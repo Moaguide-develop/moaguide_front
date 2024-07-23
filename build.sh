@@ -2,4 +2,4 @@
 cd ../
 mkdir output
 cp -R ./moaguide_front/* ./output
-cp -R ./output ./fmoaguide_front/
+cp -R ./output ./moaguide_front/
