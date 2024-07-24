@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create .env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENV_DEVELOPMENT }}" > .env
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: npm run lint
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create .env file
+        run: |
+          touch .env
+          echo "${{ secrets.ENV_DEVELOPMENT }}" > .env
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      - run: npm install
+      - run: CI='false' npm run build
