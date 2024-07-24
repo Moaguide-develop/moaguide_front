@@ -55,6 +55,7 @@ const config: Config = {
           "linear-gradient(180deg, #0A84FF 0%, rgba(10, 132, 255, 0.50) 100%)",
       },
       screens: {
+        desk2: "540px",
         desk: "360px",
         sm: "640px",
         md: "768px",
@@ -64,6 +65,7 @@ const config: Config = {
       },
       boxShadow: {
         "custom-light": "0px 2px 8px 0px rgba(95, 95, 95, 0.03)",
+        "custom-normal": "0px 2px 12px 0px rgba(185, 191, 201, 0.25)",
       },
     },
   },
