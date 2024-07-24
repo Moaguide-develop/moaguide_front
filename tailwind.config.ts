@@ -41,6 +41,8 @@ const config: Config = {
         gray600: "#343436",
         gray700: "#1E1E1E",
         black: "#000000",
+        normal: "#6F36E8",
+        light: "#01BA77",
 
         error: "#FF453A",
         success: "#0A84FF",
@@ -53,12 +55,17 @@ const config: Config = {
           "linear-gradient(180deg, #0A84FF 0%, rgba(10, 132, 255, 0.50) 100%)",
       },
       screens: {
-        desk: "380px",
+        desk2: "540px",
+        desk: "360px",
         sm: "640px",
         md: "768px",
         lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
+      },
+      boxShadow: {
+        "custom-light": "0px 2px 8px 0px rgba(95, 95, 95, 0.03)",
+        "custom-normal": "0px 2px 12px 0px rgba(185, 191, 201, 0.25)",
       },
     },
   },
