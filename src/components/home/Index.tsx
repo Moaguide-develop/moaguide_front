@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../common/Navbar";
 import Guide from "./Guide";
 import RealtimeRank from "./RealtimeRank";
+import SubMenu from "./SubMenu";
 
 const HomeIndex = () => {
   return (
@@ -10,6 +10,9 @@ const HomeIndex = () => {
         <Guide />
         <RealtimeRank />
       </section>
+      <aside className="max-w-[692px] w-full mt-[28px]">
+        <SubMenu />
+      </aside>
     </div>
   );
 };
