@@ -1,13 +1,13 @@
-import React from 'react'
+import Navbar from "@/components/common/Navbar";
+import React from "react";
 
 const Testpage = () => {
   return (
     <div>
-      <div>
-        asdasd
-      </div>
+      <Navbar />
+      <div>asdasd</div>
     </div>
-  )
-}
+  );
+};
 
-export default Testpage
+export default Testpage;

@@ -41,8 +41,8 @@ const config: Config = {
         gray600: "#343436",
         gray700: "#1E1E1E",
         black: "#000000",
-        normal:"#6F36E8",
-        light:"#01BA77",
+        normal: "#6F36E8",
+        light: "#01BA77",
 
         error: "#FF453A",
         success: "#0A84FF",
@@ -61,6 +61,9 @@ const config: Config = {
         lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",
+      },
+      boxShadow: {
+        "custom-light": "0px 2px 8px 0px rgba(95, 95, 95, 0.03)",
       },
     },
   },
