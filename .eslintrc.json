@@ -1,3 +1,32 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true 
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "next", "next/core-web-vitals"
+  ],
+  "ignorePatterns": ["dist", ".eslintrc.json"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "react-refresh"],
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react-refresh/only-export-components": [
+      "warn",
+    
+      {
+        "allowConstantExport": true
+      }
+    ],
+
+   "no-unused-vars": "off",
+  "react/jsx-pascal-case": "warn"
+  }
+ 
+
 }
