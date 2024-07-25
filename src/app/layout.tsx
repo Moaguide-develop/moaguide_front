@@ -3,6 +3,8 @@ import './globals.css';
 import localFont from 'next/font/local';
 import Container from '@/components/common/Container';
 import Gnb from '@/components/common/Gnb';
+import QueryProvider from '@/providers/QueryProvider';
+import IntegrateMSW from '@/mocks/IntegrateMsw';
 
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
@@ -36,11 +38,15 @@ export default function RootLayout({
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
       <body className={pretendard.className}>
-        <Container>
-          <Gnb/>
-        {children}
-        </Container>
-        </body>
+        <IntegrateMSW>
+          <QueryProvider>
+            <Container>
+              <Gnb />
+              {children}
+            </Container>
+          </QueryProvider>
+        </IntegrateMSW>
+      </body>
     </html>
   );
 }
