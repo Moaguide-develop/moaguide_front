@@ -34,7 +34,14 @@ const MainListItem = ({
           </div>
         </div>
         {/* 부가정보 */}
-        <div></div>
+        <div className="flex items-center gap-4">
+          <div className="p-[6px] bg-error bg-opacity-10 text-error text-body7 rounded-[4px]">
+            {lastDivide_rate}%
+          </div>
+          <div className="cursor-pointer">
+            <img src="/images/home/bookmark.svg" alt="" />
+          </div>
+        </div>
       </div>
     </div>
   );
