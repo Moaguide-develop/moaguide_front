@@ -11,6 +11,7 @@ const RecentlyIssueIndex = () => {
       <section className="max-w-[1000px] w-full">
         <CategoryNews />
       </section>
+      <div className="h-20" />
     </div>
   );
 };

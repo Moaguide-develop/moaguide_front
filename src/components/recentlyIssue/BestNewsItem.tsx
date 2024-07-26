@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface IssueItemType {
+interface BestNewsItemType {
   news: string;
   title: string;
   date: string;
@@ -8,7 +8,7 @@ interface IssueItemType {
   rank: number;
 }
 
-const BestNewsItem = ({ news, title, date, img, rank }: IssueItemType) => {
+const BestNewsItem = ({ news, title, date, img, rank }: BestNewsItemType) => {
   return (
     <div className="flex flex-col gap-4 cursor-pointer">
       <div className="relative">

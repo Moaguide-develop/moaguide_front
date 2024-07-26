@@ -1,5 +1,4 @@
 import React from 'react';
-import IssueItem from '../home/IssueItem';
 import BestNewsItem from './BestNewsItem';
 
 const mock = [
@@ -28,7 +27,7 @@ const mock = [
 
 const BestNews = () => {
   return (
-    <div className="my-[28px]">
+    <div className="mt-[28px] pb-[28px]">
       <div className="text-heading4">👀 오늘 가장 많이 본 뉴스</div>
       <div className="mt-[28px] grid grid-cols-3 gap-5 gird">
         {mock.map((item, i) => (
