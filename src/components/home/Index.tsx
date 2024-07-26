@@ -4,6 +4,7 @@ import RealtimeRank from './RealtimeRank';
 import SubMenu from './SubMenu';
 import MainItem from './MainList';
 import MainReport from './MainReport';
+import RecentlyIssue from './RecentlyIssue';
 
 const HomeIndex = () => {
   return (
@@ -20,6 +21,9 @@ const HomeIndex = () => {
       </article>
       <article className="mt-[28px] max-w-[692px] w-full">
         <MainReport />
+      </article>
+      <article className="mt-[28px] max-w-[692px] w-full">
+        <RecentlyIssue />
       </article>
     </div>
   );
