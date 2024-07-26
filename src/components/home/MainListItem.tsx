@@ -1,5 +1,15 @@
 import React from 'react';
 
+interface MainListItemProps {
+  category: string;
+  platfrom: string;
+  name: string;
+  price: number;
+  priceRate: number;
+  lastDivide_rate: number;
+  img: string;
+}
+
 const MainListItem = ({
   category,
   platfrom,
@@ -8,9 +18,9 @@ const MainListItem = ({
   priceRate,
   lastDivide_rate,
   img
-}) => {
+}: MainListItemProps) => {
   return (
-    <div className="mt-5 pb-5 border-b border-gray100">
+    <div className="mt-5 pb-5 border-b border-gray100 cursor-pointer">
       <div className="flex gap-5">
         {/* 이미지 */}
         <div>

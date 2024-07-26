@@ -93,8 +93,8 @@ const MainList = () => {
       </div>
       {/* item */}
       <div>
-        {mock.map((item) => (
-          <MainListItem key={item.product_Id} {...item} />
+        {mock.map((item, i) => (
+          <MainListItem key={i} {...item} />
         ))}
       </div>
     </div>

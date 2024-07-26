@@ -3,6 +3,7 @@ import Guide from './Guide';
 import RealtimeRank from './RealtimeRank';
 import SubMenu from './SubMenu';
 import MainItem from './MainList';
+import MainReport from './MainReport';
 
 const HomeIndex = () => {
   return (
@@ -17,7 +18,9 @@ const HomeIndex = () => {
       <article className="max-w-[692px] w-full mt-10">
         <MainItem />
       </article>
-      <div className="h-10" />
+      <article className="mt-[28px] max-w-[692px] w-full">
+        <MainReport />
+      </article>
     </div>
   );
 };
