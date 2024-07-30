@@ -9,7 +9,7 @@ interface IssueItemType {
 
 const IssueItem = ({ news, title, date, img }: IssueItemType) => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 cursor-pointer">
       <div>
         <img src={img} alt="" className="w-[336px] h-[186px] rounded-[12px]" />
       </div>

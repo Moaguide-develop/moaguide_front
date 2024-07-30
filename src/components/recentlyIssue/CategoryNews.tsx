@@ -25,6 +25,7 @@ const mock = [
 const CategoryNews = () => {
   const [category, setCategory] = useState('전체');
   const [sort, setSort] = useState('recently');
+
   return (
     <div className="mt-5">
       <div className="mt-8 flex items-center gap-5 border-b border-gray100 text-title2">
