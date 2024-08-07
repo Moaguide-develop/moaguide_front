@@ -1,5 +1,4 @@
 import { useReportStore } from '@/store/report.store';
-import Image from 'next/image';
 import React from 'react';
 
 const ReportCategory = () => {

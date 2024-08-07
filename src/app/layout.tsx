@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import './globals.css';
 import localFont from 'next/font/local';
-import Container from '@/components/common/Container';
 import Gnb from '@/components/common/Gnb';
 import QueryProvider from '@/providers/QueryProvider';
 import IntegrateMSW from '@/mocks/IntegrateMsw';

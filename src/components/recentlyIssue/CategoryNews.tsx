@@ -73,7 +73,7 @@ const CategoryNews = () => {
         </div>
       </div>
       <div className="py-[10px] flex items-center gap-[10px] border-b border-gray100">
-        <div className="body6 text-gray500">정렬</div>
+        <div className="text-body1 text-gray500">정렬</div>
         <div className="text-gray200">|</div>
         <div className="flex items-center gap-[6px]">
           <div
