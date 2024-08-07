@@ -45,10 +45,8 @@ export default function RootLayout({
       <body className={pretendard.className}>
         <IntegrateMSW>
           <QueryProvider>
-            <Container>
-              <Gnb />
-              {children}
-            </Container>
+            <Gnb />
+            {children}
           </QueryProvider>
         </IntegrateMSW>
         <FooterProvider />

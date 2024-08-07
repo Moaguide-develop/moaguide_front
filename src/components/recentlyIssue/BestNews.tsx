@@ -27,7 +27,7 @@ const mock = [
 
 const BestNews = () => {
   return (
-    <div className="mt-[28px] pb-[28px]">
+    <div className="pt-[28px] pb-[28px] max-w-[1000px] w-full mx-auto">
       <div className="text-heading4">👀 오늘 가장 많이 본 뉴스</div>
       <div className="mt-[28px] grid grid-cols-3 gap-5 gird">
         {mock.map((item, i) => (
