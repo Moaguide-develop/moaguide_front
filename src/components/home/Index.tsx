@@ -1,7 +1,11 @@
-import React from "react";
-import Guide from "./Guide";
-import RealtimeRank from "./RealtimeRank";
-import SubMenu from "./SubMenu";
+import React from 'react';
+import Guide from './Guide';
+import RealtimeRank from './RealtimeRank';
+import SubMenu from './SubMenu';
+import MainItem from './MainList';
+import MainReport from './MainReport';
+import RecentlyIssue from './RecentlyIssue';
+import Container from '../common/Container';
 
 const HomeIndex = () => {
   return (
@@ -10,9 +14,20 @@ const HomeIndex = () => {
         <Guide />
         <RealtimeRank />
       </section>
-      <aside className="max-w-[692px] w-full mt-[28px]">
-        <SubMenu />
-      </aside>
+      <Container>
+        <aside className="max-w-[692px] w-full mt-[28px]">
+          <SubMenu />
+        </aside>
+        <article className="max-w-[692px] w-full mt-10">
+          <MainItem />
+        </article>
+        <article className="mt-[28px] max-w-[692px] w-full">
+          <MainReport />
+        </article>
+        <article className="mt-[28px] max-w-[692px] w-full">
+          <RecentlyIssue />
+        </article>
+      </Container>
     </div>
   );
 };
