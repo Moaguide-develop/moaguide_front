@@ -1,59 +1,90 @@
 'use client';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
+import { Navigation, Scrollbar, Autoplay } from 'swiper/modules';
+import SwiperCore from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 // import SwiperCore, { Navigation } from 'swiper/core';
 import Image from 'next/image';
-
-// SwiperCore.use([Navigation]);
+import { useState } from 'react';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const Dividend = () => {
+  const [swiperIndex, setSwiperIndex] = useState(0); // -> 페이지네이션용
+
+  const [swiper, setSwiper] = useState<SwiperClass>(); // -> 슬라이드용
+  const handlePrev = () => {
+    swiper?.slidePrev();
+  };
+  const handleNext = () => {
+    swiper?.slideNext();
+  };
+
+  SwiperCore.use([Navigation, Scrollbar, Autoplay]);
   return (
-    <div className="mt-20">
+    <div className="  w-full max-w-[1000px]  mx-[50px] relative  z-5 flex justify-center items-center">
+      <div>
+        <div
+          className="flex  bg-white w-[40px] h-[40px]  justify-center items-center   z-10 rounded-full mr-[10px]"
+          onClick={handlePrev}>
+          <Image
+            src="/images/product/CaretLeft.svg"
+            alt="leftarrow"
+            width={20}
+            height={20}
+          />
+        </div>
+      </div>
       <Swiper
-        spaceBetween={50}
+        onActiveIndexChange={(e) => setSwiperIndex(e.realIndex)}
+        onSwiper={(e) => {
+          setSwiper(e);
+        }}
+        loop={true}
+        spaceBetween={0}
         slidesPerView={2}
-        autoplay
-        navigation={true}
+        // autoplay={{
+        //   delay: 5000,
+        //   disableOnInteraction: false // 사용자 상호작용시 슬라이더 일시 정지 비활성
+        // }}
+        // navigation
+        modules={[Navigation]}
         breakpoints={{
           320: {
             slidesPerView: 1,
-            spaceBetween: 20,
-            navigation: false
+            spaceBetween: 10
           },
           480: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-            navigation: false
+            slidesPerView: 1,
+            spaceBetween: 10
           },
           640: {
             slidesPerView: 2,
-            spaceBetween: 40,
-            navigation: false
+            spaceBetween: 10
           }
         }}
-        className="mySwiper">
+        className="mySwiper flex justify-center">
         {[1, 2, 3, 4].map((item) => {
           return (
-            <>
-              <SwiperSlide className="bg-white rounded-lg shadow-md p-4">
-                <div className="md:w-[436px] desk:w-[290px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row justify-start items-start gap-1 flex mx-[20px] desk:mx-[12px]">
-                  <div className=" w-[52px] h-[52px] rounded-[28.50px]  ">
+            <div key={item}>
+              <SwiperSlide className=" flex justify-center">
+                <div className=" md:max-w-[456px]  desk2:max-w-[400px]  desk:max-w-[300px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row justify-center items-center  flex mx-auto  relative">
+                  <div className=" w-full max-w-[52px] max-h-[52px] rounded-[28.50px] ">
                     <Image
                       src="/images/product/Building1.png"
                       alt="Building"
                       width={52}
                       height={52}
                       objectFit="cover"
-                      className="rounded-lg"
+                      className="rounded-lg "
                     />
                   </div>
 
                   <div className=" flex flex-col items-start justify-start md:ml-[20px] desk:ml-[16px]">
                     <div className=" text-gray-300">부동산</div>
-                    <div className="text-center font-bold mt-1">
-                      롯데랜드타워 시그니엘 1호
+                    <div className="w-full font-bold mt-1">
+                      롯데랜드타워 시그니엘 {item}호
                     </div>
                   </div>
 
@@ -62,10 +93,22 @@ const Dividend = () => {
                   </div>
                 </div>
               </SwiperSlide>
-            </>
+            </div>
           );
         })}
       </Swiper>
+      <div>
+        <div
+          className="flex  bg-white w-[40px] h-[40px]  justify-center items-center    z-10 rounded-full ml-[10px]"
+          onClick={handleNext}>
+          <Image
+            src="/images/product/CaretRight.svg"
+            alt="rightarrow"
+            width={20}
+            height={20}
+          />
+        </div>
+      </div>
     </div>
   );
 };
