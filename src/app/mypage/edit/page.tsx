@@ -116,7 +116,9 @@ const Editpage = () => {
         {/* 비밀번호 변경 */}
         <div className="text-body4 mt-5 pb-5 border-b border-gray100 flex justify-between items-center">
           <div>비밀번호 변경하기</div>
-          <div className="text-body7 text-gray400 cursor-pointer p-3 rounded-[12px] border border-gray100 hover:bg-bg">
+          <div
+            onClick={() => router.push('/mypage/edit/changepassword')}
+            className="text-body7 text-gray400 cursor-pointer p-3 rounded-[12px] border border-gray100 hover:bg-bg">
             비밀번호 변경
           </div>
         </div>
