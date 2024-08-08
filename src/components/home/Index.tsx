@@ -6,6 +6,7 @@ import MainItem from './MainList';
 import MainReport from './MainReport';
 import RecentlyIssue from './RecentlyIssue';
 import Container from '../common/Container';
+import HomeFooter from './HomeFooter';
 
 const HomeIndex = () => {
   return (
@@ -28,6 +29,7 @@ const HomeIndex = () => {
           <RecentlyIssue />
         </article>
       </Container>
+      <HomeFooter />
     </div>
   );
 };

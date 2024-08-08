@@ -4,11 +4,6 @@ import localFont from 'next/font/local';
 import Gnb from '@/components/common/Gnb';
 import QueryProvider from '@/providers/QueryProvider';
 import IntegrateMSW from '@/mocks/IntegrateMsw';
-import dynamic from 'next/dynamic';
-
-const FooterProvider = dynamic(() => import('@/providers/FooterProvider'), {
-  ssr: false
-});
 
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
@@ -48,8 +43,6 @@ export default function RootLayout({
             {children}
           </QueryProvider>
         </IntegrateMSW>
-        <FooterProvider />
-        <div id="footer-portal"></div>
       </body>
     </html>
   );
