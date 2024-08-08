@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import './globals.css';
 import localFont from 'next/font/local';
-import Container from '@/components/common/Container';
 import Gnb from '@/components/common/Gnb';
 import QueryProvider from '@/providers/QueryProvider';
 import IntegrateMSW from '@/mocks/IntegrateMsw';
@@ -40,10 +39,8 @@ export default function RootLayout({
       <body className={pretendard.className}>
         <IntegrateMSW>
           <QueryProvider>
-            <Container>
-              <Gnb />
-              {children}
-            </Container>
+            <Gnb />
+            {children}
           </QueryProvider>
         </IntegrateMSW>
       </body>
