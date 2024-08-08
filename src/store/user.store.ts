@@ -18,7 +18,7 @@ export const useMemberStore = create(
   persist<IMember>(
     (set) => ({
       member: {
-        memberEmail: 'kemi@leolap.com',
+        memberEmail: 'kemi@kakao.com',
         memberNickName: '더스틴 조하',
         memberPhone: '010-1234-1234',
         subscribe: '1개월 플랜'

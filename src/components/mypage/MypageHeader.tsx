@@ -1,8 +1,10 @@
 import { useMemberStore } from '@/store/user.store';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const MypageHeader = () => {
   const { member } = useMemberStore();
+  const router = useRouter();
   return (
     <div className="flex flex-col gap-[28px] pb-5 border-b border-gray100">
       <div className="w-full flex justify-between items-center">
@@ -10,7 +12,7 @@ const MypageHeader = () => {
           <div className="text-heading2">{member.memberNickName}</div>
           <div className="text-gray400 text-body1">{member.memberEmail}</div>
         </div>
-        <div>
+        <div onClick={() => router.push('/mypage/edit')}>
           <img
             src="/images/mypage/right.svg"
             alt="arrow"

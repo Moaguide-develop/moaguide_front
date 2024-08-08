@@ -12,8 +12,8 @@ const Mypage = () => {
       <nav>
         <MypageMenu />
       </nav>
-      <div className="text-gray400 underline body7 cursor-pointer flex justify-center mt-10">
-        로그아웃
+      <div className="text-gray400 body7 cursor-pointer max-w-max w-full mx-auto mt-10 hover:underline">
+        <span className="max-w-max">로그아웃</span>
       </div>
       <div className="h-[140px]" />
     </div>

@@ -9,7 +9,7 @@ const Gnb = () => {
   return (
     <div
       className={
-        pathname === '/mypage' ? 'shadow-custom-light border-b border-gray100' : ''
+        pathname.includes('/mypage') ? 'shadow-custom-light border-b border-gray100' : ''
       }>
       <div className="max-w-[1000px] mx-auto flex items-center justify-between py-3 desk:min-w-[400px]">
         <Link href={'/'} className="cursor-pointer">
