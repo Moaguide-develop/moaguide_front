@@ -75,7 +75,7 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
           <div className="text-caption3 text-success ml-2">비밀번호가 일치합니다.</div>
         ) : null}
       </div>
-      {/* Todo : 완료 버튼 누르면, 비밀번호 변경 요청 Api 실행, 성공 시 onSuccess setStep(2), 실패할시 그냥 메인페이지로 이동 */}
+      {/* Todo : 완료 버튼 누르면, 비밀번호 변경 요청 Api 실행, 성공 시 onSuccess setStep(2) 후 로그아웃, 실패할시 그냥 메인페이지로 이동 */}
       {isSame ? (
         <div
           onClick={() => setStep(2)}
