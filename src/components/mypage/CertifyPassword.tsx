@@ -40,6 +40,7 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
       <div className="flex flex-col gap-2 mt-10">
         <div className="text-body3">비밀번호</div>
         <input
+          value={passwordValue}
           onChange={handlePasswordChange}
           type="password"
           placeholder="비밀번호 입력"
