@@ -1,8 +1,10 @@
 'use client';
+import { useModalStore } from '@/store/modal.store';
 import { useMemberStore } from '@/store/user.store';
 import { checkEmail } from '@/utils/checkEmail';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useState } from 'react';
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
 const Editpage = () => {
   const router = useRouter();
@@ -11,6 +13,7 @@ const Editpage = () => {
   const [nameValue, setNameValue] = useState('');
   const [isNameValid, setIsNameValid] = useState(false);
   const [isNameComplete, setIsNameComplete] = useState('');
+  const { setModalType, setOpen, open } = useModalStore();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     /**
@@ -38,6 +41,14 @@ const Editpage = () => {
     setIsNameValid(nameValue.length >= 3);
     setIsNameComplete('');
   }, [nameValue]);
+
+  useEffect(() => {
+    if (open) {
+      disablePageScroll();
+    } else {
+      enablePageScroll();
+    }
+  }, [open]);
 
   return (
     <div className="max-w-[640px] w-full mx-auto">
@@ -139,7 +150,12 @@ const Editpage = () => {
         </div>
       </section>
       {/* 회원탈퇴 */}
-      <div className=" text-body7 text-error flex justify-end hover:underline">
+      <div
+        onClick={() => {
+          setOpen(true);
+          setModalType('secession');
+        }}
+        className=" text-body7 text-error flex justify-end hover:underline">
         <span className="cursor-pointer">회원탈퇴</span>
       </div>
       {/* 수정 완료 */}

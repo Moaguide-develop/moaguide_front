@@ -1,4 +1,5 @@
 'use client';
+import Quitmodal from '@/components/modal/Quitmodal';
 import { useModalStore } from '@/store/modal.store';
 import React from 'react';
 import { createPortal } from 'react-dom';
@@ -12,7 +13,7 @@ const ModalProvider = () => {
     return null;
   }
   return createPortal(
-    <div>{open && modalType === 'chatbot' && <AiModal />}</div>,
+    <div>{open && modalType === 'secession' && <Quitmodal />}</div>,
     $portalRoot
   );
 };

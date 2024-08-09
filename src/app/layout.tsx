@@ -4,7 +4,9 @@ import localFont from 'next/font/local';
 import Gnb from '@/components/common/Gnb';
 import QueryProvider from '@/providers/QueryProvider';
 import IntegrateMSW from '@/mocks/IntegrateMsw';
-import ModalProvider from '@/providers/ModalProvider';
+import dynamic from 'next/dynamic';
+
+const ModalProvider = dynamic(() => import('@/providers/ModalProvider'), { ssr: false });
 
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
