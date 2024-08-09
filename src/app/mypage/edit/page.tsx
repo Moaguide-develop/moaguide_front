@@ -130,7 +130,9 @@ const Editpage = () => {
           </div>
           <div className=" flex justify-between text-gray400 text-body7 mt-5 pb-5 border-b border-gray100">
             <div className="flex-1" />
-            <div className="p-3 rounded-[12px] cursor-pointer border border-gray100 max-w-max hover:bg-bg">
+            <div
+              onClick={() => router.push('/mypage/edit/changephone')}
+              className="p-3 rounded-[12px] cursor-pointer border border-gray100 max-w-max hover:bg-bg">
               휴대폰 번호 변경
             </div>
           </div>
