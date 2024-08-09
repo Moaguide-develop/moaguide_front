@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 import Gnb from '@/components/common/Gnb';
 import QueryProvider from '@/providers/QueryProvider';
 import IntegrateMSW from '@/mocks/IntegrateMsw';
+import ModalProvider from '@/providers/ModalProvider';
 
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
@@ -41,6 +42,8 @@ export default function RootLayout({
           <QueryProvider>
             <Gnb />
             {children}
+            <ModalProvider />
+            <div id="root-portal"></div>
           </QueryProvider>
         </IntegrateMSW>
       </body>
