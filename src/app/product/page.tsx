@@ -1,11 +1,15 @@
+'use client';
 import Container from '@/components/common/Container';
 import Navbar from '@/components/common/Navbar';
 import Dividend from '@/components/product/Dividend';
 import Filter from '@/components/product/Filter';
-
-import React from 'react';
+import TopProduct from '@/components/product/TopProduct';
+import Report from '@/components/product/Report';
+import React, { useState } from 'react';
+import ProductSort from '@/components/product/ProductSort';
 
 const ProductPage = () => {
+  const [sort, setSort] = useState('profit');
   return (
     <div>
       <Navbar />
@@ -32,11 +36,17 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
-        <div>캐러셀</div>
+        <TopProduct />
+      </Container>
 
-        <div className="w-atuo h-[0px] border border-[#eceef2]"></div>
-        <div className="text-black text-lg font-bold">관련 리포트</div>
-        <div>캐러셀</div>
+      <div className=" mt-[40px] mb-[40px] w-atuo h-[0px] border border-[#eceef2]"></div>
+
+      <Container>
+        <div className="text-black text-lg font-bold mb-[26px]">관련 리포트</div>
+
+        <Report />
+
+        <ProductSort sort={sort} setSort={setSort} />
       </Container>
     </div>
   );
