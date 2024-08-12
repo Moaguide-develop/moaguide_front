@@ -37,8 +37,8 @@ const Dividend = () => {
         </div>
       </div>
       <Swiper
-        onActiveIndexChange={(e) => setSwiperIndex(e.realIndex)}
-        onSwiper={(e) => {
+        onActiveIndexChange={(e: SwiperClass) => setSwiperIndex(e.realIndex)}
+        onSwiper={(e: SwiperClass) => {
           setSwiper(e);
         }}
         loop={true}
@@ -65,9 +65,9 @@ const Dividend = () => {
           }
         }}
         className="mySwiper flex justify-center">
-        {[1, 2, 3, 4].map((item) => {
+        {[1, 2, 3, 4].map((item, idx) => {
           return (
-            <div key={item}>
+            <div key={idx}>
               <SwiperSlide className=" flex justify-center">
                 <div className=" md:max-w-[456px]  desk2:max-w-[400px]  desk:max-w-[300px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row justify-center items-center  flex mx-auto  relative">
                   <div className=" w-full max-w-[52px] max-h-[52px] rounded-[28.50px] ">
@@ -76,7 +76,6 @@ const Dividend = () => {
                       alt="Building"
                       width={52}
                       height={52}
-                      objectFit="cover"
                       className="rounded-lg "
                     />
                   </div>

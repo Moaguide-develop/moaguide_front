@@ -38,8 +38,8 @@ const TopProduct = () => {
         </div>
 
         <Swiper
-          onActiveIndexChange={(e) => setSwiperIndex(e.realIndex)}
-          onSwiper={(e) => {
+          onActiveIndexChange={(e: SwiperClass) => setSwiperIndex(e.realIndex)}
+          onSwiper={(e: SwiperClass) => {
             setSwiper(e);
           }}
           loop={true}
