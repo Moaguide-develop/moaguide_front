@@ -48,8 +48,8 @@ const Step1: React.FC<StepProps> = ({ onNext }) => {
   const isNextEnabled = checks.privacy && checks.service && checks.age;
 
   return (
-    <div className="flex justify-center items-center mt-24">
-      <div className="w-full max-w-[360px]">
+    <div className="flex justify-center items-center">
+      <div className="max-w-[340px] w-full mx-auto mt-[76px]">
         <Image
           className='mb-12'
           src={'/sign/ProgressBar1.svg'}

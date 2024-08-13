@@ -1,16 +1,20 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 
+interface PhoneVerificationProps {
+  onNext: () => void;
+}
 
 const validNumberToTime = (time: number): string => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  };
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+};
 
-const PhoneVerification = () => {
+const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
   const router = useRouter();
   const [phoneNumber, setPhoneNumber] = useState<string>(''); //전화번호
   const [phoneNumberValid, setPhoneNumberValid] = useState(false); //전화번호 유효성 검사
@@ -51,16 +55,16 @@ const PhoneVerification = () => {
   };
 
   const handleCertify = () => {
-    if (isComplete) return; //이미 인증 완료된상태면 return
+    if (isComplete) return; //이미 인증 완료된 상태면 return
     // Todo 작성된 인증번호에 따라 인증 검사 API 호출
     setIsComplete(true); // 인증검사 통과
     // setIsError(true); // 인증검사 실패
   };
 
   const handleComplete = () => {
-    // Todo 인증번호 인증완료후 유저 전화번호 수정 API 호출
-    // Todo 마이페이지로 돌아가는데 바뀐 전화번호로 수정되야함
-    router.back();
+    // Todo 인증번호 인증완료 후 유저 전화번호 수정 API 호출
+    // 인증 완료 후 다음 단계로 이동
+    onNext(); // 여기서 onNext 호출로 Step2의 다음 단계로 이동
   };
 
   useEffect(() => {
@@ -114,14 +118,19 @@ const PhoneVerification = () => {
 
   return (
     <div>
-      <div className="max-w-[640px] w-full mx-auto">
-        <div onClick={() => router.back()} className="py-[14px]">
-          <img src="/images/mypage/left_password.svg" alt="" className="cursor-pointer" />
-        </div>
-      </div>
       <section className="max-w-[340px] w-full mx-auto mt-[76px]">
+      <Image
+          className='mb-12'
+          src={'/sign/ProgressBar2.svg'}
+          alt="ProgressBar"
+          width={360}
+          height={100}
+        />
         <div className="text-heading3">
-          <span className="text-normal">휴대폰 번호</span>를 인증해주세요
+        <h2 className="text-xl font-bold mb-6 text-left">
+          회원가입을 위해<br />
+          <span className="text-purple-600">휴대폰 번호</span>를 인증해주세요
+        </h2>
         </div>
         {/* 휴대폰 번호 입력 */}
         <div className="mt-10">
@@ -213,11 +222,11 @@ const PhoneVerification = () => {
           <div
             onClick={handleComplete}
             className="cursor-pointer flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gradient2 text-heading4 text-white">
-            변경 완료
+            다음으로
           </div>
         ) : (
           <div className="flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gray100 text-heading4 text-gray400">
-            변경 완료
+            다음으로
           </div>
         )}
       </section>
