@@ -88,18 +88,20 @@ const Step3: React.FC<StepProps> = ({ onNext }) => {
             onChange={handleConfirmPasswordChange}
             className="w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
           />
+          <div className="mt-1 min-h-[25px]">
           {passwordMatch === false && (
-            <p className="text-red-500 text-xs mt-1">비밀번호가 일치하지 않습니다.</p>
+            <p className="text-red-500 text-xs">비밀번호가 일치하지 않습니다.</p>
           )}
           {passwordMatch === true && (
-            <p className="text-blue-500 text-xs mt-1">비밀번호가 일치합니다.</p>
+            <p className="text-blue-500 text-xs">비밀번호가 일치합니다.</p>
           )}
+          </div>
         </div>
 
         <button 
           onClick={onNext} 
           disabled={!isFormValid} 
-          className={`w-full py-3 rounded-lg text-white text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`w-full py-3 rounded-lg text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>

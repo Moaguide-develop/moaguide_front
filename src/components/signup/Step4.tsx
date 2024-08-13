@@ -87,10 +87,10 @@ const Step4: React.FC<StepProps> = ({ onNext }) => {
           </div>
           <div className="mt-2 min-h-[25px]">
           {isNicknameValid === true && (
-            <p className="text-green-500">사용 가능한 닉네임입니다.</p>
+            <p className="text-blue-500 text-xs mt-2">사용 가능한 닉네임입니다.</p>
           )}
           {isNicknameValid === false && (
-            <p className="text-red-500">이미 사용중인 닉네임입니다.</p>
+            <p className="text-red-500 text-xs mt-2">이미 사용중인 닉네임입니다.</p>
           )}
           </div>
         </div>
@@ -108,16 +108,16 @@ const Step4: React.FC<StepProps> = ({ onNext }) => {
 
         <div className="mb-4">
         <div className="text-body3">투자 경험</div>
-          <div className='flex w-full'>
+          <div className='flex w-full mt-2'>
           <button
             onClick={() => handleInvestmentExperienceChange('no')}
-            className={`flex-1 py-3 px-4 rounded-lg border pr-1 ${investmentExperience === 'no' ? 'bg-purple-600 text-white' : 'border-gray100 text-gray-600'}`}
+            className={`flex-1 py-3 px-4 rounded-lg border pr-1 ${investmentExperience === 'no' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
           >
             투자 경험 없음
           </button>
           <button
             onClick={() => handleInvestmentExperienceChange('yes')}
-            className={`flex-1 py-3 px-4 rounded-lg border pl-1 ${investmentExperience === 'yes' ? 'bg-purple-600 text-white' : 'border-gray100 text-gray-600'}`}
+            className={`flex-1 py-3 px-4 rounded-lg border pl-1 ${investmentExperience === 'yes' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
           >
             투자 경험 있음
           </button>
@@ -126,20 +126,23 @@ const Step4: React.FC<StepProps> = ({ onNext }) => {
 
         {investmentExperience === 'yes' && (
           <div className="mb-4">
-            <label>투자 경력 (N년)</label>
+            <div className="text-body3">투자 경력 (N년)</div>
+            <div className='flex'>
             <input
               type="text"
               value={investmentYears}
               onChange={handleInvestmentYearsChange}
-              className="w-full py-3 px-4 rounded-lg"
+              className="w-full mt-2 py-3 px-4 rounded-[12px] border border-gray-100"
             />
+            <div className="text-body3 my-auto ml-2">년</div>
+            </div>
           </div>
         )}
 
         <button
           onClick={onNext}
           disabled={!isFormValid}
-          className={`w-full py-3 rounded-lg text-white text-lg ${isFormValid ? 'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500' : 'bg-gray-100 text-gray-400'}`}
+          className={`w-full py-3 rounded-lg text-white text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
         >
           가입완료
         </button>
