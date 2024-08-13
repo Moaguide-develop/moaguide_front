@@ -1,4 +1,6 @@
+import Link from 'next/link';
 import React from 'react';
+
 
 const SignLayout = () => {
   return (
@@ -40,8 +42,10 @@ const SignLayout = () => {
         >
           로그인
         </button>
-        <div className="text-center text-gray-500 text-sm">
-          <a href="/signup" className="mr-4">회원가입</a>
+        <div className="flex text-center text-gray-500 text-sm">
+          <Link href={'/signup'} className='cursor-pointer'>
+            <div className="mr-4">회원가입</div>
+          </Link>
           <a href="/forgot-password">이메일 / 비밀번호 찾기</a>
         </div>
       </section>
