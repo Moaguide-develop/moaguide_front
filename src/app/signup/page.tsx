@@ -41,7 +41,7 @@ const SignupPage = () => {
       {step === 1 && <Step1 onNext={handleNext} />}
       {step === 2 && <Step2 onNext={handleNext} onPrev={handlePrev} />}
       {step === 3 && <Step3 onNext={handleNext} />}
-      {step === 4 && <Step4 onPrev={handlePrev} />}
+      {step === 4 && <Step4 onNext={handleNext} />}
     </div>
   );
 };
