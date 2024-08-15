@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Navbar from '@/components/common/Navbar';
 import SignNavbar from '@/components/common/SignNavbar';
@@ -12,29 +12,29 @@ const Step4 = dynamic(() => import('@/components/signup/Step4'));
 
 const SignupPage = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
 
-  useEffect(() => {
-    const stepParam = searchParams.get('step');
-    if (stepParam) {
-      setStep(parseInt(stepParam, 10));
-    } else {
-      router.replace('/signup?step=1');
-    }
-  }, [searchParams, router]);
-
   const handleNext = () => {
-    const nextStep = step + 1;
-    setStep(nextStep);
-    router.push(`/signup?step=${nextStep}`); 
+    if (validateCurrentStep()) {
+      const nextStep = step + 1;
+      setStep(nextStep);
+    } else {
+      alert('모든 필수 정보를 입력해주세요.');
+    }
   };
 
   const handlePrev = () => {
     const prevStep = step - 1;
     setStep(prevStep);
-    router.push(`/signup?step=${prevStep}`);
   };
+
+  const validateCurrentStep = () => {
+    return true; 
+  };
+
+  useEffect(() => {
+    router.replace('/signup'); 
+  }, []);
 
   return (
     <div>
