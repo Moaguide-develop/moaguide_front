@@ -4,7 +4,13 @@ import localFont from 'next/font/local';
 import Gnb from '@/components/common/Gnb';
 import QueryProvider from '@/providers/QueryProvider';
 import IntegrateMSW from '@/mocks/IntegrateMsw';
+import Script from 'next/script';
 
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
   display: 'swap',
@@ -39,6 +45,10 @@ export default function RootLayout({
       <body className={pretendard.className}>
         <IntegrateMSW>
           <QueryProvider>
+            <Script
+              strategy="beforeInteractive"
+              src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
+            />
             <Gnb />
             {children}
           </QueryProvider>
