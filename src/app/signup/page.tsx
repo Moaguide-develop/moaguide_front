@@ -19,8 +19,10 @@ const SignupPage: React.FC = () => {
     birthDate?: string;
     investmentExperience?: string;
     marketingConsent?: boolean;
-    loginType?: 'local';
-  }>({});
+    loginType: 'local'; // 기본값 설정
+  }>({
+    loginType: 'local', // 기본값 설정
+  });
 
 
   const handleNext = () => {
