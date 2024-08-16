@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 
 interface StepProps {
   onNext: () => void;
+  onUpdate: (data: { email?: string; password?: string }) => void;
 }
 
-const Step3: React.FC<StepProps> = ({ onNext }) => {
+const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -24,6 +25,7 @@ const Step3: React.FC<StepProps> = ({ onNext }) => {
     if (confirmPassword) {
       setPasswordMatch(newPassword === confirmPassword);
     }
+    onUpdate({ password: newPassword });
   };
 
   const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +39,7 @@ const Step3: React.FC<StepProps> = ({ onNext }) => {
   return (
     <div className="flex justify-center items-center">
       <div className="max-w-[340px] w-full mx-auto mt-[76px]">
-      <Image
+        <Image
           className='mb-12'
           src={'/sign/ProgressBar3.svg'}
           alt="ProgressBar"
@@ -49,18 +51,21 @@ const Step3: React.FC<StepProps> = ({ onNext }) => {
         </h2>
 
         <div className="mb-4">
-        <div className="text-body3">이메일</div>
+          <div className="text-body3">이메일</div>
           <input 
             type="email" 
             placeholder="이메일 입력" 
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              onUpdate({ email: e.target.value });
+            }}
             className="w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
           />
         </div>
 
         <div className="mb-4">
-        <div className="text-body3">비밀번호</div>
+          <div className="text-body3">비밀번호</div>
           <input 
             type="password" 
             placeholder="비밀번호 입력"
@@ -80,7 +85,7 @@ const Step3: React.FC<StepProps> = ({ onNext }) => {
         </div>
 
         <div className="mb-12">
-        <div className="text-body3">비밀번호 확인</div>
+          <div className="text-body3">비밀번호 확인</div>
           <input 
             type="password" 
             placeholder="비밀번호 재입력"
@@ -89,12 +94,12 @@ const Step3: React.FC<StepProps> = ({ onNext }) => {
             className="w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
           />
           <div className="mt-1 min-h-[25px]">
-          {passwordMatch === false && (
-            <p className="text-red-500 text-xs">비밀번호가 일치하지 않습니다.</p>
-          )}
-          {passwordMatch === true && (
-            <p className="text-blue-500 text-xs">비밀번호가 일치합니다.</p>
-          )}
+            {passwordMatch === false && (
+              <p className="text-red-500 text-xs">비밀번호가 일치하지 않습니다.</p>
+            )}
+            {passwordMatch === true && (
+              <p className="text-blue-500 text-xs">비밀번호가 일치합니다.</p>
+            )}
           </div>
         </div>
 

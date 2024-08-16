@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import PrivacyModal from './modal/PrivacyModal';
 import ServiceModal from './modal/ServiceModal';
@@ -7,9 +7,10 @@ import MarketingModal from './modal/MarketingModal';
 
 interface StepProps {
   onNext: () => void;
+  onUpdate: (data: { marketingConsent: boolean }) => void;
 }
 
-const Step1: React.FC<StepProps> = ({ onNext }) => {
+const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [allChecked, setAllChecked] = useState(false);
   const [checks, setChecks] = useState({
     privacy: false,
@@ -18,6 +19,11 @@ const Step1: React.FC<StepProps> = ({ onNext }) => {
     marketing: false,
   });
   const [activePage, setActivePage] = useState<string | null>(null);
+
+  useEffect(() => {
+    onUpdate({ marketingConsent: checks.marketing });
+    console.log('Updated marketingConsent:', checks.marketing); 
+  }, [checks.marketing]);
 
   const handleAllCheckedChange = () => {
     const newCheckedState = !allChecked;
@@ -37,12 +43,12 @@ const Step1: React.FC<StepProps> = ({ onNext }) => {
   };
 
   const handleArrowClick = (key: string, event: React.MouseEvent) => {
-    event.stopPropagation(); // Prevent checkbox change
-    setActivePage(key); // 페이지 변경
+    event.stopPropagation(); 
+    setActivePage(key);
   };
 
   const closePage = () => {
-    setActivePage(null); // 페이지 닫기
+    setActivePage(null);
   };
 
   const isNextEnabled = checks.privacy && checks.service && checks.age;
@@ -120,7 +126,6 @@ const Step1: React.FC<StepProps> = ({ onNext }) => {
       {activePage === 'service' && <ServiceModal onClose={closePage} />}
       {activePage === 'age' && <AgeModal onClose={closePage} />}
       {activePage === 'marketing' && <MarketingModal onClose={closePage} />}
-      
     </div>
   );
 };

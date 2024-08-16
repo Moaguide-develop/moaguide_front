@@ -1,38 +1,58 @@
 import React, { useState, useEffect } from 'react';
+import { checkNicknameAvailability } from '@/service/auth';
+import { formatBirthDate } from '@/utils/dateUtils';
 
 interface StepProps {
   onNext: () => void;
+  onUpdate: (data: { name?: string; nickname?: string; birthDate?: string; investmentExperience?: string }) => void;
 }
 
-const Step4: React.FC<StepProps> = ({ onNext }) => {
+const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [nickname, setNickname] = useState('');
+  const [name, setName] = useState('');
   const [isNicknameValid, setIsNicknameValid] = useState<boolean | null>(null);
   const [birthdate, setBirthdate] = useState('');
   const [isBirthdateValid, setIsBirthdateValid] = useState(false);
-  const [investmentExperience, setInvestmentExperience] = useState<null | string>(null);
+  const [investmentExperience, setInvestmentExperience] = useState<string | null>(null);
   const [investmentYears, setInvestmentYears] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
-    if (investmentExperience === 'yes' && investmentYears && nickname && isNicknameValid && isBirthdateValid) {
+    if (investmentExperience === 'yes' && investmentYears && name && nickname && isNicknameValid && isBirthdateValid) {
       setIsFormValid(true);
-    } else if (investmentExperience === 'no' && nickname && isNicknameValid && isBirthdateValid) {
+    } else if (investmentExperience === 'no' && name && nickname && isNicknameValid && isBirthdateValid) {
       setIsFormValid(true);
     } else {
       setIsFormValid(false);
     }
-  }, [nickname, isNicknameValid, birthdate, isBirthdateValid, investmentExperience, investmentYears]);
+
+    const formattedBirthDate = formatBirthDate(birthdate);
+
+    onUpdate({
+      name,
+      nickname,
+      birthDate: formattedBirthDate,
+      investmentExperience: investmentExperience === 'yes' ? `${investmentYears}년` : '없음',
+    });
+
+  }, [name, nickname, isNicknameValid, birthdate, isBirthdateValid, investmentExperience, investmentYears]);
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
     setIsNicknameValid(null);
   };
 
-  const checkNickname = () => {
-    // 여기에 실제 API 호출 로직을 추가하세요
-    // 예시: axios.get('/api/check-nickname', { params: { nickname } }).then(response => setIsNicknameValid(response.data.isValid));
-    // 지금은 무조건 사용 가능한 닉네임으로 처리
-    setIsNicknameValid(true);
+  const checkNickname = async () => {
+    try {
+      const response = await checkNicknameAvailability(nickname);
+      if (response) {
+        setIsNicknameValid(true);
+      } else {
+        setIsNicknameValid(false);
+      }
+    } catch (error) {
+      setIsNicknameValid(false);
+    }
   };
 
   const handleBirthdateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +87,6 @@ const Step4: React.FC<StepProps> = ({ onNext }) => {
         <h2 className="text-xl font-bold mb-6 leading-tight">
           모아가이드에서 사용할<br /><span className="text-purple-600">상세정보</span>를 입력해주세요
         </h2>
-
         <div className="mt-10 mb-8">
           <div className="text-body3">닉네임</div>
           <div className="flex items-center mt-2">
@@ -86,17 +105,28 @@ const Step4: React.FC<StepProps> = ({ onNext }) => {
             </div>
           </div>
           <div className="mt-2 min-h-[25px]">
-          {isNicknameValid === true && (
-            <p className="text-blue-500 text-xs mt-2">사용 가능한 닉네임입니다.</p>
-          )}
-          {isNicknameValid === false && (
-            <p className="text-red-500 text-xs mt-2">이미 사용중인 닉네임입니다.</p>
-          )}
+            {isNicknameValid === true && (
+              <p className="text-blue-500 text-xs mt-2">사용 가능한 닉네임입니다.</p>
+            )}
+            {isNicknameValid === false && (
+              <p className="text-red-500 text-xs mt-2">이미 사용중인 닉네임입니다.</p>
+            )}
           </div>
         </div>
 
+        <div className="mb-10">
+          <div className="text-body3">이름</div>
+          <input
+            type="text"
+            placeholder="이름 입력"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full mt-2 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
+          />
+        </div>
+
         <div className='mb-10'>
-        <div className="text-body3">생년월일</div>
+          <div className="text-body3">생년월일</div>
           <input
             type="text"
             placeholder="생년월일 8자리 입력"
@@ -107,20 +137,20 @@ const Step4: React.FC<StepProps> = ({ onNext }) => {
         </div>
 
         <div className="mb-4">
-        <div className="text-body3">투자 경험</div>
+          <div className="text-body3">투자 경험</div>
           <div className='flex w-full mt-2'>
-          <button
-            onClick={() => handleInvestmentExperienceChange('no')}
-            className={`flex-1 py-3 px-4 rounded-lg border pr-1 ${investmentExperience === 'no' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
-          >
-            투자 경험 없음
-          </button>
-          <button
-            onClick={() => handleInvestmentExperienceChange('yes')}
-            className={`flex-1 py-3 px-4 rounded-lg border pl-1 ${investmentExperience === 'yes' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
-          >
-            투자 경험 있음
-          </button>
+            <button
+              onClick={() => handleInvestmentExperienceChange('no')}
+              className={`flex-1 py-3 px-4 rounded-lg border pr-1 ${investmentExperience === 'no' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
+            >
+              투자 경험 없음
+            </button>
+            <button
+              onClick={() => handleInvestmentExperienceChange('yes')}
+              className={`flex-1 py-3 px-4 rounded-lg border pl-1 ${investmentExperience === 'yes' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
+            >
+              투자 경험 있음
+            </button>
           </div>
         </div>
 
@@ -128,13 +158,13 @@ const Step4: React.FC<StepProps> = ({ onNext }) => {
           <div className="mb-4">
             <div className="text-body3">투자 경력 (N년)</div>
             <div className='flex'>
-            <input
-              type="text"
-              value={investmentYears}
-              onChange={handleInvestmentYearsChange}
-              className="w-full mt-2 py-3 px-4 rounded-[12px] border border-gray-100"
-            />
-            <div className="text-body3 my-auto ml-2">년</div>
+              <input
+                type="text"
+                value={investmentYears}
+                onChange={handleInvestmentYearsChange}
+                className="w-full mt-2 py-3 px-4 rounded-[12px] border border-gray-100"
+              />
+              <div className="text-body3 my-auto ml-2">년</div>
             </div>
           </div>
         )}
