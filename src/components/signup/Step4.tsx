@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { checkNicknameAvailability } from '@/service/auth';
 import { formatBirthDate } from '@/utils/dateUtils';
 
@@ -16,6 +17,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [investmentExperience, setInvestmentExperience] = useState<string | null>(null);
   const [investmentYears, setInvestmentYears] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
+  const router = useRouter(); 
 
   useEffect(() => {
     if (investmentExperience === 'yes' && investmentYears && name && nickname && isNicknameValid && isBirthdateValid) {
@@ -78,6 +80,17 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
   const handleInvestmentYearsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInvestmentYears(e.target.value.replace(/\D/g, ''));
+  };
+
+  const handleComplete = async () => {
+    if (isFormValid) {
+      try {
+        await onNext();
+        router.push('/sign');
+      } catch (error) {
+        console.error('가입 처리 중 오류 발생:', error);
+      }
+    }
   };
 
   return (
@@ -170,7 +183,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         )}
 
         <button
-          onClick={onNext}
+          onClick={handleComplete}
           disabled={!isFormValid}
           className={`w-full py-3 rounded-lg text-white text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
         >
