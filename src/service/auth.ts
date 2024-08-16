@@ -4,7 +4,7 @@ import axios from 'axios';
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 export const sendVerificationCode = async (phone: string): Promise<SendCodeResponse> => {
-  const response = await axios.post(`${backendUrl}api/signup/sendcode`, { phone });
+  const response = await axios.post(`${backendUrl}signup/send/code`, { phone });
   console.log(response.data);
   return response.data;
 };

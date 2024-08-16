@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { sendVerificationCode, verifyCode } from '@/service/auth';
 
 interface PhoneVerificationProps {
   onNext: () => void;
@@ -16,11 +17,11 @@ const validNumberToTime = (time: number): string => {
 
 const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
   const router = useRouter();
-  const [phoneNumber, setPhoneNumber] = useState<string>(''); //전화번호
-  const [phoneNumberValid, setPhoneNumberValid] = useState(false); //전화번호 유효성 검사
-  const [isRequest, setIsRequest] = useState(false); //전화번호 입력 후 인증요청 상태
-  const [validNumber, setValidNumber] = useState<string>(''); //인증번호
-  const [validNumberOk, setValidNumberOk] = useState(false); //인증번호 유효성 검사
+  const [phoneNumber, setPhoneNumber] = useState<string>(''); // 전화번호
+  const [phoneNumberValid, setPhoneNumberValid] = useState(false); // 전화번호 유효성 검사
+  const [isRequest, setIsRequest] = useState(false); // 전화번호 입력 후 인증요청 상태
+  const [validNumber, setValidNumber] = useState<string>(''); // 인증번호
+  const [validNumberOk, setValidNumberOk] = useState(false); // 인증번호 유효성 검사
   const [isComplete, setIsComplete] = useState(false); // 인증번호 인증 성공
   const [isError, setIsError] = useState(false); // 인증번호 인증 실패
   const [validTime, setValidTime] = useState<number>(300); // 인증 시간
@@ -35,36 +36,53 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
   };
 
   const handleValidNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const regex = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
+    const regex = e.target.value.replace(/[^0-9]/g, '').slice(0, 6);
     setValidNumber(regex);
   };
 
-  const handleRequest = () => {
-    // Todo 작성된 전화번호에 따라 인증 요청 API 호출
-    setIsRequest(true); // 요청 상태 true
-    setValidTime(300); // 인증 요청 시 타이머 초기화
+  const handleRequest = async () => {
+    try {
+      const data = await sendVerificationCode(phoneNumber);
+      console.log('인증 요청 성공:', data);
+      setIsRequest(true); // 요청 상태 true
+      setValidTime(300); // 인증 요청 시 타이머 초기화
+    } catch (error) {
+      console.error('인증 요청 실패:', error);
+      setIsRequest(false); // 요청 실패 시 상태 초기화
+    }
   };
 
-  const handleResending = () => {
+  const handleResending = async () => {
     if (isComplete) return;
-    //Todo 인증번호 재요청 API 호출
-    setValidNumber('');
-    inputRef.current?.focus();
-    setIsRequest(true); // 요청 상태 true
-    setValidTime(300); // 인증 요청 시 타이머 초기화
+    try {
+      const data = await sendVerificationCode(phoneNumber);
+      console.log('인증 재요청 성공:', data);
+      setValidNumber('');
+      inputRef.current?.focus();
+      setIsRequest(true); // 요청 상태 true
+      setValidTime(300); // 인증 요청 시 타이머 초기화
+    } catch (error) {
+      console.error('인증 재요청 실패:', error);
+    }
   };
 
-  const handleCertify = () => {
-    if (isComplete) return; //이미 인증 완료된 상태면 return
-    // Todo 작성된 인증번호에 따라 인증 검사 API 호출
-    setIsComplete(true); // 인증검사 통과
-    // setIsError(true); // 인증검사 실패
+  const handleCertify = async () => {
+    if (isComplete) return; // 이미 인증 완료된 상태면 return
+    try {
+      const data = await verifyCode(phoneNumber, validNumber);
+      console.log('인증 완료:', data);
+      setIsComplete(true); // 인증 검사 통과
+      setIsError(false);
+    } catch (error) {
+      console.error('인증 실패:', error);
+      setIsError(true); // 인증 검사 실패
+    }
   };
 
   const handleComplete = () => {
-    // Todo 인증번호 인증완료 후 유저 전화번호 수정 API 호출
-    // 인증 완료 후 다음 단계로 이동
-    onNext(); // 여기서 onNext 호출로 Step2의 다음 단계로 이동
+    if (isComplete) {
+      onNext(); // 인증 완료 후 다음 단계로 이동
+    }
   };
 
   useEffect(() => {
@@ -76,7 +94,7 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
   }, [phoneNumber]);
 
   useEffect(() => {
-    if (validNumber.length === 4) {
+    if (validNumber.length === 6) {
       setValidNumberOk(true);
     } else {
       setValidNumberOk(false);
@@ -103,7 +121,6 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
     }
   }, [isRequest, validTime, isComplete]);
 
-  // Error 상태 시 input 초기화 및 4초 후 상태 리셋
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     if (isError) {
@@ -119,18 +136,18 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
   return (
     <div>
       <section className="max-w-[340px] w-full mx-auto mt-[76px]">
-      <Image
-          className='mb-12'
+        <Image
+          className="mb-12"
           src={'/sign/ProgressBar2.svg'}
           alt="ProgressBar"
           width={360}
           height={100}
         />
         <div className="text-heading3">
-        <h2 className="text-xl font-bold mb-6 text-left">
-          회원가입을 위해<br />
-          <span className="text-purple-600">휴대폰 번호</span>를 인증해주세요
-        </h2>
+          <h2 className="text-xl font-bold mb-6 text-left">
+            회원가입을 위해<br />
+            <span className="text-purple-600">휴대폰 번호</span>를 인증해주세요
+          </h2>
         </div>
         {/* 휴대폰 번호 입력 */}
         <div className="mt-10">
@@ -150,13 +167,15 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
                   onClick={handleResending}
                   className={`ml-[6px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
                   ${isComplete ? 'cursor-default' : 'cursor-pointer'}
-                  `}>
+                  `}
+                >
                   재전송
                 </div>
               ) : (
                 <div
                   onClick={handleRequest}
-                  className="ml-[6px] cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2">
+                  className="ml-[6px] cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2"
+                >
                   인증 요청
                 </div>
               )
@@ -189,7 +208,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
                 onClick={handleCertify}
                 className={` ml-[8px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
                 ${isComplete ? 'cursor-default' : 'cursor-pointer'}
-                `}>
+                `}
+              >
                 인증 완료
               </div>
             ) : (
@@ -198,12 +218,14 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
               </div>
             )}
           </div>
+          {/* 남은 시간 또는 인증 완료 및 에러 메시지 */}
           {isRequest ? (
             <div
               className={`text-body7 text-normal mt-[10px]
             ${isComplete && 'hidden'}
             ${isError && 'hidden'}
-            `}>
+            `}
+            >
               남은시간 : {validNumberToTime(validTime)}
             </div>
           ) : null}
@@ -221,7 +243,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext }) => {
         {isComplete ? (
           <div
             onClick={handleComplete}
-            className="cursor-pointer flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gradient2 text-heading4 text-white">
+            className="cursor-pointer flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gradient2 text-heading4 text-white"
+          >
             다음으로
           </div>
         ) : (
