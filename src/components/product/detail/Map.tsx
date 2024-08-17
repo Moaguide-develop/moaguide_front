@@ -1,28 +1,60 @@
 // kakaoMap.tsx
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-const KakaoMap = ({ props }) => {
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
+const KakaoMap = ({ props }: any) => {
+  const mapRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (window.kakao) {
+      console.log('KakaoMap is loaded');
       window.kakao.maps.load(() => {
-        // id가 'map'인 요소에 지도를 생성
-        const mapContainer = document.getElementById('map');
         const mapOption = {
-          // 해당 좌표는 서울 시청을 중심으로 함
           center: new window.kakao.maps.LatLng(37.566826, 126.9786567),
-          // 줌 레벨 3으로 설정
           level: 3
         };
-        const map = new window.kakao.maps.Map(mapContainer, mapOption);
+        const map = new window.kakao.maps.Map(mapRef.current, mapOption);
+
+        // 마커를 생성하고 지도에 표시
+        const markerPosition = new window.kakao.maps.LatLng(37.566826, 126.9786567);
+        const marker = new window.kakao.maps.Marker({
+          position: markerPosition
+        });
+        marker.setMap(map);
+
+        // 지도가 확대 또는 축소될 때 마커의 위치를 중심으로 설정
+        window.kakao.maps.event.addListener(map, 'zoom_changed', () => {
+          map.setCenter(markerPosition);
+        });
+
+        // 폴리곤을 그릴 좌표 배열
+        const polygonPath = [
+          new window.kakao.maps.LatLng(37.566826, 126.9786567),
+          new window.kakao.maps.LatLng(37.565826, 126.9786567),
+          new window.kakao.maps.LatLng(37.565826, 126.9796567),
+          new window.kakao.maps.LatLng(37.566826, 126.9796567)
+        ];
+
+        // 폴리곤을 생성하고 지도에 표시
+        const polygon = new window.kakao.maps.Polygon({
+          path: polygonPath,
+          strokeWeight: 3,
+          strokeColor: 'green',
+          strokeOpacity: 0.8,
+          fillOpacity: 0
+        });
+        polygon.setMap(map);
       });
     }
   }, []);
 
-  return (
-    // id가 'map'인 div 출력, width와 heigth를 설정해줘야 정상 출력됨
-    <div id="map" />
-  );
+  return <div ref={mapRef} className="w-[400px] h-[300px]" />;
 };
 
 export default KakaoMap;
