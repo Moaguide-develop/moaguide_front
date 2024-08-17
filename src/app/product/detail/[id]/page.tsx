@@ -3,13 +3,14 @@
 import Container from '@/components/common/Container';
 import NavBar from '@/components/product/detail/NavBar';
 import News from '@/components/product/detail/News';
+import ProductDetail from '@/components/product/detail/ProductDetail';
 import Profit from '@/components/product/detail/Profit';
 import Public from '@/components/product/detail/Public';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useState } from 'react';
 const Detailpage = (props: any) => {
-  const [sort, setSort] = useState('public');
+  const [sort, setSort] = useState('profit');
 
   console.log(props.params.id);
 
@@ -102,6 +103,8 @@ const Detailpage = (props: any) => {
         <Report />
       ) : sort === 'profit' ? (
         <Profit />
+      ) : sort === 'detail' ? (
+        <ProductDetail />
       ) : undefined}
     </div>
   );
