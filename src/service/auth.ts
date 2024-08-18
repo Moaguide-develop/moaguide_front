@@ -1,5 +1,6 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
 import axios from 'axios';
+import qs from 'qs';
 
 axios.defaults.withCredentials = true;
 
@@ -59,6 +60,28 @@ export const finalSignup = async (
     return response.data;
   } catch (error) {
     console.error('서버 요청 오류:', error);
+    throw error;
+  }
+};
+
+export const login = async (email: string, password: string) => {
+  try {
+    const response = await axios.post(
+      `${backendUrl}/login`,
+      { email, password },  
+      {
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+      }
+    );
+    const cookie = response.headers['set-cookie']?.[0] || '';
+    const authorization = response.headers['authorization'] || '';
+
+    console.log('로그인 성공:', response.data);
+    return { cookie, authorization };
+  } catch (error) {
+    console.error('로그인 오류:', error);
     throw error;
   }
 };
