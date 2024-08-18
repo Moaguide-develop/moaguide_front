@@ -17,3 +17,8 @@ export interface MainReportNewsType {
   mainReport: MainReportType[];
   mainNews: MainNews[];
 }
+
+export interface RealtimeRankType {
+  keyword: string;
+  rank: number;
+}
