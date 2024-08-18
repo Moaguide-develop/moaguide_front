@@ -1,4 +1,5 @@
 import type { MainReportType } from '@/types/homeComponentsType';
+import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import React from 'react';
 
@@ -8,7 +9,7 @@ const MainReportItem = ({ category, title, date, id }: MainReportType) => {
       {/* 왼쪽 */}
       <div className="flex-1 flex flex-col gap-3">
         <div className="p-[6px] rounded-[4px] bg-bg text-caption3 text-gray400 max-w-max">
-          {category}
+          {formatCategory(category)}
         </div>
         <div className="text-title2 text-gray600">{title}</div>
         <div className="text-body7 text-gray300">

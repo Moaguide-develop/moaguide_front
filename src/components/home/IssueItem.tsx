@@ -1,4 +1,5 @@
 import type { MainNews } from '@/types/homeComponentsType';
+import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 import React from 'react';
@@ -16,7 +17,7 @@ const IssueItem = ({ id, title, category, link, date }: MainNews) => {
         </div>
         <div className="text-title2 text-gray600 max-w-[313px] w-full">{title}</div>
         <div className="flex items-center justify-between ">
-          <div className="text-body7 text-gray400">{category}</div>
+          <div className="text-body7 text-gray400"> {formatCategory(category)}</div>
           <div className="text-body7 text-gray300">
             {format(parseISO(date), 'yyyy.MM.dd')}
           </div>

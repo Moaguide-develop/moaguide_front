@@ -2,15 +2,18 @@ import React from 'react';
 import IssueItem from './IssueItem';
 import { getReportIssues } from '@/factory/ReportIssue';
 import { MainNews } from '@/types/homeComponentsType';
+import { useNavStore } from '@/store/nav.store';
 
 const RecentlyIssue = () => {
   const { mainNews } = getReportIssues();
+  const { setCurrentNav } = useNavStore();
+
   return (
     <div>
       {/* 타이틀 */}
       <div className="flex items-center justify-between">
         <div className="text-heading4">최신 이슈</div>
-        <div className="cursor-pointer">
+        <div onClick={() => setCurrentNav('new_issue')} className="cursor-pointer">
           <img src="/images/home/item_right.svg" alt="" />
         </div>
       </div>

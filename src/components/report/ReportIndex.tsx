@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReportCategory from './ReportCategory';
 import Container from '../common/Container';
 import CategoryReport from './CategoryReport';
 
 const ReportIndex = () => {
+  /**
+   * 하단에서 탭 변경시 위치가 그대로 하단으로 유지되는 문제가 발생해 강제로 끌어올리기
+   */
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <nav className="w-full flex items-center justify-center border-b border-gray100">
