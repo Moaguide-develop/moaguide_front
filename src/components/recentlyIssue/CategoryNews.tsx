@@ -1,74 +1,75 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import CategoryNewsItem from './CategoryNewsItem';
-
-const mock = [
-  {
-    news: '한국 경제',
-    title: '오피스텔 이어 또…홍록기, 16억 아파트 경매 나온 사연은 [집코노미-핫! 부동산]',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    news: '한국 경제',
-    title: '오피스텔 이어 또…홍록기, 16억 아파트 경매 나온 사연은 [집코노미-핫! 부동산]',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    news: '한국 경제',
-    title: '오피스텔 이어 또…홍록기, 16억 아파트 경매 나온 사연은 [집코노미-핫! 부동산]',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  }
-];
+import useIntersectionObserver from '@/hook/useIntersectionObserver';
+import { getIssueLists } from '@/factory/IssueLists';
+import type { IssueListItem } from '@/types/homeComponentsType';
+import CategoryNewsItemSkeleton from '../skeleton/CategoryNewsItemSkeleton';
 
 const CategoryNews = () => {
-  const [category, setCategory] = useState('전체');
-  const [sort, setSort] = useState('recently');
+  const [category, setCategory] = useState('building');
+  const [sort, setSort] = useState('latest');
+  const ref = useRef<HTMLDivElement | null>(null);
+  const pageRef = useIntersectionObserver(ref, {});
+  const isPageEnd = !!pageRef?.isIntersecting;
+
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
+    getIssueLists(category, sort);
+
+  const fetchNext = useCallback(async () => {
+    await fetchNextPage();
+  }, [fetchNextPage]);
+
+  useEffect(() => {
+    if (isPageEnd && hasNextPage && !isFetching) {
+      fetchNext();
+    }
+  }, [fetchNext, isPageEnd, hasNextPage, isFetching]);
+
+  const allPosts = data?.pages?.flat() || [];
 
   return (
     <div className="mt-5">
       <div className="mt-8 flex items-center gap-5 border-b border-gray100 text-title2">
         <div
           onClick={() => {
-            setCategory('전체');
+            setCategory('all');
           }}
-          className={`pb-5 cursor-pointer ${category === '전체' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'all' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           전체
         </div>
         <div
           onClick={() => {
-            setCategory('부동산');
+            setCategory('building');
           }}
-          className={`pb-5 cursor-pointer ${category === '부동산' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'building' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           부동산
         </div>
         <div
           onClick={() => {
-            setCategory('음악저작권');
+            setCategory('music');
           }}
-          className={`pb-5 cursor-pointer ${category === '음악저작권' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'music' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           음악저작권
         </div>
         <div
           onClick={() => {
-            setCategory('한우');
+            setCategory('cow');
           }}
-          className={`pb-5 cursor-pointer ${category === '한우' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'cow' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           한우
         </div>
         <div
           onClick={() => {
-            setCategory('미술품');
+            setCategory('art');
           }}
-          className={`pb-5 cursor-pointer ${category === '미술품' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'art' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           미술품
         </div>
         <div
           onClick={() => {
-            setCategory('콘텐츠');
+            setCategory('content');
           }}
-          className={`pb-5 cursor-pointer ${category === '콘텐츠' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'content' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           콘텐츠
         </div>
       </div>
@@ -78,16 +79,16 @@ const CategoryNews = () => {
         <div className="flex items-center gap-[6px]">
           <div
             onClick={() => {
-              setSort('recently');
+              setSort('latest');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-          ${sort === 'recently' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}
+          ${sort === 'latest' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}
           `}>
             최신순
             <img
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sort === 'recently' ? 'block' : 'hidden'}`}
+              className={`${sort === 'latest' ? 'block' : 'hidden'}`}
             />
           </div>
           <div
@@ -106,11 +107,13 @@ const CategoryNews = () => {
           </div>
         </div>
       </div>
-      <div>
-        {mock.map((item, i) => (
-          <CategoryNewsItem key={i} {...item} />
-        ))}
-      </div>
+
+      {isLoading
+        ? Array.from({ length: 5 }).map((_, i) => <CategoryNewsItemSkeleton key={i} />)
+        : allPosts.map((item: IssueListItem) => (
+            <CategoryNewsItem key={item.id} {...item} />
+          ))}
+      <div className="w-full touch-none" ref={ref} />
     </div>
   );
 };

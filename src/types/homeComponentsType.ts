@@ -22,3 +22,11 @@ export interface RealtimeRankType {
   keyword: string;
   rank: number;
 }
+
+export interface IssueListItem {
+  id: number;
+  title: string;
+  category: string;
+  link: string;
+  date: string;
+}
