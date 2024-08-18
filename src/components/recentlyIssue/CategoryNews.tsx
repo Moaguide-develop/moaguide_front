@@ -4,6 +4,7 @@ import useIntersectionObserver from '@/hook/useIntersectionObserver';
 import { getIssueLists } from '@/factory/IssueLists';
 import type { IssueListItem } from '@/types/homeComponentsType';
 import CategoryNewsItemSkeleton from '../skeleton/CategoryNewsItemSkeleton';
+import LoaderSkeleton from '../skeleton/LoaderSkeleton';
 
 const CategoryNews = () => {
   const [category, setCategory] = useState('building');
@@ -16,14 +17,22 @@ const CategoryNews = () => {
     getIssueLists(category, sort);
 
   const fetchNext = useCallback(async () => {
-    await fetchNextPage();
-  }, [fetchNextPage]);
+    if (hasNextPage && !isFetching && !isFetchingNextPage && !isLoading) {
+      await fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading]);
 
   useEffect(() => {
-    if (isPageEnd && hasNextPage && !isFetching) {
-      fetchNext();
+    let timerId: NodeJS.Timeout | undefined;
+
+    if (isPageEnd && hasNextPage) {
+      timerId = setTimeout(() => {
+        fetchNext();
+      }, 1000);
     }
-  }, [fetchNext, isPageEnd, hasNextPage, isFetching]);
+
+    return () => clearTimeout(timerId);
+  }, [fetchNext, isPageEnd, hasNextPage]);
 
   const allPosts = data?.pages?.flat() || [];
 
@@ -113,6 +122,7 @@ const CategoryNews = () => {
         : allPosts.map((item: IssueListItem) => (
             <CategoryNewsItem key={item.id} {...item} />
           ))}
+      {(isFetching || isFetchingNextPage || hasNextPage) && <LoaderSkeleton />}
       <div className="w-full touch-none" ref={ref} />
     </div>
   );
