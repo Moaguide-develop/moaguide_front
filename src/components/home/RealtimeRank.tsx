@@ -1,9 +1,15 @@
 import { getRealtimeRank } from '@/factory/RealtimeRank';
 import type { RealtimeRankType } from '@/types/homeComponentsType';
 import React from 'react';
+import RealtimeRankSkeleton from '../skeleton/RealtimeSkeleton';
 
 const RealtimeRank = () => {
-  const { data } = getRealtimeRank();
+  const { data, isLoading } = getRealtimeRank();
+
+  if (isLoading) {
+    return <RealtimeRankSkeleton />;
+  }
+
   return (
     <div className="max-w-[280px] w-full h-[291px] hidden desk2:block">
       <div className="flex flex-col gap-5">

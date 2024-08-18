@@ -3,9 +3,10 @@ import MainReportItem from './MainReportItem';
 import { getReportIssues } from '@/factory/ReportIssue';
 import type { MainReportType } from '@/types/homeComponentsType';
 import { useNavStore } from '@/store/nav.store';
+import MainReportItemSkeleton from '../skeleton/MainReportItemSkeleton';
 
 const MainReport = () => {
-  const { mainReport } = getReportIssues();
+  const { mainReport, isLoading } = getReportIssues();
   const { setCurrentNav } = useNavStore();
 
   return (
@@ -23,15 +24,23 @@ const MainReport = () => {
       </div>
       {/* 아이템 */}
       <div className="my-[28px]">
-        {mainReport.map((item: MainReportType, i: number) => (
-          <MainReportItem
-            key={i}
-            title={item.title}
-            date={item.date}
-            category={item.category}
-            id={item.id}
-          />
-        ))}
+        {isLoading ? (
+          <>
+            <MainReportItemSkeleton />
+            <MainReportItemSkeleton />
+            <MainReportItemSkeleton />
+          </>
+        ) : (
+          mainReport.map((item: MainReportType, i: number) => (
+            <MainReportItem
+              key={i}
+              title={item.title}
+              date={item.date}
+              category={item.category}
+              id={item.id}
+            />
+          ))
+        )}
       </div>
     </div>
   );

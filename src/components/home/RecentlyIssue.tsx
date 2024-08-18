@@ -3,9 +3,10 @@ import IssueItem from './IssueItem';
 import { getReportIssues } from '@/factory/ReportIssue';
 import { MainNews } from '@/types/homeComponentsType';
 import { useNavStore } from '@/store/nav.store';
+import IssueItemSkeleton from '../skeleton/IssueItemSkeleton';
 
 const RecentlyIssue = () => {
-  const { mainNews } = getReportIssues();
+  const { mainNews, isLoading } = getReportIssues();
   const { setCurrentNav } = useNavStore();
 
   return (
@@ -19,9 +20,16 @@ const RecentlyIssue = () => {
       </div>
       {/* 아이템 */}
       <div className="mt-[28px] grid grid-cols-2 gap-5 gird">
-        {mainNews.slice(0, 2).map((item: MainNews, i: number) => (
-          <IssueItem key={i} {...item} />
-        ))}
+        {isLoading ? (
+          <>
+            <IssueItemSkeleton />
+            <IssueItemSkeleton />
+          </>
+        ) : (
+          mainNews
+            .slice(0, 2)
+            .map((item: MainNews, i: number) => <IssueItem key={i} {...item} />)
+        )}
       </div>
     </div>
   );
