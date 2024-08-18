@@ -1,13 +1,8 @@
+import type { MainReportType } from '@/types/homeComponentsType';
+import { format, parseISO } from 'date-fns';
 import React from 'react';
 
-interface MainReportItemProps {
-  category: string;
-  title: string;
-  date: string;
-  img: string;
-}
-
-const MainReportItem = ({ category, title, date, img }: MainReportItemProps) => {
+const MainReportItem = ({ category, title, date, id }: MainReportType) => {
   return (
     <div className="mt-5 pb-5 border-b border-gray100 flex gap-5 cursor-pointer">
       {/* 왼쪽 */}
@@ -16,11 +11,17 @@ const MainReportItem = ({ category, title, date, img }: MainReportItemProps) => 
           {category}
         </div>
         <div className="text-title2 text-gray600">{title}</div>
-        <div className="text-body7 text-gray300">{date}</div>
+        <div className="text-body7 text-gray300">
+          {format(parseISO(date), 'yyyy.MM.dd')}
+        </div>
       </div>
       {/* 오른쪽 */}
       <div>
-        <img src={img} alt="" className="w-[132px] h-[93px] rounded-[8px]" />
+        <img
+          src={'/images/home/mock.jpeg'}
+          alt=""
+          className="w-[132px] h-[93px] rounded-[8px]"
+        />
       </div>
     </div>
   );

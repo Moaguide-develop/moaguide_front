@@ -1,22 +1,10 @@
 import React from 'react';
 import IssueItem from './IssueItem';
-
-const mock = [
-  {
-    news: '한국 경제',
-    title: '오피스텔 이어 또…홍록기, 16억 아파트 경매 나온 사연은 [집코노미-핫! 부동산]',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    news: '한국 경제',
-    title: '오피스텔 이어 또…홍록기, 16억 아파트 경매 나온 사연은 [집코노미-핫! 부동산]',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  }
-];
+import { getReportIssues } from '@/factory/ReportIssue';
+import { MainNews } from '@/types/homeComponentsType';
 
 const RecentlyIssue = () => {
+  const { mainNews } = getReportIssues();
   return (
     <div>
       {/* 타이틀 */}
@@ -28,7 +16,7 @@ const RecentlyIssue = () => {
       </div>
       {/* 아이템 */}
       <div className="mt-[28px] grid grid-cols-2 gap-5 gird">
-        {mock.map((item, i) => (
+        {mainNews.slice(0, 2).map((item: MainNews, i: number) => (
           <IssueItem key={i} {...item} />
         ))}
       </div>
