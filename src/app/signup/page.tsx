@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { finalSignup } from '@/service/auth'; // finalSignup 함수 가져오기
+import { finalSignup } from '@/service/auth'; 
 
 const Step1 = dynamic(() => import('@/components/signup/Step1'));
 const Step2 = dynamic(() => import('@/components/signup/Step2'));
@@ -19,9 +19,9 @@ const SignupPage: React.FC = () => {
     birthDate?: string;
     investmentExperience?: string;
     marketingConsent?: boolean;
-    loginType: 'local'; // 기본값 설정
+    loginType: 'local'; 
   }>({
-    loginType: 'local', // 기본값 설정
+    loginType: 'local', 
   });
 
 
@@ -46,22 +46,19 @@ const SignupPage: React.FC = () => {
     try {
       console.log('최종 제출 데이터:', formData);
 
-      // Authorization 헤더에 토큰 추가
       const accessToken = localStorage.getItem('acess_token');
       if (!accessToken) {
         throw new Error('Access token이 없습니다.');
       }
 
-      // 최종 API 호출
       const authHeaders = {
-        cookie: '', // 필요한 경우 쿠키를 설정
-        authorization: `Bearer ${accessToken}`, // 토큰을 Authorization 헤더에 추가
+        cookie: '',
+        authorization: `Bearer ${accessToken}`, 
       };
 
       const response = await finalSignup(formData, authHeaders);
       console.log('서버 응답 데이터:', response);
       
-      // 성공 시 추가 작업
     } catch (error) {
       console.error('서버 요청 오류:', error);
     }

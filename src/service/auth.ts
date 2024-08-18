@@ -66,20 +66,22 @@ export const finalSignup = async (
 
 export const login = async (email: string, password: string) => {
   try {
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
     const response = await axios.post(
       `${backendUrl}/login`,
-      { email, password },  
+      formData, 
       {
         headers: {
-          'Content-Type': 'application/json', 
+          'Content-Type': 'multipart/form-data',
         },
       }
     );
-    const cookie = response.headers['set-cookie']?.[0] || '';
-    const authorization = response.headers['authorization'] || '';
 
     console.log('로그인 성공:', response.data);
-    return { cookie, authorization };
+    return response.data;
   } catch (error) {
     console.error('로그인 오류:', error);
     throw error;
