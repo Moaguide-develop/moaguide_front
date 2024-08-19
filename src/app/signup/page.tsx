@@ -27,7 +27,6 @@ const SignupPage: React.FC = () => {
   });
 
   const handleNext = () => {
-    console.log('Moving to next step, current formData:', formData);
     setCurrentStep((prev) => prev + 1);
   };
 
