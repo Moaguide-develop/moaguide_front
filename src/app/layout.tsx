@@ -4,10 +4,16 @@ import localFont from 'next/font/local';
 import Gnb from '@/components/common/Gnb';
 import QueryProvider from '@/providers/QueryProvider';
 import IntegrateMSW from '@/mocks/IntegrateMsw';
-import dynamic from 'next/dynamic';
 
+import dynamic from 'next/dynamic';
+import Script from 'next/script';
 const ModalProvider = dynamic(() => import('@/providers/ModalProvider'), { ssr: false });
 
+declare global {
+  interface Window {
+    kakao: any;
+  }
+}
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
   display: 'swap',
@@ -15,7 +21,6 @@ const pretendard = localFont({
   variable: '--font-pretendard'
 });
 
-/* eslint-disable react-refresh/only-export-components*/
 export const metadata: Metadata = {
   title: '모아가이드',
   description: 'STO 큐레이션 플랫폼 모아가이드',
@@ -42,6 +47,10 @@ export default function RootLayout({
       <body className={pretendard.className}>
         <IntegrateMSW>
           <QueryProvider>
+            <Script
+              strategy="beforeInteractive"
+              src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
+            />
             <Gnb />
             {children}
             <ModalProvider />

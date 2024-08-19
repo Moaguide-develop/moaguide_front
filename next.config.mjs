@@ -2,6 +2,10 @@
 const nextConfig = {
   experimental: { instrumentationHook: true },
   reactStrictMode: true,
+  swcMinify: true,
+  compiler: {
+    styledComponents: true
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       if (Array.isArray(config.resolve.alias))

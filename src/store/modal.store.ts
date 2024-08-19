@@ -2,7 +2,6 @@ import { create } from 'zustand';
 
 interface useModalStoreType {
   open: boolean;
-  /* eslint-disable no-unused-vars */
   setOpen: (payload: boolean) => void;
   modalType: string;
   setModalType: (payload: string) => void;

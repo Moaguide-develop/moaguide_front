@@ -2,7 +2,6 @@ import { RefObject, useEffect } from 'react';
 
 export default function useOnClickOutside<T extends HTMLElement>(
   ref: RefObject<T>,
-  /* eslint-disable no-unused-vars */
   handler: (event: MouseEvent) => void
 ) {
   useEffect(() => {
