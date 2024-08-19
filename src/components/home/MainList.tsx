@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import MainListItem from './MainListItem';
+import { useNavStore } from '@/store/nav.store';
 
 const mock = [
   {
@@ -37,12 +38,14 @@ const mock = [
 
 const MainList = () => {
   const [category, setCategory] = useState('전체');
+  const { setCurrentNav } = useNavStore();
+
   return (
     <div>
       {/* title */}
       <div className="flex items-center justify-between">
         <div className="text-heading4">주요 상품 현황</div>
-        <div className="cursor-pointer">
+        <div onClick={() => setCurrentNav('item')} className="cursor-pointer">
           <img src="/images/home/item_right.svg" alt="" />
         </div>
       </div>
