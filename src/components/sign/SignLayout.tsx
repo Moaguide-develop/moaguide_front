@@ -2,15 +2,18 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login } from '@/service/auth';
+import { useAuthStore } from '@/store/userAuth.store';
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const { setIsLoggedIn } = useAuthStore(); 
 
   const handleLogin = async () => {
     try {
       await login(email, password); 
+      setIsLoggedIn(true); 
       router.push('/');
     } catch (error) {
       console.log(error);

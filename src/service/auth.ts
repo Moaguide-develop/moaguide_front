@@ -21,7 +21,7 @@ export const verifyCode = async (phone: string, code: string): Promise<VerifyCod
   console.log('토큰', token);
   const accessToken = token.replace('Bearer ', '');
   console.log('어세스토큰', accessToken);
-  localStorage.setItem('acess_token', accessToken);
+  localStorage.setItem('access_token', accessToken);
   return response.data;
 };
 
@@ -85,7 +85,7 @@ export const login = async (email: string, password: string) => {
     console.log('토큰', token);
     const accessToken = token.replace('Bearer ', '');
     console.log('어세스토큰', accessToken);
-    localStorage.setItem('acess_token', accessToken);
+    localStorage.setItem('access_token', accessToken);
     return response.data;
   } catch (error) {
     console.error('로그인 오류:', error);
