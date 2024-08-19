@@ -16,16 +16,10 @@
   "rules": {
     "@next/next/no-img-element": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "react-refresh/only-export-components": [
-      "warn",
-    
-      {
-        "allowConstantExport": true
-      }
-    ],
+   
 
-   "no-unused-vars": "off",
-  "react/jsx-pascal-case": "warn"
+   "no-unused-vars": "off"
+  
   }
  
 
