@@ -7,10 +7,15 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 // import SwiperCore, { Navigation } from 'swiper/core';
 import Image from 'next/image';
-import { useState } from 'react';
+import { memo, useState } from 'react';
+import { Divide } from '@/types/Diviend';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const Dividend = () => {
+interface DividendProps {
+  dividend: Divide[];
+}
+
+const Dividend = memo(({ dividend }: DividendProps) => {
   const [swiperIndex, setSwiperIndex] = useState(0); // -> 페이지네이션용
 
   const [swiper, setSwiper] = useState<SwiperClass>(); // -> 슬라이드용
@@ -20,7 +25,6 @@ const Dividend = () => {
   const handleNext = () => {
     swiper?.slideNext();
   };
-
   SwiperCore.use([Navigation, Scrollbar, Autoplay]);
   return (
     <div className="  w-full max-w-[1000px]  mx-[50px] relative  z-5 flex justify-center items-center">
@@ -65,9 +69,9 @@ const Dividend = () => {
           }
         }}
         className="mySwiper flex justify-center">
-        {[1, 2, 3, 4].map((item, idx) => {
+        {dividend.map((item) => {
           return (
-            <div key={idx}>
+            <div key={item.product_Id}>
               <SwiperSlide className=" flex justify-center">
                 <div className=" md:max-w-[456px]  desk2:max-w-[400px]  desk:max-w-[300px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row justify-center items-center  flex mx-auto  relative">
                   <div className=" w-full max-w-[52px] max-h-[52px] rounded-[28.50px] ">
@@ -82,13 +86,11 @@ const Dividend = () => {
 
                   <div className=" flex flex-col items-start justify-start md:ml-[20px] desk:ml-[16px]">
                     <div className=" text-gray-300">부동산</div>
-                    <div className="w-full font-bold mt-1">
-                      롯데랜드타워 시그니엘 {item}호
-                    </div>
+                    <div className="w-full font-bold mt-1">{item.name}</div>
                   </div>
 
                   <div className="ml-[46px] font-bold flex justify-center items-center text-purple-600 mt-[20px]">
-                    (1주당 112원)
+                    (1주당 {item.dividend}원)
                   </div>
                 </div>
               </SwiperSlide>
@@ -110,6 +112,8 @@ const Dividend = () => {
       </div>
     </div>
   );
-};
+});
+
+Dividend.displayName = 'Dividend';
 
 export default Dividend;
