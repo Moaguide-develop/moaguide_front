@@ -1,37 +1,20 @@
 import React from 'react';
 import MainReportItem from './MainReportItem';
-
-const mock = [
-  {
-    id: 'asdawd',
-    category: '부동산',
-    title: '한 달 노후생활비 얼마가 적당할까요?',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    id: 'asdawd',
-    category: '부동산',
-    title: '한 달 노후생활비 얼마가 적당할까요?',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    id: 'asdawd',
-    category: '부동산',
-    title: '한 달 노후생활비 얼마가 적당할까요?',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  }
-];
+import { getReportIssues } from '@/factory/ReportIssue';
+import type { MainReportType } from '@/types/homeComponentsType';
+import { useNavStore } from '@/store/nav.store';
+import MainReportItemSkeleton from '../skeleton/MainReportItemSkeleton';
 
 const MainReport = () => {
+  const { mainReport, isLoading } = getReportIssues();
+  const { setCurrentNav } = useNavStore();
+
   return (
     <div>
       {/* 타이틀 */}
       <div className="flex items-center justify-between">
         <div className="text-heading4">주요 리포트</div>
-        <div className="cursor-pointer">
+        <div onClick={() => setCurrentNav('report')} className="cursor-pointer">
           <img src="/images/home/item_right.svg" alt="" />
         </div>
       </div>
@@ -41,9 +24,23 @@ const MainReport = () => {
       </div>
       {/* 아이템 */}
       <div className="my-[28px]">
-        {mock.map((item, i) => (
-          <MainReportItem key={i} {...item} />
-        ))}
+        {isLoading ? (
+          <>
+            <MainReportItemSkeleton />
+            <MainReportItemSkeleton />
+            <MainReportItemSkeleton />
+          </>
+        ) : (
+          mainReport.map((item: MainReportType, i: number) => (
+            <MainReportItem
+              key={i}
+              title={item.title}
+              date={item.date}
+              category={item.category}
+              id={item.id}
+            />
+          ))
+        )}
       </div>
     </div>
   );
