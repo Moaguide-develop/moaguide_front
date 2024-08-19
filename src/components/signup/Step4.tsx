@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { checkNicknameAvailability } from '@/service/auth';
 import { formatBirthDate } from '@/utils/dateUtils';
@@ -19,7 +19,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [isFormValid, setIsFormValid] = useState(false);
   const router = useRouter(); 
 
-  useEffect(() => {
+  const handleUpdate = useCallback(() => {
     if (investmentExperience === 'yes' && investmentYears && name && nickname && isNicknameValid && isBirthdateValid) {
       setIsFormValid(true);
     } else if (investmentExperience === 'no' && name && nickname && isNicknameValid && isBirthdateValid) {
@@ -36,8 +36,11 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
       birthDate: formattedBirthDate,
       investmentExperience: investmentExperience === 'yes' ? `${investmentYears}년` : '없음',
     });
+  }, [name, nickname, isNicknameValid, birthdate, isBirthdateValid, investmentExperience, investmentYears, onUpdate]);
 
-  }, [name, nickname, isNicknameValid, birthdate, isBirthdateValid, investmentExperience, investmentYears]);
+  useEffect(() => {
+    handleUpdate();
+  }, [handleUpdate]);
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);

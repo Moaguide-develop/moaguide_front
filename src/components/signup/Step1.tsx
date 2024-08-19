@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import PrivacyModal from './modal/PrivacyModal';
 import ServiceModal from './modal/ServiceModal';
@@ -20,10 +20,14 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   });
   const [activePage, setActivePage] = useState<string | null>(null);
 
-  useEffect(() => {
+  const handleUpdate = useCallback(() => {
     onUpdate({ marketingConsent: checks.marketing });
-    console.log('Updated marketingConsent:', checks.marketing); 
-  }, [checks.marketing]);
+    console.log('Updated marketingConsent:', checks.marketing);
+  }, [checks.marketing, onUpdate]);
+
+  useEffect(() => {
+    handleUpdate();
+  }, [handleUpdate]);
 
   const handleAllCheckedChange = () => {
     const newCheckedState = !allChecked;
