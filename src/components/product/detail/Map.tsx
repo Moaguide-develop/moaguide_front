@@ -54,7 +54,7 @@ const KakaoMap = ({ props }: any) => {
     }
   }, []);
 
-  return <div ref={mapRef} className="w-[400px] h-[300px]" />;
+  return <div ref={mapRef} className="w-[400px] h-[300px]   rounded-md" />;
 };
 
 export default KakaoMap;

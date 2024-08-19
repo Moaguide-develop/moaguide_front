@@ -1,3 +1,6 @@
+import CopyRightFeeChart from './CopyrightFeeChart';
+import KakaoMap from './Map';
+import StockPriceChart from './StockPriceChart';
 const Profit = () => {
   // const MOCK = {
   //   product_Id: 'sou.8',
@@ -44,13 +47,15 @@ const Profit = () => {
 
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
-      <div className=" text-lg font-bold">위치</div>
-      <div className=" w-full h-[1px] bg-gray-200" />
-      <div className="text-base font-bold">주가</div>
-      <div className=" w-full h-[1px] bg-gray-200" />
+      <div className=" text-lg font-bold mb-[20px]">위치</div>
+      <KakaoMap />
+      <div className=" w-full h-[1px] my-[40px] bg-gray-200 " />
+      <div className="text-base font-bold mb-[20px]">주가</div>
+      <StockPriceChart />
+      <div className=" w-full h-[1px] my-[40px] bg-gray-200" />
 
       <div>
-        <div className="text-base font-bold ">발행 정보</div>
+        <div className="text-base font-bold  mb-[15px] ">발행 정보</div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px] ">공모자산</div>
@@ -101,17 +106,197 @@ const Profit = () => {
         </div>
       </div>
 
-      <div className=" w-full h-[1px] bg-gray-200" />
+      <div className=" w-full h-[1px] my-[40px] bg-gray-200" />
+
       <div>
-        <div className="text-base font-bold">계약 정보</div>
+        <div className="text-base font-bold  mb-[15px] ">계약 정보</div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px] ">공모자산</div>
+            <div className="">압구정 커머스 빌딩</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">증권 종류</div>
+            <div className="">00 증권</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">최근 배당금</div>
+            <div className="">한국 토지신탁</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">발생 증권수</div>
+            <div className="">1,000,000주</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">1주 당 발행 가액</div>
+            <div className="">1,000원</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">총 모집 액</div>
+            <div className="">00,000,000,000원</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">청약 일정</div>
+            <div className="">2024.06.06 ~ 2024.06.07</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">상장일</div>
+            <div className="">2024년8월12일</div>
+          </div>
+        </div>
       </div>
 
-      <div className=" w-full h-[1px] bg-gray-200" />
-      <div className="text-base font-bold">건물 정보</div>
+      <div className=" w-full h-[1px] my-[40px] bg-gray-200" />
+      <div>
+        <div className="text-base font-bold  mb-[15px] ">건물 정보</div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px] ">공모자산</div>
+            <div className="">압구정 커머스 빌딩</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">증권 종류</div>
+            <div className="">00 증권</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">최근 배당금</div>
+            <div className="">한국 토지신탁</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">발생 증권수</div>
+            <div className="">1,000,000주</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">1주 당 발행 가액</div>
+            <div className="">1,000원</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">총 모집 액</div>
+            <div className="">00,000,000,000원</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">청약 일정</div>
+            <div className="">2024.06.06 ~ 2024.06.07</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">상장일</div>
+            <div className="">2024년8월12일</div>
+          </div>
+        </div>
+      </div>
 
-      <div className="text-base font-bold">토지 정보</div>
+      <div>
+        <div className="text-base font-bold  mb-[15px]  mt-[30px] ">토지 정보</div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px] ">공모자산</div>
+            <div className="">압구정 커머스 빌딩</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">증권 종류</div>
+            <div className="">00 증권</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">최근 배당금</div>
+            <div className="">한국 토지신탁</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">발생 증권수</div>
+            <div className="">1,000,000주</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">1주 당 발행 가액</div>
+            <div className="">1,000원</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">총 모집 액</div>
+            <div className="">00,000,000,000원</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">청약 일정</div>
+            <div className="">2024.06.06 ~ 2024.06.07</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">상장일</div>
+            <div className="">2024년8월12일</div>
+          </div>
+        </div>
+      </div>
 
-      <div className="text-base font-bold">배당금 정보</div>
+      <div>
+        <div className="text-base font-bold  mb-[15px] mt-[30px] ">배당금 정보</div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px] ">공모자산</div>
+            <div className="">압구정 커머스 빌딩</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">증권 종류</div>
+            <div className="">00 증권</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">최근 배당금</div>
+            <div className="">한국 토지신탁</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">발생 증권수</div>
+            <div className="">1,000,000주</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="text-base font-bold  mb-[15px]  mt-[30px]  ">
+        배당주기별 배당금 & 시가배당률
+      </div>
+      <CopyRightFeeChart />
     </div>
   );
 };

@@ -6,10 +6,17 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Image from 'next/image';
-import { useState } from 'react';
+import { memo, useState } from 'react';
+import { Summary } from '@/types/Diviend';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-const TopProduct = () => {
+
+interface TopProductProps {
+  summary: Summary[];
+}
+
+// 최근 주목받는 상품 api 받아오기
+const TopProduct = memo(({ summary }: TopProductProps) => {
   const [swiperIndex, setSwiperIndex] = useState(0); // -> 페이지네이션용
 
   const [swiper, setSwiper] = useState<SwiperClass>(); // -> 슬라이드용
@@ -70,9 +77,9 @@ const TopProduct = () => {
             }
           }}
           className="mySwiper flex justify-center">
-          {[4, 5, 6, 7].map((item) => {
+          {summary.map((item, idx) => {
             return (
-              <div key={item}>
+              <div key={item.product_Id}>
                 <SwiperSlide>
                   <div className=" max-w-[436px] h-[372px] border-2 border-gray-200 rounded-md ">
                     <div className="flex flex-col justify-center items-center mt-[20px] mx-auto">
@@ -93,7 +100,7 @@ const TopProduct = () => {
                               width={44}
                               height={44}></Image>
                             <div className="text-white absolute top-2 left-[18px] ">
-                              {item}
+                              {idx + 1}
                             </div>
                           </div>
                         </div>
@@ -104,18 +111,20 @@ const TopProduct = () => {
                           <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center ">
                             부동산
                           </div>
-                          <div className="text-gray-400 ml-[3px]">운영 플랫폼 이름</div>
+                          <div className="text-gray-400 ml-[3px]">{item.platform}</div>
                         </div>
                         <div className="flex justify-between mt-[10px]  w-full max-w-[375px] ml-[20px] ">
-                          <div className="font-bold text-base">압구정 커머스 빌딩</div>
-                          <div className="text-red-500 bg-red-200 rounded-md w-[45px] h-[25px] flex justify-center items-center">
-                            2.7%
+                          <div className="font-bold text-base">{item.name}</div>
+                          <div className="text-red-500 bg-red-200 rounded-md w-auto h-[25px] flex justify-center items-center px-[4px] py-[4px]">
+                            {item.priceRate}%
                           </div>
                         </div>
 
                         <div className="flex mt-[10px ] ml-[20px]">
-                          <div className="text-gray-400">5,320원</div>
-                          <div className="text-red-500 ml-[3px] ">(+ 0.5%)</div>
+                          <div className="text-gray-400">{item.price}</div>
+                          <div className="text-red-500 ml-[3px] ">
+                            (+ {item.lastDivide_rate}%)
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -142,6 +151,8 @@ const TopProduct = () => {
       <div className="swiper-pagination w-full flex justify-center"></div>
     </div>
   );
-};
+});
+
+TopProduct.displayName = 'TopProduct';
 
 export default TopProduct;

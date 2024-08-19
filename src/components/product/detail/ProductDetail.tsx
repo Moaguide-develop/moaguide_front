@@ -1,4 +1,9 @@
-const Profit = () => {
+import CommercialRentChart from './CommercialRentChart';
+import CommercialVacancyRateChart from './CommercialVacancyRateChart';
+import FloatingPopulationChart from './FloatingPopulationChart';
+import PopulationInformationChart from './PopulationInformationChart';
+
+const ProductDetail = () => {
   // const MOCK = {
   //   product_Id: 'sou.8',
   //   name: '신도림 핀포인트 타워 1호',
@@ -42,7 +47,21 @@ const Profit = () => {
   //   ]
   // };
 
-  return <div className="max-w-[1000px] mx-auto mt-[32px]"></div>;
+  return (
+    <div className="max-w-[1000px] mx-auto mt-[32px]">
+      <div className=" text-lg font-bold mb-[20px]">상권 임대료</div>
+      <CommercialRentChart />
+
+      <div className=" text-lg font-bold mb-[20px]">상권 공실률</div>
+      <CommercialVacancyRateChart />
+
+      <div className=" text-lg font-bold mb-[20px]">유동인구</div>
+      <FloatingPopulationChart />
+
+      <div className=" text-lg font-bold mb-[20px]">인구정보</div>
+      <PopulationInformationChart />
+    </div>
+  );
 };
 
-export default Profit;
+export default ProductDetail;
