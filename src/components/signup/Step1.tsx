@@ -27,7 +27,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
   useEffect(() => {
     handleUpdate();
-  }, [handleUpdate]);
+  }, [checks.marketing]);
 
   const handleAllCheckedChange = () => {
     const newCheckedState = !allChecked;
