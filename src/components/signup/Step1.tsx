@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import PrivacyModal from './modal/PrivacyModal';
 import ServiceModal from './modal/ServiceModal';
@@ -20,30 +20,27 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   });
   const [activePage, setActivePage] = useState<string | null>(null);
 
-  const handleUpdate = useCallback(() => {
-    onUpdate({ marketingConsent: checks.marketing });
-    console.log('Updated marketingConsent:', checks.marketing);
-  }, [checks.marketing, onUpdate]);
-
-  useEffect(() => {
-    handleUpdate();
-  }, [checks.marketing]);
-
   const handleAllCheckedChange = () => {
     const newCheckedState = !allChecked;
     setAllChecked(newCheckedState);
-    setChecks({
+    const newChecks = {
       privacy: newCheckedState,
       service: newCheckedState,
       age: newCheckedState,
       marketing: newCheckedState,
-    });
+    };
+    setChecks(newChecks);
+    onUpdate({ marketingConsent: newCheckedState });
   };
 
   const handleCheckChange = (key: string) => {
     const newChecks = { ...checks, [key]: !checks[key as keyof typeof checks] };
     setChecks(newChecks);
     setAllChecked(Object.values(newChecks).every(Boolean));
+
+    if (key === 'marketing') {
+      onUpdate({ marketingConsent: newChecks.marketing });
+    }
   };
 
   const handleArrowClick = (key: string, event: React.MouseEvent) => {
