@@ -29,11 +29,7 @@ const SignupPage: React.FC = () => {
     console.log('Moving to next step, current formData:', formData);
     setCurrentStep((prev) => prev + 1);
   };
-
-  const handlePrev = () => {
-    setCurrentStep((prev) => prev - 1);
-  };
-
+  
   const handleUpdate = (data: Partial<typeof formData>) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
@@ -75,7 +71,6 @@ const SignupPage: React.FC = () => {
       {currentStep === 2 && (
         <Step2
           onNext={handleNext}
-          onPrev={handlePrev}
           onUpdate={(data) => handleUpdate(data)}
         />
       )}

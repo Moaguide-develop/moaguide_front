@@ -1,11 +1,10 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { sendVerificationCode, verifyCode } from '@/service/auth';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 interface PhoneVerificationProps {
   onNext: () => void;
-  onPhoneNumberChange: (number: string) => void; // 추가된 속성
+  onPhoneNumberChange: (number: string) => void; 
 }
 
 const validNumberToTime = (time: number): string => {
@@ -15,7 +14,6 @@ const validNumberToTime = (time: number): string => {
 };
 
 const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNumberChange }) => {
-  const router = useRouter();
   const [phoneNumber, setPhoneNumber] = useState<string>(''); // 전화번호
   const [phoneNumberValid, setPhoneNumberValid] = useState(false); // 전화번호 유효성 검사
   const [isRequest, setIsRequest] = useState(false); // 전화번호 입력 후 인증요청 상태

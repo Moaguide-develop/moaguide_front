@@ -1,6 +1,5 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
 import axios from 'axios';
-import qs from 'qs';
 
 axios.defaults.withCredentials = true;
 
@@ -17,7 +16,7 @@ export const verifyCode = async (phone: string, code: string): Promise<VerifyCod
   console.log('응답 데이터:', response.data);
   console.log('응답 헤더:', response.headers);
 
-  let token = response.headers['authorization'] || response.headers['Authorization'];
+  const token = response.headers['authorization'] || response.headers['Authorization'];
   console.log('토큰', token);
   const accessToken = token.replace('Bearer ', '');
   console.log('어세스토큰', accessToken);
@@ -81,7 +80,7 @@ export const login = async (email: string, password: string) => {
     );
 
     console.log('로그인 성공:', response.data);
-    let token = response.headers['authorization'] || response.headers['Authorization'];
+    const token = response.headers['authorization'] || response.headers['Authorization'];
     console.log('토큰', token);
     const accessToken = token.replace('Bearer ', '');
     console.log('어세스토큰', accessToken);
