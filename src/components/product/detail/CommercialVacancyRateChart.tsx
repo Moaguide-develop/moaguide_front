@@ -12,7 +12,6 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 const CommercialVacancyRateChart = () => {
   const chartRef = useRef(null);
 

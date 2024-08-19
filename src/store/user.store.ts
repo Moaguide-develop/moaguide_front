@@ -1,8 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-/* eslint-disable no-unused-vars */
-
 interface IUserInfo {
   memberEmail: string;
   memberNickName: string;

@@ -10,7 +10,6 @@ import Image from 'next/image';
 import { memo, useState } from 'react';
 import { Divide } from '@/types/Diviend';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 interface DividendProps {
   dividend: Divide[];
 }

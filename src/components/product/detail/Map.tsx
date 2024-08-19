@@ -2,8 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 declare global {
   interface Window {
     kakao: any;

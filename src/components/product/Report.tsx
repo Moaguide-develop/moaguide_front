@@ -8,7 +8,6 @@ import 'swiper/css/pagination';
 import Image from 'next/image';
 import { useState } from 'react';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 const Report = () => {
   const [swiperIndex, setSwiperIndex] = useState(0); // -> 페이지네이션용
 

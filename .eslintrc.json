@@ -15,11 +15,19 @@
   "plugins": ["react", "react-refresh"],
   "rules": {
     "@next/next/no-img-element": "off",
+    
     "@typescript-eslint/no-explicit-any": "off",
-   
 
-   "no-unused-vars": "off"
-  
+
+
+    "no-unused-vars": "off",
+
+    "@typescript-eslint/no-unused-vars": "off",
+
+    "react-hooks/rules-of-hooks": "off",
+
+    "react-refresh/only-export-components": "off"
+
   }
  
 

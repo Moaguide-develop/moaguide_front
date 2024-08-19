@@ -22,7 +22,6 @@ ChartJS.register(
   ChartDataLabels
 );
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
 const CommercialRentChart = () => {
   const chartRef = useRef(null);
 

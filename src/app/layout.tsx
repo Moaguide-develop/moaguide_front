@@ -9,7 +9,6 @@ import dynamic from 'next/dynamic';
 import Script from 'next/script';
 const ModalProvider = dynamic(() => import('@/providers/ModalProvider'), { ssr: false });
 
-
 declare global {
   interface Window {
     kakao: any;
@@ -22,7 +21,6 @@ const pretendard = localFont({
   variable: '--font-pretendard'
 });
 
-/* eslint-disable react-refresh/only-export-components*/
 export const metadata: Metadata = {
   title: '모아가이드',
   description: 'STO 큐레이션 플랫폼 모아가이드',
