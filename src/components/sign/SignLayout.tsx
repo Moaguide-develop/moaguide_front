@@ -10,9 +10,7 @@ const SignLayout = () => {
 
   const handleLogin = async () => {
     try {
-      const { cookie, authorization } = await login(email, password);
-      localStorage.setItem('auth_token', authorization);
-
+      await login(email, password); 
       router.push('/');
     } catch (error) {
       console.log(error);

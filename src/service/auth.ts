@@ -81,6 +81,11 @@ export const login = async (email: string, password: string) => {
     );
 
     console.log('로그인 성공:', response.data);
+    let token = response.headers['authorization'] || response.headers['Authorization'];
+    console.log('토큰', token);
+    const accessToken = token.replace('Bearer ', '');
+    console.log('어세스토큰', accessToken);
+    localStorage.setItem('acess_token', accessToken);
     return response.data;
   } catch (error) {
     console.error('로그인 오류:', error);
