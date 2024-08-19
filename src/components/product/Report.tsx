@@ -19,6 +19,7 @@ const Report = () => {
     swiper?.slideNext();
   };
 
+  //
   SwiperCore.use([Navigation, Scrollbar, Autoplay]);
   return (
     <div className=" flex flex-row justify-center items-center ">
