@@ -20,7 +20,13 @@ export const verifyCode = async (phone: string, code: string): Promise<VerifyCod
   console.log('토큰', token);
   const accessToken = token.replace('Bearer ', '');
   console.log('어세스토큰', accessToken);
-  localStorage.setItem('access_token', accessToken);
+
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('access_token', accessToken);
+  } else {
+    console.error('클라이언트 사이드에서만 localStorage를 사용할 수 있습니다.');
+  }
+
   return response.data;
 };
 
@@ -84,7 +90,13 @@ export const login = async (email: string, password: string) => {
     console.log('토큰', token);
     const accessToken = token.replace('Bearer ', '');
     console.log('어세스토큰', accessToken);
-    localStorage.setItem('access_token', accessToken);
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('access_token', accessToken);
+    } else {
+      console.error('클라이언트 사이드에서만 localStorage를 사용할 수 있습니다.');
+    }
+
     return response.data;
   } catch (error) {
     console.error('로그인 오류:', error);

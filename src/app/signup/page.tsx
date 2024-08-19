@@ -24,37 +24,42 @@ const SignupPage: React.FC = () => {
     loginType: 'local', 
   });
 
-
   const handleNext = () => {
     console.log('Moving to next step, current formData:', formData);
     setCurrentStep((prev) => prev + 1);
   };
-  
+
   const handleUpdate = (data: Partial<typeof formData>) => {
     setFormData((prev) => ({ ...prev, ...data }));
   };
 
-  useEffect(() =>
-  console.log(formData)
-  ,[formData])
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
 
   const handleSubmit = async () => {
     try {
       console.log('최종 제출 데이터:', formData);
 
-      const accessToken = localStorage.getItem('acess_token');
-      if (!accessToken) {
-        throw new Error('Access token이 없습니다.');
+      // 클라이언트 사이드에서만 localStorage 접근
+      if (typeof window !== 'undefined') {
+        const accessToken = localStorage.getItem('access_token');
+        if (!accessToken) {
+          throw new Error('Access token이 없습니다.');
+        }
+
+        const authHeaders = {
+          cookie: '',
+          authorization: `Bearer ${accessToken}`,
+        };
+
+        const response = await finalSignup(formData, authHeaders);
+        console.log('서버 응답 데이터:', response);
+
+      } else {
+        console.error('클라이언트 사이드에서만 실행되어야 합니다.');
       }
 
-      const authHeaders = {
-        cookie: '',
-        authorization: `Bearer ${accessToken}`, 
-      };
-
-      const response = await finalSignup(formData, authHeaders);
-      console.log('서버 응답 데이터:', response);
-      
     } catch (error) {
       console.error('서버 요청 오류:', error);
     }
@@ -81,10 +86,10 @@ const SignupPage: React.FC = () => {
         />
       )}
       {currentStep === 4 && (
-      <Step4
-        onNext={handleSubmit}
-        onUpdate={(data) => handleUpdate(data)}  
-      />
+        <Step4
+          onNext={handleSubmit}
+          onUpdate={(data) => handleUpdate(data)}  
+        />
       )}
     </div>
   );
