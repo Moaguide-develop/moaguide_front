@@ -1,4 +1,5 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
+import { setCookie } from '@/utils/cookies';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -21,14 +22,11 @@ export const verifyCode = async (phone: string, code: string): Promise<VerifyCod
   const accessToken = token.replace('Bearer ', '');
   console.log('어세스토큰', accessToken);
 
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('access_token', accessToken);
-  } else {
-    console.error('클라이언트 사이드에서만 localStorage를 사용할 수 있습니다.');
-  }
+  setCookie('access_token', accessToken, 7);
 
   return response.data;
 };
+
 
 export const checkNicknameAvailability = async (nickname: string): Promise<NicknameCheckResponse | null> => {
   try {
@@ -91,11 +89,7 @@ export const login = async (email: string, password: string) => {
     const accessToken = token.replace('Bearer ', '');
     console.log('어세스토큰', accessToken);
 
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('access_token', accessToken);
-    } else {
-      console.error('클라이언트 사이드에서만 localStorage를 사용할 수 있습니다.');
-    }
+    setCookie('access_token', accessToken, 7);
 
     return response.data;
   } catch (error) {

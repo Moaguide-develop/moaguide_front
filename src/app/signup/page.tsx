@@ -1,7 +1,7 @@
-'use client';
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { finalSignup } from '@/service/auth'; 
+import { finalSignup } from '@/service/auth';
+import { getCookie } from '@/utils/cookies'; 
 
 const Step1 = dynamic(() => import('@/components/signup/Step1'));
 const Step2 = dynamic(() => import('@/components/signup/Step2'));
@@ -41,24 +41,18 @@ const SignupPage: React.FC = () => {
     try {
       console.log('최종 제출 데이터:', formData);
 
-      // 클라이언트 사이드에서만 localStorage 접근
-      if (typeof window !== 'undefined') {
-        const accessToken = localStorage.getItem('access_token');
-        if (!accessToken) {
-          throw new Error('Access token이 없습니다.');
-        }
-
-        const authHeaders = {
-          cookie: '',
-          authorization: `Bearer ${accessToken}`,
-        };
-
-        const response = await finalSignup(formData, authHeaders);
-        console.log('서버 응답 데이터:', response);
-
-      } else {
-        console.error('클라이언트 사이드에서만 실행되어야 합니다.');
+      const accessToken = getCookie('access_token');
+      if (!accessToken) {
+        throw new Error('Access token이 없습니다.');
       }
+
+      const authHeaders = {
+        cookie: '',
+        authorization: `Bearer ${accessToken}`,
+      };
+
+      const response = await finalSignup(formData, authHeaders);
+      console.log('서버 응답 데이터:', response);
 
     } catch (error) {
       console.error('서버 요청 오류:', error);
