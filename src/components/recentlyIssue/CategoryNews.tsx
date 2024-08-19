@@ -1,38 +1,24 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import CategoryNewsItem from './CategoryNewsItem';
-import useIntersectionObserver from '@/hook/useIntersectionObserver';
 import { getIssueLists } from '@/factory/IssueLists';
 import type { IssueListItem } from '@/types/homeComponentsType';
 import CategoryNewsItemSkeleton from '../skeleton/CategoryNewsItemSkeleton';
-import LoaderSkeleton from '../skeleton/LoaderSkeleton';
+import { Virtuoso } from 'react-virtuoso';
 
 const CategoryNews = () => {
   const [category, setCategory] = useState('building');
   const [sort, setSort] = useState('latest');
-  const ref = useRef<HTMLDivElement | null>(null);
-  const pageRef = useIntersectionObserver(ref, {});
-  const isPageEnd = !!pageRef?.isIntersecting;
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
     getIssueLists(category, sort);
 
-  const fetchNext = useCallback(async () => {
+  const loadMore = useCallback(() => {
     if (hasNextPage && !isFetching && !isFetchingNextPage && !isLoading) {
-      await fetchNextPage();
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
     }
   }, [fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading]);
-
-  useEffect(() => {
-    let timerId: NodeJS.Timeout | undefined;
-
-    if (isPageEnd && hasNextPage) {
-      timerId = setTimeout(() => {
-        fetchNext();
-      }, 1000);
-    }
-
-    return () => clearTimeout(timerId);
-  }, [fetchNext, isPageEnd, hasNextPage]);
 
   const allPosts = data?.pages?.flat() || [];
 
@@ -117,13 +103,20 @@ const CategoryNews = () => {
         </div>
       </div>
 
-      {isLoading
-        ? Array.from({ length: 5 }).map((_, i) => <CategoryNewsItemSkeleton key={i} />)
-        : allPosts.map((item: IssueListItem) => (
+      {isLoading ? (
+        Array.from({ length: 5 }).map((_, i) => <CategoryNewsItemSkeleton key={i} />)
+      ) : (
+        <Virtuoso
+          style={{ height: 'calc(100vh - 50px)', margin: '0px' }}
+          useWindowScroll
+          totalCount={allPosts.length}
+          data={allPosts}
+          endReached={loadMore}
+          itemContent={(index, item: IssueListItem) => (
             <CategoryNewsItem key={item.id} {...item} />
-          ))}
-      {(isFetching || isFetchingNextPage || hasNextPage) && <LoaderSkeleton />}
-      <div className="w-full touch-none" ref={ref} />
+          )}
+        />
+      )}
     </div>
   );
 };

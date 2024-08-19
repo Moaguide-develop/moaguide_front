@@ -9,7 +9,6 @@ const fetchIssueLists = async ({
   pageParam?: number;
 }) => {
   const [, category, sort] = queryKey;
-  console.log('호출!!');
   const { data } = await axios.get(
     `https://api.moaguide.com/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
   );
