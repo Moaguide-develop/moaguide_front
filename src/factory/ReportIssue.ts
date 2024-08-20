@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchReportIssues = async () => {
-  const { data } = await axios.get('https://api.moaguide.com/');
+  const { data } = await axios.get(`${process.env.BASE_URL}/`);
   return data;
 };
 

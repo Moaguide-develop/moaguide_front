@@ -10,7 +10,7 @@ const fetchIssueLists = async ({
 }) => {
   const [, category, sort] = queryKey;
   const { data } = await axios.get(
-    `https://api.moaguide.com/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
+    `${process.env.BASE_URL}/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
   );
   return data;
 };
