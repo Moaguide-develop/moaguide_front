@@ -7,8 +7,13 @@ import IntegrateMSW from '@/mocks/IntegrateMsw';
 
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
-const ModalProvider = dynamic(() => import('@/providers/ModalProvider'), { ssr: false });
-
+import ModalProvider from '@/providers/ModalProvider';
+// const ModalProvider = dynamic<React.ComponentType>(
+//   () => import('@/providers/ModalProvider'),
+//   {
+//     ssr: false
+//   }
+// );
 declare global {
   interface Window {
     kakao: any;
@@ -52,8 +57,7 @@ export default function RootLayout({
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
             />
             <Gnb />
-            {children}
-            <ModalProvider />
+            <ModalProvider>{children}</ModalProvider>
             <div id="root-portal"></div>
           </QueryProvider>
         </IntegrateMSW>

@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect } from 'react';
 import ReportCategory from './ReportCategory';
 import Container from '../common/Container';

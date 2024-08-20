@@ -3,12 +3,20 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { finalSignup } from '@/service/auth';
-import { getCookie } from '@/utils/cookies'; 
+import { getCookie } from '@/utils/cookies';
 
-const Step1 = dynamic(() => import('@/components/signup/Step1'));
-const Step2 = dynamic(() => import('@/components/signup/Step2'));
-const Step3 = dynamic(() => import('@/components/signup/Step3'));
-const Step4 = dynamic(() => import('@/components/signup/Step4'));
+import Step1 from '@/components/signup/Step1';
+
+import Step2 from '@/components/signup/Step2';
+
+import Step3 from '@/components/signup/Step3';
+
+import Step4 from '@/components/signup/Step4';
+
+// const Step1 = dynamic(() => import('@/components/signup/Step1'));
+// const Step2 = dynamic(() => import('@/components/signup/Step2'));
+// const Step3 = dynamic(() => import('@/components/signup/Step3'));
+// const Step4 = dynamic(() => import('@/components/signup/Step4'));
 
 const SignupPage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -21,9 +29,9 @@ const SignupPage: React.FC = () => {
     birthDate?: string;
     investmentExperience?: string;
     marketingConsent?: boolean;
-    loginType: 'local'; 
+    loginType: 'local';
   }>({
-    loginType: 'local', 
+    loginType: 'local'
   });
 
   const handleNext = () => {
@@ -49,12 +57,11 @@ const SignupPage: React.FC = () => {
 
       const authHeaders = {
         cookie: '',
-        authorization: `Bearer ${accessToken}`,
+        authorization: `Bearer ${accessToken}`
       };
 
       const response = await finalSignup(formData, authHeaders);
       console.log('서버 응답 데이터:', response);
-
     } catch (error) {
       console.error('서버 요청 오류:', error);
     }
@@ -63,28 +70,16 @@ const SignupPage: React.FC = () => {
   return (
     <div className="signup-container">
       {currentStep === 1 && (
-        <Step1
-          onNext={handleNext}
-          onUpdate={(data) => handleUpdate(data)}
-        />
+        <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
       )}
       {currentStep === 2 && (
-        <Step2
-          onNext={handleNext}
-          onUpdate={(data) => handleUpdate(data)}
-        />
+        <Step2 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
       )}
       {currentStep === 3 && (
-        <Step3
-          onNext={handleNext}
-          onUpdate={(data) => handleUpdate(data)}
-        />
+        <Step3 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
       )}
       {currentStep === 4 && (
-        <Step4
-          onNext={handleSubmit}
-          onUpdate={(data) => handleUpdate(data)}  
-        />
+        <Step4 onNext={handleSubmit} onUpdate={(data) => handleUpdate(data)} />
       )}
     </div>
   );

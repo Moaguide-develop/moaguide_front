@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Guide from './Guide';
 import RealtimeRank from './RealtimeRank';
