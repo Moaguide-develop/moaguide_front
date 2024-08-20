@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect } from 'react';
 import BestNews from './BestNews';
 import CategoryNews from './CategoryNews';

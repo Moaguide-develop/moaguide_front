@@ -1,19 +1,30 @@
 'use client';
-import Quitmodal from '@/components/modal/Quitmodal';
+import { useEffect, useState } from 'react';
 import { useModalStore } from '@/store/modal.store';
 import React from 'react';
 import { createPortal } from 'react-dom';
+import Quitmodal from '@/components/modal/Quitmodal';
 
-const ModalProvider = () => {
+const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const { open, modalType } = useModalStore();
-  const $portalRoot =
-    typeof window !== 'undefined' ? document.getElementById('root-portal') : null;
+  const [mounted, setMounted] = useState(false);
 
-  if ($portalRoot == null) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
     return null;
   }
+
+  const $portalRoot = document.getElementById('root-portal');
+  if (!$portalRoot) return null;
+
   return createPortal(
-    <div>{open && modalType === 'secession' && <Quitmodal />}</div>,
+    <div>
+      {children}
+      {open && modalType === 'secession' && <Quitmodal />}
+    </div>,
     $portalRoot
   );
 };
