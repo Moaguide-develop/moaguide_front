@@ -14,6 +14,7 @@ const SignLayout = () => {
     try {
       await login(email, password); 
       setIsLoggedIn(true); 
+      console.log(setIsLoggedIn);
       router.push('/');
     } catch (error) {
       console.log(error);
