@@ -1,4 +1,22 @@
+import UseNoticeLists from '@/factory/useNoticeLists';
+import { useCallback } from 'react';
+
 const Public = () => {
+  const category = 'sou.8';
+
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
+    UseNoticeLists(category);
+
+  const loadMore = useCallback(() => {
+    if (hasNextPage && !isFetching && !isFetchingNextPage && !isLoading) {
+      setTimeout(() => {
+        fetchNextPage();
+      }, 200);
+    }
+  }, [fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading]);
+
+  const allPosts = data?.pages?.flat() || [];
+  console.log(allPosts);
   const MOCK = {
     notice: [
       {
@@ -43,6 +61,20 @@ const Public = () => {
           </div>
         );
       })}
+      {/* {isLoading ? (
+        Array.from({ length: 5 }).map((_, i) => <CategoryNewsItemSkeleton key={i} />)
+      ) : (
+        <Virtuoso
+          style={{ height: 'calc(100vh - 50px)', margin: '0px' }}
+          useWindowScroll
+          totalCount={allPosts.length}
+          data={allPosts}
+          endReached={loadMore}
+          itemContent={(index, item: IssueListItem) => (
+            <CategoryNewsItem key={item.id} {...item} />
+          )}
+        />
+      )} */}
     </div>
   );
 };
