@@ -40,17 +40,19 @@ const Gnb = () => {
           <div className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
           </div>
-          {isLoggedIn ? (
-            <Link href={'/mypage'}>
-              <img src="/images/gnb/mypage.svg" alt="mypage" className="w-6 h-6" />
-            </Link>
-          ) : (
-            <Link
-              href={'/sign'}
-              className="flex items-center justify-center px-3 py-2 text-normal text-body6 border-radius: 12px border border-normal rounded-[12px] ">
-              로그인 / 회원가입
-            </Link>
-          )}
+          <div className='flex items-center min-w-[123px] min-h-[35px]'>
+            {isLoggedIn ? (
+              <Link href={'/mypage'}>
+                <img src="/images/gnb/mypage.svg" alt="mypage" className="w-6 h-6" />
+              </Link>
+            ) : (
+              <Link
+                href={'/sign'}
+                className="flex items-center justify-center px-3 py-2 text-normal text-body6 border border-normal rounded-[12px]">
+                로그인 / 회원가입
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>
