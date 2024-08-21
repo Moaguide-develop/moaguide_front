@@ -1,12 +1,28 @@
 'use client';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/userAuth.store';
 
 const Gnb = () => {
   const pathname = usePathname();
-  const { isLoggedIn } = useAuthStore();
+  const { isLoggedIn, setIsLoggedIn } = useAuthStore();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('access_token');
+    if (accessToken) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+    setIsLoading(false);
+  }, [setIsLoggedIn]);
+
+  if (isLoading) {
+    return null; 
+  }
 
   return (
     <div
@@ -24,16 +40,19 @@ const Gnb = () => {
           <div className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
           </div>
-          {/* 로그인이 안되어 있을때 */}
-          <Link
-            href={'/sign'}
-            className="flex items-center justify-center px-3 py-2 text-normal text-body6 border-radius: 12px border border-normal rounded-[12px] ">
-            로그인 / 회원가입
-          </Link>
-          {/* 로그인 했을 때 */}
-          {/* <Link href={'/mypage'}>
-        <img src="/images/gnb/mypage.svg" alt="mypage" className='w-6 h-6'/>
-        </Link> */}
+          <div className='flex items-center min-w-[123px] min-h-[35px]'>
+            {isLoggedIn ? (
+              <Link href={'/mypage'}>
+                <img src="/images/gnb/mypage.svg" alt="mypage" className="w-6 h-6" />
+              </Link>
+            ) : (
+              <Link
+                href={'/sign'}
+                className="flex items-center justify-center px-3 py-2 text-normal text-body6 border border-normal rounded-[12px]">
+                로그인 / 회원가입
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>

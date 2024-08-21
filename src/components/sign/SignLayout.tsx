@@ -7,6 +7,7 @@ import { useAuthStore } from '@/store/userAuth.store';
 const SignLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); 
   const router = useRouter();
   const { setIsLoggedIn } = useAuthStore(); 
 
@@ -16,7 +17,7 @@ const SignLayout = () => {
       setIsLoggedIn(true); 
       router.push('/');
     } catch (error) {
-      console.log(error);
+      setErrorMessage('로그인에 실패했습니다. 다시 시도해주세요.'); 
     }
   };
 
@@ -48,7 +49,7 @@ const SignLayout = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="flex items-center mb-6 w-[320px]">
+        <div className="flex items-center mb-4 w-[320px]">
           <input 
             type="checkbox" 
             id="rememberMe" 
@@ -57,6 +58,13 @@ const SignLayout = () => {
           <label htmlFor="rememberMe" className="text-sm text-gray-700">
             로그인 상태 유지
           </label>
+        </div>
+        <div className='min-h-[20px] my-2'>
+        {errorMessage && (
+          <div className="w-[320px] text-red-500 text-xs  text-center">
+            {errorMessage}
+          </div>
+        )}
         </div>
         <button 
           className="w-[320px] bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-3 rounded-lg text-sm font-semibold mb-4"
