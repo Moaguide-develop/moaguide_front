@@ -3,12 +3,7 @@ import { sendVerificationCode, verifyCode } from '@/service/auth';
 import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 
-interface PhoneVerificationProps {
-  onNext: () => void;
-  onPhoneNumberChange: (number: string) => void; 
-}
-
-const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNumberChange }) => {
+const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
   const [phoneNumber, setPhoneNumber] = useState<string>(''); // 전화번호
   const [phoneNumberValid, setPhoneNumberValid] = useState(false); // 전화번호 유효성 검사
   const [isRequest, setIsRequest] = useState(false); // 전화번호 입력 후 인증요청 상태
@@ -25,7 +20,6 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
       .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
       .replace(/(-{1,2})$/g, '');
     setPhoneNumber(regex);
-    onPhoneNumberChange(regex); // 호출 추가
   };
 
   const handleValidNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +68,7 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
 
   const handleComplete = () => {
     if (isComplete) {
-      onNext(); // 인증 완료 후 다음 단계로 이동
+      onEmailFound(); 
     }
   };
 
@@ -250,4 +244,4 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   );
 };
 
-export default PhoneVerification;
+export default FindEmail;

@@ -76,7 +76,7 @@ const SignLayout = () => {
           <Link href={'/signup'} className='cursor-pointer'>
             <div className="mr-4">회원가입</div>
           </Link>
-          <a href="/forgot-password">이메일 / 비밀번호 찾기</a>
+          <a href="/find">이메일 / 비밀번호 찾기</a>
         </div>
       </section>
       <section className="mt-8">
