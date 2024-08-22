@@ -1,17 +1,19 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
-import { setCookie } from '@/utils/cookies';
+import { setToken } from '@/utils/localStorage';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
+// 인증 코드 전송 함수
 export const sendVerificationCode = async (phone: string): Promise<SendCodeResponse> => {
   const response = await axios.post(`${backendUrl}/signup/send/code`, { phone });
   console.log(response.data);
   return response.data;
 };
 
+// 코드 검증 함수
 export const verifyCode = async (phone: string, code: string): Promise<VerifyCodeResponse> => {
   const response = await axios.post(`${backendUrl}/signup/verify/code`, { phone, code });
   console.log('응답 데이터:', response.data);
@@ -22,12 +24,12 @@ export const verifyCode = async (phone: string, code: string): Promise<VerifyCod
   const accessToken = token.replace('Bearer ', '');
   console.log('어세스토큰', accessToken);
 
-  setCookie('access_token', accessToken, 7);
+  setToken(accessToken);
 
   return response.data;
 };
 
-
+// 닉네임 사용 가능 여부 확인 함수
 export const checkNicknameAvailability = async (nickname: string): Promise<NicknameCheckResponse | null> => {
   try {
     const response = await axios.post(`${backendUrl}/signup/verify/nickname`, { nickname });
@@ -44,6 +46,7 @@ export const checkNicknameAvailability = async (nickname: string): Promise<Nickn
   }
 };
 
+// 최종 회원가입 함수
 export const finalSignup = async (
   formData: any,
   authHeaders: AuthHeaders
@@ -67,6 +70,7 @@ export const finalSignup = async (
   }
 };
 
+// 로그인 함수
 export const login = async (email: string, password: string) => {
   try {
     const formData = new FormData();
@@ -89,7 +93,7 @@ export const login = async (email: string, password: string) => {
     const accessToken = token.replace('Bearer ', '');
     console.log('어세스토큰', accessToken);
 
-    setCookie('access_token', accessToken, 7);
+    setToken(accessToken);
 
     return response.data;
   } catch (error) {

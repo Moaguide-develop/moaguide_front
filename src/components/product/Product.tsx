@@ -17,7 +17,7 @@ const Product = ({ divide, summary }: SummaryData) => {
   const [sort, setSort] = useState('profit');
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <Filter />
       <div className="w-full h-[168px] bg-gradient-to-b from-[#713ce2] to-[#5100ff]">
         <Container>
