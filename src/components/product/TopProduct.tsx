@@ -7,10 +7,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Image from 'next/image';
 import { memo, useState } from 'react';
-import { Summary } from '@/types/Diviend';
+import { ISummary } from '@/types/Diviend';
 
 interface TopProductProps {
-  summary: Summary[];
+  summary: ISummary[];
 }
 
 // 최근 주목받는 상품 api 받아오기

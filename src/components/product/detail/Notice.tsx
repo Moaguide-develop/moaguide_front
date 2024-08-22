@@ -1,7 +1,10 @@
+import NoticeItemSkeleton from '@/components/skeleton/NoticeItemSkeleton';
 import UseNoticeLists from '@/factory/useNoticeLists';
+import { INoticeItem } from '@/types/ProductType';
 import { useCallback } from 'react';
+import { Virtuoso } from 'react-virtuoso';
 
-const Public = () => {
+const Notice = () => {
   const category = 'sou.8';
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
@@ -15,7 +18,9 @@ const Public = () => {
     }
   }, [fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading]);
 
-  const allPosts = data?.pages?.flat() || [];
+  // const allPosts = data?.pages?.flat() || [];
+  const allPosts = data?.pages.flatMap((page) => page.notice) || [];
+  // const allPosts = data?.pages[0].notice;
   console.log(allPosts);
   const MOCK = {
     notice: [
@@ -51,32 +56,33 @@ const Public = () => {
 
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
-      {MOCK.notice.map((item) => {
-        return (
-          <div
-            key={item.id}
-            className=" flex flex-col border-b-[1px] border-gray-200 py-[20px] px-[20px] rounded-lg">
-            <div className="text-base font-bold mb-[12px]">{item.title}</div>
-            <div className="text-gray-400">{item.noticeDay}</div>
-          </div>
-        );
-      })}
-      {/* {isLoading ? (
-        Array.from({ length: 5 }).map((_, i) => <CategoryNewsItemSkeleton key={i} />)
+      {isLoading ? (
+        Array.from({ length: 5 }).map((_, i) => <NoticeItemSkeleton key={i} />)
       ) : (
         <Virtuoso
-          style={{ height: 'calc(100vh - 50px)', margin: '0px' }}
+          style={{ height: '200px', margin: '0px' }}
           useWindowScroll
           totalCount={allPosts.length}
           data={allPosts}
           endReached={loadMore}
-          itemContent={(index, item: IssueListItem) => (
-            <CategoryNewsItem key={item.id} {...item} />
+          itemContent={(index, item: INoticeItem) => (
+            <NoticeItem key={item.id} {...item} />
           )}
         />
-      )} */}
+      )}
     </div>
   );
 };
 
-export default Public;
+export default Notice;
+
+const NoticeItem = ({ content, id, noticeDay, title }: INoticeItem) => {
+  return (
+    <div
+      key={id}
+      className=" flex flex-col border-b-[1px] border-gray-200 py-[20px] px-[20px] rounded-lg">
+      <div className="text-base font-bold mb-[12px]">{title}</div>
+      <div className="text-gray-400">{noticeDay}</div>
+    </div>
+  );
+};

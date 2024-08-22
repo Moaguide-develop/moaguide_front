@@ -5,7 +5,7 @@ import NavBar from '@/components/product/detail/NavBar';
 import News from '@/components/product/detail/News';
 import ProductDetail from '@/components/product/detail/ProductDetail';
 import Profit from '@/components/product/detail/Profit';
-import Public from '@/components/product/detail/Public';
+import Notice from '@/components/product/detail/Notice';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -96,7 +96,7 @@ const Detailpage = (props: any) => {
       <NavBar sort={sort} setSort={setSort} />
 
       {sort === 'public' ? (
-        <Public />
+        <Notice />
       ) : sort === 'news' ? (
         <News />
       ) : sort === 'report' ? (

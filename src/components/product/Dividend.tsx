@@ -8,10 +8,10 @@ import 'swiper/css/pagination';
 // import SwiperCore, { Navigation } from 'swiper/core';
 import Image from 'next/image';
 import { memo, useState } from 'react';
-import { Divide } from '@/types/Diviend';
+import { IDivide } from '@/types/Diviend';
 
 interface DividendProps {
-  dividend: Divide[];
+  dividend: IDivide[];
 }
 
 const Dividend = memo(({ dividend }: DividendProps) => {

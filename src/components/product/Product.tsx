@@ -8,12 +8,16 @@ import Report from '@/components/product/Report';
 import React, { useState } from 'react';
 import ProductSort from '@/components/product/ProductSort';
 import ProductList from '@/components/product/ProductList';
-import { SummaryData } from '@/types/Diviend';
+import { ISummaryData, IReportData } from '@/types/Diviend';
 
-const Product = ({ divide, summary }: SummaryData) => {
+interface IProductBuildingProps extends ISummaryData, IReportData {}
+
+const Product = ({ divide, summary, report }: IProductBuildingProps) => {
   const divideData = divide;
   const summaryData = summary;
+  const reportData = report;
 
+  console.log(reportData);
   const [sort, setSort] = useState('profit');
   return (
     <div>
@@ -46,7 +50,7 @@ const Product = ({ divide, summary }: SummaryData) => {
       <Container>
         <div className="text-black text-lg font-bold mb-[26px]">관련 리포트</div>
 
-        <Report />
+        <Report report={reportData} />
       </Container>
 
       <div className=" mt-[40px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]"></div>

@@ -1,4 +1,4 @@
-export interface Divide {
+export interface IDivide {
   product_Id: string;
   category: string;
   name: string;
@@ -6,7 +6,7 @@ export interface Divide {
   dividendRate: number;
 }
 
-export interface Summary {
+export interface ISummary {
   product_Id: string;
   category: string;
   platform: string;
@@ -18,7 +18,19 @@ export interface Summary {
   lastDivide_rate: number;
 }
 
-export interface SummaryData {
-  divide: Divide[];
-  summary: Summary[];
+export interface IReport {
+  id: number;
+  title: string;
+  content: string;
+  category: string;
+  date: string;
+}
+
+export interface IReportData {
+  report: IReport[];
+}
+
+export interface ISummaryData {
+  divide: IDivide[];
+  summary: ISummary[];
 }
