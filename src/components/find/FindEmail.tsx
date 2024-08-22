@@ -122,18 +122,11 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
 
   return (
     <div>
-      <section className="max-w-[340px] w-full mx-auto mt-[76px]">
-        <Image
-          className="mb-12"
-          src={'/sign/ProgressBar2.svg'}
-          alt="ProgressBar"
-          width={360}
-          height={100}
-        />
+      <section className="max-w-[340px] w-full mx-auto mt-[30px]">
         <div className="text-heading3">
           <h2 className="text-xl font-bold mb-6 text-left">
-            회원가입을 위해<br />
-            <span className="text-purple-600">휴대폰 번호</span>를 인증해주세요
+            휴대폰 번호를<br />
+            인증해주세요
           </h2>
         </div>
         {/* 휴대폰 번호 입력 */}

@@ -22,20 +22,20 @@ const FindTabs = () => {
         <>
           <div className="flex">
             <div
-              className={`flex-1 text-center cursor-pointer ${activeTab === 'email' ? 'text-normal border-b-2 border-black' : 'text-gray300'}`}
+              className={`flex-1 text-center cursor-pointer pb-4 ${activeTab === 'email' ? 'font-bold border-b-2 border-purple-600' : 'text-gray300'}`}
               onClick={() => handleTabClick('email')}
             >
               이메일 찾기
             </div>
             <div
-              className={`flex-1 text-center cursor-pointer ${activeTab === 'password' ? 'text-normal border-b-2 border-black' : 'text-gray300'}`}
+              className={`flex-1 text-center cursor-pointer pb-4 ${activeTab === 'password' ? 'font-bold border-b-2 border-purple-600' : 'text-gray300'}`}
               onClick={() => handleTabClick('password')}
             >
               비밀번호 찾기
             </div>
           </div>
 
-          <div className="mt-[50px]">
+          <div className="">
             {activeTab === 'email' && <FindEmail onEmailFound={handleEmailFound} />}
             {activeTab === 'password' && (
               <div>
@@ -67,7 +67,7 @@ const FindTabs = () => {
           </div>
         </>
       ) : (
-        <ShowEmailInfo /> // 이메일 정보 컴포넌트를 렌더링
+        <ShowEmailInfo /> 
       )}
     </div>
   );
