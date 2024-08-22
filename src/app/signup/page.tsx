@@ -14,6 +14,7 @@ import Step1 from '@/components/signup/Step1';
 import Step2 from '@/components/signup/Step2';
 import Step3 from '@/components/signup/Step3';
 import Step4 from '@/components/signup/Step4';
+import Navbar from '@/components/common/Navbar';
 
 const SignupPage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -66,6 +67,8 @@ const SignupPage: React.FC = () => {
   };
 
   return (
+    <div>
+      <Navbar/>
     <div className="signup-container">
       {currentStep === 1 && (
         <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
@@ -79,6 +82,7 @@ const SignupPage: React.FC = () => {
       {currentStep === 4 && (
         <Step4 onNext={handleSubmit} onUpdate={(data) => handleUpdate(data)} />
       )}
+    </div>
     </div>
   );
 };
