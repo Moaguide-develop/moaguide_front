@@ -70,7 +70,7 @@ const Report = ({ report }: IReportProps) => {
           }
         }}
         className="mySwiper flex justify-center">
-        {report.map((item) => {
+        {report?.map((item) => {
           return (
             <div key={item.id}>
               <SwiperSlide>

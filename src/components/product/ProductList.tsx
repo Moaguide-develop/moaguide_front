@@ -1,7 +1,18 @@
 import Image from 'next/image';
 import Container from '../common/Container';
-
-const ProductList = () => {
+import { IProductDetailData } from '@/types/Diviend';
+import ProductPagenation from './ProductPagenation';
+interface IProductContentListProps {
+  content: IProductDetailData['content'];
+  totalPages: IProductDetailData['totalPages'];
+  pageNumber: IProductDetailData['pageable']['pageNumber'];
+}
+const ProductContentList = ({
+  content,
+  totalPages,
+  pageNumber
+}: IProductContentListProps) => {
+  console.log(content);
   const MOCK = {
     summary: [
       {
@@ -68,7 +79,7 @@ const ProductList = () => {
 
       <Container>
         <div>
-          {MOCK.summary.map((item) => (
+          {content?.map((item) => (
             <div key={item.product_Id} className="desk:hidden md:block">
               <div className="flex items-center ">
                 <Image
@@ -80,19 +91,17 @@ const ProductList = () => {
                 />
 
                 <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100 ">
-                  {item.category}
+                  {item.category === 'building' ? '부동산' : '부동산'}
                 </div>
-                <div className="w-[100px] mr-[16px]  text-gray-400 ">{item.platfrom}</div>
+                <div className="w-[100px] mr-[16px]  text-gray-400 ">{item.platform}</div>
                 <div className="w-[260px] mr-[16px] text-lg font-bold ">{item.name}</div>
                 <div className=" flex flex-col">
-                  <div className="w-[88px] mr-[16px] text-gray-500  ">{item.price}원</div>
+                  <div className="w-[88px] mr-[16px] text-gray-500  ">{item.price}</div>
                   <div className="w-[88px] mr-[16px] text-red-500 ">
                     ({item.priceRate}%)
                   </div>
                 </div>
-                <div className="w-[97px] mr-[28px] text-gray-500 ">
-                  {item.totalPrice}원
-                </div>
+                <div className="w-[97px] mr-[28px] text-gray-500 ">{item.totalPrice}</div>
                 <div className="w-[61px] mr-[29px] text-red-500 bg-red-100  rounded-lg flex justify-center items-center ">
                   {item.lastDivide_rate}%
                 </div>
@@ -108,9 +117,11 @@ const ProductList = () => {
             </div>
           ))}
         </div>
+
+        <ProductPagenation totalPages={totalPages} />
       </Container>
     </div>
   );
 };
 
-export default ProductList;
+export default ProductContentList;

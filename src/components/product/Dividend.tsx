@@ -68,7 +68,7 @@ const Dividend = memo(({ dividend }: DividendProps) => {
           }
         }}
         className="mySwiper flex justify-center">
-        {dividend.map((item) => {
+        {dividend?.map((item) => {
           return (
             <div key={item.product_Id}>
               <SwiperSlide className=" flex justify-center">

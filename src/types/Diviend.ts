@@ -26,6 +26,47 @@ export interface IReport {
   date: string;
 }
 
+export interface IProductDetail {
+  product_Id: string;
+  category: string;
+  platform: string;
+  name: string;
+  price: string;
+  priceRate: number;
+  totalPrice: string;
+  dividend: number;
+  lastDivide_rate: number;
+}
+
+interface IProductDetailSort {
+  empty: boolean;
+  sorted: boolean;
+  unsorted: boolean;
+}
+
+interface IProductDetailPageable {
+  pageNumber: number;
+  pageSize: number;
+  sort: IProductDetailSort;
+  offset: number;
+  paged: boolean;
+  unpaged: boolean;
+}
+
+export interface IProductDetailData {
+  content: IProductDetail[];
+  pageable: IProductDetailPageable;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  size: number;
+  number: number;
+  sort: IProductDetailSort;
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
+}
+
 export interface IReportData {
   report: IReport[];
 }

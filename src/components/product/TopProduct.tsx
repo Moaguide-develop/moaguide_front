@@ -75,7 +75,7 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
             }
           }}
           className="mySwiper flex justify-center">
-          {summary.map((item, idx) => {
+          {summary?.map((item, idx) => {
             return (
               <div key={item.product_Id}>
                 <SwiperSlide>
