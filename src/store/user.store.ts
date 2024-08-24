@@ -10,17 +10,19 @@ interface IUserInfo {
 
 interface IMember {
   member: IUserInfo;
+  setMember: (userInfo: IUserInfo) => void;
 }
 
 export const useMemberStore = create(
   persist<IMember>(
     (set) => ({
       member: {
-        memberEmail: 'kemi@kakao.com',
-        memberNickName: '더스틴 조하',
-        memberPhone: '010-1234-1234',
-        subscribe: '1개월 플랜'
-      }
+        memberEmail: '',
+        memberNickName: '',
+        memberPhone: '',
+        subscribe: ''
+      },
+      setMember: (userInfo: IUserInfo) => set({ member: userInfo })
     }),
     {
       name: 'userInfo'
