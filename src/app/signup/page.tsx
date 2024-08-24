@@ -37,8 +37,18 @@ const SignupPage: React.FC = () => {
   };
 
   const handleUpdate = (data: Partial<typeof formData>) => {
-    setFormData((prev) => ({ ...prev, ...data }));
+    setFormData((prev) => {
+      const updatedFormData = { ...prev, ...data };
+      
+      // 새로운 상태와 기존 상태를 비교해 변경 사항이 없으면 업데이트를 생략합니다.
+      if (JSON.stringify(prev) === JSON.stringify(updatedFormData)) {
+        return prev;
+      }
+  
+      return updatedFormData;
+    });
   };
+  
 
   useEffect(() => {
     console.log(formData);

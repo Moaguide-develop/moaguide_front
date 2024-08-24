@@ -19,28 +19,25 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [isFormValid, setIsFormValid] = useState(false);
   const router = useRouter(); 
 
-  const handleUpdate = useCallback(() => {
-    if (investmentExperience === 'yes' && investmentYears && name && nickname && isNicknameValid && isBirthdateValid) {
-      setIsFormValid(true);
-    } else if (investmentExperience === 'no' && name && nickname && isNicknameValid && isBirthdateValid) {
-      setIsFormValid(true);
-    } else {
-      setIsFormValid(false);
-    }
+  const validateForm = useCallback(() => {
+    return investmentExperience === 'yes' 
+        ? !!investmentYears && !!name && !!nickname && !!isNicknameValid && !!isBirthdateValid
+        : !!name && !!nickname && !!isNicknameValid && !!isBirthdateValid;
+  }, [name, nickname, isNicknameValid, birthdate, isBirthdateValid, investmentExperience, investmentYears]);
 
+  useEffect(() => {
+    setIsFormValid(validateForm());
+  }, [validateForm]);
+
+  useEffect(() => {
     const formattedBirthDate = formatBirthDate(birthdate);
-
     onUpdate({
       name,
       nickname,
       birthDate: formattedBirthDate,
       investmentExperience: investmentExperience === 'yes' ? `${investmentYears}년` : '없음',
     });
-  }, [name, nickname, isNicknameValid, birthdate, isBirthdateValid, investmentExperience, investmentYears, onUpdate]);
-
-  useEffect(() => {
-    handleUpdate();
-  }, [handleUpdate]);
+  }, [name, nickname, birthdate, investmentExperience, investmentYears, onUpdate]);
 
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
@@ -60,17 +57,13 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     }
   };
 
+
   const handleBirthdateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, '');
     if (value.length <= 8) {
-      setBirthdate(value);
-      if (value.length === 8) {
-        const formattedDate = `${value.slice(0, 4)}.${value.slice(4, 6)}.${value.slice(6, 8)}`;
-        setBirthdate(formattedDate);
-        setIsBirthdateValid(true);
-      } else {
-        setIsBirthdateValid(false);
-      }
+      const formattedDate = value.length === 8 ? `${value.slice(0, 4)}.${value.slice(4, 6)}.${value.slice(6, 8)}` : value;
+      setBirthdate(formattedDate);
+      setIsBirthdateValid(value.length === 8);
     }
   };
 
@@ -89,6 +82,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     if (isFormValid) {
       try {
         await onNext();
+        console.log('가입성공');
         router.push('/sign');
       } catch (error) {
         console.error('가입 처리 중 오류 발생:', error);
