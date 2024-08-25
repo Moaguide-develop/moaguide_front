@@ -23,7 +23,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     return investmentExperience === 'yes' 
         ? !!investmentYears && !!name && !!nickname && !!isNicknameValid && !!isBirthdateValid
         : !!name && !!nickname && !!isNicknameValid && !!isBirthdateValid;
-  }, [name, nickname, isNicknameValid, birthdate, isBirthdateValid, investmentExperience, investmentYears]);
+  }, [name, nickname, isNicknameValid, isBirthdateValid, investmentExperience, investmentYears]);
 
   useEffect(() => {
     setIsFormValid(validateForm());
@@ -97,7 +97,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <h2 className="text-xl font-bold mb-6 leading-tight">
           모아가이드에서 사용할<br /><span className="text-purple-600">상세정보</span>를 입력해주세요
         </h2>
-        <div className="mt-10 mb-8">
+        <div className="mt-10 mb-4">
           <div className="text-body3">닉네임</div>
           <div className="flex items-center mt-2">
             <input
