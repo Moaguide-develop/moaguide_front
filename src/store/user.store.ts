@@ -1,3 +1,5 @@
+// src/store/user.store.ts
+
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -11,6 +13,7 @@ interface IUserInfo {
 interface IMember {
   member: IUserInfo;
   setMember: (userInfo: IUserInfo) => void;
+  clearMember: () => void;
 }
 
 export const useMemberStore = create(
@@ -22,7 +25,15 @@ export const useMemberStore = create(
         memberPhone: '',
         subscribe: ''
       },
-      setMember: (userInfo: IUserInfo) => set({ member: userInfo })
+      setMember: (userInfo: IUserInfo) => set({ member: userInfo }),
+      clearMember: () => set({
+        member: {
+          memberEmail: '',
+          memberNickName: '',
+          memberPhone: '',
+          subscribe: ''
+        }
+      }),
     }),
     {
       name: 'userInfo'

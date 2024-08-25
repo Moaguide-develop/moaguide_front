@@ -113,7 +113,6 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-
 export const logout = async () => {
   try {
     const token = getToken();
@@ -124,13 +123,16 @@ export const logout = async () => {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
-        withCredentials: true, // 쿠키를 요청에 포함시킵니다.
+        withCredentials: true,
       }
     );
 
     if (response.status === 200) {
-      console.log(response.data.message); // 로그아웃 성공 메시지 출력
-      removeToken(); // 로컬 스토리지에서 토큰을 제거합니다.
+      console.log(response.data.message);
+      removeToken(); 
+
+      const { clearMember } = useMemberStore.getState();
+      clearMember();
     } else {
       console.error('로그아웃 실패', response.status);
     }
