@@ -3,12 +3,7 @@ import { sendVerificationCode, verifyCode } from '@/service/auth';
 import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 
-interface PhoneVerificationProps {
-  onNext: () => void;
-  onPhoneNumberChange: (number: string) => void; 
-}
-
-const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNumberChange }) => {
+const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
   const [phoneNumber, setPhoneNumber] = useState<string>(''); // 전화번호
   const [phoneNumberValid, setPhoneNumberValid] = useState(false); // 전화번호 유효성 검사
   const [isRequest, setIsRequest] = useState(false); // 전화번호 입력 후 인증요청 상태
@@ -25,7 +20,6 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
       .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
       .replace(/(-{1,2})$/g, '');
     setPhoneNumber(regex);
-    onPhoneNumberChange(regex); // 호출 추가
   };
 
   const handleValidNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -74,7 +68,7 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
 
   const handleComplete = () => {
     if (isComplete) {
-      onNext(); // 인증 완료 후 다음 단계로 이동
+      onEmailFound(); 
     }
   };
 
@@ -128,18 +122,11 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
 
   return (
     <div>
-      <section className="max-w-[340px] w-full mx-auto mt-[76px]">
-        <Image
-          className="mb-12"
-          src={'/sign/ProgressBar2.svg'}
-          alt="ProgressBar"
-          width={360}
-          height={100}
-        />
+      <section className="max-w-[340px] w-full mx-auto mt-[30px]">
         <div className="text-heading3">
           <h2 className="text-xl font-bold mb-6 text-left">
-            회원가입을 위해<br />
-            <span className="text-purple-600">휴대폰 번호</span>를 인증해주세요
+            휴대폰 번호를<br />
+            인증해주세요
           </h2>
         </div>
         {/* 휴대폰 번호 입력 */}
@@ -250,4 +237,4 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   );
 };
 
-export default PhoneVerification;
+export default FindEmail;

@@ -1,13 +1,13 @@
 'use client';
 
-import SignNavbar from '@/components/common/SignNavbar';
+import Navbar from '@/components/common/Navbar';
 import SignLayout from '@/components/sign/SignLayout';
 import React from 'react';
 
 const SignPage = () => {
   return (
     <div>
-      <SignNavbar />
+      <Navbar />
       <SignLayout/>
     </div>
   );

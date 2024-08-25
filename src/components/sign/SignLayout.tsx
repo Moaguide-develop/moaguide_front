@@ -17,7 +17,7 @@ const SignLayout = () => {
       setIsLoggedIn(true); 
       router.push('/');
     } catch (error) {
-      setErrorMessage('로그인에 실패했습니다. 다시 시도해주세요.'); 
+      setErrorMessage('이메일 혹은 비밀번호가 일치하지 않습니다. 다시 시도해주세요.'); 
     }
   };
 
@@ -76,7 +76,7 @@ const SignLayout = () => {
           <Link href={'/signup'} className='cursor-pointer'>
             <div className="mr-4">회원가입</div>
           </Link>
-          <a href="/forgot-password">이메일 / 비밀번호 찾기</a>
+          <a href="/find">이메일 / 비밀번호 찾기</a>
         </div>
       </section>
       <section className="mt-8">

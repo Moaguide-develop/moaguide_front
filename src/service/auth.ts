@@ -1,6 +1,7 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
-import { setToken } from '@/utils/localStorage';
+import { getToken, removeToken, setToken } from '@/utils/localStorage';
 import axios from 'axios';
+import { useMemberStore } from '@/store/user.store';
 
 axios.defaults.withCredentials = true;
 
@@ -79,7 +80,7 @@ export const login = async (email: string, password: string) => {
 
     const response = await axios.post(
       `${backendUrl}/login`,
-      formData, 
+      formData,
       {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -88,16 +89,54 @@ export const login = async (email: string, password: string) => {
     );
 
     console.log('로그인 성공:', response.data);
+
     const token = response.headers['authorization'] || response.headers['Authorization'];
-    console.log('토큰', token);
+    console.log('토큰:', token);
     const accessToken = token.replace('Bearer ', '');
-    console.log('어세스토큰', accessToken);
+    console.log('어세스토큰:', accessToken);
 
     setToken(accessToken);
+
+    const { setMember } = useMemberStore.getState();
+    const userInfo = response.data.user;
+    setMember({
+      memberEmail: userInfo.email,
+      memberNickName: userInfo.nickname,
+      memberPhone: userInfo.phonenumber,
+      subscribe: '1개월 플랜' // 임시
+    });
 
     return response.data;
   } catch (error) {
     console.error('로그인 오류:', error);
     throw error;
+  }
+};
+
+export const logout = async () => {
+  try {
+    const token = getToken();
+    const response = await axios.post(
+      `${backendUrl}/logout`,
+      {},
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        withCredentials: true,
+      }
+    );
+
+    if (response.status === 200) {
+      console.log(response.data.message);
+      removeToken(); 
+
+      const { clearMember } = useMemberStore.getState();
+      clearMember();
+    } else {
+      console.error('로그아웃 실패', response.status);
+    }
+  } catch (error) {
+    console.error('로그아웃 오류:', error);
   }
 };
