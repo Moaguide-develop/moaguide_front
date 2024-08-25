@@ -1,5 +1,5 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
-import { setToken } from '@/utils/localStorage';
+import { getToken, removeToken, setToken } from '@/utils/localStorage';
 import axios from 'axios';
 import { useMemberStore } from '@/store/user.store';
 
@@ -113,3 +113,28 @@ export const login = async (email: string, password: string) => {
   }
 };
 
+
+export const logout = async () => {
+  try {
+    const token = getToken();
+    const response = await axios.post(
+      `${backendUrl}/logout`,
+      {},
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        withCredentials: true, // 쿠키를 요청에 포함시킵니다.
+      }
+    );
+
+    if (response.status === 200) {
+      console.log(response.data.message); // 로그아웃 성공 메시지 출력
+      removeToken(); // 로컬 스토리지에서 토큰을 제거합니다.
+    } else {
+      console.error('로그아웃 실패', response.status);
+    }
+  } catch (error) {
+    console.error('로그아웃 오류:', error);
+  }
+};
