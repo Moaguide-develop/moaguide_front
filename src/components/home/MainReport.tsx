@@ -1,7 +1,8 @@
+import type { MainReportType } from '@/types/homeComponentsType';
+
 import React from 'react';
 import MainReportItem from './MainReportItem';
 import { getReportIssues } from '@/factory/ReportIssue';
-import type { MainReportType } from '@/types/homeComponentsType';
 
 import MainReportItemSkeleton from '../skeleton/MainReportItemSkeleton';
 import { useRouter } from 'next/navigation';

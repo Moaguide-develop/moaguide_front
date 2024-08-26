@@ -1,4 +1,5 @@
 import type { MainProductItem } from '@/types/homeComponentsType';
+
 import { formatCategory } from '@/utils/formatCategory';
 import React from 'react';
 

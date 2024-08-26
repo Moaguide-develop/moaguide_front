@@ -42,3 +42,11 @@ export interface MainProductItem {
   dividend: number;
   lastDivide_rate: number;
 }
+
+export interface ReportListsItem {
+  id: number;
+  title: string;
+  conent?: string;
+  category: string;
+  date: string;
+}

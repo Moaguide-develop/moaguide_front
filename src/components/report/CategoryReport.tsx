@@ -1,9 +1,28 @@
-import React from 'react';
+import type { ReportListsItem } from '@/types/homeComponentsType';
+
+import React, { useCallback } from 'react';
 import CategoryReportItem from './CategoryReportItem';
 import { useReportStore } from '@/store/report.store';
+import { getReportLists } from '@/factory/ReportLists';
+import { Virtuoso } from 'react-virtuoso';
+import CategoryReportItemSkeleton from '../skeleton/CategoryReportItemSkeleton';
 
 const CategoryReport = () => {
-  const { subCategory, sort, setSubCategory, setSort } = useReportStore();
+  const { currentCategory, subCategory, sort, setSubCategory, setSort } =
+    useReportStore();
+
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
+    getReportLists(currentCategory, subCategory, sort);
+
+  const loadMore = useCallback(() => {
+    if (hasNextPage && !isFetching && !isFetchingNextPage && !isLoading) {
+      setTimeout(() => {
+        fetchNextPage();
+      }, 500);
+    }
+  }, [fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading]);
+
+  const allPosts = data || [];
 
   return (
     <div className="mt-5">
@@ -65,9 +84,20 @@ const CategoryReport = () => {
         </div>
       </div>
       <div>
-        {/* {mock.map((item, i) => (
-          <CategoryReportItem key={i} {...item} />
-        ))} */}
+        {isLoading ? (
+          Array.from({ length: 5 }).map((_, i) => <CategoryReportItemSkeleton key={i} />)
+        ) : (
+          <Virtuoso
+            style={{ height: 'calc(100vh - 50px)', margin: '0px' }}
+            useWindowScroll
+            totalCount={allPosts.length}
+            data={allPosts}
+            endReached={loadMore}
+            itemContent={(index, item: ReportListsItem) => (
+              <CategoryReportItem key={item.id} {...item} />
+            )}
+          />
+        )}
       </div>
     </div>
   );

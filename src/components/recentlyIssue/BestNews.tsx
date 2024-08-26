@@ -1,6 +1,7 @@
+import type { MainNews } from '@/types/homeComponentsType';
+
 import React from 'react';
 import BestNewsItem from './BestNewsItem';
-import type { MainNews } from '@/types/homeComponentsType';
 import { getRecentlyIssues } from '@/factory/RecentlyIssues';
 import BestNewsItemSkeleton from '../skeleton/BestNewsItemSkeleton';
 
