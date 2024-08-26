@@ -22,37 +22,6 @@ const Notice = () => {
   const allPosts = data?.pages.flatMap((page) => page.notice) || [];
   // const allPosts = data?.pages[0].notice;
   console.log(allPosts);
-  const MOCK = {
-    notice: [
-      {
-        id: 1,
-        title: '실험용 공지',
-        noticeDay: '2024-07-25',
-        content: null
-      },
-      {
-        id: 2,
-        title: '실험용 공지',
-        noticeDay: '2024-07-25',
-        content: null
-      },
-      {
-        id: 3,
-        title: '실험용 공지',
-        noticeDay: '2024-07-25',
-        content: null
-      },
-      {
-        id: 4,
-        title: '실험용 공지',
-        noticeDay: '2024-07-25',
-        content: null
-      }
-    ],
-    total: 2,
-    page: 1,
-    size: 10
-  };
 
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
