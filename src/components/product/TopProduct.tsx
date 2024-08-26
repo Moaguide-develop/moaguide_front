@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import Image from 'next/image';
 import { memo, useState } from 'react';
 import { ISummary } from '@/types/Diviend';
+import Link from 'next/link';
 
 interface TopProductProps {
   summary: ISummary[];
@@ -79,54 +80,56 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
             return (
               <div key={item.product_Id}>
                 <SwiperSlide>
-                  <div className=" max-w-[436px] h-[372px] border-2 border-gray-200 rounded-md ">
-                    <div className="flex flex-col justify-center items-center mt-[20px] mx-auto">
-                      <div className="relative  ">
-                        <div className="max-w-[396px] h-[237px] ">
-                          <Image
-                            src="/images/product/ProductBuilding.png"
-                            alt="Building"
-                            width={396}
-                            height={237}
-                          />
-                        </div>
-                        <div className="absolute top-1 left-1">
-                          <div className="relative">
+                  <Link href={`/product/detail/${item.product_Id}`}>
+                    <div className=" max-w-[436px] h-[372px] border-2 border-gray-200 rounded-md ">
+                      <div className="flex flex-col justify-center items-center mt-[20px] mx-auto">
+                        <div className="relative  ">
+                          <div className="max-w-[396px] h-[237px] ">
                             <Image
-                              src="/images/product/BookmarkSimple.svg"
+                              src="/images/product/ProductBuilding.png"
                               alt="Building"
-                              width={44}
-                              height={44}></Image>
-                            <div className="text-white absolute top-2 left-[18px] ">
-                              {idx + 1}
+                              width={396}
+                              height={237}
+                            />
+                          </div>
+                          <div className="absolute top-1 left-1">
+                            <div className="relative">
+                              <Image
+                                src="/images/product/BookmarkSimple.svg"
+                                alt="Building"
+                                width={44}
+                                height={44}></Image>
+                              <div className="text-white absolute top-2 left-[18px] ">
+                                {idx + 1}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="w-full ">
+                          <div className="flex  mt-[13px] ml-[20px]">
+                            <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center ">
+                              부동산
+                            </div>
+                            <div className="text-gray-400 ml-[3px]">{item.platform}</div>
+                          </div>
+                          <div className="flex justify-between mt-[10px]  w-full max-w-[375px] ml-[20px] ">
+                            <div className="font-bold text-base">{item.name}</div>
+                            <div className="text-red-500 bg-red-200 rounded-md w-auto h-[25px] flex justify-center items-center px-[4px] py-[4px]">
+                              {item.priceRate}%
+                            </div>
+                          </div>
+
+                          <div className="flex mt-[10px ] ml-[20px]">
+                            <div className="text-gray-400">{item.price}</div>
+                            <div className="text-red-500 ml-[3px] ">
+                              (+ {item.lastDivide_rate}%)
                             </div>
                           </div>
                         </div>
                       </div>
-
-                      <div className="w-full ">
-                        <div className="flex  mt-[13px] ml-[20px]">
-                          <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center ">
-                            부동산
-                          </div>
-                          <div className="text-gray-400 ml-[3px]">{item.platform}</div>
-                        </div>
-                        <div className="flex justify-between mt-[10px]  w-full max-w-[375px] ml-[20px] ">
-                          <div className="font-bold text-base">{item.name}</div>
-                          <div className="text-red-500 bg-red-200 rounded-md w-auto h-[25px] flex justify-center items-center px-[4px] py-[4px]">
-                            {item.priceRate}%
-                          </div>
-                        </div>
-
-                        <div className="flex mt-[10px ] ml-[20px]">
-                          <div className="text-gray-400">{item.price}</div>
-                          <div className="text-red-500 ml-[3px] ">
-                            (+ {item.lastDivide_rate}%)
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </SwiperSlide>
               </div>
             );

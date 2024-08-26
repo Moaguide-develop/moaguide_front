@@ -29,7 +29,7 @@ const Product = ({
   const reportData = report;
   const contentData = content;
   console.log(reportData);
-  const [sort, setSort] = useState('views');
+  const [sort, setSort] = useState('profit');
   return (
     <div>
       {/* <Navbar /> */}
