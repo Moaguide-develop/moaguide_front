@@ -7,8 +7,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Image from 'next/image';
 import { useState } from 'react';
+import { IReport } from '@/types/Diviend';
+import { format } from 'date-fns';
+interface IReportProps {
+  report: IReport[];
+}
 
-const Report = () => {
+const Report = ({ report }: IReportProps) => {
   const [swiperIndex, setSwiperIndex] = useState(0); // -> 페이지네이션용
 
   const [swiper, setSwiper] = useState<SwiperClass>(); // -> 슬라이드용
@@ -65,18 +70,20 @@ const Report = () => {
           }
         }}
         className="mySwiper flex justify-center">
-        {[8, 9, 10, 11].map((item) => {
+        {report?.map((item) => {
           return (
-            <div key={item}>
+            <div key={item.id}>
               <SwiperSlide>
                 <div className="w-full  max-w-[436px] max-h-[133px] flex flex-row  justify-between px-[20px] py-[20px] border-2 border-gray-200 rounded-md ">
                   <div className=" flex flex-col justify-center items-start ">
                     <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center ">
-                      부동산
+                      {item.category === 'building' ? <>부동산</> : <>미술품</>}
                     </div>
 
-                    <div className="my-[12px]">한달 노후생활비 얼마가 적당할까요?</div>
-                    <div className="text-gray-300">2024.06.06</div>
+                    <div className="my-[12px]">{item.title}</div>
+                    <div className="text-gray-300">
+                      {format(new Date(item.date), 'yyyy.MM.dd')}
+                    </div>
                   </div>
                   <div className="w-[132px] h-[93px] rounded-md">
                     <Image
