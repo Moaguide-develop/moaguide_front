@@ -1,5 +1,3 @@
-'use client';
-
 import type { RealtimeRankType } from '@/types/homeComponentsType';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';

@@ -93,7 +93,7 @@ const ReportCategory = () => {
         </div>
         {/* 콘텐츠 */}
         <div
-          onClick={() => setCurrentCategory('contents')}
+          onClick={() => setCurrentCategory('content')}
           className="flex flex-col gap-2 items-center cursor-pointer">
           <div
             className={`text-body5 bg-gray50 text-[#713CE2] border  w-[60px] h-[60px] p-[14px] flex justify-center items-center rounded-[12px] 
@@ -103,7 +103,7 @@ const ReportCategory = () => {
           </div>
           <div
             className={` 
-          ${currentCategory === 'contents' ? 'text-[#713CE2] text-body5' : 'text-gray500 text-body7'}
+          ${currentCategory === 'content' ? 'text-[#713CE2] text-body5' : 'text-gray500 text-body7'}
           `}>
             콘텐츠
           </div>

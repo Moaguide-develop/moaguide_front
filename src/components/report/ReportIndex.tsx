@@ -11,6 +11,7 @@ const ReportIndex = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <div>
       <nav className="w-full flex items-center justify-center border-b border-gray100">
