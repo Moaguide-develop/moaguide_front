@@ -9,10 +9,19 @@ const fetchIssueLists = async ({
   pageParam?: number;
 }) => {
   const [, category, sort] = queryKey;
+
   const { data } = await axios.get(
-    `${process.env.BASE_URL}/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
+    `https://api.moaguide.com/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
   );
-  return data;
+
+  return {
+    content: data.content,
+    nextPage: pageParam + 1,
+    totalPages: data.totalPages,
+    totalElements: data.totalElements,
+    currentPage: data.number,
+    isLast: data.last
+  };
 };
 
 export const getIssueLists = (category: string, sort: string) => {
@@ -22,20 +31,17 @@ export const getIssueLists = (category: string, sort: string) => {
     useInfiniteQuery({
       queryKey,
       queryFn: fetchIssueLists,
-      getNextPageParam: (lastPage, allPages) => {
-        if (lastPage.length === 0) {
-          return undefined;
-        }
-        return allPages.length + 1;
+      getNextPageParam: (lastPage) => {
+        return lastPage.isLast ? undefined : lastPage.nextPage;
       },
       initialPageParam: 1,
       enabled: !!category
     });
 
   return {
-    data,
+    data: data?.pages.flatMap((page) => page.content) || [],
     fetchNextPage,
-    hasNextPage: !!data?.pages.length,
+    hasNextPage,
     isFetching,
     isFetchingNextPage,
     isLoading

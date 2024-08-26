@@ -16,11 +16,11 @@ const CategoryNews = () => {
     if (hasNextPage && !isFetching && !isFetchingNextPage && !isLoading) {
       setTimeout(() => {
         fetchNextPage();
-      }, 200);
+      }, 500);
     }
   }, [fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading]);
 
-  const allPosts = data?.pages?.flat() || [];
+  const allPosts = data || [];
 
   return (
     <div className="mt-5">
