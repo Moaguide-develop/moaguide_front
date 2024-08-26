@@ -1,16 +1,26 @@
+'use client';
 import type { ReportListsItem } from '@/types/homeComponentsType';
 
 import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import ReactMarkdown from 'react-markdown';
-import React from 'react';
+import React, { useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import useDownloadPDF from '@/hook/useDownloadPDF';
 
 const ReportDetailIndex = ({ data }: { data: ReportListsItem }) => {
+  const router = useRouter();
+  const reportContentRef = useRef<HTMLDivElement>(null);
+  const downloadPDF = useDownloadPDF('/images/logo.svg', reportContentRef, data.title);
+
   return (
     <div>
       {/* 리포트 */}
-      <div className="my-[28px]">
+      <div className="my-[28px]" ref={reportContentRef}>
         {/* 리포트 헤더 */}
+
         <div className="pb-5 border-b border-gray100 flex flex-col gap-3">
           <div className="max-w-max p-[6px] flex items-center justify-center rounded-[4px] bg-gray50 text-gray400 text-caption3">
             {formatCategory(data.category)}
@@ -31,11 +41,15 @@ const ReportDetailIndex = ({ data }: { data: ReportListsItem }) => {
 
       {/* 버튼 */}
       <div className="flex items-center gap-3">
-        <div className="cursor-pointer p-4 max-w-max flex items-center justify-center gap-2 border border-normal rounded-[100px]">
+        <div
+          onClick={() => router.back()}
+          className="cursor-pointer p-4 max-w-max flex items-center justify-center gap-2 border border-normal rounded-[100px]">
           <img src="/images/report/back.svg" alt="" />
           <span className="text-body1 text-normal">목록으로</span>
         </div>
-        <div className="cursor-pointer px-5 py-4 max-w-max flex items-center justify-center gap-2 border border-gray200 rounded-[100px]">
+        <div
+          onClick={downloadPDF}
+          className="cursor-pointer px-5 py-4 max-w-max flex items-center justify-center gap-2 border border-gray200 rounded-[100px]">
           <span className="text-body1 text-gray400">PDF 다운로드</span>
           <img src="/images/report/down.svg" alt="" />
         </div>
