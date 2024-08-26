@@ -9,11 +9,13 @@ import Notice from '@/components/product/detail/Notice';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useState } from 'react';
+import { getProductDetail } from '@/factory/ProductDetail';
 const Detailpage = (props: any) => {
   const [sort, setSort] = useState('profit');
 
   console.log(props.params.id);
-
+  const { data, isLoading, isError } = getProductDetail(props.params.id);
+  console.log(data);
   return (
     <div>
       <Container>
@@ -29,13 +31,13 @@ const Detailpage = (props: any) => {
             <div className="flex flex-col ml-[28px] ">
               <div className="flex">
                 <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center mb-[13px] ">
-                  부동산
+                  {data?.category === 'building' ? '부동산' : '오류'}
                 </div>
-                <div className="text-gray-400 ml-[3px]">운영 플랫폼 이름</div>
+                <div className="text-gray-400 ml-[3px]">{data?.platform}</div>
               </div>
 
               <div className="w-80 text-black text-2xl font-bold mb-[60px] ">
-                압구정 커머스 빌딩
+                {data?.name}
               </div>
 
               <div className="flex">
@@ -66,29 +68,29 @@ const Detailpage = (props: any) => {
             <div className="flex  w-[300px] justify-between ">
               <div className="text-gray-400">현재가</div>
               <div className="flex flex-row ">
-                <div>5,320원</div>
-                <div className="text-red-500 "> (+ 0.5%)</div>
+                <div>{data?.price}</div>
+                <div className="text-red-500 "> ({data?.priceRate})</div>
               </div>
             </div>
 
             <div className="flex mt-[10px]  w-[300px] justify-between ">
               <div className="text-gray-400">시가총액</div>
-              <div>10,000,000</div>
+              <div>{data?.totalPrice}</div>
             </div>
 
             <div className="flex mt-[10px]  w-[300px] justify-between ">
               <div className="text-gray-400">최근 배당금</div>
-              <div>10원</div>
+              <div>{data?.lastDivide}원</div>
             </div>
 
             <div className="flex mt-[10px]  w-[300px] justify-between ">
               <div className="text-gray-400">배당 수익률</div>
-              <div className="text-red-500">2.7%</div>
+              <div className="text-red-500">{data?.lastDivideRate}%</div>
             </div>
 
             <div className="flex mt-[10px]  w-[300px] justify-between ">
               <div className="text-gray-400">배당 주기</div>
-              <div>3개월</div>
+              <div>{data?.divideCycle}개월</div>
             </div>
           </div>
         </div>
