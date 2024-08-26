@@ -1,48 +1,28 @@
-import React from 'react';
+import type { ReportListsItem } from '@/types/homeComponentsType';
+
+import React, { useCallback } from 'react';
 import CategoryReportItem from './CategoryReportItem';
 import { useReportStore } from '@/store/report.store';
-
-const mock = [
-  {
-    category: '부동산',
-    title: 'A-Z까지 소액으로 조각 투자의 시작!',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    category: '부동산',
-    title: 'A-Z까지 소액으로 조각 투자의 시작!',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    category: '부동산',
-    title: 'A-Z까지 소액으로 조각 투자의 시작!',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    category: '부동산',
-    title: 'A-Z까지 소액으로 조각 투자의 시작!',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    category: '부동산',
-    title: 'A-Z까지 소액으로 조각 투자의 시작!',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    category: '부동산',
-    title: 'A-Z까지 소액으로 조각 투자의 시작!',
-    date: '2024.06.06',
-    img: '/images/home/mock.jpeg'
-  }
-];
+import { getReportLists } from '@/factory/ReportLists';
+import { Virtuoso } from 'react-virtuoso';
+import CategoryReportItemSkeleton from '../skeleton/CategoryReportItemSkeleton';
 
 const CategoryReport = () => {
-  const { subCategory, sort, setSubCategory, setSort } = useReportStore();
+  const { currentCategory, subCategory, sort, setSubCategory, setSort } =
+    useReportStore();
+
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
+    getReportLists(currentCategory, subCategory, sort);
+
+  const loadMore = useCallback(() => {
+    if (hasNextPage && !isFetching && !isFetchingNextPage && !isLoading) {
+      setTimeout(() => {
+        fetchNextPage();
+      }, 500);
+    }
+  }, [fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading]);
+
+  const allPosts = data || [];
 
   return (
     <div className="mt-5">
@@ -63,9 +43,9 @@ const CategoryReport = () => {
         </div>
         <div
           onClick={() => {
-            setSubCategory('view');
+            setSubCategory('situation');
           }}
-          className={`pb-5 cursor-pointer ${subCategory === 'view' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${subCategory === 'situation' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           시황&전망
         </div>
       </div>
@@ -75,16 +55,16 @@ const CategoryReport = () => {
         <div className="flex items-center gap-[6px]">
           <div
             onClick={() => {
-              setSort('recently');
+              setSort('latest');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sort === 'recently' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}
+            ${sort === 'latest' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}
             `}>
             최신순
             <img
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sort === 'recently' ? 'block' : 'hidden'}`}
+              className={`${sort === 'latest' ? 'block' : 'hidden'}`}
             />
           </div>
           <div
@@ -104,9 +84,20 @@ const CategoryReport = () => {
         </div>
       </div>
       <div>
-        {mock.map((item, i) => (
-          <CategoryReportItem key={i} {...item} />
-        ))}
+        {isLoading ? (
+          Array.from({ length: 5 }).map((_, i) => <CategoryReportItemSkeleton key={i} />)
+        ) : (
+          <Virtuoso
+            style={{ height: 'calc(100vh - 50px)', margin: '0px' }}
+            useWindowScroll
+            totalCount={allPosts.length}
+            data={allPosts}
+            endReached={loadMore}
+            itemContent={(index, item: ReportListsItem) => (
+              <CategoryReportItem key={item.id} {...item} />
+            )}
+          />
+        )}
       </div>
     </div>
   );

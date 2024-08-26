@@ -1,9 +1,10 @@
 import type { MainNews } from '@/types/homeComponentsType';
+
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetcheRecentlyIssues = async () => {
-  const { data } = await axios.get('https://api.moaguide.com/content/news/');
+  const { data } = await axios.get(`https://api.moaguide.com/content/news/`);
   return data;
 };
 

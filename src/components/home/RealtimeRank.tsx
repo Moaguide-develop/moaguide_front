@@ -1,5 +1,6 @@
-import { getRealtimeRank } from '@/factory/RealtimeRank';
 import type { RealtimeRankType } from '@/types/homeComponentsType';
+
+import { getRealtimeRank } from '@/factory/RealtimeRank';
 import React from 'react';
 import RealtimeRankSkeleton from '../skeleton/RealtimeSkeleton';
 

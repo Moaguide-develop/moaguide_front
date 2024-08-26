@@ -1,7 +1,8 @@
+import type { IssueListItem } from '@/types/homeComponentsType';
+
 import React, { useCallback, useState } from 'react';
 import CategoryNewsItem from './CategoryNewsItem';
 import { getIssueLists } from '@/factory/IssueLists';
-import type { IssueListItem } from '@/types/homeComponentsType';
 import CategoryNewsItemSkeleton from '../skeleton/CategoryNewsItemSkeleton';
 import { Virtuoso } from 'react-virtuoso';
 
@@ -16,11 +17,11 @@ const CategoryNews = () => {
     if (hasNextPage && !isFetching && !isFetchingNextPage && !isLoading) {
       setTimeout(() => {
         fetchNextPage();
-      }, 200);
+      }, 500);
     }
   }, [fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading]);
 
-  const allPosts = data?.pages?.flat() || [];
+  const allPosts = data || [];
 
   return (
     <div className="mt-5">

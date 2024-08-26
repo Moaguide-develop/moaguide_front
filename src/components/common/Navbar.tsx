@@ -1,10 +1,8 @@
 'use client';
-import { useNavStore } from '@/store/nav.store';
 import React from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const Navbar = () => {
-  const pathname = usePathname();
   const params = useSearchParams();
   const router = useRouter();
 

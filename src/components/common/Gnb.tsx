@@ -21,13 +21,15 @@ const Gnb = () => {
   }, [setIsLoggedIn]);
 
   if (isLoading) {
-    return null; 
+    return null;
   }
 
   return (
     <div
       className={
-        pathname.includes('/mypage') ? 'shadow-custom-light border-b border-gray100' : ''
+        pathname.includes('/mypage') || pathname.includes('/report')
+          ? 'shadow-custom-light border-b border-gray100'
+          : ''
       }>
       <div className="max-w-[1000px] mx-auto flex items-center justify-between py-3 desk:min-w-[400px]">
         <Link href={'/'} className="cursor-pointer">
@@ -40,7 +42,7 @@ const Gnb = () => {
           <div className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
           </div>
-          <div className='flex items-center min-w-[123px] min-h-[35px]'>
+          <div className="flex items-center min-w-[123px] min-h-[35px]">
             {isLoggedIn ? (
               <Link href={'/mypage'}>
                 <img src="/images/gnb/mypage.svg" alt="mypage" className="w-6 h-6" />

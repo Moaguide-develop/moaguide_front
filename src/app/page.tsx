@@ -1,10 +1,7 @@
 import Navbar from '@/components/common/Navbar';
 import HomeIndex from '@/components/home/Index';
 import RecentlyIssueIndex from '@/components/recentlyIssue/Index';
-
-// import { useNavStore } from '@/store/nav.store';
 import React from 'react';
-import ProductPage from './product/page';
 import { IProductDetailData, IReport, IReportData, ISummaryData } from '@/types/Diviend';
 import Product from '@/components/product/Product';
 import ReportIndex from '@/components/report/ReportIndex';
@@ -44,7 +41,6 @@ const HomePage = async ({
 
   // console.log(productDetailData);
 
-  console.log(searchParams['category']);
   return (
     <div>
       <Navbar />
