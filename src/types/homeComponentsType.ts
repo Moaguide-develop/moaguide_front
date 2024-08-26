@@ -46,7 +46,7 @@ export interface MainProductItem {
 export interface ReportListsItem {
   id: number;
   title: string;
-  conent?: string;
+  content?: string;
   category: string;
   date: string;
 }

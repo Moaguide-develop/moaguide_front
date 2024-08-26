@@ -2,11 +2,15 @@ import type { ReportListsItem } from '@/types/homeComponentsType';
 
 import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const CategoryReportItem = ({ id, title, category, date }: ReportListsItem) => {
+  const router = useRouter();
   return (
-    <div className="py-5 border-b border-gray100 flex gap-5 items-center cursor-pointer">
+    <div
+      onClick={() => router.push(`/report/${id}`)}
+      className="py-5 border-b border-gray100 flex gap-5 items-center cursor-pointer">
       <div className="flex-1 flex flex-col gap-3">
         <div className="max-w-max p-[6px] flex items-center justify-center rounded-[4px] bg-gray50 text-gray400 text-caption3">
           {formatCategory(category)}
