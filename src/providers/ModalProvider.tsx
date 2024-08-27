@@ -5,7 +5,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import Quitmodal from '@/components/modal/Quitmodal';
 
-const ModalProvider = ({ children }: { children: React.ReactNode }) => {
+const ModalProvider = () => {
   const { open, modalType } = useModalStore();
   const [mounted, setMounted] = useState(false);
 
@@ -21,10 +21,7 @@ const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   if (!$portalRoot) return null;
 
   return createPortal(
-    <div>
-      {children}
-      {open && modalType === 'secession' && <Quitmodal />}
-    </div>,
+    <div>{open && modalType === 'secession' && <Quitmodal />}</div>,
     $portalRoot
   );
 };
