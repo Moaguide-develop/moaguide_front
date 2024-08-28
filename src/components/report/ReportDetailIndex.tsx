@@ -6,8 +6,6 @@ import { format, parseISO } from 'date-fns';
 import ReactMarkdown from 'react-markdown';
 import React, { useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
 import useDownloadPDF from '@/hook/useDownloadPDF';
 
 const ReportDetailIndex = ({ data }: { data: ReportListsItem }) => {
