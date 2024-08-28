@@ -69,7 +69,7 @@ const Detailpage = (props: any) => {
               <div className="text-gray-400">현재가</div>
               <div className="flex flex-row ">
                 <div>{data?.price}</div>
-                <div className="text-red-500 "> ({data?.priceRate})</div>
+                <div className="text-red-500 "> ({data?.priceRate}%)</div>
               </div>
             </div>
 
@@ -104,7 +104,7 @@ const Detailpage = (props: any) => {
       ) : sort === 'report' ? (
         <Report />
       ) : sort === 'profit' ? (
-        <Profit />
+        <Profit url={props.params.id} />
       ) : sort === 'detail' ? (
         <ProductDetail />
       ) : undefined}

@@ -9,7 +9,7 @@ const fetchProductDetail = async (context: QueryFunctionContext) => {
 };
 
 export const getProductDetail = (product_id: string) => {
-  const queryKey = ['ReportIssues', product_id];
+  const queryKey = ['ProductDetail', product_id];
 
   const { data, ...queryProps } = useQuery<IProductDetail>({
     queryKey,
