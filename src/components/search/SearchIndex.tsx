@@ -1,11 +1,16 @@
 'use client';
 import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import SearchRank from './SearchRank';
+import useDebounce from '@/hook/useDebounce';
+import { getSearchItem } from '@/factory/SearchItem';
 
 const SearchIndex = () => {
   const [isFocused, setIsFocused] = useState(false);
   const [keyWord, setKeyWord] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const debouncedKeyword = useDebounce(keyWord);
+
+  const { data, isLoading } = getSearchItem(debouncedKeyword);
 
   const handleKeyword = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setKeyWord(e.target.value);
@@ -46,15 +51,27 @@ const SearchIndex = () => {
               <img src="/images/search/xcircle.svg" alt="" />
             </div>
           )}
-          <div className="cursor-pointer">
+          <div>
             <img src="/images/search/search_icon.svg" alt="" />
           </div>
         </div>
       </div>
+
       {keyWord ? null : (
         <div>
           <div className="text-heading3 text-gray700">실시간 검색</div>
           <SearchRank />
+        </div>
+      )}
+
+      {keyWord && (
+        <div>
+          <div className="text-heading2">
+            <span className="text-gray700">검색 결과</span>{' '}
+            {keyWord && !isLoading && data && (
+              <span className="text-normal">{data?.length}개</span>
+            )}
+          </div>
         </div>
       )}
     </div>

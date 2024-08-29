@@ -13,7 +13,7 @@ const SearchRank = () => {
   }
   return (
     <div className="mt-3 w-full h-[291px]">
-      <div className="p-5 shadow-custom-normal rounded-[12px] flex-1">
+      <div className="p-5 shadow-custom-normal rounded-[12px] flex-1 bg-white">
         <ul className="flex flex-col gap-5">
           {data?.map((item: RealtimeRankType, i: number) => (
             <li key={i} className="flex gap-3 items-center">

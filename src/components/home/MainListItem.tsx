@@ -1,6 +1,7 @@
 import type { MainProductItem } from '@/types/homeComponentsType';
 
 import { formatCategory } from '@/utils/formatCategory';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const MainListItem = ({
@@ -14,8 +15,12 @@ const MainListItem = ({
   dividend,
   lastDivide_rate
 }: MainProductItem) => {
+  const router = useRouter();
+
   return (
-    <div className="mt-5 pb-5 border-b border-gray100 cursor-pointer">
+    <div
+      onClick={() => router.push(`/product/detail/${product_Id}`)}
+      className="mt-5 pb-5 border-b border-gray100 cursor-pointer">
       <div className="flex gap-5">
         {/* 이미지 */}
         <div>
@@ -35,10 +40,10 @@ const MainListItem = ({
           </div>
           <div className="text-body1">{name}</div>
           <div className="flex items-center gap-[6px]">
-            <div className="text-body7 text-gray400">{price.toLocaleString()}</div>
-            <div className="text-error">
+            <div className="text-body7 text-gray400">{price.toLocaleString()}원</div>
+            <div className={`${priceRate > 0 ? 'text-error' : 'text-success'}`}>
               {'('}
-              {'+'} {priceRate}%{')'}
+              {`${priceRate > 0 ? '+' : ''}`} {priceRate}%{')'}
             </div>
           </div>
         </div>
