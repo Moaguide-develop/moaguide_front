@@ -1,4 +1,5 @@
 import React, { ChangeEvent, Dispatch, useEffect, useState } from 'react';
+import { changePassword } from '@/service/change';
 
 interface NewPasswordType {
   setStep: Dispatch<React.SetStateAction<number>>;
@@ -9,6 +10,7 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
   const [isSame, setIsSame] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<string>('');
   const [newPassword2, setNewPassword2] = useState<string>('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false); 
 
   const handleNewPassword = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -30,6 +32,28 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
       setIsSame(false);
     }
   }, [isValid, newPassword, newPassword2]);
+
+  const handleChangePassword = async () => {
+    if (!isSame) return;
+
+    setIsSubmitting(true); 
+
+    try {
+      const result = await changePassword(newPassword);
+      if (result === 'success') {
+        setStep(2); 
+      } else {
+        alert('비밀번호 변경 실패');
+        setStep(0);
+      }
+    } catch (error) {
+      console.error('비밀번호 변경 오류:', error);
+      alert('비밀번호 변경 중 오류가 발생했습니다.');
+      setStep(0);
+    } finally {
+      setIsSubmitting(false); 
+    }
+  };
 
   return (
     <div>
@@ -78,8 +102,12 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
       {/* Todo : 완료 버튼 누르면, 비밀번호 변경 요청 Api 실행, 성공 시 onSuccess setStep(2) 후 로그아웃, 실패할시 그냥 메인페이지로 이동 */}
       {isSame ? (
         <div
-          onClick={() => setStep(2)}
-          className="cursor-pointer bg-gradient2  mt-[60px] flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full">
+          onClick={handleChangePassword}
+          className={`cursor-pointer bg-gradient2 mt-[60px] flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full ${
+            isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
+          // API 호출 중일 때 클릭 비활성화
+        >
           변경 완료
         </div>
       ) : (

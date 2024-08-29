@@ -1,5 +1,6 @@
-import useDebounce from '@/hook/useDebounce';
 import React, { ChangeEvent, Dispatch, useEffect, useState } from 'react';
+import useDebounce from '@/hook/useDebounce';
+import { checkPassword } from '@/service/change';
 
 interface CertifyPasswordType {
   setStep: Dispatch<React.SetStateAction<number>>;
@@ -8,8 +9,7 @@ interface CertifyPasswordType {
 const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
   const [passwordValue, setPasswordValue] = useState('');
   const [isValid, setIsValid] = useState(false);
-
-  //Todo : 입력된 input이 현재 비밀번호와 같은지 요청하는 API 필요 단 enabled에 isValid true일 때만
+  const [isSubmitting, setIsSubmitting] = useState(false); 
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPasswordValue(e.target.value);
@@ -29,6 +29,23 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
     checkValid(debouncedTitle);
   }, [debouncedTitle]);
 
+  const handleCheckPassword = async () => {
+    try {
+      setIsSubmitting(true);
+      const result = await checkPassword(passwordValue);
+
+      if (result === 'success') {
+        setStep(1);
+      } else {
+        alert('비밀번호가 올바르지 않습니다. 다시 시도해주세요.');
+      }
+    } catch (error) {
+      alert('비밀번호 검증에 실패했습니다. 다시 시도해주세요.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div>
       <div className="text-heading3">
@@ -47,17 +64,20 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
           className="px-4 py-[14px] bg-bg text-body2 rounded-[12px] w-full outline-none"
         />
       </div>
-      {/* Todo : 일단 isValid가 true일때로 해놨는데, api요청 결과에 따라 확인 될때로 바꾸기 */}
       {isValid ? (
-        <div
-          onClick={() => setStep(1)}
-          className="cursor-pointer bg-gradient2  mt-[60px] flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full">
+        <button
+          onClick={handleCheckPassword} 
+          className={`cursor-pointer bg-gradient2 mt-[60px] flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full ${
+            isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
+          disabled={isSubmitting}
+        >
           다음으로
-        </div>
+        </button>
       ) : (
-        <div className="mt-[60px] flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full">
+        <button className="mt-[60px] flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full">
           다음으로
-        </div>
+        </button>
       )}
     </div>
   );

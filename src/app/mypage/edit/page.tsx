@@ -5,7 +5,8 @@ import { checkEmail } from '@/utils/checkEmail';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
-import { checkNicknameAvailability, updateNickname } from '@/service/auth';
+import { checkNicknameAvailability } from '@/service/auth';
+import { updateNickname } from '@/service/change';
 
 const Editpage = () => {
   const router = useRouter();
