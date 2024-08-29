@@ -36,6 +36,7 @@ export const checkNicknameAvailability = async (nickname: string): Promise<Nickn
     const response = await axios.post(`${backendUrl}/signup/verify/nickname`, { nickname });
     
     if (response.status === 200) {
+      console.log('응답 성공:', response);  // 전체 응답 객체를 출력
       return response.data;
     } else {
       console.error('서버 오류 응답 상태:', response.status);
@@ -46,6 +47,7 @@ export const checkNicknameAvailability = async (nickname: string): Promise<Nickn
     return null;
   }
 };
+
 
 // 최종 회원가입 함수
 export const finalSignup = async (
@@ -138,5 +140,25 @@ export const logout = async () => {
     }
   } catch (error) {
     console.error('로그아웃 오류:', error);
+  }
+};
+
+
+export const updateNickname = async (nickname: string): Promise<boolean> => {
+  try {
+    const response = await axios.patch(`${backendUrl}/user/update/nickname`, 
+      { nickname }, 
+    );
+    
+    if (response.status === 200) {
+      console.log('닉네임 수정 성공:', response.data);
+      return true;
+    } else {
+      console.error('닉네임 수정 실패:', response.status);
+      return false;
+    }
+  } catch (error) {
+    console.error('API 호출 오류:', error);
+    return false;
   }
 };

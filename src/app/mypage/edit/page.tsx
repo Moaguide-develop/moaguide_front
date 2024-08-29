@@ -5,6 +5,7 @@ import { checkEmail } from '@/utils/checkEmail';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
+import { checkNicknameAvailability, updateNickname } from '@/service/auth';
 
 const Editpage = () => {
   const router = useRouter();
@@ -16,27 +17,47 @@ const Editpage = () => {
   const { setModalType, setOpen, open } = useModalStore();
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    /**
-     * Todo : 닉네임 유효성 검사 백엔드와 협의
-     */
     const regex = e.target.value.replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
     setNameValue(regex);
   };
 
-  const checkNameDuplicate = () => {
-    /**
-     * Todo : 닉네임 중복 검사 API
-     * OK할 시 setIsNameComplete 'yes' or 'no
-     */
-    setIsNameComplete('yes');
+  const checkNameDuplicate = async () => {
+    try {
+      const response = await checkNicknameAvailability(nameValue);
+      console.log(response)
+      if (response) {
+        setIsNameComplete('yes');
+      } else {
+        setIsNameComplete('no');
+      }
+    } catch (error) {
+      console.error('닉네임 중복 확인 중 오류 발생:', error);
+      setIsNameComplete('no');
+    }
   };
 
-  const handleComplete = () => {
-    /**
-     * Todo : 닉네임 수정 요청
-     */
+  const handleComplete = async () => {
+    if (isNameComplete === 'yes') {
+      const success = await updateNickname(nameValue);
+      
+      if (success) {
+        const { member, setMember } = useMemberStore.getState();
+        
+        const updatedMember = {
+          ...member,
+          memberNickName: nameValue,
+        };
+  
+        setMember(updatedMember);
+        
+        alert('닉네임이 성공적으로 수정되었습니다.');
+        router.push('/mypage'); 
+      } else {
+        alert('닉네임 수정에 실패하였습니다. 다시 시도해주세요.');
+      }
+    }
   };
-
+  
   useEffect(() => {
     setIsNameValid(nameValue.length >= 3);
     setIsNameComplete('');
