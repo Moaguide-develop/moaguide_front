@@ -74,25 +74,27 @@ const Report = ({ report }: IReportProps) => {
           return (
             <div key={item.id}>
               <SwiperSlide>
-                <div className="w-full  max-w-[436px] max-h-[133px] flex flex-row  justify-between px-[20px] py-[20px] border-2 border-gray-200 rounded-md ">
-                  <div className=" flex flex-col justify-center items-start ">
-                    <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center ">
-                      {item.category === 'building' ? <>부동산</> : <>미술품</>}
-                    </div>
+                <div className="flex justify-center items-center">
+                  <div className="w-full  max-w-[436px] max-h-[133px] flex flex-row  justify-between px-[20px] py-[20px] border-2 border-gray-200 rounded-md ">
+                    <div className=" flex flex-col justify-center items-start ">
+                      <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center ">
+                        {item.category === 'building' ? <>부동산</> : <>미술품</>}
+                      </div>
 
-                    <div className="my-[12px]">{item.title}</div>
-                    <div className="text-gray-300">
-                      {format(new Date(item.date), 'yyyy.MM.dd')}
+                      <div className="my-[12px]">{item.title}</div>
+                      <div className="text-gray-300">
+                        {format(new Date(item.date), 'yyyy.MM.dd')}
+                      </div>
                     </div>
-                  </div>
-                  <div className="w-[132px] h-[93px] rounded-md">
-                    <Image
-                      src="/images/product/Report.png"
-                      alt="Report"
-                      width={132}
-                      height={93}
-                      className="rounded-md"
-                    />
+                    <div className="w-[132px] h-[93px] rounded-md">
+                      <Image
+                        src="/images/product/Report.png"
+                        alt="Report"
+                        width={132}
+                        height={93}
+                        className="rounded-md"
+                      />
+                    </div>
                   </div>
                 </div>
               </SwiperSlide>
