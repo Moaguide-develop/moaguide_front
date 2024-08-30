@@ -1,11 +1,8 @@
 import Navbar from '@/components/common/Navbar';
 import HomeIndex from '@/components/home/Index';
 import RecentlyIssueIndex from '@/components/recentlyIssue/Index';
-
-// import { useNavStore } from '@/store/nav.store';
 import React from 'react';
-import ProductPage from './product/page';
-import { SummaryData } from '@/types/Diviend';
+import { IProductDetailData, IReport, IReportData, ISummaryData } from '@/types/Diviend';
 import Product from '@/components/product/Product';
 import ReportIndex from '@/components/report/ReportIndex';
 
@@ -14,12 +11,36 @@ const HomePage = async ({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  const response = await fetch(`https://api.moaguide.com/summary/recent/building`, {
-    cache: 'no-store'
-  });
+  const pages = searchParams['page'] || 1;
+  console.log(pages);
+  const buildingDiviedResponse = await fetch(
+    `https://api.moaguide.com/summary/recent/building`,
+    {
+      cache: 'no-store'
+    }
+  );
 
-  const data: SummaryData = await response.json();
-  console.log(searchParams['category']);
+  const buildingReportResponse = await fetch(
+    'https://api.moaguide.com/summary/report/building',
+    {
+      cache: 'no-store'
+    }
+  );
+  const productDetailResponse = await fetch(
+    `https://api.moaguide.com/summary/list/all?page=${pages}&size=10&sort=views`,
+    {
+      next: { revalidate: 300 }
+    }
+  );
+
+  const buildingDiviedData: ISummaryData = await buildingDiviedResponse.json();
+
+  const buildingReportData: IReport[] = await buildingReportResponse.json();
+
+  const productDetailData: IProductDetailData = await productDetailResponse.json();
+
+  // console.log(productDetailData);
+
   return (
     <div>
       <Navbar />
@@ -27,7 +48,14 @@ const HomePage = async ({
       {searchParams['category'] === 'newissue' ? (
         <RecentlyIssueIndex />
       ) : searchParams['category'] === 'product' ? (
-        <Product divide={data.divide} summary={data.summary} />
+        <Product
+          divide={buildingDiviedData.divide}
+          summary={buildingDiviedData.summary}
+          report={buildingReportData}
+          content={productDetailData.content}
+          pageNumber={productDetailData?.pageable?.pageNumber}
+          totalPages={productDetailData?.totalPages}
+        />
       ) : searchParams['category'] === 'report' ? (
         <ReportIndex />
       ) : (

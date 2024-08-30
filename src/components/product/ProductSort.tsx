@@ -1,6 +1,7 @@
 'use client';
 import { Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface ProductSortProps {
   sort: string;
@@ -9,7 +10,16 @@ interface ProductSortProps {
 
 const ProductSort = ({ sort, setSort }: ProductSortProps) => {
   // const [sort, setSort] = useState(filter);
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams.toString());
+  const router = useRouter();
+  const sorted = searchParams.get('sort');
+  console.log(sorted);
 
+  const handleClick = (key: string) => {
+    params.set('sort', key);
+    router.replace(`?${params.toString()}`);
+  };
   return (
     <div>
       <div className=" flex items-center gap-[10px] ">
@@ -19,9 +29,10 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('profit');
+              handleClick('profit');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sort === 'profit' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            ${sort === 'profit' || sorted == null ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
             수익률순
             <Image
               src="/images/home/news_check.svg"
@@ -34,6 +45,7 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('inquiry');
+              handleClick('inquiry');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
             ${sort === 'inquiry' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
@@ -50,6 +62,7 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('currentprice');
+              handleClick('currentprice');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
             ${sort === 'currentprice' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
@@ -66,6 +79,7 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('alphabetical ');
+              handleClick('alphabetical');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
             ${sort === 'alphabetical ' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>

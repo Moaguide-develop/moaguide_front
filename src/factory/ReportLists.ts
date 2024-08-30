@@ -1,17 +1,17 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
-const fetchIssueLists = async ({
+const fetchReportLists = async ({
   queryKey,
   pageParam = 1
 }: {
   queryKey: any[];
   pageParam?: number;
 }) => {
-  const [, category, sort] = queryKey;
+  const [, category, subCategory, sort] = queryKey;
 
   const { data } = await axios.get(
-    `https://api.moaguide.com/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
+    `https://api.moaguide.com/content/report/list/${category}?page=1&size=10&subcategory=${subCategory}&sort=${sort}`
   );
 
   return {
@@ -24,13 +24,13 @@ const fetchIssueLists = async ({
   };
 };
 
-export const getIssueLists = (category: string, sort: string) => {
-  const queryKey = ['IssueLists', category, sort];
+export const getReportLists = (category: string, subCategory: string, sort: string) => {
+  const queryKey = ['ReportLists', category, subCategory, sort];
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
       queryKey,
-      queryFn: fetchIssueLists,
+      queryFn: fetchReportLists,
       getNextPageParam: (lastPage) => {
         return lastPage.isLast ? undefined : lastPage.nextPage;
       },

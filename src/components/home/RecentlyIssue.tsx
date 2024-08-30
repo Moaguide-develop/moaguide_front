@@ -2,19 +2,23 @@ import React from 'react';
 import IssueItem from './IssueItem';
 import { getReportIssues } from '@/factory/ReportIssue';
 import { MainNews } from '@/types/homeComponentsType';
-import { useNavStore } from '@/store/nav.store';
 import IssueItemSkeleton from '../skeleton/IssueItemSkeleton';
+import { useRouter } from 'next/navigation';
 
 const RecentlyIssue = () => {
   const { mainNews, isLoading } = getReportIssues();
-  const { setCurrentNav } = useNavStore();
+  const router = useRouter();
 
   return (
     <div>
       {/* 타이틀 */}
       <div className="flex items-center justify-between">
         <div className="text-heading4">최신 이슈</div>
-        <div onClick={() => setCurrentNav('new_issue')} className="cursor-pointer">
+        <div
+          onClick={() => {
+            router.push('/?category=newissue');
+          }}
+          className="cursor-pointer">
           <img src="/images/home/item_right.svg" alt="" />
         </div>
       </div>

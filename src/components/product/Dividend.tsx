@@ -8,10 +8,11 @@ import 'swiper/css/pagination';
 // import SwiperCore, { Navigation } from 'swiper/core';
 import Image from 'next/image';
 import { memo, useState } from 'react';
-import { Divide } from '@/types/Diviend';
+import { IDivide } from '@/types/Diviend';
+import Link from 'next/link';
 
 interface DividendProps {
-  dividend: Divide[];
+  dividend: IDivide[];
 }
 
 const Dividend = memo(({ dividend }: DividendProps) => {
@@ -68,30 +69,32 @@ const Dividend = memo(({ dividend }: DividendProps) => {
           }
         }}
         className="mySwiper flex justify-center">
-        {dividend.map((item) => {
+        {dividend?.map((item) => {
           return (
             <div key={item.product_Id}>
               <SwiperSlide className=" flex justify-center">
-                <div className=" md:max-w-[456px]  desk2:max-w-[400px]  desk:max-w-[300px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row justify-center items-center  flex mx-auto  relative">
-                  <div className=" w-full max-w-[52px] max-h-[52px] rounded-[28.50px] ">
-                    <Image
-                      src="/images/product/Building1.png"
-                      alt="Building"
-                      width={52}
-                      height={52}
-                      className="rounded-lg "
-                    />
-                  </div>
+                <Link href={`/product/detail/${item.product_Id}`}>
+                  <div className=" md:max-w-[456px]  desk2:max-w-[400px]  desk:max-w-[300px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row justify-center items-center  flex mx-auto  relative">
+                    <div className=" w-full max-w-[52px] max-h-[52px] rounded-[28.50px] ">
+                      <Image
+                        src="/images/product/Building1.png"
+                        alt="Building"
+                        width={52}
+                        height={52}
+                        className="rounded-lg "
+                      />
+                    </div>
 
-                  <div className=" flex flex-col items-start justify-start md:ml-[20px] desk:ml-[16px]">
-                    <div className=" text-gray-300">부동산</div>
-                    <div className="w-full font-bold mt-1">{item.name}</div>
-                  </div>
+                    <div className=" flex flex-col items-start justify-start md:ml-[20px] desk:ml-[16px]">
+                      <div className=" text-gray-300">부동산</div>
+                      <div className="w-full font-bold mt-1">{item.name}</div>
+                    </div>
 
-                  <div className="ml-[46px] font-bold flex justify-center items-center text-purple-600 mt-[20px]">
-                    (1주당 {item.dividend}원)
+                    <div className="ml-[46px] font-bold flex justify-center items-center text-purple-600 mt-[20px]">
+                      (1주당 {item.dividend}원)
+                    </div>
                   </div>
-                </div>
+                </Link>
               </SwiperSlide>
             </div>
           );

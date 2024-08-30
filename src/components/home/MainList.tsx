@@ -1,51 +1,25 @@
-'use client';
 import React, { useState } from 'react';
 import MainListItem from './MainListItem';
-import { useNavStore } from '@/store/nav.store';
-
-const mock = [
-  {
-    product_Id: 'asdawd',
-    category: '부동산',
-    platfrom: '운영 플랫폼 이름',
-    name: '롯데월드타워 시그니엘 1호',
-    price: 5400,
-    priceRate: 0.4,
-    lastDivide_rate: 14.8,
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    product_Id: 'asdawd',
-    category: '부동산',
-    platfrom: '운영 플랫폼 이름',
-    name: '롯데월드타워 시그니엘 1호',
-    price: 5400,
-    priceRate: 0.4,
-    lastDivide_rate: 14.8,
-    img: '/images/home/mock.jpeg'
-  },
-  {
-    product_Id: 'asdawd',
-    category: '부동산',
-    platfrom: '운영 플랫폼 이름',
-    name: '롯데월드타워 시그니엘 1호',
-    price: 5400,
-    priceRate: 0.4,
-    lastDivide_rate: 14.8,
-    img: '/images/home/mock.jpeg'
-  }
-];
+import { useRouter } from 'next/navigation';
+import { getMainProduct } from '@/factory/MainProduct';
+import MainListItemSkeleton from '../skeleton/MainListItemSkeleton';
 
 const MainList = () => {
-  const [category, setCategory] = useState('전체');
-  const { setCurrentNav } = useNavStore();
+  const [category, setCategory] = useState('all');
+  const router = useRouter();
+
+  const { data, isLoading } = getMainProduct(category);
 
   return (
     <div>
       {/* title */}
       <div className="flex items-center justify-between">
         <div className="text-heading4">주요 상품 현황</div>
-        <div onClick={() => setCurrentNav('item')} className="cursor-pointer">
+        <div
+          onClick={() => {
+            router.push('/?category=product');
+          }}
+          className="cursor-pointer">
           <img src="/images/home/item_right.svg" alt="" />
         </div>
       </div>
@@ -53,52 +27,52 @@ const MainList = () => {
       <div className="mt-8 flex items-center gap-5 border-b border-gray100 text-title2">
         <div
           onClick={() => {
-            setCategory('전체');
+            setCategory('all');
           }}
-          className={`pb-5 cursor-pointer ${category === '전체' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'all' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           전체
         </div>
         <div
           onClick={() => {
-            setCategory('부동산');
+            setCategory('building');
           }}
-          className={`pb-5 cursor-pointer ${category === '부동산' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'building' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           부동산
         </div>
         <div
           onClick={() => {
-            setCategory('음악저작권');
+            setCategory('music');
           }}
-          className={`pb-5 cursor-pointer ${category === '음악저작권' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'music' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           음악저작권
         </div>
         <div
           onClick={() => {
-            setCategory('한우');
+            setCategory('cow');
           }}
-          className={`pb-5 cursor-pointer ${category === '한우' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'cow' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           한우
         </div>
         <div
           onClick={() => {
-            setCategory('미술품');
+            setCategory('art');
           }}
-          className={`pb-5 cursor-pointer ${category === '미술품' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'art' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           미술품
         </div>
         <div
           onClick={() => {
-            setCategory('콘텐츠');
+            setCategory('content');
           }}
-          className={`pb-5 cursor-pointer ${category === '콘텐츠' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
+          className={`pb-5 cursor-pointer ${category === 'content' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}>
           콘텐츠
         </div>
       </div>
       {/* item */}
       <div>
-        {mock.map((item, i) => (
-          <MainListItem key={i} {...item} />
-        ))}
+        {isLoading
+          ? Array.from({ length: 3 }).map((_, i) => <MainListItemSkeleton key={i} />)
+          : data?.map((item, i) => <MainListItem key={i} {...item} />)}
       </div>
     </div>
   );

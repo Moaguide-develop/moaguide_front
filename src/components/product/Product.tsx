@@ -7,13 +7,28 @@ import TopProduct from '@/components/product/TopProduct';
 import Report from '@/components/product/Report';
 import React, { useState } from 'react';
 import ProductSort from '@/components/product/ProductSort';
-import ProductList from '@/components/product/ProductList';
-import { SummaryData } from '@/types/Diviend';
+import ProductContentList from '@/components/product/ProductList';
+import { ISummaryData, IReportData, IProductDetailData } from '@/types/Diviend';
 
-const Product = ({ divide, summary }: SummaryData) => {
+interface IProductBuildingProps extends ISummaryData, IReportData {
+  content: IProductDetailData['content'];
+  totalPages: IProductDetailData['totalPages'];
+  pageNumber: IProductDetailData['pageable']['pageNumber'];
+}
+
+const Product = ({
+  divide,
+  summary,
+  report,
+  content,
+  totalPages,
+  pageNumber
+}: IProductBuildingProps) => {
   const divideData = divide;
   const summaryData = summary;
-
+  const reportData = report;
+  const contentData = content;
+  console.log(reportData);
   const [sort, setSort] = useState('profit');
   return (
     <div>
@@ -46,7 +61,7 @@ const Product = ({ divide, summary }: SummaryData) => {
       <Container>
         <div className="text-black text-lg font-bold mb-[26px]">관련 리포트</div>
 
-        <Report />
+        <Report report={reportData} />
       </Container>
 
       <div className=" mt-[40px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]"></div>
@@ -54,7 +69,11 @@ const Product = ({ divide, summary }: SummaryData) => {
         <ProductSort sort={sort} setSort={setSort} />
       </Container>
       <div className=" mt-[10px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]"></div>
-      <ProductList />
+      <ProductContentList
+        content={contentData}
+        totalPages={totalPages}
+        pageNumber={pageNumber}
+      />
     </div>
   );
 };

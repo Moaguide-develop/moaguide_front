@@ -30,3 +30,23 @@ export interface IssueListItem {
   link: string;
   date: string;
 }
+
+export interface MainProductItem {
+  product_Id: string;
+  category: string;
+  platform: string;
+  name: string;
+  price: string;
+  priceRate: number;
+  totalPrice: string;
+  dividend: number;
+  lastDivide_rate: number;
+}
+
+export interface ReportListsItem {
+  id: number;
+  title: string;
+  content?: string;
+  category: string;
+  date: string;
+}

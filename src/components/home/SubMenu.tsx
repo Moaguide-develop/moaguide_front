@@ -1,12 +1,15 @@
-import { useNavStore } from '@/store/nav.store';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const SubMenu = () => {
-  const { setCurrentNav } = useNavStore();
+  const router = useRouter();
+
   return (
     <div className="flex items-center gap-3">
       <div
-        onClick={() => setCurrentNav('new_issue')}
+        onClick={() => {
+          router.push('/?category=newissue');
+        }}
         className="cursor-pointer flex-1 flex items-center justify-between px-[28px] py-[22px] rounded-[12px] bg-bg">
         <div className=" text-body5 text-gray700 desk2:text-title2">최신 이슈</div>
         <div>
@@ -14,7 +17,9 @@ const SubMenu = () => {
         </div>
       </div>
       <div
-        onClick={() => setCurrentNav('item')}
+        onClick={() => {
+          router.push('/?category=product');
+        }}
         className="cursor-pointer flex-1 flex items-center justify-between px-[28px] py-[22px] rounded-[12px] bg-bg">
         <div className=" text-caption1 text-gray700 desk2:text-title2">조각투자 상품</div>
         <div>
@@ -22,7 +27,9 @@ const SubMenu = () => {
         </div>
       </div>
       <div
-        onClick={() => setCurrentNav('report')}
+        onClick={() => {
+          router.push('/?category=report');
+        }}
         className="cursor-pointer flex-1 flex items-center justify-between px-[28px] py-[22px] rounded-[12px] bg-bg">
         <div className=" text-body5 text-gray700 desk2:text-title2">리포트</div>
         <div>

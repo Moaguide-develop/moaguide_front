@@ -1,4 +1,5 @@
 import type { MainReportType } from '@/types/homeComponentsType';
+
 import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import React from 'react';

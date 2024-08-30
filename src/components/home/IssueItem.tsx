@@ -1,4 +1,5 @@
 import type { MainNews } from '@/types/homeComponentsType';
+
 import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
