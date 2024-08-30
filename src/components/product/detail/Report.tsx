@@ -93,7 +93,9 @@ const ReportItem = ({ content, id, category, title, date }: IreportItem) => {
         <div className="text-base font-bold mb-[12px]">{title} </div>
         <div className="text-gray-400 mt-[16px]">{formatDate(date)}</div>
       </div>
-      <Image src={'/images/detail/News.png'} width={132} height={93} alt="News" />
+      <div className="w-[132px] h-[93px] relative">
+        <Image src={'/images/detail/News.png'} fill alt="News" />
+      </div>
     </div>
   );
 };

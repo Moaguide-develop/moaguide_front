@@ -48,8 +48,11 @@ const NewsItem = ({ title, date, id, category, link }: INewsItem) => {
       key={id}
       className=" flex justify-between border-b-[1px] border-gray-200 py-[20px] px-[20px] rounded-lg">
       <div className="flex">
-        <Image src={'/images/detail/News.png'} width={132} height={93} alt="News" />
-        <div className="ml-[16px] mt-[15px]">
+        <div className="w-[132px] h-[93px] relative">
+          <Image src={'/images/detail/News.png'} fill alt="News" />
+        </div>
+
+        <div className="ml-[16px] mt-[15px] desk:max-w-[150px] desk2:max-w-full">
           <div className="text-base font-bold">{title} </div>
           <div className="text-gray-400 mt-[16px]">
             {category === 'building' ? <>부동산</> : undefined}
