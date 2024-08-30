@@ -1,8 +1,18 @@
+import { logout } from '@/service/auth';
+import { useAuthStore } from '@/store/userAuth.store';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const PasswordChangeSuccess = () => {
   const router = useRouter();
+  const { setIsLoggedIn } = useAuthStore();
+
+  const handleLogout = async () => {
+    await logout();
+    setIsLoggedIn(false);
+    router.push('/sign');
+  };
+  
   return (
     <div className="pt-10">
       <div className="flex flex-col gap-6">
@@ -20,8 +30,7 @@ const PasswordChangeSuccess = () => {
         </div>
       </div>
       <div
-        //todo 임의로 sign으로 해놨음. 로그인 페이지로 이동하기
-        onClick={() => router.replace('/sign')}
+        onClick={handleLogout}
         className="cursor-pointer bg-gradient2  mt-[80px] flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full">
         로그인으로 돌아가기
       </div>

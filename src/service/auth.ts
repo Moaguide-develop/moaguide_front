@@ -1,41 +1,32 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
-import { getToken, removeToken, setToken } from '@/utils/localStorage';
-import axios from 'axios';
+import { setToken, removeToken } from '@/utils/localStorage';
 import { useMemberStore } from '@/store/user.store';
+import { axiosInstance, basicAxiosInstance } from './axiosInstance';
 
-axios.defaults.withCredentials = true;
-
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
-
-// 인증 코드 전송 함수
+// 토큰 사용하지 않는 API 함수들
 export const sendVerificationCode = async (phone: string): Promise<SendCodeResponse> => {
-  const response = await axios.post(`${backendUrl}/signup/send/code`, { phone });
+  const response = await basicAxiosInstance.post('/signup/send/code', { phone });
   console.log(response.data);
   return response.data;
 };
 
-// 코드 검증 함수
 export const verifyCode = async (phone: string, code: string): Promise<VerifyCodeResponse> => {
-  const response = await axios.post(`${backendUrl}/signup/verify/code`, { phone, code });
+  const response = await basicAxiosInstance.post('/signup/verify/code', { phone, code });
   console.log('응답 데이터:', response.data);
   console.log('응답 헤더:', response.headers);
 
   const token = response.headers['authorization'] || response.headers['Authorization'];
-  console.log('토큰', token);
   const accessToken = token.replace('Bearer ', '');
-  console.log('어세스토큰', accessToken);
-
   setToken(accessToken);
 
   return response.data;
 };
 
-// 닉네임 사용 가능 여부 확인 함수
 export const checkNicknameAvailability = async (nickname: string): Promise<NicknameCheckResponse | null> => {
   try {
-    const response = await axios.post(`${backendUrl}/signup/verify/nickname`, { nickname });
-    
+    const response = await basicAxiosInstance.post('/signup/verify/nickname', { nickname });
     if (response.status === 200) {
+      console.log('응답 성공:', response);  // 전체 응답 객체를 출력
       return response.data;
     } else {
       console.error('서버 오류 응답 상태:', response.status);
@@ -47,14 +38,13 @@ export const checkNicknameAvailability = async (nickname: string): Promise<Nickn
   }
 };
 
-// 최종 회원가입 함수
 export const finalSignup = async (
   formData: any,
   authHeaders: AuthHeaders
 ) => {
   try {
-    const response = await axios.post(
-      `${backendUrl}/signup`,
+    const response = await basicAxiosInstance.post(
+      '/signup',
       formData,
       {
         headers: {
@@ -71,30 +61,23 @@ export const finalSignup = async (
   }
 };
 
-// 로그인 함수
+// 토큰 사용하는 API 함수들
 export const login = async (email: string, password: string) => {
   try {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
 
-    const response = await axios.post(
-      `${backendUrl}/login`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    );
+    const response = await basicAxiosInstance.post('/login', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
     console.log('로그인 성공:', response.data);
 
     const token = response.headers['authorization'] || response.headers['Authorization'];
-    console.log('토큰:', token);
     const accessToken = token.replace('Bearer ', '');
-    console.log('어세스토큰:', accessToken);
-
     setToken(accessToken);
 
     const { setMember } = useMemberStore.getState();
@@ -103,7 +86,7 @@ export const login = async (email: string, password: string) => {
       memberEmail: userInfo.email,
       memberNickName: userInfo.nickname,
       memberPhone: userInfo.phonenumber,
-      subscribe: '1개월 플랜' // 임시
+      subscribe: '1개월 플랜', // 임시
     });
 
     return response.data;
@@ -115,21 +98,11 @@ export const login = async (email: string, password: string) => {
 
 export const logout = async () => {
   try {
-    const token = getToken();
-    const response = await axios.post(
-      `${backendUrl}/logout`,
-      {},
-      {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        withCredentials: true,
-      }
-    );
+    const response = await axiosInstance.post('/logout', {});
 
     if (response.status === 200) {
       console.log(response.data.message);
-      removeToken(); 
+      removeToken();
 
       const { clearMember } = useMemberStore.getState();
       clearMember();

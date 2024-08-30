@@ -1,4 +1,6 @@
 'use client';
+import { sendVerificationCode, verifyCode } from '@/service/auth';
+import { useMemberStore } from '@/store/user.store';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
@@ -14,6 +16,9 @@ const ChangePhonePage = () => {
   const [isError, setIsError] = useState(false); // 인증번호 인증 실패
   const [validTime, setValidTime] = useState<number>(300); // 인증 시간
   const inputRef = useRef<HTMLInputElement>(null);
+  const setMember = useMemberStore((state) => state.setMember);
+  const member = useMemberStore((state) => state.member);
+  
 
   const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const regex = e.target.value
@@ -24,35 +29,55 @@ const ChangePhonePage = () => {
   };
 
   const handleValidNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const regex = e.target.value.replace(/[^0-9]/g, '').slice(0, 4);
+    const regex = e.target.value.replace(/[^0-9]/g, '').slice(0, 6);
     setValidNumber(regex);
   };
 
-  const handleRequest = () => {
-    // Todo 작성된 전화번호에 따라 인증 요청 API 호출
-    setIsRequest(true); // 요청 상태 true
-    setValidTime(300); // 인증 요청 시 타이머 초기화
+  const handleRequest = async () => {
+    try {
+      const data = await sendVerificationCode(phoneNumber);
+      console.log('인증 요청 성공:', data);
+      setIsRequest(true); // 요청 상태 true
+      setValidTime(300); // 인증 요청 시 타이머 초기화
+    } catch (error) {
+      console.error('인증 요청 실패:', error);
+      setIsRequest(false); // 요청 실패 시 상태 초기화
+    }
   };
 
-  const handleResending = () => {
+  const handleResending = async () => {
     if (isComplete) return;
-    //Todo 인증번호 재요청 API 호출
-    setValidNumber('');
-    inputRef.current?.focus();
-    setIsRequest(true); // 요청 상태 true
-    setValidTime(300); // 인증 요청 시 타이머 초기화
+    try {
+      const data = await sendVerificationCode(phoneNumber);
+      console.log('인증 재요청 성공:', data);
+      setValidNumber('');
+      inputRef.current?.focus();
+      setIsRequest(true); // 요청 상태 true
+      setValidTime(300); // 인증 요청 시 타이머 초기화
+    } catch (error) {
+      console.error('인증 재요청 실패:', error);
+    }
   };
 
-  const handleCertify = () => {
-    if (isComplete) return; //이미 인증 완료된상태면 return
-    // Todo 작성된 인증번호에 따라 인증 검사 API 호출
-    setIsComplete(true); // 인증검사 통과
-    // setIsError(true); // 인증검사 실패
+  const handleCertify = async () => {
+    if (isComplete) return; // 이미 인증 완료된 상태면 return
+    try {
+      const data = await verifyCode(phoneNumber, validNumber);
+      console.log('인증 완료:', data);
+      setIsComplete(true); // 인증 검사 통과
+      setIsError(false);
+    } catch (error) {
+      console.error('인증 실패:', error);
+      setIsError(true); // 인증 검사 실패
+    }
   };
+
 
   const handleComplete = () => {
-    // Todo 인증번호 인증완료후 유저 전화번호 수정 API 호출
-    // Todo 마이페이지로 돌아가는데 바뀐 전화번호로 수정되야함
+    setMember({
+      ...member, 
+      memberPhone: phoneNumber,
+    });
     router.back();
   };
 
@@ -65,7 +90,7 @@ const ChangePhonePage = () => {
   }, [phoneNumber]);
 
   useEffect(() => {
-    if (validNumber.length === 4) {
+    if (validNumber.length === 6) {
       setValidNumberOk(true);
     } else {
       setValidNumberOk(false);
