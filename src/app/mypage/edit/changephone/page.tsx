@@ -1,5 +1,6 @@
 'use client';
 import { sendVerificationCode, verifyCode } from '@/service/auth';
+import { useMemberStore } from '@/store/user.store';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
@@ -15,6 +16,9 @@ const ChangePhonePage = () => {
   const [isError, setIsError] = useState(false); // 인증번호 인증 실패
   const [validTime, setValidTime] = useState<number>(300); // 인증 시간
   const inputRef = useRef<HTMLInputElement>(null);
+  const setMember = useMemberStore((state) => state.setMember);
+  const member = useMemberStore((state) => state.member);
+  
 
   const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const regex = e.target.value
@@ -70,8 +74,10 @@ const ChangePhonePage = () => {
 
 
   const handleComplete = () => {
-    // Todo 인증번호 인증완료후 유저 전화번호 수정 API 호출
-    // Todo 마이페이지로 돌아가는데 바뀐 전화번호로 수정되야함
+    setMember({
+      ...member, 
+      memberPhone: phoneNumber,
+    });
     router.back();
   };
 
