@@ -3,6 +3,7 @@ import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import SearchRank from './SearchRank';
 import useDebounce from '@/hook/useDebounce';
 import { getSearchItem } from '@/factory/SearchItem';
+import CircleSkeleton from '../skeleton/CircleSkeleton';
 
 const SearchIndex = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -64,14 +65,14 @@ const SearchIndex = () => {
         </div>
       )}
 
-      {keyWord && (
+      {keyWord && isLoading && <CircleSkeleton />}
+      {keyWord && !isLoading && data && (
         <div>
           <div className="text-heading2">
             <span className="text-gray700">검색 결과</span>{' '}
-            {keyWord && !isLoading && data && (
-              <span className="text-normal">{data?.length}개</span>
-            )}
+            <span className="text-normal">{data?.length}개</span>
           </div>
+          <ul className="mt-10 flex flex-col gap-4"></ul>
         </div>
       )}
     </div>
