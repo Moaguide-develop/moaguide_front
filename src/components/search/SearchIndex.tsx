@@ -4,6 +4,7 @@ import SearchRank from './SearchRank';
 import useDebounce from '@/hook/useDebounce';
 import { getSearchItem } from '@/factory/SearchItem';
 import CircleSkeleton from '../skeleton/CircleSkeleton';
+import SearchedResultItem from './SearchedResultItem';
 
 const SearchIndex = () => {
   const [isFocused, setIsFocused] = useState(false);
@@ -35,7 +36,7 @@ const SearchIndex = () => {
       <div className="flex items-center justify-center">
         <div
           className={`max-w-[520px] w-full bg-white flex items-center justify-center py-[14px] px-4 rounded-[12px] 
-          ${isFocused ? 'border-[1.5px] border-normal' : 'border-[1.5px] border-gray100'}
+          ${isFocused || keyWord ? 'border-[1.5px] border-normal' : 'border-[1.5px] border-gray100'}
           `}>
           <input
             ref={inputRef}
@@ -61,7 +62,7 @@ const SearchIndex = () => {
       {keyWord ? null : (
         <div>
           <div className="text-heading3 text-gray700">실시간 검색</div>
-          <SearchRank />
+          <SearchRank setKeyWord={setKeyWord} />
         </div>
       )}
 
@@ -72,7 +73,9 @@ const SearchIndex = () => {
             <span className="text-gray700">검색 결과</span>{' '}
             <span className="text-normal">{data?.length}개</span>
           </div>
-          <ul className="mt-10 flex flex-col gap-4"></ul>
+          <ul className="mt-10 pb-10 flex flex-col gap-4">
+            {data?.map((item, i) => <SearchedResultItem key={i} {...item} />)}
+          </ul>
         </div>
       )}
     </div>
