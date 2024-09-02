@@ -12,8 +12,8 @@ import { useState } from 'react';
 import { getProductDetail } from '@/factory/ProductDetail';
 const Detailpage = (props: any) => {
   const [sort, setSort] = useState('profit');
-
-  console.log(props.params.id);
+  const url = props.params.id;
+  console.log(url);
   const { data, isLoading, isError } = getProductDetail(props.params.id);
   console.log(data);
   return (
@@ -131,9 +131,9 @@ const Detailpage = (props: any) => {
       ) : sort === 'report' ? (
         <Report />
       ) : sort === 'profit' ? (
-        <Profit url={props.params.id} />
+        <Profit url={url} />
       ) : sort === 'detail' ? (
-        <ProductDetail />
+        <ProductDetail url={url} />
       ) : undefined}
     </div>
   );
