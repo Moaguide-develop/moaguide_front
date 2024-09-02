@@ -7,7 +7,7 @@ import CategoryNewsItemSkeleton from '../skeleton/CategoryNewsItemSkeleton';
 import { Virtuoso } from 'react-virtuoso';
 
 const CategoryNews = () => {
-  const [category, setCategory] = useState('building');
+  const [category, setCategory] = useState('all');
   const [sort, setSort] = useState('latest');
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =

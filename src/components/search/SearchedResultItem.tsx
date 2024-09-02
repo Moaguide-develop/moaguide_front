@@ -1,27 +1,17 @@
-import type { MainProductItem } from '@/types/homeComponentsType';
+import type { SearchedItem } from '@/types/homeComponentsType';
 
 import { formatCategory } from '@/utils/formatCategory';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const MainListItem = ({
-  product_Id,
-  category,
-  platform,
-  name,
-  price,
-  priceRate,
-  totalPrice,
-  dividend,
-  lastDivide_rate
-}: MainProductItem) => {
+const SearchedResultItem = ({ productId, name, platform, category }: SearchedItem) => {
   const router = useRouter();
 
   return (
-    <div
-      onClick={() => router.push(`/product/detail/${product_Id}`)}
-      className="mt-5 pb-5 border-b border-gray100 cursor-pointer">
-      <div className="flex gap-5">
+    <li
+      onClick={() => router.push(`/product/detail/${productId}`)}
+      className="p-5 cursor-pointer bg-white rounded-[12px]">
+      <div className="flex gap-5 items-center">
         {/* 이미지 */}
         <div>
           <img
@@ -39,26 +29,16 @@ const MainListItem = ({
             <div className="text-body7 text-gray300 ">{platform}</div>
           </div>
           <div className="text-body1">{name}</div>
-          <div className="flex items-center gap-[6px]">
-            <div className="text-body7 text-gray400">{price.toLocaleString()}원</div>
-            <div className={`${priceRate > 0 ? 'text-error' : 'text-success'}`}>
-              {'('}
-              {`${priceRate > 0 ? '+' : ''}`} {priceRate}%{')'}
-            </div>
-          </div>
         </div>
         {/* 부가정보 */}
         <div className="flex items-center gap-4">
-          <div className="p-[6px] bg-error bg-opacity-10 text-error text-body7 rounded-[4px]">
-            {lastDivide_rate}%
-          </div>
           <div className="cursor-pointer">
             <img src="/images/home/bookmark.svg" alt="" />
           </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 
-export default MainListItem;
+export default SearchedResultItem;

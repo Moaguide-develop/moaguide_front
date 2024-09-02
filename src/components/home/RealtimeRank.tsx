@@ -3,8 +3,12 @@ import type { RealtimeRankType } from '@/types/homeComponentsType';
 import { getRealtimeRank } from '@/factory/RealtimeRank';
 import React from 'react';
 import RealtimeRankSkeleton from '../skeleton/RealtimeSkeleton';
+import { useSearchStore } from '@/store/search.store';
+import { useRouter } from 'next/navigation';
 
 const RealtimeRank = () => {
+  const router = useRouter();
+  const { setKeyword } = useSearchStore();
   const { data, isLoading } = getRealtimeRank();
 
   if (isLoading) {
@@ -28,8 +32,13 @@ const RealtimeRank = () => {
                 <div className="flex-1 text-body2 text-black truncate">
                   {item.keyword}
                 </div>
-                {/* todo : 돋보기 누르면 그대로 검색 쿼리에 keyword가 들어가게하기 */}
-                <div className="w-6 h-6 rounded-full bg-gray100 flex items-center justify-center cursor-pointer">
+
+                <div
+                  onClick={() => {
+                    setKeyword(item.keyword);
+                    router.push('/search');
+                  }}
+                  className="w-6 h-6 rounded-full bg-gray100 flex items-center justify-center cursor-pointer">
                   <img src="/images/home/search.svg" alt="search" />
                 </div>
               </li>

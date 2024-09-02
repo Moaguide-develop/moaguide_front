@@ -36,9 +36,9 @@ export interface MainProductItem {
   category: string;
   platform: string;
   name: string;
-  price: string;
+  price: number;
   priceRate: number;
-  totalPrice: string;
+  totalPrice: number;
   dividend: number;
   lastDivide_rate: number;
 }
@@ -49,4 +49,11 @@ export interface ReportListsItem {
   content?: string;
   category: string;
   date: string;
+}
+
+export interface SearchedItem {
+  productId: string;
+  name: string;
+  platform: string;
+  category: string;
 }

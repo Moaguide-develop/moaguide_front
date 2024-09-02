@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/userAuth.store';
 
@@ -9,6 +9,7 @@ const Gnb = () => {
   const pathname = usePathname();
   const { isLoggedIn, setIsLoggedIn } = useAuthStore();
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const accessToken = localStorage.getItem('access_token');
@@ -36,7 +37,7 @@ const Gnb = () => {
           <img src="/images/logo.svg" alt="logo" className="w-[144px] h-5" />
         </Link>
         <div className="flex items-center gap-6">
-          <div className="cursor-pointer">
+          <div onClick={() => router.push('/search')} className="cursor-pointer">
             <img src="/images/gnb/search.svg" alt="search_icon" className="w-6 h-6" />
           </div>
           <div className="cursor-pointer">

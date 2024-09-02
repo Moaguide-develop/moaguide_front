@@ -57,7 +57,8 @@ export default function RootLayout({
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
             />
             <Gnb />
-            <ModalProvider>{children}</ModalProvider>
+            {children}
+            <ModalProvider />
             <div id="root-portal"></div>
           </QueryProvider>
         </IntegrateMSW>
