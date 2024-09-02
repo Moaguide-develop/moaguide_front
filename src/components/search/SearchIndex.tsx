@@ -5,10 +5,12 @@ import useDebounce from '@/hook/useDebounce';
 import { getSearchItem } from '@/factory/SearchItem';
 import CircleSkeleton from '../skeleton/CircleSkeleton';
 import SearchedResultItem from './SearchedResultItem';
+import { useSearchStore } from '@/store/search.store';
 
 const SearchIndex = () => {
+  const { currentKeyword } = useSearchStore();
   const [isFocused, setIsFocused] = useState(false);
-  const [keyWord, setKeyWord] = useState('');
+  const [keyWord, setKeyWord] = useState(currentKeyword); // 전역 currentKeyword가 존재한다면 우선사용
   const inputRef = useRef<HTMLInputElement>(null);
   const debouncedKeyword = useDebounce(keyWord);
 
