@@ -15,6 +15,7 @@ import Step2 from '@/components/signup/Step2';
 import Step3 from '@/components/signup/Step3';
 import Step4 from '@/components/signup/Step4';
 import Navbar from '@/components/common/Navbar';
+import { Suspense } from "react";
 
 const SignupPage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -78,7 +79,9 @@ const SignupPage: React.FC = () => {
 
   return (
     <div>
+       <Suspense>
       <Navbar/>
+      </Suspense>
     <div className="signup-container">
       {currentStep === 1 && (
         <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
