@@ -28,7 +28,9 @@ const Gnb = () => {
   return (
     <div
       className={
-        pathname.includes('/mypage') || pathname.includes('/report')
+        pathname.includes('/mypage') ||
+        pathname.includes('/report') ||
+        pathname.includes('/payment')
           ? 'shadow-custom-light border-b border-gray100'
           : ''
       }>
