@@ -7,7 +7,7 @@ interface PaginationProps {
   totalPages: number;
 }
 
-const ProductPagenation = ({ totalPages }: PaginationProps) => {
+const ProductMobilePagenation = ({ totalPages }: PaginationProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -17,13 +17,13 @@ const ProductPagenation = ({ totalPages }: PaginationProps) => {
   useEffect(() => {
     const page = parseInt(searchParams.get('page') || '1', 10);
     setCurrentPage(page);
-    const range = Math.floor((page - 1) / 10);
+    const range = Math.floor((page - 1) / 5);
     setCurrentRange(range);
   }, [searchParams]);
 
   useEffect(() => {
-    const start = currentRange * 10 + 1;
-    const end = Math.min(start + 9, totalPages);
+    const start = currentRange * 5 + 1;
+    const end = Math.min(start + 4, totalPages);
     const pages: number[] = [];
     for (let i = start; i <= end; i++) {
       pages.push(i);
@@ -39,10 +39,10 @@ const ProductPagenation = ({ totalPages }: PaginationProps) => {
   };
 
   const handleNextRange = () => {
-    if ((currentRange + 1) * 10 < totalPages) {
+    if ((currentRange + 1) * 5 < totalPages) {
       const newRange = currentRange + 1;
       setCurrentRange(newRange);
-      const firstPageOfNextRange = newRange * 10 + 1;
+      const firstPageOfNextRange = newRange * 5 + 1;
       handlePageClick(firstPageOfNextRange);
     }
   };
@@ -51,7 +51,7 @@ const ProductPagenation = ({ totalPages }: PaginationProps) => {
     if (currentRange > 0) {
       const newRange = currentRange - 1;
       setCurrentRange(newRange);
-      const firstPageOfPrevRange = newRange * 10 + 1;
+      const firstPageOfPrevRange = newRange * 5 + 1;
       handlePageClick(firstPageOfPrevRange);
     }
   };
@@ -61,25 +61,25 @@ const ProductPagenation = ({ totalPages }: PaginationProps) => {
       <button
         onClick={handlePrevRange}
         disabled={currentRange === 0}
-        className="px-3 py-1 border rounded disabled:opacity-50 ">
+        className="px-2 py-1 border rounded disabled:opacity-50 sm:px-3 sm:py-1">
         &lt;
       </button>
       {pageNumbers.map((page) => (
         <button
           key={page}
           onClick={() => handlePageClick(page)}
-          className={`px-3 py-1 border rounded ${page === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-black'}`}>
+          className={`px-2 py-1 border rounded sm:px-3 sm:py-1 ${page === currentPage ? 'bg-blue-500 text-white' : 'bg-white text-black'}`}>
           {page}
         </button>
       ))}
       <button
         onClick={handleNextRange}
-        disabled={(currentRange + 1) * 10 >= totalPages}
-        className="px-3 py-1 border rounded disabled:opacity-50">
+        disabled={(currentRange + 1) * 5 >= totalPages}
+        className="px-2 py-1 border rounded disabled:opacity-50 sm:px-3 sm:py-1">
         &gt;
       </button>
     </div>
   );
 };
 
-export default ProductPagenation;
+export default ProductMobilePagenation;

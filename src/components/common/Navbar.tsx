@@ -1,6 +1,8 @@
 'use client';
+
 import React from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { Suspense } from 'react';
 
 const Navbar = () => {
   const params = useSearchParams();
