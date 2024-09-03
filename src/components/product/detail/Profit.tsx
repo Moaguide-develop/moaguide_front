@@ -8,7 +8,10 @@ const Profit = ({ url }: { url: string }) => {
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       <div className=" text-lg font-bold mb-[20px]">위치</div>
-      <KakaoMap />
+      <div className="desk:flex  desk:justify-center desk2:justify-start">
+        <KakaoMap />
+      </div>
+
       <div className=" w-full h-[1px] my-[40px] bg-gray-200 " />
       <div className="text-base font-bold mb-[20px]">주가</div>
       <StockPriceChart />
@@ -226,14 +229,18 @@ const Profit = ({ url }: { url: string }) => {
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
-          <div className=" flex  w-[400px]">
-            <div className="text-gray-400  w-[150px]">지역지구 등 지정여부</div>
-            <div className="">{data?.landRegistry.zoningNational}</div>
+          <div className=" flex  w-full max-w-[900px] desk:h-[100px] desk2:h-[100px]">
+            <div className="text-gray-400  desk2:w-[150px]  desk:w-[300px] ">
+              지역지구 등 지정여부 (국토의 계획 및 이용에 관한 법률)
+            </div>
+            <div className=" ">{data?.landRegistry.zoningNational}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
-          <div className=" flex  w-[400px]">
-            <div className="text-gray-400  w-[150px]">지역지구 등 지정여부</div>
+          <div className=" flex  w-full max-w-[900px] desk:h-[150px] desk2:h-[100px]">
+            <div className="text-gray-400  desk2:w-[200px]  desk:w-[500px]">
+              지역지구 등 지정여부 (기타법률)
+            </div>
             <div className="">{data?.landRegistry.zoningOther}</div>
           </div>
         </div>
