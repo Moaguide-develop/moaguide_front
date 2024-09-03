@@ -26,7 +26,6 @@ const Couponmodal = () => {
           <div className="w-[312px] mx-auto">
             <div className="text-heading2 flex items-center justify-center w-full">
               보유 쿠폰
-              <span className="ml-2 text-normal">0</span>
             </div>
             <div className="flex flex-col items-center mt-2 text-body4 text-gray400">
               <div>사용 가능한 쿠폰이 없어요</div>

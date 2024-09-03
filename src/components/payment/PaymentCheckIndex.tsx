@@ -10,6 +10,13 @@ const PaymentCheckIndex = () => {
 
   const handleClick = () => {
     if (!isChecked) return;
+    {
+      /* 유저 id 같이 내려달라고 해서 zustand의 유저 id받고 같이 쿼리로 보내기 */
+    }
+    //paytodo : 결제권 이름, 결제권 ID 추가하기
+    router.push(
+      `/payment/check/confirm?customerKey=asdf&totalAmount=1&orderTitle=첫달무료체험이벤트`
+    );
   };
 
   const handleCoupon = () => {
@@ -52,10 +59,12 @@ const PaymentCheckIndex = () => {
             type="checkbox"
             checked={isChecked}
             onChange={() => setIsChecked((prev) => !prev)}
-            className="bg-normal"
+            className="cursor-pointer"
           />
         </div>
-        <div className="text-">거래 내용을 확인하였으며, 동의합니다</div>
+        <div onClick={() => setIsChecked((prev) => !prev)} className="text-body8">
+          거래 내용을 확인하였으며, 동의합니다
+        </div>
       </div>
       <div
         onClick={handleClick}

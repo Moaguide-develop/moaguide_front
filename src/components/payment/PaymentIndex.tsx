@@ -1,14 +1,27 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const PaymentIndex = () => {
   const router = useRouter();
   const [isActive, setIsActive] = useState('first');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const token = localStorage.getItem('access_token');
+      setIsLoggedIn(!!token); // 로그인 상태를 설정
+    };
+
+    checkLoginStatus();
+  }, []);
 
   const handleClick = () => {
-    //pay-Todo : 클릭할 시 로그인 여부 확인하고 로그인되어있으면 router이동, 안되면 로그인창
-    router.push('/payment/check');
+    if (isLoggedIn) {
+      router.push('/payment/check');
+    } else {
+      router.push('/sign');
+    }
   };
 
   return (
