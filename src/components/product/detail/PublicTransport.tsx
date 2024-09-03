@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
-
+import Image from 'next/image';
 interface NearSubway {
   station: string;
   route: string;
@@ -28,6 +28,20 @@ interface PublicTransportData {
   busLine: number;
   busNode: number;
 }
+
+const stationImageMap: { [key: string]: string } = {
+  '1호선': '/images/product/detail/subway1.svg',
+  '2호선': '/images/product/detail/subway2.svg',
+  '3호선': '/images/product/detail/subway3.svg',
+  '4호선': '/images/product/detail/subway4.svg',
+  '5호선': '/images/product/detail/subway5.svg',
+  '6호선': '/images/product/detail/subway6.svg',
+  '7호선': '/images/product/detail/subway7.svg',
+  '8호선': '/images/product/detail/subway8.svg',
+  '9호선': '/images/product/detail/subway9.svg',
+  분당선: '/images/product/detail/subwaybundang.svg',
+  경의중앙선: '/images/product/detail/subwaygyeonghye.svg'
+};
 
 const PublicTransport = () => {
   const pathname = usePathname();
@@ -89,8 +103,15 @@ const PublicTransport = () => {
           <div className="text-base font-bold">주변 지하철</div>
           {data?.nearSubway.map((subway, index) => (
             <div key={index} className="flex justify-between mt-2">
-              <div className="flex">
-                <div className="mr-2">{subway.station}</div>
+              <div className="flex items-center">
+                <div className="mr-1">
+                  <Image
+                    src={stationImageMap[subway.station]}
+                    alt={`${subway.station} 이미지`}
+                    width={20}
+                    height={20}
+                  />
+                </div>
                 <div>{subway.route}</div>
               </div>
               <div className="flex">
