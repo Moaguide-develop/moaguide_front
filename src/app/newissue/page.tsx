@@ -1,18 +1,18 @@
+import RecentlyIssueIndex from '@/components/recentlyIssue/Index';
 import Navbar from '@/components/common/Navbar';
-import HomeIndex from '@/components/home/Index';
-import React from 'react';
-
-const HomePage = async ({
+const NewIssuePage = async ({
+  params,
   searchParams
 }: {
+  params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   return (
     <div>
       <Navbar />
-      <HomeIndex />
+      <RecentlyIssueIndex />
     </div>
   );
 };
 
-export default HomePage;
+export default NewIssuePage;
