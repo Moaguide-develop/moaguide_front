@@ -1,5 +1,6 @@
+import Navbar from '@/components/common/Navbar';
 import Product from '@/components/product/Product';
-import { ISummaryData } from '@/types/Diviend';
+import { IProductDetailData, IReport, ISummaryData } from '@/types/Diviend';
 
 const ProductPage = async ({
   params,
@@ -8,37 +9,47 @@ const ProductPage = async ({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  const response = await fetch(`https://api.moaguide.com/summary/recent/building`, {
-    cache: 'no-store'
-  });
-  const data: ISummaryData = await response.json();
-  // console.log(data);
+  const pages = searchParams['page'] || 1;
+  console.log(pages);
+  const buildingDiviedResponse = await fetch(
+    `https://api.moaguide.com/summary/recent/building`,
+    {
+      cache: 'no-store'
+    }
+  );
 
-  console.log(params);
-  console.log(searchParams);
+  const buildingReportResponse = await fetch(
+    'https://api.moaguide.com/summary/report/building',
+    {
+      cache: 'no-store'
+    }
+  );
+  const productDetailResponse = await fetch(
+    `https://api.moaguide.com/summary/list/all?page=${pages}&size=10&sort=views`,
+    {
+      next: { revalidate: 300 }
+    }
+  );
 
-  return <div></div>;
-  // <Product divide={data.divide} summary={data.summary} />;
+  const buildingDiviedData: ISummaryData = await buildingDiviedResponse.json();
+
+  const buildingReportData: IReport[] = await buildingReportResponse.json();
+
+  const productDetailData: IProductDetailData = await productDetailResponse.json();
+
+  return (
+    <div>
+      <Navbar />
+      <Product
+        divide={buildingDiviedData.divide}
+        summary={buildingDiviedData.summary}
+        report={buildingReportData}
+        content={productDetailData.content}
+        pageNumber={productDetailData?.pageable?.pageNumber}
+        totalPages={productDetailData?.totalPages}
+      />
+    </div>
+  );
 };
 
 export default ProductPage;
-// try {
-//   const response = await fetch(`https://api.moaguide.com/summary/recent/building`, {
-//     cache: 'no-store'
-//   });
-
-//   if (!response.ok) {
-//     throw new Error(`HTTP error! status: ${response.status}`);
-//   }
-
-//   const data: SummaryData = await response.json();
-
-//   console.log(params);
-//   console.log(searchParams);
-
-//   return <Product divide={data.divide} summary={data.summary} />;
-// } catch (error) {
-//   console.error('Error fetching data:', error);
-//   return <div>Failed to load product data.</div>;
-// }
-// };

@@ -1,16 +1,15 @@
+import ReportIndex from '@/components/report/ReportIndex';
 import Navbar from '@/components/common/Navbar';
-import HomeIndex from '@/components/home/Index';
-import React, { Suspense } from 'react';
-
-const HomePage = () => {
+import { Suspense } from 'react';
+const ReportPage = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div>
         <Navbar />
-        <HomeIndex />
+        <ReportIndex />
       </div>
     </Suspense>
   );
 };
 
-export default HomePage;
+export default ReportPage;
