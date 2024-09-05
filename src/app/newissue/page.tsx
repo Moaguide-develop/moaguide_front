@@ -1,17 +1,14 @@
 import RecentlyIssueIndex from '@/components/recentlyIssue/Index';
 import Navbar from '@/components/common/Navbar';
-const NewIssuePage = async ({
-  params,
-  searchParams
-}: {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
+import { Suspense } from 'react';
+const NewIssuePage = () => {
   return (
-    <div>
-      <Navbar />
-      <RecentlyIssueIndex />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div>
+        <Navbar />
+        <RecentlyIssueIndex />
+      </div>
+    </Suspense>
   );
 };
 

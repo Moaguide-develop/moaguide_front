@@ -1,17 +1,15 @@
 import Navbar from '@/components/common/Navbar';
 import HomeIndex from '@/components/home/Index';
-import React from 'react';
+import React, { Suspense } from 'react';
 
-const HomePage = async ({
-  searchParams
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
+const HomePage = () => {
   return (
-    <div>
-      <Navbar />
-      <HomeIndex />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div>
+        <Navbar />
+        <HomeIndex />
+      </div>
+    </Suspense>
   );
 };
 

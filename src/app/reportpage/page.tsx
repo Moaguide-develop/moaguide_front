@@ -1,18 +1,14 @@
-import NavBar from '@/components/product/detail/NavBar';
 import ReportIndex from '@/components/report/ReportIndex';
 import Navbar from '@/components/common/Navbar';
-const ReportPage = async ({
-  params,
-  searchParams
-}: {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) => {
+import { Suspense } from 'react';
+const ReportPage = () => {
   return (
-    <div>
-      <Navbar />
-      <ReportIndex />
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div>
+        <Navbar />
+        <ReportIndex />
+      </div>
+    </Suspense>
   );
 };
 
