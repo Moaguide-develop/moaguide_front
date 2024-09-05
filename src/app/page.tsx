@@ -1,15 +1,14 @@
+'use clinet';
 import Navbar from '@/components/common/Navbar';
 import HomeIndex from '@/components/home/Index';
-import React, { Suspense } from 'react';
+import React from 'react';
 
 const HomePage = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div>
-        <Navbar />
-        <HomeIndex />
-      </div>
-    </Suspense>
+    <div>
+      <Navbar />
+      <HomeIndex />
+    </div>
   );
 };
 
