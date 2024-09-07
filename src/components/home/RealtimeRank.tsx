@@ -1,3 +1,4 @@
+'use client';
 import type { RealtimeRankType } from '@/types/homeComponentsType';
 
 import { getRealtimeRank } from '@/factory/RealtimeRank';

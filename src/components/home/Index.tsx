@@ -8,17 +8,19 @@ import MainReport from './MainReport';
 import RecentlyIssue from './RecentlyIssue';
 import Container from '../common/Container';
 import HomeFooter from './HomeFooter';
+import MoblieRank from './MoblieRank';
 
 const HomeIndex = () => {
   return (
-    <div>
-      <section className="max-w-[1000px] mx-auto flex items-center desk:min-w-[400px] gap-[28px] mt-[29px]">
+    <div className="overflow-x-hidden">
+      <section className="max-w-[1000px] mx-auto flex items-center desk:min-w-[400px] gap-[28px] sm:mt-[29px]">
         <Guide />
         <RealtimeRank />
       </section>
       <Container>
         <aside className="max-w-[692px] w-full mt-[28px]">
           <SubMenu />
+          <MoblieRank />
         </aside>
         <article className="max-w-[692px] w-full mt-10">
           <MainItem />

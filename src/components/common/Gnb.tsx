@@ -34,7 +34,7 @@ const Gnb = () => {
           ? 'shadow-custom-light border-b border-gray100'
           : ''
       }>
-      <div className="max-w-[1000px] mx-auto flex items-center justify-between py-3 desk:min-w-[400px]">
+      <div className="px-5 py-[16px] max-w-[1000px] mx-auto flex items-center justify-between sm:px-0 desk:min-w-[400px] sm:py-3 ">
         <Link href={'/'} className="cursor-pointer">
           <img src="/images/logo.svg" alt="logo" className="w-[144px] h-5" />
         </Link>
@@ -42,10 +42,18 @@ const Gnb = () => {
           <div onClick={() => router.push('/search')} className="cursor-pointer">
             <img src="/images/gnb/search.svg" alt="search_icon" className="w-6 h-6" />
           </div>
-          <div className="cursor-pointer">
+          <div
+            onClick={() => {
+              if (isLoggedIn) {
+                router.push('/sign');
+              } else {
+                router.push('/mypage');
+              }
+            }}
+            className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
           </div>
-          <div className="flex items-center min-w-[123px] min-h-[35px]">
+          <div className="hidden items-center min-w-[123px] min-h-[35px] sm:flex">
             {isLoggedIn ? (
               <Link href={'/mypage'}>
                 <img src="/images/gnb/mypage.svg" alt="mypage" className="w-6 h-6" />
