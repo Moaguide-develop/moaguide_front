@@ -1,7 +1,6 @@
 'use client';
 import { getRealtimeRank } from '@/factory/RealtimeRank';
 import React, { Dispatch } from 'react';
-import RealtimeRankSkeleton from '../skeleton/RealtimeSkeleton';
 import { RealtimeRankType } from '@/types/homeComponentsType';
 import SearchRankSkeleton from '../skeleton/SearchRankSkeleton';
 
