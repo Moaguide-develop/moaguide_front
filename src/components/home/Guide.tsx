@@ -3,8 +3,8 @@ import React from 'react';
 
 const Guide = () => {
   return (
-    <div className="mx-auto flex-1 rounded-[12px] h-[221px] sm:max-w-[692px] w-full sm:h-[290px] bg-[url('/images/home/guide.svg')] desk:min-w-[400px]">
-      <div className="text-white text-heading3 sm:text-heading1 mt-[96px] sm:mt-[117px] ml-11">
+    <div className="mx-auto flex-1 rounded-[12px] h-[200px] sm:max-w-[692px] w-full sm:h-[290px] bg-[url('/images/home/guide.svg')] desk:min-w-[390px]">
+      <div className="text-white text-heading3 sm:text-heading1 mt-[76px] sm:mt-[117px] ml-11">
         <div>투자 가이드로</div>
         <div>소액 투자 시작해보자!</div>
       </div>

@@ -5,15 +5,10 @@ import Gnb from '@/components/common/Gnb';
 import QueryProvider from '@/providers/QueryProvider';
 import IntegrateMSW from '@/mocks/IntegrateMsw';
 
-import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import ModalProvider from '@/providers/ModalProvider';
-// const ModalProvider = dynamic<React.ComponentType>(
-//   () => import('@/providers/ModalProvider'),
-//   {
-//     ssr: false
-//   }
-// );
+import MobileFooter from '@/components/common/MobileFooter';
+
 declare global {
   interface Window {
     kakao: any;
@@ -58,6 +53,7 @@ export default function RootLayout({
             />
             <Gnb />
             {children}
+            <MobileFooter />
             <ModalProvider />
             <div id="root-portal"></div>
           </QueryProvider>

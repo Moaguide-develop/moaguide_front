@@ -73,23 +73,26 @@ const SearchIndex = () => {
       {keyWord && isLoading && <CircleSkeleton />}
       {keyWord && !isLoading && data && (
         <div>
-          <div className="text-heading2">
-            <span className="text-gray700">검색 결과</span>{' '}
-            <span className="text-normal">{data?.length}개</span>
-          </div>
+          {data?.length === 0 ? (
+            <div className="text-heading3">
+              {' '}
+              <span className="text-normal">{debouncedKeyword}</span>에 대한 검색 결과가
+              존재하지 않습니다.
+            </div>
+          ) : (
+            <div className="text-heading2">
+              <span className="text-gray700">검색 결과</span>{' '}
+              <span className="text-normal">{data?.length}개</span>
+            </div>
+          )}
+
           <ul
             className={` pb-10 flex flex-col gap-4
           ${data?.length === 0 ? 'mt-4' : 'mt-10'}
           `}>
             {data?.length === 0 && (
               <div>
-                <div className="text-body4 text-gray400">
-                  <span className="text-normal">{debouncedKeyword}</span>에 대한 검색
-                  결과가 존재하지 않습니다.
-                </div>
-                <div className="text-body4 text-gray400 mt-1">
-                  이러한 투자 상품 어떠신가요?
-                </div>
+                <div className="text-title1 pb-5">👀 아래 투자 상품은 어떠신가요?</div>
                 {recommend?.map((item, i) => <SearchedResultItem key={i} {...item} />)}
               </div>
             )}
