@@ -18,7 +18,7 @@ const MainReport = () => {
         <div className="text-heading4">주요 리포트</div>
         <div
           onClick={() => {
-            router.push('/?category=report');
+            router.push('/reportpage');
           }}
           className="cursor-pointer">
           <img src="/images/home/item_right.svg" alt="" />

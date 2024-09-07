@@ -17,7 +17,7 @@ const MainList = () => {
         <div className="text-heading4">주요 상품 현황</div>
         <div
           onClick={() => {
-            router.push('/?category=product');
+            router.push('/product');
           }}
           className="cursor-pointer">
           <img src="/images/home/item_right.svg" alt="" />

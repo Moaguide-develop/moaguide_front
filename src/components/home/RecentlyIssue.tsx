@@ -10,13 +10,13 @@ const RecentlyIssue = () => {
   const router = useRouter();
 
   return (
-    <div className="px-5 pb-[100px] sm:px-0 sm:pb-0">
+    <div className="px-5 pb-[120px] sm:px-0 sm:pb-0">
       {/* 타이틀 */}
       <div className="flex items-center justify-between">
         <div className="text-heading4">최신 이슈</div>
         <div
           onClick={() => {
-            router.push('/?category=newissue');
+            router.push('/newissue');
           }}
           className="cursor-pointer">
           <img src="/images/home/item_right.svg" alt="" />
