@@ -29,12 +29,12 @@ const MainReport = () => {
         <img src="/images/home/report_main.svg" alt="" />
       </div>
       <div className="mt-5 sm:hidden mx-auto rounded-[12px] h-[130px] w-full bg-cover bg-[url('/images/home/report_layout.svg')]">
-        <div className="text-normal text-mobileTitle ml-11 pt-5">
+        <div className="text-normal text-title2 ml-6 sm:ml-11 pt-5">
           <div>투자 가이드</div>
         </div>
-        <div className=" ml-11 mt-5 max-w-max">
-          <div className="text-gray700 text-mobileTitle">A-Z까지 소액으로</div>
-          <div className="text-gray700 text-mobileTitle">조각 투자의 시작!</div>
+        <div className="ml-6 sm:ml-11 mt-5 max-w-max">
+          <div className="text-gray700 text-title2">A-Z까지 소액으로</div>
+          <div className="text-gray700 text-title2">조각 투자의 시작!</div>
         </div>
       </div>
       {/* 아이템 */}

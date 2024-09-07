@@ -13,13 +13,18 @@ const IssueItem = ({ id, title, category, link, date }: MainNews) => {
           <img
             src={'/images/home/mock.jpeg'}
             alt=""
-            className="w-[336px] h-[186px] rounded-[12px]"
+            className="w-[195px] h-[108px] sm:w-[336px] sm:h-[186px] rounded-[12px]"
           />
         </div>
-        <div className="text-title2 text-gray600 max-w-[313px] w-full">{title}</div>
+        <div className="text-mobileTitle sm:text-title2 text-gray600 max-w-[313px] w-full">
+          {title}
+        </div>
         <div className="flex items-center justify-between ">
-          <div className="text-body7 text-gray400"> {formatCategory(category)}</div>
-          <div className="text-body7 text-gray300">
+          <div className="text-caption3 sm:text-body7 text-gray400">
+            {' '}
+            {formatCategory(category)}
+          </div>
+          <div className="text-caption3 sm:text-body7 text-gray300">
             {format(parseISO(date), 'yyyy.MM.dd')}
           </div>
         </div>

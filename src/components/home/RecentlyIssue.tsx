@@ -10,7 +10,7 @@ const RecentlyIssue = () => {
   const router = useRouter();
 
   return (
-    <div>
+    <div className="px-5 pb-[100px] sm:px-0 sm:pb-0">
       {/* 타이틀 */}
       <div className="flex items-center justify-between">
         <div className="text-heading4">최신 이슈</div>
@@ -23,7 +23,7 @@ const RecentlyIssue = () => {
         </div>
       </div>
       {/* 아이템 */}
-      <div className="mt-[28px] grid grid-cols-2 gap-5 gird">
+      <div className="mt-5 sm:mt-[28px] grid grid-cols-2 gap-5 gird">
         {isLoading ? (
           <>
             <IssueItemSkeleton />

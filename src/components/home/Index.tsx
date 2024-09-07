@@ -22,13 +22,13 @@ const HomeIndex = () => {
           <SubMenu />
           <MoblieRank />
         </aside>
-        <article className="max-w-[390px] sm:max-w-[692px] w-full mt-10">
+        <article className="max-w-[692px] w-full mt-[18px] sm:mt-10">
           <MainItem />
         </article>
-        <article className="max-w-[390px] mt-[28px] sm:max-w-[692px] w-full">
+        <article className=" mt-[28px] max-w-[692px] w-full">
           <MainReport />
         </article>
-        <article className="max-w-[390px] mt-[28px] sm:max-w-[692px] w-full">
+        <article className=" mt-[28px] max-w-[692px] w-full">
           <RecentlyIssue />
         </article>
       </Container>
