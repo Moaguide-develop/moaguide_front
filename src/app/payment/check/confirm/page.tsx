@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import {
   PaymentWidgetInstance,
@@ -79,26 +79,28 @@ const PaymentConfirmPage = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 my-20">
-      <div className="flex flex-col gap-2 mt-4">
-        <h1 className="text-lg md:text-2xl font-semibold">확인 및 결제</h1>
-        <p className="text-gray-600 mb-4">
-          결제 수단을 선택하고 결제를 진행해주세요. 환불금은 예약 취소 후 2~3일 내에
-          결제한 카드로 입금됩니다. 동의하시는 경우에만 아래 버튼을 눌러 예약을
-          결제하세요.
-        </p>
-        {(paymentWidgetRef === null || paymentMethodsWidgetRef === null) && (
-          <LoaderSkeleton />
-        )}
-        <div id="payment-widget" className="w-full" />
-        <div id="agreement" className="w-full" />
-        <div
-          onClick={handleClick}
-          className={` my-10 py-[18px] w-full rounded-[12px] cursor-pointer bg-gradient2 text-white flex items-center justify-center text-heading4`}>
-          결제하기
+    <Suspense>
+      <div className="max-w-2xl mx-auto px-4 my-20">
+        <div className="flex flex-col gap-2 mt-4">
+          <h1 className="text-lg md:text-2xl font-semibold">확인 및 결제</h1>
+          <p className="text-gray-600 mb-4">
+            결제 수단을 선택하고 결제를 진행해주세요. 환불금은 예약 취소 후 2~3일 내에
+            결제한 카드로 입금됩니다. 동의하시는 경우에만 아래 버튼을 눌러 예약을
+            결제하세요.
+          </p>
+          {(paymentWidgetRef === null || paymentMethodsWidgetRef === null) && (
+            <LoaderSkeleton />
+          )}
+          <div id="payment-widget" className="w-full" />
+          <div id="agreement" className="w-full" />
+          <div
+            onClick={handleClick}
+            className={` my-10 py-[18px] w-full rounded-[12px] cursor-pointer bg-gradient2 text-white flex items-center justify-center text-heading4`}>
+            결제하기
+          </div>
         </div>
       </div>
-    </div>
+    </Suspense>
   );
 };
 

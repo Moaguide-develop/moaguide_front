@@ -1,6 +1,4 @@
-import { PaymentType } from '@/interface';
 import axios from 'axios';
-import dayjs from 'dayjs';
 
 import { redirect } from 'next/navigation';
 
