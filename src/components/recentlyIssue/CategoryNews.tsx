@@ -24,8 +24,8 @@ const CategoryNews = () => {
   const allPosts = data || [];
 
   return (
-    <div className="mt-5">
-      <div className="mt-8 flex items-center gap-5 border-b border-gray100 text-title2">
+    <div className="mt-4 sm:mt-5 px-5 sm:px-0">
+      <div className="mt-5 sm:mt-8 flex justify-between sm:justify-start items-center gap-5 border-b border-gray100 text-title2 sm:text-title2">
         <div
           onClick={() => {
             setCategory('all');
@@ -70,14 +70,14 @@ const CategoryNews = () => {
         </div>
       </div>
       <div className="py-[10px] flex items-center gap-[10px] border-b border-gray100">
-        <div className="text-body1 text-gray500">정렬</div>
+        <div className="text-body6 sm:text-body1 text-gray500">정렬</div>
         <div className="text-gray200">|</div>
         <div className="flex items-center gap-[6px]">
           <div
             onClick={() => {
               setSort('latest');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-caption2 sm:text-body6 cursor-pointer
           ${sort === 'latest' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}
           `}>
             최신순
@@ -91,7 +91,7 @@ const CategoryNews = () => {
             onClick={() => {
               setSort('popular');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-caption2 sm:text-body6 cursor-pointer
           ${sort === 'popular' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}
           `}>
             인기순

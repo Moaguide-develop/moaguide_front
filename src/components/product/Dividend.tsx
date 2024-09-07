@@ -74,7 +74,7 @@ const Dividend = memo(({ dividend }: DividendProps) => {
             <div key={item.product_Id}>
               <SwiperSlide className=" flex justify-center">
                 <Link href={`/product/detail/${item.product_Id}`}>
-                  <div className=" md:max-w-[456px]  desk2:max-w-[400px]  desk:max-w-[300px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row  desk:justify-start md:justify-center items-center  flex mx-auto  relative">
+                  <div className=" md:max-w-[456px]  desk2:max-w-[390px]  desk:max-w-[300px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row  desk:justify-start md:justify-center items-center  flex mx-auto  relative">
                     <div className=" w-full max-w-[52px] max-h-[52px] rounded-[28.50px] ">
                       <Image
                         src="/images/product/Building1.png"

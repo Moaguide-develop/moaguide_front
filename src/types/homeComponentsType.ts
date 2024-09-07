@@ -52,8 +52,14 @@ export interface ReportListsItem {
 }
 
 export interface SearchedItem {
-  productId: string;
+  productId?: string;
   name: string;
   platform: string;
   category: string;
+  price?: number;
+  priceRate?: number;
+  totalPrice?: number;
+  dividend?: number;
+  lastDivide_rate?: number;
+  product_Id: string;
 }

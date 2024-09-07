@@ -4,6 +4,7 @@ import { useModalStore } from '@/store/modal.store';
 import React from 'react';
 import { createPortal } from 'react-dom';
 import Quitmodal from '@/components/modal/Quitmodal';
+import Couponmodal from '@/components/modal/CouponModal';
 
 const ModalProvider = () => {
   const { open, modalType } = useModalStore();
@@ -21,7 +22,10 @@ const ModalProvider = () => {
   if (!$portalRoot) return null;
 
   return createPortal(
-    <div>{open && modalType === 'secession' && <Quitmodal />}</div>,
+    <div>
+      {open && modalType === 'secession' && <Quitmodal />}
+      {open && modalType === 'coupon' && <Couponmodal />}
+    </div>,
     $portalRoot
   );
 };

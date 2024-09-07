@@ -3,7 +3,7 @@ import React from 'react';
 
 const HomeFooter = () => {
   return (
-    <div className="mt-[158px] bg-bg mx-auto w-full">
+    <div className="hidden mt-[158px] bg-bg mx-auto w-full sm:block">
       <div className="flex justify-between items-center py-[52px] w-full mx-auto desk:max-w-[1000px]">
         {/* 왼쪽 */}
         <div className="flex flex-col gap-6">

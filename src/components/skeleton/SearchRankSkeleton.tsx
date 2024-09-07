@@ -2,7 +2,7 @@ import React from 'react';
 
 const SearchRankSkeleton = () => {
   return (
-    <div className="mt-3 w-full h-[291px] hidden desk2:block">
+    <div className="mt-3 w-full h-[291px] desk2:block">
       <div className="flex flex-col gap-5 animate-pulse">
         <div className="p-5 shadow-custom-normal rounded-[12px] flex-1">
           <ul className="flex flex-col gap-5">

@@ -16,10 +16,12 @@ const CategoryNewsItem = ({ id, title, category, link, date }: IssueListItem) =>
           />
         </div>
         <div className="flex-1 flex flex-col gap-4">
-          <div className="text-title2 text-gray600">{title}</div>
+          <div className="text-body5 sm:text-title2 text-gray600">{title}</div>
           <div className="flex items-center justify-between">
-            <div className="text-body7 text-gray400">{formatCategory(category)}</div>
-            <div className="text-body7 text-gray300">
+            <div className="text-caption3 sm:text-body7 text-gray400">
+              {formatCategory(category)}
+            </div>
+            <div className="text-caption3 sm:text-body7 text-gray300">
               {' '}
               {format(parseISO(date), 'yyyy.MM.dd')}
             </div>
