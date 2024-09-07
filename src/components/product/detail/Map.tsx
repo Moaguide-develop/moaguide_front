@@ -42,14 +42,14 @@ const KakaoMap = () => {
         marker.setMap(map);
 
         const circle = new window.kakao.maps.Circle({
-          center: markerPosition, // Set the center to the marker's position
-          radius: 400, // Radius of the circle in meters
-          strokeWeight: 2, // Border thickness
-          strokeColor: '#ff0000', // Border color
-          strokeOpacity: 0.8, // Border transparency
-          strokeStyle: 'solid', // Border style
-          fillColor: '#ff0000', // Fill color
-          fillOpacity: 0.4 // Fill transparency
+          center: markerPosition,
+          radius: 400,
+          strokeWeight: 2,
+          strokeColor: '#ff0000',
+          strokeOpacity: 0.8,
+          strokeStyle: 'solid',
+          fillColor: '#ff0000',
+          fillOpacity: 0.4
         });
         circle.setMap(map);
         circle.setZIndex(10);

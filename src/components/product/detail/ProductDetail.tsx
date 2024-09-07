@@ -3,6 +3,7 @@ import CommercialVacancyRateChart from './CommercialVacancyRateChart';
 import FloatingPopulationChart from './FloatingPopulationChart';
 import PopulationInformationChart from './PopulationInformationChart';
 import PublicTransport from './PublicTransport';
+import OfficialPriceChart from './OfficialPriceChart';
 const ProductDetail = ({ url }: { url: string }) => {
   console.log(url);
   return (
@@ -12,6 +13,9 @@ const ProductDetail = ({ url }: { url: string }) => {
 
       <div className=" text-lg font-bold mb-[20px]">상권 공실률</div>
       <CommercialVacancyRateChart />
+
+      <div className=" text-lg font-bold mb-[20px]">공시지가</div>
+      <OfficialPriceChart />
       <div className=" text-lg font-bold mb-[20px]">접근성</div>
       <PublicTransport />
 
