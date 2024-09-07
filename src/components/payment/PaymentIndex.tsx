@@ -37,20 +37,23 @@ const PaymentIndex = () => {
         <div className="bg-gray50 rounded-[12px] px-10 py-6 w-full flex flex-col gap-4">
           <div className="flex gap-4 text-body7 text-gray400">
             <img src="/images/payment/Check.svg" alt="" />
-            {/* pay-Todo 결제할시 장점 문구 정해서 올리기 */}
-            <div>플랜 구독 내용 노출란</div>
+
+            <div>상품 상세정보 페이지 무제한 확인</div>
           </div>
           <div className="flex gap-4 text-body7 text-gray400">
             {' '}
             <img src="/images/payment/Check.svg" alt="" />
-            {/* pay-Todo 결제할시 장점 문구 정해서 올리기 */}
-            <div>플랜 구독 내용 노출란 플랜 구독 내용 노출란</div>
+            <div>관심상품 저장 및 관리</div>
           </div>
           <div className="flex gap-4 text-body7 text-gray400">
             {' '}
             <img src="/images/payment/Check.svg" alt="" />
-            {/* pay-Todo 결제할시 장점 문구 정해서 올리기 */}
-            <div>플랜 구독 내용 노출란</div>
+            <div>관심상품 변동, 공시, 뉴스 알림</div>
+          </div>
+          <div className="flex gap-4 text-body7 text-gray400">
+            {' '}
+            <img src="/images/payment/Check.svg" alt="" />
+            <div>학습하기 콘텐츠 무제한 열람</div>
           </div>
         </div>
       </div>
@@ -87,9 +90,15 @@ const PaymentIndex = () => {
           className={`w-full rounded-[12px] px-[20px] py-[22px] flex items-center justify-between border-2 cursor-pointer
         ${isActive === 'third' ? 'border-normal' : 'border-gray100'}
         `}>
-          <div className="text-heading4">
-            6개월 구독 <span className="text-normal">+ 1개월</span>
+          <div className="flex flex-col gap-2">
+            <div className="bg-error text-caption3 text-white rounded-[4px] max-w-max px-[6px] py-[4px]">
+              Best
+            </div>
+            <div className="text-heading4">
+              6개월 구독 <span className="text-normal">+ 1개월</span>
+            </div>
           </div>
+
           <div className="flex flex-col gap-2 items-end">
             <div className="text-body7 text-gray300 line-through">₩ 60,000</div>
             <div className="text-heading4 ">₩ 18,000</div>

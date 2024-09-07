@@ -6,6 +6,7 @@ import { getSearchItem } from '@/factory/SearchItem';
 import CircleSkeleton from '../skeleton/CircleSkeleton';
 import SearchedResultItem from './SearchedResultItem';
 import { useSearchStore } from '@/store/search.store';
+import { getMainProduct } from '@/factory/MainProduct';
 
 const SearchIndex = () => {
   const { currentKeyword } = useSearchStore();
@@ -14,6 +15,7 @@ const SearchIndex = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const debouncedKeyword = useDebounce(keyWord);
 
+  const { data: recommend, isLoading: recommendLoading } = getMainProduct('all');
   const { data, isLoading } = getSearchItem(debouncedKeyword);
 
   const handleKeyword = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +77,22 @@ const SearchIndex = () => {
             <span className="text-gray700">검색 결과</span>{' '}
             <span className="text-normal">{data?.length}개</span>
           </div>
-          <ul className="mt-10 pb-10 flex flex-col gap-4">
+          <ul
+            className={` pb-10 flex flex-col gap-4
+          ${data?.length === 0 ? 'mt-4' : 'mt-10'}
+          `}>
+            {data?.length === 0 && (
+              <div>
+                <div className="text-body4 text-gray400">
+                  <span className="text-normal">{debouncedKeyword}</span>에 대한 검색
+                  결과가 존재하지 않습니다.
+                </div>
+                <div className="text-body4 text-gray400 mt-1">
+                  이러한 투자 상품 어떠신가요?
+                </div>
+                {recommend?.map((item, i) => <SearchedResultItem key={i} {...item} />)}
+              </div>
+            )}
             {data?.map((item, i) => <SearchedResultItem key={i} {...item} />)}
           </ul>
         </div>
