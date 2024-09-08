@@ -10,7 +10,7 @@ const PaymentIndex = () => {
   useEffect(() => {
     const checkLoginStatus = () => {
       const token = localStorage.getItem('access_token');
-      setIsLoggedIn(!!token); // 로그인 상태를 설정
+      setIsLoggedIn(!!token);
     };
 
     checkLoginStatus();
@@ -25,7 +25,7 @@ const PaymentIndex = () => {
   };
 
   return (
-    <div>
+    <div className="px-5 pb-20 sm:px-0 sm:pb-0">
       {/* 뒤로가기 */}
       <div onClick={() => router.back()} className="py-[14px] cursor-pointer max-w-max">
         <img src="/images/payment/back.svg" alt="" />

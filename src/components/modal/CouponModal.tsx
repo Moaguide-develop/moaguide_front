@@ -13,15 +13,11 @@ const Couponmodal = () => {
   const ref = useRef<HTMLDivElement>(null);
   useOnClickOutside(ref, () => setOpen(false));
 
-  const handleQuit = () => {
-    //Todo 탈퇴 로직 실행
-  };
-
   return (
     <Dimmed>
       <div
         ref={ref}
-        className=" absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 ">
+        className=" absolute z-[99999] top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 ">
         <div className="px-6 py-[28px] bg-white rounded-[12px]">
           <div className="w-[312px] mx-auto">
             <div className="text-heading2 flex items-center justify-center w-full">
