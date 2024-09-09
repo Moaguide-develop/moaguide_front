@@ -37,7 +37,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const isFormValid = email && passwordValid && passwordMatch;
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex flex-col justify-between items-center min-h-[calc(100vh-160px)]">
       <div className="max-w-[340px] w-full mx-auto mt-[76px]">
         <Image
           className='mb-12'
@@ -102,15 +102,15 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             )}
           </div>
         </div>
+        </div>
 
         <button 
           onClick={onNext} 
           disabled={!isFormValid} 
-          className={`w-full py-3 rounded-lg text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`w-full max-w-[340px] py-3 rounded-lg text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>
-      </div>
     </div>
   );
 };

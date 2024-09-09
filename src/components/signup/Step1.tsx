@@ -55,10 +55,10 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const isNextEnabled = checks.privacy && checks.service && checks.age;
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex flex-col justify-between items-center min-h-[calc(100vh-160px)]">
       <div className="max-w-[340px] w-full mx-auto mt-[76px]">
         <Image
-          className='mb-12'
+          className="mb-12"
           src={'/sign/ProgressBar1.svg'}
           alt="ProgressBar"
           width={360}
@@ -71,7 +71,9 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <div className="space-y-4">
           <div
             onClick={handleAllCheckedChange}
-            className={`flex items-center p-4 border rounded-lg cursor-pointer ${allChecked ? 'border-purple-600' : 'border-gray-300'}`}
+            className={`flex items-center p-4 border rounded-lg cursor-pointer ${
+              allChecked ? 'border-purple-600' : 'border-gray-300'
+            }`}
           >
             <Image
               src={allChecked ? '/sign/CheckedCircle.svg' : '/sign/CheckCircle.svg'}
@@ -112,23 +114,27 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             </div>
           ))}
         </div>
-        <button
-          onClick={onNext}
-          className={`mt-6 w-full py-3 rounded-lg font-bold text-lg transition duration-300 ${
-            isNextEnabled ? 'bg-purple-600 text-white hover:bg-purple-700' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'
-          }`}
-          disabled={!isNextEnabled}
-        >
-          다음으로
-        </button>
       </div>
-
+  
+      <button
+        onClick={onNext}
+        className={`w-full max-w-[340px] py-3 rounded-lg font-bold text-lg transition duration-300 ${
+          isNextEnabled
+            ? 'bg-purple-600 text-white hover:bg-purple-700'
+            : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'
+        }`}
+        disabled={!isNextEnabled}
+      >
+        다음으로
+      </button>
+  
       {activePage === 'privacy' && <PrivacyModal onClose={closePage} />}
       {activePage === 'service' && <ServiceModal onClose={closePage} />}
       {activePage === 'age' && <AgeModal onClose={closePage} />}
       {activePage === 'marketing' && <MarketingModal onClose={closePage} />}
     </div>
   );
+  
 };
 
 export default Step1;
