@@ -91,7 +91,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   };
 
   return (
-    <div className="flex flex-col justify-between items-center min-h-[calc(100vh-160px)]">
+    <div className="flex flex-col justify-between items-center min-h-[calc(100vh-100px)] sm:min-h-[unset]">
       <div className="max-w-[340px] w-full mx-auto mt-[76px]">
         <img className='mb-12' src={'/sign/ProgressBar4.svg'} alt="ProgressBar" width={360} height={100} />
         <h2 className="text-xl font-bold mb-6 leading-tight">
@@ -183,7 +183,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <button
           onClick={handleComplete}
           disabled={!isFormValid}
-          className={`w-full max-w-[340px] py-3 rounded-lg text-white text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
+          className={`w-full max-w-[340px] mt-[60px] py-3 rounded-lg text-white text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
         >
           가입완료
         </button>

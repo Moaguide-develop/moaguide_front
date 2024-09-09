@@ -44,7 +44,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   };
 
   const handleArrowClick = (key: string, event: React.MouseEvent) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     setActivePage(key);
   };
 
@@ -55,7 +55,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const isNextEnabled = checks.privacy && checks.service && checks.age;
 
   return (
-    <div className="flex flex-col justify-between items-center min-h-[calc(100vh-160px)]">
+    <div className="flex flex-col justify-between items-center min-h-[calc(100vh-100px)] sm:min-h-[unset] overflow-y-auto">
       <div className="max-w-[340px] w-full mx-auto mt-[76px]">
         <Image
           className="mb-12"
@@ -115,10 +115,10 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           ))}
         </div>
       </div>
-  
+
       <button
         onClick={onNext}
-        className={`w-full max-w-[340px] py-3 rounded-lg font-bold text-lg transition duration-300 ${
+        className={`w-full max-w-[340px] mt-[60px] py-3 rounded-lg font-bold text-lg transition duration-300 ${
           isNextEnabled
             ? 'bg-purple-600 text-white hover:bg-purple-700'
             : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'
@@ -127,14 +127,13 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
       >
         다음으로
       </button>
-  
+
       {activePage === 'privacy' && <PrivacyModal onClose={closePage} />}
       {activePage === 'service' && <ServiceModal onClose={closePage} />}
       {activePage === 'age' && <AgeModal onClose={closePage} />}
       {activePage === 'marketing' && <MarketingModal onClose={closePage} />}
     </div>
   );
-  
 };
 
 export default Step1;

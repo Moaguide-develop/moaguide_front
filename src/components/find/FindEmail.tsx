@@ -121,7 +121,7 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
   }, [isError]);
 
   return (
-    <div>
+    <div className='flex flex-col justify-between items-center min-h-[calc(100vh-220px)] sm:min-h-[unset]'>
       <section className="max-w-[340px] w-full mx-auto mt-[30px]">
         <div className="text-heading3">
           <h2 className="text-xl font-bold mb-6 text-left">
@@ -220,6 +220,7 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
             </div>
           )}
         </div>
+        </section>
         {isComplete ? (
           <div
             onClick={handleComplete}
@@ -232,7 +233,6 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
             다음으로
           </div>
         )}
-      </section>
     </div>
   );
 };

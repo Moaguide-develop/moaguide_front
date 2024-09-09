@@ -127,7 +127,7 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   }, [isError]);
 
   return (
-    <div className='flex flex-col justify-between items-center min-h-[calc(100vh-160px)]'>
+    <div className="flex flex-col justify-between items-center min-h-[calc(100vh-100px)] sm:min-h-[unset]">
       <section className="max-w-[340px] w-full mx-auto mt-[76px]">
         <Image
           className="mb-12"
