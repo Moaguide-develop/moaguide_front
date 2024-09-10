@@ -26,7 +26,7 @@ interface PaymentResponseProps {
   };
   type?: string;
   totalAmount: number;
-  method?: '카드' | '가상계좌' | '계좌이체';
+  method?: '카드' | '가상계좌' | '계좌이체' | '간편결제';
 }
 
 interface ParamsProps {
@@ -77,21 +77,7 @@ async function getPayment({ paymentKey, orderId, amount }: PaymentRequestProps) 
     );
 
     if (payment) {
-      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/payments`, {
-        orderId: orderId,
-        paymentKey: paymentKey,
-        amount: amount,
-        bookingStatus: 'SUCCESS',
-        status: payment.status,
-        method: payment?.method,
-        receiptUrl: payment?.receipt?.url,
-        approvedAt: payment?.approvedAt,
-        cardNumber: payment?.card?.number,
-        cardType: payment?.card?.cardType,
-        type: payment?.type,
-        mId: payment?.mId,
-        checkoutUrl: payment?.checkout?.url
-      });
+      console.log(payment);
     }
 
     return {
@@ -99,15 +85,6 @@ async function getPayment({ paymentKey, orderId, amount }: PaymentRequestProps) 
     };
   } catch (err: any) {
     console.log(err);
-
-    await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/payments`, {
-      orderId: orderId,
-      paymentKey: paymentKey,
-      amount: amount,
-      bookingStatus: 'FAILED',
-      failureCode: err.code,
-      failureMessage: err.message
-    });
 
     return {
       redirect: {

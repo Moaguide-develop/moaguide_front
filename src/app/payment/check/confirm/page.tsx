@@ -6,7 +6,7 @@ import {
   loadPaymentWidget
 } from '@tosspayments/payment-widget-sdk';
 import { useAsync } from 'react-use';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useMemberStore } from '@/store/user.store';
 import LoaderSkeleton from '@/components/skeleton/LoaderSkeleton';
 
@@ -14,11 +14,9 @@ const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
 
 const PaymentConfirmPage = () => {
   const { member } = useMemberStore();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const price = searchParams.get('totalAmount') || '0';
   const orderTitle = searchParams.get('orderTitle') as string;
-  //paytodo : 유저 id 추가하기
   const customerKey = searchParams.get('customerKey') as string;
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<
@@ -80,7 +78,7 @@ const PaymentConfirmPage = () => {
 
   return (
     <Suspense>
-      <div className="max-w-2xl mx-auto px-4 my-20">
+      <div className="max-w-2xl mx-auto px-5 mt-10 pb-20 sm:px-4 sm:my-20 sm:pb-0">
         <div className="flex flex-col gap-2 mt-4">
           <h1 className="text-lg md:text-2xl font-semibold">확인 및 결제</h1>
           <p className="text-gray-600 mb-4">
