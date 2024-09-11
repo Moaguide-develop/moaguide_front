@@ -6,12 +6,16 @@ import Filter from '@/components/product/Filter';
 import TopProduct from '@/components/product/TopProduct';
 import Report from '@/components/product/Report';
 import React, { useState } from 'react';
-import ProductSort from '@/components/product/ProductSort';
-import ProductContentList from '@/components/product/ProductList';
+import ProductIsdealSort from '@/components/product/ProductIsdealSort';
+import ProductDealContentList from '@/components/product/ProductDealContentList';
 import { ISummaryData, IReportData, IProductDetailData } from '@/types/Diviend';
+import ProductClassification from './ProductClassification';
+import { useRouter, useSearchParams } from 'next/navigation';
+import ProductRecruitmentSort from './ProductRecruitmentSort';
+import ProductEndRecruitmentSort from './ProductEndRecruitmentSort';
 
 interface IProductBuildingProps extends ISummaryData, IReportData {
-  content: IProductDetailData['content'];
+  content: IProductDetailData['product'];
   totalPages: IProductDetailData['totalPages'];
   pageNumber: IProductDetailData['pageable']['pageNumber'];
 }
@@ -29,7 +33,11 @@ const Product = ({
   const reportData = report;
   const contentData = content;
   console.log(reportData);
+  const [classification, setClassification] = useState('isdeal');
   const [sort, setSort] = useState('profit');
+  const searchParams = useSearchParams();
+  const sorted = searchParams.get('subcategory');
+
   return (
     <div>
       {/* <Navbar /> */}
@@ -56,7 +64,7 @@ const Product = ({
         <TopProduct summary={summaryData} />
       </Container>
 
-      <div className=" mt-[40px] mb-[40px] w-atuo h-[0px] border border-[#eceef2]"></div>
+      <div className=" mt-[40px] mb-[40px] w-atuo h-[0px] border border-[#eceef2]" />
 
       <Container>
         <div className="text-black text-lg font-bold mb-[26px] ml-[20px]">
@@ -66,12 +74,27 @@ const Product = ({
         <Report report={reportData} />
       </Container>
 
-      <div className=" mt-[40px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]"></div>
+      <div className=" mt-[40px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
       <Container>
-        <ProductSort sort={sort} setSort={setSort} />
+        <ProductClassification
+          classification={classification}
+          setClassification={setClassification}
+        />
       </Container>
-      <div className=" mt-[10px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]"></div>
-      <ProductContentList
+      <div className=" mt-[5px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
+      <Container>
+        {sorted === 'start' ? (
+          <ProductRecruitmentSort sort={sort} setSort={setSort} />
+        ) : sorted === 'end' ? (
+          <ProductEndRecruitmentSort />
+        ) : (
+          <ProductIsdealSort sort={sort} setSort={setSort} />
+        )}
+        {/* <ProductIsdealSort sort={sort} setSort={setSort} /> */}
+      </Container>
+      <div className=" mt-[10px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
+
+      <ProductDealContentList
         content={contentData}
         totalPages={totalPages}
         pageNumber={pageNumber}
