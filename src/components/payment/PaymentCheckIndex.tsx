@@ -25,7 +25,7 @@ const PaymentCheckIndex = () => {
   };
 
   return (
-    <div>
+    <div className="px-5 pb-20 sm:px-0 sm:pb-0">
       {/* 뒤로가기 */}
       <div onClick={() => router.back()} className="py-[14px] cursor-pointer max-w-max">
         <img src="/images/payment/back.svg" alt="" />

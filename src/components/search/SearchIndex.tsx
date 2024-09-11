@@ -31,7 +31,7 @@ const SearchIndex = () => {
 
   useEffect(() => {
     setKeyword('');
-  }, []);
+  }, [setKeyword]);
 
   return (
     <div className="pt-10 flex flex-col  gap-10">
