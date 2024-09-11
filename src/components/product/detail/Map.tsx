@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { usePathname } from 'next/navigation';
 
 declare global {
   interface Window {
@@ -8,14 +9,16 @@ declare global {
   }
 }
 
-const fetchBuildingData = async () => {
-  const response = await axios.get(
-    'https://api.moaguide.com/detail/building/area/sou.10'
-  );
-  return response.data;
-};
-
 const KakaoMap = () => {
+  const pathname = usePathname();
+  const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
+  console.log(lastSegment);
+  const fetchBuildingData = async () => {
+    const response = await axios.get(
+      `https://api.moaguide.com/detail/building/area/${lastSegment}`
+    );
+    return response.data;
+  };
   const mapRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading, error } = useQuery({
