@@ -6,26 +6,21 @@ import Gnb from '@/components/common/Gnb';
 
 const GnbWrapper = () => {
   const pathname = usePathname();
-  const [shouldRenderGnb, setShouldRenderGnb] = useState(true);
+  const [isGnbHidden, setIsGnbHidden] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640 && (pathname === '/signup' || pathname === '/sign' || pathname === '/find' || pathname === '/login')) {
-        setShouldRenderGnb(false);
+    const checkIfGnbShouldBeHidden = () => {
+      if (pathname === '/signup' || pathname === '/sign' || pathname === '/find' || pathname === '/login') {
+        setIsGnbHidden(true);
       } else {
-        setShouldRenderGnb(true);
+        setIsGnbHidden(false); 
       }
     };
 
-    handleResize(); 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    checkIfGnbShouldBeHidden();
   }, [pathname]);
 
-  return shouldRenderGnb ? <Gnb /> : null;
+  return !isGnbHidden ? <Gnb /> : null;
 };
 
 export default GnbWrapper;

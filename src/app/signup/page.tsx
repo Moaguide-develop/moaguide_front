@@ -79,10 +79,7 @@ const SignupPage: React.FC = () => {
 
   return (
     <div>
-       <Suspense>
-      <Navbar/>
-      </Suspense>
-    <div className="signup-container">
+    <div className="flex flex-col items-center justify-center">
       {currentStep === 1 && (
         <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
       )}
