@@ -10,6 +10,8 @@ const ProductPage = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const pages = searchParams['page'] || 1;
+  const subcategory = searchParams['subcategory'] || 'trade';
+  const sort = searchParams['sort'] || 'views';
   console.log(pages);
   const buildingDiviedResponse = await fetch(
     `https://api.moaguide.com/summary/recent/building`,
@@ -25,7 +27,7 @@ const ProductPage = async ({
     }
   );
   const productDetailResponse = await fetch(
-    `https://api.moaguide.com/summary/list/all?page=${pages}&size=10&sort=views`,
+    `https://api.moaguide.com/summary/list/all?&subcategory=${subcategory}&sort=${sort}&page=${pages}&size=10`,
     {
       next: { revalidate: 300 }
     }
@@ -36,7 +38,7 @@ const ProductPage = async ({
   const buildingReportData: IReport[] = await buildingReportResponse.json();
 
   const productDetailData: IProductDetailData = await productDetailResponse.json();
-
+  console.log(productDetailData);
   return (
     <div>
       <Navbar />
@@ -44,7 +46,7 @@ const ProductPage = async ({
         divide={buildingDiviedData.divide}
         summary={buildingDiviedData.summary}
         report={buildingReportData}
-        content={productDetailData.content}
+        content={productDetailData.product}
         pageNumber={productDetailData?.pageable?.pageNumber}
         totalPages={productDetailData?.totalPages}
       />
