@@ -92,7 +92,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   };
 
   return (
-    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto">
+    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto mb-[90px]">
       <div className="max-w-[340px] w-full mx-auto mt-[30px]">
       <Image
           src={'/sign/LeftArrowIcon.svg'}
@@ -198,7 +198,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <button
           onClick={handleComplete}
           disabled={!isFormValid}
-          className={`w-full max-w-[340px] mt-[60px]  mb-[90px]  py-3 rounded-[12px] text-white text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
+          className={`w-full max-w-[340px] mt-[60px] py-3 rounded-[12px] text-white text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
         >
           가입완료
         </button>

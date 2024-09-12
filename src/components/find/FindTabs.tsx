@@ -5,6 +5,7 @@ import FindEmail from './FindEmail';
 import ShowEmailInfo from './ShowEmailInfo';
 import FindPassword from './FindPassword';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const FindTabs = () => {
   const [activeTab, setActiveTab] = useState('email');
@@ -18,29 +19,13 @@ const FindTabs = () => {
     setShowEmailInfo(true); 
   };
 
-  const [maxHeightClass, setmaxHeightClass] = useState('max-h-screen');
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setmaxHeightClass('max-h-[calc(100vh-75.5px)]');
-      } else {
-        setmaxHeightClass('max-h-screen');
-      }
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const router = useRouter();
 
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center'>
+    <div className='flex flex-col items-center justify-center'>
       {!showEmailInfo ? ( 
         <>
-        <div className="find-container flex flex-col items-center overflow-y-auto w-full">
+        <div className="custom-container flex flex-col items-center overflow-y-auto w-full mb-[90px]">
           <div className='max-w-[340px] w-full mx-auto mt-[30px]'>
           <div className="self-start">
             <Image
@@ -48,6 +33,8 @@ const FindTabs = () => {
               alt='뒤로가기'
               width={24}
               height={24}
+              className='cursor-pointer'
+              onClick={() => router.back()} 
             />
             </div>
         </div>

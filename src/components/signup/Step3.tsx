@@ -40,7 +40,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const isFormValid = email && passwordValid && passwordMatch;
 
   return (
-    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto">
+    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto mb-[90px]">
       <div className="max-w-[340px] w-full mx-auto mt-[30px]">
       <Image
           src={'/sign/LeftArrowIcon.svg'}
@@ -118,7 +118,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <button 
           onClick={onNext} 
           disabled={!isFormValid} 
-          className={`w-full max-w-[340px] py-3 mt-[60px]  mb-[90px]  rounded-[12px] text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`w-full max-w-[340px] py-3 mt-[60px] rounded-[12px] text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>
