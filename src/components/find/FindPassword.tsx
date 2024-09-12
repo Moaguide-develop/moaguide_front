@@ -22,7 +22,7 @@ const FindPassword = () => {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            className="w-full mt-2 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
+            className="w-full mt-2 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
           />
         </div>
         </div>

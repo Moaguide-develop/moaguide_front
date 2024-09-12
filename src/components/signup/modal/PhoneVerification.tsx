@@ -166,7 +166,7 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
               placeholder="휴대폰 번호 입력"
-              className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
+              className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
             />
             {phoneNumberValid ? (
               isRequest ? (

@@ -71,7 +71,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
               setEmail(e.target.value);
               onUpdate({ email: e.target.value });
             }}
-            className="w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
+            className="w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
           />
         </div>
 
@@ -82,7 +82,8 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             placeholder="비밀번호 입력"
             value={password}
             onChange={handlePasswordChange}
-            className="w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
+            className={`w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
+            ${password ? (passwordValid ? 'outline-success' : 'focus:outline-normal') : ''}`}
           />
           {!password && (
             <p className="text-[#6E6F73] text-xs mt-2">영문, 숫자, 특수문자 포함 8-20자로 입력해주세요.</p>
@@ -102,7 +103,8 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             placeholder="비밀번호 재입력"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
-            className="w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
+            className={`w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
+            ${password ? (passwordMatch ? 'outline-success' : 'focus:outline-normal') : ''}`}
           />
           <div className="mt-1 min-h-[25px]">
             {passwordMatch === false && (
