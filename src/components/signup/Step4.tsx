@@ -126,7 +126,8 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
               value={nickname}
               onChange={handleNicknameChange}
               placeholder="닉네임 입력"
-              className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
+              className={`flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] text-body2 
+              ${nickname ? (isNicknameValid === true ? 'outline-success' : 'outline-normal') : 'outline-none'}`}
             />
             <div
               onClick={checkNickname}
@@ -135,7 +136,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
               중복확인
             </div>
           </div>
-          <div className="mt-2 min-h-[25px]">
+          <div className="">
             {isNicknameValid === true && (
               <p className="text-blue-500 text-xs mt-2">사용 가능한 닉네임입니다.</p>
             )}
@@ -145,14 +146,14 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           </div>
         </div>
 
-        <div className="mb-10">
+        <div className="mb-4">
           <div className="text-body3">이름</div>
           <input
             type="text"
             placeholder="이름 입력"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full mt-2 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
+            className="w-full mt-2 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
           />
         </div>
 
@@ -163,7 +164,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             placeholder="생년월일 8자리 입력"
             value={birthdate}
             onChange={handleBirthdateChange}
-            className="w-full px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 mt-2"
+            className="w-full px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 mt-2 focus:outline-normal"
           />
         </div>
 
@@ -172,13 +173,13 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           <div className='flex w-full mt-2'>
             <button
               onClick={() => handleInvestmentExperienceChange('no')}
-              className={`flex-1 py-3 px-4 rounded-lg border pr-1 ${investmentExperience === 'no' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
+              className={`flex-1 py-3 px-4 rounded-lg border mr-1 ${investmentExperience === 'no' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
             >
               투자 경험 없음
             </button>
             <button
               onClick={() => handleInvestmentExperienceChange('yes')}
-              className={`flex-1 py-3 px-4 rounded-lg border pl-1 ${investmentExperience === 'yes' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
+              className={`flex-1 py-3 px-4 rounded-lg border ml-1 ${investmentExperience === 'yes' ? 'border-purple-600 text-purple-600' : 'border-gray-100 text-gray-600'}`}
             >
               투자 경험 있음
             </button>
@@ -193,7 +194,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
                 type="text"
                 value={investmentYears}
                 onChange={handleInvestmentYearsChange}
-                className="w-full mt-2 py-3 px-4 rounded-[12px] border border-gray-100"
+                className="w-full mt-2 py-3 px-4 rounded-[12px] border border-gray-100 focus:outline-normal"
               />
               <div className="text-body3 my-auto ml-2">년</div>
             </div>
