@@ -28,7 +28,7 @@ const Mypage = () => {
   const handleLogout = async () => {
     await logout();
     setIsLoggedIn(false);
-    localStorage.removeItem('access_token'); // Remove access token from local storage
+    localStorage.removeItem('access_token'); 
     router.push('/sign');
   };
 
