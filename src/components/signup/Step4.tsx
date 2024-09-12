@@ -21,9 +21,15 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const router = useRouter(); 
 
   const validateForm = useCallback(() => {
-    return investmentExperience === 'yes' 
-        ? !!investmentYears && !!name && !!nickname && !!isNicknameValid && !!isBirthdateValid
-        : !!name && !!nickname && !!isNicknameValid && !!isBirthdateValid;
+    if (!name || !nickname || !isNicknameValid || !isBirthdateValid || !investmentExperience) {
+      return false; // 필수 필드가 모두 입력되지 않으면 false
+    }
+    
+    if (investmentExperience === 'yes' && !investmentYears) {
+      return false; // 투자 경험 있음인데 투자 경력이 없으면 false
+    }
+
+    return true; // 모든 조건이 충족되면 true
   }, [name, nickname, isNicknameValid, isBirthdateValid, investmentExperience, investmentYears]);
 
   useEffect(() => {
@@ -93,7 +99,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
   return (
     <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto mb-[90px]">
-      <div className="max-w-[340px] w-full mx-auto mt-[30px]">
+      <div className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-[100px]">
       <Image
           src={'/sign/LeftArrowIcon.svg'}
           alt='뒤로가기'
@@ -120,11 +126,11 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
               value={nickname}
               onChange={handleNicknameChange}
               placeholder="닉네임 입력"
-              className="flex-1 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
+              className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
             />
             <div
               onClick={checkNickname}
-              className={`ml-[6px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 cursor-pointer`}
+              className={`ml-[6px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 cursor-pointer`}
             >
               중복확인
             </div>
