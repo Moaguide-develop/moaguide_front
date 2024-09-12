@@ -23,14 +23,14 @@ const SignupPage: React.FC = () => {
     loginType: 'local'
   });
   
-  const [minHeightClass, setMinHeightClass] = useState('min-h-screen');
+  const [maxHeightClass, setmaxHeightClass] = useState('max-h-screen');
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setMinHeightClass('min-h-[calc(100vh-100px)]');
+        setmaxHeightClass('max-h-[calc(100vh-75.5px)]');
       } else {
-        setMinHeightClass('min-h-screen');
+        setmaxHeightClass('max-h-screen');
       }
     };
     handleResize();
@@ -79,7 +79,7 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className={`flex flex-col items-center justify-center ${minHeightClass}`}>
+    <div className={`flex flex-col items-center justify-center ${maxHeightClass} overflow-y-auto`}>
       {currentStep === 1 && (
         <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
       )}

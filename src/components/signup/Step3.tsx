@@ -90,7 +90,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           )}
         </div>
 
-        <div className="mb-12">
+        <div className="">
           <div className="text-body3">비밀번호 확인</div>
           <input 
             type="password" 
@@ -113,7 +113,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <button 
           onClick={onNext} 
           disabled={!isFormValid} 
-          className={`w-full max-w-[340px] py-3 mt-[60px] rounded-[12px] text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`w-full max-w-[340px] py-3 mt-[60px] mb-[10px] rounded-[12px] text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>

@@ -110,7 +110,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <h2 className="text-xl font-bold mb-6 leading-tight">
           모아가이드에서 사용할<br /><span className="text-purple-600">상세정보</span>를 입력해주세요
         </h2>
-        <div className="mt-10 mb-4">
+        <div className="mb-4">
           <div className="text-body3">닉네임</div>
           <div className="flex items-center mt-2">
             <input
@@ -148,7 +148,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           />
         </div>
 
-        <div className='mb-10'>
+        <div className='mb-4'>
           <div className="text-body3">생년월일</div>
           <input
             type="text"
@@ -196,7 +196,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <button
           onClick={handleComplete}
           disabled={!isFormValid}
-          className={`w-full max-w-[340px] mt-[60px] py-3 rounded-[12px] text-white text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
+          className={`w-full max-w-[340px] mt-[60px] mb-[10px] py-3 rounded-[12px] text-white text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
         >
           가입완료
         </button>

@@ -35,7 +35,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
 
   const handleRequest = async () => {
     try {
-      const data = await sendVerificationCode(phoneNumber);
+      const plainPhoneNumber = phoneNumber.replace(/-/g, '');
+      const data = await sendVerificationCode(plainPhoneNumber);
       console.log('인증 요청 성공:', data);
       setIsRequest(true); // 요청 상태 true
       setValidTime(300); // 인증 요청 시 타이머 초기화
@@ -48,7 +49,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   const handleResending = async () => {
     if (isComplete) return;
     try {
-      const data = await sendVerificationCode(phoneNumber);
+      const plainPhoneNumber = phoneNumber.replace(/-/g, '');
+      const data = await sendVerificationCode(plainPhoneNumber);
       console.log('인증 재요청 성공:', data);
       setValidNumber('');
       inputRef.current?.focus();
@@ -62,7 +64,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   const handleCertify = async () => {
     if (isComplete) return; // 이미 인증 완료된 상태면 return
     try {
-      const data = await verifyCode(phoneNumber, validNumber);
+      const plainPhoneNumber = phoneNumber.replace(/-/g, '');
+      const data = await verifyCode(plainPhoneNumber, validNumber);
       console.log('인증 완료:', data);
       setIsComplete(true); // 인증 검사 통과
       setIsError(false);
@@ -243,12 +246,12 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
         {isComplete ? (
           <div
             onClick={handleComplete}
-            className="w-full max-w-[340px] cursor-pointer flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
+            className="w-full max-w-[340px] cursor-pointer flex items-center justify-center px-5 py-3 mt-[60px] mb-[10px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
           >
             다음으로
           </div>
         ) : (
-          <div className="w-full max-w-[340px] flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
+          <div className="w-full max-w-[340px] flex items-center justify-center px-5 py-3 mt-[60px] mb-[10px] w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
             다음으로
           </div>
         )}
