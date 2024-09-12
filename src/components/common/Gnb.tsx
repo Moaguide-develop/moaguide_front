@@ -13,7 +13,8 @@ const Gnb = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem('access_token');
-    if (accessToken) {
+
+    if (accessToken && accessToken !== 'undefined') {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);

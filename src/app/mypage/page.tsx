@@ -14,11 +14,11 @@ const Mypage = () => {
 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const isLoggedIn = !!localStorage.getItem('access_token');
-      if (!isLoggedIn) {
+      const accessToken = localStorage.getItem('access_token');
+      if (!accessToken || accessToken === 'undefined') {
         router.push('/sign');
       } else {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
@@ -28,6 +28,7 @@ const Mypage = () => {
   const handleLogout = async () => {
     await logout();
     setIsLoggedIn(false);
+    localStorage.removeItem('access_token'); // Remove access token from local storage
     router.push('/sign');
   };
 
