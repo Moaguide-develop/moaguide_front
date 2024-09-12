@@ -59,7 +59,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
   return (
     <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto mb-[90px]">
-      <div className="max-w-[340px] w-full mx-auto mt-[30px]">
+      <div className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-[100px]">
         <Image
           src={'/sign/LeftArrowIcon.svg'}
           alt='뒤로가기'
