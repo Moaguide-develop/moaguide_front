@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import PrivacyModal from './modal/PrivacyModal';
 import ServiceModal from './modal/ServiceModal';
 import AgeModal from './modal/AgeModal';
@@ -19,6 +20,8 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     marketing: false,
   });
   const [activePage, setActivePage] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const handleAllCheckedChange = () => {
     const newCheckedState = !allChecked;
@@ -62,6 +65,8 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           alt='뒤로가기'
           width={24}
           height={24}
+          className='cursor-pointer'
+          onClick={() => router.back()} 
         />
         <Image
           className="mt-6 mb-6"

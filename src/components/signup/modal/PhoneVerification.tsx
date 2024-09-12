@@ -2,6 +2,7 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { sendVerificationCode, verifyCode } from '@/service/auth';
 import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
+import { useRouter } from 'next/navigation';
 
 interface PhoneVerificationProps {
   onNext: () => void;
@@ -18,6 +19,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   const [isError, setIsError] = useState(false); // 인증번호 인증 실패
   const [validTime, setValidTime] = useState<number>(300); // 인증 시간
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const router = useRouter();
 
   const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const regex = e.target.value
@@ -137,6 +140,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
           alt='뒤로가기'
           width={24}
           height={24}
+          className='cursor-pointer'
+          onClick={() => router.back()} 
         />
         <Image
           className="mt-6 mb-6"

@@ -99,6 +99,8 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           alt='뒤로가기'
           width={24}
           height={24}
+          className='cursor-pointer'
+          onClick={() => router.back()} 
         />
         <Image
           className="mt-6 mb-6"

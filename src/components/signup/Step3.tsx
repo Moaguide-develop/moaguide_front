@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 interface StepProps {
@@ -12,6 +13,8 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
   const [passwordMatch, setPasswordMatch] = useState<boolean | null>(null);
+
+  const router = useRouter();
 
   const validatePassword = (password: string) => {
     const isValid = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/.test(password);
@@ -44,6 +47,8 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           alt='뒤로가기'
           width={24}
           height={24}
+          className='cursor-pointer'
+          onClick={() => router.back()} 
         />
         <Image
           className="mt-6 mb-6"
