@@ -127,10 +127,16 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   }, [isError]);
 
   return (
-    <div className="flex flex-col justify-between items-center min-h-[calc(100vh-100px)] sm:min-h-[unset]">
-      <section className="max-w-[340px] w-full mx-auto mt-[76px]">
+    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto">
+      <section className="max-w-[340px] w-full mx-auto mt-[30px]">
+      <Image
+          src={'/sign/LeftArrowIcon.svg'}
+          alt='뒤로가기'
+          width={24}
+          height={24}
+        />
         <Image
-          className="mb-12"
+          className="mt-6 mb-6"
           src={'/sign/ProgressBar2.svg'}
           alt="ProgressBar"
           width={360}

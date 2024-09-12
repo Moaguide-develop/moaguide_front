@@ -37,10 +37,16 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const isFormValid = email && passwordValid && passwordMatch;
 
   return (
-    <div className="flex flex-col justify-between items-center min-h-[calc(100vh-100px)] sm:min-h-[unset]">
-      <div className="max-w-[340px] w-full mx-auto mt-[76px]">
+    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto">
+      <div className="max-w-[340px] w-full mx-auto mt-[30px]">
+      <Image
+          src={'/sign/LeftArrowIcon.svg'}
+          alt='뒤로가기'
+          width={24}
+          height={24}
+        />
         <Image
-          className='mb-12'
+          className="mt-6 mb-6"
           src={'/sign/ProgressBar3.svg'}
           alt="ProgressBar"
           width={360}
