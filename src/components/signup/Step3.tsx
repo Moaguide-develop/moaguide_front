@@ -118,7 +118,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <button 
           onClick={onNext} 
           disabled={!isFormValid} 
-          className={`w-full max-w-[340px] py-3 mt-[60px] mb-[10px] rounded-[12px] text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`w-full max-w-[340px] py-3 mt-[60px]  mb-[90px]  rounded-[12px] text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>

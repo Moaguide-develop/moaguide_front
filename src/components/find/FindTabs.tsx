@@ -37,7 +37,7 @@ const FindTabs = () => {
   }, []);
 
   return (
-    <div className={`flex flex-col items-center justify-center ${maxHeightClass} overflow-y-auto`}>
+    <div className='min-h-screen flex flex-col items-center justify-center'>
       {!showEmailInfo ? ( 
         <>
         <div className="find-container flex flex-col items-center overflow-y-auto w-full">
