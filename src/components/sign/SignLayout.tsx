@@ -67,7 +67,7 @@ const SignLayout = () => {
         )}
         </div>
         <button 
-          className="w-[320px] bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-3 rounded-lg text-sm font-semibold mb-4"
+          className="w-[320px] bg-gradient-to-r font-bold text-lg from-purple-500 to-indigo-500 text-white py-3 rounded-lg mb-4"
           onClick={handleLogin}
         >
           로그인
