@@ -18,14 +18,14 @@ const FindTabs = () => {
     setShowEmailInfo(true); 
   };
 
-  const [minHeightClass, setMinHeightClass] = useState('min-h-screen');
+  const [maxHeightClass, setmaxHeightClass] = useState('max-h-screen');
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setMinHeightClass('min-h-[calc(100vh-100px)]');
+        setmaxHeightClass('max-h-[calc(100vh-75.5px)]');
       } else {
-        setMinHeightClass('min-h-screen');
+        setmaxHeightClass('max-h-screen');
       }
     };
     handleResize();
@@ -37,10 +37,11 @@ const FindTabs = () => {
   }, []);
 
   return (
-    <div className={`flex flex-col items-center justify-center ${minHeightClass}`}>
+    <div className={`flex flex-col items-center justify-center ${maxHeightClass} overflow-y-auto`}>
       {!showEmailInfo ? ( 
         <>
-        <div className="find-container flex flex-col items-center overflow-y-auto mt-[30px] max-w-[340px]">
+        <div className="find-container flex flex-col items-center overflow-y-auto w-full">
+          <div className='max-w-[340px] w-full mx-auto mt-[30px]'>
           <div className="self-start">
             <Image
               src={'/sign/LeftArrowIcon.svg'}
@@ -48,6 +49,7 @@ const FindTabs = () => {
               width={24}
               height={24}
             />
+            </div>
         </div>
           <div className="flex max-w-[340px] w-full mx-auto mt-6">
             <div
