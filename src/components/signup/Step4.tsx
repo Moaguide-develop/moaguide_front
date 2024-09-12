@@ -126,8 +126,8 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
               value={nickname}
               onChange={handleNicknameChange}
               placeholder="닉네임 입력"
-              className={`flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] text-body2 
-              ${nickname ? (isNicknameValid === true ? 'outline-success' : 'outline-normal') : 'outline-none'}`}
+              className={`flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] text-body2 focus:outline-normal
+              ${nickname ? (isNicknameValid === true ? 'outline-success' : 'outline-error') : 'outline-none'}`}
             />
             <div
               onClick={checkNickname}
