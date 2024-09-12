@@ -79,7 +79,7 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center'>
+    <div className='flex flex-col items-center justify-center'>
       {currentStep === 1 && (
         <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
       )}

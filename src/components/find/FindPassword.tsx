@@ -29,7 +29,7 @@ const FindPassword = () => {
         <div className='w-full max-w-[340px]'>
         <button 
           disabled={!email} 
-          className={`flex items-center justify-center px-5 py-3 text-lg font-bold mt-[60px] mb-[90px] w-full rounded-[12px] ${email ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`flex items-center justify-center px-5 py-3 text-lg font-bold mt-[60px] w-full rounded-[12px] ${email ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>

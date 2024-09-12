@@ -139,13 +139,13 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
               placeholder="휴대폰 번호 입력"
-              className="flex-1 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
+              className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
             />
             {phoneNumberValid ? (
               isRequest ? (
                 <div
                   onClick={handleResending}
-                  className={`ml-[6px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+                  className={`ml-[6px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
                   ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                   `}
                 >
@@ -154,18 +154,19 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
               ) : (
                 <div
                   onClick={handleRequest}
-                  className="ml-[6px] cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2"
+                  className="ml-[6px] flex-shrink-0 cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2"
                 >
                   인증 요청
                 </div>
               )
             ) : (
-              <div className="ml-[6px] px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+              <div className="ml-[6px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
                 인증 요청
               </div>
             )}
           </div>
         </div>
+
         {/* 인증번호 입력 */}
         <div className="mt-[28px]">
           <div className="text-body3">인증번호</div>
@@ -173,27 +174,23 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
             <input
               ref={inputRef}
               value={validNumber}
-              disabled={!isRequest || validTime == 0 || isComplete}
+              disabled={!isRequest || validTime === 0 || isComplete}
               onChange={handleValidNumberChange}
               type="text"
               placeholder="인증 번호 입력"
-              className={`flex-1 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
-              ${isRequest && !isComplete && !isError && 'outline-normal'}
-              ${isRequest && isComplete && 'outline-success'}
-              ${isRequest && isError && 'outline-error'}
-              `}
+              className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
             />
             {isRequest && validNumberOk ? (
               <div
                 onClick={handleCertify}
-                className={` ml-[8px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+                className={`ml-[8px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
                 ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                 `}
               >
                 인증 완료
               </div>
             ) : (
-              <div className="ml-[8px] px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+              <div className="ml-[8px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
                 인증 완료
               </div>
             )}
@@ -225,12 +222,12 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
         {isComplete ? (
           <div
             onClick={handleComplete}
-            className="cursor-pointer flex items-center justify-center px-5 py-3 mt-[60px] mb-[90px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
+            className="cursor-pointer flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
           >
             다음으로
           </div>
         ) : (
-          <div className="flex items-center justify-center px-5 py-3 mt-[60px] mb-[90px] w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
+          <div className="flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
             다음으로
           </div>
         )}

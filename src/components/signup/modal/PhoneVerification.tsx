@@ -133,7 +133,7 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   }, [isError]);
 
   return (
-    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto">
+    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto mb-[90px]">
       <section className="max-w-[340px] w-full mx-auto mt-[30px]">
         <Image
           src={'/sign/LeftArrowIcon.svg'}
@@ -160,103 +160,105 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
         <div className="mt-10">
           <div className="text-body3">휴대폰 번호</div>
           <div className="flex items-center mt-2">
-            <input
-              type="text"
-              disabled={isRequest}
-              value={phoneNumber}
-              onChange={handlePhoneNumberChange}
-              placeholder="휴대폰 번호 입력"
-              className="flex-1 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
-            />
-            {phoneNumberValid ? (
-              isRequest ? (
-                <div
-                  onClick={handleResending}
-                  className={`ml-[6px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
-                  ${isComplete ? 'cursor-default' : 'cursor-pointer'}
-                  `}
-                >
-                  재전송
-                </div>
-              ) : (
-                <div
-                  onClick={handleRequest}
-                  className="ml-[6px] cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2"
-                >
-                  인증 요청
-                </div>
-              )
-            ) : (
-              <div className="ml-[6px] px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
-                인증 요청
-              </div>
-            )}
-          </div>
+  <input
+    type="text"
+    disabled={isRequest}
+    value={phoneNumber}
+    onChange={handlePhoneNumberChange}
+    placeholder="휴대폰 번호 입력"
+    className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
+  />
+  {phoneNumberValid ? (
+    isRequest ? (
+      <div
+        onClick={handleResending}
+        className={`ml-[6px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+        ${isComplete ? 'cursor-default' : 'cursor-pointer'}
+        `}
+      >
+        재전송
+      </div>
+    ) : (
+      <div
+        onClick={handleRequest}
+        className="ml-[6px] flex-shrink-0 cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2"
+      >
+        인증 요청
+      </div>
+    )
+  ) : (
+    <div className="ml-[6px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+      인증 요청
+    </div>
+  )}
+</div>
+
         </div>
         {/* 인증번호 입력 */}
         <div className="mt-[28px]">
-          <div className="text-body3">인증번호</div>
-          <div className="flex items-center mt-2">
-            <input
-              ref={inputRef}
-              value={validNumber}
-              disabled={!isRequest || validTime == 0 || isComplete}
-              onChange={handleValidNumberChange}
-              type="text"
-              placeholder="인증 번호 입력"
-              className={`flex-1 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
-              ${isRequest && !isComplete && !isError && 'outline-normal'}
-              ${isRequest && isComplete && 'outline-success'}
-              ${isRequest && isError && 'outline-error'}
-              `}
-            />
-            {isRequest && validNumberOk ? (
-              <div
-                onClick={handleCertify}
-                className={` ml-[8px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
-                ${isComplete ? 'cursor-default' : 'cursor-pointer'}
-                `}
-              >
-                인증 완료
-              </div>
-            ) : (
-              <div className="ml-[8px] px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
-                인증 완료
-              </div>
-            )}
-          </div>
-          {/* 남은 시간 또는 인증 완료 및 에러 메시지 */}
-          {isRequest ? (
-            <div
-              className={`text-body7 text-normal mt-[10px]
-            ${isComplete && 'hidden'}
-            ${isError && 'hidden'}
-            `}
-            >
-              남은시간 : {validNumberToTime(validTime)}
-            </div>
-          ) : null}
-          {isComplete && (
-            <div className="text-body7 text-success mt-[10px]">
-              인증이 완료되었습니다.
-            </div>
-          )}
-          {isError && (
-            <div className="text-body7 text-error mt-[10px]">
-              인증번호가 일치하지 않습니다.
-            </div>
-          )}
-        </div>
+  <div className="text-body3">인증번호</div>
+  <div className="flex items-center mt-2">
+    <input
+      ref={inputRef}
+      value={validNumber}
+      disabled={!isRequest || validTime === 0 || isComplete}
+      onChange={handleValidNumberChange}
+      type="text"
+      placeholder="인증 번호 입력"
+      className={`flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
+      ${isRequest && !isComplete && !isError && 'outline-normal'}
+      ${isRequest && isComplete && 'outline-success'}
+      ${isRequest && isError && 'outline-error'}
+      `}
+    />
+    {isRequest && validNumberOk ? (
+      <div
+        onClick={handleCertify}
+        className={`ml-[8px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+        ${isComplete ? 'cursor-default' : 'cursor-pointer'}
+        `}
+      >
+        인증 완료
+      </div>
+    ) : (
+      <div className="ml-[8px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+        인증 완료
+      </div>
+    )}
+  </div>
+  {/* 남은 시간 또는 인증 완료 및 에러 메시지 */}
+  {isRequest ? (
+    <div
+      className={`text-body7 text-normal mt-[10px]
+    ${isComplete && 'hidden'}
+    ${isError && 'hidden'}
+    `}
+    >
+      남은시간 : {validNumberToTime(validTime)}
+    </div>
+  ) : null}
+  {isComplete && (
+    <div className="text-body7 text-success mt-[10px]">
+      인증이 완료되었습니다.
+    </div>
+  )}
+  {isError && (
+    <div className="text-body7 text-error mt-[10px]">
+      인증번호가 일치하지 않습니다.
+    </div>
+  )}
+</div>
+
         </section>
         {isComplete ? (
           <div
             onClick={handleComplete}
-            className="w-full max-w-[340px] cursor-pointer flex items-center justify-center px-5 py-3 mt-[60px]  mb-[90px]  w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
+            className="w-full max-w-[340px] cursor-pointer flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
           >
             다음으로
           </div>
         ) : (
-          <div className="w-full max-w-[340px] flex items-center justify-center px-5 py-3 mt-[60px]  mb-[90px]  w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
+          <div className="w-full max-w-[340px] flex items-center justify-center px-5 py-3 mt-[60px]  w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
             다음으로
           </div>
         )}
