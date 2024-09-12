@@ -8,9 +8,6 @@ import { Suspense } from "react";
 const SignPage = () => {
   return (
     <div>
-      <Suspense>
-      <Navbar />
-      </Suspense>
       <SignLayout/>
     </div>
   );

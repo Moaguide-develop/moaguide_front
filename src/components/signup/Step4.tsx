@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { checkNicknameAvailability } from '@/service/auth';
 import { formatBirthDate } from '@/utils/dateUtils';
+import Image from 'next/image';
 
 interface StepProps {
   onNext: () => void;
@@ -91,13 +92,27 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="max-w-[340px] w-full mx-auto mt-[76px]">
-        <img className='mb-12' src={'/sign/ProgressBar4.svg'} alt="ProgressBar" width={360} height={100} />
+    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto">
+      <div className="max-w-[340px] w-full mx-auto mt-[30px]">
+      <Image
+          src={'/sign/LeftArrowIcon.svg'}
+          alt='뒤로가기'
+          width={24}
+          height={24}
+          className='cursor-pointer'
+          onClick={() => router.back()} 
+        />
+        <Image
+          className="mt-6 mb-6"
+          src={'/sign/ProgressBar4.svg'}
+          alt="ProgressBar"
+          width={360}
+          height={100}
+        />
         <h2 className="text-xl font-bold mb-6 leading-tight">
           모아가이드에서 사용할<br /><span className="text-purple-600">상세정보</span>를 입력해주세요
         </h2>
-        <div className="mt-10 mb-4">
+        <div className="mb-4">
           <div className="text-body3">닉네임</div>
           <div className="flex items-center mt-2">
             <input
@@ -135,7 +150,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           />
         </div>
 
-        <div className='mb-10'>
+        <div className='mb-4'>
           <div className="text-body3">생년월일</div>
           <input
             type="text"
@@ -178,15 +193,16 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             </div>
           </div>
         )}
+      </div>
 
         <button
           onClick={handleComplete}
           disabled={!isFormValid}
-          className={`w-full py-3 rounded-lg text-white text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
+          className={`w-full max-w-[340px] mt-[60px] mb-[10px] py-3 rounded-[12px] text-white text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
         >
           가입완료
         </button>
-      </div>
+
     </div>
   );
 };

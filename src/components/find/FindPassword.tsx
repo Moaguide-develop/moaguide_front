@@ -5,8 +5,8 @@ const FindPassword = () => {
   const [email, setEmail] = useState('');
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="max-w-[340px] w-full mx-auto mt-[30px]">
+    <div className='find-inner-container flex flex-col items-center min-h-[calc(100vh-220px)] w-[340px]'>
+    <div className="w-full mx-auto mt-[30px]">
       <div className="text-heading3">
           <h2 className="text-xl font-bold mb-6 text-left">
             가입하신<br />
@@ -25,14 +25,15 @@ const FindPassword = () => {
             className="w-full mt-2 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
           />
         </div>
-
+        </div>
+        <div className='w-full max-w-[340px]'>
         <button 
           disabled={!email} 
-          className={`w-full mt-[60px] py-3 rounded-lg text-lg ${email ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`flex items-center justify-center px-5 py-3 text-lg font-bold mt-[60px] mb-[10px] w-full rounded-[12px] ${email ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>
-      </div>
+        </div>
     </div>
   );
 };

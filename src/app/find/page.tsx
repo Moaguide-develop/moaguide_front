@@ -8,9 +8,6 @@ import { Suspense } from "react";
 const FindPage = () => {
   return (
     <div>
-      <Suspense>
-      <Navbar />
-      </Suspense>
       <FindTabs />
     </div>
   );

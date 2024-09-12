@@ -15,8 +15,7 @@ export const verifyCode = async (phone: string, code: string): Promise<VerifyCod
   console.log('응답 데이터:', response.data);
   console.log('응답 헤더:', response.headers);
 
-  const token = response.headers['authorization'] || response.headers['Authorization'];
-  const accessToken = token.replace('Bearer ', '');
+  const accessToken = response.headers['verify'];
   setToken(accessToken);
 
   return response.data;

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 interface StepProps {
@@ -12,6 +13,8 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
   const [passwordMatch, setPasswordMatch] = useState<boolean | null>(null);
+
+  const router = useRouter();
 
   const validatePassword = (password: string) => {
     const isValid = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/.test(password);
@@ -37,10 +40,18 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const isFormValid = email && passwordValid && passwordMatch;
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="max-w-[340px] w-full mx-auto mt-[76px]">
+    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto">
+      <div className="max-w-[340px] w-full mx-auto mt-[30px]">
+      <Image
+          src={'/sign/LeftArrowIcon.svg'}
+          alt='뒤로가기'
+          width={24}
+          height={24}
+          className='cursor-pointer'
+          onClick={() => router.back()} 
+        />
         <Image
-          className='mb-12'
+          className="mt-6 mb-6"
           src={'/sign/ProgressBar3.svg'}
           alt="ProgressBar"
           width={360}
@@ -84,7 +95,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           )}
         </div>
 
-        <div className="mb-12">
+        <div className="">
           <div className="text-body3">비밀번호 확인</div>
           <input 
             type="password" 
@@ -102,15 +113,15 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             )}
           </div>
         </div>
+        </div>
 
         <button 
           onClick={onNext} 
           disabled={!isFormValid} 
-          className={`w-full py-3 rounded-lg text-lg ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`w-full max-w-[340px] py-3 mt-[60px] mb-[10px] rounded-[12px] text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>
-      </div>
     </div>
   );
 };

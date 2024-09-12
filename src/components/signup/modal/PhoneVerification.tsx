@@ -2,6 +2,7 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { sendVerificationCode, verifyCode } from '@/service/auth';
 import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
+import { useRouter } from 'next/navigation';
 
 interface PhoneVerificationProps {
   onNext: () => void;
@@ -19,6 +20,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   const [validTime, setValidTime] = useState<number>(300); // 인증 시간
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const router = useRouter();
+
   const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const regex = e.target.value
       .replace(/[^0-9]/g, '')
@@ -35,7 +38,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
 
   const handleRequest = async () => {
     try {
-      const data = await sendVerificationCode(phoneNumber);
+      const plainPhoneNumber = phoneNumber.replace(/-/g, '');
+      const data = await sendVerificationCode(plainPhoneNumber);
       console.log('인증 요청 성공:', data);
       setIsRequest(true); // 요청 상태 true
       setValidTime(300); // 인증 요청 시 타이머 초기화
@@ -48,7 +52,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   const handleResending = async () => {
     if (isComplete) return;
     try {
-      const data = await sendVerificationCode(phoneNumber);
+      const plainPhoneNumber = phoneNumber.replace(/-/g, '');
+      const data = await sendVerificationCode(plainPhoneNumber);
       console.log('인증 재요청 성공:', data);
       setValidNumber('');
       inputRef.current?.focus();
@@ -62,7 +67,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   const handleCertify = async () => {
     if (isComplete) return; // 이미 인증 완료된 상태면 return
     try {
-      const data = await verifyCode(phoneNumber, validNumber);
+      const plainPhoneNumber = phoneNumber.replace(/-/g, '');
+      const data = await verifyCode(plainPhoneNumber, validNumber);
       console.log('인증 완료:', data);
       setIsComplete(true); // 인증 검사 통과
       setIsError(false);
@@ -127,10 +133,18 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   }, [isError]);
 
   return (
-    <div>
-      <section className="max-w-[340px] w-full mx-auto mt-[76px]">
+    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto">
+      <section className="max-w-[340px] w-full mx-auto mt-[30px]">
         <Image
-          className="mb-12"
+          src={'/sign/LeftArrowIcon.svg'}
+          alt='뒤로가기'
+          width={24}
+          height={24}
+          className='cursor-pointer'
+          onClick={() => router.back()} 
+        />
+        <Image
+          className="mt-6 mb-6"
           src={'/sign/ProgressBar2.svg'}
           alt="ProgressBar"
           width={360}
@@ -233,19 +247,19 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
             </div>
           )}
         </div>
+        </section>
         {isComplete ? (
           <div
             onClick={handleComplete}
-            className="cursor-pointer flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gradient2 text-heading4 text-white"
+            className="w-full max-w-[340px] cursor-pointer flex items-center justify-center px-5 py-3 mt-[60px] mb-[10px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
           >
             다음으로
           </div>
         ) : (
-          <div className="flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gray100 text-heading4 text-gray400">
+          <div className="w-full max-w-[340px] flex items-center justify-center px-5 py-3 mt-[60px] mb-[10px] w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
             다음으로
           </div>
         )}
-      </section>
     </div>
   );
 };

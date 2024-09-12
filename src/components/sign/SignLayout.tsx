@@ -22,11 +22,11 @@ const SignLayout = () => {
   };
 
   return (
-    <div>
-      <nav className="w-full flex items-center justify-center border-b border-gray100">
-      </nav>
-      <section className="flex justify-center mt-24 mb-12">
-        <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <section className="flex justify-center mt-8 mb-6">
+        <Link href={'/'} className='cursor-pointer'>
+          <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
+        </Link>
       </section>
       <section className="flex flex-col items-center w-full px-4">
         <div className="mb-6">
@@ -61,13 +61,13 @@ const SignLayout = () => {
         </div>
         <div className='min-h-[20px] my-2'>
         {errorMessage && (
-          <div className="w-[320px] text-red-500 text-xs  text-center">
+          <div className="w-[320px] text-red-500 text-xs text-center">
             {errorMessage}
           </div>
         )}
         </div>
         <button 
-          className="w-[320px] bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-3 rounded-lg text-sm font-semibold mb-4"
+          className="w-[320px] bg-gradient-to-r font-bold text-lg from-purple-500 to-indigo-500 text-white py-3 rounded-lg mb-4"
           onClick={handleLogin}
         >
           로그인

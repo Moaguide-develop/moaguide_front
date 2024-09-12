@@ -121,8 +121,8 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
   }, [isError]);
 
   return (
-    <div>
-      <section className="max-w-[340px] w-full mx-auto mt-[30px]">
+    <div className='find-inner-container flex flex-col items-center min-h-[calc(100vh-220px)] w-[340px]'>
+      <section className="w-full mx-auto mt-[30px]">
         <div className="text-heading3">
           <h2 className="text-xl font-bold mb-6 text-left">
             휴대폰 번호를<br />
@@ -220,19 +220,21 @@ const FindEmail = ({ onEmailFound }: { onEmailFound: () => void }) => {
             </div>
           )}
         </div>
+        </section>
+        <div className='w-full max-w-[340px]'>
         {isComplete ? (
           <div
             onClick={handleComplete}
-            className="cursor-pointer flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gradient2 text-heading4 text-white"
+            className="cursor-pointer flex items-center justify-center px-5 py-3 mt-[60px] mb-[10px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
           >
             다음으로
           </div>
         ) : (
-          <div className="flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gray100 text-heading4 text-gray400">
+          <div className="flex items-center justify-center px-5 py-3 mt-[60px] mb-[10px] w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
             다음으로
           </div>
         )}
-      </section>
+        </div>
     </div>
   );
 };
