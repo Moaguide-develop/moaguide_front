@@ -14,7 +14,7 @@ const ReportDetailIndex = ({ data }: { data: ReportListsItem }) => {
   const downloadPDF = useDownloadPDF('/images/logo.svg', reportContentRef, data.title);
 
   return (
-    <div>
+    <div className="px-5 sm:px-0">
       {/* 리포트 */}
       <div className="my-[28px]" ref={reportContentRef}>
         {/* 리포트 헤더 */}
