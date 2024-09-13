@@ -8,16 +8,27 @@ import Report from '@/components/product/Report';
 import React, { useState } from 'react';
 import ProductIsdealSort from '@/components/product/ProductIsdealSort';
 import ProductDealContentList from '@/components/product/ProductDealContentList';
-import { ISummaryData, IReportData, IProductDetailData } from '@/types/Diviend';
+import {
+  ISummaryData,
+  IReportData,
+  IProductDealDetailData,
+  IProductEndRecruitmentData,
+  IProductRecruitmentData
+} from '@/types/Diviend';
 import ProductClassification from './ProductClassification';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ProductRecruitmentSort from './ProductRecruitmentSort';
 import ProductEndRecruitmentSort from './ProductEndRecruitmentSort';
+import ProductRecruitmentContentList from './ProductRecruitmentContentList';
+import ProductEndRecruitmentContentList from './ProductEndRecruitmentContentList';
 
 interface IProductBuildingProps extends ISummaryData, IReportData {
-  content: IProductDetailData['product'];
-  totalPages: IProductDetailData['totalPages'];
-  pageNumber: IProductDetailData['pageable']['pageNumber'];
+  content:
+    | IProductDealDetailData['product']
+    | IProductEndRecruitmentData['product']
+    | IProductRecruitmentData['product'];
+  totalPages: IProductDealDetailData['totalPages'];
+  pageNumber: IProductDealDetailData['pageable']['pageNumber'];
 }
 
 const Product = ({
@@ -94,11 +105,25 @@ const Product = ({
       </Container>
       <div className=" mt-[10px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
 
-      <ProductDealContentList
-        content={contentData}
-        totalPages={totalPages}
-        pageNumber={pageNumber}
-      />
+      {sorted === 'start' ? (
+        <ProductRecruitmentContentList
+          content={contentData as IProductRecruitmentData['product']}
+          totalPages={totalPages}
+          pageNumber={pageNumber}
+        />
+      ) : sorted === 'end' ? (
+        <ProductEndRecruitmentContentList
+          content={contentData as IProductEndRecruitmentData['product']}
+          totalPages={totalPages}
+          pageNumber={pageNumber}
+        />
+      ) : (
+        <ProductDealContentList
+          content={contentData as IProductDealDetailData['product']}
+          totalPages={totalPages}
+          pageNumber={pageNumber}
+        />
+      )}
     </div>
   );
 };
