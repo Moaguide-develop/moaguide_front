@@ -31,3 +31,32 @@ export const getEducationRoadmap = (category: string) => {
     ...queryProps
   };
 };
+
+const fetchEducationSubRoadmap = async (id: string) => {
+  try {
+    const { data } = await axios.get(`https://api.moaguide.com/study/guide/${id}`);
+    return data;
+  } catch (e) {
+    throw new Error('Failed to fetch main product data');
+  }
+};
+
+export const getEducationSubRoadmap = (id: string) => {
+  const queryKey = ['EducationSubRoadmap', id];
+
+  const { data, error, ...queryProps } = useQuery<EducationRoadmaps[]>({
+    queryKey,
+    queryFn: () => fetchEducationSubRoadmap(id),
+    enabled: !!id
+  });
+
+  if (error) {
+    console.error('Error fetching realtime rank:', error);
+  }
+
+  return {
+    data,
+    error,
+    ...queryProps
+  };
+};

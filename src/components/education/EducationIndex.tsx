@@ -1,12 +1,14 @@
 'use client';
-import { getEducationRoadmap } from '@/factory/EducationDetail';
+import { getEducationRoadmap, getEducationSubRoadmap } from '@/factory/EducationDetail';
 import React, { useState } from 'react';
 import RoadMapItem from './RoadMapItem';
 
 const EducationIndex = () => {
   const [category, setCategory] = useState('guide');
+  const [roadmap, setRoadmap] = useState('');
 
   const { data } = getEducationRoadmap(category);
+  const { data: subRoadmapData } = getEducationSubRoadmap(roadmap);
 
   return (
     <div className="max-w-[1000px] w-full mx-auto">
@@ -33,7 +35,15 @@ const EducationIndex = () => {
       </div>
       {/* 로드맵 아이템 */}
       <ul className="mt-6 flex flex-col gap-10">
-        {data?.map((item, i) => <RoadMapItem {...item} />)}
+        {data?.map((item, i) => (
+          <RoadMapItem
+            subRoadmapData={subRoadmapData}
+            key={i}
+            roadmap={roadmap}
+            setRoadmap={setRoadmap}
+            {...item}
+          />
+        ))}
       </ul>
 
       <div className="h-20" />
