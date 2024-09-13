@@ -26,7 +26,7 @@ const FindTabs = () => {
       {!showEmailInfo ? ( 
         <>
         <div className="custom-container flex flex-col items-center overflow-y-auto w-full mb-[90px]">
-          <div className='max-w-[340px] w-full mx-auto mt-[30px]'>
+          <div className='max-w-[340px] w-full mx-auto mt-[30px] sm:mt-[100px]'>
           <div className="self-start">
             <Image
               src={'/sign/LeftArrowIcon.svg'}
