@@ -79,7 +79,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           회원가입을 위해<br />
           <span className="text-purple-600">이용약관에 동의</span>해주세요
         </h2>
-        <div className="space-y-4">
+        <div className="">
           <div
             onClick={handleAllCheckedChange}
             className={`flex items-center p-4 border rounded-lg cursor-pointer ${
