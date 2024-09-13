@@ -14,17 +14,17 @@ const ReportIndex = () => {
 
   return (
     <div>
-      <nav className="w-full flex items-center justify-center border-b border-gray100">
+      <nav className="bg-bg sm:bg-white px-4 sm:px-0 w-full flex items-center justify-center border-b border-gray100">
         <ReportCategory />
       </nav>
       <Container>
-        <section className="flex justify-center mt-6 pb-[29px]">
+        <section className="hidden sm:flex justify-center mt-6 pb-[29px]">
           <img src="/images/report/report_main.svg" alt="" />
         </section>
-        <section>
+        <section className="px-5 sm:px-0">
           <CategoryReport />
         </section>
-        <div className="h-12" />
+        <div className="h-[100px] sm:h-12" />
       </Container>
     </div>
   );

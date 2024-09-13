@@ -25,7 +25,7 @@ const CategoryNews = () => {
 
   return (
     <div className="mt-4 sm:mt-5 px-5 sm:px-0">
-      <div className="mt-5 sm:mt-8 flex justify-between sm:justify-start items-center gap-5 border-b border-gray100 text-title2 sm:text-title2">
+      <div className="mt-5 sm:mt-8 flex justify-between sm:justify-start items-center gap-5 border-b border-gray100 text-body5 sm:text-title2">
         <div
           onClick={() => {
             setCategory('all');
@@ -77,7 +77,7 @@ const CategoryNews = () => {
             onClick={() => {
               setSort('latest');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-caption2 sm:text-body6 cursor-pointer
+            className={`flex items-center gap-1 px-[6px] sm:px-[10px] py-1 sm:py-2 rounded-[100px] text-caption2 sm:text-body6 cursor-pointer
           ${sort === 'latest' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}
           `}>
             최신순
@@ -91,7 +91,7 @@ const CategoryNews = () => {
             onClick={() => {
               setSort('popular');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-caption2 sm:text-body6 cursor-pointer
+            className={`flex items-center gap-1 px-[6px] sm:px-[10px] py-1 sm:py-2 rounded-[100px] text-caption2 sm:text-body6 cursor-pointer
           ${sort === 'popular' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}
           `}>
             인기순
