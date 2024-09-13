@@ -39,7 +39,6 @@ export interface MainProductItem {
   price: number;
   priceRate: number;
   totalPrice: number;
-  dividend: number;
   lastDivide_rate: number;
 }
 
