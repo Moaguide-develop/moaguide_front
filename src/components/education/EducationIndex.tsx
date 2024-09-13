@@ -1,14 +1,20 @@
 'use client';
+import { getEducationRoadmap } from '@/factory/EducationDetail';
 import React, { useState } from 'react';
+import RoadMapItem from './RoadMapItem';
 
 const EducationIndex = () => {
   const [category, setCategory] = useState('guide');
 
+  const { data } = getEducationRoadmap(category);
+
   return (
     <div className="max-w-[1000px] w-full mx-auto">
+      {/* 캐러셀 이미지 */}
       <div className="mt-[26px] flex justify-center">
         <img src="/images/education/edu_main.svg" alt="" />
       </div>
+      {/* 카테고리 */}
       <div className="mt-8 flex items-center gap-5 border-b border-gray100 text-title2">
         <div
           onClick={() => {
@@ -25,6 +31,12 @@ const EducationIndex = () => {
           아티클
         </div>
       </div>
+      {/* 로드맵 아이템 */}
+      <ul className="mt-6 flex flex-col gap-10">
+        {data?.map((item, i) => <RoadMapItem {...item} />)}
+      </ul>
+
+      <div className="h-20" />
     </div>
   );
 };
