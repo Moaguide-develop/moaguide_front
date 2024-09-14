@@ -8,7 +8,7 @@ interface ProductSortProps {
   setSort: Dispatch<SetStateAction<string>>;
 }
 
-const ProductSort = ({ sort, setSort }: ProductSortProps) => {
+const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
   // const [sort, setSort] = useState(filter);
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
@@ -18,7 +18,7 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
 
   const handleClick = (key: string) => {
     params.set('sort', key);
-    router.replace(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
   return (
     <div>
@@ -29,15 +29,15 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('profit');
-              handleClick('profit');
+              handleClick('lastDivide_rate desc');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sort === 'profit' || sorted == null ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            ${sorted === 'lastDivide_rate desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
             수익률순
             <Image
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sort === 'profit' ? 'block' : 'hidden'}`}
+              className={`${sorted === 'lastDivide_rate desc' ? 'block' : 'hidden'}`}
               width={20}
               height={20}
             />
@@ -45,15 +45,15 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('inquiry');
-              handleClick('inquiry');
+              handleClick('views desc');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sort === 'inquiry' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            ${sorted === 'views desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
             조회순
             <Image
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sort === 'inquiry' ? 'block' : 'hidden'}`}
+              className={`${sorted === 'views desc' ? 'block' : 'hidden'}`}
               width={20}
               height={20}
             />
@@ -62,15 +62,15 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('currentprice');
-              handleClick('currentprice');
+              handleClick('priceRate desc');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sort === 'currentprice' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            ${sorted === 'priceRate desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
             현재가순
             <Image
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sort === 'currentprice' ? 'block' : 'hidden'}`}
+              className={`${sorted === 'priceRate desc' ? 'block' : 'hidden'}`}
               width={20}
               height={20}
             />
@@ -79,15 +79,15 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('alphabetical ');
-              handleClick('alphabetical');
+              handleClick('name');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sort === 'alphabetical ' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            ${sorted === 'name' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
             가나다순
             <Image
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sort === 'alphabetical ' ? 'block' : 'hidden'}`}
+              className={`${sorted === 'name' ? 'block' : 'hidden'}`}
               width={20}
               height={20}
             />
@@ -98,4 +98,4 @@ const ProductSort = ({ sort, setSort }: ProductSortProps) => {
   );
 };
 
-export default ProductSort;
+export default ProductIsdealSort;
