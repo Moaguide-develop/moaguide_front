@@ -112,3 +112,28 @@ export const logout = async () => {
     console.error('로그아웃 오류:', error);
   }
 };
+
+export const sendEmail = async (email: string) => {
+  try {
+    const response = await basicAxiosInstance.post(`/user/send/mail?email=${email}`);
+    console.log('이메일 전송 성공:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('이메일 전송 실패:', error);
+    throw error;
+  }
+};
+
+export const verifyEmailCode = async (email: string, code: string) => {
+  try {
+    const response = await basicAxiosInstance.post('/user/verify/mail', {
+      email,
+      code,
+    });
+    console.log('인증 완료:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('인증 실패:', error);
+    throw error;
+  }
+};
