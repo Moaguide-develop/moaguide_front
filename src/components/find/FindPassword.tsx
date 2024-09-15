@@ -15,6 +15,11 @@ const FindPassword = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
 
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
+  const [passwordMatch, setPasswordMatch] = useState<boolean | null>(null);
+
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -61,6 +66,26 @@ const FindPassword = () => {
       console.error('인증 실패:', error);
       setIsError(true); 
     }
+  };
+
+  const validatePassword = (password: string) => {
+    const isValid = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/.test(password);
+    setPasswordValid(isValid);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    validatePassword(newPassword);
+    if (confirmPassword) {
+      setPasswordMatch(newPassword === confirmPassword);
+    }
+  };
+
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newConfirmPassword = e.target.value;
+    setConfirmPassword(newConfirmPassword);
+    setPasswordMatch(newConfirmPassword === password);
   };
 
   useEffect(() => {
@@ -219,21 +244,46 @@ const FindPassword = () => {
 
             <div className="mt-10">
               <div className="text-body3">새 비밀번호</div>
-              <div className="flex items-center mt-2">
-                <input
-                  type="password"
-                  placeholder="새 비밀번호 입력"
-                  className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal" />
+              <div className="flex flex-col items-center mt-2">
+              <input 
+                type="password" 
+                placeholder="비밀번호 입력"
+                value={password}
+                onChange={handlePasswordChange}
+                className={`w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
+                ${password ? (passwordValid ? 'outline-success' : 'focus:outline-normal') : ''}`}
+              />
+               {!password && (
+                  <p className="w-full mr-auto text-[#6E6F73] text-xs mt-2">영문, 숫자, 특수문자 포함 8-20자로 입력해주세요.</p>
+                )}
+                {password && passwordValid === false && (
+                  <p className="w-full mr-auto  text-red-500 text-xs mt-2">비밀번호 양식에 맞지 않습니다.</p>
+                )}
+                {passwordValid === true && (
+                  <p className="w-full mr-auto text-blue-500 text-xs mt-2">사용 가능한 비밀번호입니다.</p>
+                )}
               </div>
             </div>
 
             <div className="mt-[28px]">
               <div className="text-body3">비밀번호 확인</div>
-              <div className="flex items-center mt-2">
-                <input
-                  type="password"
+              <div className="flex flex-col items-center mt-2">
+                <input 
+                  type="password" 
                   placeholder="비밀번호 재입력"
-                  className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal" />
+                  value={confirmPassword}
+                  onChange={handleConfirmPasswordChange}
+                  className={`w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
+                  ${password ? (passwordMatch ? 'outline-success' : 'focus:outline-normal') : ''}`}
+                />
+                 <div className="w-full mr-auto mt-1 min-h-[25px]">
+                  {passwordMatch === false && (
+                    <p className="w-full mr-auto text-red-500 text-xs">비밀번호가 일치하지 않습니다.</p>
+                  )}
+                  {passwordMatch === true && (
+                    <p className="w-full mr-auto text-blue-500 text-xs">비밀번호가 일치합니다.</p>
+                  )}
+                </div>
               </div>
             </div>
           </section>
