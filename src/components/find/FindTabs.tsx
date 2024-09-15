@@ -2,28 +2,21 @@
 
 import React, { useEffect, useState } from 'react';
 import FindEmail from './FindEmail';
-import ShowEmailInfo from './ShowEmailInfo';
 import FindPassword from './FindPassword';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 const FindTabs = () => {
   const [activeTab, setActiveTab] = useState('email');
-  const [showEmailInfo, setShowEmailInfo] = useState(false);
 
   const handleTabClick = (tab: React.SetStateAction<string>) => {
     setActiveTab(tab);
-  };
-
-  const handleEmailFound = () => {
-    setShowEmailInfo(true); 
   };
 
   const router = useRouter();
 
   return (
     <div className='flex flex-col items-center justify-center'>
-      {!showEmailInfo ? ( 
         <>
         <div className="custom-container flex flex-col items-center overflow-y-auto w-full mb-[90px]">
           <div className='max-w-[340px] w-full mx-auto mt-[30px] sm:mt-[100px]'>
@@ -54,14 +47,11 @@ const FindTabs = () => {
           </div>
 
           <div className="">
-            {activeTab === 'email' && <FindEmail onEmailFound={handleEmailFound} />}
+            {activeTab === 'email' && <FindEmail />}
             {activeTab === 'password' && <FindPassword/>}
           </div>
           </div>
         </>
-      ) : (
-        <ShowEmailInfo /> 
-      )}
     </div>
   );
 };
