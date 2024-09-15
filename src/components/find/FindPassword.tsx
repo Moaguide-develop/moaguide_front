@@ -296,9 +296,15 @@ const FindPassword = () => {
           transition={{ duration: 0.5 }}
           className="w-full mx-auto"
         >
-        <div className="flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white">
+        {passwordMatch ? (
+          <div className="flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white cursor-pointer">
             비밀번호 재설정
           </div>
+        ) : (
+          <div className="flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
+            비밀번호 재설정
+          </div>
+        )}
         </motion.div>
       </>
       )}
