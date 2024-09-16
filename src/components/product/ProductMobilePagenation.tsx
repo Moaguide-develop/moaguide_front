@@ -35,7 +35,7 @@ const ProductMobilePagenation = ({ totalPages }: PaginationProps) => {
     setCurrentPage(page);
     const params = new URLSearchParams(searchParams.toString());
     params.set('page', page.toString());
-    router.replace(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
 
   const handleNextRange = () => {

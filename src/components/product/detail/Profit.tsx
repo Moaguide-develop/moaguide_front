@@ -129,7 +129,7 @@ const Profit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px] ">상품명</div>
-            <div className="">{data?.buildingDetail.productId.name}</div>
+            {/* <div className="">{data?.buildingDetail.productId.name}</div> */}
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
