@@ -10,7 +10,7 @@ import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useState } from 'react';
 import { getProductDetail } from '@/factory/ProductDetail';
-const Detailpage = (props: any) => {
+const BuildingDetailpage = (props: any) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
   console.log(url);
@@ -139,4 +139,4 @@ const Detailpage = (props: any) => {
   );
 };
 
-export default Detailpage;
+export default BuildingDetailpage;

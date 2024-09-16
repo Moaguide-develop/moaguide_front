@@ -1,6 +1,12 @@
 import Navbar from '@/components/common/Navbar';
 import Product from '@/components/product/Product';
-import { IProductDetailData, IReport, ISummaryData } from '@/types/Diviend';
+import {
+  IProductCommon,
+  IProductDealDetailData,
+  IProductRecruitmentData,
+  IReport,
+  ISummaryData
+} from '@/types/Diviend';
 
 const ProductPage = async ({
   params,
@@ -37,7 +43,7 @@ const ProductPage = async ({
 
   const buildingReportData: IReport[] = await buildingReportResponse.json();
 
-  const productDetailData: IProductDetailData = await productDetailResponse.json();
+  const productDetailData: IProductCommon = await productDetailResponse.json();
   console.log(productDetailData);
   return (
     <div>
