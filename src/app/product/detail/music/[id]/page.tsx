@@ -3,20 +3,19 @@
 import Container from '@/components/common/Container';
 import NavBar from '@/components/product/detail/NavBar';
 import News from '@/components/product/detail/News';
-import ProductDetail from '@/components/product/detail/ProductDetail';
-import Profit from '@/components/product/detail/Profit';
+import BuildingProductDetail from '@/components/product/detail/building/BuildingProductDetail';
+import BuildingProfit from '@/components/product/detail/building/BuildingProfit';
 import Notice from '@/components/product/detail/Notice';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useState } from 'react';
-import { getProductDetail } from '@/factory/ProductDetail';
-
+import { getBuildingProductDetail } from '@/factory/ProductDetail/BuildingProductDetail';
 import { CATEGORY } from '@/static/category';
-const MusicDetailpage = (props: any) => {
+const BuildingDetailpage = (props: any) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
   console.log(url);
-  const { data, isLoading, isError } = getProductDetail(props.params.id);
+  const { data, isLoading, isError } = getBuildingProductDetail(props.params.id);
   console.log(data);
   return (
     <div>
@@ -70,7 +69,7 @@ const MusicDetailpage = (props: any) => {
             <div className="flex flex-col desk2:ml-[28px] desk:ml-[15px] ">
               <div className="flex">
                 <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center mb-[13px] ">
-                  {data?.category === 'building' ? '부동산' : '오류'}
+                  {CATEGORY[data?.category as string]}
                 </div>
                 <div className="text-gray-400 ml-[3px]">{data?.platform}</div>
               </div>
@@ -133,12 +132,12 @@ const MusicDetailpage = (props: any) => {
       ) : sort === 'report' ? (
         <Report />
       ) : sort === 'profit' ? (
-        <Profit url={url} />
+        <BuildingProfit url={url} />
       ) : sort === 'detail' ? (
-        <ProductDetail url={url} />
+        <BuildingProductDetail url={url} />
       ) : undefined}
     </div>
   );
 };
 
-export default MusicDetailpage;
+export default BuildingDetailpage;
