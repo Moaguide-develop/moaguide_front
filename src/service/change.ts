@@ -40,3 +40,15 @@ export const changePassword = async (password: string): Promise<string> => {
         throw error;
     }
 };
+
+
+export const changePasswordinFind = async (email:string, password: string): Promise<string> => {
+    try {
+        const response = await axiosInstance.patch('/user/update/password', { email, password });
+        console.log(response);
+        return response.data;
+    } catch (error) {
+        console.error('비밀번호 변경 실패:', error);
+        throw error;
+    }
+};
