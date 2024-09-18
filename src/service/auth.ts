@@ -10,22 +10,60 @@ export const sendVerificationCode = async (phone: string): Promise<SendCodeRespo
   return response.data;
 };
 
-export const verifyCode = async (phone: string, code: string): Promise<VerifyCodeResponse> => {
-  const response = await basicAxiosInstance.post('/signup/verify/code', { phone, code });
-  console.log('응답 데이터:', response.data);
-  console.log('응답 헤더:', response.headers);
 
-  const accessToken = response.headers['verify'];
-  setToken(accessToken);
+export const verifyCode = async (phone: string, code: string): Promise<VerifyCodeResponse> => {
+  const response = await basicAxiosInstance.post('/signup/verify/code', { 
+    phone,
+    code
+   });
+
+  console.log('응답 데이터:', response.data);
+  const token = response.headers['Verify'] || response.headers['verify'];
+  console.log('응답 토큰', token);
+  setToken(token);
 
   return response.data;
 };
+
+// export const verifyCode = async (phone: string, code: string): Promise<VerifyCodeResponse> => {
+//   try {
+//     const response = await fetch('https://api.moaguide.com/signup/verify/code', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({ phone, code }),
+//     });
+
+
+//     const responseText = await response.text();
+//     console.log('응답 텍스트:', responseText);
+
+//     for (let [key, value] of response.headers) {
+//       console.log(`${key} = ${value}`);
+//     }
+//     // 응답 헤더 처리
+//     const verifyHeader = response.headers.get('verify') || response.headers.get('Verify');
+//     if (verifyHeader) {
+//       console.log('Verify 헤더:', verifyHeader);
+//     } else {
+//       console.error('Verify 헤더를 찾을 수 없습니다.');
+//     }
+
+//     // 응답 텍스트가 JSON으로 변환되지 않으면 그대로 반환
+//     return responseText as unknown as VerifyCodeResponse;
+//   } catch (error) {
+//     console.error('API 호출 중 오류 발생:', error);
+//     throw error;
+//   }
+// };
+
 
 export const checkNicknameAvailability = async (nickname: string): Promise<NicknameCheckResponse | null> => {
   try {
     const response = await basicAxiosInstance.post('/signup/verify/nickname', { nickname });
     if (response.status === 200) {
-      console.log('응답 성공:', response);  // 전체 응답 객체를 출력
+      console.log('응답 성공:', response);  
       return response.data;
     } else {
       console.error('서버 오류 응답 상태:', response.status);
@@ -128,12 +166,27 @@ export const verifyEmailCode = async (email: string, code: string) => {
   try {
     const response = await basicAxiosInstance.post('/user/verify/mail', {
       email,
-      code,
+      code
     });
     console.log('인증 완료:', response.data);
+
     return response.data;
   } catch (error) {
     console.error('인증 실패:', error);
+    throw error;
+  }
+};
+
+export const getUserEmail = async (token: string) => {
+  try {
+    const response = await basicAxiosInstance.get('/user/email', {
+      headers: {
+        'verify': `${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('이메일 정보 요청 실패:', error);
     throw error;
   }
 };

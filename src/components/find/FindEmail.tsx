@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { sendVerificationCode, verifyCode } from '@/service/auth';
+import { getUserEmail, sendVerificationCode, verifyCode } from '@/service/auth';
 import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import { motion } from 'framer-motion';
@@ -16,6 +16,7 @@ const FindEmail = () => {
   const [validTime, setValidTime] = useState<number>(300); // 인증 시간
   const inputRef = useRef<HTMLInputElement>(null);
   const [showUserEmail, setShowUserEmail] = useState(false);
+  const [userEmail, setUserEmail] = useState(''); 
 
   const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const regex = e.target.value
@@ -69,11 +70,28 @@ const FindEmail = () => {
     }
   };
 
-  const handleComplete = () => {
-    if (isComplete) {
-      setShowUserEmail(true);
-    }
+  const handleComplete = async () => {
+      try {
+        const token = localStorage.getItem('access_token'); 
+        console.log(token);
+        if (token) {
+          const data = await getUserEmail(token); 
+          console.log('이메일 정보:', data);
+          console.log(userEmail);
+          setUserEmail(data); 
+          setShowUserEmail(true); 
+        } else {
+          console.error('토큰을 찾을 수 없습니다.');
+        }
+      } catch (error) {
+        console.error('이메일 정보 요청 실패:', error);
+      }
   };
+
+  useEffect(() => {
+    handleComplete(); 
+  }, []);
+ 
 
   useEffect(() => {
     if (phoneNumber.length === 13) {
@@ -252,7 +270,7 @@ const FindEmail = () => {
             가입하신<br />
             <span className="text-purple-600">이메일 정보</span>입니다
           </h2>
-          <div className="w-full py-8 px-4 text-center bg-gray-100 rounded-lg my-10">Moaguide@gmail.com</div>
+          <div className="w-full py-8 px-4 text-center rounded-lg my-10 text-black">{userEmail ? userEmail : 'No email available'}</div>
           </section>
         </motion.div>
         <motion.div

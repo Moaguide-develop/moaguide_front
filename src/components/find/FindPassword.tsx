@@ -2,6 +2,7 @@ import { sendEmail, verifyEmailCode } from '@/service/auth';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion'; 
+import { changePassword } from '@/service/change';
 
 const FindPassword = () => {
   const [email, setEmail] = useState<string>(''); 
@@ -113,6 +114,18 @@ const FindPassword = () => {
       setShowPasswordReset(true); 
     }
   };
+
+  const handlePasswordReset = async () => {
+    if (passwordMatch && passwordValid) {
+      try {
+        await changePassword(password);
+        console.log('비밀번호 재설정 성공');
+      } catch (error) {
+        console.error('비밀번호 재설정 실패:', error);
+      }
+    }
+  };
+
 
   return (
     <div className='find-inner-container flex flex-col items-center min-h-[calc(100vh-220px)] w-[340px]'>
@@ -297,7 +310,7 @@ const FindPassword = () => {
           className="w-full mx-auto"
         >
         {passwordMatch ? (
-          <div className="flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white cursor-pointer">
+          <div className="flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white cursor-pointer" onClick={handlePasswordReset}>
             비밀번호 재설정
           </div>
         ) : (
