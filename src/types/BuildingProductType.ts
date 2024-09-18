@@ -22,7 +22,7 @@ export interface IreportItem {
   date: string;
 }
 
-export interface IProductDetail {
+export interface IBuildingProductDetail {
   productId: string;
   name: string;
   category: string;
@@ -36,7 +36,7 @@ export interface IProductDetail {
   link: string;
 }
 
-export interface IProductProfitDetail {
+export interface IBuildingProductProfitDetail {
   product_Id: string;
   publish: {
     name: string;
@@ -115,7 +115,7 @@ export interface IProductProfitDetail {
   }[];
 }
 
-export interface IProductType extends IProductDetail {
+export interface IProductType extends IBuildingProductDetail {
   notices: INoticeItem[];
   news: INewsItem[];
   reports: IreportItem[];
