@@ -2,7 +2,7 @@ import { sendEmail, verifyEmailCode } from '@/service/auth';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion'; 
-import { changePassword } from '@/service/change';
+import { changePassword, changePasswordinFind } from '@/service/change';
 
 const FindPassword = () => {
   const [email, setEmail] = useState<string>(''); 
@@ -118,7 +118,7 @@ const FindPassword = () => {
   const handlePasswordReset = async () => {
     if (passwordMatch && passwordValid) {
       try {
-        await changePassword(password);
+        await changePasswordinFind(email, password);
         console.log('비밀번호 재설정 성공');
       } catch (error) {
         console.error('비밀번호 재설정 실패:', error);

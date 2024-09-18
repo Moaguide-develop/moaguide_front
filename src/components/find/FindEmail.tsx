@@ -18,6 +18,8 @@ const FindEmail = () => {
   const [showUserEmail, setShowUserEmail] = useState(false);
   const [userEmail, setUserEmail] = useState(''); 
 
+  const [AllComplete, setAllComplete] = useState(false); // 인증번호 인증 성공
+  
   const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const regex = e.target.value
       .replace(/[^0-9]/g, '')
@@ -78,6 +80,7 @@ const FindEmail = () => {
           const data = await getUserEmail(token); 
           console.log('이메일 정보:', data);
           console.log(userEmail);
+          setAllComplete(true);
           setUserEmail(data); 
           setShowUserEmail(true); 
         } else {
@@ -88,10 +91,13 @@ const FindEmail = () => {
       }
   };
 
+
   useEffect(() => {
-    handleComplete(); 
-  }, []);
- 
+    if (AllComplete) {
+      handleComplete();
+    }
+  }, [AllComplete]);
+  
 
   useEffect(() => {
     if (phoneNumber.length === 13) {
