@@ -64,14 +64,18 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     }
   };
 
-
   const handleBirthdateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, '');
-    if (value.length <= 8) {
-      const formattedDate = value.length === 8 ? `${value.slice(0, 4)}.${value.slice(4, 6)}.${value.slice(6, 8)}` : value;
-      setBirthdate(formattedDate);
-      setIsBirthdateValid(value.length === 8);
-    }
+    const value = e.target.value.replace(/\D/g, ''); // 숫자만 추출
+    const formattedDate = formatBirthDateInput(value);
+    setBirthdate(formattedDate);
+    setIsBirthdateValid(value.length === 8);
+  };
+
+  const formatBirthDateInput = (value: string): string => {
+    // 생년월일 포맷팅
+    if (value.length <= 4) return value;
+    if (value.length <= 6) return `${value.slice(0, 4)}.${value.slice(4)}`;
+    return `${value.slice(0, 4)}.${value.slice(4, 6)}.${value.slice(6, 8)}`;
   };
 
   const handleInvestmentExperienceChange = (experience: string) => {
@@ -100,7 +104,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   return (
     <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto mb-[90px]">
       <div className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-[100px]">
-      <Image
+        <Image
           src={'/sign/LeftArrowIcon.svg'}
           alt='뒤로가기'
           width={24}
@@ -118,7 +122,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <h2 className="text-xl font-bold mb-6 leading-tight">
           모아가이드에서 사용할<br /><span className="text-purple-600">상세정보</span>를 입력해주세요
         </h2>
-        <div className="mb-4">
+        <div className="">
           <div className="text-body3">닉네임</div>
           <div className="flex items-center mt-2">
             <input
@@ -136,17 +140,16 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
               중복확인
             </div>
           </div>
-          <div className="">
+          <div className="min-h-8 flex items-center">
             {isNicknameValid === true && (
-              <p className="text-blue-500 text-xs mt-2">사용 가능한 닉네임입니다.</p>
+              <p className="text-blue-500 text-xs">사용 가능한 닉네임입니다.</p>
             )}
             {isNicknameValid === false && (
-              <p className="text-red-500 text-xs mt-2">이미 사용중인 닉네임입니다.</p>
+              <p className="text-red-500 text-xs">이미 사용중인 닉네임입니다.</p>
             )}
+            </div>
           </div>
-        </div>
-
-        <div className="mb-4">
+        <div className="mb-8">
           <div className="text-body3">이름</div>
           <input
             type="text"
@@ -157,7 +160,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           />
         </div>
 
-        <div className='mb-4'>
+        <div className='mb-8'>
           <div className="text-body3">생년월일</div>
           <input
             type="text"
@@ -168,7 +171,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           />
         </div>
 
-        <div className="mb-4">
+        <div className="mb-8">
           <div className="text-body3">투자 경험</div>
           <div className='flex w-full mt-2'>
             <button
@@ -187,14 +190,14 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         </div>
 
         {investmentExperience === 'yes' && (
-          <div className="mb-4">
+          <div className="mb-8">
             <div className="text-body3">투자 경력 (N년)</div>
-            <div className='flex'>
+            <div className='flex justify-end items-center mt-2'>
               <input
                 type="text"
                 value={investmentYears}
                 onChange={handleInvestmentYearsChange}
-                className="w-full mt-2 py-3 px-4 rounded-[12px] border border-gray-100 focus:outline-normal"
+                className="w-full py-3 px-4 rounded-[12px] border border-gray-100 focus:outline-normal text-right"
               />
               <div className="text-body3 my-auto ml-2">년</div>
             </div>
@@ -202,14 +205,13 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         )}
       </div>
 
-        <button
-          onClick={handleComplete}
-          disabled={!isFormValid}
-          className={`w-full max-w-[340px] mt-[60px] py-3 rounded-[12px] text-white text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray-100 text-gray-400'}`}
-        >
-          가입완료
-        </button>
-
+      <button
+        onClick={handleComplete}
+        disabled={!isFormValid}
+        className={`w-full max-w-[340px] mt-6 py-3 px-4 rounded-lg text-white ${isFormValid ? 'bg-purple-600' : 'bg-gray-300 cursor-not-allowed'}`}
+      >
+        완료
+      </button>
     </div>
   );
 };

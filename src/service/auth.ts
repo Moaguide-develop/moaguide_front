@@ -10,13 +10,17 @@ export const sendVerificationCode = async (phone: string): Promise<SendCodeRespo
   return response.data;
 };
 
-export const verifyCode = async (phone: string, code: string): Promise<VerifyCodeResponse> => {
-  const response = await basicAxiosInstance.post('/signup/verify/code', { phone, code });
-  console.log('응답 데이터:', response.data);
-  console.log('응답 헤더:', response.headers);
 
-  const accessToken = response.headers['verify'];
-  setToken(accessToken);
+export const verifyCode = async (phone: string, code: string): Promise<VerifyCodeResponse> => {
+  const response = await basicAxiosInstance.post('/signup/verify/code', { 
+    phone,
+    code
+   });
+
+  console.log('응답 데이터:', response.data);
+  const token = response.headers['Verify'] || response.headers['verify'];
+  console.log('응답 토큰', token);
+  setToken(token);
 
   return response.data;
 };
@@ -25,7 +29,7 @@ export const checkNicknameAvailability = async (nickname: string): Promise<Nickn
   try {
     const response = await basicAxiosInstance.post('/signup/verify/nickname', { nickname });
     if (response.status === 200) {
-      console.log('응답 성공:', response);  // 전체 응답 객체를 출력
+      console.log('응답 성공:', response);  
       return response.data;
     } else {
       console.error('서버 오류 응답 상태:', response.status);
@@ -110,5 +114,49 @@ export const logout = async () => {
     }
   } catch (error) {
     console.error('로그아웃 오류:', error);
+  }
+};
+
+export const sendEmail = async (email: string) => {
+  try {
+    const response = await basicAxiosInstance.post(`/user/send/mail?email=${email}`);
+    console.log('이메일 전송 성공:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('이메일 전송 실패:', error);
+    throw error;
+  }
+};
+
+export const verifyEmailCode = async (email: string, code: string) => {
+  try {
+    const response = await basicAxiosInstance.post('/user/verify/mail', {
+      email,
+      code
+    });
+    console.log('인증 완료:', response.data);
+
+    const token = response.headers['Verify'] || response.headers['verify'];
+    console.log('응답 토큰', token);
+    setToken(token);
+
+    return response.data;
+  } catch (error) {
+    console.error('인증 실패:', error);
+    throw error;
+  }
+};
+
+export const getUserEmail = async (token: string) => {
+  try {
+    const response = await basicAxiosInstance.get('/user/email', {
+      headers: {
+        'verify': `${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('이메일 정보 요청 실패:', error);
+    throw error;
   }
 };

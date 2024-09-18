@@ -3,23 +3,24 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
+import throttle from 'lodash/throttle'; // lodash에서 throttle 함수 import
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
-  const { setIsLoggedIn } = useAuthStore(); 
+  const { setIsLoggedIn } = useAuthStore();
 
-  const handleLogin = async () => {
+  const throttledHandleLogin = throttle(async () => {
     try {
-      await login(email, password); 
-      setIsLoggedIn(true); 
+      await login(email, password);
+      setIsLoggedIn(true);
       router.push('/');
     } catch (error) {
-      setErrorMessage('이메일 혹은 비밀번호가 일치하지 않습니다. 다시 시도해주세요.'); 
+      setErrorMessage('이메일 혹은 비밀번호가 일치하지 않습니다. 다시 시도해주세요.');
     }
-  };
+  }, 1000); 
 
   return (
     <div className="min-h-[calc(100vh-75px)] flex flex-col items-center justify-center">
@@ -60,15 +61,15 @@ const SignLayout = () => {
           </label>
         </div>
         <div className='min-h-[20px] my-2'>
-        {errorMessage && (
-          <div className="w-[320px] text-red-500 text-xs text-center">
-            {errorMessage}
-          </div>
-        )}
+          {errorMessage && (
+            <div className="w-[320px] text-red-500 text-xs text-center">
+              {errorMessage}
+            </div>
+          )}
         </div>
         <button 
           className="w-[320px] bg-gradient-to-r font-bold text-lg from-purple-500 to-indigo-500 text-white py-3 rounded-lg mb-4"
-          onClick={handleLogin}
+          onClick={throttledHandleLogin} 
         >
           로그인
         </button>
@@ -79,7 +80,7 @@ const SignLayout = () => {
           <a href="/find">이메일 / 비밀번호 찾기</a>
         </div>
       </section>
-      {/* <section className="mt-8"> */}
+       {/* <section className="mt-8"> */}
         {/* <SocialLoginButtons /> */}
       {/* </section> */}
       {/* <div className="h-12" /> */}
