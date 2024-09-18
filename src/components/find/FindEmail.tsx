@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { getUserEmail, sendVerificationCode, verifyCode } from '@/service/auth';
 import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
@@ -72,31 +72,21 @@ const FindEmail = () => {
     }
   };
 
-  const handleComplete = async () => {
-      try {
-        const token = localStorage.getItem('access_token'); 
-        console.log(token);
-        if (token) {
-          const data = await getUserEmail(token); 
-          console.log('이메일 정보:', data);
-          console.log(userEmail);
-          setAllComplete(true);
-          setUserEmail(data); 
-          setShowUserEmail(true); 
-        } else {
-          console.error('토큰을 찾을 수 없습니다.');
-        }
-      } catch (error) {
-        console.error('이메일 정보 요청 실패:', error);
+  const handleComplete = useCallback(async () => {
+    try {
+      const token = localStorage.getItem('access_token');
+      if (token) {
+        const data = await getUserEmail(token);
+        setAllComplete(true);
+        setUserEmail(data);
+        setShowUserEmail(true);
+      } else {
+        console.error('토큰을 찾을 수 없습니다.');
       }
-  };
-
-
-  useEffect(() => {
-    if (AllComplete) {
-      handleComplete();
+    } catch (error) {
+      console.error('이메일 정보 요청 실패:', error);
     }
-  }, [AllComplete]);
+  }, []);
   
 
   useEffect(() => {
