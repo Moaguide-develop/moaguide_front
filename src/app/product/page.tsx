@@ -17,7 +17,8 @@ const ProductPage = async ({
 }) => {
   const pages = searchParams['page'] || 1;
   const subcategory = searchParams['subcategory'] || 'trade';
-  const sort = searchParams['sort'] || 'views';
+  const sort = searchParams['sort'] || 'lastDivide_rate desc';
+  const category = searchParams['category'] || 'all';
   console.log(pages);
   const buildingDiviedResponse = await fetch(
     `https://api.moaguide.com/summary/recent/building`,
@@ -33,7 +34,7 @@ const ProductPage = async ({
     }
   );
   const productDetailResponse = await fetch(
-    `https://api.moaguide.com/summary/list/all?&subcategory=${subcategory}&sort=${sort}&page=${pages}&size=10`,
+    `https://api.moaguide.com/summary/list?category=${category}&subcategory=${subcategory}&sort=${sort}&page=${pages}&size=10`,
     {
       next: { revalidate: 300 }
     }
