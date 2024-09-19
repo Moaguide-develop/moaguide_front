@@ -1,9 +1,9 @@
-import { getProductProfitDetail } from '@/factory/ProductProfitDetail';
-import CopyRightFeeChart from './CopyrightFeeChart';
+import { getBuildingProductProfitDetail } from '@/factory/ProductProfitDetail/BuildingProductProfitDetail';
+import CopyRightFeeChart from './chart/CopyrightFeeChart';
 import KakaoMap from './Map';
-import StockPriceChart from './StockPriceChart';
-const Profit = ({ url }: { url: string }) => {
-  const { data, isLoading } = getProductProfitDetail(url);
+import StockPriceChart from './chart/StockPriceChart';
+const BuildingProfit = ({ url }: { url: string }) => {
+  const { data, isLoading } = getBuildingProductProfitDetail(url);
   console.log(data);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
@@ -288,4 +288,4 @@ const Profit = ({ url }: { url: string }) => {
   );
 };
 
-export default Profit;
+export default BuildingProfit;

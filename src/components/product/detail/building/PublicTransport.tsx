@@ -98,16 +98,16 @@ const PublicTransport = () => {
 
       <div className="text-gray-400 mb-[10px]">0.5km 이내 대중교통</div>
 
-      <div className="flex max-w-[1000px] w-full mx-auto h-[120px]">
-        <div className="bg-gray-50 rounded-xl mr-[20px] flex flex-col w-[calc(50%-10px)] p-[20px]">
+      <div className="flex max-w-[1000px] w-full mx-auto h-auto">
+        <div className="bg-gray-50 rounded-xl mr-[20px] flex flex-col w-[calc(50%-10px)] p-[20px] ">
           <div className="text-base font-bold">주변 지하철</div>
           {data?.nearSubway.map((subway, index) => (
             <div key={index} className="flex justify-between mt-2">
               <div className="flex items-center">
                 <div className="mr-1">
                   <Image
-                    src={stationImageMap[subway.station]}
-                    alt={`${subway.station} 이미지`}
+                    src={stationImageMap[subway.route]}
+                    alt={`이미지`}
                     width={20}
                     height={20}
                   />
