@@ -32,12 +32,12 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
               handleClick('lastDivide_rate desc');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sorted === 'lastDivide_rate desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            ${sorted === 'lastDivide_rate desc' || sorted == null ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
             수익률순
             <Image
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sorted === 'lastDivide_rate desc' ? 'block' : 'hidden'}`}
+              className={`${sorted === 'lastDivide_rate desc' || sorted == null ? 'block' : 'hidden'}`}
               width={20}
               height={20}
             />

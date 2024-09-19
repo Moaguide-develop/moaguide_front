@@ -40,7 +40,7 @@ const ProductClassification = ({
             <Image
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sorted === 'trade' ? 'block' : 'hidden'}`}
+              className={`${sorted === 'trade' || sorted == null ? 'block' : 'hidden'}`}
               width={20}
               height={20}
             />

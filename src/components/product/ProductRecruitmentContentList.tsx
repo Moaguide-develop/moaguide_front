@@ -65,7 +65,7 @@ const ProductRecruitmentContentList = ({
         <div>
           {content?.map((item) => (
             <div key={item.productId} className=" lg:flex  ">
-              <Link href={`product/detail/${item.productId}`}>
+              <Link href={`product/detail/${item.category}/${item.productId}`}>
                 <div className="flex items-center  h-[110px] ">
                   <div className="flex   desk:ml-[20px] ">
                     <Image

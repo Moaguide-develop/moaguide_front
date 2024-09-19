@@ -4,12 +4,13 @@ const Filter = () => {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
   const router = useRouter();
-  const sort = searchParams.get('kind');
+  const sort = searchParams.get('category');
   console.log(sort);
 
   const handleClick = (key: string) => {
-    params.set('kind', key);
-    router.replace(`?${params.toString()}`);
+    params.set('category', key);
+    params.set('page', '1');
+    router.replace(`?${params.toString()}`, { scroll: false });
   };
   interface FilterElementType {
     [key: string]: { name: string; img: string };
@@ -17,7 +18,7 @@ const Filter = () => {
 
   const FilterElement: FilterElementType = {
     all: { name: '전체', img: 'ALL' },
-    house: { name: '부동산', img: 'OfficeBuilding.svg' },
+    building: { name: '부동산', img: 'OfficeBuilding.svg' },
     music: { name: '음악저작권', img: 'MusicalNote.svg' },
     cow: { name: '한우', img: 'CowFace.svg' },
     art: { name: '미술', img: 'FramedPicture.svg' },

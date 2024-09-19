@@ -37,7 +37,7 @@ const ProductDealContentList = ({
         <div>
           {content?.map((item) => (
             <div key={item.product_Id} className=" lg:flex  ">
-              <Link href={`product/detail/${item.product_Id}`}>
+              <Link href={`product/detail/${item.category}/${item.product_Id}`}>
                 <div className="flex items-center  h-[110px] ">
                   <div className="flex   desk:ml-[20px] ">
                     <Image
