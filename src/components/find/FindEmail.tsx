@@ -266,7 +266,7 @@ const FindEmail = () => {
             가입하신<br />
             <span className="text-purple-600">이메일 정보</span>입니다
           </h2>
-          <div className="w-full py-8 px-4 text-center rounded-lg my-10 text-black">{userEmail ? userEmail : 'No email available'}</div>
+          <div className="w-full py-8 px-4 bg-gray-100 text-center rounded-lg my-10 text-black">{userEmail ? userEmail : 'No email available'}</div>
           </section>
         </motion.div>
         <motion.div

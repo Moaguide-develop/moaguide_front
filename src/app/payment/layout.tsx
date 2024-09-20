@@ -7,7 +7,7 @@ export default function PaymentLayout({
 }>) {
   return (
     <Suspense>
-      <div className="max-w-[640px] w-full mx-auto">{children}</div>
+      <div className="px-5 mt-5 w-full mx-auto sm:max-w-[640px] sm:mt-10 sm:px-0">{children}</div>
     </Suspense>
   );
 }

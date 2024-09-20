@@ -73,7 +73,7 @@ const Editpage = () => {
   }, [open]);
 
   return (
-    <div className="max-w-[640px] w-full mx-auto">
+    <div className="px-5 mt-5 w-full mx-auto sm:max-w-[640px] sm:mt-10 sm:px-0">
       <div onClick={() => router.back()} className="py-[14px]">
         <img src="/images/mypage/left.svg" alt="" className="cursor-pointer" />
       </div>
