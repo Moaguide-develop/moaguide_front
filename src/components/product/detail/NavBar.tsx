@@ -44,15 +44,6 @@ const NavBar = ({ sort, setSort }: NavBarProps) => {
         `}>
             뉴스
           </div>
-          <div
-            onClick={() => {
-              setSort('public');
-            }}
-            className={`px-4 py-3 flex-1 flex justify-center items-center cursor-pointer text-body5 desk2:text-heading4
-        ${sort === 'public' ? ' text-black border-b-[2px] border-purple-700' : 'text-gray300'}
-        `}>
-            공시
-          </div>
         </div>
       </div>
     </div>
