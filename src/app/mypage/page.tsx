@@ -37,7 +37,7 @@ const Mypage = () => {
   }
 
   return (
-    <div className="max-w-[640px] w-full mx-auto mt-10">
+    <div className="px-5 mt-5 w-full mx-auto sm:max-w-[640px] sm:mt-10 sm:px-0">
       <header>
         <MypageHeader />
       </header>

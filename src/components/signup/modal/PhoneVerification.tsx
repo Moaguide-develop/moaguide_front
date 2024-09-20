@@ -133,8 +133,8 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   }, [isError]);
 
   return (
-    <div className="custom-container flex flex-col items-center min-h-[calc(100vh-100px)] overflow-y-auto mb-[90px]">
-      <section className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-[100px]">
+    <div className="min-h-[calc(100vh-100px)] flex flex-col items-center justify-between mb-[100px] sm:min-h-[100vh] sm:justify-center sm:mb-0">
+      <section className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-0">
         <Image
           src={'/sign/LeftArrowIcon.svg'}
           alt='뒤로가기'

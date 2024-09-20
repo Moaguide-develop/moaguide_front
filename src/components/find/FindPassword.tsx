@@ -128,7 +128,7 @@ const FindPassword = () => {
 
 
   return (
-    <div className='find-inner-container flex flex-col items-center min-h-[calc(100vh-220px)] w-[340px]'>
+    <div className='min-h-[calc(100vh-220px)] flex flex-col items-center justify-between w-[340px] sm:min-h-0 sm:justify-center'>
        {!showPasswordReset && (
       <><section className="w-full mx-auto mt-[30px]">
           <div className="text-heading3">

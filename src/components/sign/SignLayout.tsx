@@ -23,7 +23,7 @@ const SignLayout = () => {
   }, 1000); 
 
   return (
-    <div className="min-h-[calc(100vh-75px)] flex flex-col items-center justify-center">
+    <div className="min-h-[calc(100vh-75px)] flex flex-col items-center justify-center sm:min-h-[100vh]">
       <section className="flex mt-8 mb-6">
         <Link href={'/'} className='cursor-pointer'>
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
