@@ -138,7 +138,7 @@ const FindEmail = () => {
   }, [isError]);
 
   return (
-    <div className='min-h-[calc(100vh-220px)] flex flex-col items-center justify-between w-[340px] sm:min-h-0 sm:justify-center'>
+    <div className='min-h-[calc(100dvh-220px)] flex flex-col items-center justify-between w-[340px] sm:min-h-0 sm:justify-center'>
       {!showUserEmail && (
       <><section className="w-full mx-auto mt-[30px]">
           <div className="text-heading3">
