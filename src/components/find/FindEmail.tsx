@@ -241,12 +241,12 @@ const FindEmail = () => {
             {isComplete ? (
               <div
                 onClick={handleComplete}
-                className="cursor-pointer flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
+                className="cursor-pointer flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
               >
                 다음으로
               </div>
             ) : (
-              <div className="flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
+              <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
                 다음으로
               </div>
             )}
@@ -278,7 +278,7 @@ const FindEmail = () => {
           className="w-full mx-auto"
         >
         <Link href={'/sign'}>
-        <button className='flex items-center justify-center px-5 py-3 mt-[60px] w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white'>
+        <button className='flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white'>
           로그인으로 돌아가기
         </button>
       </Link>
