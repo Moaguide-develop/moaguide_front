@@ -37,6 +37,7 @@ const Report = ({ report }: IReportProps) => {
             alt="leftarrow"
             width={20}
             height={20}
+            className=" cursor-pointer"
           />
         </div>
       </div>
@@ -112,6 +113,7 @@ const Report = ({ report }: IReportProps) => {
             alt="rightarrow"
             width={20}
             height={20}
+            className=" cursor-pointer"
           />
         </div>
       </div>

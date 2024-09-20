@@ -4,10 +4,14 @@ import UseNewsList from '@/factory/useNewsList';
 import { useCallback } from 'react';
 import NoticeItemSkeleton from '@/components/skeleton/NoticeItemSkeleton';
 import { Virtuoso } from 'react-virtuoso';
-import { INewsItem } from '@/types/ProductType';
+import { INewsItem } from '@/types/BuildingProductType';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 const News = () => {
-  const category = '압구정커머스빌딩';
+  const pathname = usePathname();
+  // URL의 마지막 부분 추출
+  const category = pathname.split('/').pop() as string;
+
   console.log(encodeURIComponent(category));
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
