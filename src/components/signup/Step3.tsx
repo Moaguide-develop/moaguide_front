@@ -40,7 +40,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const isFormValid = email && passwordValid && passwordMatch;
 
   return (
-    <div className="min-h-[calc(100vh-100px)] flex flex-col items-center justify-between mb-[100px] sm:min-h-[100vh] sm:justify-center sm:mb-0">
+    <div className="min-h-[calc(100dvh-100px)] flex flex-col items-center justify-between mb-[100px] sm:min-h-[100vh] sm:justify-center sm:mb-0">
       <div className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-0">
       <Image
           src={'/sign/LeftArrowIcon.svg'}
