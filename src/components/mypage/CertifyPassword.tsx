@@ -34,7 +34,7 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
       setIsSubmitting(true);
       const result = await checkPassword(passwordValue);
 
-      if (result === 'success') {
+      if (result === '인증에 성공했습니다.') {
         setStep(1);
       } else {
         alert('비밀번호가 올바르지 않습니다. 다시 시도해주세요.');
