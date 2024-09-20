@@ -230,11 +230,11 @@ const ChangePhonePage = () => {
         {isComplete ? (
           <div
             onClick={handleComplete}
-            className="cursor-pointer flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gradient2 text-heading4 text-white">
+            className="cursor-pointer flex items-center justify-center px-5 py-[14px] w-full rounded-[12px] bg-gradient2 text-heading4 text-white">
             변경 완료
           </div>
         ) : (
-          <div className="flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gray100 text-heading4 text-gray400">
+          <div className="flex items-center justify-center px-5 py-[14px] w-full rounded-[12px] bg-gray100 text-heading4 text-gray400">
             변경 완료
           </div>
         )}

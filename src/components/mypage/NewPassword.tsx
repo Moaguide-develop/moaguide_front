@@ -103,7 +103,7 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
       {isSame ? (
         <div
           onClick={handleChangePassword}
-          className={`cursor-pointer bg-gradient2 mt-[60px] flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full ${
+          className={`cursor-pointer bg-gradient2 flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full ${
             isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           // API 호출 중일 때 클릭 비활성화
@@ -111,7 +111,7 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
           변경 완료
         </div>
       ) : (
-        <div className="mt-[60px] flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full">
+        <div className="flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full">
           변경 완료
         </div>
       )}
