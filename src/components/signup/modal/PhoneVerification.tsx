@@ -172,7 +172,7 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
               isRequest ? (
                 <div
                   onClick={handleResending}
-                  className={`ml-[6px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+                  className={`ml-[6px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 flex-shrink-0 
                   ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                   `}
                 >
@@ -181,13 +181,13 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
               ) : (
                 <div
                   onClick={handleRequest}
-                  className="ml-[6px] flex-shrink-0 cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2"
+                  className="ml-[6px] flex-shrink-0 cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 flex-shrink-0"
                 >
                   인증 요청
                 </div>
               )
             ) : (
-              <div className="ml-[6px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+              <div className="ml-[6px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 flex-shrink-0">
                 인증 요청
               </div>
             )}
@@ -214,14 +214,14 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
             {isRequest && validNumberOk ? (
               <div
                 onClick={handleCertify}
-                className={`ml-[8px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+                className={`ml-[8px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 flex-shrink-0 
                 ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                 `}
               >
                 인증 완료
               </div>
             ) : (
-              <div className="ml-[8px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+              <div className="ml-[8px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 flex-shrink-0">
                 인증 완료
               </div>
             )}

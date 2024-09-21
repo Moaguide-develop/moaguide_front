@@ -135,7 +135,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             />
             <div
               onClick={checkNickname}
-              className={`ml-[6px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 cursor-pointer`}
+              className={`ml-[6px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 cursor-pointer flex-shrink-0`}
             >
               중복확인
             </div>
