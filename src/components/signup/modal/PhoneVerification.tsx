@@ -252,12 +252,12 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
         {isComplete ? (
           <div
             onClick={handleComplete}
-            className="w-full max-w-[340px] cursor-pointer flex items-center justify-center px-5 py-3  w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
+            className="w-full max-w-[340px] cursor-pointer flex items-center justify-center px-5 py-3  w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white mt-0 sm:mt-[40px]"
           >
             다음으로
           </div>
         ) : (
-          <div className="w-full max-w-[340px] flex items-center justify-center px-5 py-3   w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
+          <div className="w-full max-w-[340px] flex items-center justify-center px-5 py-3   w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px]">
             다음으로
           </div>
         )}

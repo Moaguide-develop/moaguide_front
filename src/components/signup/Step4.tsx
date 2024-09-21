@@ -208,7 +208,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
       <button
         onClick={handleComplete}
         disabled={!isFormValid}
-        className={`w-full max-w-[340px] mt-6 py-3 px-4 rounded-lg text-white ${isFormValid ? 'bg-purple-600' : 'bg-gray-300 cursor-not-allowed'}`}
+        className={`w-full max-w-[340px] py-3 rounded-[12px] text-lg font-bold text-white  mt-0 sm:mt-[40px] ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'}`}
       >
         완료
       </button>

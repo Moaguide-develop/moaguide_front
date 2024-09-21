@@ -229,12 +229,12 @@ const FindPassword = () => {
             {isComplete ? (
               <div
                 onClick={handleComplete}
-                className="cursor-pointer flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white"
+                className="cursor-pointer flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white mt-0 sm:mt-[40px]"
               >
                 다음으로
               </div>
             ) : (
-              <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
+              <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px]">
                 다음으로
               </div>
             )}
@@ -310,11 +310,11 @@ const FindPassword = () => {
           className="w-full mx-auto"
         >
         {passwordMatch ? (
-          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white cursor-pointer" onClick={handlePasswordReset}>
+          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white cursor-pointer mt-0 sm:mt-[40px]" onClick={handlePasswordReset}>
             비밀번호 재설정
           </div>
         ) : (
-          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400">
+          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px]">
             비밀번호 재설정
           </div>
         )}
