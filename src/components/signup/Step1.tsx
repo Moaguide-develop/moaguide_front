@@ -128,9 +128,9 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
       <button
         onClick={onNext}
-        className={`w-full max-w-[340px] py-3 rounded-[12px] font-bold text-lg transition duration-300 ${
+        className={`w-full max-w-[340px] py-3 rounded-[12px] font-bold text-lg transition duration-300 mt-0 sm:mt-[40px] ${
           isNextEnabled
-            ? 'bg-purple-600 text-white hover:bg-purple-700'
+            ? 'bg-gradient2  text-white hover:bg-purple-700'
             : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'
         }`}
         disabled={!isNextEnabled}

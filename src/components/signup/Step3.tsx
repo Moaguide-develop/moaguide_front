@@ -16,6 +16,18 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
   const router = useRouter();
 
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+  
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+    onUpdate({ email: newEmail });
+  };
+
+
   const validatePassword = (password: string) => {
     const isValid = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/.test(password);
     setPasswordValid(isValid);
@@ -37,7 +49,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     setPasswordMatch(newConfirmPassword === password);
   };
 
-  const isFormValid = email && passwordValid && passwordMatch;
+  const isFormValid = email && passwordValid === true && passwordMatch === true;
 
   return (
     <div className="min-h-[calc(100dvh-100px)] flex flex-col items-center justify-between mb-[100px] sm:min-h-[100vh] sm:justify-center sm:mb-0">
@@ -120,7 +132,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         <button 
           onClick={onNext} 
           disabled={!isFormValid} 
-          className={`w-full max-w-[340px] py-3 rounded-[12px] text-lg font-bold ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`w-full max-w-[340px] py-3 rounded-[12px] text-lg font-bold mt-0 sm:mt-[40px] ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>

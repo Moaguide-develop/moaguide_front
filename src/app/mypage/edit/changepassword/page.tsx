@@ -10,7 +10,7 @@ const ChangePasswordPage = () => {
   const [step, setStep] = useState(0);
   return (
     <div>
-      <div className="px-5 mt-5 w-full mx-auto sm:max-w-[640px] sm:mt-10 sm:px-0">
+      <div className="w-[90%] mt-5 w-full mx-auto sm:max-w-[640px] sm:mt-10 sm:px-0">
         {step === 2 ? null : (
           <div onClick={() => router.back()} className="py-[14px]">
             <img
@@ -21,7 +21,7 @@ const ChangePasswordPage = () => {
           </div>
         )}
       </div>
-      <section className="max-w-[340px] w-full mx-auto mt-[76px]">
+      <section className="w-[90%] max-w-[340px] w-full mx-auto mt-0 sm:mt-[76px]">
         {step === 0 ? <CertifyPassword setStep={setStep} /> : null}
         {step === 1 ? <NewPassword setStep={setStep} /> : null}
         {step === 2 ? <PasswordChangeSuccess /> : null}
