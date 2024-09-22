@@ -132,7 +132,7 @@ const ChangePhonePage = () => {
 
   return (
     <div>
-      <div className="w-[90%] mt-5 w-full mx-auto sm:max-w-[640px] sm:mt-10 sm:px-0">
+      <div className="w-[90%] mt-5 w-full mx-auto max-w-[340px] sm:max-w-[640px] sm:mt-10 sm:px-0">
         <div onClick={() => router.back()} className="py-[14px]">
           <img src="/images/mypage/left_password.svg" alt="" className="cursor-pointer" />
         </div>
@@ -153,7 +153,8 @@ const ChangePhonePage = () => {
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
               placeholder="휴대폰 번호 입력"
-              className="flex-1 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
+              className="flex-1 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
+              style={{ minWidth: '0' }} 
             />
             {phoneNumberValid ? (
               isRequest ? (
@@ -194,6 +195,7 @@ const ChangePhonePage = () => {
               ${isRequest && isComplete && 'outline-success'}
               ${isRequest && isError && 'outline-error'}
               `}
+              style={{ minWidth: '0' }} 
             />
             {isRequest && validNumberOk ? (
               <div
