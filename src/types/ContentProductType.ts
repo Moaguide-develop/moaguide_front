@@ -31,3 +31,44 @@ export interface IContentProductProfitDetail {
     breakEvenPoint: string;
   };
 }
+
+export interface IContentMovieStats {
+  schedules: {
+    id: number;
+    title: string;
+    genre: string;
+    country: string;
+    director: string;
+    releaseDate: string;
+    imgLink: string;
+  }[];
+  stats: {
+    day: string;
+    region: string;
+    screenCount: number;
+    totalRevenue: number;
+    revenueShare: number;
+    totalAudience: number;
+    audienceShare: number;
+    releaseDate: string;
+  }[];
+}
+
+export interface IContentMovieChartData {
+  count: number;
+  day: string;
+}
+
+export type IContentMovieCharts = IContentMovieChartData[];
+
+export interface IMovieSchedule {
+  id: number;
+  title: string;
+  genre: string;
+  country: string;
+  director: string;
+  releaseDate: string;
+  imgLink: string;
+}
+
+export type IMovieSchedules = IMovieSchedule[];
