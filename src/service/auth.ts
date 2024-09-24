@@ -1,5 +1,5 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
-import { setToken, removeToken } from '@/utils/localStorage';
+import { setToken, removeToken, getToken } from '@/utils/localStorage';
 import { useMemberStore } from '@/store/user.store';
 import { axiosInstance, basicAxiosInstance } from './axiosInstance';
 
@@ -157,6 +157,30 @@ export const getUserEmail = async (token: string) => {
     return response.data;
   } catch (error) {
     console.error('이메일 정보 요청 실패:', error);
+    throw error;
+  }
+};
+
+export const refreshAccessToken = async (): Promise<string> => {
+  try {
+    // refresh 토큰은 브라우저 쿠키에 저장되어 있다고 가정
+    const response = await axiosInstance.post('/token/refresh', null, {
+      withCredentials: true, // 쿠키 전송을 위해 필요
+    });
+
+    // 새로 발급받은 액세스 토큰을 Authorization 헤더에서 추출
+    const newToken = response.headers['Authorization'] || response.headers['authorization'];
+    
+    if (newToken) {
+      const accessToken = newToken.replace('Bearer ', '');
+      setToken(accessToken); // 새 액세스 토큰을 저장 (localStorage)
+      return accessToken;
+    } else {
+      throw new Error('새로운 액세스 토큰을 받지 못했습니다.');
+    }
+  } catch (error) {
+    console.error('리프레시 토큰 요청 오류:', error);
+    removeToken(); // 토큰 갱신에 실패하면 저장된 토큰 제거
     throw error;
   }
 };
