@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { getToken, setToken, removeToken } from '@/utils/localStorage';
-import { refreshAccessToken } from './auth'; // 새로 추가된 refreshAccessToken 함수
+import { refreshAccessToken } from './auth';
+
 
 const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -9,6 +10,19 @@ export const axiosInstance = axios.create({
   baseURL: backendUrl,
   withCredentials: true,
 });
+
+// 토큰을 사용하지 않는 Axios 인스턴스
+export const basicAxiosInstance = axios.create({
+  baseURL: backendUrl,
+  withCredentials: true,
+});
+
+// 리프레시 토큰 요청을 위한 Axios 인스턴스
+export const refreshAxiosInstance = axios.create({
+  baseURL: backendUrl,
+  withCredentials: true,
+});
+
 
 axiosInstance.interceptors.request.use(
   (config) => {
@@ -21,7 +35,7 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// 응답 인터셉터에서 401(토큰 만료) 오류 처리
+
 axiosInstance.interceptors.response.use(
   (response) => {
     return response;
@@ -36,24 +50,21 @@ axiosInstance.interceptors.response.use(
       try {
         // 리프레시 토큰으로 새 액세스 토큰 발급
         const newToken = await refreshAccessToken();
-        setToken(newToken); // 새 토큰 저장
-
-        // 새 토큰으로 헤더를 갱신한 후, 실패한 요청 재시도
-        originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
-        return axiosInstance(originalRequest);
+        if (newToken) {
+          // 새 토큰으로 헤더를 갱신한 후, 실패한 요청 재시도
+          originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+          return axiosInstance(originalRequest);
+        }
       } catch (refreshError) {
         console.error('리프레시 토큰 갱신 오류:', refreshError);
-        removeToken(); // 토큰이 유효하지 않다면 삭제
-        return Promise.reject(refreshError);
+        
+        // 리프레시 토큰 갱신 실패 시 로그아웃 처리 또는 에러 핸들링
+        removeToken(); // 만료된 토큰 제거
+        window.location.href = '/sign'; // 로그인 페이지로 리디렉션
+        return Promise.reject(refreshError); // 무한 루프 방지
       }
     }
 
     return Promise.reject(error);
   }
 );
-
-// 토큰을 사용하지 않는 Axios 인스턴스
-export const basicAxiosInstance = axios.create({
-  baseURL: backendUrl,
-  withCredentials: true,
-});

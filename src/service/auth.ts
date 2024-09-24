@@ -1,7 +1,7 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
 import { setToken, removeToken, getToken } from '@/utils/localStorage';
 import { useMemberStore } from '@/store/user.store';
-import { axiosInstance, basicAxiosInstance } from './axiosInstance';
+import { axiosInstance, basicAxiosInstance, refreshAxiosInstance } from './axiosInstance';
 
 // 토큰 사용하지 않는 API 함수들
 export const sendVerificationCode = async (phone: string): Promise<SendCodeResponse> => {
@@ -80,8 +80,11 @@ export const login = async (email: string, password: string) => {
     console.log('로그인 성공:', response.data);
 
     const token = response.headers['authorization'] || response.headers['Authorization'];
+    console.log(token);
     const accessToken = token.replace('Bearer ', '');
     setToken(accessToken);
+
+    const refreshToken = response.headers['Set-Cookie'] || response.headers['set-cookie'];
 
     const { setMember } = useMemberStore.getState();
     const userInfo = response.data.user;
@@ -89,7 +92,7 @@ export const login = async (email: string, password: string) => {
       memberEmail: userInfo.email,
       memberNickName: userInfo.nickname,
       memberPhone: userInfo.phonenumber,
-      subscribe: '1개월 플랜', // 임시
+      subscribe: '1개월 플랜', 
     });
 
     return response.data;
@@ -161,26 +164,40 @@ export const getUserEmail = async (token: string) => {
   }
 };
 
-export const refreshAccessToken = async (): Promise<string> => {
+export const refreshAccessToken = async () => {
   try {
-    // refresh 토큰은 브라우저 쿠키에 저장되어 있다고 가정
-    const response = await axiosInstance.post('/token/refresh', null, {
-      withCredentials: true, // 쿠키 전송을 위해 필요
-    });
+    const response = await refreshAxiosInstance.post('/token/refresh', null);
 
-    // 새로 발급받은 액세스 토큰을 Authorization 헤더에서 추출
     const newToken = response.headers['Authorization'] || response.headers['authorization'];
     
     if (newToken) {
       const accessToken = newToken.replace('Bearer ', '');
-      setToken(accessToken); // 새 액세스 토큰을 저장 (localStorage)
+      setToken(accessToken);
       return accessToken;
     } else {
       throw new Error('새로운 액세스 토큰을 받지 못했습니다.');
     }
   } catch (error) {
     console.error('리프레시 토큰 요청 오류:', error);
-    removeToken(); // 토큰 갱신에 실패하면 저장된 토큰 제거
+    removeToken(); 
     throw error;
+  }
+};
+
+export const deleteUser = async () => {
+  try {
+    const response = await axiosInstance.delete('/user/Withdrawal');
+
+    if (response.status === 200) {
+      console.log(response.data.message);
+      removeToken();
+
+      const { clearMember } = useMemberStore.getState();
+      clearMember();
+    } else {
+      console.error('회원탈퇴 실패', response.status);
+    }
+  } catch (error) {
+    console.error('회원탈퇴 오류:', error);
   }
 };
