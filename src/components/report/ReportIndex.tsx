@@ -14,9 +14,6 @@ const ReportIndex = () => {
 
   return (
     <div>
-      <nav className="bg-bg sm:bg-white px-4 sm:px-0 w-full flex items-center justify-center border-b border-gray100">
-        <ReportCategory />
-      </nav>
       <Container>
         <section className="hidden sm:flex justify-center mt-6 pb-[29px]">
           <img src="/images/report/report_main.svg" alt="" />

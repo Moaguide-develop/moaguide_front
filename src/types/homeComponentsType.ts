@@ -62,3 +62,11 @@ export interface SearchedItem {
   lastDivide_rate?: number;
   product_Id: string;
 }
+
+
+export interface StudyGuidesItem {
+  id: number;
+  difficulty: string;
+  title: string;
+  description: string;
+}
