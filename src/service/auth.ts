@@ -1,7 +1,7 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
-import { setToken, removeToken } from '@/utils/localStorage';
+import { setToken, removeToken, getToken } from '@/utils/localStorage';
 import { useMemberStore } from '@/store/user.store';
-import { axiosInstance, basicAxiosInstance } from './axiosInstance';
+import { axiosInstance, basicAxiosInstance, refreshAxiosInstance } from './axiosInstance';
 
 // 토큰 사용하지 않는 API 함수들
 export const sendVerificationCode = async (phone: string): Promise<SendCodeResponse> => {
@@ -80,8 +80,11 @@ export const login = async (email: string, password: string) => {
     console.log('로그인 성공:', response.data);
 
     const token = response.headers['authorization'] || response.headers['Authorization'];
+    console.log(token);
     const accessToken = token.replace('Bearer ', '');
     setToken(accessToken);
+
+    const refreshToken = response.headers['Set-Cookie'] || response.headers['set-cookie'];
 
     const { setMember } = useMemberStore.getState();
     const userInfo = response.data.user;
@@ -89,7 +92,7 @@ export const login = async (email: string, password: string) => {
       memberEmail: userInfo.email,
       memberNickName: userInfo.nickname,
       memberPhone: userInfo.phonenumber,
-      subscribe: '1개월 플랜', // 임시
+      subscribe: '1개월 플랜', 
     });
 
     return response.data;
@@ -158,5 +161,43 @@ export const getUserEmail = async (token: string) => {
   } catch (error) {
     console.error('이메일 정보 요청 실패:', error);
     throw error;
+  }
+};
+
+export const refreshAccessToken = async () => {
+  try {
+    const response = await refreshAxiosInstance.post('/token/refresh', null);
+
+    const newToken = response.headers['Authorization'] || response.headers['authorization'];
+    
+    if (newToken) {
+      const accessToken = newToken.replace('Bearer ', '');
+      setToken(accessToken);
+      return accessToken;
+    } else {
+      throw new Error('새로운 액세스 토큰을 받지 못했습니다.');
+    }
+  } catch (error) {
+    console.error('리프레시 토큰 요청 오류:', error);
+    removeToken(); 
+    throw error;
+  }
+};
+
+export const deleteUser = async () => {
+  try {
+    const response = await axiosInstance.delete('/user/Withdrawal');
+
+    if (response.status === 200) {
+      console.log(response.data.message);
+      removeToken();
+
+      const { clearMember } = useMemberStore.getState();
+      clearMember();
+    } else {
+      console.error('회원탈퇴 실패', response.status);
+    }
+  } catch (error) {
+    console.error('회원탈퇴 오류:', error);
   }
 };

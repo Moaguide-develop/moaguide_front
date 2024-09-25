@@ -69,7 +69,7 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
       {isValid ? (
         <button
           onClick={handleCheckPassword} 
-          className={`cursor-pointer bg-gradient2 flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full mt-0 sm:mt-[50px] ${
+          className={`cursor-pointer bg-gradient2 flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full mt-0 sm:mt-[40px] ${
             isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           disabled={isSubmitting}
@@ -77,7 +77,7 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
           다음으로
         </button>
       ) : (
-        <button className="flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full mt-0 sm:mt-[50px] ">
+        <button className="flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full mt-0 sm:mt-[40px]">
           다음으로
         </button>
       )}
