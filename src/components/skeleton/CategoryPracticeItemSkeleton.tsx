@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CategoryReportItemSkeleton = () => {
+const CategoryPracticeItemSkeleton = () => {
   return (
     <div className="py-5 border-b border-gray100 flex gap-5 items-center cursor-pointer animate-pulse">
       <div className="flex-1 flex flex-col gap-3">
@@ -19,4 +19,4 @@ const CategoryReportItemSkeleton = () => {
   );
 };
 
-export default CategoryReportItemSkeleton;
+export default CategoryPracticeItemSkeleton;

@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react';
 import ReportCategory from './ReportCategory';
 import Container from '../common/Container';
-import CategoryReport from './CategoryReport';
+import CategoryPractice from './CategoryPractice';
 
-const ReportIndex = () => {
+const PracticeIndex = () => {
   /**
    * 하단에서 탭 변경시 위치가 그대로 하단으로 유지되는 문제가 발생해 강제로 끌어올리기
    */
@@ -19,7 +19,7 @@ const ReportIndex = () => {
           <img src="/images/report/report_main.svg" alt="" />
         </section>
         <section className="px-5 sm:px-0">
-          <CategoryReport />
+          <CategoryPractice />
         </section>
         <div className="h-[100px] sm:h-12" />
       </Container>
@@ -27,4 +27,4 @@ const ReportIndex = () => {
   );
 };
 
-export default ReportIndex;
+export default PracticeIndex;

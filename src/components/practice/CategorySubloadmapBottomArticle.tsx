@@ -1,10 +1,17 @@
 import React from 'react';
 import { SubLoadmapBottomArticleItemsProps } from '@/types/homeComponentsType';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const CategorySubloadmapBottomArticle: React.FC<SubLoadmapBottomArticleItemsProps> = ({ data }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/practice/${data.id}`);
+  };
+
   return (
-    <div className='py-5'>
+    <div className='py-5' onClick={handleClick}>
       <div className="flex gap-5 items-center cursor-pointer">
         <Image
           src={data.imageLink}

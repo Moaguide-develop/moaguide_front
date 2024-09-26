@@ -105,3 +105,13 @@ export interface SubLoadmapBottomArticleItemsProps {
   isTop: boolean;
   isBottom: boolean;
 }
+
+export interface ArticleItem {
+  id: number;
+  title: string;
+  description: string;
+  imageLink: string;
+  date: string;
+  content?: string;
+  pdfLink: string;
+}

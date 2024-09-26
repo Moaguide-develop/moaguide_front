@@ -1,14 +1,13 @@
 import React, { useCallback } from 'react';
-import CategoryReportItem from './CategoryReportItem'; // 필요에 따라 조정
 import { useReportStore } from '@/store/report.store';
 import { Virtuoso } from 'react-virtuoso';
-import CategoryReportItemSkeleton from '../skeleton/CategoryReportItemSkeleton';
 import { getStudyGuides } from '@/factory/ReportLists';
+import CategoryPracticeItem from './CategoryPracticeItem';
+import CategoryPracticeItemSkeleton from '../skeleton/CategoryPracticeItemSkeleton';
 
-const CategoryReport = () => {
+const CategoryPractice = () => {
   const { currentCategory, subCategory, sort, setSubCategory, setSort } = useReportStore();
 
-  // 변경된 데이터 페칭 함수 사용
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } = getStudyGuides();
 
   const loadMore = useCallback(() => {
@@ -30,7 +29,7 @@ const CategoryReport = () => {
       </div>
       <div>
         {isLoading ? (
-          Array.from({ length: 3 }).map((_, i) => <CategoryReportItemSkeleton key={i} />)
+          Array.from({ length: 3 }).map((_, i) => <CategoryPracticeItemSkeleton key={i} />)
         ) : (
           <Virtuoso
             style={{ height: 'calc(100vh - 50px)', margin: '0px' }}
@@ -39,7 +38,7 @@ const CategoryReport = () => {
             data={allPosts}
             endReached={loadMore}
             itemContent={(index, item) => (
-              <CategoryReportItem key={item.id} {...item} />
+              <CategoryPracticeItem key={item.id} {...item} />
             )}
           />
         )}
@@ -48,4 +47,4 @@ const CategoryReport = () => {
   );
 };
 
-export default CategoryReport;
+export default CategoryPractice;

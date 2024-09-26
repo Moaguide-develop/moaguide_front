@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import SubLoadmapSkeleton from '../skeleton/SubLoadmapSkeleton';
 import CategorySubloadmapItem from './CategorySubloadmapItem';
 
-const CategoryReportItem = ({ id, difficulty, title, description }: StudyGuidesItem) => {
+const CategoryPracticeItem = ({ id, difficulty, title, description }: StudyGuidesItem) => {
   const [details, setDetails] = useState<SubLoadmap[] | null>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [loadingDetails, setLoadingDetails] = useState(false);
@@ -60,4 +60,4 @@ const CategoryReportItem = ({ id, difficulty, title, description }: StudyGuidesI
   );
 };
 
-export default CategoryReportItem;
+export default CategoryPracticeItem;

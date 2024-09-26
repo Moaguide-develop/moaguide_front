@@ -1,4 +1,4 @@
-export default function ReportLayout({
+export default function PracticeLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
