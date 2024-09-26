@@ -16,6 +16,7 @@ const CategoryPracticeItem = ({ id, difficulty, title, description }: StudyGuide
 
   const fetchDetails = async (itemId: number) => {
     if (!details) { // 데이터가 없을 때만 호출
+      setShowDetails(!showDetails);
       setLoadingDetails(true);
       try {
         const response = await axios.get(`https://api.moaguide.com/study/guide/${itemId}`);
@@ -28,7 +29,6 @@ const CategoryPracticeItem = ({ id, difficulty, title, description }: StudyGuide
         setLoadingDetails(false);
       }
     }
-    setShowDetails(!showDetails);
     setToggleImage(showDetails ? '/images/report/toggle_button.svg' : '/images/report/toggle_button_close.svg');
   };
 
