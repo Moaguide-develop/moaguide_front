@@ -27,6 +27,7 @@
     "react-query": "^3.39.3",
     "react-use": "^17.5.1",
     "react-virtuoso": "^4.10.1",
+    "react-youtube": "^10.1.0",
     "scroll-lock": "^2.1.5",
     "swiper": "^11.1.8",
     "uuidv4": "^6.2.13",
