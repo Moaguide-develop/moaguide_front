@@ -1,5 +1,4 @@
 import type { ReportListsItem, StudyGuidesItem, SubLoadmap } from '@/types/homeComponentsType';
-
 import { formatCategory } from '@/utils/formatCategory';
 import axios from 'axios';
 import { format, parseISO } from 'date-fns';
@@ -15,21 +14,26 @@ const CategoryPracticeItem = ({ id, difficulty, title, description }: StudyGuide
   const [toggleImage, setToggleImage] = useState('/images/report/toggle_button.svg');
 
   const fetchDetails = async (itemId: number) => {
-    if (!details) { // 데이터가 없을 때만 호출
-      setShowDetails(!showDetails);
+    if (!details && !loadingDetails) {
       setLoadingDetails(true);
       try {
         const response = await axios.get(`https://api.moaguide.com/study/guide/${itemId}`);
-        setTimeout(() => {
-          setDetails(response.data);
-          setLoadingDetails(false);
-        }, 500);
+        setDetails(response.data);
+        setLoadingDetails(false);
       } catch (error) {
         console.error('Fetching details failed:', error);
         setLoadingDetails(false);
       }
     }
-    setToggleImage(showDetails ? '/images/report/toggle_button.svg' : '/images/report/toggle_button_close.svg');
+  };
+
+  const handleToggle = () => {
+    setShowDetails(!showDetails);
+    if (!showDetails && !details) {
+      fetchDetails(id);
+    }
+
+    setToggleImage(!showDetails ? '/images/report/toggle_button_close.svg' : '/images/report/toggle_button.svg');
   };
 
   return (
@@ -46,14 +50,25 @@ const CategoryPracticeItem = ({ id, difficulty, title, description }: StudyGuide
           src={toggleImage}
           alt="Toggle Details"
           className="w-[30px] h-[30px]"
-          onClick={() => fetchDetails(id)}
+          onClick={handleToggle} // 토글 로직 추가
         />
       </div>
       <div>
       {showDetails && (
-        loadingDetails ? Array.from({ length: 3 }).map((_, i) => <SubLoadmapSkeleton key={i} isTop={i === 0} isBottom={i === 2} />) : details?.map((detail, index) => (
-          <CategorySubloadmapItem key={index} data={detail} isTop={index === 0} isBottom={index === details.length - 1} />
-        ))
+        loadingDetails ? (
+          Array.from({ length: 3 }).map((_, i) => (
+            <SubLoadmapSkeleton key={i} isTop={i === 0} isBottom={i === 2} />
+          ))
+        ) : (
+          details?.map((detail, index) => (
+            <CategorySubloadmapItem
+              key={index}
+              data={detail}
+              isTop={index === 0}
+              isBottom={index === details.length - 1}
+            />
+          ))
+        )
       )}
       </div>
     </div>

@@ -7,6 +7,7 @@ const CategorySubloadmapBottomArticle: React.FC<SubLoadmapBottomArticleItemsProp
   const router = useRouter();
 
   const handleClick = () => {
+    console.log(data.id);
     router.push(`/practice/${data.id}`);
   };
 
