@@ -30,7 +30,7 @@ const CategoryReport = () => {
       </div>
       <div>
         {isLoading ? (
-          Array.from({ length: 5 }).map((_, i) => <CategoryReportItemSkeleton key={i} />)
+          Array.from({ length: 3 }).map((_, i) => <CategoryReportItemSkeleton key={i} />)
         ) : (
           <Virtuoso
             style={{ height: 'calc(100vh - 50px)', margin: '0px' }}

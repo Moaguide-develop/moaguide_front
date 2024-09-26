@@ -70,3 +70,16 @@ export interface StudyGuidesItem {
   title: string;
   description: string;
 }
+
+export interface SubLoadmap {
+  id: number;
+  number: number;
+  title: string;
+  description: string;
+}
+
+export interface CategorySubloadmapItemProps {
+  data: SubLoadmap;
+  isTop: boolean;
+  isBottom: boolean;
+}
