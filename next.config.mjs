@@ -6,6 +6,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true
   },
+  images: {
+    domains: ['api.moaguide.com'], 
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       if (Array.isArray(config.resolve.alias))

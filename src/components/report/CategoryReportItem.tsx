@@ -34,7 +34,7 @@ const CategoryReportItem = ({ id, difficulty, title, description }: StudyGuidesI
 
   return (
     <div className='py-5'>
-      <div className="flex gap-5 items-center cursor-pointer" onClick={() => fetchDetails(id)}>
+      <div className="flex gap-5 items-center cursor-pointer">
         <div className="flex-1 flex flex-col gap-3">
           <div className="max-w-max p-1 sm:p-[6px] flex items-center justify-center rounded-[4px] bg-gray50 text-gray400 text-caption3">
             {difficulty}
@@ -46,13 +46,16 @@ const CategoryReportItem = ({ id, difficulty, title, description }: StudyGuidesI
           src={toggleImage}
           alt="Toggle Details"
           className="w-[30px] h-[30px]"
+          onClick={() => fetchDetails(id)}
         />
       </div>
+      <div>
       {showDetails && (
         loadingDetails ? Array.from({ length: 3 }).map((_, i) => <SubLoadmapSkeleton key={i} isTop={i === 0} isBottom={i === 2} />) : details?.map((detail, index) => (
           <CategorySubloadmapItem key={index} data={detail} isTop={index === 0} isBottom={index === details.length - 1} />
         ))
       )}
+      </div>
     </div>
   );
 };
