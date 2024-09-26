@@ -2,16 +2,14 @@
 import Container from '@/components/common/Container';
 import NavBar from '@/components/product/detail/NavBar';
 import News from '@/components/product/detail/News';
-import BuildingProfit from '@/components/product/detail/building/BuildingProfit';
-import Notice from '@/components/product/detail/Notice';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useState } from 'react';
 import { getCowProductDetail } from '@/factory/ProductDetail/CowProductDetail';
-import BuildingProductDetail from '@/components/product/detail/building/BuildingProductDetail';
 import CowProductDetail from '@/components/product/detail/cow/CowProductDetail';
 import CowProfit from '@/components/product/detail/cow/CowProfit';
 import { CATEGORY } from '@/static/category';
+import Link from 'next/link';
 const CowDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
@@ -43,15 +41,17 @@ const CowDetailpage = (props: { params: { id: string } }) => {
               </div>
 
               <div className="desk2:flex  desk:hidden">
-                <div className=" w-[180px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
-                  <div>해당 플랫폼으로 이동</div>
-                  <Image
-                    src="/images/detail/CaretRight.svg"
-                    width={16}
-                    height={16}
-                    alt="Right Arrow"
-                  />
-                </div>
+                <Link href={data?.link || '#'}>
+                  <div className=" w-[180px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
+                    <div>해당 플랫폼으로 이동</div>
+                    <Image
+                      src="/images/detail/CaretRight.svg"
+                      width={16}
+                      height={16}
+                      alt="Right Arrow"
+                    />
+                  </div>
+                </Link>
 
                 <div className=" desk2:flex desk:hidden ml-[6px] w-[118px] h-[49px] justify-center items-center border-2 border-gray-200 rounded-xl ">
                   <div>관심 종목</div>
@@ -112,15 +112,17 @@ const CowDetailpage = (props: { params: { id: string } }) => {
           </div>
 
           <div className="desk2:hidden  desk:flex  justify-center mt-[20px] ">
-            <div className=" w-[380px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
-              <div>해당 플랫폼으로 이동</div>
-              <Image
-                src="/images/detail/CaretRight.svg"
-                width={16}
-                height={16}
-                alt="Right Arrow"
-              />
-            </div>
+            <Link href={data?.link || '#'}>
+              <div className=" w-[380px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
+                <div>해당 플랫폼으로 이동</div>
+                <Image
+                  src="/images/detail/CaretRight.svg"
+                  width={16}
+                  height={16}
+                  alt="Right Arrow"
+                />
+              </div>
+            </Link>
           </div>
         </div>
       </Container>

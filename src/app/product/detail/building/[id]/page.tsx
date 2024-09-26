@@ -11,6 +11,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { getBuildingProductDetail } from '@/factory/ProductDetail/BuildingProductDetail';
 import { CATEGORY } from '@/static/category';
+import Link from 'next/link';
 const BuildingDetailpage = (props: any) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
@@ -42,15 +43,17 @@ const BuildingDetailpage = (props: any) => {
               </div>
 
               <div className="desk2:flex  desk:hidden">
-                <div className=" w-[180px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
-                  <div>해당 플랫폼으로 이동</div>
-                  <Image
-                    src="/images/detail/CaretRight.svg"
-                    width={16}
-                    height={16}
-                    alt="Right Arrow"
-                  />
-                </div>
+                <Link href={data?.link || '#'}>
+                  <div className=" w-[180px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
+                    <div>해당 플랫폼으로 이동</div>
+                    <Image
+                      src="/images/detail/CaretRight.svg"
+                      width={16}
+                      height={16}
+                      alt="Right Arrow"
+                    />
+                  </div>
+                </Link>
 
                 <div className=" desk2:flex desk:hidden ml-[6px] w-[118px] h-[49px] justify-center items-center border-2 border-gray-200 rounded-xl ">
                   <div>관심 종목</div>
@@ -111,15 +114,17 @@ const BuildingDetailpage = (props: any) => {
           </div>
 
           <div className="desk2:hidden  desk:flex  justify-center mt-[20px] ">
-            <div className=" w-[380px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
-              <div>해당 플랫폼으로 이동</div>
-              <Image
-                src="/images/detail/CaretRight.svg"
-                width={16}
-                height={16}
-                alt="Right Arrow"
-              />
-            </div>
+            <Link href={data?.link || '#'}>
+              <div className=" w-[180px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
+                <div>해당 플랫폼으로 이동</div>
+                <Image
+                  src="/images/detail/CaretRight.svg"
+                  width={16}
+                  height={16}
+                  alt="Right Arrow"
+                />
+              </div>
+            </Link>
           </div>
         </div>
       </Container>

@@ -1,21 +1,20 @@
 'use client';
-
 import Container from '@/components/common/Container';
 import NavBar from '@/components/product/detail/NavBar';
 import News from '@/components/product/detail/News';
-import BuildingProductDetail from '@/components/product/detail/building/BuildingProductDetail';
-import BuildingProfit from '@/components/product/detail/building/BuildingProfit';
-import Notice from '@/components/product/detail/Notice';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useState } from 'react';
-import { getBuildingProductDetail } from '@/factory/ProductDetail/BuildingProductDetail';
 import { CATEGORY } from '@/static/category';
-const BuildingDetailpage = (props: any) => {
+import { getMusicProductDetail } from '@/factory/ProductDetail/MusicProductDetail';
+import MusicProfit from '@/components/product/detail/music/MusicProfit';
+import MusicProductDetail from '@/components/product/detail/music/MusicProductDetail';
+import Link from 'next/link';
+const MusicDetailpage = (props: any) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
   console.log(url);
-  const { data, isLoading, isError } = getBuildingProductDetail(props.params.id);
+  const { data, isLoading, isError } = getMusicProductDetail(props.params.id);
   console.log(data);
   return (
     <div>
@@ -42,16 +41,17 @@ const BuildingDetailpage = (props: any) => {
               </div>
 
               <div className="desk2:flex  desk:hidden">
-                <div className=" w-[180px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
-                  <div>해당 플랫폼으로 이동</div>
-                  <Image
-                    src="/images/detail/CaretRight.svg"
-                    width={16}
-                    height={16}
-                    alt="Right Arrow"
-                  />
-                </div>
-
+                <Link href={data?.link || '#'}>
+                  <div className=" w-[180px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
+                    <div>해당 플랫폼으로 이동</div>
+                    <Image
+                      src="/images/detail/CaretRight.svg"
+                      width={16}
+                      height={16}
+                      alt="Right Arrow"
+                    />
+                  </div>
+                </Link>
                 <div className=" desk2:flex desk:hidden ml-[6px] w-[118px] h-[49px] justify-center items-center border-2 border-gray-200 rounded-xl ">
                   <div>관심 종목</div>
                   <Image
@@ -69,7 +69,7 @@ const BuildingDetailpage = (props: any) => {
             <div className="flex flex-col desk2:ml-[28px] desk:ml-[15px] ">
               <div className="flex">
                 <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center mb-[13px] ">
-                  {CATEGORY[data?.category as string]}
+                  {CATEGORY[data?.category || '']}
                 </div>
                 <div className="text-gray-400 ml-[3px]">{data?.platform}</div>
               </div>
@@ -101,7 +101,7 @@ const BuildingDetailpage = (props: any) => {
 
             <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">배당 수익률</div>
-              <div className="text-red-500">{data?.lastDivideRate}%</div>
+              <div className="text-red-500">{data?.lastDivide_rate}%</div>
             </div>
 
             <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
@@ -110,34 +110,34 @@ const BuildingDetailpage = (props: any) => {
             </div>
           </div>
 
-          <div className="desk2:hidden  desk:flex  justify-center mt-[20px] ">
-            <div className=" w-[380px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
-              <div>해당 플랫폼으로 이동</div>
-              <Image
-                src="/images/detail/CaretRight.svg"
-                width={16}
-                height={16}
-                alt="Right Arrow"
-              />
-            </div>
+          <div className="desk2:hidden  desk:flex  justify-center mt-[20px] cursor-pointer ">
+            <Link href={data?.link || '#'}>
+              <div className=" w-[380px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
+                <div>해당 플랫폼으로 이동</div>
+                <Image
+                  src="/images/detail/CaretRight.svg"
+                  width={16}
+                  height={16}
+                  alt="Right Arrow"
+                />
+              </div>
+            </Link>
           </div>
         </div>
       </Container>
       <NavBar sort={sort} setSort={setSort} />
 
-      {sort === 'public' ? (
-        <Notice />
-      ) : sort === 'news' ? (
+      {sort === 'news' ? (
         <News />
       ) : sort === 'report' ? (
         <Report />
       ) : sort === 'profit' ? (
-        <BuildingProfit url={url} />
+        <MusicProfit url={url} />
       ) : sort === 'detail' ? (
-        <BuildingProductDetail url={url} />
+        <MusicProductDetail />
       ) : undefined}
     </div>
   );
 };
 
-export default BuildingDetailpage;
+export default MusicDetailpage;
