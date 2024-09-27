@@ -8,6 +8,7 @@ export interface IArtProductDetail {
   totalPrice: number;
   recruitmentDate: string;
   minInvestment: number;
+  link: string;
 }
 
 export interface IArtProductProfitDetail {
