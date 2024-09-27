@@ -21,9 +21,9 @@ export interface ISummary {
 export interface IReport {
   id: number;
   title: string;
-  content: string;
+  description: string;
   category: string;
-  date: string;
+  imageLink: string;
 }
 
 export interface IProductDetail {
