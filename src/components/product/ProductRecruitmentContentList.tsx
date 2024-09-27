@@ -69,7 +69,7 @@ const ProductRecruitmentContentList = ({
                 <div className="flex items-center  h-[110px] ">
                   <div className="flex   desk:ml-[20px] ">
                     <Image
-                      src={'/images/product/ProductImage.png'}
+                      src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.productId}.jpg`}
                       width={82}
                       height={82}
                       alt="image"
@@ -120,7 +120,7 @@ const ProductRecruitmentContentList = ({
                     </div>
                   </div>
 
-                  <div className="w-[125px] mr-[28px] text-gray-500    desk:hidden  md:flex">
+                  <div className="w-[125px] mr-[28px] text-gray-500    desk:hidden  md:flex ">
                     {item.totalprice.toLocaleString()}원
                   </div>
 

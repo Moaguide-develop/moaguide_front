@@ -54,7 +54,7 @@ const ProductEndRecruitmentContentList = ({
                 <div className="flex items-center  h-[110px] ">
                   <div className="flex   desk:ml-[20px] ">
                     <Image
-                      src={'/images/product/ProductImage.png'}
+                      src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.productId}.jpg`}
                       width={82}
                       height={82}
                       alt="image"

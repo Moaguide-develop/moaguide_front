@@ -26,7 +26,7 @@ const ProductDealContentList = ({
           <div className="w-[100px] mr-[16px] text-gray-500 ">운영 플랫폼</div>
           <div className="w-[260px] mr-[16px] text-gray-500 ">종목 명</div>
           <div className="w-[88px] mr-[34px]  text-gray-500">현재가</div>
-          <div className="w-[103px] mr-[34px] text-gray-500 ">시가총액</div>
+          <div className="w-[103px] mr-[62px] text-gray-500 ">시가총액</div>
           <div className="w-[92px] mr-[30px]  text-gray-500 ">배당 수익률</div>
           <div className="w-[24px]  text-gray-500">#</div>
         </div>
@@ -41,7 +41,7 @@ const ProductDealContentList = ({
                 <div className="flex items-center  h-[110px] ">
                   <div className="flex   desk:ml-[20px] ">
                     <Image
-                      src={'/images/product/ProductImage.png'}
+                      src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.product_Id}.jpg`}
                       width={82}
                       height={82}
                       alt="image"
@@ -91,10 +91,10 @@ const ProductDealContentList = ({
                     </div>
                   </div>
 
-                  <div className="w-[125px] mr-[28px] text-gray-500    desk:hidden  md:flex">
+                  <div className=" w-[140px] mr-[28px] text-gray-500    desk:hidden  md:flex ">
                     {item.totalPrice.toLocaleString()}원
                   </div>
-                  <div className="w-[61px] mr-[29px] text-red-500 bg-red-100  rounded-lg flex justify-center items-center desk: ml-auto ">
+                  <div className="w-[61px] mr-[29px] text-red-500 bg-red-100  rounded-lg flex justify-center items-center desk:ml-auto  ">
                     {item.lastDivide_rate}%
                   </div>
                 </div>
@@ -105,7 +105,7 @@ const ProductDealContentList = ({
                 width={24}
                 height={24}
                 alt="Bookmark"
-                className="  desk:hidden  md:flex ml-[10px] cursor-pointer"
+                className="  desk:hidden  md:flex  cursor-pointer ml-auto"
               />
 
               <div className="  mt-[20px] mb-[20px] w-atuo h-[0px] border border-[#eceef2]" />

@@ -73,9 +73,9 @@ const Dividend = memo(({ dividend }: DividendProps) => {
         {dividend?.map((item) => {
           return (
             <div key={item.product_Id}>
-              <SwiperSlide className=" flex justify-center">
-                <Link href={`/product/detail/${item.product_Id}`}>
-                  <div className=" md:max-w-[456px]  desk2:max-w-[390px]  desk:max-w-[300px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row  desk:justify-start md:justify-center items-center  flex mx-auto  relative">
+              <SwiperSlide className=" flex ">
+                <Link href={`/product/detail/${item.category}/${item.product_Id}`}>
+                  <div className=" md:max-w-[456px]  desk2:max-w-[390px]  desk:max-w-[300px] h-[84px] px-5 py-4 bg-white rounded-lg flex-row  desk:justify-start  items-center  flex mx-auto  relative">
                     <div className=" w-full max-w-[52px] max-h-[52px] rounded-[28.50px] ">
                       <Image
                         src="/images/product/Building1.png"
@@ -86,15 +86,17 @@ const Dividend = memo(({ dividend }: DividendProps) => {
                       />
                     </div>
 
-                    <div className=" flex flex-col items-start justify-start md:ml-[20px] desk:ml-[16px]">
-                      <div className=" text-gray-300">부동산</div>
-                      <div className="w-full font-bold mt-1">{item.name}</div>
+                    <div className=" flex flex-col items-start justify-start md:ml-[20px] desk:ml-[16px] flex-grow ">
+                      <div className="">
+                        <div className=" text-gray-300">부동산</div>
+                        <div className="w-full font-bold mt-1">{item.name}</div>
+                      </div>
                       <div className=" font-bold flex justify-center items-center text-purple-600   desk:block  md:hidden">
                         (1주당 {item.dividend}원)
                       </div>
                     </div>
 
-                    <div className="ml-[46px] font-bold flex justify-center items-center text-purple-600 mt-[20px] desk:hidden md:block">
+                    <div className="ml-[46px] font-bold flex justify-center items-center text-purple-600 mt-[20px] desk:hidden md:block  ">
                       (1주당 {item.dividend}원)
                     </div>
                   </div>
