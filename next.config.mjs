@@ -2,6 +2,10 @@
 const nextConfig = {
   experimental: { instrumentationHook: true },
   reactStrictMode: true,
+
+  images: {
+    domains: ['www.kobis.or.kr', 'd2qf2amuam62ps.cloudfront.net']
+  },
   swcMinify: true,
   compiler: {
     styledComponents: true

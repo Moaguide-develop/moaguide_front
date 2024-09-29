@@ -21,9 +21,9 @@ export interface ISummary {
 export interface IReport {
   id: number;
   title: string;
-  content: string;
+  description: string;
   category: string;
-  date: string;
+  imageLink: string;
 }
 
 export interface IProductDetail {
@@ -36,6 +36,25 @@ export interface IProductDetail {
   totalPrice: string;
   dividend: number;
   lastDivide_rate: number;
+}
+
+export interface IProductEndRecruit {
+  productId: string;
+  name: string;
+  category: string;
+  platform: string;
+  totalPrice: number;
+  sailRate: number;
+}
+
+export interface IProductRecruit {
+  productId: string;
+  name: string;
+  totalprice: number;
+  day: string;
+  category: string;
+  platform: string;
+  recruitmentRate: number;
 }
 
 interface IProductDetailSort {
@@ -53,8 +72,36 @@ interface IProductDetailPageable {
   unpaged: boolean;
 }
 
-export interface IProductDetailData {
-  content: IProductDetail[];
+export interface IProductDealDetailData {
+  product: IProductDetail[];
+  pageable: IProductDetailPageable;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  size: number;
+  number: number;
+  sort: IProductDetailSort;
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
+}
+
+export interface IProductEndRecruitmentData {
+  product: IProductEndRecruit[];
+  pageable: IProductDetailPageable;
+  totalPages: number;
+  totalElements: number;
+  last: boolean;
+  size: number;
+  number: number;
+  sort: IProductDetailSort;
+  numberOfElements: number;
+  first: boolean;
+  empty: boolean;
+}
+
+export interface IProductRecruitmentData {
+  product: IProductRecruit[];
   pageable: IProductDetailPageable;
   totalPages: number;
   totalElements: number;
@@ -75,3 +122,8 @@ export interface ISummaryData {
   divide: IDivide[];
   summary: ISummary[];
 }
+
+export type IProductCommon =
+  | IProductDealDetailData
+  | IProductEndRecruitmentData
+  | IProductRecruitmentData;

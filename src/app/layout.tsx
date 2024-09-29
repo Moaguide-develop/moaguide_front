@@ -6,7 +6,9 @@ import IntegrateMSW from '@/mocks/IntegrateMsw';
 import Script from 'next/script';
 import ModalProvider from '@/providers/ModalProvider';
 import MobileFooter from '@/components/common/MobileFooter';
+import GoogleAnalytics from '@/lib/GoogleAnalytics';
 import GnbWrapper from '@/components/common/GnbWrapper'; 
+
 
 declare global {
   interface Window {
@@ -25,7 +27,7 @@ export const metadata: Metadata = {
   title: '모아가이드',
   description: 'STO 큐레이션 플랫폼 모아가이드',
   icons: {
-    icon: '/logo.png'
+    icon: '/favicon.svg'
   },
   openGraph: {
     title: '모아가이드',
@@ -45,6 +47,9 @@ export default function RootLayout({
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
       <body className={pretendard.className}>
+        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
         <IntegrateMSW>
           <QueryProvider>
             <Script
