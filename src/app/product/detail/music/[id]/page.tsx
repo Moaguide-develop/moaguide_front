@@ -22,7 +22,7 @@ const MusicDetailpage = (props: any) => {
         <div className="flex justify-between md:flex-row desk:flex-col ">
           <div className="flex desk2:justify-start desk:justify-center desk:mb-[40px] ">
             <Image
-              src="/images/detail/Profile.png"
+              src={`https://d2qf2amuam62ps.cloudfront.net/img/${url}.jpg`}
               width={181}
               height={181}
               alt="Profile Image"

@@ -20,12 +20,9 @@ const ProductPage = async ({
   const sort = searchParams['sort'] || 'lastDivide_rate desc';
   const category = searchParams['category'] || 'all';
   console.log(pages);
-  const buildingDiviedResponse = await fetch(
-    `https://api.moaguide.com/summary/recent/building`,
-    {
-      cache: 'no-store'
-    }
-  );
+  const buildingDiviedResponse = await fetch(`https://api.moaguide.com/summary`, {
+    cache: 'no-store'
+  });
 
   const buildingReportResponse = await fetch(
     'https://api.moaguide.com/summary/report/building',

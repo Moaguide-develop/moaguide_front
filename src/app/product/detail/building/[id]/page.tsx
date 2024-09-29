@@ -104,7 +104,7 @@ const BuildingDetailpage = (props: any) => {
 
             <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">배당 수익률</div>
-              <div className="text-red-500">{data?.lastDivideRate}%</div>
+              <div className="text-red-500">{data?.lastDivide_rate}%</div>
             </div>
 
             <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
