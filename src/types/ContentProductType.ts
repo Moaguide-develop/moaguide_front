@@ -9,6 +9,7 @@ export interface IContentProductDetail {
   date: string;
   lowPrice: number;
   invest: boolean;
+  link: string;
 }
 
 export interface IContentProductProfitDetail {
