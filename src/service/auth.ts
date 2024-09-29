@@ -1,4 +1,4 @@
-import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
+import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/types/auth';
 import { setToken, removeToken, getToken } from '@/utils/localStorage';
 import { useMemberStore } from '@/store/user.store';
 import { axiosInstance, basicAxiosInstance, refreshAxiosInstance } from './axiosInstance';
