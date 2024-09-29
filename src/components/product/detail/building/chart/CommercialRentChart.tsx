@@ -78,6 +78,7 @@ const CommercialRentChart: React.FC = () => {
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
   console.log(lastSegment);
   // API에서 데이터를 가져오는 함수
+
   const fetchData = async (): Promise<ApiData> => {
     const response = await axios.get(
       `https://api.moaguide.com/detail/building/rate/${lastSegment}?type=오피스`
@@ -103,7 +104,7 @@ const CommercialRentChart: React.FC = () => {
 
   // useQuery로 데이터 패칭
   const { data, error, isLoading } = useQuery({
-    queryKey: ['rentData'],
+    queryKey: ['rentData', lastSegment],
     queryFn: fetchData
   });
 

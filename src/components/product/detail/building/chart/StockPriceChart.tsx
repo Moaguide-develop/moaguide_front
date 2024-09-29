@@ -10,6 +10,10 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import { usePathname } from 'next/navigation';
+import { IMusicStockPriceChart } from '@/types/MusicProductType';
 
 ChartJS.register(
   CategoryScale,
@@ -21,53 +25,61 @@ ChartJS.register(
   Legend
 );
 
-// 각 기간에 해당하는 데이터의 타입 정의
-type TimePeriod = '3개월' | '6개월' | '1년';
-
-const StockPriceChart = () => {
+const BuildingStockPriceChart = () => {
   const chartRef = useRef(null);
+  const pathname = usePathname();
+  const lastSegment = pathname.split('/').pop();
+  console.log(lastSegment);
+  const [filteringData, setFilteringData] = useState('100');
 
-  const [chartData, setChartData] = useState<TimePeriod>('1년');
-
-  const dataSets: Record<TimePeriod, { labels: string[]; data: number[] }> = {
-    '3개월': {
-      labels: ['2023-10', '2023-11', '2023-12'],
-      data: [4500, 3000, 3500]
-    },
-    '6개월': {
-      labels: ['2023-07', '2023-08', '2023-09', '2023-10', '2023-11', '2023-12'],
-      data: [4200, 3900, 3500, 4500, 3000, 3500]
-    },
-    '1년': {
-      labels: [
-        '2023-01',
-        '2023-02',
-        '2023-03',
-        '2023-04',
-        '2023-05',
-        '2023-06',
-        '2023-07',
-        '2023-08',
-        '2023-09',
-        '2023-10',
-        '2023-11',
-        '2023-12'
-      ],
-      data: [4000, 4300, 3700, 3500, 4200, 4000, 3900, 3500, 4200, 4500, 3000, 3500]
+  const fetchData = async () => {
+    try {
+      const response = await axios.get<IMusicStockPriceChart>(
+        `https://api.moaguide.com/detail/transaction/${lastSegment}?month=${filteringData}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error; // 에러를 다시 던져서 useQuery의 onError로 전달
     }
   };
 
+  const {
+    data: StockPriceData,
+    isLoading,
+    error
+  } = useQuery({
+    queryKey: ['BuildingStockPriceChart', filteringData],
+    queryFn: fetchData
+  });
+
+  const StockPriceDate =
+    (StockPriceData?.transaction &&
+      StockPriceData?.transaction.map((item) => item.date)) ||
+    [];
+
+  const StockPriceCount =
+    (StockPriceData?.transaction &&
+      StockPriceData?.transaction.map((item) => Number(item.price))) ||
+    [];
+  const sortedStockPriceCount = [...StockPriceCount].sort((a, b) => b - a);
+  const maxStockPriceCount = sortedStockPriceCount[0] || 0;
+  const averageStockPriceCount =
+    StockPriceCount.reduce((acc, val) => acc + val, 0) / StockPriceCount.length || 0;
+
+  const newVariable = Math.floor(maxStockPriceCount + averageStockPriceCount);
+
   const data = {
-    labels: dataSets[chartData].labels,
+    labels: StockPriceDate,
     datasets: [
       {
         label: '주가',
-        data: dataSets[chartData].data,
+        data: StockPriceCount,
         borderColor: '#8a4af3',
         backgroundColor: '#8a4af3',
         pointBackgroundColor: '#8a4af3',
         pointBorderColor: '#8a4af3',
-        pointRadius: 5,
+        pointRadius: 0,
         pointHoverRadius: 7,
         fill: false,
         datalabels: {
@@ -105,7 +117,7 @@ const StockPriceChart = () => {
       y: {
         display: true,
         beginAtZero: true,
-        max: 6000,
+        max: newVariable,
         grid: {
           display: false
         }
@@ -125,19 +137,24 @@ const StockPriceChart = () => {
     <>
       <div className="mb-4  flex justify-end">
         <button
-          className={`w-[55px] mr-2 p-2  rounded-lg ${chartData === '3개월' ? 'bg-purple-500 text-white' : 'bg-gray-300  '}`}
-          onClick={() => setChartData('3개월')}>
+          className={`w-[55px] mr-2 p-2  rounded-lg ${filteringData === '3' ? 'bg-purple-500 text-white' : 'bg-gray-300  '}`}
+          onClick={() => setFilteringData('3')}>
           3개월
         </button>
         <button
-          className={`w-[55px] mr-2 p-2 rounded-lg ${chartData === '6개월' ? 'bg-purple-500 text-white' : 'bg-gray-300 '}`}
-          onClick={() => setChartData('6개월')}>
+          className={`w-[55px] mr-2 p-2 rounded-lg ${filteringData === '6' ? 'bg-purple-500 text-white' : 'bg-gray-300 '}`}
+          onClick={() => setFilteringData('6')}>
           6개월
         </button>
         <button
-          className={`w-[55px] p-2 rounded-lg ${chartData === '1년' ? 'bg-purple-500 text-white' : 'bg-gray-300 '}`}
-          onClick={() => setChartData('1년')}>
+          className={`w-[55px] mr-2 p-2 rounded-lg ${filteringData === '12' ? 'bg-purple-500 text-white' : 'bg-gray-300 '}`}
+          onClick={() => setFilteringData('12')}>
           1년
+        </button>
+        <button
+          className={`w-[55px] p-2 rounded-lg ${filteringData === '100' ? 'bg-purple-500 text-white' : 'bg-gray-300 '}`}
+          onClick={() => setFilteringData('100')}>
+          전체
         </button>
       </div>
       <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
@@ -149,4 +166,4 @@ const StockPriceChart = () => {
   );
 };
 
-export default StockPriceChart;
+export default BuildingStockPriceChart;

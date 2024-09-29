@@ -31,7 +31,7 @@ export interface IBuildingProductDetail {
   priceRate: number;
   totalPrice: string;
   lastDivide: number;
-  lastDivideRate: number;
+  lastDivide_rate: number;
   divideCycle: number;
   link: string;
 }

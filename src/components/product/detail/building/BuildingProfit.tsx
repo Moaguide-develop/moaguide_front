@@ -230,18 +230,18 @@ const BuildingProfit = ({ url }: { url: string }) => {
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-full max-w-[900px] desk:h-[100px] desk2:h-[100px]">
-            <div className="text-gray-400  desk2:w-[150px]  desk:w-[300px] ">
+            <div className="text-gray-400  w-[150px] ">
               지역지구 등 지정여부 (국토의 계획 및 이용에 관한 법률)
             </div>
-            <div className=" ">{data?.landRegistry.zoningNational}</div>
+            <div className="flex-1 ">{data?.landRegistry.zoningNational}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-full max-w-[900px] desk:h-[150px] desk2:h-[100px]">
-            <div className="text-gray-400  desk2:w-[200px]  desk:w-[500px]">
+            <div className="text-gray-400  w-[150px]  ">
               지역지구 등 지정여부 (기타법률)
             </div>
-            <div className="">{data?.landRegistry.zoningOther}</div>
+            <div className="flex-1">{data?.landRegistry.zoningOther}</div>
           </div>
         </div>
       </div>
