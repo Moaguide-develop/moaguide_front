@@ -73,7 +73,7 @@ const Editpage = () => {
   }, [open]);
 
   return (
-    <div className="max-w-[640px] w-full mx-auto">
+    <div className="px-5 mt-5 w-full mx-auto sm:max-w-[640px] sm:mt-10 sm:px-0">
       <div onClick={() => router.back()} className="py-[14px]">
         <img src="/images/mypage/left.svg" alt="" className="cursor-pointer" />
       </div>
@@ -92,20 +92,20 @@ const Editpage = () => {
                 placeholder="닉네임 입력"
                 value={nameValue}
                 onChange={handleNameChange}
-                className={`flex-1 bg-bg rounded-[12px] px-4 py-[14px] mt-2 text-body2 
-              outline-none
+                className={`flex-1 bg-bg rounded-[12px] px-4 py-[14px] mt-2 text-body2 outline-none flex-grow
               ${isNameComplete === 'no' && 'outline-error'}
               ${isNameComplete === 'yes' && 'outline-success'}
               `}
+              style={{ minWidth: '0' }} 
               />
               {isNameValid ? (
                 <div
                   onClick={checkNameDuplicate}
-                  className="ml-[6px] cursor-pointer flex mt-[8px] px-4 py-[14px] bg-black rounded-[12px] text-body5 text-white ">
+                  className="ml-[6px] cursor-pointer flex mt-[8px] px-4 py-[14px] bg-black rounded-[12px] text-body5 text-white flex-shrink-0">
                   중복확인
                 </div>
               ) : (
-                <div className="ml-[6px] flex mt-[8px] px-4 py-[14px] bg-gray100 rounded-[12px] text-body5 text-gray400 ">
+                <div className="ml-[6px] flex mt-[8px] px-4 py-[14px] bg-gray100 rounded-[12px] text-body5 text-gray400 flex-shrink-0">
                   중복확인
                 </div>
               )}

@@ -13,7 +13,8 @@ const Gnb = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem('access_token');
-    if (accessToken) {
+
+    if (accessToken && accessToken !== 'undefined') {
       setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
@@ -53,7 +54,7 @@ const Gnb = () => {
             className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
           </div>
-          <div className="hidden items-center min-w-[123px] min-h-[35px] sm:flex">
+          <div className="hidden items-center min-h-[35px] sm:flex">
             {isLoggedIn ? (
               <Link href={'/mypage'}>
                 <img src="/images/gnb/mypage.svg" alt="mypage" className="w-6 h-6" />

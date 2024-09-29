@@ -34,7 +34,7 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
       setIsSubmitting(true);
       const result = await checkPassword(passwordValue);
 
-      if (result === 'success') {
+      if (result === '인증에 성공했습니다.') {
         setStep(1);
       } else {
         alert('비밀번호가 올바르지 않습니다. 다시 시도해주세요.');
@@ -47,7 +47,8 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
   };
 
   return (
-    <div>
+    <div className='flex flex-col min-h-[calc(100dvh-220px)] justify-between sm:justify-center sm:min-h-0'>
+      <div>
       <div className="text-heading3">
         <div>현재 사용하고 계신</div>
         <div>
@@ -64,10 +65,11 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
           className="px-4 py-[14px] bg-bg text-body2 rounded-[12px] w-full outline-none"
         />
       </div>
+      </div>
       {isValid ? (
         <button
           onClick={handleCheckPassword} 
-          className={`cursor-pointer bg-gradient2 mt-[60px] flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full ${
+          className={`cursor-pointer bg-gradient2 flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full mt-0 sm:mt-[40px] ${
             isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           disabled={isSubmitting}
@@ -75,7 +77,7 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
           다음으로
         </button>
       ) : (
-        <button className="mt-[60px] flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full">
+        <button className="flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full mt-0 sm:mt-[40px]">
           다음으로
         </button>
       )}

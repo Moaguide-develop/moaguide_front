@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import PrivacyModal from './modal/PrivacyModal';
 import ServiceModal from './modal/ServiceModal';
 import AgeModal from './modal/AgeModal';
@@ -19,6 +20,8 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     marketing: false,
   });
   const [activePage, setActivePage] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const handleAllCheckedChange = () => {
     const newCheckedState = !allChecked;
@@ -44,7 +47,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   };
 
   const handleArrowClick = (key: string, event: React.MouseEvent) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     setActivePage(key);
   };
 
@@ -53,12 +56,19 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   };
 
   const isNextEnabled = checks.privacy && checks.service && checks.age;
-
   return (
-    <div className="flex justify-center items-center">
-      <div className="max-w-[340px] w-full mx-auto mt-[76px]">
+    <div className="min-h-[calc(100dvh-100px)] flex flex-col items-center justify-between mb-[100px] sm:min-h-[100vh] sm:justify-center sm:mb-0">
+      <div className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-0">
         <Image
-          className='mb-12'
+          src={'/sign/LeftArrowIcon.svg'}
+          alt='뒤로가기'
+          width={24}
+          height={24}
+          className='cursor-pointer'
+          onClick={() => router.back()} 
+        />
+        <Image
+          className="mt-6 mb-6"
           src={'/sign/ProgressBar1.svg'}
           alt="ProgressBar"
           width={360}
@@ -68,10 +78,12 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           회원가입을 위해<br />
           <span className="text-purple-600">이용약관에 동의</span>해주세요
         </h2>
-        <div className="space-y-4">
+        <div className="">
           <div
             onClick={handleAllCheckedChange}
-            className={`flex items-center p-4 border rounded-lg cursor-pointer ${allChecked ? 'border-purple-600' : 'border-gray-300'}`}
+            className={`flex items-center p-4 border rounded-lg cursor-pointer ${
+              allChecked ? 'border-purple-600' : 'border-gray-300'
+            }`}
           >
             <Image
               src={allChecked ? '/sign/CheckedCircle.svg' : '/sign/CheckCircle.svg'}
@@ -112,16 +124,19 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             </div>
           ))}
         </div>
-        <button
-          onClick={onNext}
-          className={`mt-6 w-full py-3 rounded-lg font-bold text-lg transition duration-300 ${
-            isNextEnabled ? 'bg-purple-600 text-white hover:bg-purple-700' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'
-          }`}
-          disabled={!isNextEnabled}
-        >
-          다음으로
-        </button>
       </div>
+
+      <button
+        onClick={onNext}
+        className={`w-full max-w-[340px] py-3 rounded-[12px] font-bold text-lg transition duration-300 mt-0 sm:mt-[40px] ${
+          isNextEnabled
+            ? 'bg-gradient2 text-white hover:bg-purple-700'
+            : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'
+        }`}
+        disabled={!isNextEnabled}
+      >
+        다음으로
+      </button>
 
       {activePage === 'privacy' && <PrivacyModal onClose={closePage} />}
       {activePage === 'service' && <ServiceModal onClose={closePage} />}

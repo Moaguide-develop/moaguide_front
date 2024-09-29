@@ -12,11 +12,11 @@ const CategoryReportItem = ({ id, title, category, date }: ReportListsItem) => {
       onClick={() => router.push(`/report/${id}`)}
       className="py-5 border-b border-gray100 flex gap-5 items-center cursor-pointer">
       <div className="flex-1 flex flex-col gap-3">
-        <div className="max-w-max p-[6px] flex items-center justify-center rounded-[4px] bg-gray50 text-gray400 text-caption3">
+        <div className="max-w-max p-1 sm:p-[6px] flex items-center justify-center rounded-[4px] bg-gray50 text-gray400 text-caption3">
           {formatCategory(category)}
         </div>
-        <div className="text-gray600 text-title1">{title}</div>
-        <div className="text-gray300 text-body7">
+        <div className="text-gray600 text-body5 sm:text-title1">{title}</div>
+        <div className="text-gray300 text-caption3 sm:text-body7">
           {' '}
           {format(parseISO(date), 'yyyy.MM.dd')}
         </div>

@@ -14,11 +14,11 @@ const Mypage = () => {
 
   useEffect(() => {
     const checkLoginStatus = async () => {
-      const isLoggedIn = !!localStorage.getItem('access_token');
-      if (!isLoggedIn) {
+      const accessToken = localStorage.getItem('access_token');
+      if (!accessToken || accessToken === 'undefined') {
         router.push('/sign');
       } else {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
@@ -28,6 +28,7 @@ const Mypage = () => {
   const handleLogout = async () => {
     await logout();
     setIsLoggedIn(false);
+    localStorage.removeItem('access_token'); 
     router.push('/sign');
   };
 
@@ -36,7 +37,7 @@ const Mypage = () => {
   }
 
   return (
-    <div className="max-w-[640px] w-full mx-auto mt-10">
+    <div className="px-5 mt-5 w-full mx-auto sm:max-w-[640px] sm:mt-10 sm:px-0">
       <header>
         <MypageHeader />
       </header>

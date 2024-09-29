@@ -56,7 +56,8 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
   };
 
   return (
-    <div>
+    <div className='flex flex-col min-h-[calc(100dvh-220px)] justify-between sm:justify-center sm:min-h-0'>
+      <div>
       <div className="text-heading3">
         <div>비밀번호를</div>
         <div>
@@ -95,15 +96,18 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
           ${isSame && 'outline-success'}
           `}
         />
+        <div className='h-[14.5px]'>
         {isSame ? (
           <div className="text-caption3 text-success ml-2">비밀번호가 일치합니다.</div>
         ) : null}
+        </div>
+      </div>
       </div>
       {/* Todo : 완료 버튼 누르면, 비밀번호 변경 요청 Api 실행, 성공 시 onSuccess setStep(2) 후 로그아웃, 실패할시 그냥 메인페이지로 이동 */}
       {isSame ? (
         <div
           onClick={handleChangePassword}
-          className={`cursor-pointer bg-gradient2 mt-[60px] flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full ${
+          className={`cursor-pointer bg-gradient2 flex justify-center items-center text-white rounded-[12px] text-title2 px-5 py-[14px] w-full mt-0 sm:mt-[40px] ${
             isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           // API 호출 중일 때 클릭 비활성화
@@ -111,7 +115,7 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
           변경 완료
         </div>
       ) : (
-        <div className="mt-[60px] flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full">
+        <div className="flex justify-center items-center bg-gray100 text-gray400 rounded-[12px] text-title2 px-5 py-[14px] w-full mt-0 sm:mt-[40px]">
           변경 완료
         </div>
       )}
