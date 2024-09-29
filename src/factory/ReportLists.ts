@@ -39,31 +39,31 @@ export const getStudyGuides = (category: string, subCategory: string, sort: stri
 
 
 const fetchArticleList = async ({ pageParam = null }) => {
-  const url = pageParam ? `https://api.moaguide.com/study/article?nextCursur=${pageParam}` : 'https://api.moaguide.com/study/article';
+  const url = pageParam ? `https://api.moaguide.com/study/article?nextCursor=${pageParam}` : 'https://api.moaguide.com/study/article';
   
-  console.log("Fetching next page with nextCursur:", pageParam); // 디버깅용 콘솔 로그
+  console.log("Fetching next page with nextCursor:", pageParam); 
   
   const { data } = await axios.get(url);
 
   return {
-    content: data.articleList, // 아티클 리스트
-    nextPage: data.nextCursur,  // 다음 페이지를 위한 nextCursur 값
-    isLast: !data.nextCursur,  // 다음 페이지가 없으면 true로 처리
+    content: data.articleList, 
+    nextPage: data.nextCursor,  
+    isLast: !data.nextCursor,  
   };
 };
 
 export const getArticles = () => {
-  const queryKey = ['ArticleList']; // 고유 쿼리 키
+  const queryKey = ['ArticleList']; 
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
       queryKey,
-      queryFn: fetchArticleList,  // 아티클 API 호출 함수
+      queryFn: fetchArticleList,  
       getNextPageParam: (lastPage) => {
-        console.log("Last page:", lastPage); // 디버깅용 콘솔 로그
+        console.log("Last page:", lastPage);
         return lastPage.isLast ? undefined : lastPage.nextPage;
       },
-      initialPageParam: null, // 첫 호출 시에는 nextCursur가 null
+      initialPageParam: null, 
     });
 
   return {
