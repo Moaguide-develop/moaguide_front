@@ -132,12 +132,14 @@ const ChangePhonePage = () => {
 
   return (
     <div>
-      <div className="max-w-[640px] w-full mx-auto">
+      <div className="w-[90%] mt-5 w-full mx-auto max-w-[340px] sm:max-w-[640px] sm:mt-10 sm:px-0">
         <div onClick={() => router.back()} className="py-[14px]">
           <img src="/images/mypage/left_password.svg" alt="" className="cursor-pointer" />
         </div>
       </div>
-      <section className="max-w-[340px] w-full mx-auto mt-[76px]">
+      <section className="w-[90%] max-w-[340px] w-full mx-auto mt-0 sm:mt-[76px]">
+      <div className='flex flex-col min-h-[calc(100dvh-220px)] justify-between sm:justify-center sm:min-h-0'>
+        <div>
         <div className="text-heading3">
           <span className="text-normal">휴대폰 번호</span>를 인증해주세요
         </div>
@@ -151,13 +153,14 @@ const ChangePhonePage = () => {
               value={phoneNumber}
               onChange={handlePhoneNumberChange}
               placeholder="휴대폰 번호 입력"
-              className="flex-1 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 "
+              className="flex-1 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2"
+              style={{ minWidth: '0' }} 
             />
             {phoneNumberValid ? (
               isRequest ? (
                 <div
                   onClick={handleResending}
-                  className={`ml-[6px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+                  className={`ml-[6px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 flex-shrink-0
                   ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                   `}>
                   재전송
@@ -165,12 +168,12 @@ const ChangePhonePage = () => {
               ) : (
                 <div
                   onClick={handleRequest}
-                  className="ml-[6px] cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2">
+                  className="ml-[6px] cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 flex-shrink-0">
                   인증 요청
                 </div>
               )
             ) : (
-              <div className="ml-[6px] px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+              <div className="ml-[6px] px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 flex-shrink-0">
                 인증 요청
               </div>
             )}
@@ -192,17 +195,18 @@ const ChangePhonePage = () => {
               ${isRequest && isComplete && 'outline-success'}
               ${isRequest && isError && 'outline-error'}
               `}
+              style={{ minWidth: '0' }} 
             />
             {isRequest && validNumberOk ? (
               <div
                 onClick={handleCertify}
-                className={` ml-[8px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+                className={` ml-[8px] px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 flex-shrink-0 
                 ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                 `}>
                 인증 완료
               </div>
             ) : (
-              <div className="ml-[8px] px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+              <div className="ml-[8px] px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 flex-shrink-0">
                 인증 완료
               </div>
             )}
@@ -227,17 +231,19 @@ const ChangePhonePage = () => {
             </div>
           )}
         </div>
+        </div>
         {isComplete ? (
           <div
             onClick={handleComplete}
-            className="cursor-pointer flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gradient2 text-heading4 text-white">
+            className="cursor-pointer flex items-center justify-center px-5 py-[14px] w-full rounded-[12px] bg-gradient2 text-heading4 text-white mt-0 sm:mt-[40px]">
             변경 완료
           </div>
         ) : (
-          <div className="flex items-center justify-center px-5 py-[14px] mt-[60px] w-full rounded-[12px] bg-gray100 text-heading4 text-gray400">
+          <div className="flex items-center justify-center px-5 py-[14px] w-full rounded-[12px] bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px]">
             변경 완료
           </div>
         )}
+        </div>
       </section>
     </div>
   );

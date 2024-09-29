@@ -1,20 +1,21 @@
 import { Metadata } from 'next';
 import './globals.css';
 import localFont from 'next/font/local';
-import Gnb from '@/components/common/Gnb';
 import QueryProvider from '@/providers/QueryProvider';
 import IntegrateMSW from '@/mocks/IntegrateMsw';
-
 import Script from 'next/script';
 import ModalProvider from '@/providers/ModalProvider';
 import MobileFooter from '@/components/common/MobileFooter';
 import GoogleAnalytics from '@/lib/GoogleAnalytics';
+import GnbWrapper from '@/components/common/GnbWrapper'; 
+
 
 declare global {
   interface Window {
     kakao: any;
   }
 }
+
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
   display: 'swap',
@@ -55,7 +56,7 @@ export default function RootLayout({
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
             />
-            <Gnb />
+            <GnbWrapper />
             {children}
             <MobileFooter />
             <ModalProvider />

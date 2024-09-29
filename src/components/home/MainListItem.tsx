@@ -12,7 +12,6 @@ const MainListItem = ({
   price,
   priceRate,
   totalPrice,
-  dividend,
   lastDivide_rate
 }: MainProductItem) => {
   const router = useRouter();

@@ -3,30 +3,31 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
+import throttle from 'lodash/throttle'; // lodash에서 throttle 함수 import
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); 
+  const [errorMessage, setErrorMessage] = useState('');
   const router = useRouter();
-  const { setIsLoggedIn } = useAuthStore(); 
+  const { setIsLoggedIn } = useAuthStore();
 
-  const handleLogin = async () => {
+  const throttledHandleLogin = throttle(async () => {
     try {
-      await login(email, password); 
-      setIsLoggedIn(true); 
+      await login(email, password);
+      setIsLoggedIn(true);
       router.push('/');
     } catch (error) {
-      setErrorMessage('이메일 혹은 비밀번호가 일치하지 않습니다. 다시 시도해주세요.'); 
+      setErrorMessage('이메일 혹은 비밀번호가 일치하지 않습니다. 다시 시도해주세요.');
     }
-  };
+  }, 1000); 
 
   return (
-    <div>
-      <nav className="w-full flex items-center justify-center border-b border-gray100">
-      </nav>
-      <section className="flex justify-center mt-24 mb-12">
-        <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
+    <div className="min-h-[calc(100dvh-75px)] flex flex-col items-center justify-center sm:min-h-[100vh]">
+      <section className="flex mt-8 mb-6">
+        <Link href={'/'} className='cursor-pointer'>
+          <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
+        </Link>
       </section>
       <section className="flex flex-col items-center w-full px-4">
         <div className="mb-6">
@@ -60,15 +61,15 @@ const SignLayout = () => {
           </label>
         </div>
         <div className='min-h-[20px] my-2'>
-        {errorMessage && (
-          <div className="w-[320px] text-red-500 text-xs  text-center">
-            {errorMessage}
-          </div>
-        )}
+          {errorMessage && (
+            <div className="w-[320px] text-red-500 text-xs text-center">
+              {errorMessage}
+            </div>
+          )}
         </div>
         <button 
-          className="w-[320px] bg-gradient-to-r from-purple-500 to-indigo-500 text-white py-3 rounded-lg text-sm font-semibold mb-4"
-          onClick={handleLogin}
+          className="w-[320px] bg-gradient2 font-bold text-lg text-white py-3 rounded-lg mb-4"
+          onClick={throttledHandleLogin} 
         >
           로그인
         </button>
@@ -79,10 +80,10 @@ const SignLayout = () => {
           <a href="/find">이메일 / 비밀번호 찾기</a>
         </div>
       </section>
-      <section className="mt-8">
+       {/* <section className="mt-8"> */}
         {/* <SocialLoginButtons /> */}
-      </section>
-      <div className="h-12" />
+      {/* </section> */}
+      {/* <div className="h-12" /> */}
     </div>
   );
 };
