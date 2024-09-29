@@ -1,6 +1,12 @@
 import Navbar from '@/components/common/Navbar';
 import Product from '@/components/product/Product';
-import { IProductDetailData, IReport, ISummaryData } from '@/types/Diviend';
+import {
+  IProductCommon,
+  IProductDealDetailData,
+  IProductRecruitmentData,
+  IReport,
+  ISummaryData
+} from '@/types/Diviend';
 
 const ProductPage = async ({
   params,
@@ -10,13 +16,13 @@ const ProductPage = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const pages = searchParams['page'] || 1;
+  const subcategory = searchParams['subcategory'] || 'trade';
+  const sort = searchParams['sort'] || 'lastDivide_rate desc';
+  const category = searchParams['category'] || 'all';
   console.log(pages);
-  const buildingDiviedResponse = await fetch(
-    `https://api.moaguide.com/summary/recent/building`,
-    {
-      cache: 'no-store'
-    }
-  );
+  const buildingDiviedResponse = await fetch(`https://api.moaguide.com/summary`, {
+    cache: 'no-store'
+  });
 
   const buildingReportResponse = await fetch(
     'https://api.moaguide.com/summary/report/building',
@@ -25,7 +31,7 @@ const ProductPage = async ({
     }
   );
   const productDetailResponse = await fetch(
-    `https://api.moaguide.com/summary/list/all?page=${pages}&size=10&sort=views`,
+    `https://api.moaguide.com/summary/list?category=${category}&subcategory=${subcategory}&sort=${sort}&page=${pages}&size=10`,
     {
       next: { revalidate: 300 }
     }
@@ -35,8 +41,8 @@ const ProductPage = async ({
 
   const buildingReportData: IReport[] = await buildingReportResponse.json();
 
-  const productDetailData: IProductDetailData = await productDetailResponse.json();
-
+  const productDetailData: IProductCommon = await productDetailResponse.json();
+  console.log(productDetailData);
   return (
     <div>
       <Navbar />
@@ -44,7 +50,7 @@ const ProductPage = async ({
         divide={buildingDiviedData.divide}
         summary={buildingDiviedData.summary}
         report={buildingReportData}
-        content={productDetailData.content}
+        content={productDetailData.product}
         pageNumber={productDetailData?.pageable?.pageNumber}
         totalPages={productDetailData?.totalPages}
       />

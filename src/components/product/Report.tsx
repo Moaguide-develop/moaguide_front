@@ -37,6 +37,7 @@ const Report = ({ report }: IReportProps) => {
             alt="leftarrow"
             width={20}
             height={20}
+            className=" cursor-pointer"
           />
         </div>
       </div>
@@ -83,7 +84,7 @@ const Report = ({ report }: IReportProps) => {
 
                       <div className="my-[12px]">{item.title}</div>
                       <div className="text-gray-300">
-                        {format(new Date(item.date), 'yyyy.MM.dd')}
+                        {/* {format(new Date(item.date), 'yyyy.MM.dd')} */}
                       </div>
                     </div>
                     <div className="w-[132px] h-[93px] rounded-md">
@@ -112,6 +113,7 @@ const Report = ({ report }: IReportProps) => {
             alt="rightarrow"
             width={20}
             height={20}
+            className=" cursor-pointer"
           />
         </div>
       </div>

@@ -39,6 +39,7 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
               alt="leftarrow"
               width={20}
               height={20}
+              className=" cursor-pointer"
             />
           </div>
         </div>
@@ -151,6 +152,7 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
               alt="rightarrow"
               width={20}
               height={20}
+              className=" cursor-pointer"
             />
           </div>
         </div>
