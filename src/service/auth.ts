@@ -1,4 +1,4 @@
-import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/type/auth';
+import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/types/auth';
 import { setToken, removeToken, getToken } from '@/utils/localStorage';
 import { useMemberStore } from '@/store/user.store';
 import { axiosInstance, basicAxiosInstance, refreshAxiosInstance } from './axiosInstance';
@@ -194,10 +194,13 @@ export const deleteUser = async () => {
 
       const { clearMember } = useMemberStore.getState();
       clearMember();
+      return response;  // 반환값 추가
     } else {
       console.error('회원탈퇴 실패', response.status);
+      return response;  // 실패 시에도 response 반환
     }
   } catch (error) {
     console.error('회원탈퇴 오류:', error);
+    throw error;  // 에러를 호출한 함수로 throw하여 catch하도록 함
   }
 };

@@ -42,15 +42,15 @@ const MobileFooter = () => {
         <div className="text-caption1 text-gray300">조각투자 상품</div>
       </div>
       <div
-        onClick={() => router.push('/reportpage')}
+        onClick={() => router.push('/practicepage')}
         className="flex-1 flex flex-col gap-1 items-center">
         <div>
           <img
-            src={`${pathname.includes('/report') ? '/images/footer/report_active.svg' : '/images/footer/report.svg'}`}
+            src={`${pathname.includes('/practice') ? '/images/footer/practice_active.svg' : '/images/footer/practice.svg'}`}
             alt=""
           />
         </div>
-        <div className="text-caption1 text-gray300">리포트</div>
+        <div className="text-caption1 text-gray300">학습하기</div>
       </div>
       <div
         onClick={() => router.push('/mypage')}

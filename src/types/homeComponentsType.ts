@@ -62,3 +62,56 @@ export interface SearchedItem {
   lastDivide_rate?: number;
   product_Id: string;
 }
+
+
+export interface StudyGuidesItem {
+  id: number;
+  difficulty: string;
+  title: string;
+  description: string;
+}
+
+export interface SubLoadmap {
+  id: number;
+  number: number;
+  title: string;
+  description: string;
+}
+
+export interface CategorySubloadmapItemProps {
+  data: SubLoadmap;
+  isTop: boolean;
+  isBottom: boolean;
+}
+
+export interface CategorySubloadmapSkeletonItemProps {
+  isTop: boolean;
+  isBottom: boolean;
+}
+
+export interface SubLoadmapBottomArticle {
+  id: number;
+  title: string;
+  description: string;
+  imageLink: string;
+  date: string;
+  content: string;
+  pdfLink: string;
+}
+
+
+export interface SubLoadmapBottomArticleItemsProps {
+  data: SubLoadmapBottomArticle;
+  isTop: boolean;
+  isBottom: boolean;
+}
+
+export interface ArticleItem {
+  id: number;
+  title: string;
+  description: string;
+  imageLink: string;
+  date: string;
+  content?: string;
+  pdfLink: string;
+}

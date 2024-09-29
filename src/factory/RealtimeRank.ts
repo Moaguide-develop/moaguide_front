@@ -19,6 +19,7 @@ export const getRealtimeRank = () => {
     queryKey,
     queryFn: fetchRealtimeRank
   });
+
   if (error) {
     console.error('Error fetching realtime rank:', error);
   }

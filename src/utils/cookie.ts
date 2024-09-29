@@ -1,6 +1,6 @@
 import { Cookies } from 'react-cookie';
 
-import { CookieGetOptions, CookieSetOptions } from '@/type/cookies';
+import { CookieGetOptions, CookieSetOptions } from '@/types/cookies';
 
 const cookies = new Cookies();
 
