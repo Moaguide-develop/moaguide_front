@@ -92,12 +92,12 @@ const Dividend = memo(({ dividend }: DividendProps) => {
                         <div className="w-full font-bold mt-1">{item.name}</div>
                       </div>
                       <div className=" font-bold flex justify-center items-center text-purple-600   desk:block  md:hidden">
-                        (1주당 {item.dividend}원)
+                        (1주당 {item.dividend.toLocaleString()}원)
                       </div>
                     </div>
 
                     <div className="ml-[46px] font-bold flex justify-center items-center text-purple-600 mt-[20px] desk:hidden md:block  ">
-                      (1주당 {item.dividend}원)
+                      (1주당 {item.dividend.toLocaleString()}원)
                     </div>
                   </div>
                 </Link>
