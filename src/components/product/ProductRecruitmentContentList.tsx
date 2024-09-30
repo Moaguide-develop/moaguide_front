@@ -67,13 +67,13 @@ const ProductRecruitmentContentList = ({
             <div key={item.productId} className=" lg:flex  ">
               <Link href={`product/detail/${item.category}/${item.productId}`}>
                 <div className="flex items-center  h-[110px] ">
-                  <div className="flex   desk:ml-[20px] ">
+                  <div className="flex  mr-[16px]  desk:ml-[20px] ">
                     <Image
                       src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.productId}.jpg`}
                       width={82}
                       height={82}
                       alt="image"
-                      className="mr-[16px]"
+                      className=""
                     />
                   </div>
                   <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100   desk:hidden  md:flex ">
@@ -92,12 +92,12 @@ const ProductRecruitmentContentList = ({
                       <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100 ">
                         {CATEGORY[item.category]}
                       </div>
-                      <div className="w-[100px] mr-[16px]  text-gray-400 ">
+                      <div className="max-w-[100px] mr-[16px]  text-gray-400 ">
                         {item.platform}
                       </div>
                     </div>
 
-                    <div className="w-[220px] mr-[16px] text-lg font-bold mb-[5px] ">
+                    <div className="max-w-[220px] mr-[16px] text-lg font-bold mb-[5px] ">
                       {item.name}
                     </div>
 

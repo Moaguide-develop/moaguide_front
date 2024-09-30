@@ -39,13 +39,12 @@ const ProductDealContentList = ({
             <div key={item.product_Id} className=" lg:flex  ">
               <Link href={`product/detail/${item.category}/${item.product_Id}`}>
                 <div className="flex items-center  h-[110px] ">
-                  <div className="flex   desk:ml-[20px] ">
+                  <div className="mr-[10px] desk:ml-[20px] ">
                     <Image
                       src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.product_Id}.jpg`}
                       width={82}
                       height={82}
                       alt="image"
-                      className="mr-[16px]"
                     />
                   </div>
                   <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100   desk:hidden  md:flex ">
@@ -57,18 +56,19 @@ const ProductDealContentList = ({
                   <div className="w-[260px] mr-[16px] text-lg font-bold   desk:hidden  md:flex ">
                     {item.name}
                   </div>
+
                   {/* /////   반응형  //////////// */}
-                  <div className="flex flex-col  md:hidden  desk:flex  ">
+                  <div className="flex-1 flex flex-col  md:hidden  desk:flex  ">
                     <div className="flex mb-[5px]">
                       <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100 ">
                         {CATEGORY[item.category]}
                       </div>
-                      <div className="w-[100px] mr-[16px]  text-gray-400 ">
+                      <div className="max-w-[80px] mr-[16px]  text-gray-400 ">
                         {item.platform}
                       </div>
                     </div>
 
-                    <div className="w-[220px] mr-[16px] text-lg font-bold mb-[5px] ">
+                    <div className="maw-[170px] mr-[16px] text-lg font-bold mb-[5px] ">
                       {item.name}
                     </div>
 
@@ -76,26 +76,62 @@ const ProductDealContentList = ({
                       <div className=" ml-[4px] mr-[4px] text-gray-500  ">
                         {item.price.toLocaleString()}원
                       </div>
-                      <div className="mr-[16px] text-red-500 ">({item.priceRate}%)</div>
+                      <div
+                        className={`mr-[16px] ${
+                          item.priceRate > 0
+                            ? 'text-red-500'
+                            : item.priceRate < 0
+                              ? 'text-blue-500'
+                              : 'text-gray-500'
+                        }`}>
+                        {item.priceRate > 0
+                          ? `(+${item.priceRate}%)`
+                          : item.priceRate < 0
+                            ? `(${item.priceRate}%)`
+                            : `(0%)`}
+                      </div>
                     </div>
                   </div>
-
-                  {/* ///// */}
+                  {/* /////   반응형  //////////// */}
 
                   <div className=" flex flex-col">
                     <div className="w-[108px] mr-[16px] text-gray-500  desk:hidden  md:flex  ">
                       {item.price.toLocaleString()} 원
                     </div>
-                    <div className="w-[88px] mr-[16px] text-red-500  desk:hidden  md:flex ">
-                      ({item.priceRate}%)
+                    <div
+                      className={`w-[88px] mr-[16px] desk:hidden md:flex  ${
+                        item.priceRate > 0
+                          ? 'text-red-500'
+                          : item.priceRate < 0
+                            ? 'text-blue-500'
+                            : 'text-gray-500'
+                      }`}>
+                      (
+                      {item.priceRate > 0
+                        ? `+${item.priceRate}%`
+                        : item.priceRate < 0
+                          ? `${item.priceRate}%`
+                          : `0%`}
+                      )
                     </div>
                   </div>
 
                   <div className=" w-[140px] mr-[28px] text-gray-500    desk:hidden  md:flex ">
                     {item.totalPrice.toLocaleString()}원
                   </div>
-                  <div className="w-[61px] mr-[29px] text-red-500 bg-red-100  rounded-lg flex justify-center items-center desk:ml-auto  ">
-                    {item.lastDivide_rate}%
+                  <div
+                    className={`w-[61px] mr-[29px] rounded-lg flex justify-center items-center desk:ml-auto px-2 ${
+                      item.lastDivide_rate > 0
+                        ? 'text-red-500 bg-red-100'
+                        : item.lastDivide_rate < 0
+                          ? 'text-blue-500 bg-blue-100'
+                          : 'text-gray-500 bg-gray-100'
+                    }`}>
+                    {item.lastDivide_rate > 0
+                      ? `+${item.lastDivide_rate}%`
+                      : item.lastDivide_rate < 0
+                        ? `${item.lastDivide_rate}%`
+                        : `0%`}
                   </div>
                 </div>
               </Link>

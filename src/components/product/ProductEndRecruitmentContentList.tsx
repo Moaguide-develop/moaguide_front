@@ -52,13 +52,13 @@ const ProductEndRecruitmentContentList = ({
             <div key={item.productId} className=" lg:flex  ">
               <Link href={`product/detail/${item.category}/${item.productId}`}>
                 <div className="flex items-center  h-[110px] ">
-                  <div className="flex   desk:ml-[20px] ">
+                  <div className="flex   desk:ml-[20px] mr-[16px] ">
                     <Image
                       src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.productId}.jpg`}
                       width={82}
                       height={82}
                       alt="image"
-                      className="mr-[16px]"
+                      className=""
                     />
                   </div>
                   <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100   desk:hidden  md:flex ">
@@ -77,12 +77,12 @@ const ProductEndRecruitmentContentList = ({
                       <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100 ">
                         {CATEGORY[item.category]}
                       </div>
-                      <div className="w-[100px] mr-[16px]  text-gray-400 ">
+                      <div className="max-w-[100px] mr-[16px]  text-gray-400 ">
                         {item.platform}
                       </div>
                     </div>
 
-                    <div className="w-[220px] mr-[16px] text-lg font-bold mb-[5px] ">
+                    <div className="max-w-[220px] mr-[16px] text-lg font-bold mb-[5px] ">
                       {item.name}
                     </div>
 
@@ -111,8 +111,19 @@ const ProductEndRecruitmentContentList = ({
                       </div>
                     </div>
                   ) : (
-                    <div className="w-[245px] flex justify-start text-red-500   font-bold  desk:hidden  md:flex ">
-                      {item.sailRate}%
+                    <div
+                      className={`w-[245px] flex justify-start font-bold desk:hidden md:flex ${
+                        item.sailRate > 0
+                          ? 'text-red-500'
+                          : item.sailRate < 0
+                            ? 'text-blue-500'
+                            : 'text-gray-500'
+                      }`}>
+                      {item.sailRate > 0
+                        ? `+${item.sailRate}%`
+                        : item.sailRate < 0
+                          ? `${item.sailRate}%`
+                          : `0%`}
                     </div>
                   )}
                 </div>
