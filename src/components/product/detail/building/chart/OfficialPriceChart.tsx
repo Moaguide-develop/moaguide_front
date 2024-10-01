@@ -29,9 +29,8 @@ ChartJS.register(
 
 // API 데이터 타입 정의
 interface LandData {
-  landPrice: number;
-  baseYear: string;
-  baseDay: string;
+  value: number;
+  day: string;
 }
 
 interface ApiData {
@@ -93,18 +92,18 @@ const OfficialPriceChart = () => {
 
     // 사용자가 선택한 기간에 맞게 데이터를 필터링
     const filteredLandPrices = data.lands.filter((item) => {
-      const year = parseInt(item.baseYear);
+      const year = parseInt(item.day);
       return year >= startYear && year <= endYear;
     });
 
     // 레이블 생성 및 역순으로 정렬
-    const labels = filteredLandPrices.map((item) => `${item.baseYear}.1Q`).reverse();
+    const labels = filteredLandPrices.map((item) => `${item.day}.1Q`).reverse();
 
     // 데이터셋 생성 및 역순으로 정렬
     const datasets = [
       {
         label: '공시지가',
-        data: filteredLandPrices.map((item) => item.landPrice).reverse(),
+        data: filteredLandPrices.map((item) => item.value).reverse(),
         borderColor: '#8A4AF3', // 선의 색상
         backgroundColor: '#8A4AF3',
         pointBackgroundColor: '#8A4AF3',
