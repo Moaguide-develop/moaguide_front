@@ -35,7 +35,7 @@ const Gnb = () => {
           ? 'shadow-custom-light border-b border-gray100'
           : ''
       }>
-      <div className="px-5 py-[16px] max-w-[1000px] mx-auto flex items-center justify-between sm:px-0 desk:min-w-[390px] sm:py-3 ">
+      <div className="px-5 py-[16px] max-w-[1000px] mx-auto flex items-center justify-between sm:px-0  sm:py-3 ">
         <Link href={'/'} className="cursor-pointer">
           <img src="/images/logo.svg" alt="logo" className="w-[144px] h-5" />
         </Link>
