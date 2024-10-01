@@ -4,15 +4,20 @@ import FloatingPopulationChart from './chart/FloatingPopulationChart';
 import PopulationInformationChart from './chart/PopulationInformationChart';
 import PublicTransport from './PublicTransport';
 import OfficialPriceChart from './chart/OfficialPriceChart';
-const BuildingProductDetail = ({ url }: { url: string }) => {
-  console.log(url);
+const BuildingProductDetail = ({
+  url,
+  rentType
+}: {
+  url: string;
+  rentType: boolean | undefined;
+}) => {
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       <div className=" text-lg font-bold mb-[20px]">상권 임대료</div>
-      <CommercialRentChart />
+      <CommercialRentChart rentType={rentType} />
 
       <div className=" text-lg font-bold mb-[20px]">상권 공실률</div>
-      <CommercialVacancyRateChart />
+      <CommercialVacancyRateChart rentType={rentType} />
 
       <div className=" text-lg font-bold mb-[20px]">공시지가</div>
       <OfficialPriceChart />

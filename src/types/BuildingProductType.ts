@@ -34,6 +34,8 @@ export interface IBuildingProductDetail {
   lastDivide_rate: number;
   divideCycle: number;
   link: string;
+  rentType: boolean;
+  bookMark: string;
 }
 
 export interface IBuildingProductProfitDetail {
