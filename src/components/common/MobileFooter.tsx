@@ -7,7 +7,7 @@ const MobileFooter = () => {
   const pathname = usePathname();
 
   return (
-    <div className="sm:hidden z-[9999] fixed bottom-0 pt-[14px] pb-[18px] px-[6px] flex items-center border-t border-gray100 bg-white w-full">
+    <div className="sm:hidden z-[9999] sticky bottom-0 pt-[14px] pb-[18px] px-[6px] flex items-center border-t border-gray100 bg-white w-full ">
       <div
         onClick={() => router.push('/')}
         className="flex-1 flex flex-col gap-1 items-center">
