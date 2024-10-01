@@ -81,7 +81,7 @@ const MusicDetailpage = (props: any) => {
           </div>
 
           <div className="flex flex-col  desk2:justify-start desk2:items-start  desk:justify-center desk:items-center    ">
-            <div className="flex desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex w-full desk:max-w-[360px] md:w-[300px] justify-between ">
               <div className="text-gray-400">현재가</div>
               <div className="flex flex-row ">
                 <div>{data?.price.toLocaleString()}원</div>
@@ -89,22 +89,22 @@ const MusicDetailpage = (props: any) => {
               </div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px] md:w-[300px] justify-between ">
               <div className="text-gray-400">시가총액</div>
               <div>{data?.totalPrice.toLocaleString()}원</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px] md:w-[300px] justify-between ">
               <div className="text-gray-400">최근 배당금</div>
               <div>{data?.lastDivide}원</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px] md:w-[300px] justify-between ">
               <div className="text-gray-400">배당 수익률</div>
               <div className="text-red-500">{data?.lastDivide_rate}%</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px] md:w-[300px] justify-between ">
               <div className="text-gray-400">배당 주기</div>
               <div>{data?.divideCycle}개월</div>
             </div>

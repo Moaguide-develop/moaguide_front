@@ -82,7 +82,7 @@ const ArtDetailpage = (props: { params: { id: string } }) => {
           </div>
 
           <div className="flex flex-col  desk2:justify-start desk2:items-start  desk:justify-center desk:items-center    ">
-            <div className="flex desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">모집금액</div>
               <div className="flex flex-row ">
                 <div>{data?.recruitmentPrice.toLocaleString()}원</div>
@@ -90,22 +90,22 @@ const ArtDetailpage = (props: { params: { id: string } }) => {
               </div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">모집률</div>
               <div>{data?.recruitmentRate.toLocaleString()}%</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">시가총액</div>
               <div>{data?.totalPrice.toLocaleString()}원</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">모집기간</div>
               <div className="">~{data?.recruitmentDate}까지</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">최소투자금</div>
               <div>{data?.minInvestment.toLocaleString()}원</div>
             </div>
