@@ -36,3 +36,16 @@ export interface ICowProductProfitDetail {
     initialDate: string;
   };
 }
+
+export interface ICowPrice {
+  day: string;
+  value: number;
+}
+
+export interface ICowProductPrice {
+  object: ICowPrice[];
+}
+
+export interface ICowMarketPrice {
+  object: ICowPrice[];
+}
