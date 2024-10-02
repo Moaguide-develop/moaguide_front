@@ -1,18 +1,16 @@
 import React from 'react';
 import { InvestmentGuideProps } from '@/types/homeComponentsType';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 const CategorySubloadmapBottomArticle: React.FC<InvestmentGuideProps> = ({ id, title, description, date, imageLink, link }) => {
-  const router = useRouter();
 
   const handleClick = () => {
     console.log(link);
-    router.push(link); 
+    window.open(link, '_blank');
   };
 
   return (
-    <div className='w-full pt-5' onClick={handleClick}> {/* 48% 너비로 한 줄에 두 개씩 */}
+    <div className='w-full pt-5' onClick={handleClick}> 
       <div className="flex gap-5 items-center cursor-pointer">
         <Image
           src={imageLink} 
