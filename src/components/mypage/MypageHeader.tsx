@@ -21,22 +21,14 @@ const MypageHeader = () => {
         </div>
       </div>
       <div className="flex justify-between items-center px-[21px] py-[25px] bg-gradient2 rounded-[12px]">
-        <div className="text-white text-title1">{member.subscribe} 이용 중</div>
+        <div className='flex items-center gap-[14px]'>
+          <img src="/images/mypage/bookmark-white.svg" alt="" />
+          <div className="text-white text-title1">관심종목</div>
+        </div>
         <div>
-          <img src="/images/mypage/right_white.svg" alt="" className="cursor-pointer" />
-        </div>
-      </div>
-      <div className="flex justify-between items-center p-5">
-        <div className="flex items-center gap-[14px]">
-          <div>
-            <img src="/images/mypage/bookmark.svg" alt="" />
-          </div>
-          <div className="text-body1 text-gray700">관심종목</div>
-        </div>
-        <div className="flex items-center gap-[14px]">
-          <div className="text-normal text-body1">24개</div>
-          <div>
-            <img src="/images/mypage/right_gray.svg" alt="" className="cursor-pointer" />
+          <div className='flex items-center gap-[14px]'>
+            <div className="text-normal text-white">24개</div>
+            <img src="/images/mypage/right_white.svg" alt="" className="cursor-pointer" />
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
-import throttle from 'lodash/throttle'; // lodash에서 throttle 함수 import
+import throttle from 'lodash/throttle'; 
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');

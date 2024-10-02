@@ -92,8 +92,10 @@ export const login = async (email: string, password: string) => {
       memberEmail: userInfo.email,
       memberNickName: userInfo.nickname,
       memberPhone: userInfo.phonenumber,
-      subscribe: '1개월 플랜', 
+      loginType: userInfo.loginType, 
     });
+
+    console.log(userInfo);
 
     return response.data;
   } catch (error) {

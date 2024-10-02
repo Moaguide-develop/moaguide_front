@@ -1,75 +1,29 @@
-import type { ReportListsItem, StudyGuidesItem, SubLoadmap } from '@/types/homeComponentsType';
-import { formatCategory } from '@/utils/formatCategory';
-import axios from 'axios';
-import { format, parseISO } from 'date-fns';
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import SubLoadmapSkeleton from '../skeleton/SubLoadmapSkeleton';
-import CategorySubloadmapItem from './CategorySubloadmapItem';
+import type { StudyGuidesItem, SubLoadmap } from '@/types/homeComponentsType';
+import React from 'react';
+import { useRouter } from 'next/navigation'; 
 
-const CategoryPracticeItem = ({ id, difficulty, title, description }: StudyGuidesItem) => {
-  const [details, setDetails] = useState<SubLoadmap[] | null>(null);
-  const [showDetails, setShowDetails] = useState(false);
-  const [loadingDetails, setLoadingDetails] = useState(false);
-  const [toggleImage, setToggleImage] = useState('/images/report/toggle_button.svg');
+const CategoryPracticeItem = ({ id, title, link }: StudyGuidesItem) => {
+  const router = useRouter(); 
 
-  const fetchDetails = async (itemId: number) => {
-    if (!details && !loadingDetails) {
-      setLoadingDetails(true);
-      try {
-        const response = await axios.get(`https://api.moaguide.com/study/guide/${itemId}`);
-        setDetails(response.data);
-        setLoadingDetails(false);
-      } catch (error) {
-        console.error('Fetching details failed:', error);
-        setLoadingDetails(false);
-      }
-    }
-  };
-
-  const handleToggle = () => {
-    setShowDetails(!showDetails);
-    if (!showDetails && !details) {
-      fetchDetails(id);
-    }
-
-    setToggleImage(!showDetails ? '/images/report/toggle_button_close.svg' : '/images/report/toggle_button.svg');
+  const handleClick = () => {
+    console.log(link);
+    window.open(link, '_blank');
   };
 
   return (
-    <div className='py-5'>
-      <div className="flex gap-5 items-center cursor-pointer">
-        <div className="flex-1 flex flex-col gap-3">
-          <div className="max-w-max p-1 sm:p-[6px] flex items-center justify-center rounded-[4px] bg-gray50 text-gray400 text-caption3">
-            {difficulty}
-          </div>
+    <div className='pt-5'>
+      <div className="flex gap-5 items-center cursor-pointer rounded-xl shadow border border-[#eceef2] px-5 py-6" onClick={handleClick}>
+        <div className="flex-1 flex">
           <div className="text-gray600 text-body5 sm:text-title1">{title}</div>
-          <div className="text-gray300 text-caption3 sm:text-body7">{description}</div>
         </div>
+        <div className='text-[#bdbdbd] text-sm font-bold'>더보기</div>
         <img
-          src={toggleImage}
+          src={'images/report/left-button.svg'}
           alt="Toggle Details"
           className="w-[30px] h-[30px]"
-          onClick={handleToggle} // 토글 로직 추가
         />
       </div>
       <div>
-      {showDetails && (
-        loadingDetails ? (
-          Array.from({ length: 3 }).map((_, i) => (
-            <SubLoadmapSkeleton key={i} isTop={i === 0} isBottom={i === 2} />
-          ))
-        ) : (
-          details?.map((detail, index) => (
-            <CategorySubloadmapItem
-              key={index}
-              data={detail}
-              isTop={index === 0}
-              isBottom={index === details.length - 1}
-            />
-          ))
-        )
-      )}
       </div>
     </div>
   );
