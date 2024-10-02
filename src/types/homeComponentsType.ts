@@ -88,22 +88,15 @@ export interface CategorySubloadmapSkeletonItemProps {
   isBottom: boolean;
 }
 
-export interface SubLoadmapBottomArticle {
+export interface InvestmentGuideProps {
   id: number;
   title: string;
   description: string;
   imageLink: string;
   date: string;
-  content: string;
-  pdfLink: string;
+  link: string;
 }
 
-
-export interface SubLoadmapBottomArticleItemsProps {
-  data: SubLoadmapBottomArticle;
-  isTop: boolean;
-  isBottom: boolean;
-}
 
 export interface ArticleItem {
   id: number;

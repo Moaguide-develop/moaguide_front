@@ -4,15 +4,20 @@ const nextConfig = {
   reactStrictMode: true,
 
   images: {
-    domains: ['www.kobis.or.kr', 'd2qf2amuam62ps.cloudfront.net', 'scs-phinf.pstatic.net']
+    domains: [
+      'www.kobis.or.kr',
+      'd2qf2amuam62ps.cloudfront.net',
+      'scs-phinf.pstatic.net',
+      'api.moaguide.com',
+    ],
   },
+  
   swcMinify: true,
+  
   compiler: {
-    styledComponents: true
+    styledComponents: true,
   },
-  images: {
-    domains: ['api.moaguide.com'], 
-  },
+
   webpack: (config, { isServer }) => {
     if (isServer) {
       if (Array.isArray(config.resolve.alias))
@@ -24,7 +29,7 @@ const nextConfig = {
       else config.resolve.alias['msw/node'] = false;
     }
     return config;
-  }
+  },
 };
 
 export default nextConfig;
