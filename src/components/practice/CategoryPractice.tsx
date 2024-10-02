@@ -33,13 +33,13 @@ const CategoryPractice = () => {
           onClick={() => setSubCategory('guide')} 
           className={`pb-5 cursor-pointer ${subCategory === 'guide' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}
         >
-          투자 가이드
+          조각투자 가이드
         </div>
         <div 
           onClick={() => setSubCategory('article')} 
           className={`pb-5 cursor-pointer ${subCategory === 'article' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}
         >
-          아티클
+          재테크 가이드
         </div>
       </div>
 

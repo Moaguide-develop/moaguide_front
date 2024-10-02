@@ -4,7 +4,7 @@ const nextConfig = {
   reactStrictMode: true,
 
   images: {
-    domains: ['www.kobis.or.kr', 'd2qf2amuam62ps.cloudfront.net']
+    domains: ['www.kobis.or.kr', 'd2qf2amuam62ps.cloudfront.net', 'scs-phinf.pstatic.net']
   },
   swcMinify: true,
   compiler: {
