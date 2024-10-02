@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchStudyGuides = async ({ pageParam = 1 }) => {
-  const { data } = await axios.get(`https://api.moaguide.com/study/guide?page=${pageParam}&size=3`);
+  const { data } = await axios.get(`https://api.moaguide.com/study/guide?page=${pageParam}&size=10`);
   return {
     content: data.roadmaps,
     nextPage: pageParam + 1,

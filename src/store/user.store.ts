@@ -7,7 +7,7 @@ interface IUserInfo {
   memberEmail: string;
   memberNickName: string;
   memberPhone: string;
-  subscribe: string;
+  loginType: string;  
 }
 
 interface IMember {
@@ -23,7 +23,7 @@ export const useMemberStore = create(
         memberEmail: '',
         memberNickName: '',
         memberPhone: '',
-        subscribe: ''
+        loginType: '',  
       },
       setMember: (userInfo: IUserInfo) => set({ member: userInfo }),
       clearMember: () => set({
@@ -31,7 +31,7 @@ export const useMemberStore = create(
           memberEmail: '',
           memberNickName: '',
           memberPhone: '',
-          subscribe: ''
+          loginType: '',  
         }
       }),
     }),

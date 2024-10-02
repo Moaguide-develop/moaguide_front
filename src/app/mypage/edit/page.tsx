@@ -1,12 +1,12 @@
 'use client';
 import { useModalStore } from '@/store/modal.store';
 import { useMemberStore } from '@/store/user.store';
-import { checkEmail } from '@/utils/checkEmail';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import { checkNicknameAvailability } from '@/service/auth';
 import { updateNickname } from '@/service/change';
+import { getSocialInfo } from '@/utils/checkEmail';
 
 const Editpage = () => {
   const router = useRouter();
@@ -16,6 +16,8 @@ const Editpage = () => {
   const [isNameValid, setIsNameValid] = useState(false);
   const [isNameComplete, setIsNameComplete] = useState('');
   const { setModalType, setOpen, open } = useModalStore();
+
+  const socialInfo = getSocialInfo(member.loginType, member.memberEmail); 
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const regex = e.target.value.replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
@@ -136,9 +138,9 @@ const Editpage = () => {
         <div className="mt-5 text-body4">
           <div className="flex justify-between items-center">
             <div>이메일</div>
-            <div className="flex items-center gap-[6px]">
-              <img src="/images/mypage/social.svg" alt="" />
-              <div>{checkEmail(member?.memberEmail)} 가입</div>
+            <div className="flex items-center gap-[8px]">
+              {socialInfo.imgSrc && <img src={socialInfo.imgSrc} alt="socialLogo" width={18} height={18}/>}
+              <div>{socialInfo.platform} 가입</div>
             </div>
           </div>
           <div className=" flex justify-between mt-[13px] pb-5 border-b border-gray100">

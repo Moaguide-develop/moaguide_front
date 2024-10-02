@@ -3,22 +3,6 @@ import React from 'react';
 const MypageMenu = () => {
   return (
     <div className="mt-5 flex flex-col">
-      {/* 구독 관리 */}
-      <div className="flex items-center justify-between px-5 py-6">
-        <div className="flex items-center gap-[14px]">
-          <div>
-            <img src="/images/mypage/tag.svg" alt="구독" />
-          </div>
-          <div className="text-gray700 text-body1">구독 관리</div>
-        </div>
-        <div>
-          <img
-            src="/images/mypage/right_menu.svg"
-            alt="구독"
-            className="cursor-pointer"
-          />
-        </div>
-      </div>
       {/* 공지사항 */}
       <div className="flex items-center justify-between px-5 py-6">
         <div className="flex items-center gap-[14px]">
@@ -35,22 +19,6 @@ const MypageMenu = () => {
           />
         </div>
       </div>
-      {/* 쿠폰 관리 */}
-      <div className="flex items-center justify-between px-5 py-6">
-        <div className="flex items-center gap-[14px]">
-          <div>
-            <img src="/images/mypage/ticket.svg" alt="쿠폰" />
-          </div>
-          <div className="text-gray700 text-body1">쿠폰 관리</div>
-        </div>
-        <div>
-          <img
-            src="/images/mypage/right_menu.svg"
-            alt="쿠폰"
-            className="cursor-pointer"
-          />
-        </div>
-      </div>
       {/* 알림 설정 */}
       <div className="flex items-center justify-between px-5 py-6">
         <div className="flex items-center gap-[14px]">
@@ -63,22 +31,6 @@ const MypageMenu = () => {
           <img
             src="/images/mypage/right_menu.svg"
             alt="알림"
-            className="cursor-pointer"
-          />
-        </div>
-      </div>
-      {/* 결제 관리 */}
-      <div className="flex items-center justify-between px-5 py-6">
-        <div className="flex items-center gap-[14px]">
-          <div>
-            <img src="/images/mypage/card.svg" alt="결제" />
-          </div>
-          <div className="text-gray700 text-body1">결제 관리</div>
-        </div>
-        <div>
-          <img
-            src="/images/mypage/right_menu.svg"
-            alt="결제"
             className="cursor-pointer"
           />
         </div>
