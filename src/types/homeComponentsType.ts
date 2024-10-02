@@ -66,9 +66,8 @@ export interface SearchedItem {
 
 export interface StudyGuidesItem {
   id: number;
-  difficulty: string;
   title: string;
-  description: string;
+  link: string;
 }
 
 export interface SubLoadmap {

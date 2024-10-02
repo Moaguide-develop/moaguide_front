@@ -4,12 +4,12 @@ import axios from 'axios';
 const fetchStudyGuides = async ({ pageParam = 1 }) => {
   const { data } = await axios.get(`https://api.moaguide.com/study/guide?page=${pageParam}&size=10`);
   return {
-    content: data.roadmaps,
+    content: data.roadmap, 
     nextPage: pageParam + 1,
     totalPages: data.total,
-    totalElements: data.roadmaps.length,
+    totalElements: data.roadmap.length, 
     currentPage: data.page,
-    isLast: data.page + 1 >= data.total
+    isLast: data.page + 1 >= data.total,
   };
 };
 
@@ -19,7 +19,7 @@ export const getStudyGuides = (category: string, subCategory: string, sort: stri
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
       queryKey,
-      queryFn: fetchStudyGuides,
+      queryFn: fetchStudyGuides, 
       getNextPageParam: (lastPage) => {
         return lastPage.isLast ? undefined : lastPage.nextPage;
       },
@@ -28,12 +28,12 @@ export const getStudyGuides = (category: string, subCategory: string, sort: stri
     });
 
   return {
-    data: data?.pages.flatMap((page) => page.content) || [],
+    data: data?.pages.flatMap((page) => page.content) || [], 
     fetchNextPage,
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-    isLoading
+    isLoading,
   };
 };
 

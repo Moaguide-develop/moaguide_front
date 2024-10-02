@@ -46,7 +46,7 @@ const CategoryPractice = () => {
       <div>
         {isLoading ? (
           subCategory === 'guide' ? (
-            Array.from({ length: 3 }).map((_, i) => <CategoryPracticeItemSkeleton key={i} />) 
+            Array.from({ length: 10 }).map((_, i) => <CategoryPracticeItemSkeleton key={i} />) 
           ) : (
             Array.from({ length: 10 }).map((_, i) => <SubLoadmapBottomArticleSkeleton key={i} />)
           )
@@ -57,7 +57,7 @@ const CategoryPractice = () => {
             totalCount={allPosts.length}
             data={allPosts}
             endReached={loadMore}
-            itemContent={(index, item) => (
+            itemContent={(_index, item) => (
               subCategory === 'guide' ? (
                 <CategoryPracticeItem key={item.id} {...item} />
               ) : (
