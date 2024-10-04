@@ -5,6 +5,8 @@ import ProductPagenation from './ProductPagenation';
 import Link from 'next/link';
 import ProductMobilePagenation from './ProductMobilePagenation';
 import { CATEGORY } from '@/static/category';
+import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
+import { useState } from 'react';
 interface IProductContentListProps {
   content: IProductDealDetailData['product'];
   totalPages: IProductDealDetailData['totalPages'];
@@ -15,8 +17,29 @@ const ProductDealContentList = ({
   totalPages,
   pageNumber
 }: IProductContentListProps) => {
-  console.log(content);
-  // product_Id
+  // const addmutation = useAddBookMark();
+  // const deletemutation = useDeleteBookMark();
+  // const [localContent, setLocalContent] = useState(content);
+
+  // const handleBookmarkClick = (productId: string, bookmark: boolean) => {
+  //   // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
+  //   console.log('click');
+  //   setLocalContent((prevContent) =>
+  //     prevContent.map((item) =>
+  //       item.product_Id === productId && !bookmark
+  //         ? { ...item, bookmark: !bookmark }
+  //         : item.product_Id === productId && bookmark
+  //           ? { ...item, bookmark: !bookmark }
+  //           : item
+  //     )
+  //   );
+  //   if (!bookmark) {
+  //     addmutation.mutate({ productId, bookmark });
+  //   } else if (bookmark) {
+  //     deletemutation.mutate({ productId });
+  //   }
+  // };
+
   return (
     <div>
       <Container>
@@ -137,11 +160,12 @@ const ProductDealContentList = ({
               </Link>
 
               <Image
-                src={'/images/product/BookmarkWhite.svg'}
+                src={`${item.bookmark ? '/images/product/BookmarkSimple.svg' : '/images/product/BookmarkWhite.svg'}`}
                 width={24}
                 height={24}
                 alt="Bookmark"
-                className="  desk:hidden  md:flex  cursor-pointer ml-auto"
+                className="desk:hidden md:flex cursor-pointer"
+                // onClick={() => handleBookmarkClick(item.product_Id, item.bookmark)}
               />
 
               <div className="  mt-[20px] mb-[20px] w-atuo h-[0px] border border-[#eceef2]" />

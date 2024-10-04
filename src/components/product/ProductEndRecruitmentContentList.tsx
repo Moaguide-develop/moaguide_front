@@ -6,6 +6,8 @@ import Link from 'next/link';
 import ProductMobilePagenation from './ProductMobilePagenation';
 import { CATEGORY } from '@/static/category';
 import { useSearchParams } from 'next/navigation';
+import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
+import { useState } from 'react';
 
 interface IProductContentListProps {
   content: IProductEndRecruitmentData['product'];
@@ -20,8 +22,29 @@ const ProductEndRecruitmentContentList = ({
   const searchParams = useSearchParams();
   const sorted = searchParams.get('sort');
 
-  console.log(CATEGORY);
-  // product_Id
+  // const addmutation = useAddBookMark();
+  // const deletemutation = useDeleteBookMark();
+  // const [localContent, setLocalContent] = useState(content);
+
+  // const handleBookmarkClick = (productId: string, bookmark: boolean) => {
+  //   // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
+  //   console.log('click');
+  //   setLocalContent((prevContent) =>
+  //     prevContent.map((item) =>
+  //       item.productId === productId && !bookmark
+  //         ? { ...item, bookmark: !bookmark }
+  //         : item.productId === productId && bookmark
+  //           ? { ...item, bookmark: !bookmark }
+  //           : item
+  //     )
+  //   );
+  //   if (!bookmark) {
+  //     addmutation.mutate({ productId, bookmark });
+  //   } else if (bookmark) {
+  //     deletemutation.mutate({ productId });
+  //   }
+  // };
+
   return (
     <div>
       <Container>
@@ -130,11 +153,16 @@ const ProductEndRecruitmentContentList = ({
               </Link>
 
               <Image
-                src={'/images/product/BookmarkWhite.svg'}
+                src={`${item.bookmark ? '/images/product/BookmarkSimple.svg' : '/images/product/BookmarkWhite.svg'}`}
                 width={24}
                 height={24}
                 alt="Bookmark"
-                className="  desk:hidden  md:flex ml-[10px] cursor-pointer"
+                className="desk:hidden md:flex cursor-pointer"
+                // onClick={() => {
+                //   return (
+                //     handleBookmarkClick(item.productId, item.bookmark), !item.bookmark
+                //   );
+                // }}
               />
               <div className="  mt-[20px] mb-[20px] w-atuo h-[0px] border border-[#eceef2]" />
             </div>
