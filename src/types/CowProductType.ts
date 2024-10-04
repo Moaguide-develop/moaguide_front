@@ -10,6 +10,7 @@ export interface ICowProductDetail {
   recruitmentDate: string;
   minInvestment: number;
   link: string;
+  bookmark: boolean;
 }
 
 export interface ICowProductProfitDetail {
@@ -35,4 +36,17 @@ export interface ICowProductProfitDetail {
     cattleBreed: string;
     initialDate: string;
   };
+}
+
+export interface ICowPrice {
+  day: string;
+  value: number;
+}
+
+export interface ICowProductPrice {
+  object: ICowPrice[];
+}
+
+export interface ICowMarketPrice {
+  object: ICowPrice[];
 }

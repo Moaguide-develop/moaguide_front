@@ -4,18 +4,47 @@ import NavBar from '@/components/product/detail/NavBar';
 import News from '@/components/product/detail/News';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getArtProductDetail } from '@/factory/ProductDetail/ArtProductDetail';
 import { CATEGORY } from '@/static/category';
 import ArtProfit from '@/components/product/detail/art/ArtProfit';
 import ArtProductDetail from '@/components/product/detail/art/ArtProductDetail';
 import Link from 'next/link';
+import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 const ArtDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
-  console.log(url);
+
   const { data, isLoading, isError } = getArtProductDetail(props.params.id);
-  console.log(data);
+
+  const [localData, setLocalData] = useState(data);
+
+  useEffect(() => {
+    if (!localData) {
+      setLocalData(data);
+    }
+  }, [data, localData]);
+
+  const addmutation = useAddBookMark();
+  const deletemutation = useDeleteBookMark();
+
+  const handleBookmarkClick = (
+    productId: string | undefined,
+    bookmark: boolean | undefined
+  ) => {
+    // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
+    console.log('click');
+    setLocalData((prevData) =>
+      prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
+    );
+
+    if (!bookmark) {
+      addmutation.mutate({ productId, bookmark });
+    } else if (bookmark) {
+      deletemutation.mutate({ productId });
+    }
+  };
+
   return (
     <div>
       <Container>
@@ -53,10 +82,17 @@ const ArtDetailpage = (props: { params: { id: string } }) => {
                   </div>
                 </Link>
 
-                <div className=" desk2:flex desk:hidden ml-[6px] w-[118px] h-[49px] justify-center items-center border-2 border-gray-200 rounded-xl ">
-                  <div>관심 종목</div>
+                <div
+                  className={` desk2:flex desk:hidden ml-[6px] w-[118px] h-[49px] justify-center items-center border-2 ${localData?.bookmark ? `border-purple-500` : `border-gray-200`}  rounded-xl cursor-pointer `}
+                  onClick={() => {
+                    handleBookmarkClick(localData?.productId, localData?.bookmark);
+                  }}>
+                  <div
+                    className={` ${localData?.bookmark ? `text-purple-500 font-bold ` : `text-black `}mr-1`}>
+                    관심 종목
+                  </div>
                   <Image
-                    src="/images/detail/BookmarkSimple.svg"
+                    src={`${localData?.bookmark ? '/images/product/BookmarkSimple.svg' : '/images/product/BookmarkWhite.svg'}`}
                     width={16}
                     height={16}
                     alt="BookMark"
@@ -82,7 +118,7 @@ const ArtDetailpage = (props: { params: { id: string } }) => {
           </div>
 
           <div className="flex flex-col  desk2:justify-start desk2:items-start  desk:justify-center desk:items-center    ">
-            <div className="flex desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">모집금액</div>
               <div className="flex flex-row ">
                 <div>{data?.recruitmentPrice.toLocaleString()}원</div>
@@ -90,22 +126,22 @@ const ArtDetailpage = (props: { params: { id: string } }) => {
               </div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">모집률</div>
               <div>{data?.recruitmentRate.toLocaleString()}%</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">시가총액</div>
               <div>{data?.totalPrice.toLocaleString()}원</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">모집기간</div>
               <div className="">~{data?.recruitmentDate}까지</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]  w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">최소투자금</div>
               <div>{data?.minInvestment.toLocaleString()}원</div>
             </div>

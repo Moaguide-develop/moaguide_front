@@ -1,4 +1,5 @@
 export interface IArtProductDetail {
+  productId: string;
   category: string;
   platform: string;
   name: string;
@@ -9,6 +10,7 @@ export interface IArtProductDetail {
   recruitmentDate: string;
   minInvestment: number;
   link: string;
+  bookmark: boolean;
 }
 
 export interface IArtProductProfitDetail {

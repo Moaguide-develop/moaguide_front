@@ -15,9 +15,9 @@ const Schedule = () => {
   return (
     <div className="flex flex-col items-center mt-10">
       <div className="text-lg font-bold mb-4">
-        {releaseDate.getFullYear()}년 {releaseDate.getMonth() + 1}월
+        {/* {releaseDate.getFullYear()}년 {releaseDate.getMonth() + 1}월 */}
       </div>
-      <div className="flex flex-row gap-2">
+      <div className="grid grid-cols-1 desk:grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-7 xl:grid-cols-9 gap-2">
         {dates.map((item, index) => (
           <div
             key={index}

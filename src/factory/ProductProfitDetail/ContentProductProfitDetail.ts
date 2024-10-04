@@ -3,15 +3,16 @@ import { useQuery, QueryFunctionContext } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchContentProductProfitDetail = async (context: QueryFunctionContext) => {
-  const product_id = context.queryKey[1] as string;
+  const product_id = context.queryKey[1];
+  const genre = context.queryKey[2];
   const { data } = await axios.get(
-    `https://api.moaguide.com/detail/contents/base/${product_id}`
+    `https://api.moaguide.com/detail/contents/base/${product_id}?genre=${genre}`
   );
   return data;
 };
 
-export const getContentProductProfitDetail = (product_id: string) => {
-  const queryKey = ['ContentProductProfitDetail', product_id];
+export const getContentProductProfitDetail = (product_id: string, genre: string) => {
+  const queryKey = ['ContentProductProfitDetail', product_id, genre];
 
   const { data, ...queryProps } = useQuery<IContentProductProfitDetail>({
     queryKey,

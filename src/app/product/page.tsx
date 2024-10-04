@@ -33,7 +33,8 @@ const ProductPage = async ({
   const productDetailResponse = await fetch(
     `https://api.moaguide.com/summary/list?category=${category}&subcategory=${subcategory}&sort=${sort}&page=${pages}&size=10`,
     {
-      next: { revalidate: 300 }
+      // next: { revalidate: 300 }
+      cache: 'no-store'
     }
   );
 

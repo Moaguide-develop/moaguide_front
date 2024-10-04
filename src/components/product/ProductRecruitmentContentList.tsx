@@ -6,6 +6,8 @@ import Link from 'next/link';
 import ProductMobilePagenation from './ProductMobilePagenation';
 import { CATEGORY } from '@/static/category';
 import { useSearchParams } from 'next/navigation';
+import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
+import { useState } from 'react';
 
 interface IProductContentListProps {
   content: IProductRecruitmentData['product'];
@@ -40,6 +42,30 @@ const ProductRecruitmentContentList = ({
 
   console.log(CATEGORY);
   // product_Id
+
+  // const addmutation = useAddBookMark();
+  // const deletemutation = useDeleteBookMark();
+  // const [localContent, setLocalContent] = useState(content);
+
+  // const handleBookmarkClick = (productId: string, bookmark: boolean) => {
+  //   // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
+  //   console.log('click');
+  //   setLocalContent((prevContent) =>
+  //     prevContent.map((item) =>
+  //       item.productId === productId && !bookmark
+  //         ? { ...item, bookmark: !bookmark }
+  //         : item.productId === productId && bookmark
+  //           ? { ...item, bookmark: !bookmark }
+  //           : item
+  //     )
+  //   );
+  //   if (!bookmark) {
+  //     addmutation.mutate({ productId, bookmark });
+  //   } else if (bookmark) {
+  //     deletemutation.mutate({ productId });
+  //   }
+  // };
+
   return (
     <div>
       <Container>
@@ -67,13 +93,13 @@ const ProductRecruitmentContentList = ({
             <div key={item.productId} className=" lg:flex  ">
               <Link href={`product/detail/${item.category}/${item.productId}`}>
                 <div className="flex items-center  h-[110px] ">
-                  <div className="flex   desk:ml-[20px] ">
+                  <div className="flex  mr-[16px]  desk:ml-[20px] ">
                     <Image
                       src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.productId}.jpg`}
                       width={82}
                       height={82}
                       alt="image"
-                      className="mr-[16px]"
+                      className=""
                     />
                   </div>
                   <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100   desk:hidden  md:flex ">
@@ -92,12 +118,12 @@ const ProductRecruitmentContentList = ({
                       <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100 ">
                         {CATEGORY[item.category]}
                       </div>
-                      <div className="w-[100px] mr-[16px]  text-gray-400 ">
+                      <div className="max-w-[100px] mr-[16px]  text-gray-400 ">
                         {item.platform}
                       </div>
                     </div>
 
-                    <div className="w-[220px] mr-[16px] text-lg font-bold mb-[5px] ">
+                    <div className="max-w-[220px] mr-[16px] text-lg font-bold mb-[5px] ">
                       {item.name}
                     </div>
 
@@ -133,12 +159,14 @@ const ProductRecruitmentContentList = ({
               </Link>
 
               <Image
-                src={'/images/product/BookmarkWhite.svg'}
+                src={`${item.bookmark ? '/images/product/BookmarkSimple.svg' : '/images/product/BookmarkWhite.svg'}`}
                 width={24}
                 height={24}
                 alt="Bookmark"
-                className="  desk:hidden  md:flex ml-[10px] cursor-pointer"
+                className="desk:hidden md:flex cursor-pointer"
+                // onClick={() => handleBookmarkClick(item.productId, item.bookmark)}
               />
+
               <div className="  mt-[20px] mb-[20px] w-atuo h-[0px] border border-[#eceef2]" />
             </div>
           ))}

@@ -33,17 +33,16 @@ const YoutubeViewChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
   console.log(lastSegment);
-  const [filteringData, setFilteringData] = useState('all');
+  const [filteringData, setFilteringData] = useState('100');
 
   const handleFiltering = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const idWithoutSuffix = e.target.id.replace('-youtube', '');
-    setFilteringData(idWithoutSuffix);
+    setFilteringData(e.target.id);
   };
 
   const fetchData = async () => {
     try {
       const response = await axios.get<IContentYoutubeViewCharts>(
-        `https://api.moaguide.com/detail/music/view/${lastSegment}?date=${filteringData}`
+        `https://api.moaguide.com/detail/music/view/${lastSegment}?month=${filteringData}`
       );
       return response.data;
     } catch (error) {
@@ -62,10 +61,10 @@ const YoutubeViewChart = () => {
   });
   const chartRef = useRef(null);
 
-  const YoutubeDay = (YoutubeData && YoutubeData?.map((item) => item.viewCount)) || [];
+  const YoutubeDay = (YoutubeData && YoutubeData?.map((item) => item.day)) || [];
 
   const YoutubeCount =
-    (YoutubeData && YoutubeData?.map((item) => Number(item.viewDate))) || [];
+    (YoutubeData && YoutubeData?.map((item) => Number(item.value))) || [];
   const sortedYoutubeCount = [...YoutubeCount].sort((a, b) => b - a);
   const maxYoutubeCount = sortedYoutubeCount[0] || 0;
   const averageYoutubeCount =
@@ -147,13 +146,13 @@ const YoutubeViewChart = () => {
       <section className=" mb-[30px]">
         <input
           type="radio"
-          id="1w-youtube"
+          id="1"
           className=" mr-[5px] hidden "
-          checked={filteringData + '-youtube' == '1w-youtube'}
+          checked={filteringData == '1'}
           onChange={handleFiltering}
         />
         <label
-          htmlFor="1w-youtube"
+          htmlFor="1"
           className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
             filteringData === '1w' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
@@ -161,61 +160,57 @@ const YoutubeViewChart = () => {
         </label>
         <input
           type="radio"
-          id="6m-youtube"
+          id="6"
           className=" mr-[5px] hidden"
-          checked={filteringData + '-youtube' == '6m-youtube'}
+          checked={filteringData == '6'}
           onChange={handleFiltering}
         />
         <label
-          htmlFor="6m-youtube"
+          htmlFor="6"
           className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
-            filteringData === '6m' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
+            filteringData === '6' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
           6개월
         </label>
         <input
           type="radio"
-          id="12m-youtube"
+          id="12"
           className=" mr-[5px] hidden"
-          checked={filteringData + '-youtube' == '12m-youtube'}
+          checked={filteringData + '' == '12'}
           onChange={handleFiltering}
         />
         <label
-          htmlFor="12m-youtube"
+          htmlFor="12"
           className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
-            filteringData === '12m'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-700'
+            filteringData === '12' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
           1년
         </label>
         <input
           type="radio"
-          id="36m-youtube"
+          id="36"
           className=" mr-[5px] hidden"
-          checked={filteringData + '-youtube' == '36m-youtube'}
+          checked={filteringData + '' == '36'}
           onChange={handleFiltering}
         />
         <label
-          htmlFor="36m-youtube"
+          htmlFor="36"
           className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
-            filteringData === '36m'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-700'
+            filteringData === '36' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
           3년
         </label>
         <input
           type="radio"
-          id="all-youtube"
+          id="100"
           className=" mr-[5px] hidden"
-          checked={filteringData + '-youtube' == 'all-youtube'}
+          checked={filteringData + '' == '100'}
           onChange={handleFiltering}
         />
         <label
-          htmlFor="all-youtube"
+          htmlFor="100"
           className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
-            filteringData === 'all'
+            filteringData === '100'
               ? 'bg-purple-500 text-white'
               : 'bg-white text-gray-700'
           }`}>

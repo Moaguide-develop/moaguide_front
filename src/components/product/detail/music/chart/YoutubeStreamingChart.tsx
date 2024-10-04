@@ -1,4 +1,7 @@
-import React, { useRef, useState } from 'react';
+import { IContentMovieCharts } from '@/types/ContentProductType';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { usePathname } from 'next/navigation';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -8,12 +11,15 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartOptions
 } from 'chart.js';
-import axios from 'axios';
-import { useQuery } from '@tanstack/react-query';
-import { usePathname } from 'next/navigation';
-import { IMusicBulidingStockPriceChart } from '@/types/MusicProductType';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { useRef, useState } from 'react';
+import {
+  IContentYoutubeViewCharts,
+  IMusicStreamingChart
+} from '@/types/MusicProductType';
 
 ChartJS.register(
   CategoryScale,
@@ -22,20 +28,24 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataLabels
 );
 
-const MusicStockPriceChart = () => {
-  const chartRef = useRef(null);
+const YoutubeStreamingChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
   console.log(lastSegment);
   const [filteringData, setFilteringData] = useState('100');
 
+  const handleFiltering = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilteringData(e.target.id);
+  };
+
   const fetchData = async () => {
     try {
-      const response = await axios.get<IMusicBulidingStockPriceChart>(
-        `https://api.moaguide.com/detail/transaction/${lastSegment}?month=${filteringData}`
+      const response = await axios.get<IMusicStreamingChart>(
+        `https://api.moaguide.com/detail/music/streaming/${lastSegment}?month=${filteringData}`
       );
       return response.data;
     } catch (error) {
@@ -45,36 +55,36 @@ const MusicStockPriceChart = () => {
   };
 
   const {
-    data: StockPriceData,
+    data: StreamingData,
     isLoading,
     error
   } = useQuery({
-    queryKey: ['MusicStockPriceChart', filteringData],
+    queryKey: ['StreamingChart', filteringData],
     queryFn: fetchData
   });
+  const chartRef = useRef(null);
 
-  const StockPriceDate =
-    (StockPriceData?.transaction &&
-      StockPriceData?.transaction.map((item) => item.day)) ||
-    [];
+  const StreamingDay = (StreamingData && StreamingData?.map((item) => item.day)) || [];
 
-  const StockPriceCount =
-    (StockPriceData?.transaction &&
-      StockPriceData?.transaction.map((item) => Number(item.value))) ||
-    [];
-  const sortedStockPriceCount = [...StockPriceCount].sort((a, b) => b - a);
-  const maxStockPriceCount = sortedStockPriceCount[0] || 0;
-  const averageStockPriceCount =
-    StockPriceCount.reduce((acc, val) => acc + val, 0) / StockPriceCount.length || 0;
+  const StreamingCount =
+    (StreamingData && StreamingData?.map((item) => Number(item.value))) || [];
+  const sortedStreamingCount = [...StreamingCount].sort((a, b) => b - a);
+  const maxStreamingCount = sortedStreamingCount[0] || 0;
+  const averageStreamingCount =
+    StreamingCount.reduce((acc, val) => acc + val, 0) / StreamingCount.length || 0;
+  const newVariable = Math.floor(maxStreamingCount + averageStreamingCount);
 
-  const newVariable = Math.floor(maxStockPriceCount + averageStockPriceCount);
-
+  const dataSets = {
+    labels: StreamingDay,
+    data: StreamingCount
+  };
+  console.log(dataSets);
   const data = {
-    labels: StockPriceDate,
+    labels: dataSets.labels,
     datasets: [
       {
-        label: '주가',
-        data: StockPriceCount,
+        label: '조회수',
+        data: dataSets.data,
         borderColor: '#8a4af3',
         backgroundColor: '#8a4af3',
         pointBackgroundColor: '#8a4af3',
@@ -112,7 +122,7 @@ const MusicStockPriceChart = () => {
           maxRotation: 45,
           minRotation: 45
         },
-        offset: true // x축의 첫 번째 데이터 포인트를 약간 오른쪽으로 이동
+        offset: true
       },
       y: {
         display: true,
@@ -134,8 +144,9 @@ const MusicStockPriceChart = () => {
   };
 
   return (
-    <>
-      <div className="mb-4  flex justify-end">
+    <div>
+      <div className="text-base text-gray-500 mb-[10px]">매월 1일 누적 조회수 차트</div>
+      <div className="mb-4  flex justify-start">
         <button
           className={`w-[55px] mr-2 p-2  rounded-lg ${filteringData === '3' ? 'bg-purple-500 text-white' : 'bg-gray-300  '}`}
           onClick={() => setFilteringData('3')}>
@@ -157,13 +168,14 @@ const MusicStockPriceChart = () => {
           전체
         </button>
       </div>
+
       <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
         <div className="w-full max-w-4xl h-[400px]">
           <Line ref={chartRef} data={data} options={options} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default MusicStockPriceChart;
+export default YoutubeStreamingChart;

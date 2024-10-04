@@ -1,4 +1,5 @@
 import YoutubeSearchChart from './chart/YoutubeSearchChart';
+import YoutubeStreamingChart from './chart/YoutubeStreamingChart';
 import YoutubeViewChart from './chart/YoutubeViewChart';
 import MusicSchedule from './MusicSchedule';
 import MusicYoutube from './MusicYoutube';
@@ -15,8 +16,8 @@ const MusicProductDetail = () => {
 
       <div className="mt-[10px] text-2xl font-bold mb-[10px]">검색량</div>
       <YoutubeSearchChart />
-
-      <div>일간/월간 스트리밍 수</div>
+      <div className="mt-[10px] text-2xl font-bold mb-[10px]">일간/월간 스트리밍 수</div>
+      <YoutubeStreamingChart />
 
       <div className="mt-[10px] text-2xl font-bold mb-[10px]">공연일정</div>
 

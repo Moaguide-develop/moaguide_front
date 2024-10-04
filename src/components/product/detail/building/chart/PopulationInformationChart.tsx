@@ -37,7 +37,7 @@ const PopulationInformationChart = () => {
   };
   // useQuery로 데이터 패칭
   const { data, error, isLoading } = useQuery({
-    queryKey: ['floatingpopulation'],
+    queryKey: ['populationinformation', lastSegment],
     queryFn: fetchData
   });
   console.log(data?.populations);
