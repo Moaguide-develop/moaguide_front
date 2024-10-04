@@ -157,7 +157,7 @@ const ProductEndRecruitmentContentList = ({
                 width={24}
                 height={24}
                 alt="Bookmark"
-                className="desk:hidden md:flex cursor-pointer"
+                className="desk:hidden md:flex cursor-pointer "
                 // onClick={() => {
                 //   return (
                 //     handleBookmarkClick(item.productId, item.bookmark), !item.bookmark
