@@ -170,7 +170,7 @@ const OfficialPriceChart = () => {
         intersect: false
       },
       datalabels: {
-        display: !isMobile, // 모바일일 때는 데이터 라벨 숨김
+        display: false,
         anchor: 'end',
         align: 'end',
         formatter: (value: number) => {
