@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { login } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
 import throttle from 'lodash/throttle'; 
+import NaverLogin from './NaverLogin';
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');
@@ -73,6 +74,7 @@ const SignLayout = () => {
         >
           로그인
         </button>
+        <NaverLogin /> 
         <div className="flex text-center text-gray-500 text-sm">
           <Link href={'/signup'} className='cursor-pointer'>
             <div className="mr-4">회원가입</div>

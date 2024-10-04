@@ -6,9 +6,13 @@ import Step2 from '@/components/signup/Step2';
 import Step3 from '@/components/signup/Step3';
 import Step4 from '@/components/signup/Step4';
 import { finalSignup } from '@/service/auth';
+import { useSearchParams } from 'next/navigation';
 
 const SignupPage: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const searchParams = useSearchParams();
+  const isSocialLogin = searchParams.get('social') === 'true'; 
+
+  const [currentStep, setCurrentStep] = useState(isSocialLogin ? 4 : 1); 
   const [formData, setFormData] = useState<{
     email?: string;
     name?: string;
@@ -18,11 +22,11 @@ const SignupPage: React.FC = () => {
     birthDate?: string;
     investmentExperience?: string;
     marketingConsent?: boolean;
-    loginType: 'local';
+    loginType: 'local' | 'social';
   }>({
-    loginType: 'local'
+    loginType: isSocialLogin ? 'social' : 'local', // 소셜 로그인인지 여부에 따라 설정
   });
-  
+
   const [maxHeightClass, setmaxHeightClass] = useState('max-h-screen');
 
   useEffect(() => {
@@ -48,11 +52,11 @@ const SignupPage: React.FC = () => {
   const handleUpdate = (data: Partial<typeof formData>) => {
     setFormData((prev) => {
       const updatedFormData = { ...prev, ...data };
-      
+
       if (JSON.stringify(prev) === JSON.stringify(updatedFormData)) {
         return prev;
       }
-  
+
       return updatedFormData;
     });
   };
@@ -79,7 +83,7 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className='flex flex-col items-center justify-center'>
+    <div className={`flex flex-col items-center justify-center ${maxHeightClass}`}>
       {currentStep === 1 && (
         <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
       )}
