@@ -10,6 +10,7 @@ export interface ICowProductDetail {
   recruitmentDate: string;
   minInvestment: number;
   link: string;
+  bookmark: boolean;
 }
 
 export interface ICowProductProfitDetail {

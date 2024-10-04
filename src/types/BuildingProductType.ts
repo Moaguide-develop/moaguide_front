@@ -23,7 +23,7 @@ export interface IreportItem {
 }
 
 export interface IBuildingProductDetail {
-  productId: string;
+  product_Id: string;
   name: string;
   category: string;
   platform: string;
@@ -35,7 +35,7 @@ export interface IBuildingProductDetail {
   divideCycle: number;
   link: string;
   rentType: boolean;
-  bookMark: string;
+  bookmark: boolean;
 }
 
 export interface IBuildingProductProfitDetail {

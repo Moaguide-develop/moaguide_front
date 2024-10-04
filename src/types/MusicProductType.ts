@@ -54,13 +54,13 @@ export interface IMusicYoutube {
 }
 
 export interface IYoutubeViewChartData {
-  viewCount: string;
-  viewDate: string;
+  value: string;
+  day: string;
 }
 
 export interface IYoutubeSearchData {
   value: string;
-  date: string;
+  day: string;
 }
 
 export type IContentYoutubeViewCharts = IYoutubeViewChartData[];
@@ -86,11 +86,18 @@ export interface IMusicCopyRightFeeChart {
   divide: IMusicCopyRightFee[];
 }
 
-export interface IMusicStockPrice {
-  date: string;
-  price: number;
+export interface IMusicBuildingStockPrice {
+  day: string;
+  value: number;
 }
 
-export interface IMusicStockPriceChart {
-  transaction: IMusicStockPrice[];
+export interface IMusicBulidingStockPriceChart {
+  transaction: IMusicBuildingStockPrice[];
 }
+
+export interface IMusicStreaming {
+  day: string;
+  value: string;
+}
+
+export type IMusicStreamingChart = IMusicStreaming[];
