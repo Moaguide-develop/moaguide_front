@@ -13,7 +13,7 @@ import MoblieRank from './MoblieRank';
 const HomeIndex = () => {
   return (
     <div className="overflow-x-hidden">
-      <section className="max-w-[1000px] mx-auto flex items-center desk:min-w-[390px] gap-[28px] sm:mt-[29px]">
+      <section className="max-w-[1000px] mx-auto flex items-center desk:min-w-[390px] gap-[28px] sm:mt-[29px] w-[90%] lg:w-[100%]">
         <Guide />
         <RealtimeRank />
       </section>
