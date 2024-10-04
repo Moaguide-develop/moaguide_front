@@ -82,16 +82,16 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
               <div key={item.product_Id}>
                 <SwiperSlide>
                   <div className=" flex justify-center items-center">
-                    <Link href={`/product/detail/${item.product_Id}`}>
+                    <Link href={`/product/detail/${item.category}/${item.product_Id}`}>
                       <div className=" max-w-[436px] h-[372px] border-2 border-gray-200 rounded-md px-3">
                         <div className="flex flex-col justify-center items-center mt-[20px] mx-auto">
-                          <div className="relative  ">
-                            <div className="max-w-[396px] h-[237px] ">
+                          <div className="relative ">
+                            <div className="max-w-[396px] h-[227px]  overflow-hidden ">
                               <Image
-                                src="/images/product/ProductBuilding.png"
+                                src={`https://d2qf2amuam62ps.cloudfront.net/img/${item?.product_Id}.jpg`}
                                 alt="Building"
                                 width={396}
-                                height={237}
+                                height={227}
                               />
                             </div>
                             <div className="absolute top-1 left-1">
