@@ -50,7 +50,7 @@ const BuildingDetailpage = (props: any) => {
         <div className="flex justify-between md:flex-row desk:flex-col ">
           <div className="flex desk2:justify-start desk:justify-center desk:mb-[40px] ">
             <Image
-              src="/images/detail/Profile.png"
+              src={`https://d2qf2amuam62ps.cloudfront.net/img/${data?.product_Id}.jpg`}
               width={181}
               height={181}
               alt="Profile Image"
@@ -121,7 +121,27 @@ const BuildingDetailpage = (props: any) => {
               <div className="text-gray-400">현재가</div>
               <div className="flex flex-row ">
                 <div>{data?.price?.toLocaleString()}원</div>
-                <div className="text-red-500 "> ({data?.priceRate}%)</div>
+
+                <div
+                  className={`${
+                    data?.priceRate !== undefined
+                      ? data.priceRate > 0
+                        ? 'text-red-500'
+                        : data.priceRate < 0
+                          ? 'text-blue-500'
+                          : 'text-gray-500'
+                      : 'text-gray-500'
+                  }`}>
+                  (
+                  {data?.priceRate !== undefined
+                    ? data.priceRate > 0
+                      ? `+${data.priceRate}%`
+                      : data.priceRate < 0
+                        ? `${data.priceRate}%`
+                        : `0%`
+                    : '0%'}
+                  )
+                </div>
               </div>
             </div>
 
@@ -137,7 +157,24 @@ const BuildingDetailpage = (props: any) => {
 
             <div className="flex mt-[10px]   w-full desk:max-w-[360px]   md:w-[300px] justify-between ">
               <div className="text-gray-400">배당 수익률</div>
-              <div className="text-red-500">{data?.lastDivide_rate}%</div>
+              <div
+                className={`${
+                  data?.lastDivide_rate !== undefined
+                    ? data.lastDivide_rate > 0
+                      ? 'text-red-500'
+                      : data.lastDivide_rate < 0
+                        ? 'text-blue-500'
+                        : 'text-gray-500'
+                    : 'text-gray-500'
+                }`}>
+                {data?.lastDivide_rate !== undefined
+                  ? data.lastDivide_rate > 0
+                    ? `+${data.lastDivide_rate}%`
+                    : data.lastDivide_rate < 0
+                      ? `${data.lastDivide_rate}%`
+                      : `0%`
+                  : '0%'}
+              </div>
             </div>
 
             <div className="flex mt-[10px]   w-full desk:max-w-[360px]   md:w-[300px] justify-between ">
