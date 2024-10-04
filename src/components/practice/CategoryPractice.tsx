@@ -90,7 +90,7 @@ const CategoryPractice = () => {
                 const secondItem = allPosts[index * 2 + 1];
 
                 return (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-8 w-full">
                     {firstItem && (
                       <CategorySubloadmapBottomArticle
                         key={firstItem.id}

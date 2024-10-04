@@ -18,7 +18,7 @@ const PracticeIndex = () => {
         <section className="hidden sm:flex justify-center mt-6 pb-[29px]">
           <img src="/images/report/report_main.svg" alt="" />
         </section>
-        <section className="px-5 sm:px-0">
+        <section className="">
           <CategoryPractice />
         </section>
         <div className="h-[100px] sm:h-12" />
