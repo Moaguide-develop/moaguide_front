@@ -4,18 +4,46 @@ import NavBar from '@/components/product/detail/NavBar';
 import News from '@/components/product/detail/News';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CATEGORY } from '@/static/category';
 import ContentProfit from '@/components/product/detail/content/ContentProfit';
 import ContentProductDetail from '@/components/product/detail/content/ContentProductDetail';
 import { getContentProductDetail } from '@/factory/ProductDetail/ContentProductDetail';
 import Link from 'next/link';
+import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 const ContentDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
-  console.log(url);
+
   const { data, isLoading, isError } = getContentProductDetail(props.params.id);
-  console.log(data);
+
+  const [localData, setLocalData] = useState(data);
+
+  useEffect(() => {
+    if (!localData) {
+      setLocalData(data);
+    }
+  }, [data, localData]);
+
+  const addmutation = useAddBookMark();
+  const deletemutation = useDeleteBookMark();
+  const handleBookmarkClick = (
+    productId: string | undefined,
+    bookmark: boolean | undefined
+  ) => {
+    // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
+    console.log('click');
+    setLocalData((prevData) =>
+      prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
+    );
+
+    if (!bookmark) {
+      addmutation.mutate({ productId, bookmark });
+    } else if (bookmark) {
+      deletemutation.mutate({ productId });
+    }
+  };
+
   return (
     <div>
       <Container>
@@ -52,10 +80,17 @@ const ContentDetailpage = (props: { params: { id: string } }) => {
                     />
                   </div>
                 </Link>
-                <div className=" desk2:flex desk:hidden ml-[6px] w-[118px] h-[49px] justify-center items-center border-2 border-gray-200 rounded-xl ">
-                  <div>관심 종목</div>
+                <div
+                  className={` desk2:flex desk:hidden ml-[6px] w-[118px] h-[49px] justify-center items-center border-2 ${localData?.bookmark ? `border-purple-500` : `border-gray-200`}  rounded-xl cursor-pointer `}
+                  onClick={() => {
+                    handleBookmarkClick(localData?.productId, localData?.bookmark);
+                  }}>
+                  <div
+                    className={` ${localData?.bookmark ? `text-purple-500 font-bold ` : `text-black `}mr-1`}>
+                    관심 종목
+                  </div>
                   <Image
-                    src="/images/detail/BookmarkSimple.svg"
+                    src={`${localData?.bookmark ? '/images/product/BookmarkSimple.svg' : '/images/product/BookmarkWhite.svg'}`}
                     width={16}
                     height={16}
                     alt="BookMark"
