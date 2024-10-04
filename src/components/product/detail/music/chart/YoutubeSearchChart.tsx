@@ -35,17 +35,16 @@ const YoutubeSearchChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
   console.log(lastSegment);
-  const [filteringData, setFilteringData] = useState('all');
+  const [filteringData, setFilteringData] = useState('100');
 
-  const handleFiltering = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const idWithoutSuffix = e.target.id.replace('-youtubeserach', '');
-    setFilteringData(idWithoutSuffix);
-  };
+  // const handleFiltering = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setFilteringData(e.target.id);
+  // };
 
   const fetchData = async () => {
     try {
       const response = await axios.get<IContentYoutubeSearchCharts>(
-        `https://api.moaguide.com/detail/music/search/${lastSegment}?date=${filteringData}`
+        `https://api.moaguide.com/detail/music/search/${lastSegment}?month=${filteringData}`
       );
       return response.data;
     } catch (error) {
@@ -59,12 +58,12 @@ const YoutubeSearchChart = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['YoutubeViewChart', filteringData],
+    queryKey: ['YoutubeSearchChart', filteringData],
     queryFn: fetchData
   });
   const chartRef = useRef(null);
 
-  const YoutubeSearchDay = (YoutubeData && YoutubeData?.map((item) => item.date)) || [];
+  const YoutubeSearchDay = (YoutubeData && YoutubeData?.map((item) => item.day)) || [];
 
   const YoutubeSearchCount =
     (YoutubeData && YoutubeData?.map((item) => Number(item.value))) || [];
@@ -147,84 +146,28 @@ const YoutubeSearchChart = () => {
 
   return (
     <div>
-      <section className=" mb-[30px]">
-        <input
-          type="radio"
-          id="1w-youtubeserach"
-          className=" mr-[5px] hidden "
-          checked={filteringData + '-youtubeserach' == '1w-youtubeserach'}
-          onChange={handleFiltering}
-        />
-        <label
-          htmlFor="1w-youtubeserach"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
-            filteringData === '1w' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
-          }`}>
-          1주일
-        </label>
-        <input
-          type="radio"
-          id="6m-youtubeserach"
-          className=" mr-[5px] hidden"
-          checked={filteringData + '-youtubeserach' == '6m-youtubeserach'}
-          onChange={handleFiltering}
-        />
-        <label
-          htmlFor="6m-youtubeserach"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
-            filteringData === '6m' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
-          }`}>
+      <div className="mb-4  flex justify-end">
+        <button
+          className={`w-[55px] mr-2 p-2  rounded-lg ${filteringData === '3' ? 'bg-purple-500 text-white' : 'bg-gray-300  '}`}
+          onClick={() => setFilteringData('3')}>
+          3개월
+        </button>
+        <button
+          className={`w-[55px] mr-2 p-2 rounded-lg ${filteringData === '6' ? 'bg-purple-500 text-white' : 'bg-gray-300 '}`}
+          onClick={() => setFilteringData('6')}>
           6개월
-        </label>
-        <input
-          type="radio"
-          id="12m-youtubeserach"
-          className=" mr-[5px] hidden"
-          checked={filteringData + '-youtubeserach' == '12m-youtubeserach'}
-          onChange={handleFiltering}
-        />
-        <label
-          htmlFor="12m-youtubeserach"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
-            filteringData === '12m'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-700'
-          }`}>
+        </button>
+        <button
+          className={`w-[55px] mr-2 p-2 rounded-lg ${filteringData === '12' ? 'bg-purple-500 text-white' : 'bg-gray-300 '}`}
+          onClick={() => setFilteringData('12')}>
           1년
-        </label>
-        <input
-          type="radio"
-          id="36m-youtubeserach"
-          className=" mr-[5px] hidden"
-          checked={filteringData + '-youtubeserach' == '36m-youtubeserach'}
-          onChange={handleFiltering}
-        />
-        <label
-          htmlFor="36m-youtubeserach"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
-            filteringData === '36m'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-700'
-          }`}>
-          3년
-        </label>
-        <input
-          type="radio"
-          id="all-youtubeserach"
-          className=" mr-[5px] hidden"
-          checked={filteringData + '-youtubeserach' == 'all-youtubeserach'}
-          onChange={handleFiltering}
-        />
-        <label
-          htmlFor="all-youtubeserach"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
-            filteringData === 'all'
-              ? 'bg-purple-500 text-white'
-              : 'bg-white text-gray-700'
-          }`}>
+        </button>
+        <button
+          className={`w-[55px] p-2 rounded-lg ${filteringData === '100' ? 'bg-purple-500 text-white' : 'bg-gray-300 '}`}
+          onClick={() => setFilteringData('100')}>
           전체
-        </label>
-      </section>
+        </button>
+      </div>
 
       <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
         <div className="w-full max-w-4xl h-[400px]">
