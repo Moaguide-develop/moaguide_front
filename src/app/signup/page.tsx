@@ -31,7 +31,7 @@ const SignupPage: React.FC = () => {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) {
-        setmaxHeightClass('max-h-[calc(100vh-75.5px)]');
+        setmaxHeightClass('');
       } else {
         setmaxHeightClass('max-h-screen');
       }
