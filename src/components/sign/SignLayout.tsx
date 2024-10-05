@@ -4,11 +4,15 @@ import { useRouter } from 'next/navigation';
 import { login } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
 import throttle from 'lodash/throttle'; 
+import NaverLogin from './NaverLogin';
+import KakaoLogin from './KakaoLogin';
+import GoogleLogin from './GoogleLogin';
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loginType, setLoginType] = useState<'local' | 'social' | 'naver' | 'google' | 'kakao'>('local'); 
   const router = useRouter();
   const { setIsLoggedIn } = useAuthStore();
 
@@ -23,7 +27,7 @@ const SignLayout = () => {
   }, 1000); 
 
   return (
-    <div className="min-h-[calc(100dvh-75px)] flex flex-col items-center justify-center sm:min-h-[100vh]">
+    <div className="min-h-[calc(100dvh-100px)] mb-[100px] flex flex-col items-center justify-center sm:min-h-[100vh] sm:mb-0">
       <section className="flex mt-8 mb-6">
         <Link href={'/'} className='cursor-pointer'>
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
@@ -80,10 +84,11 @@ const SignLayout = () => {
           <a href="/find">이메일 / 비밀번호 찾기</a>
         </div>
       </section>
-       {/* <section className="mt-8"> */}
-        {/* <SocialLoginButtons /> */}
-      {/* </section> */}
-      {/* <div className="h-12" /> */}
+      <section className="mt-8 flex flex-col gap-3">
+        <KakaoLogin setLoginType={setLoginType} /> {/* Kakao login */}
+        <NaverLogin setLoginType={setLoginType} /> {/* Naver login */}
+        <GoogleLogin setLoginType={setLoginType} /> {/* Google login */}
+      </section>
     </div>
   );
 };

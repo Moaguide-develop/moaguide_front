@@ -52,7 +52,7 @@ export const finalSignup = async (
       {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': authHeaders.authorization,
+          'Verify': authHeaders.Verify,
         },
       }
     );
