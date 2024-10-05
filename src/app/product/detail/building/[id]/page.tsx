@@ -8,23 +8,49 @@ import BuildingProfit from '@/components/product/detail/building/BuildingProfit'
 import Notice from '@/components/product/detail/Notice';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getBuildingProductDetail } from '@/factory/ProductDetail/BuildingProductDetail';
 import { CATEGORY } from '@/static/category';
 import Link from 'next/link';
+import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 const BuildingDetailpage = (props: any) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
-  console.log(url);
+
   const { data, isLoading, isError } = getBuildingProductDetail(props.params.id);
-  console.log(data);
+  const [localData, setLocalData] = useState(data);
+  useEffect(() => {
+    if (!localData) {
+      setLocalData(data);
+    }
+  }, [data, localData]);
+  const addmutation = useAddBookMark();
+  const deletemutation = useDeleteBookMark();
+
+  const handleBookmarkClick = (
+    productId: string | undefined,
+    bookmark: boolean | undefined
+  ) => {
+    // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
+    console.log('click');
+    setLocalData((prevData) =>
+      prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
+    );
+
+    if (!bookmark) {
+      addmutation.mutate({ productId, bookmark });
+    } else if (bookmark) {
+      deletemutation.mutate({ productId });
+    }
+  };
+  console.log(localData);
   return (
     <div>
       <Container>
         <div className="flex justify-between md:flex-row desk:flex-col ">
           <div className="flex desk2:justify-start desk:justify-center desk:mb-[40px] ">
             <Image
-              src="/images/detail/Profile.png"
+              src={`https://d2qf2amuam62ps.cloudfront.net/img/${data?.product_Id}.jpg`}
               width={181}
               height={181}
               alt="Profile Image"
@@ -55,10 +81,17 @@ const BuildingDetailpage = (props: any) => {
                   </div>
                 </Link>
 
-                <div className=" desk2:flex desk:hidden ml-[6px] w-[118px] h-[49px] justify-center items-center border-2 border-gray-200 rounded-xl ">
-                  <div>관심 종목</div>
+                <div
+                  className={` desk2:flex desk:hidden ml-[6px] w-[118px] h-[49px] justify-center items-center border-2 ${localData?.bookmark ? `border-purple-500` : `border-gray-200`}  rounded-xl cursor-pointer `}
+                  onClick={() => {
+                    handleBookmarkClick(localData?.product_Id, localData?.bookmark);
+                  }}>
+                  <div
+                    className={` ${localData?.bookmark ? `text-purple-500 font-bold ` : `text-black `}mr-1`}>
+                    관심 종목
+                  </div>
                   <Image
-                    src="/images/detail/BookmarkSimple.svg"
+                    src={`${localData?.bookmark ? '/images/product/BookmarkSimple.svg' : '/images/product/BookmarkWhite.svg'}`}
                     width={16}
                     height={16}
                     alt="BookMark"
@@ -84,30 +117,67 @@ const BuildingDetailpage = (props: any) => {
           </div>
 
           <div className="flex flex-col  desk2:justify-start desk2:items-start  desk:justify-center desk:items-center    ">
-            <div className="flex desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex w-full desk:max-w-[360px]  md:w-[300px] justify-between ">
               <div className="text-gray-400">현재가</div>
               <div className="flex flex-row ">
-                <div>{data?.price.toLocaleString()}원</div>
-                <div className="text-red-500 "> ({data?.priceRate}%)</div>
+                <div>{data?.price?.toLocaleString()}원</div>
+
+                <div
+                  className={`${
+                    data?.priceRate !== undefined
+                      ? data.priceRate > 0
+                        ? 'text-red-500'
+                        : data.priceRate < 0
+                          ? 'text-blue-500'
+                          : 'text-gray-500'
+                      : 'text-gray-500'
+                  }`}>
+                  (
+                  {data?.priceRate !== undefined
+                    ? data.priceRate > 0
+                      ? `+${data.priceRate}%`
+                      : data.priceRate < 0
+                        ? `${data.priceRate}%`
+                        : `0%`
+                    : '0%'}
+                  )
+                </div>
               </div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]   w-full desk:max-w-[360px]   md:w-[300px] justify-between ">
               <div className="text-gray-400">시가총액</div>
-              <div>{data?.totalPrice.toLocaleString()}원</div>
+              <div>{data?.totalPrice?.toLocaleString()}원</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]   w-full desk:max-w-[360px]   md:w-[300px] justify-between ">
               <div className="text-gray-400">최근 배당금</div>
               <div>{data?.lastDivide}원</div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]   w-full desk:max-w-[360px]   md:w-[300px] justify-between ">
               <div className="text-gray-400">배당 수익률</div>
-              <div className="text-red-500">{data?.lastDivide_rate}%</div>
+              <div
+                className={`${
+                  data?.lastDivide_rate !== undefined
+                    ? data.lastDivide_rate > 0
+                      ? 'text-red-500'
+                      : data.lastDivide_rate < 0
+                        ? 'text-blue-500'
+                        : 'text-gray-500'
+                    : 'text-gray-500'
+                }`}>
+                {data?.lastDivide_rate !== undefined
+                  ? data.lastDivide_rate > 0
+                    ? `+${data.lastDivide_rate}%`
+                    : data.lastDivide_rate < 0
+                      ? `${data.lastDivide_rate}%`
+                      : `0%`
+                  : '0%'}
+              </div>
             </div>
 
-            <div className="flex mt-[10px]  desk:w-[380px]  md:w-[300px] justify-between ">
+            <div className="flex mt-[10px]   w-full desk:max-w-[360px]   md:w-[300px] justify-between ">
               <div className="text-gray-400">배당 주기</div>
               <div>{data?.divideCycle}개월</div>
             </div>
@@ -139,7 +209,7 @@ const BuildingDetailpage = (props: any) => {
       ) : sort === 'profit' ? (
         <BuildingProfit url={url} />
       ) : sort === 'detail' ? (
-        <BuildingProductDetail url={url} />
+        <BuildingProductDetail url={url} rentType={data?.rentType} />
       ) : undefined}
     </div>
   );

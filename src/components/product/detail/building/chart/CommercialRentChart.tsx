@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Line } from 'react-chartjs-2';
 import axios from 'axios';
+import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,10 +9,9 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend,
-  ChartOptions
+  Legend
 } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
 ChartJS.register(
@@ -23,48 +21,23 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
-  ChartDataLabels
+  Legend
 );
 
-// API 데이터 타입 정의
 interface RentData {
   year: number;
   quarter: number;
   region: string;
-  rent: number;
+  value: number;
 }
 
-interface VacancyRateData {
-  year: number;
-  quarter: number;
-  region: string;
-  vacancyRate: number;
+interface ApiResponse {
+  rent: {
+    [region: string]: RentData[];
+  };
 }
 
-interface ApiData {
-  rent: RentData[];
-  vacancyrate: VacancyRateData[];
-}
-
-// 차트 데이터 타입 정의
-interface ChartData {
-  labels: string[];
-  datasets: {
-    label: string;
-    data: (number | null)[];
-    borderColor: string;
-    backgroundColor: string;
-    pointBackgroundColor: string;
-    pointBorderColor: string;
-    pointRadius: number;
-    pointHoverRadius: number;
-    fill: boolean;
-  }[];
-}
-
-// 랜덤 색상 생성 함수
-const generateRandomColor = () => {
+const getRandomColor = () => {
   const letters = '0123456789ABCDEF';
   let color = '#';
   for (let i = 0; i < 6; i++) {
@@ -73,144 +46,87 @@ const generateRandomColor = () => {
   return color;
 };
 
-const CommercialRentChart: React.FC = () => {
+const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) => {
+  const [buildingType, setBuildingType] = useState<string>('오피스'); // 소규모 or 중대형
+  const [startYear, setStartYear] = useState<number>(2022);
+  const [endYear, setEndYear] = useState<number>(2024);
+  const [chartData, setChartData] = useState<any>(null);
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
-  console.log(lastSegment);
-  // API에서 데이터를 가져오는 함수
 
-  const fetchData = async (): Promise<ApiData> => {
-    const response = await axios.get(
-      `https://api.moaguide.com/detail/building/rate/${lastSegment}?type=오피스`
+  useEffect(() => {
+    console.log('rentTpye = ', rentType);
+    setBuildingType(rentType ? '오피스' : '소규모');
+  }, [rentType, setBuildingType]);
+
+  const fetchData = async () => {
+    const response = await axios.get<ApiResponse>(
+      `https://api.moaguide.com/detail/building/rentrate/${lastSegment}?type=${buildingType}&syear=${startYear}&eyear=${endYear}`
     );
     return response.data;
   };
-  const chartRef = useRef(null);
 
-  // 선택된 연도와 분기를 관리하는 상태
-  const [startYear, setStartYear] = useState<number>(2022);
-  const [startQuarter, setStartQuarter] = useState<number>(1);
-  const [endYear, setEndYear] = useState<number>(2024);
-  const [endQuarter, setEndQuarter] = useState<number>(2);
-
-  // 지역별 색상을 저장하는 상태
-  const [regionColors, setRegionColors] = useState<{ [key: string]: string }>({});
-
-  // 변환된 데이터를 관리할 상태
-  const [filteredData, setFilteredData] = useState<ChartData>({
-    labels: [],
-    datasets: []
-  });
-
-  // useQuery로 데이터 패칭
-  const { data, error, isLoading } = useQuery({
-    queryKey: ['rentData', lastSegment],
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['CommercialRentChart', buildingType, startYear, endYear, lastSegment],
     queryFn: fetchData
   });
 
-  // 데이터를 필터링하고 변환하는 함수
-  const transformAndFilterData = (): ChartData => {
-    if (!data || !data.rent) return { labels: [], datasets: [] };
+  useEffect(() => {
+    if (data) {
+      processChartData(data);
+    }
+  }, [data, buildingType, startYear, endYear, lastSegment]);
 
-    // 사용자가 선택한 기간에 맞게 데이터를 필터링
-    const filteredRentRates = data.rent.filter((item) => {
-      const startCondition =
-        item.year > startYear ||
-        (item.year === startYear && item.quarter >= startQuarter);
-      const endCondition =
-        item.year < endYear || (item.year === endYear && item.quarter <= endQuarter);
-      return startCondition && endCondition;
-    });
+  useEffect(() => {
+    if (startYear > endYear) {
+      alert('시작 연도는 종료 연도보다 클 수 없습니다.');
+      setStartYear(endYear);
+    }
+  }, [startYear, endYear]);
 
-    // 레이블 생성
-    const labels = Array.from(
-      new Set(filteredRentRates.map((item) => `${item.year}.${item.quarter}Q`))
-    );
+  const processChartData = (data: ApiResponse) => {
+    if (!data || !data.rent) return; // data 또는 data.rent가 유효한지 확인
 
-    // 지역별로 데이터셋 생성
-    const regions = Array.from(new Set(filteredRentRates.map((item) => item.region)));
-    const newRegionColors = { ...regionColors };
+    const labelsSet: Set<string> = new Set();
+    const datasets: any[] = [];
 
-    const datasets = regions.map((region) => {
-      // 해당 지역의 색상이 아직 없다면 랜덤 색상을 생성
-      if (!newRegionColors[region]) {
-        newRegionColors[region] = generateRandomColor();
-      }
-      const regionData = filteredRentRates.filter((item) => item.region === region);
-      return {
+    Object.keys(data.rent).forEach((region) => {
+      const regionData = data.rent[region];
+      const values = regionData.map((item) => {
+        const label = `${item.year} Q${item.quarter}`;
+        labelsSet.add(label);
+        return item.value;
+      });
+      const color = getRandomColor();
+
+      datasets.push({
         label: region,
-        data: labels.map((label) => {
-          const [year, quarter] = label.split('.');
-          const quarterData = regionData.find(
-            (item) =>
-              item.year === parseInt(year) && item.quarter === parseInt(quarter[0])
-          );
-          return quarterData ? quarterData.rent : null; // 데이터가 없을 경우 null 반환
-        }),
-        borderColor: newRegionColors[region],
-        backgroundColor: newRegionColors[region],
-        pointBackgroundColor: newRegionColors[region],
-        pointBorderColor: newRegionColors[region],
-        pointRadius: 5,
+        data: values,
+        borderColor: color,
+        backgroundColor: color,
+        pointBackgroundColor: color,
+        pointBorderColor: color,
+        pointRadius: 0,
         pointHoverRadius: 7,
         fill: false
-      };
+      });
     });
 
-    // 지역별 색상을 상태에 저장
-    setRegionColors(newRegionColors);
+    const labels = Array.from(labelsSet).sort();
 
-    return { labels, datasets };
+    setChartData({ labels, datasets });
   };
 
-  // 검색 기간을 검증하는 함수
-  const validateSearchPeriod = () => {
-    if (startYear > endYear || (startYear === endYear && startQuarter > endQuarter)) {
-      alert('잘못된 검색 기간입니다. 시작 날짜가 종료 날짜보다 앞서야 합니다.');
-      return false;
-    }
-    return true;
-  };
-
-  /* eslint-disable  react-hooks/exhaustive-deps */
-  // 검색 기간 변경 시 자동 필터링
-  useEffect(() => {
-    if (validateSearchPeriod()) {
-      const transformedData = transformAndFilterData();
-      setFilteredData(transformedData);
-    }
-  }, [startYear, startQuarter, endYear, endQuarter, data]);
-
-  // 로딩 상태 처리
-  if (isLoading) return <div>데이터를 불러오는 중...</div>;
-  if (error)
-    return (
-      <div>데이터를 가져오는 데 오류가 발생했습니다: {(error as Error).message}</div>
-    );
-
-  // 차트 옵션
-  const options: ChartOptions<'line'> = {
+  const options = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: true,
-        position: 'bottom'
+        display: true
       },
       tooltip: {
         enabled: true,
         intersect: false
-      },
-      datalabels: {
-        anchor: 'end',
-        align: 'top',
-        formatter: (value: number | null) => {
-          return value !== null ? value.toString() : '';
-        },
-        color: '#000',
-        font: {
-          weight: 'bold'
-        }
       }
     },
     scales: {
@@ -218,26 +134,19 @@ const CommercialRentChart: React.FC = () => {
         display: true,
         grid: {
           display: false
-        },
-        ticks: {
-          maxRotation: 0,
-          minRotation: 0
         }
       },
       y: {
         display: true,
-        beginAtZero: false,
+        beginAtZero: true,
         grid: {
-          display: true
-        },
-        ticks: {
-          stepSize: 0.5
+          display: false
         }
       }
     },
     elements: {
       line: {
-        tension: 0.3 // 이 값을 낮추면 선이 직선에 가까워지고, 공백이 줄어듭니다.
+        tension: 0
       },
       point: {
         pointStyle: 'circle'
@@ -245,28 +154,22 @@ const CommercialRentChart: React.FC = () => {
     }
   };
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading data</div>;
+
   return (
-    <>
-      <div className="mb-4 flex justify-end space-x-2">
+    <div>
+      <div className="flex justify-end"></div>
+      <div className="flex justify-end mb-4">
         <div>
-          {/* <label htmlFor="startYear">검색기간</label> */}
           <select
             id="startYear"
             value={startYear}
-            onChange={(e) => setStartYear(parseInt(e.target.value))}>
+            onChange={(e) => setStartYear(parseInt(e.target.value))}
+            className="border rounded p-1">
             {[2022, 2023, 2024].map((year) => (
               <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-          <select
-            id="startQuarter"
-            value={startQuarter}
-            onChange={(e) => setStartQuarter(parseInt(e.target.value))}>
-            {[1, 2, 3, 4].map((quarter) => (
-              <option key={quarter} value={quarter}>
-                {quarter}분기
+                {year}년
               </option>
             ))}
           </select>
@@ -274,31 +177,40 @@ const CommercialRentChart: React.FC = () => {
           <select
             id="endYear"
             value={endYear}
-            onChange={(e) => setEndYear(parseInt(e.target.value))}>
+            onChange={(e) => setEndYear(parseInt(e.target.value))}
+            className="border rounded p-1">
             {[2022, 2023, 2024].map((year) => (
               <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-          <select
-            id="endQuarter"
-            value={endQuarter}
-            onChange={(e) => setEndQuarter(parseInt(e.target.value))}>
-            {[1, 2, 3, 4].map((quarter) => (
-              <option key={quarter} value={quarter}>
-                {quarter}분기
+                {year}년
               </option>
             ))}
           </select>
         </div>
       </div>
+      {!rentType && (
+        <div className=" flex justify-end">
+          <button
+            className={` mr-2 p-2 rounded-lg ${buildingType === '소규모' ? 'bg-purple-500 text-white' : 'bg-gray-300'}`}
+            onClick={() => setBuildingType('소규모')}>
+            소규모
+          </button>
+          <button
+            className={` mr-2 p-2 rounded-lg ${buildingType === '중대형' ? 'bg-purple-500 text-white' : 'bg-gray-300'}`}
+            onClick={() => setBuildingType('중대형')}>
+            중대형
+          </button>
+        </div>
+      )}
       <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
         <div className="w-full max-w-4xl h-[400px]">
-          <Line ref={chartRef} data={filteredData} options={options} />
+          {chartData ? (
+            <Line data={chartData} options={options} />
+          ) : (
+            <div>Loading chart...</div>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

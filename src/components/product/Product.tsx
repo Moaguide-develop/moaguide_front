@@ -82,7 +82,7 @@ const Product = ({
           관련 리포트
         </div>
 
-        <Report report={reportData} />
+        {/* <Report report={reportData} /> */}
       </Container>
 
       <div className=" mt-[40px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
@@ -106,18 +106,21 @@ const Product = ({
       <div className=" mt-[10px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
 
       {sorted === 'start' ? (
+        //모집중
         <ProductRecruitmentContentList
           content={contentData as IProductRecruitmentData['product']}
           totalPages={totalPages}
           pageNumber={pageNumber}
         />
-      ) : sorted === 'end' ? (
+      ) : // 모집완료
+      sorted === 'end' ? (
         <ProductEndRecruitmentContentList
           content={contentData as IProductEndRecruitmentData['product']}
           totalPages={totalPages}
           pageNumber={pageNumber}
         />
       ) : (
+        //거래가능
         <ProductDealContentList
           content={contentData as IProductDealDetailData['product']}
           totalPages={totalPages}

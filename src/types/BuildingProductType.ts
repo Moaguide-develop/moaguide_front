@@ -23,7 +23,7 @@ export interface IreportItem {
 }
 
 export interface IBuildingProductDetail {
-  productId: string;
+  product_Id: string;
   name: string;
   category: string;
   platform: string;
@@ -34,6 +34,8 @@ export interface IBuildingProductDetail {
   lastDivide_rate: number;
   divideCycle: number;
   link: string;
+  rentType: boolean;
+  bookmark: boolean;
 }
 
 export interface IBuildingProductProfitDetail {

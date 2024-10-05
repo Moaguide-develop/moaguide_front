@@ -36,6 +36,7 @@ export interface IProductDetail {
   totalPrice: string;
   dividend: number;
   lastDivide_rate: number;
+  bookmark: boolean;
 }
 
 export interface IProductEndRecruit {
@@ -45,6 +46,7 @@ export interface IProductEndRecruit {
   platform: string;
   totalPrice: number;
   sailRate: number;
+  bookmark: boolean;
 }
 
 export interface IProductRecruit {
@@ -55,6 +57,7 @@ export interface IProductRecruit {
   category: string;
   platform: string;
   recruitmentRate: number;
+  bookmark: boolean;
 }
 
 interface IProductDetailSort {

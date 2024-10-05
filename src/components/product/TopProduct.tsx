@@ -82,16 +82,16 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
               <div key={item.product_Id}>
                 <SwiperSlide>
                   <div className=" flex justify-center items-center">
-                    <Link href={`/product/detail/${item.product_Id}`}>
-                      <div className=" max-w-[436px] h-[372px] border-2 border-gray-200 rounded-md ">
+                    <Link href={`/product/detail/${item.category}/${item.product_Id}`}>
+                      <div className=" max-w-[436px] h-[372px] border-2 border-gray-200 rounded-md px-3">
                         <div className="flex flex-col justify-center items-center mt-[20px] mx-auto">
-                          <div className="relative  ">
-                            <div className="max-w-[396px] h-[237px] ">
+                          <div className="relative ">
+                            <div className="max-w-[396px] h-[227px]  overflow-hidden ">
                               <Image
-                                src="/images/product/ProductBuilding.png"
+                                src={`https://d2qf2amuam62ps.cloudfront.net/img/${item?.product_Id}.jpg`}
                                 alt="Building"
                                 width={396}
-                                height={237}
+                                height={227}
                               />
                             </div>
                             <div className="absolute top-1 left-1">
@@ -121,15 +121,34 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
                               <div className="font-bold text-base mr-auto">
                                 {item.name}
                               </div>
-                              <div className="text-red-500 bg-red-100 rounded-md w-auto h-[25px] flex justify-center items-center px-[4px] py-[4px] mr-[20px] ">
+
+                              <div
+                                className={`${
+                                  item.priceRate > 0
+                                    ? 'text-red-500 bg-red-100'
+                                    : item.priceRate < 0
+                                      ? 'text-blue-500 bg-blue-100'
+                                      : 'text-gray-500 bg-gray-100'
+                                } rounded-md w-auto h-[25px] flex justify-center items-center px-[4px] py-[4px] mr-[20px]`}>
                                 {item.priceRate}%
                               </div>
                             </div>
 
                             <div className="flex mt-[10px ] ml-[20px]">
                               <div className="text-gray-400">{item.price}</div>
-                              <div className="text-red-500 ml-[3px] ">
-                                (+ {item.lastDivide_rate}%)
+                              <div
+                                className={`ml-[3px] ${
+                                  item.lastDivide_rate > 0
+                                    ? 'text-red-500'
+                                    : item.lastDivide_rate < 0
+                                      ? 'text-blue-500'
+                                      : 'text-gray-500'
+                                }`}>
+                                {item.lastDivide_rate > 0
+                                  ? `(+ ${item.lastDivide_rate}%)`
+                                  : item.lastDivide_rate < 0
+                                    ? `(${item.lastDivide_rate}%)`
+                                    : `(0%)`}
                               </div>
                             </div>
                           </div>

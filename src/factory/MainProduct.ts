@@ -6,7 +6,7 @@ import axios from 'axios';
 const fetchMainProduct = async (category: string) => {
   try {
     const { data } = await axios.get(
-      `https://api.moaguide.com/summary/list/${category}?subcategory=trade&sort=lastDivide_rate&desc&page=1&size=3`
+      `https://api.moaguide.com/summary/list?category=${category}&subcategory=trade&sort=lastDivide_rate desc&page=1&size=3`
     );
     return data.product;
   } catch (e) {

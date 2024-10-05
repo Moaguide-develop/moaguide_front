@@ -13,7 +13,7 @@ import {
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
-import { IMusicStockPriceChart } from '@/types/MusicProductType';
+import { IMusicBulidingStockPriceChart } from '@/types/MusicProductType';
 
 ChartJS.register(
   CategoryScale,
@@ -34,7 +34,7 @@ const BuildingStockPriceChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<IMusicStockPriceChart>(
+      const response = await axios.get<IMusicBulidingStockPriceChart>(
         `https://api.moaguide.com/detail/transaction/${lastSegment}?month=${filteringData}`
       );
       return response.data;
@@ -55,12 +55,12 @@ const BuildingStockPriceChart = () => {
 
   const StockPriceDate =
     (StockPriceData?.transaction &&
-      StockPriceData?.transaction.map((item) => item.date)) ||
+      StockPriceData?.transaction.map((item) => item.day)) ||
     [];
 
   const StockPriceCount =
     (StockPriceData?.transaction &&
-      StockPriceData?.transaction.map((item) => Number(item.price))) ||
+      StockPriceData?.transaction.map((item) => Number(item.value))) ||
     [];
   const sortedStockPriceCount = [...StockPriceCount].sort((a, b) => b - a);
   const maxStockPriceCount = sortedStockPriceCount[0] || 0;
