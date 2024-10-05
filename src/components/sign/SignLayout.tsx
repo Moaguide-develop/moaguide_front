@@ -5,6 +5,8 @@ import { login } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
 import throttle from 'lodash/throttle'; 
 import NaverLogin from './NaverLogin';
+import KakaoLogin from './KakaoLogin';
+import GoogleLogin from './GoogleLogin';
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');
@@ -24,7 +26,7 @@ const SignLayout = () => {
   }, 1000); 
 
   return (
-    <div className="min-h-[calc(100dvh-75px)] flex flex-col items-center justify-center sm:min-h-[100vh]">
+    <div className="min-h-[calc(100dvh-100px)] mb-[100px] flex flex-col items-center justify-center sm:min-h-[100vh] sm:mb-0">
       <section className="flex mt-8 mb-6">
         <Link href={'/'} className='cursor-pointer'>
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
@@ -74,7 +76,6 @@ const SignLayout = () => {
         >
           로그인
         </button>
-        <NaverLogin /> 
         <div className="flex text-center text-gray-500 text-sm">
           <Link href={'/signup'} className='cursor-pointer'>
             <div className="mr-4">회원가입</div>
@@ -82,10 +83,12 @@ const SignLayout = () => {
           <a href="/find">이메일 / 비밀번호 찾기</a>
         </div>
       </section>
-       {/* <section className="mt-8"> */}
-        {/* <SocialLoginButtons /> */}
-      {/* </section> */}
-      {/* <div className="h-12" /> */}
+       <section className="mt-8 flex flex-col gap-3"> 
+        <KakaoLogin /> 
+        <NaverLogin /> 
+        <GoogleLogin /> 
+      </section>
+     
     </div>
   );
 };
