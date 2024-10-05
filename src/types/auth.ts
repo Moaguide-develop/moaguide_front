@@ -9,7 +9,7 @@ export interface VerifyCodeResponse {
 
 export interface AuthHeaders {
     cookie: string;
-    authorization: string;
+    Verify: string;
 }
   
 export interface NicknameCheckResponse {

@@ -72,7 +72,7 @@ const SignupPage: React.FC = () => {
 
       const authHeaders = {
         cookie: '',
-        authorization: `Bearer ${accessToken}`
+        Verify: accessToken
       };
 
       const response = await finalSignup(formData, authHeaders);
