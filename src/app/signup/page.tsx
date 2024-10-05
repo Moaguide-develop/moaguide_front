@@ -1,18 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import Step1 from '@/components/signup/Step1';
 import Step2 from '@/components/signup/Step2';
 import Step3 from '@/components/signup/Step3';
 import Step4 from '@/components/signup/Step4';
 import { finalSignup } from '@/service/auth';
-import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const SignupPage: React.FC = () => {
-  const searchParams = useSearchParams();
-  const isSocialLogin = searchParams.get('social') === 'true'; 
-
-  const [currentStep, setCurrentStep] = useState(isSocialLogin ? 4 : 1); 
+  const [isSocialLogin, setIsSocialLogin] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<{
     email?: string;
     name?: string;
@@ -24,10 +22,11 @@ const SignupPage: React.FC = () => {
     marketingConsent?: boolean;
     loginType: 'local' | 'social';
   }>({
-    loginType: isSocialLogin ? 'social' : 'local', // 소셜 로그인인지 여부에 따라 설정
+    loginType: 'local',
   });
 
   const [maxHeightClass, setmaxHeightClass] = useState('max-h-screen');
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,6 +42,14 @@ const SignupPage: React.FC = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  // searchParams를 클라이언트에서만 처리
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const isSocial = searchParams.get('social') === 'true';
+    setIsSocialLogin(isSocial);
+    setCurrentStep(isSocial ? 4 : 1);
   }, []);
 
   const handleNext = () => {
@@ -72,7 +79,7 @@ const SignupPage: React.FC = () => {
 
       const authHeaders = {
         cookie: '',
-        Verify: accessToken
+        Verify: accessToken,
       };
 
       const response = await finalSignup(formData, authHeaders);
@@ -83,20 +90,22 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className={`flex flex-col items-center justify-center ${maxHeightClass}`}>
-      {currentStep === 1 && (
-        <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
-      )}
-      {currentStep === 2 && (
-        <Step2 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
-      )}
-      {currentStep === 3 && (
-        <Step3 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
-      )}
-      {currentStep === 4 && (
-        <Step4 onNext={handleSubmit} onUpdate={(data) => handleUpdate(data)} />
-      )}
-    </div>
+    <Suspense fallback={<div></div>}>
+      <div className={`flex flex-col items-center justify-center ${maxHeightClass}`}>
+        {currentStep === 1 && (
+          <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
+        )}
+        {currentStep === 2 && (
+          <Step2 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
+        )}
+        {currentStep === 3 && (
+          <Step3 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
+        )}
+        {currentStep === 4 && (
+          <Step4 onNext={handleSubmit} onUpdate={(data) => handleUpdate(data)} />
+        )}
+      </div>
+    </Suspense>
   );
 };
 
