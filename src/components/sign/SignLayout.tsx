@@ -12,6 +12,7 @@ const SignLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [loginType, setLoginType] = useState<'local' | 'social' | 'naver' | 'google' | 'kakao'>('local'); 
   const router = useRouter();
   const { setIsLoggedIn } = useAuthStore();
 
@@ -83,12 +84,11 @@ const SignLayout = () => {
           <a href="/find">이메일 / 비밀번호 찾기</a>
         </div>
       </section>
-       <section className="mt-8 flex flex-col gap-3"> 
-        <KakaoLogin /> 
-        <NaverLogin /> 
-        <GoogleLogin /> 
+      <section className="mt-8 flex flex-col gap-3">
+        <KakaoLogin setLoginType={setLoginType} /> {/* Kakao login */}
+        <NaverLogin setLoginType={setLoginType} /> {/* Naver login */}
+        <GoogleLogin setLoginType={setLoginType} /> {/* Google login */}
       </section>
-     
     </div>
   );
 };

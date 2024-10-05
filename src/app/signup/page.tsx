@@ -20,27 +20,26 @@ const SignupPage: React.FC = () => {
     birthDate?: string;
     investmentExperience?: string;
     marketingConsent?: boolean;
-    loginType: 'local' | 'naver' | 'kakao' | 'google'; // loginType을 소셜 제공자로 확장
+    loginType: 'local' | 'social';
   }>({
     loginType: 'local',
   });
 
   const router = useRouter();
 
-  // URL에서 verify 토큰, email, provider를 추출하고 처리하는 로직
+  // URL에서 verify 토큰과 email을 추출하고 처리하는 로직
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const verifyToken = searchParams.get('verify');
     const email = searchParams.get('email');
-    const provider = searchParams.get('provider');  // 네이버, 카카오, 구글 등
-
-    if (verifyToken && email && provider && !isSocialLogin) {
+    
+    if (verifyToken && email && !isSocialLogin) {
       // 소셜 로그인 사용자일 때만 상태를 업데이트
       setIsSocialLogin(true);
       setFormData((prev) => ({
         ...prev,
         email,
-        loginType: provider as 'naver' | 'kakao' | 'google',  // loginType을 provider에 맞게 설정
+        loginType: 'social',
       }));
 
       // verifyToken을 로컬 스토리지에 저장 (토큰 저장)
