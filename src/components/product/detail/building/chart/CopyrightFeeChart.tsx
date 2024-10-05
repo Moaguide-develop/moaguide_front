@@ -97,7 +97,7 @@ const BuildingCopyRightFeeChart = () => {
     datasets: [
       {
         type: 'bar' as const,
-        label: '저작권료',
+        label: '배당금',
         data: CopyRightFeeDivideCount,
         backgroundColor: (context: any) => {
           const chart = context.chart;
@@ -133,7 +133,7 @@ const BuildingCopyRightFeeChart = () => {
       },
       {
         type: 'line' as const,
-        label: '시가저작권료',
+        label: '시가배당률',
         data: CopyRightFeeDivideRateCount,
         borderColor: '#0000FF',
         backgroundColor: '#0000FF',

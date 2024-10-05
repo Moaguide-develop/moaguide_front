@@ -97,7 +97,7 @@ const OfficialPriceChart = () => {
     });
 
     // 레이블 생성 및 역순으로 정렬
-    const labels = filteredLandPrices.map((item) => `${item.day}.1Q`).reverse();
+    const labels = filteredLandPrices.map((item) => `${item.day}`).reverse();
 
     // 데이터셋 생성 및 역순으로 정렬
     const datasets = [

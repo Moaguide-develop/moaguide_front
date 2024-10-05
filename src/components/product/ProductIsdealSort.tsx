@@ -31,8 +31,8 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
               setSort('profit');
               handleClick('lastDivide_rate desc');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sorted === 'lastDivide_rate desc' || sorted == null ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer desk2:text-sm desk:text-xs
+            ${sorted === 'lastDivide_rate desc' || sorted == null ? 'border border-normal text-normal' : 'border border-gray100 text-gray300   '}`}>
             수익률순
             <Image
               src="/images/home/news_check.svg"
@@ -47,8 +47,8 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
               setSort('inquiry');
               handleClick('views desc');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sorted === 'views desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer desk2:text-sm desk:text-xs
+            ${sorted === 'views desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300  '}`}>
             조회순
             <Image
               src="/images/home/news_check.svg"
@@ -64,8 +64,8 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
               setSort('currentprice');
               handleClick('priceRate desc');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sorted === 'priceRate desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer desk2:text-sm desk:text-xs
+            ${sorted === 'priceRate desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300  '}`}>
             현재가순
             <Image
               src="/images/home/news_check.svg"
@@ -81,8 +81,8 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
               setSort('alphabetical ');
               handleClick('name');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sorted === 'name' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer  desk2:text-sm desk:text-xs
+            ${sorted === 'name' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300  '}`}>
             가나다순
             <Image
               src="/images/home/news_check.svg"
