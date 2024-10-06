@@ -77,17 +77,24 @@ export const login = async (email: string, password: string) => {
       },
     });
 
-    console.log('로그인 성공:', response.data);
+    console.log('로그인 성공 응답 데이터:', response.data);
 
     const token = response.headers['authorization'] || response.headers['Authorization'];
-    console.log(token);
+    if (!token) {
+      throw new Error('토큰을 찾을 수 없습니다. 헤더에서 Authorization이 존재하지 않습니다.');
+    }
+
     const accessToken = token.replace('Bearer ', '');
-    setToken(accessToken);
+    setToken(accessToken);  
+    console.log('Access Token 저장 성공:', accessToken);
 
-    const refreshToken = response.headers['Set-Cookie'] || response.headers['set-cookie'];
-
+    // 사용자 정보 업데이트
     const { setMember } = useMemberStore.getState();
     const userInfo = response.data.user;
+    if (!userInfo) {
+      throw new Error('사용자 정보를 응답에서 찾을 수 없습니다.');
+    }
+
     setMember({
       memberEmail: userInfo.email,
       memberNickName: userInfo.nickname,
@@ -95,11 +102,11 @@ export const login = async (email: string, password: string) => {
       loginType: userInfo.loginType, 
     });
 
-    console.log(userInfo);
+    console.log('사용자 정보 저장 완료:', userInfo);
 
     return response.data;
   } catch (error) {
-    console.error('로그인 오류:', error);
+    console.error('로그인 오류 발생:', error);
     throw error;
   }
 };

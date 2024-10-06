@@ -1,31 +1,46 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
+import { useMemberStore } from '@/store/user.store'; 
 import throttle from 'lodash/throttle'; 
 import NaverLogin from './NaverLogin';
 import KakaoLogin from './KakaoLogin';
 import GoogleLogin from './GoogleLogin';
+import { login } from '@/service/auth';
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [loginType, setLoginType] = useState<'local' | 'social' | 'naver' | 'google' | 'kakao'>('local'); 
+  const [loginType, setLoginType] = useState<'local' | 'naver' | 'google' | 'kakao'>('local'); 
   const router = useRouter();
-  const { setIsLoggedIn } = useAuthStore();
+  const { setIsLoggedIn } = useAuthStore(); 
+  const { setMember } = useMemberStore(); 
 
   const throttledHandleLogin = throttle(async () => {
     try {
-      await login(email, password);
+      const response = await login(email, password);
       setIsLoggedIn(true);
+  
+      const userInfo = response.user;
+      setMember({
+        memberEmail: userInfo.email,
+        memberNickName: userInfo.nickname,
+        memberPhone: userInfo.phoneNumber,
+        loginType: 'local',
+      });
+
+      setErrorMessage('');  
+  
       router.push('/');
     } catch (error) {
+      console.log(error);
       setErrorMessage('이메일 혹은 비밀번호가 일치하지 않습니다. 다시 시도해주세요.');
     }
-  }, 1000); 
+  }, 1000);
 
+  
   return (
     <div className="min-h-[calc(100dvh-100px)] mb-[100px] flex flex-col items-center justify-center sm:min-h-[100vh] sm:mb-0">
       <section className="flex mt-8 mb-6">
