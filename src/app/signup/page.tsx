@@ -20,32 +20,30 @@ const SignupPage: React.FC = () => {
     birthDate?: string;
     investmentExperience?: string;
     marketingConsent?: boolean;
-    loginType: 'local' | 'social';
+    loginType: 'local' | 'social' | 'naver' | 'google' | 'kakao';  
   }>({
     loginType: 'local',
   });
 
   const router = useRouter();
 
-  // URL에서 verify 토큰과 email을 추출하고 처리하는 로직
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const verifyToken = searchParams.get('verify');
     const email = searchParams.get('email');
+    const loginType = searchParams.get('loginType') as 'naver' | 'google' | 'kakao' | null;  // loginType을 URL에서 가져옴
     
-    if (verifyToken && email && !isSocialLogin) {
-      // 소셜 로그인 사용자일 때만 상태를 업데이트
+    if (verifyToken && email && loginType && !isSocialLogin) {
       setIsSocialLogin(true);
       setFormData((prev) => ({
         ...prev,
         email,
-        loginType: 'social',
+        loginType, 
       }));
 
-      // verifyToken을 로컬 스토리지에 저장 (토큰 저장)
       localStorage.setItem('access_token', verifyToken);
 
-      setCurrentStep(4);  // 소셜 로그인인 경우 Step4로 이동
+      setCurrentStep(4); 
     }
   }, [isSocialLogin]);
 
@@ -57,7 +55,6 @@ const SignupPage: React.FC = () => {
     setFormData((prev) => {
       const updatedFormData = { ...prev, ...data };
       
-      // 상태가 이전과 같다면 업데이트하지 않음
       if (JSON.stringify(prev) === JSON.stringify(updatedFormData)) {
         return prev;
       }
@@ -77,14 +74,13 @@ const SignupPage: React.FC = () => {
 
       const authHeaders = {
         cookie: '',
-        Verify: accessToken,  // Verify 헤더에 JWT 토큰을 포함
+        Verify: accessToken,
       };
 
       const response = await finalSignup(formData, authHeaders);
       console.log('서버 응답 데이터:', response);
 
-      // 회원가입 완료 후 페이지 이동
-      router.push('/dashboard');  // 완료 후 다른 페이지로 이동
+      router.push('/');
     } catch (error) {
       console.error('서버 요청 오류:', error);
     }
