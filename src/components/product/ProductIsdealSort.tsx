@@ -62,15 +62,15 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('currentprice');
-              handleClick('priceRate desc');
+              handleClick('price desc');
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer desk2:text-sm desk:text-xs
-            ${sorted === 'priceRate desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300  '}`}>
+            ${sorted === 'price desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300  '}`}>
             현재가순
             <Image
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sorted === 'priceRate desc' ? 'block' : 'hidden'}`}
+              className={`${sorted === 'price desc' ? 'block' : 'hidden'}`}
               width={20}
               height={20}
             />
