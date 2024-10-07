@@ -44,7 +44,7 @@ const Mypage = () => {
   }
 
   return (
-    <div className="px-5 mt-5 w-full mx-auto sm:max-w-[640px] sm:mt-10 sm:px-0">
+    <div className="min-h-[calc(100dvh-160px)] flex flex-col sm:min-h-[calc(100vh-160px)] sm:mb-0 mt-5 w-[90%] mx-auto sm:max-w-[640px] sm:mt-10">
       <header>
         <MypageHeader />
       </header>
@@ -57,7 +57,6 @@ const Mypage = () => {
       >
         <span className="max-w-max">로그아웃</span>
       </div>
-      <div className="h-[140px]" />
     </div>
   );
 };

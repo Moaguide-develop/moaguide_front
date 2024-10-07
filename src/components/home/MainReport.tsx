@@ -12,7 +12,7 @@ const MainReport = () => {
   const router = useRouter();
 
   return (
-    <div className="px-5 sm:px-0">
+    <div className="">
       {/* 타이틀 */}
       <div className="flex items-center justify-between">
         <div className="text-heading4">주요 리포트</div>

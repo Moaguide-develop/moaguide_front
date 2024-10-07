@@ -30,7 +30,7 @@ const MoblieRank = () => {
   }, [data]);
 
   return (
-    <div className="sm:hidden px-5 py-[28px]">
+    <div className="sm:hidden py-[28px]">
       <div className="text-heading4">실시간 검색 순위</div>
       <div className="mt-[28px]">
         {isLoading ? (

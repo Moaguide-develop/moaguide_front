@@ -139,7 +139,7 @@ const ChangePhonePage = () => {
   }, [isError]);
 
   return (
-    <div>
+    <div className='min-h-[calc(100dvh-160px)] mb-[20px] sm:mb-0'>
       <div className="w-[90%] mt-5 w-full mx-auto max-w-[340px] sm:max-w-[640px] sm:mt-10 sm:px-0">
         <div onClick={() => router.back()} className="py-[14px]">
           <img src="/images/mypage/left_password.svg" alt="" className="cursor-pointer" />

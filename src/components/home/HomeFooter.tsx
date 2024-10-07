@@ -4,7 +4,7 @@ import React from 'react';
 const HomeFooter = () => {
   return (
     <div className="hidden mt-[158px] bg-bg mx-auto w-full sm:block">
-      <div className="flex justify-between items-center py-[52px] w-full mx-auto desk:max-w-[1000px]">
+      <div className="flex justify-between items-center py-[52px] w-[90%] lg:w-full mx-auto desk:max-w-[1000px]">
         {/* 왼쪽 */}
         <div className="flex flex-col gap-6">
           <div>
@@ -23,16 +23,16 @@ const HomeFooter = () => {
         </div>
 
         {/* 오른쪽 */}
-        <div>
-          <div className="cursor-pointer flex gap-2 px-[28px] py-4 bg-white border border-gray200 rounded-[12px]">
+        <div className=''>
+          <div className="cursor-pointer flex gap-0 mx-auto justify-center px-[7px] md:px-[28px] md:gap-2 py-4 bg-white border border-gray200 rounded-[12px]">
             <div className="text-body5 text-gray400">카카오톡으로 1:1 문의</div>
             <div>
               <img src="/images/home/footer_right.svg" alt="" />
             </div>
           </div>
-          <div className="flex gap-3 text-body1 text-gray300 mt-[165px]">
+          <div className="flex flex-col md:flex-row gap-3 text-body1 text-gray300 mt-[165px]">
             <div className="cursor-pointer">개인정보처리방침</div>
-            <div>|</div>
+            <div className="hidden md:block">|</div>
             <div className="cursor-pointer">이용약관</div>
           </div>
         </div>

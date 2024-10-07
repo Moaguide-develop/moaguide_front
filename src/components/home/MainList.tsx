@@ -13,7 +13,7 @@ const MainList = () => {
   return (
     <div>
       {/* title */}
-      <div className="flex items-center justify-between px-5 sm:px-0">
+      <div className="flex items-center justify-between">
         <div className="text-heading4">주요 상품 현황</div>
         <div
           onClick={() => {
@@ -24,7 +24,7 @@ const MainList = () => {
         </div>
       </div>
       {/* nav */}
-      <div className="mt-5 sm:mt-8 flex justify-between sm:justify-start items-center gap-5 border-b border-gray100 text-mobileTitle sm:text-title2 px-5 sm:px-0">
+      <div className="mt-5 sm:mt-8 flex items-center gap-5 border-b border-gray100 text-mobileTitle sm:text-title2 overflow-x-auto whitespace-nowrap">
         <div
           onClick={() => {
             setCategory('all');
@@ -69,7 +69,7 @@ const MainList = () => {
         </div>
       </div>
       {/* item */}
-      <div className="px-5 sm:px-0">
+      <div className="">
         {isLoading
           ? Array.from({ length: 3 }).map((_, i) => <MainListItemSkeleton key={i} />)
           : data?.map((item, i) => <MainListItem key={i} {...item} />)}
