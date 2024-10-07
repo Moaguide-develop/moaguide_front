@@ -7,6 +7,7 @@ import Step3 from '@/components/signup/Step3';
 import Step4 from '@/components/signup/Step4';
 import { finalSignup } from '@/service/auth';
 import { useRouter } from 'next/navigation';
+import { getCookie, setCookie } from '@/utils/cookie';
 
 const SignupPage: React.FC = () => {
   const [isSocialLogin, setIsSocialLogin] = useState(false);
@@ -31,7 +32,7 @@ const SignupPage: React.FC = () => {
     const searchParams = new URLSearchParams(window.location.search);
     const verifyToken = searchParams.get('verify');
     const email = searchParams.get('email');
-    const loginType = searchParams.get('loginType') as 'naver' | 'google' | 'kakao' | null;  // loginType을 URL에서 가져옴
+    const loginType = searchParams.get('loginType') as 'naver' | 'google' | 'kakao' | null;  
     
     if (verifyToken && email && loginType && !isSocialLogin) {
       setIsSocialLogin(true);
@@ -41,7 +42,7 @@ const SignupPage: React.FC = () => {
         loginType, 
       }));
 
-      localStorage.setItem('access_token', verifyToken);
+      setCookie('access_token', verifyToken);
 
       setCurrentStep(4); 
     }
@@ -67,7 +68,8 @@ const SignupPage: React.FC = () => {
     try {
       console.log('최종 제출 데이터:', formData);
 
-      const accessToken = localStorage.getItem('access_token');
+      const accessToken = getCookie('access_token');
+      
       if (!accessToken) {
         throw new Error('Access token이 없습니다.');
       }

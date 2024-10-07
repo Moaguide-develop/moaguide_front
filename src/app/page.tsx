@@ -6,6 +6,7 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/userAuth.store';
 import { useMemberStore } from '@/store/user.store';
+import { setCookie } from '@/utils/cookie';
 
 const HomePage = () => {
   const { setIsLoggedIn } = useAuthStore();
@@ -22,7 +23,8 @@ const HomePage = () => {
         const parsedUser = JSON.parse(decodeURIComponent(userParam));
         
         const user = JSON.parse(parsedUser.user); 
-        localStorage.setItem('access_token', accessToken);
+        setCookie('access_token', accessToken);
+  
 
         console.log('유저 정보', user);
         setMember({

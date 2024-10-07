@@ -17,6 +17,10 @@ const Editpage = () => {
   const [isNameComplete, setIsNameComplete] = useState('');
   const { setModalType, setOpen, open } = useModalStore();
 
+  useEffect(() => {
+    console.log('현재 member 정보:', member);
+  }, [member]);
+
   const socialInfo = getSocialInfo(member.loginType, member.memberEmail); 
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {

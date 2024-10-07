@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/userAuth.store';
+import { getCookie } from '@/utils/cookie';
 
 const Gnb = () => {
   const pathname = usePathname();
@@ -12,7 +13,7 @@ const Gnb = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('access_token');
+    const accessToken = getCookie('access_token');
 
     if (accessToken && accessToken !== 'undefined') {
       setIsLoggedIn(true);

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { getCookie } from '@/utils/cookie';
 
 const FindEmail = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>(''); // 전화번호
@@ -74,7 +75,7 @@ const FindEmail = () => {
 
   const handleComplete = useCallback(async () => {
     try {
-      const token = localStorage.getItem('access_token');
+      const token = getCookie('access_token');
       if (token) {
         const data = await getUserEmail(token);
         setAllComplete(true);
