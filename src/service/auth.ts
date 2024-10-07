@@ -65,13 +65,17 @@ export const finalSignup = async (
 };
 
 // 토큰 사용하는 API 함수들
-export const login = async (email: string, password: string) => {
+// 로그인 API 함수
+export const login = async (email: string, password: string, rememberMe: boolean) => {
   try {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
 
-    const response = await basicAxiosInstance.post('/login', formData, {
+    // rememberMe 값에 따라 URL에 쿼리 파라미터 추가
+    const url = `/login?rememberMe=${rememberMe}`;
+
+    const response = await basicAxiosInstance.post(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
