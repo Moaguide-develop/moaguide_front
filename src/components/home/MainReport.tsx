@@ -15,10 +15,10 @@ const MainReport = () => {
     <div className="">
       {/* 타이틀 */}
       <div className="flex items-center justify-between">
-        <div className="text-heading4">주요 리포트</div>
+        <div className="text-heading4">실력 올리기</div>
         <div
           onClick={() => {
-            router.push('/reportpage');
+            router.push('/practicepage');
           }}
           className="cursor-pointer">
           <img src="/images/home/item_right.svg" alt="" />
@@ -55,6 +55,7 @@ const MainReport = () => {
               id={item.id}
               imageLink={item.imageLink}
               description={item.description}
+              link={item.link}
             />
           ))
         )}

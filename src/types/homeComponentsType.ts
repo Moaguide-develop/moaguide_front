@@ -5,6 +5,7 @@ export interface MainReportType {
   date: string;
   imageLink: string;
   description: string;
+  link: string;
 }
 
 export interface MainNews {
