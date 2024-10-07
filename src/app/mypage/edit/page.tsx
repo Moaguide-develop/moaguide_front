@@ -170,7 +170,7 @@ const Editpage = () => {
         <div className="mt-5 pb-5 ">
           <div className="text-body4 flex justify-between items-center">
             <div>휴대폰 번호</div>
-            <div>{member.memberPhone}</div>
+            <div>{member?.memberPhone || '없음'}</div>
           </div>
           <div className=" flex justify-between text-gray400 text-body7 mt-5 pb-5 border-b border-gray100">
             <div className="flex-1" />

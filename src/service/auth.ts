@@ -64,15 +64,12 @@ export const finalSignup = async (
   }
 };
 
-// 토큰 사용하는 API 함수들
-// 로그인 API 함수
 export const login = async (email: string, password: string, rememberMe: boolean) => {
   try {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
 
-    // rememberMe 값에 따라 URL에 쿼리 파라미터 추가
     const url = `/login?rememberMe=${rememberMe}`;
 
     const response = await basicAxiosInstance.post(url, formData, {
@@ -92,7 +89,6 @@ export const login = async (email: string, password: string, rememberMe: boolean
     setToken(accessToken);  
     console.log('Access Token 저장 성공:', accessToken);
 
-    // 사용자 정보 업데이트
     const { setMember } = useMemberStore.getState();
     const userInfo = response.data.user;
     if (!userInfo) {
@@ -207,13 +203,13 @@ export const deleteUser = async () => {
 
       const { clearMember } = useMemberStore.getState();
       clearMember();
-      return response;  // 반환값 추가
+      return response;  
     } else {
       console.error('회원탈퇴 실패', response.status);
-      return response;  // 실패 시에도 response 반환
+      return response; 
     }
   } catch (error) {
     console.error('회원탈퇴 오류:', error);
-    throw error;  // 에러를 호출한 함수로 throw하여 catch하도록 함
+    throw error; 
   }
 };

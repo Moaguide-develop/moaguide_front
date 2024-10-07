@@ -12,7 +12,7 @@ const SignLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [rememberMe, setRememberMe] = useState(false); // 상태 유지 여부
+  const [rememberMe, setRememberMe] = useState(false); 
   const [loginType, setLoginType] = useState<'local' | 'naver' | 'google' | 'kakao'>('local'); 
   const router = useRouter();
   const { isLoggedIn, setIsLoggedIn } = useAuthStore();  
@@ -26,16 +26,8 @@ const SignLayout = () => {
 
   const throttledHandleLogin = throttle(async () => {
     try {
-      const response = await login(email, password, rememberMe); // rememberMe 값 추가
+      await login(email, password, rememberMe);
       setIsLoggedIn(true);
-  
-      const userInfo = response.user;
-      setMember({
-        memberEmail: userInfo.email,
-        memberNickName: userInfo.nickname,
-        memberPhone: userInfo.phoneNumber,
-        loginType: 'local',
-      });
 
       setErrorMessage('');  
   
@@ -78,8 +70,8 @@ const SignLayout = () => {
           <input 
             type="checkbox" 
             id="rememberMe" 
-            checked={rememberMe} // rememberMe 상태와 연결
-            onChange={(e) => setRememberMe(e.target.checked)} // 상태 유지 여부 업데이트
+            checked={rememberMe} 
+            onChange={(e) => setRememberMe(e.target.checked)}
             className="mr-2"
           />
           <label htmlFor="rememberMe" className="text-sm text-gray-700">
