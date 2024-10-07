@@ -4,9 +4,14 @@ import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import React from 'react';
 
-const MainReportItem = ({ category, title, date, id, description, imageLink }: MainReportType) => {
+const MainReportItem = ({ category, title, date, link, description, imageLink }: MainReportType) => {
+
+  const handleClick = () => {
+    window.open(link, '_blank');
+  };
+
   return (
-    <div className="mt-5 pb-5 border-b border-gray100 flex items-center gap-5 cursor-pointer">
+    <div className="mt-5 pb-5 border-b border-gray100 flex items-center gap-5 cursor-pointer"  onClick={handleClick}>
       {/* 왼쪽 */}
       <div className="flex-1 flex flex-col gap-3">
         <div className="p-[6px] rounded-[4px] bg-bg text-caption3 text-gray400 max-w-max">
