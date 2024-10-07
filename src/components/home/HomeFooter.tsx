@@ -37,7 +37,7 @@ const HomeFooter = () => {
           </div>
           <div className="flex sm:hidden flex-row md:flex-row gap-3 text-body1 text-gray300">
             <div className="cursor-pointer">개인정보처리방침</div>
-            <div className="hidden md:block">|</div>
+            <div className="">|</div>
             <div className="cursor-pointer">이용약관</div>
           </div>
 
