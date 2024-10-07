@@ -12,6 +12,7 @@ const SignLayout = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [rememberMe, setRememberMe] = useState(false); 
   const [loginType, setLoginType] = useState<'local' | 'naver' | 'google' | 'kakao'>('local'); 
   const router = useRouter();
   const { isLoggedIn, setIsLoggedIn } = useAuthStore();  
@@ -23,19 +24,10 @@ const SignLayout = () => {
     }
   }, [isLoggedIn, router]);
 
-
   const throttledHandleLogin = throttle(async () => {
     try {
-      const response = await login(email, password);
+      await login(email, password, rememberMe);
       setIsLoggedIn(true);
-  
-      const userInfo = response.user;
-      setMember({
-        memberEmail: userInfo.email,
-        memberNickName: userInfo.nickname,
-        memberPhone: userInfo.phoneNumber,
-        loginType: 'local',
-      });
 
       setErrorMessage('');  
   
@@ -46,7 +38,6 @@ const SignLayout = () => {
     }
   }, 1000);
 
-  
   return (
     <div className="min-h-[calc(100dvh-100px)] mb-[100px] flex flex-col items-center justify-center sm:min-h-[100vh] sm:mb-0">
       <section className="flex mt-8 mb-6">
@@ -79,6 +70,8 @@ const SignLayout = () => {
           <input 
             type="checkbox" 
             id="rememberMe" 
+            checked={rememberMe} 
+            onChange={(e) => setRememberMe(e.target.checked)}
             className="mr-2"
           />
           <label htmlFor="rememberMe" className="text-sm text-gray-700">

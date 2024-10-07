@@ -2,9 +2,9 @@ import React from 'react';
 
 const SubLoadmapBottomArticleSkeleton = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-8 w-full">
       {/* 첫 번째 스켈레톤 */}
-      <div className='py-5'>
+      <div className='pt-5'>
         <div className='flex gap-5 items-center cursor-pointer animate-pulse'>
           <div>
             <div className="w-[70px] h-[70px] bg-gray200 rounded-[8px]"></div>
@@ -19,7 +19,7 @@ const SubLoadmapBottomArticleSkeleton = () => {
       </div>
 
       {/* 두 번째 스켈레톤 */}
-      <div className='py-5'>
+      <div className='pt-5'>
         <div className='flex gap-5 items-center cursor-pointer animate-pulse'>
           <div>
             <div className="w-[70px] h-[70px] bg-gray200 rounded-[8px]"></div>

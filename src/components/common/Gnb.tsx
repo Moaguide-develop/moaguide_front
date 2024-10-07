@@ -44,7 +44,7 @@ const Gnb = () => {
           <div onClick={() => router.push('/search')} className="cursor-pointer">
             <img src="/images/gnb/search.svg" alt="search_icon" className="w-6 h-6" />
           </div>
-          <div
+          {/* <div
             onClick={() => {
               if (isLoggedIn) {
                 router.push('/sign');
@@ -53,6 +53,9 @@ const Gnb = () => {
               }
             }}
             className="cursor-pointer">
+            <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
+          </div> */}
+          <div className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
           </div>
           <div className="hidden items-center min-h-[35px] sm:flex">
