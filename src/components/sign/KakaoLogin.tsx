@@ -15,7 +15,8 @@ const KakaoLogin = ({ setLoginType }: { setLoginType: (type: 'kakao') => void })
       src={KakaoLoginButton}  
       alt="카카오 로그인"
       width={320}             
-      height={52}              
+      height={52}   
+      className='cursor-pointer'           
     />
   );
 };

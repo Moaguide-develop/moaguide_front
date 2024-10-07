@@ -16,7 +16,8 @@ const NaverLogin = ({ setLoginType }: { setLoginType: (type: 'naver') => void })
       src={NaverLoginButton}  
       alt="네이버 로그인"
       width={320}             
-      height={52}              
+      height={52}        
+      className='cursor-pointer'      
     />
   );
 };

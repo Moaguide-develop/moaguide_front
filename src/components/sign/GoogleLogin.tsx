@@ -15,7 +15,8 @@ const GoogleLogin = ({ setLoginType }: { setLoginType: (type: 'google') => void 
       src={GoogleLoginButton}  
       alt="구글 로그인"
       width={320}             
-      height={52}              
+      height={52}
+      className='cursor-pointer'
     />
   );
 };
