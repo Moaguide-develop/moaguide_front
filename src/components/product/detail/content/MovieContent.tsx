@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 const MovieContent = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
-  console.log(lastSegment);
 
   const fetchData = async () => {
     const response = await axios.get<IContentMovieStats>(
@@ -25,7 +24,6 @@ const MovieContent = () => {
     data?.schedules.filter((item) =>
       item.imgLink.startsWith('https://www.kobis.or.kr/')
     ) || [];
-  console.log(movieData);
 
   return (
     <div className="flex mt-[50px]">

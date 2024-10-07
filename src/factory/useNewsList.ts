@@ -10,10 +10,9 @@ const fetchNewsList = async ({
   pageParam: number;
 }) => {
   const [, category] = queryKey;
-  const encodedCategory = encodeURIComponent(category); // 한글 데이터를 URL 인코딩
-
+  console.log('category', category);
   const { data } = await axios.get(
-    `https://api.moaguide.com/detail/news/?page=${pageParam}&size=10&keyword=${encodedCategory}`
+    `https://api.moaguide.com/detail/news/${category}?page=${pageParam}&size=10`
   );
   return data;
 };

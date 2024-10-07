@@ -38,9 +38,6 @@ const ProductRecruitmentContentList = ({
     }
   };
 
-  console.log(calculateDateDifference('2024-9-31'));
-
-  console.log(CATEGORY);
   // product_Id
 
   // const addmutation = useAddBookMark();
@@ -49,7 +46,6 @@ const ProductRecruitmentContentList = ({
 
   // const handleBookmarkClick = (productId: string, bookmark: boolean) => {
   //   // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
-  //   console.log('click');
   //   setLocalContent((prevContent) =>
   //     prevContent.map((item) =>
   //       item.productId === productId && !bookmark

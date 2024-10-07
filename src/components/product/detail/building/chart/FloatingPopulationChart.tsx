@@ -18,7 +18,6 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 const FloatingPopulationChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
-  console.log(lastSegment);
 
   const fetchData = async () => {
     const response = await axios.get(
@@ -31,7 +30,16 @@ const FloatingPopulationChart = () => {
     queryKey: ['floatingpopulation'],
     queryFn: fetchData
   });
+  const subwayWeekTotalBoardingData = data?.subwayWeek.map(
+    (item: any) => item.totalBoarding
+  );
+  const subwayWeekTotalAlightingData = data?.subwayWeek.map(
+    (item: any) => item.totalAlighting
+  );
 
+  const subwayDayTotalBoardingData = data?.subwayTime.boarding;
+
+  const subwayDayTotalAlightingData = data?.subwayTime.alighting;
   const stackedData = {
     labels: [
       '05-06',
@@ -56,18 +64,12 @@ const FloatingPopulationChart = () => {
     datasets: [
       {
         label: '승차승객',
-        data: [
-          2.1, 2.0, 2.3, 2.5, 2.8, 3.0, 3.2, 3.5, 3.8, 4.0, 4.1, 4.2, 6.7, 6.8, 6.9, 7.0,
-          7.1, 7.2
-        ],
+        data: subwayDayTotalBoardingData,
         backgroundColor: '#FF6B6B'
       },
       {
         label: '하차승객',
-        data: [
-          2.2, 2.1, 2.2, 2.6, 2.7, 2.9, 3.0, 3.1, 3.3, 3.4, 3.5, 3.7, 4.0, 4.1, 4.2, 4.3,
-          4.4, 4.5
-        ],
+        data: subwayDayTotalAlightingData,
         backgroundColor: '#A28DFF'
       }
     ]
@@ -78,12 +80,12 @@ const FloatingPopulationChart = () => {
     datasets: [
       {
         label: '승차승객',
-        data: [3.2, 3.0, 2.9, 3.1, 3.3, 3.5, 3.6],
+        data: subwayWeekTotalBoardingData,
         backgroundColor: '#FF6B6B'
       },
       {
         label: '하차승객',
-        data: [3.5, 3.4, 3.2, 3.3, 3.5, 3.6, 4.0],
+        data: subwayWeekTotalAlightingData,
         backgroundColor: '#A28DFF'
       }
     ]

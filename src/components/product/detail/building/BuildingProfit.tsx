@@ -4,16 +4,15 @@ import KakaoMap from './Map';
 import StockPriceChart from './chart/StockPriceChart';
 const BuildingProfit = ({ url }: { url: string }) => {
   const { data, isLoading } = getBuildingProductProfitDetail(url);
-  console.log(data);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
-      <div className=" text-lg font-bold mb-[20px]">위치</div>
+      <div className=" text-2xl font-bold mb-[20px]">위치</div>
       <div className="desk:flex  desk:justify-center desk2:justify-start">
         <KakaoMap />
       </div>
 
       <div className=" w-full h-[1px] my-[40px] bg-gray-200 " />
-      <div className="text-base font-bold mb-[20px]">주가</div>
+      <div className="text-2xl font-bold mb-[20px]">주가</div>
       <StockPriceChart />
       <div className=" w-full h-[1px] my-[40px] bg-gray-200" />
 
@@ -82,7 +81,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">임차인 소개</div>
-            <div className="">{data?.lease[0].tenantIntroduction}</div>
+            <div className=" flex-1">{data?.lease[0].tenantIntroduction}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
@@ -112,13 +111,13 @@ const BuildingProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">관리비</div>
-            <div className="">{data?.lease[0].administrationCost}</div>
+            <div className="">{data?.lease[0].adminCost}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
-          <div className=" flex  w-[400px]">
+          <div className=" flex  max-w-[900px]">
             <div className="text-gray-400  w-[150px]">상세 계약조건 및 비고</div>
-            <div className="">{data?.lease[0].detailedConditions}</div>
+            <div className=" flex-1">{data?.lease[0].detaile}</div>
           </div>
         </div>
       </div>
@@ -136,13 +135,13 @@ const BuildingProfit = ({ url }: { url: string }) => {
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">위치</div>
 
-            <div className="">{data?.buildingDetail.location}</div>
+            <div className="">{data?.buildingDetail.address}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">용도 지역</div>
-            <div className="">{data?.buildingDetail.mainUse}</div>
+            <div className="">{data?.buildingDetail.useArea}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
@@ -160,7 +159,9 @@ const BuildingProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">대지면적</div>
-            <div className="">{data?.buildingDetail.floorArea}</div>
+            <div className="">
+              {data?.buildingDetail.landArea}m^2 / 전체 : {data?.buildingDetail.floorArea}
+            </div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
@@ -209,7 +210,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
       </div>
 
       <div>
-        <div className="text-base font-bold  mb-[15px]  mt-[30px] ">토지 정보</div>
+        <div className="text-base font-bold  mb-[15px]  mt-[60px] ">토지 정보</div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px] ">지형높이</div>
@@ -229,7 +230,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
-          <div className=" flex  w-full max-w-[900px] desk:h-[100px] desk2:h-[100px]">
+          <div className=" flex  w-full max-w-[900px] ">
             <div className="text-gray-400  w-[150px] ">
               지역지구 등 지정여부 (국토의 계획 및 이용에 관한 법률)
             </div>
@@ -237,7 +238,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
-          <div className=" flex  w-full max-w-[900px] desk:h-[150px] desk2:h-[100px]">
+          <div className=" flex  w-full max-w-[900px] ">
             <div className="text-gray-400  w-[150px]  ">
               지역지구 등 지정여부 (기타법률)
             </div>
@@ -247,35 +248,29 @@ const BuildingProfit = ({ url }: { url: string }) => {
       </div>
 
       <div>
-        <div className="text-base font-bold  mb-[15px] mt-[30px] ">배당금 정보</div>
+        <div className="text-base font-bold  mb-[15px] mt-[30px]  ">배당금 정보</div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px] ">최근 배당금</div>
-            <div className="">null</div>
+            <div className="">{data?.divide.lastDivide}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">배당 주기</div>
-            <div className="">null</div>
-          </div>
-        </div>
-        <div className="flex flex-col  mb-[7px]">
-          <div className=" flex  w-[400px]">
-            <div className="text-gray-400  w-[150px]">배당 기준일</div>
-            <div className="">null</div>
+            <div className="">{data?.divide.divideCycle}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">배당 지급일</div>
-            <div className="">null</div>
+            <div className="">{data?.divide.paymentDay}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">배당 수익률</div>
-            <div className="">null</div>
+            <div className="">{data?.divide.divideRate}</div>
           </div>
         </div>
       </div>

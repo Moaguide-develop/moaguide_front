@@ -14,7 +14,6 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
   const params = new URLSearchParams(searchParams.toString());
   const router = useRouter();
   const sorted = searchParams.get('sort');
-  console.log(sorted);
 
   const handleClick = (key: string) => {
     params.set('sort', key);
@@ -31,8 +30,8 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
               setSort('profit');
               handleClick('lastDivide_rate desc');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sorted === 'lastDivide_rate desc' || sorted == null ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer desk2:text-sm desk:text-xs
+            ${sorted === 'lastDivide_rate desc' || sorted == null ? 'border border-normal text-normal' : 'border border-gray100 text-gray300   '}`}>
             수익률순
             <Image
               src="/images/home/news_check.svg"
@@ -47,8 +46,8 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
               setSort('inquiry');
               handleClick('views desc');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sorted === 'views desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer desk2:text-sm desk:text-xs
+            ${sorted === 'views desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300  '}`}>
             조회순
             <Image
               src="/images/home/news_check.svg"
@@ -62,15 +61,15 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
           <div
             onClick={() => {
               setSort('currentprice');
-              handleClick('priceRate desc');
+              handleClick('price desc');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sorted === 'priceRate desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
-            현재가순
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer desk2:text-sm desk:text-xs
+            ${sorted === 'price desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300  '}`}>
+            상승률순
             <Image
               src="/images/home/news_check.svg"
               alt=""
-              className={`${sorted === 'priceRate desc' ? 'block' : 'hidden'}`}
+              className={`${sorted === 'price desc' ? 'block' : 'hidden'}`}
               width={20}
               height={20}
             />
@@ -81,8 +80,8 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
               setSort('alphabetical ');
               handleClick('name');
             }}
-            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer
-            ${sorted === 'name' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300'}`}>
+            className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer  desk2:text-sm desk:text-xs
+            ${sorted === 'name' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300  '}`}>
             가나다순
             <Image
               src="/images/home/news_check.svg"

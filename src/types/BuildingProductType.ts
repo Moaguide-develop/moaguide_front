@@ -42,31 +42,17 @@ export interface IBuildingProductProfitDetail {
   product_Id: string;
   publish: {
     name: string;
-    publisher: string | null;
+    publisher: string;
     piece: number;
     last_divide: number;
     basePrice: number;
-    totalPrice: string;
+    totalPrice: number;
     subscription: string;
-    listingDate: string | null;
+    listingDate: string;
   };
   buildingDetail: {
-    productId: {
-      productId: string;
-      name: string;
-      piece: number;
-      views: number;
-      nowPiece: number;
-      category: string;
-      platformId: {
-        category: string;
-        platform: string;
-        possible: boolean;
-        platformId: number;
-        hibernateLazyInitializer: object;
-      };
-      platform: string;
-    };
+    productId: string | null;
+    address: string;
     useArea: string;
     mainUse: string;
     completionDate: string;
@@ -79,26 +65,10 @@ export interface IBuildingProductProfitDetail {
     mainStructure: string;
     parking: number;
     lift: number;
-    location: string;
   };
   landRegistry: {
-    id: number;
-    productId: {
-      productId: string;
-      name: string;
-      piece: number;
-      views: number;
-      nowPiece: number;
-      category: string;
-      platformId: {
-        category: string;
-        platform: string;
-        possible: boolean;
-        platformId: number;
-        hibernateLazyInitializer: object;
-      };
-      platform: string;
-    };
+    id: string | null;
+    productId: string | null;
     landElevation: string;
     landShape: string;
     roadInterface: string;
@@ -107,14 +77,20 @@ export interface IBuildingProductProfitDetail {
   };
   lease: {
     tenant: string;
-    tenantIntroduction: string;
+    tenantIntroduction: string | null;
     leasePeriod: string;
     leaseArea: number;
     deposit: number;
     rent: string;
-    administrationCost: string;
-    detailedConditions: string;
+    adminCost: string;
+    detaile: string;
   }[];
+  divide: {
+    lastDivide: number;
+    divideCycle: number;
+    paymentDay: string;
+    divideRate: number;
+  };
 }
 
 export interface IProductType extends IBuildingProductDetail {

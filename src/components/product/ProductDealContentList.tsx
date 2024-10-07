@@ -23,7 +23,6 @@ const ProductDealContentList = ({
 
   // const handleBookmarkClick = (productId: string, bookmark: boolean) => {
   //   // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
-  //   console.log('click');
   //   setLocalContent((prevContent) =>
   //     prevContent.map((item) =>
   //       item.product_Id === productId && !bookmark

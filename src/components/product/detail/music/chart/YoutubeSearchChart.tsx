@@ -34,7 +34,6 @@ ChartJS.register(
 const YoutubeSearchChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
-  console.log(lastSegment);
   const [filteringData, setFilteringData] = useState('100');
 
   // const handleFiltering = (e: React.ChangeEvent<HTMLInputElement>) => {

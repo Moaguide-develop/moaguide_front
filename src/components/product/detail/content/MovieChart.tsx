@@ -31,7 +31,6 @@ ChartJS.register(
 const MovieChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
-  console.log(lastSegment);
   const [filteringData, setFilteringData] = useState('screen');
 
   const handleFiltering = (e: React.ChangeEvent<HTMLInputElement>) => {

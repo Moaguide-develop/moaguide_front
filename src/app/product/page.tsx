@@ -1,12 +1,6 @@
 import Navbar from '@/components/common/Navbar';
 import Product from '@/components/product/Product';
-import {
-  IProductCommon,
-  IProductDealDetailData,
-  IProductRecruitmentData,
-  IReport,
-  ISummaryData
-} from '@/types/Diviend';
+import { IProductCommon, IReport, ISummaryData } from '@/types/Diviend';
 
 const ProductPage = async ({
   params,
@@ -19,7 +13,6 @@ const ProductPage = async ({
   const subcategory = searchParams['subcategory'] || 'trade';
   const sort = searchParams['sort'] || 'lastDivide_rate desc';
   const category = searchParams['category'] || 'all';
-  console.log(pages);
   const buildingDiviedResponse = await fetch(`https://api.moaguide.com/summary`, {
     cache: 'no-store'
   });
@@ -43,7 +36,6 @@ const ProductPage = async ({
   const buildingReportData: IReport[] = await buildingReportResponse.json();
 
   const productDetailData: IProductCommon = await productDetailResponse.json();
-  console.log(productDetailData);
   return (
     <div>
       <Navbar />

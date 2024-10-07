@@ -13,21 +13,21 @@ const BuildingProductDetail = ({
 }) => {
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
-      <div className=" text-lg font-bold mb-[20px]">상권 임대료</div>
+      <div className=" text-2xl font-bold mb-[20px]">상권 임대료</div>
       <CommercialRentChart rentType={rentType} />
 
-      <div className=" text-lg font-bold mb-[20px]">상권 공실률</div>
+      <div className=" text-2xl font-bold mb-[20px]">상권 공실률</div>
       <CommercialVacancyRateChart rentType={rentType} />
 
-      <div className=" text-lg font-bold mb-[20px]">공시지가</div>
+      <div className=" text-2xl font-bold mb-[20px]">공시지가</div>
       <OfficialPriceChart />
-      <div className=" text-lg font-bold mb-[20px]">접근성</div>
+      <div className=" text-2xl font-bold mb-[20px]">접근성</div>
       <PublicTransport />
 
-      <div className=" text-lg font-bold mb-[20px]">유동인구</div>
+      <div className=" text-2xl font-bold mb-[40px] mt-[50px]">유동인구</div>
       <FloatingPopulationChart />
 
-      <div className=" text-lg font-bold mb-[20px]">인구정보</div>
+      <div className=" text-2xl font-bold mb-[20px]">인구정보</div>
       <PopulationInformationChart />
     </div>
   );
