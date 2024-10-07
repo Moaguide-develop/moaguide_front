@@ -1,6 +1,7 @@
 import type { MainProductItem } from '@/types/homeComponentsType';
 
 import { formatCategory } from '@/utils/formatCategory';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -23,11 +24,13 @@ const MainListItem = ({
       <div className="flex gap-4 sm:gap-5">
         {/* 이미지 */}
         <div>
-          <img
-            src={'/images/home/mock.jpeg'}
-            alt=""
-            className="w-[82px] h-[82px] rounded-[8px]"
-          />
+        <Image
+          src={`https://d2qf2amuam62ps.cloudfront.net/img/${product_Id}.jpg`}
+          width={82}
+          height={82}
+          alt="Profile Image"
+          className='rounded-[8px] object-cover w-[82px] h-[82px]'
+        />
         </div>
         {/* 메인정보 */}
         <div className="flex-1 flex flex-col gap-[10px]">
