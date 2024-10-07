@@ -15,7 +15,6 @@ import { set } from 'lodash';
 const MusicDetailpage = (props: any) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
-  console.log(url);
   const { data, isLoading, isError } = getMusicProductDetail(props.params.id);
 
   const [localData, setLocalData] = useState(data);
@@ -34,7 +33,6 @@ const MusicDetailpage = (props: any) => {
     bookmark: boolean | undefined
   ) => {
     // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
-    console.log('click');
     setLocalData((prevData) =>
       prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
     );

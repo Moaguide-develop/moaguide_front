@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 const MusicSchedule = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
-  console.log(lastSegment);
 
   const fetchData = async () => {
     const response = await axios.get<IMusicSchedule>(

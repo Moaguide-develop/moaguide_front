@@ -61,7 +61,6 @@ const MusicProfit = ({ url }: { url: string }) => {
   };
 
   const { data, isLoading } = getMusicProductProfitDetail(url);
-  console.log(data);
 
   const categories = [
     { label: '방송', value: data?.musicDivide.divideDto.broadcasting ?? 0, color: 'red' },

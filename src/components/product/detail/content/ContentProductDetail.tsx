@@ -5,8 +5,6 @@ import MovieTenChart from './MovieTenChart';
 import Schedule from './Schedule';
 
 const ContentProductDetail = ({ url, genre }: { url: string; genre: string }) => {
-  console.log(url);
-
   return (
     <div>
       {genre === 'MOVIE' ? (

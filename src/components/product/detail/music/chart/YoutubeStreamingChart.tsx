@@ -35,7 +35,6 @@ ChartJS.register(
 const YoutubeStreamingChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
-  console.log(lastSegment);
   const [filteringData, setFilteringData] = useState('100');
 
   const handleFiltering = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +77,6 @@ const YoutubeStreamingChart = () => {
     labels: StreamingDay,
     data: StreamingCount
   };
-  console.log(dataSets);
   const data = {
     labels: dataSets.labels,
     datasets: [

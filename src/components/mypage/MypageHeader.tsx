@@ -1,4 +1,5 @@
 import { useMemberStore } from '@/store/user.store';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -20,18 +21,24 @@ const MypageHeader = () => {
           />
         </div>
       </div>
-      <div className="flex justify-between items-center px-[21px] py-[25px] bg-gradient2 rounded-[12px]">
-        <div className='flex items-center gap-[14px]'>
-          <img src="/images/mypage/bookmark-white.svg" alt="" />
-          <div className="text-white text-title1">관심종목</div>
-        </div>
-        <div>
-          <div className='flex items-center gap-[14px]'>
-            <div className="text-normal text-white">24개</div>
-            <img src="/images/mypage/right_white.svg" alt="" className="cursor-pointer" />
+      <Link href={'/mypage/bookmark'}>
+        <div className="flex justify-between items-center px-[21px] py-[25px] bg-gradient2 rounded-[12px]">
+          <div className="flex items-center gap-[14px]">
+            <img src="/images/mypage/bookmark-white.svg" alt="" />
+            <div className="text-white text-title1">관심종목</div>
+          </div>
+          <div>
+            <div className="flex items-center gap-[14px]">
+              <div className="text-normal text-white">24개</div>
+              <img
+                src="/images/mypage/right_white.svg"
+                alt=""
+                className="cursor-pointer"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

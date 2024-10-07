@@ -41,3 +41,4 @@ const BookmarkPage = async ({
 };
 
 export default BookmarkPage;
+

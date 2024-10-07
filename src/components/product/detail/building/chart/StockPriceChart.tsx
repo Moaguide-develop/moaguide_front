@@ -29,7 +29,6 @@ const BuildingStockPriceChart = () => {
   const chartRef = useRef(null);
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
-  console.log(lastSegment);
   const [filteringData, setFilteringData] = useState('100');
 
   const fetchData = async () => {

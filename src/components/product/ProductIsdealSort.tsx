@@ -14,7 +14,6 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
   const params = new URLSearchParams(searchParams.toString());
   const router = useRouter();
   const sorted = searchParams.get('sort');
-  console.log(sorted);
 
   const handleClick = (key: string) => {
     params.set('sort', key);
@@ -66,7 +65,7 @@ const ProductIsdealSort = ({ sort, setSort }: ProductSortProps) => {
             }}
             className={`flex items-center gap-1 px-[10px] py-2 rounded-[100px] text-body6 cursor-pointer desk2:text-sm desk:text-xs
             ${sorted === 'price desc' ? 'border border-normal text-normal' : 'border border-gray100 text-gray300  '}`}>
-            현재가순
+            상승률순
             <Image
               src="/images/home/news_check.svg"
               alt=""

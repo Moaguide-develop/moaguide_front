@@ -7,7 +7,6 @@ import { IMusicYoutube } from '@/types/MusicProductType';
 const MusicYoutube = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
-  console.log(lastSegment);
 
   const fetchData = async () => {
     const response = await axios.get<IMusicYoutube>(
@@ -17,7 +16,7 @@ const MusicYoutube = () => {
   };
 
   const { data } = useQuery({
-    queryKey: ['YoutubeMusic'],
+    queryKey: ['YoutubeMusic', lastSegment],
     queryFn: fetchData
   });
   const videoId = data?.youtubeUrl.split('v=')[1]; // YouTube URL에서 비디오 ID 추출

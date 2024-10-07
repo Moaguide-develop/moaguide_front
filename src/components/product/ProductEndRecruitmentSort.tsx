@@ -15,7 +15,6 @@ const ProductEndRecruitmentSort = () => {
   const sorted = searchParams.get('sort');
 
   const [sort, setSort] = useState('end');
-  console.log(sorted);
 
   const handleClick = (key: string) => {
     params.set('sort', key);

@@ -11,7 +11,6 @@ const ContentProfit = ({
   genre: string;
 }) => {
   const { data, isLoading } = getContentProductProfitDetail(url, genre);
-  console.log(data);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       <div>

@@ -32,7 +32,6 @@ const CowDetailpage = (props: { params: { id: string } }) => {
     bookmark: boolean | undefined
   ) => {
     // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
-    console.log('click');
     setLocalData((prevData) =>
       prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
     );

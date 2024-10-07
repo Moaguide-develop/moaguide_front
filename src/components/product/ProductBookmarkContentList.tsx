@@ -16,7 +16,6 @@ const ProductBookmarkContentList = ({
   content,
   totalPages
 }: IProductContentListProps) => {
-  console.log(content);
   return (
     <div>
       <Container>

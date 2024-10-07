@@ -12,8 +12,6 @@ const News = () => {
   // URL의 마지막 부분 추출
   const category = pathname.split('/').pop() as string;
 
-  console.log(encodeURIComponent(category));
-
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
     UseNewsList(category);
   const loadMore = useCallback(() => {

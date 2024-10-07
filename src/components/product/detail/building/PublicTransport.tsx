@@ -46,7 +46,6 @@ const stationImageMap: { [key: string]: string } = {
 const PublicTransport = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
-  console.log(lastSegment);
   const fetchData = async () => {
     const response = await axios.get(
       `https://api.moaguide.com/detail/building/sub/${lastSegment}`

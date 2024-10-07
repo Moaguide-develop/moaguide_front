@@ -1,5 +1,4 @@
 const ArtProductDetail = ({ url }: { url: string }) => {
-  console.log(url);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       <div className="w-full h-[400px] flex justify-center items-center bg-gray-200">

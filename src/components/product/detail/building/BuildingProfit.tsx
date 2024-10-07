@@ -4,7 +4,6 @@ import KakaoMap from './Map';
 import StockPriceChart from './chart/StockPriceChart';
 const BuildingProfit = ({ url }: { url: string }) => {
   const { data, isLoading } = getBuildingProductProfitDetail(url);
-  console.log(data);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       <div className=" text-2xl font-bold mb-[20px]">위치</div>

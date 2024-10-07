@@ -56,7 +56,6 @@ const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) =>
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
 
   useEffect(() => {
-    console.log('rentTpye = ', rentType);
     setBuildingType(rentType ? '오피스' : '소규모');
   }, [rentType, setBuildingType]);
 
@@ -90,7 +89,7 @@ const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) =>
 
     const labelsSet: Set<string> = new Set();
     const datasets: any[] = [];
-    let allValues: number[] = [];
+    const allValues: number[] = [];
 
     Object.keys(data.rent).forEach((region) => {
       const regionData = data.rent[region];

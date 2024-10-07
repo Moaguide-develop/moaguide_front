@@ -21,7 +21,6 @@ const Notice = () => {
   // const allPosts = data?.pages?.flat() || [];
   const allPosts = data?.pages.flatMap((page) => page.notice) || [];
   // const allPosts = data?.pages[0].notice;
-  console.log(allPosts);
 
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">

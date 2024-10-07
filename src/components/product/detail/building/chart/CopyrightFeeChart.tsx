@@ -32,7 +32,6 @@ ChartJS.register(
 const BuildingCopyRightFeeChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
-  console.log(lastSegment);
   const [filteringData, setFilteringData] = useState('100');
 
   const fetchData = async () => {

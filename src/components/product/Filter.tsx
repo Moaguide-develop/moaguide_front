@@ -5,7 +5,6 @@ const Filter = () => {
   const params = new URLSearchParams(searchParams.toString());
   const router = useRouter();
   const sort = searchParams.get('category');
-  console.log(sort);
 
   const handleClick = (key: string) => {
     params.set('category', key);

@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 const MovieStats = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
-  console.log(lastSegment);
 
   const fetchData = async () => {
     const response = await axios.get<IContentMovieStats>(
