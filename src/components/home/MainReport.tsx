@@ -53,6 +53,8 @@ const MainReport = () => {
               date={item.date}
               category={item.category}
               id={item.id}
+              imageLink={item.imageLink}
+              description={item.description}
             />
           ))
         )}

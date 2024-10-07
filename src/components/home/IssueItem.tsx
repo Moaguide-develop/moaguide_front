@@ -6,13 +6,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const IssueItem = ({ id, title, category, link, date }: MainNews) => {
+const IssueItem = ({ id, title, category, link, imgUrl, date }: MainNews) => {
   return (
     <Link href={link} target="_blank">
       <div className="flex flex-col gap-4 cursor-pointer">
         <div>
           <img
-            src={link}
+            src={imgUrl}
             alt="Image"
             className="w-[195px] h-[108px] sm:w-[336px] sm:h-[186px] rounded-[12px]"
           />

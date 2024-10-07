@@ -4,7 +4,7 @@ import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import React from 'react';
 
-const MainReportItem = ({ category, title, date, id }: MainReportType) => {
+const MainReportItem = ({ category, title, date, id, description, imageLink }: MainReportType) => {
   return (
     <div className="mt-5 pb-5 border-b border-gray100 flex items-center gap-5 cursor-pointer">
       {/* 왼쪽 */}
@@ -13,16 +13,17 @@ const MainReportItem = ({ category, title, date, id }: MainReportType) => {
           {formatCategory(category)}
         </div>
         <div className="text-mobileTitle sm:text-title2 text-gray600">{title}</div>
+        <div className='text-gray300 text-caption3 sm:text-body7 line-clamp-3 flex-grow'>{description}</div>
         <div className="text-body7 text-gray300">
           {format(parseISO(date), 'yyyy.MM.dd')}
         </div>
       </div>
       {/* 오른쪽 */}
-      <div>
+      <div className='h-full'>
         <img
-          src={'/images/home/mock.jpeg'}
-          alt=""
-          className="w-[90px] h-[75px] sm:w-[132px] sm:h-[93px] rounded-[8px]"
+          src={imageLink}
+          alt="img"
+          className="w-[90px] h-[75px] sm:w-[132px] sm:h-[93px] rounded-[8px] mb-auto"
         />
       </div>
     </div>

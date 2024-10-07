@@ -3,6 +3,8 @@ export interface MainReportType {
   title: string;
   category: string;
   date: string;
+  imageLink: string;
+  description: string;
 }
 
 export interface MainNews {
@@ -11,6 +13,7 @@ export interface MainNews {
   category: string;
   link: string;
   date: string;
+  imgUrl: string;
 }
 
 export interface MainReportNewsType {
