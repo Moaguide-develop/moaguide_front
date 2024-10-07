@@ -2,14 +2,11 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchStudyGuides = async ({ pageParam = 1 }) => {
-  const { data } = await axios.get(`https://api.moaguide.com/study/guide?page=${pageParam}&size=10`);
+  const { data } = await axios.get(`https://api.moaguide.com/study/guide`);
   return {
     content: data.roadmap, 
     nextPage: pageParam + 1,
-    totalPages: data.total,
-    totalElements: data.roadmap.length, 
-    currentPage: data.page,
-    isLast: data.page + 1 >= data.total,
+    isLast: data.roadmap.length < 10 || !data.roadmap.length || data.nextCursor === null,
   };
 };
 

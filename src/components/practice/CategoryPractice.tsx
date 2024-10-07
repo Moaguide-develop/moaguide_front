@@ -79,7 +79,7 @@ const CategoryPractice = () => {
           <Virtuoso
             style={{ height: 'calc(100vh - 50px)', margin: '0px' }}
             useWindowScroll
-            totalCount={subCategory === 'guide' ? allPosts.length : Math.ceil(allPosts.length / 2)} 
+            totalCount={allPosts.length}
             data={allPosts}
             endReached={loadMore}
             itemContent={(index, item) => {
