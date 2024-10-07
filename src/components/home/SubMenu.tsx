@@ -32,10 +32,10 @@ const SubMenu = () => {
         </div>
         <div
           onClick={() => {
-            router.push('/reportpage');
+            router.push('/practicepage');
           }}
           className="cursor-pointer flex-1 flex items-center justify-between px-[16px] md:px-[28px] py-[22px] rounded-[12px] bg-bg">
-          <div className=" text-body5 text-gray700 desk2:text-title2">리포트</div>
+          <div className=" text-body5 text-gray700 desk2:text-title2">학습하기</div>
           <div>
             <img src="/images/home/paper.svg" alt="paper" className="w-10 desk2:w-full" />
           </div>
@@ -65,13 +65,13 @@ const SubMenu = () => {
         </div>
         <div
           onClick={() => {
-            router.push('/reportpage');
+            router.push('/practicepage');
           }}
           className="max-w-[110px] w-full py-4 flex flex-col justify-center items-center gap-3  rounded-[12px] border border-gray100">
           <div>
             <img src="/images/home/paper.svg" alt="paper" className="w-10 desk2:w-full" />
           </div>
-          <div className="text-mobileTitle text-gray700">리포트</div>
+          <div className="text-mobileTitle text-gray700">학습하기</div>
         </div>
       </div>
     </div>
