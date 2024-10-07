@@ -12,7 +12,7 @@ const IssueItem = ({ id, title, category, link, date }: MainNews) => {
       <div className="flex flex-col gap-4 cursor-pointer">
         <div>
           <img
-            src={`https://d2qf2amuam62ps.cloudfront.net/img/${id}.jpg`}
+            src={link}
             alt="Image"
             className="w-[195px] h-[108px] sm:w-[336px] sm:h-[186px] rounded-[12px]"
           />

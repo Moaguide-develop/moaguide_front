@@ -3,8 +3,8 @@ import React from 'react';
 
 const HomeFooter = () => {
   return (
-    <div className="hidden mt-[158px] bg-bg mx-auto w-full sm:block">
-      <div className="flex justify-between items-center py-[52px] w-[90%] lg:w-full mx-auto desk:max-w-[1000px]">
+    <div className="mt-[158px] bg-bg mx-auto w-full sm:block">
+      <div className="flex flex-col sm:flex-row justify-start sm:justify-between sm:items-center py-[52px] w-[90%] lg:w-full mx-auto desk:max-w-[1000px]">
         {/* 왼쪽 */}
         <div className="flex flex-col gap-6">
           <div>
@@ -17,23 +17,32 @@ const HomeFooter = () => {
             <div>사업자등록번호 : 0000-00-00000</div>
             <div>통신판매업 번호 : 0000-0000-0000</div>
           </div>
-          <div className="mt-10 text-[16px] font-normal text-gray700 ">
+          <div className="hidden sm:flex mt-10 text-[16px] font-normal text-gray700 ">
             Copyright © 2024. MOA GUIDE. All Rights Reserved.
           </div>
         </div>
 
         {/* 오른쪽 */}
         <div className=''>
-          <div className="cursor-pointer flex gap-0 mx-auto justify-center px-[7px] md:px-[28px] md:gap-2 py-4 bg-white border border-gray200 rounded-[12px]">
+          <div className="w-[202.34px] my-8 sm:w-full sm:my-0 cursor-pointer flex gap-0 mr-auto sm:mx-auto justify-center px-[7px] md:px-[28px] md:gap-2 py-4 bg-white border border-gray200 rounded-[12px]">
             <div className="text-body5 text-gray400">카카오톡으로 1:1 문의</div>
             <div>
-              <img src="/images/home/footer_right.svg" alt="" />
+              <img src="/images/home/footer_right.svg" alt="" className='ml-2 sm:ml-0'/>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row gap-3 text-body1 text-gray300 mt-[165px]">
+          <div className="hidden sm:flex flex-col md:flex-row gap-3 text-body1 text-gray300 mt-0 sm:mt-[165px]">
             <div className="cursor-pointer">개인정보처리방침</div>
             <div className="hidden md:block">|</div>
             <div className="cursor-pointer">이용약관</div>
+          </div>
+          <div className="flex sm:hidden flex-row md:flex-row gap-3 text-body1 text-gray300">
+            <div className="cursor-pointer">개인정보처리방침</div>
+            <div className="hidden md:block">|</div>
+            <div className="cursor-pointer">이용약관</div>
+          </div>
+
+          <div className="flex sm:hidden mt-8 text-[16px] font-normal text-gray700 ">
+            Copyright © 2024. MOA GUIDE. All Rights Reserved.
           </div>
         </div>
       </div>

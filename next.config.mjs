@@ -9,6 +9,7 @@ const nextConfig = {
       'd2qf2amuam62ps.cloudfront.net',
       'scs-phinf.pstatic.net',
       'api.moaguide.com',
+      'entertain.naver.com',
     ],
   },
   
