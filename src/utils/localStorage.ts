@@ -1,15 +1,18 @@
+import { getCookie, removeCookie, setCookie } from "./cookie";
+
+
 export const setToken = (token: string) => {
-  console.log('Saving token:', token); 
-  localStorage.setItem('access_token', token);
+  console.log('Saving token to cookie:', token); 
+  setCookie('access_token', token, { path: '/', secure: true, sameSite: 'strict' });
 };
 
-export const getToken = (): string | null => {
-  const token = localStorage.getItem('access_token');
-  console.log('Retrieved token:', token); 
+export const getToken = (): string | undefined => {
+  const token = getCookie('access_token');
+  console.log('Retrieved token from cookie:', token); 
   return token;
 };
 
-
 export const removeToken = () => {
-    localStorage.removeItem('access_token');
-  };
+  removeCookie('access_token', { path: '/' });
+  console.log('Access token removed from cookie');
+};

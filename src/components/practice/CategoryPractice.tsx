@@ -71,7 +71,7 @@ const CategoryPractice = () => {
       <div>
         {showSkeleton || isLoading ? ( 
           subCategory === 'guide' ? (
-            Array.from({ length: 10 }).map((_, i) => <CategoryPracticeItemSkeleton key={i} />) 
+            Array.from({ length: 6 }).map((_, i) => <CategoryPracticeItemSkeleton key={i} />) 
           ) : (
             Array.from({ length: 10 }).map((_, i) => <SubLoadmapBottomArticleSkeleton key={i} />)
           )

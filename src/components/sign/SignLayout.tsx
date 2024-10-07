@@ -6,7 +6,6 @@ import { useMemberStore } from '@/store/user.store';
 import throttle from 'lodash/throttle'; 
 import NaverLogin from './NaverLogin';
 import KakaoLogin from './KakaoLogin';
-import GoogleLogin from './GoogleLogin';
 import { login } from '@/service/auth';
 
 const SignLayout = () => {
@@ -15,8 +14,15 @@ const SignLayout = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loginType, setLoginType] = useState<'local' | 'naver' | 'google' | 'kakao'>('local'); 
   const router = useRouter();
-  const { setIsLoggedIn } = useAuthStore(); 
+  const { isLoggedIn, setIsLoggedIn } = useAuthStore();  
   const { setMember } = useMemberStore(); 
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/');
+    }
+  }, [isLoggedIn, router]);
+
 
   const throttledHandleLogin = throttle(async () => {
     try {
@@ -69,7 +75,7 @@ const SignLayout = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="flex items-center mb-4 w-[320px]">
+        <div className="flex items-center w-[320px]">
           <input 
             type="checkbox" 
             id="rememberMe" 
@@ -100,9 +106,8 @@ const SignLayout = () => {
         </div>
       </section>
       <section className="mt-8 flex flex-col gap-3">
-        <KakaoLogin setLoginType={setLoginType} /> {/* Kakao login */}
-        <NaverLogin setLoginType={setLoginType} /> {/* Naver login */}
-        <GoogleLogin setLoginType={setLoginType} /> {/* Google login */}
+        <KakaoLogin setLoginType={setLoginType} /> 
+        <NaverLogin setLoginType={setLoginType} /> 
       </section>
     </div>
   );

@@ -1,4 +1,5 @@
 'use client';
+import { getCookie } from '@/utils/cookie';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -9,7 +10,7 @@ const PaymentIndex = () => {
 
   useEffect(() => {
     const checkLoginStatus = () => {
-      const token = localStorage.getItem('access_token');
+      const token = getCookie('access_token');
       setIsLoggedIn(!!token);
     };
 

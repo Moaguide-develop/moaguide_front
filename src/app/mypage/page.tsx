@@ -6,15 +6,22 @@ import MypageHeader from '@/components/mypage/MypageHeader';
 import MypageMenu from '@/components/mypage/MypageMenu';
 import { logout } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
+import { getCookie, removeCookie } from '@/utils/cookie';
 
 const Mypage = () => {
   const router = useRouter();
-  const { setIsLoggedIn } = useAuthStore();
+  const { isLoggedIn, setIsLoggedIn } = useAuthStore();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/');
+    }
+  }, [isLoggedIn, router]);
+
+  useEffect(() => {
     const checkLoginStatus = async () => {
-      const accessToken = localStorage.getItem('access_token');
+      const accessToken = getCookie('access_token');
       if (!accessToken || accessToken === 'undefined') {
         router.push('/sign');
       } else {
@@ -28,7 +35,7 @@ const Mypage = () => {
   const handleLogout = async () => {
     await logout();
     setIsLoggedIn(false);
-    localStorage.removeItem('access_token'); 
+    removeCookie('access_token');
     router.push('/sign');
   };
 

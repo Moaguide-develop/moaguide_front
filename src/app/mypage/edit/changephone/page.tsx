@@ -1,6 +1,7 @@
 'use client';
 import { sendVerificationCode, verifyCode } from '@/service/auth';
 import { useMemberStore } from '@/store/user.store';
+import { useAuthStore } from '@/store/userAuth.store';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
@@ -18,6 +19,7 @@ const ChangePhonePage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const setMember = useMemberStore((state) => state.setMember);
   const member = useMemberStore((state) => state.member);
+  const { isLoggedIn } = useAuthStore();
   
 
   const handlePhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -80,6 +82,12 @@ const ChangePhonePage = () => {
     });
     router.back();
   };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/');
+    }
+  }, [isLoggedIn, router]);
 
   useEffect(() => {
     if (phoneNumber.length === 13) {

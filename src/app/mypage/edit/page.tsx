@@ -7,6 +7,7 @@ import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import { checkNicknameAvailability } from '@/service/auth';
 import { updateNickname } from '@/service/change';
 import { getSocialInfo } from '@/utils/checkEmail';
+import { useAuthStore } from '@/store/userAuth.store';
 
 const Editpage = () => {
   const router = useRouter();
@@ -16,6 +17,8 @@ const Editpage = () => {
   const [isNameValid, setIsNameValid] = useState(false);
   const [isNameComplete, setIsNameComplete] = useState('');
   const { setModalType, setOpen, open } = useModalStore();
+
+  const { isLoggedIn } = useAuthStore();
 
   const socialInfo = getSocialInfo(member.loginType, member.memberEmail); 
 
@@ -60,6 +63,12 @@ const Editpage = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/');
+    }
+  }, [isLoggedIn, router]);
   
   useEffect(() => {
     setIsNameValid(nameValue.length >= 3);
