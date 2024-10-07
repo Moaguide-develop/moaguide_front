@@ -19,7 +19,7 @@ const MainListItem = ({
 
   return (
     <div
-      onClick={() => router.push(`/product/detail/${product_Id}`)}
+      onClick={() => router.push(`/product/detail/${category}/${product_Id}`)}
       className="mt-5 pb-5 border-b border-gray100 cursor-pointer">
       <div className="flex gap-4 sm:gap-5">
         {/* 이미지 */}
