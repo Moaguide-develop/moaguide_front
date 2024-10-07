@@ -10,8 +10,14 @@ import { getCookie, removeCookie } from '@/utils/cookie';
 
 const Mypage = () => {
   const router = useRouter();
-  const { setIsLoggedIn } = useAuthStore();
+  const { isLoggedIn, setIsLoggedIn } = useAuthStore();
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/');
+    }
+  }, [isLoggedIn, router]);
 
   useEffect(() => {
     const checkLoginStatus = async () => {

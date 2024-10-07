@@ -8,6 +8,7 @@ import Step4 from '@/components/signup/Step4';
 import { finalSignup } from '@/service/auth';
 import { useRouter } from 'next/navigation';
 import { getCookie, setCookie } from '@/utils/cookie';
+import { useAuthStore } from '@/store/userAuth.store';
 
 const SignupPage: React.FC = () => {
   const [isSocialLogin, setIsSocialLogin] = useState(false);
@@ -27,6 +28,14 @@ const SignupPage: React.FC = () => {
   });
 
   const router = useRouter();
+
+  const { isLoggedIn } = useAuthStore();  
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/');
+    }
+  }, [isLoggedIn, router]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
@@ -69,7 +78,7 @@ const SignupPage: React.FC = () => {
       console.log('최종 제출 데이터:', formData);
 
       const accessToken = getCookie('access_token');
-      
+
       if (!accessToken) {
         throw new Error('Access token이 없습니다.');
       }

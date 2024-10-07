@@ -1,13 +1,23 @@
 'use client';
+
 import CertifyPassword from '@/components/mypage/CertifyPassword';
 import NewPassword from '@/components/mypage/NewPassword';
 import PasswordChangeSuccess from '@/components/mypage/PasswordChangeSuccess';
+import { useAuthStore } from '@/store/userAuth.store';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ChangePasswordPage = () => {
   const router = useRouter();
   const [step, setStep] = useState(0);
+  const { isLoggedIn } = useAuthStore();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push('/');
+    }
+  }, [isLoggedIn, router]);
+
   return (
     <div>
       <div className="w-[90%] mt-5 w-full mx-auto max-w-[340px] sm:max-w-[640px] sm:mt-10 sm:px-0">

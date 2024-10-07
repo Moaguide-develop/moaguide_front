@@ -15,8 +15,15 @@ const SignLayout = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [loginType, setLoginType] = useState<'local' | 'naver' | 'google' | 'kakao'>('local'); 
   const router = useRouter();
-  const { setIsLoggedIn } = useAuthStore(); 
+  const { isLoggedIn, setIsLoggedIn } = useAuthStore();  
   const { setMember } = useMemberStore(); 
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/');
+    }
+  }, [isLoggedIn, router]);
+
 
   const throttledHandleLogin = throttle(async () => {
     try {
@@ -69,7 +76,7 @@ const SignLayout = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="flex items-center mb-4 w-[320px]">
+        <div className="flex items-center w-[320px]">
           <input 
             type="checkbox" 
             id="rememberMe" 
