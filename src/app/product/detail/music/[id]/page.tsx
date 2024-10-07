@@ -15,7 +15,6 @@ import { set } from 'lodash';
 const MusicDetailpage = (props: any) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
-  console.log(url);
   const { data, isLoading, isError } = getMusicProductDetail(props.params.id);
 
   const [localData, setLocalData] = useState(data);
@@ -34,7 +33,6 @@ const MusicDetailpage = (props: any) => {
     bookmark: boolean | undefined
   ) => {
     // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
-    console.log('click');
     setLocalData((prevData) =>
       prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
     );
@@ -46,7 +44,7 @@ const MusicDetailpage = (props: any) => {
     }
   };
   return (
-    <div>
+    <div className="overflow-x-hidden desk:mx-3">
       <Container>
         <div className="flex justify-between md:flex-row desk:flex-col ">
           <div className="flex desk2:justify-start desk:justify-center desk:mb-[40px] ">
@@ -102,7 +100,7 @@ const MusicDetailpage = (props: any) => {
           </div>
 
           <div className="desk2:hidden  desk:flex  flex-col">
-            <div className="flex flex-col desk2:ml-[28px] desk:ml-[15px] ">
+            <div className="flex flex-col desk2:ml-[28px] desk:ml-[5px] ">
               <div className="flex">
                 <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center mb-[13px] ">
                   {CATEGORY[data?.category || '']}
@@ -148,7 +146,7 @@ const MusicDetailpage = (props: any) => {
 
           <div className="desk2:hidden  desk:flex  justify-center mt-[20px] cursor-pointer ">
             <Link href={data?.link || '#'}>
-              <div className=" w-[380px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
+              <div className=" desk:w-[300px] desk2:w-[380px] h-[49px] flex justify-center items-center border-2 border-gray-200 rounded-xl">
                 <div>해당 플랫폼으로 이동</div>
                 <Image
                   src="/images/detail/CaretRight.svg"

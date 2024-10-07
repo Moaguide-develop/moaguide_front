@@ -43,7 +43,6 @@ const Product = ({
   const summaryData = summary;
   const reportData = report;
   const contentData = content;
-  console.log(reportData);
   const [classification, setClassification] = useState('isdeal');
   const [sort, setSort] = useState('profit');
   const searchParams = useSearchParams();
@@ -77,13 +76,13 @@ const Product = ({
 
       <div className=" mt-[40px] mb-[40px] w-atuo h-[0px] border border-[#eceef2]" />
 
-      <Container>
+      {/* <Container>
         <div className="text-black text-lg font-bold mb-[26px] ml-[20px]">
           관련 리포트
         </div>
 
-        {/* <Report report={reportData} /> */}
-      </Container>
+        <Report report={reportData} />
+      </Container> */}
 
       <div className=" mt-[40px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
       <Container>
@@ -101,7 +100,6 @@ const Product = ({
         ) : (
           <ProductIsdealSort sort={sort} setSort={setSort} />
         )}
-        {/* <ProductIsdealSort sort={sort} setSort={setSort} /> */}
       </Container>
       <div className=" mt-[10px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
 

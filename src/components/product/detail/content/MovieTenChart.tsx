@@ -31,7 +31,6 @@ ChartJS.register(
 const MovieTenChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
-  console.log(lastSegment);
   const [filteringData, setFilteringData] = useState('tenscreen');
 
   const handleFiltering = (e: React.ChangeEvent<HTMLInputElement>) => {

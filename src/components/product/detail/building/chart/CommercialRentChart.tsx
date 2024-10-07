@@ -51,11 +51,11 @@ const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) =>
   const [startYear, setStartYear] = useState<number>(2022);
   const [endYear, setEndYear] = useState<number>(2024);
   const [chartData, setChartData] = useState<any>(null);
+  const [chartOptions, setChartOptions] = useState<any>({});
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
 
   useEffect(() => {
-    console.log('rentTpye = ', rentType);
     setBuildingType(rentType ? '오피스' : '소규모');
   }, [rentType, setBuildingType]);
 
@@ -89,12 +89,14 @@ const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) =>
 
     const labelsSet: Set<string> = new Set();
     const datasets: any[] = [];
+    const allValues: number[] = [];
 
     Object.keys(data.rent).forEach((region) => {
       const regionData = data.rent[region];
       const values = regionData.map((item) => {
         const label = `${item.year} Q${item.quarter}`;
         labelsSet.add(label);
+        allValues.push(item.value);
         return item.value;
       });
       const color = getRandomColor();
@@ -113,45 +115,49 @@ const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) =>
     });
 
     const labels = Array.from(labelsSet).sort();
+    const minValue = Math.min(...allValues);
+    const maxValue = Math.max(...allValues);
 
     setChartData({ labels, datasets });
-  };
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true
-      },
-      tooltip: {
-        enabled: true,
-        intersect: false
-      }
-    },
-    scales: {
-      x: {
-        display: true,
-        grid: {
-          display: false
+    setChartOptions({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true
+        },
+        tooltip: {
+          enabled: true,
+          intersect: false
         }
       },
-      y: {
-        display: true,
-        beginAtZero: true,
-        grid: {
-          display: false
+      scales: {
+        x: {
+          display: true,
+          grid: {
+            display: false
+          }
+        },
+        y: {
+          display: true,
+          beginAtZero: true,
+          min: minValue / 2,
+          max: maxValue * 1.5,
+          grid: {
+            display: false
+          }
+        }
+      },
+      elements: {
+        line: {
+          tension: 0
+        },
+        point: {
+          pointStyle: 'circle'
         }
       }
-    },
-    elements: {
-      line: {
-        tension: 0
-      },
-      point: {
-        pointStyle: 'circle'
-      }
-    }
+    });
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -204,7 +210,7 @@ const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) =>
       <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
         <div className="w-full max-w-4xl h-[400px]">
           {chartData ? (
-            <Line data={chartData} options={options} />
+            <Line data={chartData} options={chartOptions} />
           ) : (
             <div>Loading chart...</div>
           )}

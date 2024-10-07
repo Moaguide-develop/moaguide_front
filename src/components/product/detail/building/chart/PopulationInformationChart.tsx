@@ -27,7 +27,6 @@ ChartJS.register(
 const PopulationInformationChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
-  console.log(lastSegment);
 
   const fetchData = async () => {
     const response = await axios.get(
@@ -40,7 +39,6 @@ const PopulationInformationChart = () => {
     queryKey: ['populationinformation', lastSegment],
     queryFn: fetchData
   });
-  console.log(data?.populations);
   const populationData =
     data?.populations?.map((population: { total: number }) => population.total) || [];
   const Chartdata = {

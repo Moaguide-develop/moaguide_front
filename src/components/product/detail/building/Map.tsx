@@ -12,7 +12,6 @@ declare global {
 const KakaoMap = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
-  console.log(lastSegment);
   const fetchBuildingData = async () => {
     const response = await axios.get(
       `https://api.moaguide.com/detail/building/area/${lastSegment}`
@@ -25,7 +24,6 @@ const KakaoMap = () => {
     queryKey: ['buildingData'],
     queryFn: fetchBuildingData
   });
-  console.log(data);
   useEffect(() => {
     if (window.kakao && data) {
       window.kakao.maps.load(() => {

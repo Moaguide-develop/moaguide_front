@@ -3,7 +3,6 @@ import { getArtProductProfitDetail } from '@/factory/ProductProfitDetail/ArtProd
 
 const ArtProfit = ({ url }: { url: string }) => {
   const { data, isLoading } = getArtProductProfitDetail(url);
-  console.log(data);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       <div>

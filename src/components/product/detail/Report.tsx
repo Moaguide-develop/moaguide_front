@@ -22,7 +22,6 @@ const Report = () => {
   const allPosts = data?.pages.flatMap((page) => page.report) || [];
 
   //여기 계쏙 콘솔 찍히는 이유 알아오기
-  console.log(allPosts);
   const MOCK = {
     report: [
       {

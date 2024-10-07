@@ -3,7 +3,6 @@ import { getCowProductProfitDetail } from '@/factory/ProductProfitDetail/CowProd
 
 const CowProfit = ({ url }: { url: string }) => {
   const { data, isLoading } = getCowProductProfitDetail(url);
-  console.log(data);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       <div>

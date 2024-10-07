@@ -57,7 +57,7 @@ const ProductMobilePagenation = ({ totalPages }: PaginationProps) => {
   };
 
   return (
-    <div className="flex justify-center items-center space-x-2">
+    <div className="flex justify-center items-center space-x-2 mt-10 mb-5">
       <button
         onClick={handlePrevRange}
         disabled={currentRange === 0}
