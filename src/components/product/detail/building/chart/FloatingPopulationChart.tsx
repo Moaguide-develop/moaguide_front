@@ -102,6 +102,9 @@ const FloatingPopulationChart = () => {
       tooltip: {
         enabled: true,
         intersect: false
+      },
+      datalabels: {
+        display: false // 데이터 레이블 숨기기
       }
     },
     scales: {
@@ -132,6 +135,9 @@ const FloatingPopulationChart = () => {
       tooltip: {
         enabled: true,
         intersect: false
+      },
+      datalabels: {
+        display: false // 데이터 레이블 숨기기
       }
     },
     scales: {
