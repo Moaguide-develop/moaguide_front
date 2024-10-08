@@ -77,8 +77,9 @@ const BuildingCopyRightFeeChart = () => {
 
   const CopyRightFeeDivideRateCount =
     (CopyRightFeeData?.divide &&
-      CopyRightFeeData?.divide.map((item) => Number(item.divide))) ||
+      CopyRightFeeData?.divide.map((item) => Number(item.divide_rate))) ||
     [];
+
   const sortedCopyRightFeeDivideRateCount = [...CopyRightFeeDivideRateCount].sort(
     (a, b) => b - a
   );

@@ -134,8 +134,8 @@ const MovieChart = () => {
   };
 
   return (
-    <div>
-      <section>
+    <div className="mt-[60px]">
+      <section className="mb-[15px]">
         <input
           type="radio"
           id="screen"

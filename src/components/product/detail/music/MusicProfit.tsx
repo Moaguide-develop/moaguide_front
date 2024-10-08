@@ -46,7 +46,7 @@ const MusicProfit = ({ url }: { url: string }) => {
             />
           ))}
         </div>
-        <div className="flex justify-between text-xs mt-1">
+        <div className="flex justify-between text-xs mt-1  desk2:flex-row desk:flex-col">
           {segments.map((segment, index) => (
             <span
               key={index}
@@ -189,7 +189,7 @@ const MusicProfit = ({ url }: { url: string }) => {
               <div className="text-gray-400  w-[150px]">저작권료 상세정보</div>
             </div>
             <div className="flex-1">
-              <div className="max-w-[250px] ">
+              <div className="max-w-[250px]  ">
                 <CategoryGauge categories={categories} />
               </div>
             </div>

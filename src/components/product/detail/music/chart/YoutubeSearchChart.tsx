@@ -145,7 +145,7 @@ const YoutubeSearchChart = () => {
 
   return (
     <div>
-      <div className="mb-4  flex justify-end">
+      <div className="mb-4  flex justify-start">
         <button
           className={`w-[55px] mr-2 p-2  rounded-lg ${filteringData === '3' ? 'bg-purple-500 text-white' : 'bg-gray-300  '}`}
           onClick={() => setFilteringData('3')}>

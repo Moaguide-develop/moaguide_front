@@ -114,12 +114,12 @@ const ProductRecruitmentContentList = ({
                       <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100 ">
                         {CATEGORY[item.category]}
                       </div>
-                      <div className="max-w-[100px] mr-[16px]  text-gray-400 ">
+                      <div className="max-w-[100px] mr-[16px]  text-gray-400  whitespace-nowrap">
                         {item.platform}
                       </div>
                     </div>
 
-                    <div className="max-w-[220px] mr-[16px] text-lg font-bold mb-[5px] ">
+                    <div className="max-w-[220px] mr-[16px] text-lg font-bold mb-[5px] line-clamp-2 ">
                       {item.name}
                     </div>
 
@@ -146,7 +146,7 @@ const ProductRecruitmentContentList = ({
                     {item.totalprice.toLocaleString()}원
                   </div>
 
-                  <div className="w-[61px] mr-[29px] text-red-500 bg-red-100  rounded-lg flex justify-center items-center desk: ml-auto ">
+                  <div className="w-[61px] desk2:mr-[29px] desk:mr-[0px]  text-red-500 bg-red-100  rounded-lg flex justify-center items-center desk: ml-auto ">
                     {sorted === 'ready'
                       ? calculateDateDifference(item.day)
                       : item.recruitmentRate + '%'}

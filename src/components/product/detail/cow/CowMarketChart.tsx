@@ -173,7 +173,7 @@ const CowMarketChart = () => {
           한우 거래정육량
         </label>
       </section>
-      <div className=" flex justify-end">
+      <div className=" flex justify-end my-[15px]">
         <button
           className={`w-[55px] mr-2 p-2  rounded-lg ${MarketDateData === '1' ? 'bg-purple-500 text-white' : 'bg-gray-300  '}`}
           onClick={() => setDateData('1')}>
