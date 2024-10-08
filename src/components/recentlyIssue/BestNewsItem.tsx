@@ -18,7 +18,7 @@ const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
           <img
             src={item.imgUrl}
             alt="img"
-            className="w-[358px] h-[176px] sm:w-[336px] sm:h-[186px] rounded-[12px]"
+            className="w-full h-[50%] sm:w-[358px] h-[176px] sm:w-[336px] sm:h-[186px] rounded-[12px]"
           />
         </div>
         <img
@@ -26,7 +26,7 @@ const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
           alt=""
           className="absolute mt-1 ml-1"
         />
-        <div className="sm:text-title2 text-title1 text-gray600 max-w-[313px] w-full">
+        <div className="sm:text-title2 text-title1 text-gray600 w-full">
           {item.title}
         </div>
         <div className="flex items-center justify-between ">
