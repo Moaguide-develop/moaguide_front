@@ -14,7 +14,7 @@ const ContentProfit = ({
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       <div>
-        <div className="text-base font-bold  mb-[15px] ">발행 정보</div>
+        <div className="text-2xl font-bold  mb-[15px] mt-[20px] ">발행 정보</div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px] ">작품명</div>
@@ -86,7 +86,7 @@ const ContentProfit = ({
 
       {invest ? (
         <div>
-          <div className="text-base font-bold  mb-[15px] ">투자정보</div>
+          <div className="text-2xl font-bold  mb-[15px] mt-[20px] ">투자정보</div>
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px] ">총예산규모</div>
@@ -116,7 +116,7 @@ const ContentProfit = ({
 
       {genre === 'MOVIE' ? (
         <div>
-          <div className="text-base font-bold  mb-[15px] ">영화정보</div>
+          <div className="text-2xl font-bold  mb-[15px] mt-[20px] ">영화정보</div>
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400   w-[150px] ">영화 소개</div>
@@ -179,7 +179,7 @@ const ContentProfit = ({
         </div>
       ) : genre === 'CULTURE' ? (
         <div>
-          <div className="text-base font-bold  mb-[15px] ">공연정보</div>
+          <div className="text-2xl font-bold  mb-[15px] mt-[20px] ">공연정보</div>
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px] ">공연 장소</div>
@@ -220,7 +220,7 @@ const ContentProfit = ({
         </div>
       ) : genre === 'EXHIBITION' ? (
         <div>
-          <div className="text-base font-bold  mb-[15px] ">전시 정보</div>
+          <div className="text-2xl font-bold  mb-[15px] mt-[20px] ">전시 정보</div>
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px] ">전시 장소</div>
@@ -236,7 +236,7 @@ const ContentProfit = ({
         </div>
       ) : (
         <div>
-          <div className="text-base font-bold  mb-[15px] ">드라마 정보</div>
+          <div className="text-2xl font-bold  mb-[15px] mt-[20px] ">드라마 정보</div>
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px] ">감독</div>

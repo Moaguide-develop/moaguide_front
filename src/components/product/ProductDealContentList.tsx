@@ -85,12 +85,12 @@ const ProductDealContentList = ({
                       <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100 ">
                         {CATEGORY[item.category]}
                       </div>
-                      <div className="max-w-[80px] mr-[16px]  text-gray-400 ">
+                      <div className="max-w-[80px] mr-[16px]  text-gray-400  whitespace-nowrap  ">
                         {item.platform}
                       </div>
                     </div>
 
-                    <div className="maw-[170px] mr-[16px] text-lg font-bold mb-[5px] ">
+                    <div className="maw-[170px] mr-[16px] text-lg font-bold mb-[5px] line-clamp-2 ">
                       {item.name}
                     </div>
 
@@ -142,7 +142,7 @@ const ProductDealContentList = ({
                     {item.totalPrice.toLocaleString()}원
                   </div>
                   <div
-                    className={`w-[61px] mr-[29px] rounded-lg flex justify-center items-center desk:ml-auto px-2 ${
+                    className={`w-[61px] desk2:mr-[29px] desk:mr-[0px]  rounded-lg flex justify-center items-center desk:ml-auto px-2 ${
                       item.lastDivide_rate > 0
                         ? 'text-red-500 bg-red-100'
                         : item.lastDivide_rate < 0

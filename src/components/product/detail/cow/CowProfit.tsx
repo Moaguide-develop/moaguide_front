@@ -6,7 +6,7 @@ const CowProfit = ({ url }: { url: string }) => {
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       <div>
-        <div className="text-base font-bold  mb-[15px] ">발행 정보</div>
+        <div className="text-2xl font-bold  mb-[15px] ">발행 정보</div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px] ">상품명</div>
@@ -85,7 +85,7 @@ const CowProfit = ({ url }: { url: string }) => {
       <div className=" w-full h-[1px] my-[40px] bg-gray-200" />
 
       <div>
-        <div className="text-base font-bold  mb-[15px] ">농가정보</div>
+        <div className="text-2xl font-bold  mb-[15px] ">농가정보</div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px] ">인증번호</div>
