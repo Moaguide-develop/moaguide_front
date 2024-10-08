@@ -135,7 +135,7 @@ const MovieTenChart = () => {
 
   return (
     <div>
-      <section>
+      <section className="mb-[15px]">
         <input
           type="radio"
           id="tenscreen"
