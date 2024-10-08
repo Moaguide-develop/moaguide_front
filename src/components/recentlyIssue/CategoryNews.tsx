@@ -24,7 +24,7 @@ const CategoryNews = () => {
   const allPosts = data || [];
 
   return (
-    <div className="mt-4 sm:mt-5">
+    <div className="mt-4 mb-[50px] sm:mt-5">
       <div className="mt-5 sm:mt-8 flex justify-between sm:justify-start items-center gap-5 border-b border-gray100 text-body5 sm:text-title2 overflow-x-auto whitespace-nowrap">
         <div
           onClick={() => {
