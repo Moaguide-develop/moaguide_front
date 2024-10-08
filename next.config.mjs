@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   experimental: { instrumentationHook: true },
   reactStrictMode: true,
 
@@ -9,14 +10,14 @@ const nextConfig = {
       'd2qf2amuam62ps.cloudfront.net',
       'scs-phinf.pstatic.net',
       'api.moaguide.com',
-      'entertain.naver.com',
-    ],
+      'entertain.naver.com'
+    ]
   },
-  
+
   swcMinify: true,
-  
+
   compiler: {
-    styledComponents: true,
+    styledComponents: true
   },
 
   webpack: (config, { isServer }) => {
@@ -30,7 +31,7 @@ const nextConfig = {
       else config.resolve.alias['msw/node'] = false;
     }
     return config;
-  },
+  }
 };
 
 export default nextConfig;
