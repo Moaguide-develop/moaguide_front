@@ -142,7 +142,7 @@ const YoutubeViewChart = () => {
   return (
     <div>
       <div className="text-base text-gray-500 mb-[10px]">매월 1일 누적 조회수 차트</div>
-      <section className=" mb-[30px]">
+      <section className=" mb-[30px] h-[70px] flex  items-center desk:overflow-x-scroll desk2:overflow-x-visible scrollbar-hide  ">
         <input
           type="radio"
           id="1"
@@ -152,7 +152,7 @@ const YoutubeViewChart = () => {
         />
         <label
           htmlFor="1"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
+          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg whitespace-nowrap ${
             filteringData === '1w' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
           1주일
@@ -166,7 +166,7 @@ const YoutubeViewChart = () => {
         />
         <label
           htmlFor="6"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
+          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg whitespace-nowrap ${
             filteringData === '6' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
           6개월
@@ -180,7 +180,7 @@ const YoutubeViewChart = () => {
         />
         <label
           htmlFor="12"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
+          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg whitespace-nowrap ${
             filteringData === '12' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
           1년
@@ -194,7 +194,7 @@ const YoutubeViewChart = () => {
         />
         <label
           htmlFor="36"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
+          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg whitespace-nowrap ${
             filteringData === '36' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
           3년
@@ -208,7 +208,7 @@ const YoutubeViewChart = () => {
         />
         <label
           htmlFor="100"
-          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg ${
+          className={`cursor-pointer  mr-[10px] px-4 py-2 border rounded-lg whitespace-nowrap ${
             filteringData === '100'
               ? 'bg-purple-500 text-white'
               : 'bg-white text-gray-700'

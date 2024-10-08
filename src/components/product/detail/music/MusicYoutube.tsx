@@ -31,8 +31,8 @@ const MusicYoutube = () => {
 
   return (
     <div className=" flex desk:flex-col   md:flex-row ">
-      <div className="max-w-[400px]  max-h-[200px]  mr-[30px] ">
-        <div className=" flex  ">
+      <div className="max-w-[400px]  max-h-[200px]  mr-[30px]  ">
+        <div className=" flex  md:w-[400px] md:h-[300px]   desk:w-[400px] desk:h-[200px] ">
           {/* 클릭 가능한 YouTube 썸네일 */}
           <a href={data?.youtubeUrl} target="_blank" rel="noopener noreferrer">
             <img
@@ -43,7 +43,7 @@ const MusicYoutube = () => {
           </a>
         </div>
       </div>
-      <div className="mt-[40px]">
+      <div className="mt-[40px] ">
         <div className="text-2xl font-bold  mb-[20px]">대표곡 정보</div>
 
         <div className="text-2xl ">{data?.youtubeTitle}</div>
