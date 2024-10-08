@@ -63,18 +63,18 @@ const Product = ({
         </Container>
       </div>
       <Container>
-        <div className="max-w-[1000px] h-[59px] p-5 bg-white flex-col justify-center items-center gap-1 inline-flex">
+        <div className="max-w-[1000px] h-[59px] p-1 bg-white flex-col justify-center items-center gap-1 inline-flex">
           <div className="max-w-80 justify-start items-center gap-5 inline-flex">
             <div className="grow shrink basis-0">
               <span className="text-black text-lg font-bold">최근 주목 받는 상품</span>
-              <span className="text-[#713ce2] text-lg font-bold">TOP 3</span>
+              <span className="text-[#713ce2] text-lg font-bold ml-1">TOP 3</span>
             </div>
           </div>
         </div>
         <TopProduct summary={summaryData} />
       </Container>
 
-      <div className=" mt-[40px] mb-[40px] w-atuo h-[0px] border border-[#eceef2]" />
+      {/* <div className=" mt-[40px] mb-[40px] w-atuo h-[0px] border border-[#eceef2]" /> */}
 
       {/* <Container>
         <div className="text-black text-lg font-bold mb-[26px] ml-[20px]">
