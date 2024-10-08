@@ -67,6 +67,7 @@ const ProductDealContentList = ({
                       width={82}
                       height={82}
                       alt="image"
+                      className="object-cover w-[82px] h-[82px] rounded-[8px] "
                     />
                   </div>
                   <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100   desk:hidden  md:flex ">

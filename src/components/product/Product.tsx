@@ -84,7 +84,7 @@ const Product = ({
         <Report report={reportData} />
       </Container> */}
 
-      <div className=" mt-[40px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
+      <div className=" mt-[40px] mb-[10px] w-atuo h-[1px] border border-[#eceef2]" />
       <Container>
         <ProductClassification
           classification={classification}
