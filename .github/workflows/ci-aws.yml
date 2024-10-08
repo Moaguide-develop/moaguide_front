@@ -3,7 +3,7 @@ name: Frontend CI
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build_and_push:
@@ -32,5 +32,5 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t moaguide/frontend:latest .
-          docker push moaguide/frontend:latest
+          docker build -t moaguide/moaguide:front_last .
+          docker push moaguide/moaguide:front_last
