@@ -16,9 +16,9 @@ const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
       <div className="flex flex-col  gap-4 cursor-pointer mt-5 sm:mt-0">
         <div className="relative">
           <img
-            src={'/images/home/mock.jpeg'}
-            alt=""
-            className="w-[358px] h-[176px] sm:w-[336px] sm:h-[186px] rounded-[12px]"
+            src={item.imgUrl}
+            alt="img"
+            className="w-full h-[50%] sm:w-[358px] h-[176px] sm:w-[336px] sm:h-[186px] rounded-[12px]"
           />
         </div>
         <img
@@ -26,7 +26,7 @@ const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
           alt=""
           className="absolute mt-1 ml-1"
         />
-        <div className="sm:text-title2 text-title1 text-gray600 max-w-[313px] w-full">
+        <div className="sm:text-title2 text-title1 text-gray600 w-full">
           {item.title}
         </div>
         <div className="flex items-center justify-between ">

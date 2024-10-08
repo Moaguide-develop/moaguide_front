@@ -13,8 +13,10 @@ import { Pagination, Autoplay } from 'swiper/modules';
 const BestNews = () => {
   const { data, isLoading } = getRecentlyIssues();
 
+  console.log('최신뉴스', data);
+
   return (
-    <div className="pt-5 px-5 sm:px-0 sm:pt-[28px] pb-[28px] max-w-[1000px] w-full mx-auto">
+    <div className="pt-5 sm:pt-[28px] pb-[28px] max-w-[1000px] w-[90%] lg:w-full mx-auto">
       <div className="text-heading4">👀 오늘 가장 많이 본 뉴스</div>
       {/* 데스크톱 */}
       <div className="hidden sm:grid mt-[28px] grid-cols-3 gap-5 gird">
