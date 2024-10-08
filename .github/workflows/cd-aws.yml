@@ -1,8 +1,8 @@
-name: Frontend CD
+name: AWS CD
 
 on:
   workflow_run:
-    workflows: ['Frontend CI']
+    workflows: ['AWS CI']
     types:
       - completed
 
