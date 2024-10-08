@@ -16,8 +16,8 @@ const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
       <div className="flex flex-col  gap-4 cursor-pointer mt-5 sm:mt-0">
         <div className="relative">
           <img
-            src={'/images/home/mock.jpeg'}
-            alt=""
+            src={item.imgUrl}
+            alt="img"
             className="w-[358px] h-[176px] sm:w-[336px] sm:h-[186px] rounded-[12px]"
           />
         </div>

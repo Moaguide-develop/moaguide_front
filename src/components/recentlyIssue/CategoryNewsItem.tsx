@@ -4,14 +4,14 @@ import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 import React from 'react';
 
-const CategoryNewsItem = ({ id, title, category, link, date }: IssueListItem) => {
+const CategoryNewsItem = ({ id, title, category, link, date, imgUrl }: IssueListItem) => {
   return (
     <Link href={link} target="_blank">
       <div className="mt-5 pb-5 border-b border-gray100 flex gap-5 items-center cursor-pointer">
         <div>
           <img
-            src={'/images/home/mock.jpeg'}
-            alt=""
+            src={imgUrl}
+            alt="img"
             className="w-[132px] h-[93px] rounded-[12px]"
           />
         </div>

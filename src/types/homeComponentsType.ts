@@ -33,6 +33,7 @@ export interface IssueListItem {
   category: string;
   link: string;
   date: string;
+  imgUrl: string;
 }
 
 export interface MainProductItem {
