@@ -55,7 +55,7 @@ const config: Config = {
       },
       screens: {
         desk2: '540px',
-        desk: '360px',
+        desk: '340px',
         sm: '640px',
         md: '768px',
         lg: '1024px',
