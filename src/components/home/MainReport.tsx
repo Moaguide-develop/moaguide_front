@@ -11,6 +11,10 @@ const MainReport = () => {
   const { mainReport, isLoading } = getReportIssues();
   const router = useRouter();
 
+  const handleGuideClick = () => {
+    window.open('https://contents.premium.naver.com/vestpie/pieceofmoney', '_blank');
+  };
+
   return (
     <div className="">
       {/* 타이틀 */}
@@ -25,7 +29,7 @@ const MainReport = () => {
         </div>
       </div>
       {/* 캐러셀 이미지 */}
-      <div className="hidden mt-[26px] sm:block">
+      <div className="hidden mt-[26px] sm:block" onClick={handleGuideClick}>
         <img src="/images/home/report_main.svg" alt="" />
       </div>
       <div className="mt-5 sm:hidden mx-auto rounded-[12px] h-[130px] w-full bg-cover bg-[url('/images/home/report_layout.svg')]">

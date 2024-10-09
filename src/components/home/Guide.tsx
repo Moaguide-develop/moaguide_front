@@ -2,8 +2,15 @@
 import React from 'react';
 
 const Guide = () => {
+  const handleGuideClick = () => {
+    window.open('https://contents.premium.naver.com/vestpie/pieceofmoney', '_blank');
+  };
+
   return (
-    <div className="mx-auto flex-1 rounded-[12px] h-[200px] sm:max-w-[692px] w-full sm:h-[290px] bg-[url('/images/home/guide.svg')]">
+    <div 
+      className="mx-auto flex-1 rounded-[12px] h-[200px] sm:max-w-[692px] w-full sm:h-[290px] bg-[url('/images/home/guide.svg')] cursor-pointer" 
+      onClick={handleGuideClick}
+    >
       <div className="text-white text-heading3 sm:text-heading1 mt-[76px] sm:mt-[117px] ml-5 md:ml-11">
         <div>투자 가이드로</div>
         <div>소액 투자 시작해보자!</div>
