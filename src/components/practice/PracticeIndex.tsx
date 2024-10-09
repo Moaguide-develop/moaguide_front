@@ -19,7 +19,7 @@ const PracticeIndex = () => {
   return (
     <div>
       <Container>
-        <section className="hidden sm:flex justify-center mt-6 pb-[29px]" onClick={handleGuideClick}>
+        <section className="hidden sm:flex justify-center mt-6 pb-[29px] cursor-pointer" onClick={handleGuideClick}>
           <img src="/images/report/report_main.svg" alt="" />
         </section>
         <section className="">
