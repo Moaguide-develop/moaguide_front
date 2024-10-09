@@ -10,14 +10,14 @@ interface PhoneVerificationProps {
 }
 
 const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNumberChange }) => {
-  const [phoneNumber, setPhoneNumber] = useState<string>(''); // 전화번호
-  const [phoneNumberValid, setPhoneNumberValid] = useState(false); // 전화번호 유효성 검사
-  const [isRequest, setIsRequest] = useState(false); // 전화번호 입력 후 인증요청 상태
-  const [validNumber, setValidNumber] = useState<string>(''); // 인증번호
-  const [validNumberOk, setValidNumberOk] = useState(false); // 인증번호 유효성 검사
-  const [isComplete, setIsComplete] = useState(false); // 인증번호 인증 성공
-  const [isError, setIsError] = useState(false); // 인증번호 인증 실패
-  const [validTime, setValidTime] = useState<number>(300); // 인증 시간
+  const [phoneNumber, setPhoneNumber] = useState<string>(''); 
+  const [phoneNumberValid, setPhoneNumberValid] = useState(false); 
+  const [isRequest, setIsRequest] = useState(false); 
+  const [validNumber, setValidNumber] = useState<string>('');
+  const [validNumberOk, setValidNumberOk] = useState(false); 
+  const [isComplete, setIsComplete] = useState(false); 
+  const [isError, setIsError] = useState(false); 
+  const [validTime, setValidTime] = useState<number>(300); 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
@@ -28,7 +28,7 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
       .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3')
       .replace(/(-{1,2})$/g, '');
     setPhoneNumber(regex);
-    onPhoneNumberChange(regex); // 호출 추가
+    onPhoneNumberChange(regex);
   };
 
   const handleValidNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,13 +39,12 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
   const handleRequest = async () => {
     try {
       const plainPhoneNumber = phoneNumber.replace(/-/g, '');
-      const data = await sendVerificationCode(plainPhoneNumber);
-      console.log('인증 요청 성공:', data);
-      setIsRequest(true); // 요청 상태 true
-      setValidTime(300); // 인증 요청 시 타이머 초기화
+      await sendVerificationCode(plainPhoneNumber);
+      setIsRequest(true); 
+      setValidTime(300); 
     } catch (error) {
       console.error('인증 요청 실패:', error);
-      setIsRequest(false); // 요청 실패 시 상태 초기화
+      setIsRequest(false);
     }
   };
 
@@ -53,34 +52,32 @@ const PhoneVerification: React.FC<PhoneVerificationProps> = ({ onNext, onPhoneNu
     if (isComplete) return;
     try {
       const plainPhoneNumber = phoneNumber.replace(/-/g, '');
-      const data = await sendVerificationCode(plainPhoneNumber);
-      console.log('인증 재요청 성공:', data);
+      await sendVerificationCode(plainPhoneNumber);
       setValidNumber('');
       inputRef.current?.focus();
-      setIsRequest(true); // 요청 상태 true
-      setValidTime(300); // 인증 요청 시 타이머 초기화
+      setIsRequest(true); 
+      setValidTime(300); 
     } catch (error) {
       console.error('인증 재요청 실패:', error);
     }
   };
 
   const handleCertify = async () => {
-    if (isComplete) return; // 이미 인증 완료된 상태면 return
+    if (isComplete) return; 
     try {
       const plainPhoneNumber = phoneNumber.replace(/-/g, '');
-      const data = await verifyCode(plainPhoneNumber, validNumber);
-      console.log('인증 완료:', data);
-      setIsComplete(true); // 인증 검사 통과
+      await verifyCode(plainPhoneNumber, validNumber);
+      setIsComplete(true);
       setIsError(false);
     } catch (error) {
       console.error('인증 실패:', error);
-      setIsError(true); // 인증 검사 실패
+      setIsError(true); 
     }
   };
 
   const handleComplete = () => {
     if (isComplete) {
-      onNext(); // 인증 완료 후 다음 단계로 이동
+      onNext(); 
     }
   };
 

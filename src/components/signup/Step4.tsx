@@ -93,7 +93,6 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     if (isFormValid) {
       try {
         await onNext();
-        console.log('가입성공');
         router.push('/sign');
       } catch (error) {
         console.error('가입 처리 중 오류 발생:', error);

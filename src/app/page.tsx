@@ -25,8 +25,6 @@ const HomePage = () => {
         const user = JSON.parse(parsedUser.user); 
         setCookie('access_token', accessToken);
   
-
-        console.log('유저 정보', user);
         setMember({
           memberEmail: user.email,
           memberNickName: user.nickname,

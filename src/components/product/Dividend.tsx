@@ -5,7 +5,6 @@ import SwiperCore from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-// import SwiperCore, { Navigation } from 'swiper/core';
 import Image from 'next/image';
 import { memo, useState } from 'react';
 import { IDivide } from '@/types/Diviend';
@@ -71,7 +70,6 @@ const Dividend = memo(({ dividend }: DividendProps) => {
         }}
         className="mySwiper flex justify-center">
         {dividend?.map((item) => {
-          console.log(item?.product_Id);
           return (
             <div key={item.product_Id}>
               <SwiperSlide className=" flex ">
