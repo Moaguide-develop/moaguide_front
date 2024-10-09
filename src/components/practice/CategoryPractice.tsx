@@ -77,7 +77,7 @@ const CategoryPractice = () => {
           )
         ) : (
           <Virtuoso
-            style={{ height: 'calc(100vh - 50px)', margin: '0px' }}
+            style={{ minHeight: '200px', height: '100vh', margin: '0px' }}
             useWindowScroll
             totalCount={allPosts.length}
             data={allPosts}
