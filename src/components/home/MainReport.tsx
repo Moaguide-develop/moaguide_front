@@ -29,7 +29,7 @@ const MainReport = () => {
         </div>
       </div>
       {/* 캐러셀 이미지 */}
-      <div className="hidden mt-[26px] sm:block" onClick={handleGuideClick}>
+      <div className="hidden mt-[26px] sm:block cursor-pointer" onClick={handleGuideClick}>
         <img src="/images/home/report_main.svg" alt="" />
       </div>
       <div className="mt-5 sm:hidden mx-auto rounded-[12px] h-[130px] w-full bg-cover bg-[url('/images/home/report_layout.svg')]">
