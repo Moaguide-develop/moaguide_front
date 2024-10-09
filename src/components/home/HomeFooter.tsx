@@ -2,6 +2,15 @@
 import React from 'react';
 
 const HomeFooter = () => {
+
+  const handlePrivacyClick = () => {
+    window.open('https://empty-meteor-4dd.notion.site/41a968cf570147c19920e014acce8ba5', '_blank');
+  };
+
+  const handleUseClick = () => {
+    window.open('https://empty-meteor-4dd.notion.site/af1c37c79e944d85af61aaf15e5e760e', '_blank');
+  };
+
   return (
     <div className="mt-[100px] sm:mt-[158px] bg-bg mx-auto w-full sm:block">
       <div className="flex flex-col sm:flex-row justify-start sm:justify-between sm:items-center py-[52px] w-[90%] lg:w-full mx-auto desk:max-w-[1000px]">
@@ -39,14 +48,14 @@ const HomeFooter = () => {
             </div>
           </div>
           <div className="hidden sm:flex flex-col md:flex-row gap-3 text-body1 text-gray300 mt-0 sm:mt-[165px]">
-            <div className="cursor-pointer">개인정보처리방침</div>
+            <div className="cursor-pointer" onClick={handlePrivacyClick}>개인정보처리방침</div>
             <div className="hidden md:block">|</div>
-            <div className="cursor-pointer">이용약관</div>
+            <div className="cursor-pointer" onClick={handleUseClick}>이용약관</div>
           </div>
           <div className="flex sm:hidden flex-row md:flex-row gap-3 text-body1 text-gray300">
-            <div className="cursor-pointer">개인정보처리방침</div>
+            <div className="cursor-pointer" onClick={handlePrivacyClick}>개인정보처리방침</div>
             <div className="">|</div>
-            <div className="cursor-pointer">이용약관</div>
+            <div className="cursor-pointer" onClick={handleUseClick}>이용약관</div>
           </div>
 
           <div className="flex sm:hidden mt-8 text-[16px] font-normal text-gray700 ">
