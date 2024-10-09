@@ -38,12 +38,10 @@ const ChangePhonePage = () => {
   const handleRequest = async () => {
     try {
       const data = await sendVerificationCode(phoneNumber);
-      console.log('인증 요청 성공:', data);
-      setIsRequest(true); // 요청 상태 true
-      setValidTime(300); // 인증 요청 시 타이머 초기화
+      setIsRequest(true);
+      setValidTime(300);
     } catch (error) {
-      console.error('인증 요청 실패:', error);
-      setIsRequest(false); // 요청 실패 시 상태 초기화
+      setIsRequest(false);
     }
   };
 
@@ -51,26 +49,24 @@ const ChangePhonePage = () => {
     if (isComplete) return;
     try {
       const data = await sendVerificationCode(phoneNumber);
-      console.log('인증 재요청 성공:', data);
       setValidNumber('');
       inputRef.current?.focus();
-      setIsRequest(true); // 요청 상태 true
-      setValidTime(300); // 인증 요청 시 타이머 초기화
+      setIsRequest(true); 
+      setValidTime(300); 
     } catch (error) {
       console.error('인증 재요청 실패:', error);
     }
   };
 
   const handleCertify = async () => {
-    if (isComplete) return; // 이미 인증 완료된 상태면 return
+    if (isComplete) return; 
     try {
       const data = await verifyCode(phoneNumber, validNumber);
-      console.log('인증 완료:', data);
-      setIsComplete(true); // 인증 검사 통과
+      setIsComplete(true);
       setIsError(false);
     } catch (error) {
       console.error('인증 실패:', error);
-      setIsError(true); // 인증 검사 실패
+      setIsError(true);
     }
   };
 

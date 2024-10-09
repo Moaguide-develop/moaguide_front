@@ -21,7 +21,6 @@ const RoadMapItem = ({
   roadmap,
   setRoadmap
 }: RoadMapItemType) => {
-  console.log(subRoadmapData);
 
   return (
     <div>

@@ -76,10 +76,6 @@ async function getPayment({ paymentKey, orderId, amount }: PaymentRequestProps) 
       }
     );
 
-    if (payment) {
-      console.log(payment);
-    }
-
     return {
       payment: payment
     };

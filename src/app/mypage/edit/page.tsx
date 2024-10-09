@@ -30,7 +30,6 @@ const Editpage = () => {
   const checkNameDuplicate = async () => {
     try {
       const response = await checkNicknameAvailability(nameValue);
-      console.log(response)
       if (response) {
         setIsNameComplete('yes');
       } else {
