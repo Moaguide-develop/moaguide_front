@@ -98,10 +98,10 @@ const SignLayout = () => {
           <a href="/find">이메일 / 비밀번호 찾기</a>
         </div>
       </section>
-      <section className="mt-8 flex flex-col gap-3">
+      {/* <section className="mt-8 flex flex-col gap-3">
         <KakaoLogin setLoginType={setLoginType} /> 
         <NaverLogin setLoginType={setLoginType} /> 
-      </section>
+      </section> */}
     </div>
   );
 };
