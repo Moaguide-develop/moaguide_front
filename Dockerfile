@@ -21,16 +21,6 @@ FROM node:18-alpine AS builder
 # 명령어를 실행할 디렉터리 지정
 WORKDIR /app
 
-# 빌드 시 사용할 환경 변수를 ARG로 정의
-ARG NEXT_PUBLIC_MAP_KEY
-ARG NEXT_PUBLIC_BACKEND_URL
-ARG NEXT_PUBLIC_GOOGLE_ANALYTICS
-
-# 환경 변수를 빌드 시 사용할 수 있도록 설정
-ENV NEXT_PUBLIC_MAP_KEY=${NEXT_PUBLIC_MAP_KEY}
-ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
-ENV NEXT_PUBLIC_GOOGLE_ANALYTICS=${NEXT_PUBLIC_GOOGLE_ANALYTICS}
-
 # node_modules 등의 dependancy를 복사함.
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
