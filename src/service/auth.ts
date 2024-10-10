@@ -6,7 +6,6 @@ import { axiosInstance, basicAxiosInstance, refreshAxiosInstance } from './axios
 // 토큰 사용하지 않는 API 함수들
 export const sendVerificationCode = async (phone: string): Promise<SendCodeResponse> => {
   const response = await basicAxiosInstance.post('/signup/send/code', { phone });
-  console.log(response.data);
   return response.data;
 };
 
@@ -17,9 +16,7 @@ export const verifyCode = async (phone: string, code: string): Promise<VerifyCod
     code
    });
 
-  console.log('응답 데이터:', response.data);
   const token = response.headers['Verify'] || response.headers['verify'];
-  console.log('응답 토큰', token);
   setToken(token);
 
   return response.data;
@@ -29,7 +26,6 @@ export const checkNicknameAvailability = async (nickname: string): Promise<Nickn
   try {
     const response = await basicAxiosInstance.post('/signup/verify/nickname', { nickname });
     if (response.status === 200) {
-      console.log('응답 성공:', response);  
       return response.data;
     } else {
       console.error('서버 오류 응답 상태:', response.status);
@@ -56,7 +52,6 @@ export const finalSignup = async (
         },
       }
     );
-    console.log('서버 응답 데이터:', response.data);
     return response.data;
   } catch (error) {
     console.error('서버 요청 오류:', error);
@@ -78,8 +73,6 @@ export const login = async (email: string, password: string, rememberMe: boolean
       },
     });
 
-    console.log('로그인 성공 응답 데이터:', response.data);
-
     const token = response.headers['authorization'] || response.headers['Authorization'];
     if (!token) {
       throw new Error('토큰을 찾을 수 없습니다. 헤더에서 Authorization이 존재하지 않습니다.');
@@ -87,7 +80,6 @@ export const login = async (email: string, password: string, rememberMe: boolean
 
     const accessToken = token.replace('Bearer ', '');
     setToken(accessToken);  
-    console.log('Access Token 저장 성공:', accessToken);
 
     const { setMember } = useMemberStore.getState();
     const userInfo = response.data.user;
@@ -102,8 +94,6 @@ export const login = async (email: string, password: string, rememberMe: boolean
       loginType: userInfo.loginType, 
     });
 
-    console.log('사용자 정보 저장 완료:', userInfo);
-
     return response.data;
   } catch (error) {
     console.error('로그인 오류 발생:', error);
@@ -116,7 +106,6 @@ export const logout = async () => {
     const response = await axiosInstance.post('/logout', {});
 
     if (response.status === 200) {
-      console.log(response.data.message);
       removeToken();
 
       const { clearMember } = useMemberStore.getState();
@@ -132,7 +121,6 @@ export const logout = async () => {
 export const sendEmail = async (email: string) => {
   try {
     const response = await basicAxiosInstance.post(`/user/send/mail?email=${email}`);
-    console.log('이메일 전송 성공:', response.data);
     return response.data;
   } catch (error) {
     console.error('이메일 전송 실패:', error);
@@ -146,10 +134,8 @@ export const verifyEmailCode = async (email: string, code: string) => {
       email,
       code
     });
-    console.log('인증 완료:', response.data);
 
     const token = response.headers['Verify'] || response.headers['verify'];
-    console.log('응답 토큰', token);
     setToken(token);
 
     return response.data;
@@ -198,7 +184,6 @@ export const deleteUser = async () => {
     const response = await axiosInstance.delete('/user/Withdrawal');
 
     if (response.status === 200) {
-      console.log(response.data.message);
       removeToken();
 
       const { clearMember } = useMemberStore.getState();

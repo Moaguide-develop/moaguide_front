@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const fetchReportIssues = async () => {
   const { data } = await axios.get(`https://api.moaguide.com/`);
-  console.log('최신이슈', data);
   return data;
 };
 

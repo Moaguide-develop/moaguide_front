@@ -1,12 +1,9 @@
 import type { StudyGuidesItem, SubLoadmap } from '@/types/homeComponentsType';
 import React from 'react';
-import { useRouter } from 'next/navigation'; 
 
 const CategoryPracticeItem = ({ id, title, link }: StudyGuidesItem) => {
-  const router = useRouter(); 
 
   const handleClick = () => {
-    console.log(link);
     window.open(link, '_blank');
   };
 

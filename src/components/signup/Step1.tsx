@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import PrivacyModal from './modal/PrivacyModal';
 import ServiceModal from './modal/ServiceModal';
-import AgeModal from './modal/AgeModal';
 import MarketingModal from './modal/MarketingModal';
 
 interface StepProps {
@@ -16,7 +15,6 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [checks, setChecks] = useState({
     privacy: false,
     service: false,
-    age: false,
     marketing: false,
   });
   const [activePage, setActivePage] = useState<string | null>(null);
@@ -29,7 +27,6 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     const newChecks = {
       privacy: newCheckedState,
       service: newCheckedState,
-      age: newCheckedState,
       marketing: newCheckedState,
     };
     setChecks(newChecks);
@@ -55,7 +52,8 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     setActivePage(null);
   };
 
-  const isNextEnabled = checks.privacy && checks.service && checks.age;
+  const isNextEnabled = checks.privacy && checks.service;
+  
   return (
     <div className="min-h-[calc(100dvh-100px)] flex flex-col items-center justify-between mb-[100px] sm:min-h-[100vh] sm:justify-center sm:mb-0">
       <div className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-0">
@@ -93,7 +91,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             />
             <span className="ml-2 font-medium">모두 동의합니다</span>
           </div>
-          {['privacy', 'service', 'age', 'marketing'].map((key, index) => (
+          {['privacy', 'service', 'marketing'].map((key, index) => (
             <div
               key={key}
               className={`flex items-center justify-between py-4 rounded-lg cursor-pointer`}
@@ -107,10 +105,9 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
                   height={24}
                 />
                 <span className="ml-2 font-medium">
-                  {index < 3 ? `[필수] ` : `[선택] `}
+                  {index < 2 ? `[필수] ` : `[선택] `}
                   {key === 'privacy' && '개인정보 수집 / 이용동의'}
                   {key === 'service' && '서비스 이용 동의'}
-                  {key === 'age' && '만 14세 이상입니다'}
                   {key === 'marketing' && '마케팅 메시지 수신 동의'}
                 </span>
               </div>
@@ -140,7 +137,6 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
       {activePage === 'privacy' && <PrivacyModal onClose={closePage} />}
       {activePage === 'service' && <ServiceModal onClose={closePage} />}
-      {activePage === 'age' && <AgeModal onClose={closePage} />}
       {activePage === 'marketing' && <MarketingModal onClose={closePage} />}
     </div>
   );

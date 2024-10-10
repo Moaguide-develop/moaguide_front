@@ -2,6 +2,15 @@
 import React from 'react';
 
 const HomeFooter = () => {
+
+  const handlePrivacyClick = () => {
+    window.open('https://empty-meteor-4dd.notion.site/41a968cf570147c19920e014acce8ba5', '_blank');
+  };
+
+  const handleUseClick = () => {
+    window.open('https://empty-meteor-4dd.notion.site/af1c37c79e944d85af61aaf15e5e760e', '_blank');
+  };
+
   return (
     <div className="mt-[100px] sm:mt-[158px] bg-bg mx-auto w-full sm:block">
       <div className="flex flex-col sm:flex-row justify-start sm:justify-between sm:items-center py-[52px] w-[90%] lg:w-full mx-auto desk:max-w-[1000px]">
@@ -12,10 +21,18 @@ const HomeFooter = () => {
           </div>
           <div className="text-heading4 text-gray500">(주)모아가이드</div>
           <div className="text-body2 text-gray400 flex flex-col gap-4">
-            <div>대표자 : 홍길동 | 주소 : 서울특별시 강남구 테헤란로 10길, 동성빌딩</div>
-            <div>번호 : 010-1234-1234 | 이메일 : Moaguide@gmail.com</div>
-            <div>사업자등록번호 : 0000-00-00000</div>
-            <div>통신판매업 번호 : 0000-0000-0000</div>
+            <div className='flex flex-col gap-4 sm:flex-row sm:gap-0'>
+              <div>대표자 : 노상현</div>
+              <div className='hidden sm:flex sm:px-2'> | </div>
+              <div>주소 : 경기도 수원시 영통구 영통로 498</div>
+            </div>
+            <div className='flex flex-col gap-4 sm:flex-row sm:gap-0'>
+              <div>번호 : 010-2247-6408</div>
+              <div className='hidden sm:flex sm:px-2'> | </div>
+              <div>이메일 : ssang2247@moaguide.com</div>
+            </div>
+            <div>사업자등록 번호 : 890-19-01893</div>
+            <div>통신판매업 번호 : 2024-수원영통-1533</div>
           </div>
           <div className="hidden sm:flex mt-10 text-[16px] font-normal text-gray700 ">
             Copyright © 2024. MOA GUIDE. All Rights Reserved.
@@ -31,14 +48,14 @@ const HomeFooter = () => {
             </div>
           </div>
           <div className="hidden sm:flex flex-col md:flex-row gap-3 text-body1 text-gray300 mt-0 sm:mt-[165px]">
-            <div className="cursor-pointer">개인정보처리방침</div>
+            <div className="cursor-pointer" onClick={handlePrivacyClick}>개인정보처리방침</div>
             <div className="hidden md:block">|</div>
-            <div className="cursor-pointer">이용약관</div>
+            <div className="cursor-pointer" onClick={handleUseClick}>이용약관</div>
           </div>
           <div className="flex sm:hidden flex-row md:flex-row gap-3 text-body1 text-gray300">
-            <div className="cursor-pointer">개인정보처리방침</div>
+            <div className="cursor-pointer" onClick={handlePrivacyClick}>개인정보처리방침</div>
             <div className="">|</div>
-            <div className="cursor-pointer">이용약관</div>
+            <div className="cursor-pointer" onClick={handleUseClick}>이용약관</div>
           </div>
 
           <div className="flex sm:hidden mt-8 text-[16px] font-normal text-gray700 ">

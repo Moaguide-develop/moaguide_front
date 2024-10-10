@@ -10,7 +10,6 @@ const fetchNewsList = async ({
   pageParam: number;
 }) => {
   const [, category] = queryKey;
-  console.log('category', category);
   const { data } = await axios.get(
     `https://api.moaguide.com/detail/news/${category}?page=${pageParam}&size=10`
   );

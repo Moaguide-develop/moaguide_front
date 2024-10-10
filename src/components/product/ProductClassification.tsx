@@ -16,7 +16,6 @@ const ProductClassification = ({
   const params = new URLSearchParams(searchParams.toString());
   const router = useRouter();
   const sorted = searchParams.get('subcategory');
-  console.log(sorted);
 
   const handleClick = (key: string, key2: string) => {
     params.set('subcategory', key);

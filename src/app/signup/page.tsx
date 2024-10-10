@@ -75,8 +75,6 @@ const SignupPage: React.FC = () => {
   
   const handleSubmit = async () => {
     try {
-      console.log('최종 제출 데이터:', formData);
-
       const accessToken = getCookie('access_token');
 
       if (!accessToken) {
@@ -88,9 +86,7 @@ const SignupPage: React.FC = () => {
         Verify: accessToken,
       };
 
-      const response = await finalSignup(formData, authHeaders);
-      console.log('서버 응답 데이터:', response);
-
+      await finalSignup(formData, authHeaders);
       router.push('/');
     } catch (error) {
       console.error('서버 요청 오류:', error);

@@ -38,8 +38,6 @@ export const getStudyGuides = (category: string, subCategory: string, sort: stri
 const fetchArticleList = async ({ pageParam = null }) => {
   const url = pageParam ? `https://api.moaguide.com/study/article?nextCursor=${pageParam}` : 'https://api.moaguide.com/study/article';
   
-  console.log("Fetching next page with nextCursor:", pageParam); 
-  
   const { data } = await axios.get(url);
 
   return {
@@ -57,7 +55,6 @@ export const getArticles = () => {
       queryKey,
       queryFn: fetchArticleList,  
       getNextPageParam: (lastPage) => {
-        console.log("Last page:", lastPage);
         return lastPage.isLast ? undefined : lastPage.nextPage;
       },
       initialPageParam: null, 

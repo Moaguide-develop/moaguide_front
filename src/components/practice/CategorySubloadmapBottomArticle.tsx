@@ -5,7 +5,6 @@ import Image from 'next/image';
 const CategorySubloadmapBottomArticle: React.FC<InvestmentGuideProps> = ({ id, title, description, date, imageLink, link }) => {
 
   const handleClick = () => {
-    console.log(link);
     window.open(link, '_blank');
   };
 

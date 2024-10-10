@@ -30,10 +30,8 @@ const FindPassword = () => {
   };
 
   const handleRequest = async () => {
-    console.log('요청함');
     try {
-      const data = await sendEmail(email);
-      console.log('인증 요청 성공:', data);
+      await sendEmail(email);
       setIsRequest(true); 
       setValidTime(300); 
     } catch (error) {
@@ -45,8 +43,7 @@ const FindPassword = () => {
   const handleResending = async () => {
     if (isComplete) return;
     try {
-      const data = await sendEmail(email);
-      console.log('인증 재요청 성공:', data);
+      await sendEmail(email);
       setVerificationCode('');
       inputRef.current?.focus();
       setIsRequest(true); 
@@ -59,8 +56,7 @@ const FindPassword = () => {
   const handleCertify = async () => {
     if (isComplete) return;
     try {
-      const data = await verifyEmailCode(email, verificationCode);
-      console.log('인증 완료:', data);
+      await verifyEmailCode(email, verificationCode);
       setIsComplete(true);
       setIsError(false); 
     } catch (error) {
@@ -119,7 +115,6 @@ const FindPassword = () => {
     if (passwordMatch && passwordValid) {
       try {
         await changePasswordinFind(email, password);
-        console.log('비밀번호 재설정 성공');
       } catch (error) {
         console.error('비밀번호 재설정 실패:', error);
       }
