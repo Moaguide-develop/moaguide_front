@@ -213,7 +213,7 @@ const MusicProfit = ({ url }: { url: string }) => {
       </div>
       <div className=" w-full h-[1px] my-[40px] bg-gray-200" />
       <div className="text-2xl font-bold  mb-[15px]  mt-[30px]  ">
-        지급주기별 저작권료 & 시가저작권료
+        지급주기별 저작권료 & 시가배당률(%)
       </div>
       <MusicCopyRightFeeChart />
     </div>

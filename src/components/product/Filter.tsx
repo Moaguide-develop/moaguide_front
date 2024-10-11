@@ -21,7 +21,7 @@ const Filter = () => {
     music: { name: '음악저작권', img: 'MusicalNote.svg' },
     cow: { name: '한우', img: 'CowFace.svg' },
     art: { name: '미술', img: 'FramedPicture.svg' },
-    contents: { name: '콘텐츠', img: 'ClapperBoard.svg' },
+    content: { name: '콘텐츠', img: 'ClapperBoard.svg' },
     bookmark: { name: '북마크', img: 'BookmarkSimple.svg' }
   };
 

@@ -11,6 +11,7 @@ export interface INewsItem {
   category: string;
   link: string;
   date: string;
+  imgUrl: string;
 }
 
 export interface IreportItem {

@@ -48,7 +48,7 @@ const BuildingStockPriceChart = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['BuildingStockPriceChart', filteringData],
+    queryKey: ['BuildingStockPriceChart', filteringData, lastSegment],
     queryFn: fetchData
   });
 

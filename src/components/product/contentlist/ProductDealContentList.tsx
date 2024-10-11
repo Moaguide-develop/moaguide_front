@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import Container from '../common/Container';
+import Container from '../../common/Container';
 import { IProductDealDetailData } from '@/types/Diviend';
-import ProductPagenation from './ProductPagenation';
+import ProductPagenation from '../pagenation/ProductPagenation';
 import Link from 'next/link';
-import ProductMobilePagenation from './ProductMobilePagenation';
+import ProductMobilePagenation from '../pagenation/ProductMobilePagenation';
 import { CATEGORY } from '@/static/category';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import { useState } from 'react';
@@ -67,6 +67,7 @@ const ProductDealContentList = ({
                       width={82}
                       height={82}
                       alt="image"
+                      className="object-cover w-[82px] h-[82px] rounded-[8px] "
                     />
                   </div>
                   <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100   desk:hidden  md:flex ">
@@ -155,17 +156,17 @@ const ProductDealContentList = ({
                         ? `${item.lastDivide_rate}%`
                         : `0%`}
                   </div>
+
+                  <Image
+                    src={`${item.bookmark ? '/images/product/BookmarkSimple.svg' : '/images/product/BookmarkWhite.svg'}`}
+                    width={24}
+                    height={24}
+                    alt="Bookmark"
+                    className="desk:hidden md:flex cursor-pointer ml-3"
+                    // onClick={() => handleBookmarkClick(item.product_Id, item.bookmark)}
+                  />
                 </div>
               </Link>
-
-              <Image
-                src={`${item.bookmark ? '/images/product/BookmarkSimple.svg' : '/images/product/BookmarkWhite.svg'}`}
-                width={24}
-                height={24}
-                alt="Bookmark"
-                className="desk:hidden md:flex cursor-pointer ml-3"
-                // onClick={() => handleBookmarkClick(item.product_Id, item.bookmark)}
-              />
 
               <div className="  mt-[20px] mb-[20px] w-atuo h-[0px] border border-[#eceef2]" />
             </div>

@@ -8,8 +8,8 @@ import {
   IProductEndRecruitmentData,
   IProductRecruitmentData
 } from '@/types/Diviend';
-import ProductClassification from './ProductClassification';
-import ProductBookmarkContentList from './ProductBookmarkContentList';
+import ProductClassification from './sort/ProductClassification';
+import ProductBookmarkContentList from './contentlist/ProductBookmarkContentList';
 
 interface IProductBuildingProps {
   content:

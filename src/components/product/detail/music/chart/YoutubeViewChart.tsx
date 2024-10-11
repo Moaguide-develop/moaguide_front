@@ -55,7 +55,7 @@ const YoutubeViewChart = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['YoutubeViewChart', filteringData],
+    queryKey: ['YoutubeViewChart', filteringData, lastSegment],
     queryFn: fetchData
   });
   const chartRef = useRef(null);

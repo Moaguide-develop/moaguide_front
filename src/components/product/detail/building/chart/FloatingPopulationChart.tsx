@@ -7,7 +7,8 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Plugin
 } from 'chart.js';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -27,7 +28,7 @@ const FloatingPopulationChart = () => {
   };
   // useQuery로 데이터 패칭
   const { data, error, isLoading } = useQuery({
-    queryKey: ['floatingpopulation'],
+    queryKey: ['floatingpopulation', lastSegment],
     queryFn: fetchData
   });
   const subwayWeekTotalBoardingData = data?.subwayWeek.map(
@@ -91,6 +92,29 @@ const FloatingPopulationChart = () => {
     ]
   };
 
+  const customTextPlugin = {
+    id: 'customText',
+    beforeDraw: (chart: any) => {
+      const { datasets } = chart.data;
+      const hasData = datasets.some((dataset: any) =>
+        dataset.data.some((value: number) => value !== 0)
+      );
+      if (!hasData) {
+        const ctx = chart.ctx;
+        const width = chart.width;
+        const height = chart.height;
+        ctx.save();
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.font = '16px Arial';
+        ctx.fillText('준비중입니다', width / 2, height / 2);
+        ctx.restore();
+      }
+    }
+  };
+
+  ChartJS.register(customTextPlugin);
+
   const stackedOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -105,7 +129,8 @@ const FloatingPopulationChart = () => {
       },
       datalabels: {
         display: false // 데이터 레이블 숨기기
-      }
+      },
+      customText: customTextPlugin
     },
     scales: {
       x: {
@@ -138,7 +163,8 @@ const FloatingPopulationChart = () => {
       },
       datalabels: {
         display: false // 데이터 레이블 숨기기
-      }
+      },
+      customText: customTextPlugin
     },
     scales: {
       x: {

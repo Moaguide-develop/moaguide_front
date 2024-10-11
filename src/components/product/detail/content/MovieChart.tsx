@@ -39,7 +39,7 @@ const MovieChart = () => {
 
   const fetchData = async () => {
     const response = await axios.get<IContentMovieCharts>(
-      `https://api.moaguide.com/detail/contents/${filteringData}/${lastSegment}`
+      `https://api.moaguide.com/detail/content/${filteringData}/${lastSegment}`
     );
     return response.data;
   };

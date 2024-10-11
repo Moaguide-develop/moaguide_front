@@ -51,7 +51,7 @@ const BuildingCopyRightFeeChart = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['BuildingRightFeeChart', filteringData],
+    queryKey: ['BuildingRightFeeChart', filteringData, lastSegment],
     queryFn: fetchData
   });
 
