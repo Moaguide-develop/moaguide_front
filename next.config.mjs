@@ -11,7 +11,8 @@ const nextConfig = {
       'scs-phinf.pstatic.net',
       'api.moaguide.com',
       'entertain.naver.com',
-      's.pstatic.net'
+      's.pstatic.net',
+      'search.pstatic.net'
     ]
   },
 
