@@ -90,9 +90,8 @@ const MusicCopyRightFeeChart = () => {
     CopyRightFeeDivideRateCount.reduce((acc, val) => acc + val, 0) /
       CopyRightFeeDivideRateCount.length || 0;
 
-  const LinenewVariable = Math.floor(
-    maxCopyRightFeeDivideRateCount + averageCopyRightFeeDivideRateCount
-  );
+  const LinenewVariable =
+    Math.floor(maxCopyRightFeeDivideRateCount + averageCopyRightFeeDivideRateCount) * 1.5;
 
   const data = {
     labels: paymentDate,

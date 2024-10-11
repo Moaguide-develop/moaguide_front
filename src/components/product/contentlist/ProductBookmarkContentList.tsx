@@ -19,7 +19,7 @@ const ProductBookmarkContentList = ({
   return (
     <div>
       <Container>
-        <div className="flex flex-row   desk:hidden  md:flex ml-[20px]  ">
+        <div className="flex flex-row   desk:hidden  md:flex ml-[10px]  ">
           <div className="w-[62px] mr-[16px] ml-[10px] text-gray-500 ">이미지</div>
           <div className="w-[60px] mr-[16px] text-gray-500 ">카테고리</div>
           <div className="w-[100px] mr-[16px] text-gray-500 ">운영 플랫폼</div>
@@ -40,7 +40,7 @@ const ProductBookmarkContentList = ({
             <div key={item.product_Id} className=" lg:flex  ">
               <Link href={`/product/detail/${item.category}/${item.product_Id}`}>
                 <div className="flex items-center  h-[110px] ">
-                  <div className="mr-[10px] desk:ml-[20px] ">
+                  <div className="mr-[10px] desk:ml-[10px] ">
                     <Image
                       src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.product_Id}.jpg`}
                       width={82}
