@@ -8,7 +8,7 @@ const EventGuide = () => {
 
   return (
     <div 
-      className="mx-auto flex-1 rounded-[12px] h-[200px] sm:max-w-[692px] w-full sm:h-[290px] mt-[10px] bg-[url('/images/home/moaguide-main-event.png')] cursor-pointer" 
+      className="mx-auto flex-1 rounded-[12px]  sm:max-w-[692px] w-full h-[290px] mt-[10px] bg-[url('/images/home/moaguide-main-event.png')] cursor-pointer" 
       onClick={handleGuideClick}
     >
     <div className="text-white text-heading3 sm:text-heading1 mt-[70px] sm:mt-[117px] ml-5 md:ml-11">

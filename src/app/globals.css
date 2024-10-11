@@ -79,3 +79,25 @@
   -webkit-line-clamp: 2; /* 3-line limit */
   white-space: normal;
 }
+
+.mySwiper2 .swiper-pagination {
+  padding-top: 100px;
+  bottom: 0px; /* 하단에 위치 */
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+}
+
+.mySwiper2 .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: gray;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.mySwiper2 .swiper-pagination-bullet-active {
+  background-color: black;
+}
