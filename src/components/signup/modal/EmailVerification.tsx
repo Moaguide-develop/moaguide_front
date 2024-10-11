@@ -62,7 +62,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
   const handleVerifyCode = async () => {
     if (isComplete) return;
     try {
-      await verifyEmailCode(email, verificationCode); // 인증 코드 확인
+      await verifyEmailCode(email, verificationCode); 
       setIsComplete(true);
       setIsError(false);
     } catch (error) {
@@ -73,7 +73,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
 
   const handleComplete = () => {
     if (isComplete) {
-      onNext(); // 인증 완료 후 다음 단계로 이동
+      onNext();
     }
   };
 
@@ -100,8 +100,8 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
   }, [isError]);
 
   return (
-    <div className="min-h-[calc(100dvh-100px)] flex flex-col items-center justify-between mb-[100px] sm:min-h-[100vh] sm:justify-center sm:mb-0">
-      <section className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-0">
+    <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
+      <section className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
         <Image
           src={'/sign/LeftArrowIcon.svg'}
           alt='뒤로가기'
@@ -195,13 +195,13 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
               남은시간 : {validNumberToTime(validTime)}
             </div>
           )}
-          {isComplete && <div className="text-body7 text-success mt-[10px]">인증이 완료되었습니다.</div>}
+          {isComplete && <div className="text-body7 text-success mt-[10px] pb-4">인증이 완료되었습니다.</div>}
           {isError && <div className="text-body7 text-error mt-[10px]">인증번호가 일치하지 않습니다.</div>}
         </div>
       </section>
       <div
         onClick={handleComplete}
-        className={`w-full max-w-[340px] flex items-center justify-center px-5 py-3 rounded-[12px] font-bold text-lg mt-0 sm:mt-[40px] 
+        className={`w-[90%] sm:w-full sm:max-w-[340px] flex items-center justify-center px-5 py-3 rounded-[12px] font-bold text-lg mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 
         ${isComplete ? 'bg-gradient2 text-heading4 text-white cursor-pointer' : 'bg-gray100 text-heading4 text-gray400'}`}
     >
       다음으로

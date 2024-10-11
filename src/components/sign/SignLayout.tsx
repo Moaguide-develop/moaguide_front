@@ -39,7 +39,7 @@ const SignLayout = () => {
   }, 1000);
 
   return (
-    <div className="min-h-[calc(100dvh-100px)] mb-[100px] flex flex-col items-center justify-center sm:min-h-[100vh] sm:mb-0">
+    <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-center sm:min-h-[100vh]">
       <section className="flex mt-8 mb-6">
         <Link href={'/'} className='cursor-pointer'>
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
@@ -95,7 +95,7 @@ const SignLayout = () => {
           <Link href={'/signup'} className='cursor-pointer'>
             <div className="mr-4">회원가입</div>
           </Link>
-          <a href="/find">이메일 / 비밀번호 찾기</a>
+          <a href="/find">비밀번호 찾기</a>
         </div>
       </section>
       {/* <section className="mt-8 flex flex-col gap-3">

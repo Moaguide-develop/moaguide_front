@@ -40,8 +40,8 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
   const isFormValid = passwordValid && passwordMatch;
 
   return (
-    <div className="min-h-[calc(100dvh-100px)] flex flex-col items-center justify-between mb-[100px] sm:min-h-[100vh] sm:justify-center sm:mb-0">
-      <div className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-0">
+    <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
+      <div className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
         <Image
           src={'/sign/LeftArrowIcon.svg'}
           alt='뒤로가기'
@@ -58,7 +58,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
           height={100}
         />
         <h2 className="text-xl font-bold mb-6 leading-tight">
-          로그인에 사용할 <span className="text-purple-600">비밀번호</span>를 설정해주세요
+          로그인에 사용할 <br /><span className="text-purple-600">비밀번호</span>를 설정해주세요
         </h2>
         <div className="mb-4">
           <div className="text-body3">이메일</div>
@@ -115,7 +115,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
         <button 
           onClick={onNext} 
           disabled={!isFormValid} 
-          className={`w-full max-w-[340px] py-3 rounded-[12px] text-lg font-bold mt-0 sm:mt-[40px] 
+          className={`w-[90%] sm:w-full sm:max-w-[340px] py-3 rounded-[12px] text-lg font-bold mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 
           ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로

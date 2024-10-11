@@ -9,7 +9,7 @@ const MypageHeader = () => {
   return (
     <div className="flex flex-col gap-[28px] pb-5 border-b border-gray100">
       <div className="w-full flex justify-between items-center">
-        <div className="flex-1 flex flex-col gap-[10px]">
+        <div className="flex-1 flex flex-col gap-[10px] mt-5 sm:mt-10">
           <div className="text-heading2">{member.memberNickName}</div>
           <div className="text-gray400 text-body1">{member.memberEmail}</div>
         </div>

@@ -3,6 +3,8 @@ import { validNumberToTime } from '@/utils/validNumberToTime';
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion'; 
 import { changePassword, changePasswordinFind } from '@/service/change';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const FindPassword = () => {
   const [email, setEmail] = useState<string>(''); 
@@ -20,6 +22,8 @@ const FindPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
   const [passwordMatch, setPasswordMatch] = useState<boolean | null>(null);
+
+  const router = useRouter();
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -123,11 +127,23 @@ const FindPassword = () => {
 
 
   return (
-    <div className='min-h-[calc(100dvh-220px)] flex flex-col items-center justify-between w-[340px] sm:min-h-0 sm:justify-center'>
+    <div className='min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center'>
        {!showPasswordReset && (
-      <><section className="w-full mx-auto mt-[30px]">
+      <><section className="w-[90%] sm:w-full max-w-[340px] mx-auto">
+        <div className=''>
+          <div className="self-start">
+            <Image
+              src={'/sign/LeftArrowIcon.svg'}
+              alt='뒤로가기'
+              width={24}
+              height={24}
+              className='cursor-pointer'
+              onClick={() => router.back()} 
+            />
+            </div>
+        </div>
           <div className="text-heading3">
-            <h2 className="text-xl font-bold mb-6 text-left">
+            <h2 className="text-xl font-bold my-6 text-left">
               가입하신<br />
               <span className="text-purple-600">이메일</span>을 입력해주세요
             </h2>
@@ -171,7 +187,7 @@ const FindPassword = () => {
 
           <div className="mt-[28px]">
             <div className="text-body3">인증번호</div>
-            <div className="flex items-center mt-2">
+            <div className="flex items-center mt-2 pb-4">
               <input
                 ref={inputRef}
                 value={verificationCode}
@@ -220,16 +236,16 @@ const FindPassword = () => {
               </div>
             )}
           </div>
-        </section><div className='w-full max-w-[340px]'>
+        </section><div className='w-[90%] sm:w-full max-w-[340px]'>
             {isComplete ? (
               <div
                 onClick={handleComplete}
-                className="cursor-pointer flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white mt-0 sm:mt-[40px]"
+                className="cursor-pointer flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white mt-0 sm:mt-[40px] mb-[20px] sm:mb-0"
               >
                 다음으로
               </div>
             ) : (
-              <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px]">
+              <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px] mb-[20px] sm:mb-0">
                 다음으로
               </div>
             )}
@@ -242,10 +258,22 @@ const FindPassword = () => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 100 }}
           transition={{ duration: 0.5 }}
-          className="w-full mx-auto mt-[30px]"
+          className="w-[90%] sm:w-full max-w-[340px] mx-auto"
         >
           <section>
-            <h2 className="text-xl font-bold mb-6 text-left">
+          <div className=''>
+          <div className="self-start">
+            <Image
+              src={'/sign/LeftArrowIcon.svg'}
+              alt='뒤로가기'
+              width={24}
+              height={24}
+              className='cursor-pointer'
+              onClick={() => router.back()} 
+            />
+            </div>
+        </div>
+            <h2 className="text-xl font-bold my-6 text-left ">
               비밀번호를<br />
               <span className="text-purple-600">재설정</span> 해주세요
             </h2>
@@ -302,14 +330,14 @@ const FindPassword = () => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 100 }}
           transition={{ duration: 0.5 }}
-          className="w-full mx-auto"
+          className="w-[90%] sm:w-full max-w-[340px] mx-auto"
         >
         {passwordMatch ? (
-          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white cursor-pointer mt-0 sm:mt-[40px]" onClick={handlePasswordReset}>
+          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white cursor-pointer mt-0 sm:mt-[40px] mb-[20px] sm:mb-0" onClick={handlePasswordReset}>
             비밀번호 재설정
           </div>
         ) : (
-          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px]">
+          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px] mb-[20px] sm:mb-0">
             비밀번호 재설정
           </div>
         )}
