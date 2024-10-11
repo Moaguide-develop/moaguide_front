@@ -1,22 +1,31 @@
 import type { SearchedItem } from '@/types/homeComponentsType';
-
 import { formatCategory } from '@/utils/formatCategory';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const SearchedResultItem = ({ productId, name, platform, category }: SearchedItem) => {
+interface MainProductItem {
+  productId?: string; // SearchedItem에서는 productId 사용, 추천 상품에서는 product_Id
+  product_Id?: string; // 추천 상품에서 사용되는 product_Id
+  name: string;
+  platform: string;
+  category: string;
+}
+
+const SearchedResultItem = ({ productId, product_Id, name, platform, category }: MainProductItem) => {
   const router = useRouter();
+
+  const id = productId || product_Id;
 
   return (
     <li
-      onClick={() => router.push(`/product/detail/${productId}`)}
+      onClick={() => router.push(`/product/detail/${category}/${id}`)}
       className="p-5 cursor-pointer bg-white rounded-[12px]">
       <div className="flex gap-5 items-center">
         {/* 이미지 */}
         <div>
           <img
-            src={'/images/home/mock.jpeg'}
-            alt=""
+            src={`https://d2qf2amuam62ps.cloudfront.net/img/${id}.jpg`}
+            alt="Product Image"
             className="w-[82px] h-[82px] rounded-[8px]"
           />
         </div>
@@ -33,7 +42,7 @@ const SearchedResultItem = ({ productId, name, platform, category }: SearchedIte
         {/* 부가정보 */}
         <div className="flex items-center gap-4">
           <div className="cursor-pointer">
-            <img src="/images/home/bookmark.svg" alt="" />
+            <img src="/images/home/bookmark.svg" alt="Bookmark" />
           </div>
         </div>
       </div>
