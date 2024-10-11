@@ -52,6 +52,7 @@ const BuildingDetailpage = (props: any) => {
               width={181}
               height={181}
               alt="Profile Image"
+              className="object-cover w-[181px] h-[181px] rounded-[8px] "
             />
 
             <div className="desk:hidden  desk2:flex flex-col ml-[28px] ">

@@ -1,11 +1,5 @@
 import Bookmark from '@/components/product/Bookmark';
-import {
-  IProductCommon,
-  IProductDealDetailData,
-  IProductRecruitmentData,
-  IReport,
-  ISummaryData
-} from '@/types/Diviend';
+import { IProductCommon } from '@/types/Diviend';
 
 const BookmarkPage = async ({
   params,
@@ -15,8 +9,6 @@ const BookmarkPage = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const pages = searchParams['page'] || 1;
-  // const subcategory = searchParams['subcategory'] || 'trade';
-  // const sort = searchParams['sort'] || 'lastDivide_rate desc';
   const category = searchParams['category'] || 'all';
 
   const productBookmarkResponse = await fetch(
@@ -41,4 +33,3 @@ const BookmarkPage = async ({
 };
 
 export default BookmarkPage;
-
