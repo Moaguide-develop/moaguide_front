@@ -82,7 +82,7 @@ const OfficialPriceChart = () => {
 
   // useQuery로 데이터 패칭
   const { data, error, isLoading } = useQuery({
-    queryKey: ['landPriceData'],
+    queryKey: ['landPriceData', lastSegment],
     queryFn: fetchData
   });
 

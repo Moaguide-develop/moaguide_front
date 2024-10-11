@@ -52,7 +52,7 @@ const MusicCopyRightFeeChart = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['MusicCopyRightFeeChart', filteringData],
+    queryKey: ['MusicCopyRightFeeChart', filteringData, lastSegment],
     queryFn: fetchData
   });
 
