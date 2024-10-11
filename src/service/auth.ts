@@ -1,5 +1,5 @@
 import { AuthHeaders, NicknameCheckResponse, SendCodeResponse, VerifyCodeResponse } from '@/types/auth';
-import { setToken, removeToken, getToken } from '@/utils/localStorage';
+import { setToken, removeToken, getToken, setVerifyToken } from '@/utils/localStorage';
 import { useMemberStore } from '@/store/user.store';
 import { axiosInstance, basicAxiosInstance, refreshAxiosInstance } from './axiosInstance';
 
@@ -136,7 +136,7 @@ export const verifyEmailCode = async (email: string, code: string) => {
     });
 
     const token = response.headers['Verify'] || response.headers['verify'];
-    setToken(token);
+    setVerifyToken(token);
 
     return response.data;
   } catch (error) {

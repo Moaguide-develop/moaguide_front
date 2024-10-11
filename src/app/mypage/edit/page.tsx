@@ -166,7 +166,7 @@ const Editpage = () => {
           </div>
         </div>
         {/* 휴대폰 번호 변경 */}
-        <div className="mt-5 pb-5 ">
+        {/* <div className="mt-5 pb-5 ">
           <div className="text-body4 flex justify-between items-center">
             <div>휴대폰 번호</div>
             <div>{member?.memberPhone || '없음'}</div>
@@ -179,7 +179,7 @@ const Editpage = () => {
               휴대폰 번호 변경
             </div>
           </div>
-        </div>
+        </div> */}
       </section>
       {/* 회원탈퇴 */}
       <div

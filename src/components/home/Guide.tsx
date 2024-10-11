@@ -4,10 +4,26 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation'; 
 
 const Guide = () => {
+  const router = useRouter();
+
   const handleGuideClick = (url: string) => {
     window.open(url, '_blank');
+  };
+
+  const handleEventClick = () => {
+    const accessToken = Cookies.get('access_token'); 
+
+    if (accessToken) {
+      window.open('https://docs.google.com/forms/d/1sa512hYe_eRDBjq-maNHIeGiwbu--EPG3k_8zmR9e7M/edit?pli=1', '_blank');
+    } else {
+      if (confirm('로그인 후 신청 가능합니다. 확인을 누르면 로그인 페이지로 이동합니다.')) {
+        router.push('/sign');
+      }
+    }
   };
 
   return (
@@ -24,7 +40,6 @@ const Guide = () => {
         modules={[Pagination, Autoplay]}
         className="mySwiper2"
       >
-        {/* 첫 번째 슬라이드 */}
         <SwiperSlide>
           <div 
             className="relative mx-auto flex-1 rounded-[12px] h-[200px] sm:max-w-[692px] w-full sm:h-[290px] bg-[url('/images/home/guide.svg')] cursor-pointer"
@@ -42,12 +57,10 @@ const Guide = () => {
             </div>
           </div>
         </SwiperSlide>
-
-        {/* 두 번째 슬라이드 */}
         <SwiperSlide>
           <div
             className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[url('/images/home/moaguide-main-event.png')] bg-cover cursor-pointer"
-            onClick={() => handleGuideClick('https://contents.premium.naver.com/vestpie/pieceofmoney')}
+            onClick={handleEventClick}
           >
             <div className="absolute top-[70px] sm:top-[120px] text-white text-heading3 sm:text-heading1 ml-5 md:ml-11">
               <div>모아가이드 오픈이벤트</div>

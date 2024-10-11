@@ -3,7 +3,7 @@ import React from 'react';
 
 const EventGuide = () => {
   const handleGuideClick = () => {
-    window.open('https://contents.premium.naver.com/vestpie/pieceofmoney', '_blank');
+    window.open('https://docs.google.com/forms/d/1sa512hYe_eRDBjq-maNHIeGiwbu--EPG3k_8zmR9e7M/edit?pli=1', '_blank');
   };
 
   return (

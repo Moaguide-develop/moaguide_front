@@ -1,5 +1,5 @@
 import React from 'react';
-import PhoneVerification from './modal/PhoneVerification';
+import EmailVerification from './modal/EmailVerification';  // 이메일 인증 컴포넌트로 변경
 
 interface Step2Props {
   onNext: () => void;
@@ -7,14 +7,15 @@ interface Step2Props {
 }
 
 const Step2: React.FC<Step2Props> = ({ onNext, onUpdate }) => {
-  const handlePhoneNumberChange = (number: string) => {
-    onUpdate({ phoneNumber: number });
+  // 이메일 변경 핸들러
+  const handleEmailChange = (email: string) => {
+    onUpdate({ email });  // 이메일 값을 업데이트
   };
 
   return (
-    <PhoneVerification
+    <EmailVerification
       onNext={onNext}
-      onPhoneNumberChange={handlePhoneNumberChange}
+      onEmailChange={handleEmailChange}  // 이메일 변경 핸들러 전달
     />
   );
 };
