@@ -5,7 +5,7 @@ import axios from 'axios';
 const fetchContentProductDetail = async (context: QueryFunctionContext) => {
   const product_id = context.queryKey[1] as string;
   const { data } = await axios.get(
-    `https://api.moaguide.com/detail/contents/${product_id}`
+    `https://api.moaguide.com/detail/content/${product_id}`
   );
   return data;
 };
