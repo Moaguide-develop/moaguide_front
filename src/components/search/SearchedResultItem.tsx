@@ -9,7 +9,7 @@ const SearchedResultItem = ({ productId, name, platform, category }: SearchedIte
 
   return (
     <li
-      onClick={() => router.push(`/product/detail/${productId}`)}
+      onClick={() => router.push(`/product/detail/${category}/${productId}`)}
       className="p-5 cursor-pointer bg-white rounded-[12px]">
       <div className="flex gap-5 items-center">
         {/* 이미지 */}
