@@ -6,8 +6,8 @@ import Filter from '@/components/product/Filter';
 import TopProduct from '@/components/product/TopProduct';
 import Report from '@/components/product/Report';
 import React, { useState } from 'react';
-import ProductIsdealSort from '@/components/product/ProductIsdealSort';
-import ProductDealContentList from '@/components/product/ProductDealContentList';
+import ProductIsdealSort from '@/components/product/sort/ProductIsdealSort';
+import ProductDealContentList from '@/components/product/contentlist/ProductDealContentList';
 import {
   ISummaryData,
   IReportData,
@@ -15,12 +15,12 @@ import {
   IProductEndRecruitmentData,
   IProductRecruitmentData
 } from '@/types/Diviend';
-import ProductClassification from './ProductClassification';
+import ProductClassification from './sort/ProductClassification';
 import { useRouter, useSearchParams } from 'next/navigation';
-import ProductRecruitmentSort from './ProductRecruitmentSort';
-import ProductEndRecruitmentSort from './ProductEndRecruitmentSort';
-import ProductRecruitmentContentList from './ProductRecruitmentContentList';
-import ProductEndRecruitmentContentList from './ProductEndRecruitmentContentList';
+import ProductRecruitmentSort from './sort/ProductRecruitmentSort';
+import ProductEndRecruitmentSort from './sort/ProductEndRecruitmentSort';
+import ProductRecruitmentContentList from './contentlist/ProductRecruitmentContentList';
+import ProductEndRecruitmentContentList from './contentlist/ProductEndRecruitmentContentList';
 
 interface IProductBuildingProps extends ISummaryData, IReportData {
   content:

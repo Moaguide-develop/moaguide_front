@@ -97,9 +97,9 @@ const ReportCategory = () => {
           className="flex flex-col gap-2 items-center cursor-pointer">
           <div
             className={`text-body5 bg-gray50 text-[#713CE2] border   w-[50px] h-[50px] p-[10px] sm:w-[60px] sm:h-[60px] sm:p-[14px] flex justify-center items-center rounded-[12px] 
-            ${currentCategory === 'contents' ? 'border-[#713CE2]' : 'border-gray100'}
+            ${currentCategory === 'content' ? 'border-[#713CE2]' : 'border-gray100'}
              `}>
-            <img src="/images/report/movie.svg" alt="contents" />
+            <img src="/images/report/movie.svg" alt="content" />
           </div>
           <div
             className={` 
