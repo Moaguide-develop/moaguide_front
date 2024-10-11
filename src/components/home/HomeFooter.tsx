@@ -14,10 +14,10 @@ const HomeFooter = () => {
   return (
     <div className="mt-[100px] sm:mt-[158px] bg-bg mx-auto w-full sm:block">
       <div className='flex flex-col mx-auto'>
-      <div className='flex flex-col justify-start sm:justify-between sm:items-center mt-[52px] py-[20px] w-[90%] lg:w-full mx-auto desk:max-w-[1000px] bg-gradient2 rounded-[12px]'>
+      <div className='flex flex-col justify-start sm:justify-between sm:items-center mt-[52px] py-[30px] w-[90%] lg:w-full mx-auto desk:max-w-[1000px] bg-gradient2 rounded-[12px]'>
         <div className='w-[90%] mx-auto'>
         <div className='flex justify-center text-white text-body2 text-lg font-bold pb-[20px]'>모아가이드에서 알려드립니다.</div>
-        <div className='flex flex-col justify-start text-white text-body2 text-sm'>
+        <div className='flex flex-col justify-start text-white text-sm'>
           <div className='flex'>1. 모아가이드에서 제공하는 상품정보와 금액은 일치하지 않을 수 있습니다. 해당 플랫폼에서 상품정보 및 금액을 반드시 확인해 주시기 바랍니다.</div>
           <div className='flex'>2. 모아가이드는 고객이 플랫폼에서 구매한 투자 상품에 대해 보증하거나 별도의 책임을 지지 않으며, 투자상품 거래와 관련한 일체의 책임은 해당 플랫폼 및 사용자 각자에게 있습니다.</div>
           <div className='flex'>3. 고객께서는 투자상품 거래 전 해당 플랫폼의 이용약관을 반드시 확인해  주시기 바랍니다.</div>
