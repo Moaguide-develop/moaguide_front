@@ -1,32 +1,20 @@
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
 
 interface StepProps {
   onNext: () => void;
   onUpdate: (data: { email?: string; password?: string }) => void;
+  email: string; // 이전 스텝에서 입력된 이메일을 받음
 }
 
-const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
-  const [email, setEmail] = useState('');
+const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordValid, setPasswordValid] = useState<boolean | null>(null);
   const [passwordMatch, setPasswordMatch] = useState<boolean | null>(null);
 
   const router = useRouter();
-
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-  
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newEmail = e.target.value;
-    setEmail(newEmail);
-    onUpdate({ email: newEmail });
-  };
-
 
   const validatePassword = (password: string) => {
     const isValid = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/.test(password);
@@ -49,12 +37,12 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     setPasswordMatch(newConfirmPassword === password);
   };
 
-  const isFormValid = email && passwordValid === true && passwordMatch === true;
+  const isFormValid = passwordValid && passwordMatch;
 
   return (
     <div className="min-h-[calc(100dvh-100px)] flex flex-col items-center justify-between mb-[100px] sm:min-h-[100vh] sm:justify-center sm:mb-0">
       <div className="max-w-[340px] w-full mx-auto mt-[30px] sm:mt-0">
-      <Image
+        <Image
           src={'/sign/LeftArrowIcon.svg'}
           alt='뒤로가기'
           width={24}
@@ -70,20 +58,15 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           height={100}
         />
         <h2 className="text-xl font-bold mb-6 leading-tight">
-          가입할 <span className="text-purple-600">로그인 정보</span>를<br />입력해주세요
+          로그인에 사용할 <span className="text-purple-600">비밀번호</span>를 설정해주세요
         </h2>
-
         <div className="mb-4">
           <div className="text-body3">이메일</div>
           <input 
             type="email" 
-            placeholder="이메일 입력" 
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-              onUpdate({ email: e.target.value });
-            }}
-            className="w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
+            value={email} 
+            disabled
+            className="w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] text-body2 cursor-not-allowed"
           />
         </div>
 
@@ -116,7 +99,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
             className={`w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
-            ${password ? (passwordMatch ? 'outline-success' : 'focus:outline-normal') : ''}`}
+            ${confirmPassword ? (passwordMatch ? 'outline-success' : 'focus:outline-normal') : ''}`}
           />
           <div className="mt-1 min-h-[25px]">
             {passwordMatch === false && (
@@ -126,13 +109,14 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate }) => {
               <p className="text-blue-500 text-xs">비밀번호가 일치합니다.</p>
             )}
           </div>
-        </div>
+          </div>
         </div>
 
         <button 
           onClick={onNext} 
           disabled={!isFormValid} 
-          className={`w-full max-w-[340px] py-3 rounded-[12px] text-lg font-bold mt-0 sm:mt-[40px] ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          className={`w-full max-w-[340px] py-3 rounded-[12px] text-lg font-bold mt-0 sm:mt-[40px] 
+          ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
         >
           다음으로
         </button>

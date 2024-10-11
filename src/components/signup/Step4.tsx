@@ -93,7 +93,6 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     if (isFormValid) {
       try {
         await onNext();
-        router.push('/sign');
       } catch (error) {
         console.error('가입 처리 중 오류 발생:', error);
       }
@@ -189,7 +188,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         </div>
 
         {investmentExperience === 'yes' && (
-          <div className="mb-8">
+          <div className="mb-8 sm:mb-0">
             <div className="text-body3">투자 경력 (N년)</div>
             <div className='flex justify-end items-center mt-2'>
               <input
