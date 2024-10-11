@@ -28,6 +28,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.svg'
   },
+  keywords: ['모아가이드', 'moaguide', 'STO 큐레이션', '블록체인', '투자 플랫폼'], // 추가된 부분
   openGraph: {
     title: '모아가이드',
     description: 'STO 큐레이션 플랫폼 모아가이드',
