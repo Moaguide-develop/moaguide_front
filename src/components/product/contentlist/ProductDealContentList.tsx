@@ -61,7 +61,7 @@ const ProductDealContentList = ({
             <div key={item.product_Id} className=" lg:flex  ">
               <Link href={`product/detail/${item.category}/${item.product_Id}`}>
                 <div className="flex items-center  h-[110px] ">
-                  <div className="mr-[10px] desk:ml-[20px] ">
+                  <div className="mr-[10px] desk:ml-[10px] flex-shrink-0">
                     <Image
                       src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.product_Id}.jpg`}
                       width={82}
@@ -70,7 +70,7 @@ const ProductDealContentList = ({
                       className="object-cover w-[82px] h-[82px] rounded-[8px] "
                     />
                   </div>
-                  <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100   desk:hidden  md:flex ">
+                  <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100  flex-shrink-0 desk:hidden  md:flex ">
                     {CATEGORY[item.category]}
                   </div>
                   <div className="w-[100px] mr-[16px]  text-gray-400   desk:hidden  md:flex ">

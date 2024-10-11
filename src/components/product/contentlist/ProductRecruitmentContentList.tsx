@@ -89,7 +89,7 @@ const ProductRecruitmentContentList = ({
             <div key={item.productId} className=" lg:flex  ">
               <Link href={`product/detail/${item.category}/${item.productId}`}>
                 <div className="flex items-center  h-[110px] ">
-                  <div className="flex  mr-[16px]  desk:ml-[20px] ">
+                  <div className="flex  mr-[16px]  desk:ml-[10px] flex-shrink-0 ">
                     <Image
                       src={`https://d2qf2amuam62ps.cloudfront.net/img/${item.productId}.jpg`}
                       width={82}
@@ -98,7 +98,7 @@ const ProductRecruitmentContentList = ({
                       className="object-cover w-[82px] h-[82px] rounded-[8px] "
                     />
                   </div>
-                  <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100   desk:hidden  md:flex ">
+                  <div className="w-[54px] h-[26px] mr-[16px] flex justify-center items-center rounded-lg text-gray-500  bg-gray-100  flex-shrink-0  desk:hidden  md:flex ">
                     {CATEGORY[item.category]}
                   </div>
                   <div className="w-[100px] mr-[16px]  text-gray-400   desk:hidden  md:flex ">
