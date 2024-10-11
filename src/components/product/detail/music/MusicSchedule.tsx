@@ -15,13 +15,13 @@ const MusicSchedule = () => {
   };
 
   const { data } = useQuery({
-    queryKey: ['MusicSchedule'],
+    queryKey: ['MusicSchedule', lastSegment],
     queryFn: fetchData
   });
 
   return (
     <div>
-      <div className="w-full">
+      <div className="w-full mb-[30px]">
         <div className="grid  desk2:grid-cols-2  md:grid-cols-4  gap-x-2 gap-y-2 ">
           {data &&
             data?.map((item, index) => (
