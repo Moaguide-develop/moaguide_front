@@ -1,4 +1,5 @@
 import React from 'react';
+import EventGuide from './EventGuide';
 
 const MypageMenu = () => {
   return (
@@ -36,7 +37,7 @@ const MypageMenu = () => {
         </div>
       </div>
       {/* 카카로톡 1:1 문의 */}
-      <div className="flex items-center justify-between px-5 py-6">
+      {/* <div className="flex items-center justify-between px-5 py-6">
         <div className="flex items-center gap-[14px]">
           <div>
             <img src="/images/mypage/chat.svg" alt="카카로톡" />
@@ -50,7 +51,8 @@ const MypageMenu = () => {
             className="cursor-pointer"
           />
         </div>
-      </div>
+      </div> */}
+      <EventGuide/>
     </div>
   );
 };

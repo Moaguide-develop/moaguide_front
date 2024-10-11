@@ -16,6 +16,7 @@ const SearchIndex = () => {
   const debouncedKeyword = useDebounce(keyWord);
 
   const { data: recommend, isLoading: recommendLoading } = getMainProduct('all');
+
   const { data, isLoading } = getSearchItem(debouncedKeyword);
 
   const handleKeyword = useCallback((e: ChangeEvent<HTMLInputElement>) => {
@@ -35,11 +36,11 @@ const SearchIndex = () => {
 
   return (
     <div className="pt-10 flex flex-col  gap-10">
-      {keyWord ? null : (
+     
         <div className="text-heading3 sm:text-heading1 text-gray700 flex items-center justify-center">
           찾으시는 상품이 있으신가요?
         </div>
-      )}
+
 
       <div className="flex items-center justify-center px-5 sm:px-0">
         <div
@@ -91,7 +92,7 @@ const SearchIndex = () => {
           )}
 
           <ul
-            className={`pb-[120px] sm:pb-10 flex flex-col gap-4 px-5 sm:px-0
+            className={`pb-[50px] sm:pb-10 flex flex-col gap-4 px-5 sm:px-0
           ${data?.length === 0 ? 'mt-4' : 'mt-6 sm:mt-10'}
           `}>
             {data?.length === 0 && (

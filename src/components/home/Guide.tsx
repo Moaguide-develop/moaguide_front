@@ -1,26 +1,69 @@
 'use client';
 import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination, Autoplay } from 'swiper/modules';
 
 const Guide = () => {
-  const handleGuideClick = () => {
-    window.open('https://contents.premium.naver.com/vestpie/pieceofmoney', '_blank');
+  const handleGuideClick = (url: string) => {
+    window.open(url, '_blank');
   };
 
   return (
-    <div 
-      className="mx-auto flex-1 rounded-[12px] h-[200px] sm:max-w-[692px] w-full sm:h-[290px] bg-[url('/images/home/guide.svg')] cursor-pointer" 
-      onClick={handleGuideClick}
-    >
-      <div className="text-white text-heading3 sm:text-heading1 mt-[76px] sm:mt-[117px] ml-5 md:ml-11">
-        <div>투자 가이드로</div>
-        <div>소액 투자 시작해보자!</div>
-      </div>
-      <div className="flex items-center gap-1 ml-5 md:ml-11 mt-5 cursor-pointer max-w-max">
-        <div className="text-white text-body7 sm:text-body2">가이드 보러가기</div>
-        <div>
-          <img src="/images/home/guide_right.svg" alt="guide_right" />
-        </div>
-      </div>
+    <div className="w-full sm:w-[65%] md:w-[70%] lg:w-full lg:max-w-[692px]">
+      <Swiper
+        pagination={{
+          clickable: true
+        }}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false
+        }}
+        loop={true}  
+        modules={[Pagination, Autoplay]}
+        className="mySwiper2"
+      >
+        {/* 첫 번째 슬라이드 */}
+        <SwiperSlide>
+          <div 
+            className="relative mx-auto flex-1 rounded-[12px] h-[200px] sm:max-w-[692px] w-full sm:h-[290px] bg-[url('/images/home/guide.svg')] cursor-pointer"
+            onClick={() => handleGuideClick('https://contents.premium.naver.com/vestpie/pieceofmoney')}
+          >
+            <div className="absolute top-[80px] sm:top-[120px] text-white text-heading3 sm:text-heading1 ml-5 md:ml-11">
+              <div>투자 가이드로</div>
+              <div>소액 투자 시작해보자!</div>
+            </div>
+            <div className="absolute top-[130px] sm:top-[200px] flex items-center gap-1 ml-5 md:ml-11 mt-5 cursor-pointer max-w-max">
+              <div className="text-white text-body7 sm:text-body2">가이드 보러가기</div>
+              <div>
+                <img src="/images/home/guide_right.svg" alt="guide_right" />
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+
+        {/* 두 번째 슬라이드 */}
+        <SwiperSlide>
+          <div
+            className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[url('/images/home/moaguide-main-event.png')] bg-cover cursor-pointer"
+            onClick={() => handleGuideClick('https://contents.premium.naver.com/vestpie/pieceofmoney')}
+          >
+            <div className="absolute top-[70px] sm:top-[120px] text-white text-heading3 sm:text-heading1 ml-5 md:ml-11">
+              <div>모아가이드 오픈이벤트</div>
+              <div>사용후기 남기고 사은품 받자!</div>
+            </div>
+            <div className="absolute top-[130px] sm:top-[200px] flex items-center gap-1 ml-5 md:ml-11 mt-4 cursor-pointer max-w-max z-10">
+              <div className="bg-black bg-opacity-50 rounded-[10px] p-2 flex items-center gap-1">
+                <div className="ml-[5px] text-white text-body7 sm:text-body2">참여하러 가기</div>
+                <div>
+                  <img src="/images/home/guide_right.svg" alt="guide_right" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </SwiperSlide>
+      </Swiper>
     </div>
   );
 };
