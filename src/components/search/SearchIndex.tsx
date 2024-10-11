@@ -16,6 +16,7 @@ const SearchIndex = () => {
   const debouncedKeyword = useDebounce(keyWord);
 
   const { data: recommend, isLoading: recommendLoading } = getMainProduct('all');
+
   const { data, isLoading } = getSearchItem(debouncedKeyword);
 
   const handleKeyword = useCallback((e: ChangeEvent<HTMLInputElement>) => {
