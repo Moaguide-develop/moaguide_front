@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import Container from '../common/Container';
+import Container from '@/components/common/Container';
 import { IProductDealDetailData } from '@/types/Diviend';
-import ProductPagenation from './ProductPagenation';
+import ProductPagenation from '../pagenation/ProductPagenation';
 import Link from 'next/link';
-import ProductMobilePagenation from './ProductMobilePagenation';
+import ProductMobilePagenation from '../pagenation/ProductMobilePagenation';
 import { CATEGORY } from '@/static/category';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import { useState } from 'react';
