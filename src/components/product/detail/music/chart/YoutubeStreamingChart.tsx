@@ -58,7 +58,7 @@ const YoutubeStreamingChart = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['StreamingChart', filteringData],
+    queryKey: ['StreamingChart', filteringData, lastSegment],
     queryFn: fetchData
   });
   const chartRef = useRef(null);

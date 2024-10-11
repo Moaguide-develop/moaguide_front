@@ -49,7 +49,7 @@ const MovieTenChart = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['MovieTenChart', filteringData],
+    queryKey: ['MovieTenChart', filteringData, lastSegment],
     queryFn: fetchData
   });
 

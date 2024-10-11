@@ -33,19 +33,19 @@ const BuildingProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">최근 배당금</div>
-            <div className="">{data?.publish.basePrice}</div>
-          </div>
-        </div>
-        <div className="flex flex-col  mb-[7px]">
-          <div className=" flex  w-[400px]">
-            <div className="text-gray-400  w-[150px]">발생 증권수</div>
             <div className="">{data?.publish.last_divide}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
-            <div className="text-gray-400  w-[150px]">1주 당 발행 가액</div>
+            <div className="text-gray-400  w-[150px]">발생 증권수</div>
             <div className="">{data?.publish.piece}</div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">1주 당 발행 가액</div>
+            <div className="">{data?.publish.basePrice}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
@@ -276,7 +276,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
       </div>
 
       <div className="text-base font-bold  mb-[15px]  mt-[30px]  ">
-        배당주기별 배당금 & 시가배당률
+        지급주기별 배당금 & 시가배당률(%)
       </div>
       <CopyRightFeeChart />
     </div>

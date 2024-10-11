@@ -10,13 +10,13 @@ const MovieContent = () => {
 
   const fetchData = async () => {
     const response = await axios.get<IContentMovieStats>(
-      `https://api.moaguide.com/detail/contents/sub/${lastSegment}`
+      `https://api.moaguide.com/detail/content/sub/${lastSegment}`
     );
     return response.data;
   };
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['MovieContent'],
+    queryKey: ['MovieContent', lastSegment],
     queryFn: fetchData
   });
 

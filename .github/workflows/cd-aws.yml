@@ -43,12 +43,12 @@ jobs:
       - name: Health check new environment
         id: health-check
         run: |
-          ssh -i /tmp/ssh_key -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=3 -o ConnectTimeout=10 ec2-user@*** "
+          ssh -i /tmp/ssh_key -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=3 -o ConnectTimeout=10 ec2-user@${{ secrets.DOMAIN }} "
             health_url=''
-            if [ 'front_green' = 'front_blue' ]; then
-              health_url='http://${{ secrets.Domain }}:3000'
+            if [  "$frontend_target" = 'front_blue' ]; then
+              health_url='http://${{ secrets.DOMAIN }}:3000'
             else
-              health_url='http://${{ secrets.Domain }}:3001'
+              health_url='http://${{ secrets.DOMAIN }}:3001'
             fi
             for i in {1..10}; do
               http_status=\$(curl -s -o /dev/null -w '%{http_code}' \$health_url)
@@ -81,13 +81,12 @@ jobs:
         run: |
           ssh -t -i /tmp/ssh_key -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=3 -o ConnectTimeout=10 ec2-user@${{ secrets.LIVE_SERVER_IP }} "
             if [ '${{ steps.determine-target.outputs.new_target }}' = 'front_blue' ]; then
-               docker-compose exec nginx sed -i 's/server front_green:3001/server front_blue:3000/' /home/ec2-user/nginx.conf
+              sed -i 's/server front_green:3000/server front_blue:3000/' /home/ec2-user/nginx/nginx.conf
             else
-               docker-compose exec nginx sed -i 's/server front_blue:3000/server front_green:3001/' /home/ec2-user/nginx.conf
+              sed -i 's/server front_blue:3000/server front_green:3000/' /home/ec2-user/nginx/nginx.conf
             fi
             docker-compose -f docker-compose-back.yml exec nginx nginx -s reload
           "
-
         
       - name: Stop old environment
         if: success()

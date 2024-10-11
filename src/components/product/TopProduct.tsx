@@ -92,6 +92,7 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
                                 alt="Building"
                                 width={396}
                                 height={227}
+                                className="rounded-[8px] object-cover w-[396px] h-[227px]"
                               />
                             </div>
                             <div className="absolute top-1 left-1">

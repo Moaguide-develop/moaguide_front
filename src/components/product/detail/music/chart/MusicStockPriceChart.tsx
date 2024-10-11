@@ -48,7 +48,7 @@ const MusicStockPriceChart = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['MusicStockPriceChart', filteringData],
+    queryKey: ['MusicStockPriceChart', filteringData, lastSegment],
     queryFn: fetchData
   });
 

@@ -6,7 +6,7 @@ const fetchContentProductProfitDetail = async (context: QueryFunctionContext) =>
   const product_id = context.queryKey[1];
   const genre = context.queryKey[2];
   const { data } = await axios.get(
-    `https://api.moaguide.com/detail/contents/base/${product_id}?genre=${genre}`
+    `https://api.moaguide.com/detail/content/base/${product_id}?genre=${genre}`
   );
   return data;
 };

@@ -21,6 +21,14 @@ FROM node:18-alpine AS builder
 # 명령어를 실행할 디렉터리 지정
 WORKDIR /app
 
+# Build-time arguments
+ARG NEXT_PUBLIC_MAP_KEY
+ARG NEXT_PUBLIC_BACKEND_URL
+ARG NEXT_PUBLIC_GOOGLE_ANALYTICS
+
+
+
+
 # node_modules 등의 dependancy를 복사함.
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
