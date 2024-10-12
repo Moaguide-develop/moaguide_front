@@ -51,7 +51,7 @@ const SignLayout = () => {
           <input 
             type="email" 
             placeholder="이메일 입력" 
-            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm"
+            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm focus:outline-normal"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -61,7 +61,7 @@ const SignLayout = () => {
           <input 
             type="password" 
             placeholder="비밀번호 입력" 
-            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm"
+            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm focus:outline-normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

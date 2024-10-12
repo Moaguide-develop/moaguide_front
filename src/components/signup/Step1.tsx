@@ -7,7 +7,7 @@ import MarketingModal from './modal/MarketingModal';
 
 interface StepProps {
   onNext: () => void;
-  onUpdate: (data: { marketingConsent: boolean }) => void;
+  onUpdate: (data: { marketingConsent: number }) => void; 
 }
 
 const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
@@ -30,7 +30,8 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
       marketing: newCheckedState,
     };
     setChecks(newChecks);
-    onUpdate({ marketingConsent: newCheckedState });
+    
+    onUpdate({ marketingConsent: newCheckedState ? 7 : 0 });
   };
 
   const handleCheckChange = (key: string) => {
@@ -39,9 +40,11 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     setAllChecked(Object.values(newChecks).every(Boolean));
 
     if (key === 'marketing') {
-      onUpdate({ marketingConsent: newChecks.marketing });
+      const marketingConsentValue = newChecks.marketing ? 7 : 0;
+      onUpdate({ marketingConsent: marketingConsentValue });
     }
   };
+
 
   const handleArrowClick = (key: string, event: React.MouseEvent) => {
     event.stopPropagation();
@@ -53,7 +56,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   };
 
   const isNextEnabled = checks.privacy && checks.service;
-  
+
   return (
     <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
       <div className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">

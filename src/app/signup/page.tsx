@@ -22,7 +22,7 @@ const SignupPage: React.FC = () => {
     nickname?: string;
     birthDate?: string;
     investmentExperience?: string;
-    marketingConsent?: boolean;
+    marketingConsent?: number;
     loginType: 'local' | 'social' | 'naver' | 'google' | 'kakao';
   }>({
     loginType: 'local',
