@@ -88,7 +88,7 @@ const SignupPage: React.FC = () => {
   
       const response = await finalSignup(formData, authHeaders);
 
-      console.log(response.status);
+      console.log(response);
  
       if (response?.status === 200) {
         router.push('/');
