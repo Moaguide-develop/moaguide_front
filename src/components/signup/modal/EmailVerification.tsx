@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { sendEmail, verifyEmailCode } from '@/service/auth';
+import { sendEmail, verifyEmailCode, verifyEmail } from '@/service/auth'; 
 import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import { useRouter } from 'next/navigation';
@@ -12,6 +12,7 @@ interface EmailVerificationProps {
 const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailChange }) => {
   const [email, setEmail] = useState<string>(''); 
   const [emailValid, setEmailValid] = useState(false); 
+  const [emailAvailable, setEmailAvailable] = useState<boolean | null>(null); 
   const [isRequest, setIsRequest] = useState(false); 
   const [verificationCode, setVerificationCode] = useState<string>(''); 
   const [verificationCodeValid, setVerificationCodeValid] = useState(false); 
@@ -22,11 +23,38 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
 
   const router = useRouter();
 
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null); 
+
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const emailInput = e.target.value;
     setEmail(emailInput);
-    onEmailChange(emailInput); 
-    setEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput)); 
+    setEmailAvailable(null); 
+    onEmailChange(emailInput);
+    
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
+    setEmailValid(isEmailValid);
+
+    if (debounceTimeout.current) clearTimeout(debounceTimeout.current);
+  
+    if (isEmailValid) {
+      debounceTimeout.current = setTimeout(async () => {
+        try {
+          if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput)) {
+            const response = await verifyEmail(emailInput); 
+            if (response.success) {
+              setEmailAvailable(true); 
+            } else {
+              setEmailAvailable(false);
+            }
+          }
+        } catch (error) {
+          setEmailAvailable(false); 
+          console.error('이메일 중복 확인 실패:', error);
+        }
+      }, 1000); 
+    } else {
+      setEmailAvailable(null); 
+    }
   };
 
   const handleVerificationCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -135,7 +163,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
               placeholder="이메일 입력"
               className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
             />
-            {emailValid ? (
+            {emailValid && emailAvailable === true ? (
               isRequest ? (
                 <div
                   onClick={handleResendVerification}
@@ -153,14 +181,22 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
                 </div>
               )
             ) : (
-              <div className="ml-[6px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+              <div className="ml-[6px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
                 인증 요청
               </div>
             )}
           </div>
+          <div className='h-[20px] mt-2'>
+          {emailAvailable === true && (
+            <p className="text-green-500 text-sm">사용 가능한 이메일입니다.</p>
+          )}
+          {emailAvailable === false && (
+            <p className="text-red-500 text-sm">이미 사용 중인 이메일입니다.</p>
+          )}
+          </div>
         </div>
 
-        <div className="mt-[28px]">
+        <div className="mt-6">
           <div className="text-body3">인증번호</div>
           <div className="flex items-center mt-2">
             <input
@@ -184,29 +220,30 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
                 인증 완료
               </div>
             ) : (
-              <div className="ml-[8px] px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
-                인증 완료
-              </div>
-            )}
-          </div>
-
+              <div className="ml-[8px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
+              인증 완료
+            </div>
+          )}
+        </div>
+        <div className='h-[14px] mt-2 pb-4'>
           {isRequest && (
-            <div className={`text-body7 text-normal mt-[10px] ${isComplete && 'hidden'} ${isError && 'hidden'}`}>
+            <div className={`text-body7 text-normal ${isComplete && 'hidden'} ${isError && 'hidden'}`}>
               남은시간 : {validNumberToTime(validTime)}
             </div>
           )}
-          {isComplete && <div className="text-body7 text-success mt-[10px] pb-4">인증이 완료되었습니다.</div>}
-          {isError && <div className="text-body7 text-error mt-[10px]">인증번호가 일치하지 않습니다.</div>}
+          {isComplete && <div className="text-body7 text-success">인증이 완료되었습니다.</div>}
+          {isError && <div className="text-body7 text-error">인증번호가 일치하지 않습니다.</div>}
         </div>
-      </section>
-      <div
-        onClick={handleComplete}
-        className={`w-[90%] sm:w-full sm:max-w-[340px] flex items-center justify-center px-5 py-3 rounded-[12px] font-bold text-lg mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 
-        ${isComplete ? 'bg-gradient2 text-heading4 text-white cursor-pointer' : 'bg-gray100 text-heading4 text-gray400'}`}
-    >
-      다음으로
-    </div>
+      </div>
+    </section>
+    <div
+      onClick={handleComplete}
+      className={`w-[90%] sm:w-full sm:max-w-[340px] flex items-center justify-center px-5 py-3 rounded-[12px] font-bold text-lg mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 
+      ${isComplete ? 'bg-gradient2 text-heading4 text-white cursor-pointer' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'}`}
+  >
+    다음으로
   </div>
+</div>
 );
 };
 
