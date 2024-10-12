@@ -140,10 +140,10 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           </div>
           <div className="min-h-8 flex items-center">
             {isNicknameValid === true && (
-              <p className="text-blue-500 text-xs">사용 가능한 닉네임입니다.</p>
+              <p className="text-xs text-success">사용 가능한 닉네임입니다.</p>
             )}
             {isNicknameValid === false && (
-              <p className="text-red-500 text-xs">이미 사용중인 닉네임입니다.</p>
+              <p className="text-xs text-error">이미 사용중인 닉네임입니다.</p>
             )}
             </div>
           </div>

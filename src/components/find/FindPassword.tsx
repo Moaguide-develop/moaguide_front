@@ -217,7 +217,7 @@ const FindPassword = () => {
             </div>
             {isRequest ? (
               <div
-                className={`text-body7 text-normal mt-[10px]
+                className={`text-xs text-normal mt-[10px]
             ${isComplete && 'hidden'}
             ${isError && 'hidden'}
             `}
@@ -226,12 +226,12 @@ const FindPassword = () => {
               </div>
             ) : null}
             {isComplete && (
-              <div className="text-body7 text-success mt-[10px]">
+              <div className="text-xs text-success mt-[10px]">
                 인증이 완료되었습니다.
               </div>
             )}
             {isError && (
-              <div className="text-body7 text-error mt-[10px]">
+              <div className="text-xs text-error mt-[10px]">
                 인증번호가 일치하지 않습니다.
               </div>
             )}

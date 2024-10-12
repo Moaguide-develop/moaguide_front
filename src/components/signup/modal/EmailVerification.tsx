@@ -188,15 +188,15 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
           </div>
           <div className='h-[20px] mt-2'>
           {emailAvailable === true && (
-            <p className="text-green-500 text-sm">사용 가능한 이메일입니다.</p>
+            <p className="text-xs text-success">사용 가능한 이메일입니다.</p>
           )}
           {emailAvailable === false && (
-            <p className="text-red-500 text-sm">이미 사용 중인 이메일입니다.</p>
+            <p className="text-xs text-error">이미 사용 중인 이메일입니다.</p>
           )}
           </div>
         </div>
 
-        <div className="mt-6">
+        <div className="mt-4">
           <div className="text-body3">인증번호</div>
           <div className="flex items-center mt-2">
             <input
@@ -227,12 +227,12 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
         </div>
         <div className='h-[14px] mt-2 pb-4'>
           {isRequest && (
-            <div className={`text-body7 text-normal ${isComplete && 'hidden'} ${isError && 'hidden'}`}>
+            <div className={`text-xs text-normal ${isComplete && 'hidden'} ${isError && 'hidden'}`}>
               남은시간 : {validNumberToTime(validTime)}
             </div>
           )}
-          {isComplete && <div className="text-body7 text-success">인증이 완료되었습니다.</div>}
-          {isError && <div className="text-body7 text-error">인증번호가 일치하지 않습니다.</div>}
+          {isComplete && <div className="text-xs text-success">인증이 완료되었습니다.</div>}
+          {isError && <div className="text-xs text-error">인증번호가 일치하지 않습니다.</div>}
         </div>
       </div>
     </section>

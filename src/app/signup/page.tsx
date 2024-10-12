@@ -90,21 +90,14 @@ const SignupPage: React.FC = () => {
 
       console.log(response);
  
-      if (response?.status === 200) {
-        router.push('/');
+      if (response === '회원가입 완료') {
+        alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
+        router.push('/sign'); 
       }
       
     } catch (error) {
       console.error('서버 요청 오류:', error);
-      toast.error('회원가입에 실패했습니다. 잠시후 다시 시도해주세요.', {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      alert('회원가입에 실패했습니다. 다시 시도해주세요.');
     }
   };
 

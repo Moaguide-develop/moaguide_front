@@ -84,10 +84,10 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
             <p className="text-[#6E6F73] text-xs mt-2">영문, 숫자, 특수문자 포함 8-20자로 입력해주세요.</p>
           )}
           {password && passwordValid === false && (
-            <p className="text-red-500 text-xs mt-2">비밀번호 양식에 맞지 않습니다.</p>
+            <p className="text-xs text-error mt-2">비밀번호 양식에 맞지 않습니다.</p>
           )}
           {passwordValid === true && (
-            <p className="text-blue-500 text-xs mt-2">사용 가능한 비밀번호입니다.</p>
+            <p className="text-xs text-success mt-2">사용 가능한 비밀번호입니다.</p>
           )}
         </div>
 
@@ -101,12 +101,12 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
             className={`w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
             ${confirmPassword ? (passwordMatch ? 'outline-success' : 'focus:outline-normal') : ''}`}
           />
-          <div className="mt-1 min-h-[25px]">
+          <div className="mt-2 min-h-[16px]">
             {passwordMatch === false && (
-              <p className="text-red-500 text-xs">비밀번호가 일치하지 않습니다.</p>
+              <p className="text-xs text-error">비밀번호가 일치하지 않습니다.</p>
             )}
             {passwordMatch === true && (
-              <p className="text-blue-500 text-xs">비밀번호가 일치합니다.</p>
+              <p className="text-xs text-success">비밀번호가 일치합니다.</p>
             )}
           </div>
           </div>
