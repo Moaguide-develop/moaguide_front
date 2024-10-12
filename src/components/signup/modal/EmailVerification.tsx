@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 interface EmailVerificationProps {
   onNext: () => void;
-  onEmailChange: (email: string) => void; // 이메일을 전달하는 함수
+  onEmailChange: (email: string) => void; 
 }
 
 const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailChange }) => {
@@ -25,8 +25,8 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const emailInput = e.target.value;
     setEmail(emailInput);
-    onEmailChange(emailInput); // 입력된 이메일을 상위 컴포넌트로 전달
-    setEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput)); // 이메일 유효성 검사
+    onEmailChange(emailInput); 
+    setEmailValid(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput)); 
   };
 
   const handleVerificationCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -37,9 +37,9 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
 
   const handleRequestVerification = async () => {
     try {
-      await sendEmail(email); // 이메일로 인증 코드 발송
+      await sendEmail(email);
       setIsRequest(true);
-      setValidTime(300); // 5분 타이머 시작
+      setValidTime(300);
     } catch (error) {
       console.error('인증 요청 실패:', error);
       setIsRequest(false);
@@ -49,11 +49,11 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
   const handleResendVerification = async () => {
     if (isComplete) return;
     try {
-      await sendEmail(email); // 이메일 재전송
+      await sendEmail(email);
       setVerificationCode('');
       inputRef.current?.focus();
       setIsRequest(true);
-      setValidTime(300); // 타이머 초기화
+      setValidTime(300); 
     } catch (error) {
       console.error('재요청 실패:', error);
     }
@@ -123,7 +123,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
             <span className="text-purple-600">이메일</span>을 인증해주세요
           </h2>
         </div>
-        {/* 이메일 입력 */}
+
         <div className="mt-10">
           <div className="text-body3">이메일</div>
           <div className="flex items-center mt-2">
@@ -159,7 +159,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
             )}
           </div>
         </div>
-        {/* 인증번호 입력 */}
+
         <div className="mt-[28px]">
           <div className="text-body3">인증번호</div>
           <div className="flex items-center mt-2">
@@ -189,7 +189,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
               </div>
             )}
           </div>
-          {/* 남은 시간 또는 인증 완료 및 에러 메시지 */}
+
           {isRequest && (
             <div className={`text-body7 text-normal mt-[10px] ${isComplete && 'hidden'} ${isError && 'hidden'}`}>
               남은시간 : {validNumberToTime(validTime)}

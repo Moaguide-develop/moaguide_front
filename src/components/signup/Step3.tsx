@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 interface StepProps {
   onNext: () => void;
   onUpdate: (data: { email?: string; password?: string }) => void;
-  email: string; // 이전 스텝에서 입력된 이메일을 받음
+  email: string; 
 }
 
 const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
