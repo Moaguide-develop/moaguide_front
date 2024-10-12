@@ -35,7 +35,15 @@ export const metadata: Metadata = {
     url: 'https://moaguide.com',
     siteName: '모아가이드',
     locale: 'ko_KR',
-    type: 'website'
+    type: 'website',
+    images: [
+      {
+        url: '/favicon.svg', // Open Graph 이미지 URL
+        width: 1200,
+        height: 630,
+        alt: '모아가이드 대표 이미지'
+      }
+    ]
   }
 };
 
