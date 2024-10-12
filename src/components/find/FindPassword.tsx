@@ -129,7 +129,7 @@ const FindPassword = () => {
   return (
     <div className='min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center'>
        {!showPasswordReset && (
-      <><section className="w-[90%] sm:w-full max-w-[340px] mx-auto">
+      <><section className="w-[90%] sm:w-full max-w-[340px] mx-auto mt-[30px] sm:mt-0">
         <div className=''>
           <div className="self-start">
             <Image
