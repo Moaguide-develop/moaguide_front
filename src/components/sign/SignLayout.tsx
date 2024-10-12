@@ -7,6 +7,7 @@ import throttle from 'lodash/throttle';
 import NaverLogin from './NaverLogin';
 import KakaoLogin from './KakaoLogin';
 import { login } from '@/service/auth';
+import GoogleLogin from './GoogleLogin';
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');
@@ -45,13 +46,13 @@ const SignLayout = () => {
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
         </Link>
       </section>
-      <section className="flex flex-col items-center w-full px-4">
+      <section className="flex flex-col items-center w-[90%] sm:w-full max-w-[340px] px-4">
         <div className="mb-6">
           <div className='mb-2'>이메일</div>
           <input 
             type="email" 
             placeholder="이메일 입력" 
-            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm"
+            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm focus:outline-normal"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -61,7 +62,7 @@ const SignLayout = () => {
           <input 
             type="password" 
             placeholder="비밀번호 입력" 
-            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm"
+            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm focus:outline-normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -98,10 +99,11 @@ const SignLayout = () => {
           <a href="/find">비밀번호 찾기</a>
         </div>
       </section>
-      {/* <section className="mt-8 flex flex-col gap-3">
-        <KakaoLogin setLoginType={setLoginType} /> 
+      <section className="mt-8 flex flex-col gap-3">
+        {/* <KakaoLogin setLoginType={setLoginType} />  */}
         <NaverLogin setLoginType={setLoginType} /> 
-      </section> */}
+        <GoogleLogin setLoginType={setLoginType} /> 
+      </section>
     </div>
   );
 };

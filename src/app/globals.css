@@ -87,7 +87,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  z-index: 100;
+  z-index: 1;
+  pointer-events: none; 
 }
 
 .mySwiper2 .swiper-pagination-bullet {
@@ -95,6 +96,7 @@
   height: 8px;
   border-radius: 50%;
   display: inline-block;
+  pointer-events: auto;
 }
 
 .mySwiper2 .swiper-pagination-bullet-active {
