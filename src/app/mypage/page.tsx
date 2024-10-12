@@ -52,10 +52,10 @@ const Mypage = () => {
         <MypageMenu />
       </nav>
       <div 
-        className="text-gray400 body7 cursor-pointer max-w-max w-full mx-auto mt-10 hover:underline"
+        className="text-gray400 body7 cursor-pointer max-w-max w-full mx-auto mt-10 pb-4 hover:underline"
         onClick={handleLogout}
       >
-        <span className="max-w-max mb-[20px] sm:mb-0">로그아웃</span>
+        <span className="max-w-max mb-[40px] sm:mb-0">로그아웃</span>
       </div>
     </div>
   );

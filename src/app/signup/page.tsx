@@ -51,7 +51,7 @@ const SignupPage: React.FC = () => {
         loginType,
       }));
 
-      setCookie('access_token', verifyToken);
+      setCookie('verify_token', verifyToken);
 
       setCurrentStep(4);
     }

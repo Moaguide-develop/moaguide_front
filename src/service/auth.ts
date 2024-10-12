@@ -145,6 +145,26 @@ export const verifyEmailCode = async (email: string, code: string) => {
   }
 };
 
+export const verifyEmail = async (email: string) => {
+  try {
+    const response = await basicAxiosInstance.post('/signup/verify/email', { email });
+
+    if (response.status === 200) {
+      return { success: true, message: '중복된 이메일이 없습니다.' }; 
+    } else {
+      console.error('서버 오류 응답 상태:', response.status);
+      return { success: false, message: '서버 오류가 발생했습니다.' }; 
+    }
+  } catch (error: any) {
+    if (error.response && error.response.status === 400) {
+      return { success: false, message: '중복된 이메일이 있습니다.' }; 
+    } else {
+      console.error('API 호출 오류:', error);
+      return { success: false, message: 'API 호출 중 오류가 발생했습니다.' }; 
+    }
+  }
+};
+
 export const getUserEmail = async (token: string) => {
   try {
     const response = await basicAxiosInstance.get('/user/email', {

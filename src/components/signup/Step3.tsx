@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 interface StepProps {
   onNext: () => void;
   onUpdate: (data: { email?: string; password?: string }) => void;
-  email: string; // 이전 스텝에서 입력된 이메일을 받음
+  email: string; 
 }
 
 const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
@@ -116,7 +116,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
           onClick={onNext} 
           disabled={!isFormValid} 
           className={`w-[90%] sm:w-full sm:max-w-[340px] py-3 rounded-[12px] text-lg font-bold mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 
-          ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400'}`}
+          ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'}`}
         >
           다음으로
         </button>
