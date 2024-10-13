@@ -33,25 +33,25 @@ const BuildingProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">최근 배당금</div>
-            <div className="">{data?.publish.last_divide}</div>
+            <div className="">{data?.publish.last_divide.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">발생 증권수</div>
-            <div className="">{data?.publish.piece}</div>
+            <div className="">{data?.publish.piece.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">1주 당 발행 가액</div>
-            <div className="">{data?.publish.basePrice}</div>
+            <div className="">{data?.publish.basePrice.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">총 모집 액</div>
-            <div className="">{data?.publish.totalPrice}</div>
+            <div className="">{data?.publish.totalPrice.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
@@ -99,7 +99,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">보증금</div>
-            <div className="">{data?.lease[0].deposit}</div>
+            <div className="">{data?.lease[0].deposit.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">

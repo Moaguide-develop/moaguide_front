@@ -21,9 +21,10 @@ const KakaoMap = () => {
   const mapRef = useRef<HTMLDivElement>(null);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ['buildingData'],
+    queryKey: ['buildingData', lastSegment],
     queryFn: fetchBuildingData
   });
+
   useEffect(() => {
     if (window.kakao && data) {
       window.kakao.maps.load(() => {
@@ -54,30 +55,64 @@ const KakaoMap = () => {
         });
         circle.setMap(map);
         circle.setZIndex(10);
+
+        // 지도의 중심을 고정
         window.kakao.maps.event.addListener(map, 'zoom_changed', () => {
           map.setCenter(markerPosition);
         });
 
         // API에서 가져온 데이터를 사용해 폴리곤을 그리기
         data.areas.forEach((area: any) => {
-          const coordinates = area.polygon
-            .replace('POLYGON ((', '')
-            .replace('))', '')
-            .split(', ')
-            .map((coord: string) => {
-              const [lng, lat] = coord.split(' ').map(Number);
-              return new window.kakao.maps.LatLng(lat, lng);
-            });
+          if (area.polygon.startsWith('HOLE')) {
+            // HOLE 처리
+            const polygons = area.polygon
+              .replace('HOLE ((', '')
+              .replace('))', '')
+              .split('),(')
+              .map((polygon: string) => {
+                return polygon
+                  .replace('(', '')
+                  .replace(')', '')
+                  .split(', ')
+                  .map((coord: string) => {
+                    const [lng, lat] = coord.split(' ').map(Number);
+                    return new window.kakao.maps.LatLng(lat, lng);
+                  });
+              });
 
-          const polygon = new window.kakao.maps.Polygon({
-            path: coordinates,
-            strokeWeight: 3,
-            strokeColor: area.color.toLowerCase(),
-            strokeOpacity: 0.8,
-            fillOpacity: 0.5,
-            fillColor: area.color.toLowerCase()
-          });
-          polygon.setMap(map);
+            const outerPolygon = polygons[0];
+            const innerPolygons = polygons.slice(1);
+
+            const polygon = new window.kakao.maps.Polygon({
+              path: [outerPolygon, ...innerPolygons],
+              strokeWeight: 3,
+              strokeColor: area.color.toLowerCase(),
+              strokeOpacity: 0.8,
+              fillOpacity: 0.5,
+              fillColor: area.color.toLowerCase()
+            });
+            polygon.setMap(map);
+          } else if (area.polygon.startsWith('POLYGON')) {
+            // 일반 POLYGON 처리
+            const coordinates = area.polygon
+              .replace('POLYGON ((', '')
+              .replace('))', '')
+              .split(', ')
+              .map((coord: string) => {
+                const [lng, lat] = coord.split(' ').map(Number);
+                return new window.kakao.maps.LatLng(lat, lng);
+              });
+
+            const polygon = new window.kakao.maps.Polygon({
+              path: coordinates,
+              strokeWeight: 3,
+              strokeColor: area.color.toLowerCase(),
+              strokeOpacity: 0.8,
+              fillOpacity: 0.5,
+              fillColor: area.color.toLowerCase()
+            });
+            polygon.setMap(map);
+          }
         });
       });
     }
