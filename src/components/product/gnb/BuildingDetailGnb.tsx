@@ -3,11 +3,13 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { getBuildingProductDetail } from '@/factory/ProductDetail/BuildingProductDetail';
 
 const BuildingDetailGnb = () => {
+  const router = useRouter();
+
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop() || '';
   const { data } = getBuildingProductDetail(lastSegment);
@@ -41,9 +43,9 @@ const BuildingDetailGnb = () => {
   return (
     <div>
       <div className="py-[16px] h-[60px] max-w-[1000px] mx-auto flex items-center justify-between sm:px-0 sm:py-3 w-[90%] lg:w-[100%]">
-        <Link href={'/'} className="cursor-pointer">
+        <div className="cursor-pointer" onClick={() => router.back()}>
           <img src="/images/product/LeftVector.svg" alt="left" className="w-5 h-5" />
-        </Link>
+        </div>
         <div className="flex items-center gap-6">
           <div>
             <Image
