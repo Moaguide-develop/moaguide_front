@@ -97,6 +97,24 @@ const MusicCopyRightFeeChart = () => {
     labels: paymentDate,
     datasets: [
       {
+        type: 'line' as const,
+        label: '시가배당률',
+        data: CopyRightFeeDivideRateCount,
+        borderColor: '#0000FF',
+        backgroundColor: '#0000FF',
+        pointBackgroundColor: '#0000FF',
+        pointBorderColor: '#0000FF',
+        fill: false,
+        tension: 0.4,
+        yAxisID: 'y2',
+        pointStyle: 'circle',
+        pointRadius: 6,
+        datalabels: {
+          display: false
+        },
+        order: 1 // Line 그래프를 먼저 렌더링
+      },
+      {
         type: 'bar' as const,
         label: '저작권료',
         data: CopyRightFeeDivideCount,
@@ -130,24 +148,8 @@ const MusicCopyRightFeeChart = () => {
           anchor: 'end' as const,
           color: '#000',
           formatter: (value: number) => `${value}원`
-        }
-      },
-      {
-        type: 'line' as const,
-        label: '시가저작권료',
-        data: CopyRightFeeDivideRateCount,
-        borderColor: '#0000FF',
-        backgroundColor: '#0000FF',
-        pointBackgroundColor: '#0000FF',
-        pointBorderColor: '#0000FF',
-        fill: false,
-        tension: 0.4,
-        yAxisID: 'y2',
-        pointStyle: 'circle',
-        pointRadius: 6,
-        datalabels: {
-          display: false
-        }
+        },
+        order: 2 // Bar 그래프를 나중에 렌더링
       }
     ]
   };

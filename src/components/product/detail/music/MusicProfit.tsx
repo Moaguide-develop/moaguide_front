@@ -105,19 +105,19 @@ const MusicProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">발행수량</div>
-            <div className="flex-1">{data?.musicPublish.piece}</div>
+            <div className="flex-1">{data?.musicPublish.piece.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">발행가액</div>
-            <div className="flex-1">{data?.musicPublish.basePrice}</div>
+            <div className="flex-1">{data?.musicPublish.basePrice.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">총 모집액</div>
-            <div className="flex-1">{data?.musicPublish.totalPrice}</div>
+            <div className="flex-1">{data?.musicPublish.totalPrice.toLocaleString()}</div>
           </div>
         </div>
 
