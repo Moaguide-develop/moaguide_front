@@ -99,7 +99,7 @@ const SignLayout = () => {
           <a href="/find">비밀번호 찾기</a>
         </div>
       </section>
-      <section className="mt-8 flex flex-col gap-3">
+      <section className="mt-8 flex flex-col gap-3 mb-4">
         {/* <KakaoLogin setLoginType={setLoginType} />  */}
         <NaverLogin setLoginType={setLoginType} /> 
         <GoogleLogin setLoginType={setLoginType} /> 
