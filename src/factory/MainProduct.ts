@@ -5,9 +5,14 @@ import axios from 'axios';
 
 const fetchMainProduct = async (category: string) => {
   try {
-    const { data } = await axios.get(
-      `https://api.moaguide.com/summary/list?category=${category}&subcategory=trade&sort=lastDivide_rate desc&page=1&size=3`
-    );
+    let url = '';
+    if (category === 'all') {
+      url = `https://api.moaguide.com/summary/list?category=${category}&subcategory=trade&sort=lastDivide_rate desc&page=1&size=3`;
+    } else {
+      url = `https://api.moaguide.com/home/list?category=${category}`;
+    }
+
+    const { data } = await axios.get(url);
     return data.product;
   } catch (e) {
     throw new Error('Failed to fetch main product data');
