@@ -58,13 +58,15 @@ const ContentProfit = ({
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px]">1주당 가격</div>
-            <div className="flex-1">{data?.base.publish.basePrice}</div>
+            <div className="flex-1">{data?.base.publish.basePrice.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px]">최소투자금액</div>
-            <div className="flex-1">{data?.base.publish.minInvestment}</div>
+            <div className="flex-1">
+              {data?.base.publish.minInvestment.toLocaleString()}
+            </div>
           </div>
         </div>
 
@@ -90,7 +92,9 @@ const ContentProfit = ({
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px] ">총예산규모</div>
-              <div className="flex-1">{data?.base.investment.totalBudget}</div>
+              <div className="flex-1">
+                {data?.base.investment.totalBudget.toLocaleString()}
+              </div>
             </div>
           </div>
           <div className="flex flex-col  mb-[7px]">
