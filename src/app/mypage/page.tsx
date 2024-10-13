@@ -44,7 +44,7 @@ const Mypage = () => {
   }
 
   return (
-    <div className="min-h-[calc(100dvh-160px)] flex flex-col sm:min-h-[calc(100vh-160px)] sm:mb-0 mt-5 w-[90%] mx-auto sm:max-w-[640px] sm:mt-10">
+    <div className="min-h-[calc(100dvh-132.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]">
       <header>
         <MypageHeader />
       </header>
@@ -52,10 +52,10 @@ const Mypage = () => {
         <MypageMenu />
       </nav>
       <div 
-        className="text-gray400 body7 cursor-pointer max-w-max w-full mx-auto mt-10 hover:underline"
+        className="text-gray400 body7 cursor-pointer max-w-max w-full mx-auto mt-10 pb-4 hover:underline"
         onClick={handleLogout}
       >
-        <span className="max-w-max">로그아웃</span>
+        <span className="max-w-max mb-[40px] sm:mb-0">로그아웃</span>
       </div>
     </div>
   );

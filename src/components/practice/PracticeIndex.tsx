@@ -25,7 +25,6 @@ const PracticeIndex = () => {
         <section className="">
           <CategoryPractice />
         </section>
-        <div className="h-[100px] sm:h-12" />
       </Container>
     </div>
   );

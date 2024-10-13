@@ -13,3 +13,7 @@ export const getToken = (): string | undefined => {
 export const removeToken = () => {
   removeCookie('access_token', { path: '/' });
 };
+
+export const setVerifyToken = (token: string) => {
+  setCookie('verify_token', token, { path: '/', secure: true, sameSite: 'strict' });
+};

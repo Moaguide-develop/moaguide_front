@@ -1,9 +1,10 @@
 'use client';
+
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import { useModalStore } from '@/store/modal.store';
 import { useMemberStore } from '@/store/user.store';
-import { useRouter } from 'next/navigation';
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import { checkNicknameAvailability } from '@/service/auth';
 import { updateNickname } from '@/service/change';
 import { getSocialInfo } from '@/utils/checkEmail';
@@ -17,10 +18,8 @@ const Editpage = () => {
   const [isNameValid, setIsNameValid] = useState(false);
   const [isNameComplete, setIsNameComplete] = useState('');
   const { setModalType, setOpen, open } = useModalStore();
-
   const { isLoggedIn } = useAuthStore();
-
-  const socialInfo = getSocialInfo(member.loginType, member.memberEmail); 
+  const socialInfo = getSocialInfo(member.loginType, member.memberEmail);
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     const regex = e.target.value.replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
@@ -44,19 +43,17 @@ const Editpage = () => {
   const handleComplete = async () => {
     if (isNameComplete === 'yes') {
       const success = await updateNickname(nameValue);
-      
+
       if (success) {
         const { member, setMember } = useMemberStore.getState();
-        
         const updatedMember = {
           ...member,
           memberNickName: nameValue,
         };
-  
         setMember(updatedMember);
-        
+
         alert('닉네임이 성공적으로 수정되었습니다.');
-        router.push('/mypage'); 
+        router.push('/mypage');
       } else {
         alert('닉네임 수정에 실패하였습니다. 다시 시도해주세요.');
       }
@@ -68,7 +65,7 @@ const Editpage = () => {
       router.push('/');
     }
   }, [isLoggedIn, router]);
-  
+
   useEffect(() => {
     setIsNameValid(nameValue.length >= 3);
     setIsNameComplete('');
@@ -106,7 +103,7 @@ const Editpage = () => {
               ${isNameComplete === 'no' && 'outline-error'}
               ${isNameComplete === 'yes' && 'outline-success'}
               `}
-              style={{ minWidth: '0' }} 
+                style={{ minWidth: '0' }}
               />
               {isNameValid ? (
                 <div
@@ -147,7 +144,7 @@ const Editpage = () => {
           <div className="flex justify-between items-center">
             <div>이메일</div>
             <div className="flex items-center gap-[8px]">
-              {socialInfo.imgSrc && <img src={socialInfo.imgSrc} alt="socialLogo" width={18} height={18}/>}
+              {socialInfo.imgSrc && <img src={socialInfo.imgSrc} alt="socialLogo" width={18} height={18} />}
               <div>{socialInfo.platform} 가입</div>
             </div>
           </div>
@@ -156,17 +153,20 @@ const Editpage = () => {
             <div>{member.memberEmail}</div>
           </div>
         </div>
-        {/* 비밀번호 변경 */}
-        <div className="text-body4 mt-5 pb-5 border-b border-gray100 flex justify-between items-center">
-          <div>비밀번호 변경하기</div>
-          <div
-            onClick={() => router.push('/mypage/edit/changepassword')}
-            className="text-body7 text-gray400 cursor-pointer p-3 rounded-[12px] border border-gray100 hover:bg-bg">
-            비밀번호 변경
+
+        {/* 비밀번호 변경 (loginType이 local일 때만 렌더링) */}
+        {member.loginType === 'local' && (
+          <div className="text-body4 mt-5 pb-5 border-b border-gray100 flex justify-between items-center">
+            <div>비밀번호 변경하기</div>
+            <div
+              onClick={() => router.push('/mypage/edit/changepassword')}
+              className="text-body7 text-gray400 cursor-pointer p-3 rounded-[12px] border border-gray100 hover:bg-bg">
+              비밀번호 변경
+            </div>
           </div>
-        </div>
-        {/* 휴대폰 번호 변경 */}
-        <div className="mt-5 pb-5 ">
+        )}
+         {/* 휴대폰 번호 변경 */}
+        {/* <div className="mt-5 pb-5 ">
           <div className="text-body4 flex justify-between items-center">
             <div>휴대폰 번호</div>
             <div>{member?.memberPhone || '없음'}</div>
@@ -179,19 +179,20 @@ const Editpage = () => {
               휴대폰 번호 변경
             </div>
           </div>
+        </div> */}
+        {/* 회원탈퇴 */}
+        <div
+          onClick={() => {
+            setOpen(true);
+            setModalType('secession');
+          }}
+          className="text-body7 text-error flex justify-end hover:underline mt-4">
+          <span className="cursor-pointer">회원탈퇴</span>
         </div>
       </section>
-      {/* 회원탈퇴 */}
-      <div
-        onClick={() => {
-          setOpen(true);
-          setModalType('secession');
-        }}
-        className=" text-body7 text-error flex justify-end hover:underline">
-        <span className="cursor-pointer">회원탈퇴</span>
-      </div>
+
       {/* 수정 완료 */}
-      <div className=" mt-12 flex justify-end">
+      <div className="mt-12 flex justify-end">
         <div className="flex-1"></div>
         {isNameComplete === 'yes' ? (
           <div

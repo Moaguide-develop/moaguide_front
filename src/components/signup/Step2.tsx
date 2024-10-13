@@ -1,5 +1,5 @@
 import React from 'react';
-import PhoneVerification from './modal/PhoneVerification';
+import EmailVerification from './modal/EmailVerification';  
 
 interface Step2Props {
   onNext: () => void;
@@ -7,14 +7,15 @@ interface Step2Props {
 }
 
 const Step2: React.FC<Step2Props> = ({ onNext, onUpdate }) => {
-  const handlePhoneNumberChange = (number: string) => {
-    onUpdate({ phoneNumber: number });
+
+  const handleEmailChange = (email: string) => {
+    onUpdate({ email }); 
   };
 
   return (
-    <PhoneVerification
+    <EmailVerification
       onNext={onNext}
-      onPhoneNumberChange={handlePhoneNumberChange}
+      onEmailChange={handleEmailChange}  
     />
   );
 };
