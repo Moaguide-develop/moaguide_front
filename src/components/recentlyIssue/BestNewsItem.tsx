@@ -4,7 +4,7 @@ import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 import React from 'react';
-
+import Image from 'next/image';
 interface BestNewsItemType {
   item: MainNews;
   rank: number;
@@ -15,10 +15,12 @@ const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
     <Link href={item.link} target="_blank">
       <div className="flex flex-col  gap-4 cursor-pointer mt-5 sm:mt-0">
         <div className="relative">
-          <img
+          <Image
             src={item.imgUrl}
             alt="img"
-            className="w-full h-[50%] sm:w-[358px] h-[176px] sm:w-[336px] sm:h-[186px] rounded-[12px]"
+            width={336}
+            height={186}
+            className="w-full  rounded-[12px] object-cover"
           />
         </div>
         <img
@@ -26,9 +28,7 @@ const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
           alt=""
           className="absolute mt-1 ml-1"
         />
-        <div className="sm:text-title2 text-title1 text-gray600 w-full">
-          {item.title}
-        </div>
+        <div className="sm:text-title2 text-title1 text-gray600 w-full">{item.title}</div>
         <div className="flex items-center justify-between ">
           <div className="text-body4 sm:text-body7 text-gray400">
             {formatCategory(item.category)}

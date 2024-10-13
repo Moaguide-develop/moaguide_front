@@ -3,27 +3,31 @@ import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 import React from 'react';
-
+import Image from 'next/image';
 const CategoryNewsItem = ({ id, title, category, link, date, imgUrl }: IssueListItem) => {
-
   const defaultImages: { [key: string]: string } = {
-    'building': '/images/home/default-real-estate.png',
-    'music': '/images/home/default-entertainment.png',
-    'cow': '/images/home/default-cow.png',
-    'art': '/images/home/default-art.png',
-    'content': '/images/home/default-contents.png',
+    building: '/images/home/default-real-estate.png',
+    music: '/images/home/default-entertainment.png',
+    cow: '/images/home/default-cow.png',
+    art: '/images/home/default-art.png',
+    content: '/images/home/default-contents.png'
   };
 
-  const imageSrc = (!imgUrl || imgUrl === "No image" || imgUrl === "null") ? defaultImages[category] : imgUrl;
+  const imageSrc =
+    !imgUrl || imgUrl === 'No image' || imgUrl === 'null'
+      ? defaultImages[category]
+      : imgUrl;
 
   return (
     <Link href={link} target="_blank">
       <div className="mt-5 pb-5 border-b border-gray100 flex gap-5 items-center cursor-pointer">
         <div>
-          <img
+          <Image
             src={imageSrc}
             alt="img"
-            className="w-[132px] h-[93px] rounded-[12px]"
+            width={132}
+            height={93}
+            className="w-[132px] h-[93px] rounded-[12px] ovject-cover "
           />
         </div>
         <div className="flex-1 flex flex-col gap-4">
