@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
+import withBundleAnalyzer from '@next/bundle-analyzer';
+
+const bundleAnalyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+  openAnalyzer: false
+});
 const nextConfig = {
   output: 'standalone',
   experimental: { instrumentationHook: true },
@@ -12,7 +18,9 @@ const nextConfig = {
       'api.moaguide.com',
       'entertain.naver.com',
       's.pstatic.net',
-      'search.pstatic.net'
+      'search.pstatic.net',
+      'imgnews.pstatic.net',
+      'mimgnews.pstatic.net'
     ]
   },
 
@@ -36,4 +44,4 @@ const nextConfig = {
   }
 };
 
-export default nextConfig;
+export default bundleAnalyzer(nextConfig);

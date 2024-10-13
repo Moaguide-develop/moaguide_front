@@ -7,8 +7,7 @@ import Script from 'next/script';
 import ModalProvider from '@/providers/ModalProvider';
 import MobileFooter from '@/components/common/MobileFooter';
 import GoogleAnalytics from '@/lib/GoogleAnalytics';
-import GnbWrapper from '@/components/common/GnbWrapper'; 
-
+import GnbWrapper from '@/components/common/GnbWrapper';
 
 declare global {
   interface Window {
@@ -29,13 +28,22 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.svg'
   },
+  keywords: ['모아가이드', 'moaguide', 'STO 큐레이션', '블록체인', '투자 플랫폼'], // 추가된 부분
   openGraph: {
     title: '모아가이드',
     description: 'STO 큐레이션 플랫폼 모아가이드',
-    url: 'https://moaguide.vercel.app/',
+    url: 'https://moaguide.com',
     siteName: '모아가이드',
     locale: 'ko_KR',
-    type: 'website'
+    type: 'website',
+    images: [
+      {
+        url: '/favicon.svg',
+        width: 1200,
+        height: 630,
+        alt: '모아가이드 대표 이미지'
+      }
+    ]
   }
 };
 

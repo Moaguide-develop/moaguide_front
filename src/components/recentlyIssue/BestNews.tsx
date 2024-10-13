@@ -50,7 +50,7 @@ const BestNews = () => {
             </>
           ) : (
             data?.map((item: MainNews, i: number) => (
-              <SwiperSlide key={item.id}>
+              <SwiperSlide key={item.id} className="flex justify-center">
                 <BestNewsItem item={item} rank={i + 1} />
               </SwiperSlide>
             ))
