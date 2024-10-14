@@ -143,7 +143,7 @@ const YoutubeViewChart = () => {
     <div>
       <div className="text-base text-gray-500 mb-[10px]">매월 1일 누적 조회수 차트</div>
       <section className=" mb-[30px] h-[70px] flex  items-center desk:overflow-x-scroll desk2:overflow-x-visible scrollbar-hide  ">
-        <input
+        {/* <input
           type="radio"
           id="1"
           className=" mr-[5px] hidden "
@@ -156,7 +156,7 @@ const YoutubeViewChart = () => {
             filteringData === '1w' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
           1주일
-        </label>
+        </label> */}
         <input
           type="radio"
           id="6"
