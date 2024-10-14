@@ -11,12 +11,13 @@ import ContentProductDetail from '@/components/product/detail/content/ContentPro
 import { getContentProductDetail } from '@/factory/ProductDetail/ContentProductDetail';
 import Link from 'next/link';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
+import { useAuthStore } from '@/store/userAuth.store';
 const ContentDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
 
   const { data, isLoading, isError } = getContentProductDetail(props.params.id);
-
+  console.log(data?.genre);
   const [localData, setLocalData] = useState(data);
 
   useEffect(() => {
@@ -27,19 +28,25 @@ const ContentDetailpage = (props: { params: { id: string } }) => {
 
   const addmutation = useAddBookMark();
   const deletemutation = useDeleteBookMark();
+  const { isLoggedIn } = useAuthStore();
   const handleBookmarkClick = (
     productId: string | undefined,
     bookmark: boolean | undefined
   ) => {
     // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
-    setLocalData((prevData) =>
-      prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
-    );
+    if (isLoggedIn) {
+      setLocalData((prevData) =>
+        prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
+      );
 
-    if (!bookmark) {
-      addmutation.mutate({ productId, bookmark });
-    } else if (bookmark) {
-      deletemutation.mutate({ productId });
+      if (!bookmark) {
+        addmutation.mutate({ productId, bookmark });
+      } else if (bookmark) {
+        deletemutation.mutate({ productId });
+      }
+    } else {
+      alert('로그인이 필요한 서비스입니다.');
+      window.location.href = '/sign';
     }
   };
 
