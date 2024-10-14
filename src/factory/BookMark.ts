@@ -1,7 +1,6 @@
 import { axiosInstance } from '@/service/axiosInstance';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
-
+import { throttle } from 'lodash';
 const fetchAddBookMark = async ({
   productId,
   bookmark
@@ -9,21 +8,25 @@ const fetchAddBookMark = async ({
   productId: string | undefined;
   bookmark: boolean | undefined;
 }) => {
-  const { data } = await axiosInstance.post(
-    `https://api.moaguide.com/summary/bookmark/${productId}`,
-    {
-      productId,
-      bookmark
-    }
-  );
-  return data;
+  try {
+    const { data } = await axiosInstance.post(
+      `https://api.moaguide.com/summary/bookmark/${productId}`,
+      {
+        productId,
+        bookmark
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error; // 에러를 다시 던져서 호출한 곳에서 처리할 수 있도록 합니다.
+  }
 };
 
 export const useAddBookMark = () => {
-  const queryClient = useQueryClient();
-
+  const throttledFetchAddBookMark = throttle(fetchAddBookMark, 2000);
   const addmutation = useMutation({
-    mutationFn: fetchAddBookMark,
+    mutationFn: throttledFetchAddBookMark,
 
     onError: () => {}
   });
@@ -32,15 +35,22 @@ export const useAddBookMark = () => {
 };
 
 const fetchDeleteBookMark = async ({ productId }: { productId: string | undefined }) => {
-  const { data } = await axiosInstance.delete(
-    `https://api.moaguide.com/summary/bookmark/${productId}`
-  );
-  return data;
+  try {
+    const { data } = await axiosInstance.delete(
+      `https://api.moaguide.com/summary/bookmark/${productId}`
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error; // 에러를 다시 던져서 호출한 곳에서 처리할 수 있도록 합니다.
+  }
 };
 
 export const useDeleteBookMark = () => {
+  const throttledFetchDeleteBookMark = throttle(fetchDeleteBookMark, 2000);
+
   const deletemutation = useMutation({
-    mutationFn: fetchDeleteBookMark,
+    mutationFn: throttledFetchDeleteBookMark,
     onError: () => {}
   });
 
