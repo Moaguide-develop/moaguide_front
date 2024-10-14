@@ -24,14 +24,16 @@ const pretendard = localFont({
 
 export const metadata: Metadata = {
   title: '모아가이드',
-  description: 'STO 큐레이션 플랫폼 모아가이드',
+  description:
+    '모아가이드는 조각투자 및 소액투자를 쉽게 시작할 수 있도록 돕는 정보 큐레이션 플랫폼입니다. 다양한 자산 정보와 투자 가이드를 한곳에서 확인하세요. 안전하고 효율적인 투자 결정을 모아가이드와 함께하세요.',
   icons: {
     icon: '/favicon.svg'
   },
   keywords: ['모아가이드', 'moaguide', 'STO 큐레이션', '블록체인', '투자 플랫폼'], // 추가된 부분
   openGraph: {
     title: '모아가이드',
-    description: 'STO 큐레이션 플랫폼 모아가이드',
+    description:
+      '모아가이드는 조각투자 및 소액투자를 쉽게 시작할 수 있도록 돕는 정보 큐레이션 플랫폼입니다. 다양한 자산 정보와 투자 가이드를 한곳에서 확인하세요. 안전하고 효율적인 투자 결정을 모아가이드와 함께하세요.',
     url: 'https://moaguide.com',
     siteName: '모아가이드',
     locale: 'ko_KR',
