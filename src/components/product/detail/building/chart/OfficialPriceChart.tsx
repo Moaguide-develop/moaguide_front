@@ -3,29 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { usePathname } from 'next/navigation';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartOptions
-} from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartDataLabels
-);
+import { ChartOptions } from 'chart.js';
 
 // API 데이터 타입 정의
 interface LandData {

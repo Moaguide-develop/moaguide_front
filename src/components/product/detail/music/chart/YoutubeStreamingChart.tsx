@@ -1,36 +1,9 @@
-import { IContentMovieCharts } from '@/types/ContentProductType';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartOptions
-} from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useRef, useState } from 'react';
-import {
-  IContentYoutubeViewCharts,
-  IMusicStreamingChart
-} from '@/types/MusicProductType';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartDataLabels
-);
+import { IMusicStreamingChart } from '@/types/MusicProductType';
 
 const YoutubeStreamingChart = () => {
   const pathname = usePathname();

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -15,7 +16,8 @@
 
 .mySwiper .swiper-pagination {
   padding-top: 100px;
-  bottom: 0px; /* 하단에 위치 */
+  bottom: 0px;
+  /* 하단에 위치 */
   position: absolute;
   width: 100%;
   display: flex;
@@ -76,7 +78,8 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  -webkit-line-clamp: 2; /* 3-line limit */
+  -webkit-line-clamp: 2;
+  /* 3-line limit */
   white-space: normal;
 }
 
@@ -88,7 +91,7 @@
   display: flex;
   justify-content: center;
   z-index: 1;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .mySwiper2 .swiper-pagination-bullet {

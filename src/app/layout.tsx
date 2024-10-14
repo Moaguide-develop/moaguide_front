@@ -9,6 +9,8 @@ import MobileFooter from '@/components/common/MobileFooter';
 import GoogleAnalytics from '@/lib/GoogleAnalytics';
 import GnbWrapper from '@/components/common/GnbWrapper';
 
+import './plugin';
+
 declare global {
   interface Window {
     kakao: any;
