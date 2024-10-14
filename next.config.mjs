@@ -20,7 +20,8 @@ const nextConfig = {
       's.pstatic.net',
       'search.pstatic.net',
       'imgnews.pstatic.net',
-      'mimgnews.pstatic.net'
+      'mimgnews.pstatic.net',
+      'image.newsis.com'
     ]
   },
 
