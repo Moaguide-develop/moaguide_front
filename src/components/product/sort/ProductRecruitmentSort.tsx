@@ -20,7 +20,7 @@ const ProductRecruitmentSort = ({ sort, setSort }: ProductSortProps) => {
   };
   return (
     <div>
-      <div className="flex items-center gap-[10px] ml-[20px] ">
+      <div className="flex items-center gap-[10px] ml-[10px] ">
         <div className="text-body1 text-gray500">정렬</div>
         <div className="text-gray200">|</div>
         <div className="flex items-center gap-[6px]">
