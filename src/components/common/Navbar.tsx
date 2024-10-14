@@ -8,7 +8,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="hidden shadow-custom-light border-b border-gray100 sm:block w-[90%] lg:w-[100%] mx-auto">
+    <div className=" bg-white shadow-custom-light border-b desk:h-[60px] md:h-full border-gray100 sm:block desk:w-full  lg:w-[100%] sticky top-[58px] z-[99999]">
       <div className="max-w-[1000px] mx-auto flex items-center">
         <div
           onClick={() => {
