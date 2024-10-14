@@ -1,31 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartOptions
-} from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useRef, useState } from 'react';
 import { ICowMarketPrice } from '@/types/CowProductType';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartDataLabels
-);
 const CowMarketChart = () => {
   const [MarketfilteringData, setMarketFilteringData] = useState('cattlePopulation');
   const [MarketDateData, setDateData] = useState('1');

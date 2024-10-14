@@ -49,7 +49,7 @@ const Product = ({
   const sorted = searchParams.get('subcategory');
 
   return (
-    <div className="max-h-[2500px]">
+    <div className="">
       {/* <Navbar /> */}
       <Filter />
       <div className="w-full h-[168px] bg-gradient-to-b from-[#713ce2] to-[#5100ff]">

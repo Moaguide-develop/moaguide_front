@@ -1,33 +1,9 @@
 import React, { useState } from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'react-chartjs-2';
 import { usePathname } from 'next/navigation';
 import axios from 'axios';
 import { IMusicCopyRightFeeChart } from '@/types/MusicProductType';
 import { useQuery } from '@tanstack/react-query';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartDataLabels
-);
 
 const BuildingCopyRightFeeChart = () => {
   const pathname = usePathname();

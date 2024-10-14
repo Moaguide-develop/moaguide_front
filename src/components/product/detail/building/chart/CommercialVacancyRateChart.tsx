@@ -1,29 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartOptions
-} from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { ChartOptions } from 'chart.js';
+
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartDataLabels
-);
 
 interface RentData {
   year: number;

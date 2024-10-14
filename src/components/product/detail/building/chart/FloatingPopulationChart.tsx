@@ -1,20 +1,9 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  Plugin
-} from 'chart.js';
+
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { usePathname } from 'next/navigation';
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const FloatingPopulationChart = () => {
   const pathname = usePathname();
@@ -92,29 +81,6 @@ const FloatingPopulationChart = () => {
     ]
   };
 
-  const customTextPlugin = {
-    id: 'customText',
-    beforeDraw: (chart: any) => {
-      const { datasets } = chart.data;
-      const hasData = datasets.some((dataset: any) =>
-        dataset.data.some((value: number) => value !== 0)
-      );
-      if (!hasData) {
-        const ctx = chart.ctx;
-        const width = chart.width;
-        const height = chart.height;
-        ctx.save();
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.font = '16px Arial';
-        ctx.fillText('준비중입니다', width / 2, height / 2);
-        ctx.restore();
-      }
-    }
-  };
-
-  ChartJS.register(customTextPlugin);
-
   const stackedOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -129,8 +95,8 @@ const FloatingPopulationChart = () => {
       },
       datalabels: {
         display: false // 데이터 레이블 숨기기
-      },
-      customText: customTextPlugin
+      }
+      // customText: customTextPlugin
     },
     scales: {
       x: {
@@ -163,8 +129,8 @@ const FloatingPopulationChart = () => {
       },
       datalabels: {
         display: false // 데이터 레이블 숨기기
-      },
-      customText: customTextPlugin
+      }
+      // customText: customTextPlugin
     },
     scales: {
       x: {

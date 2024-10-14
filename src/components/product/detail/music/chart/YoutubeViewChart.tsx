@@ -1,33 +1,9 @@
-import { IContentMovieCharts } from '@/types/ContentProductType';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartOptions
-} from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useRef, useState } from 'react';
 import { IContentYoutubeViewCharts } from '@/types/MusicProductType';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  ChartDataLabels
-);
 
 const YoutubeViewChart = () => {
   const pathname = usePathname();
@@ -143,7 +119,7 @@ const YoutubeViewChart = () => {
     <div>
       <div className="text-base text-gray-500 mb-[10px]">매월 1일 누적 조회수 차트</div>
       <section className=" mb-[30px] h-[70px] flex  items-center desk:overflow-x-scroll desk2:overflow-x-visible scrollbar-hide  ">
-        <input
+        {/* <input
           type="radio"
           id="1"
           className=" mr-[5px] hidden "
@@ -156,7 +132,7 @@ const YoutubeViewChart = () => {
             filteringData === '1w' ? 'bg-purple-500 text-white' : 'bg-white text-gray-700'
           }`}>
           1주일
-        </label>
+        </label> */}
         <input
           type="radio"
           id="6"

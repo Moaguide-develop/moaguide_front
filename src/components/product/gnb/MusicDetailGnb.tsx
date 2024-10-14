@@ -6,6 +6,7 @@ import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import { getMusicProductDetail } from '@/factory/ProductDetail/MusicProductDetail';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useAuthStore } from '@/store/userAuth.store';
 
 const MusicDetailGnb = () => {
   const router = useRouter();
@@ -23,22 +24,27 @@ const MusicDetailGnb = () => {
   const addmutation = useAddBookMark();
   const deletemutation = useDeleteBookMark();
 
+  const { isLoggedIn } = useAuthStore();
   const handleBookmarkClick = (
     productId: string | undefined,
     bookmark: boolean | undefined
   ) => {
     // 낙관적 업데이트를 위해 로컬 상태를 먼저 변경합니다.
-    setLocalData((prevData) =>
-      prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
-    );
+    if (isLoggedIn) {
+      setLocalData((prevData) =>
+        prevData ? { ...prevData, bookmark: !prevData.bookmark } : prevData
+      );
 
-    if (!bookmark) {
-      addmutation.mutate({ productId, bookmark });
-    } else if (bookmark) {
-      deletemutation.mutate({ productId });
+      if (!bookmark) {
+        addmutation.mutate({ productId, bookmark });
+      } else if (bookmark) {
+        deletemutation.mutate({ productId });
+      }
+    } else {
+      alert('로그인이 필요한 서비스입니다.');
+      window.location.href = '/sign';
     }
   };
-
   return (
     <div>
       <div className="py-[16px] h-[60px] max-w-[1000px] mx-auto flex items-center justify-between sm:px-0 sm:py-3 w-[90%] lg:w-[100%]">

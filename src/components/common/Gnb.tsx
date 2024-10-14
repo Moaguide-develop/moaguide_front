@@ -29,13 +29,13 @@ const Gnb = () => {
 
   return (
     <div
-      className={
+      className={` sticky top-0 z-[99999] bg-white h-[59px] ${
         pathname.includes('/mypage') ||
         pathname.includes('/report/') ||
         pathname.includes('/payment')
           ? 'shadow-custom-light border-b border-gray100'
           : ''
-      }>
+      }`}>
       <div className="py-[16px] max-w-[1000px] mx-auto flex items-center justify-between sm:px-0 sm:py-3 w-[90%] lg:w-[100%]">
         <Link href={'/'} className="cursor-pointer">
           <img src="/images/logo.svg" alt="logo" className="w-[144px] h-5" />
