@@ -93,7 +93,7 @@ const ContentProfit = ({
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px] ">총예산규모</div>
               <div className="flex-1">
-                {data?.base.investment.totalBudget.toLocaleString()}
+                {data?.base.investment && data?.base.investment.totalBudget}
               </div>
             </div>
           </div>
