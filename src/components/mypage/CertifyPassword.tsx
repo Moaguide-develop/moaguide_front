@@ -62,7 +62,7 @@ const CertifyPassword = ({ setStep }: CertifyPasswordType) => {
           onChange={handlePasswordChange}
           type="password"
           placeholder="비밀번호 입력"
-          className="px-4 py-[14px] bg-bg text-body2 rounded-[12px] w-full outline-none"
+          className="px-4 py-[14px] bg-bg text-body2 rounded-[12px] w-full outline-none focus:outline-normal"
         />
       </div>
       </div>
