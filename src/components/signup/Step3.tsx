@@ -97,6 +97,7 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
             type="password" 
             placeholder="비밀번호 재입력"
             value={confirmPassword}
+            disabled={!passwordValid} 
             onChange={handleConfirmPasswordChange}
             className={`w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
             ${confirmPassword ? (passwordMatch ? 'outline-success' : 'focus:outline-normal') : ''}`}
