@@ -59,11 +59,11 @@ const SearchIndex = () => {
           />
           {keyWord && (
             <div onClick={handleClear} className="cursor-pointer mr-3">
-              <img src="/images/search/xcircle.svg" alt="" />
+              <img src="/images/search/xcircle.svg" alt="close" />
             </div>
           )}
           <div>
-            <img src="/images/search/search_icon.svg" alt="" />
+            <img src="/images/search/search_icon.svg" alt="search" className='cursor-pointer'/>
           </div>
         </div>
       </div>

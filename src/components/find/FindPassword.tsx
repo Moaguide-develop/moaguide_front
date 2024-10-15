@@ -187,7 +187,7 @@ const FindPassword = () => {
 
           <div className="mt-[28px]">
             <div className="text-body3">인증번호</div>
-            <div className="flex items-center mt-2 pb-4">
+            <div className="flex items-center mt-2">
               <input
                 ref={inputRef}
                 value={verificationCode}
@@ -280,7 +280,7 @@ const FindPassword = () => {
 
             <div className="mt-10">
               <div className="text-body3">새 비밀번호</div>
-              <div className="flex flex-col items-center mt-2">
+              <div className="flex flex-col items-center">
               <input 
                 type="password" 
                 placeholder="비밀번호 입력"
@@ -293,31 +293,32 @@ const FindPassword = () => {
                   <p className="w-full mr-auto text-[#6E6F73] text-xs mt-2">영문, 숫자, 특수문자 포함 8-20자로 입력해주세요.</p>
                 )}
                 {password && passwordValid === false && (
-                  <p className="w-full mr-auto  text-red-500 text-xs mt-2">비밀번호 양식에 맞지 않습니다.</p>
+                  <p className="w-full mr-auto  text-error text-xs mt-2">비밀번호 양식에 맞지 않습니다.</p>
                 )}
                 {passwordValid === true && (
-                  <p className="w-full mr-auto text-blue-500 text-xs mt-2">사용 가능한 비밀번호입니다.</p>
+                  <p className="w-full mr-auto text-success text-xs mt-2">사용 가능한 비밀번호입니다.</p>
                 )}
               </div>
             </div>
 
             <div className="mt-[28px]">
               <div className="text-body3">비밀번호 확인</div>
-              <div className="flex flex-col items-center mt-2">
+              <div className="flex flex-col items-center">
                 <input 
                   type="password" 
                   placeholder="비밀번호 재입력"
                   value={confirmPassword}
+                  disabled={!passwordValid} 
                   onChange={handleConfirmPasswordChange}
                   className={`w-full mt-4 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
                   ${password ? (passwordMatch ? 'outline-success' : 'focus:outline-normal') : ''}`}
                 />
-                 <div className="w-full mr-auto mt-1 min-h-[25px]">
-                  {passwordMatch === false && (
-                    <p className="w-full mr-auto text-red-500 text-xs">비밀번호가 일치하지 않습니다.</p>
+                <div className="w-full mr-auto min-h-[25px]">
+                  {confirmPassword && passwordMatch === false && (
+                    <p className="w-full mr-auto text-error text-xs mt-2">비밀번호가 일치하지 않습니다.</p>
                   )}
-                  {passwordMatch === true && (
-                    <p className="w-full mr-auto text-blue-500 text-xs">비밀번호가 일치합니다.</p>
+                  {confirmPassword && passwordMatch === true && (
+                    <p className="w-full mr-auto text-success text-xs mt-2">비밀번호가 일치합니다.</p>
                   )}
                 </div>
               </div>
@@ -332,7 +333,7 @@ const FindPassword = () => {
           transition={{ duration: 0.5 }}
           className="w-[90%] sm:w-full max-w-[340px] mx-auto"
         >
-        {passwordMatch ? (
+        {passwordValid && passwordMatch ? (
           <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white cursor-pointer mt-0 sm:mt-[40px] mb-[20px] sm:mb-0" onClick={handlePasswordReset}>
             비밀번호 재설정
           </div>

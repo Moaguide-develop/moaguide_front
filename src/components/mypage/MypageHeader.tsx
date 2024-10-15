@@ -1,22 +1,15 @@
-import { axiosInstance } from '@/service/axiosInstance';
-import { useMemberStore } from '@/store/user.store';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMemberStore } from '@/store/user.store';
 
-const MypageHeader = () => {
+interface MypageHeaderProps {
+  bookmarks: number;
+}
+
+const MypageHeader = ({ bookmarks }: MypageHeaderProps) => {
   const { member } = useMemberStore();
   const router = useRouter();
-
-  const fetchBookmarks = async () => {
-    const { data } = await axiosInstance.get('https://api.moaguide.com/user/bookmark');
-    return data;
-  };
-
-  const {
-    data: bookmarks,
-  } = useQuery({ queryKey: ['bookmarks'], queryFn: fetchBookmarks });
 
   return (
     <div className="flex flex-col gap-[28px] pb-5 border-b border-gray100">

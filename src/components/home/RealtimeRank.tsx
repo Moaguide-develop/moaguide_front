@@ -30,7 +30,10 @@ const RealtimeRank = () => {
                   className={`${i < 3 ? 'text-normal text-body6 ' : 'text-gray400 text-body6'}`}>
                   {item.rank}위
                 </div>
-                <div className="flex-1 text-body2 text-black truncate">
+                <div className="flex-1 text-body2 text-black truncate cursor-pointer" onClick={() => {
+                    setKeyword(item.keyword);
+                    router.push('/search');
+                  }}>
                   {item.keyword}
                 </div>
 
