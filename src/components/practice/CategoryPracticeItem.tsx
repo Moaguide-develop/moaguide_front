@@ -8,7 +8,7 @@ const CategoryPracticeItem = ({ id, title, link }: StudyGuidesItem) => {
   };
 
   return (
-    <div className='py-3'>
+    <div className='pb-5'>
       <div className="flex gap-5 items-center cursor-pointer rounded-xl shadow border border-[#eceef2] px-5 py-6" onClick={handleClick}>
         <div className="flex-1 flex">
           <div className="text-gray600 text-body5 sm:text-title1">{title}</div>

@@ -52,17 +52,17 @@ const CategoryPractice = () => {
   const allPosts = data || [];
 
   return (
-    <div className="mt-0 sm:mt-5">
-      <div className="mt-6 sm:mt-8 flex items-center gap-5 border-b border-gray100 text-body5 sm:text-title2">
+    <div className="mt-5 sm:mt-0">
+      <div className="flex items-center gap-5 border-b border-gray100 text-body5 sm:text-title2 mb-5">
         <div 
           onClick={() => setSubCategory('guide')} 
-          className={`pb-5 cursor-pointer ${subCategory === 'guide' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}
+          className={`pb-4 cursor-pointer ${subCategory === 'guide' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}
         >
           조각투자 가이드
         </div>
         <div 
           onClick={() => setSubCategory('article')} 
-          className={`pb-5 cursor-pointer ${subCategory === 'article' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}
+          className={`pb-4 cursor-pointer ${subCategory === 'article' ? ' text-gray700 border-b-2 border-normal ' : 'text-gray300'}`}
         >
           재테크 가이드
         </div>
