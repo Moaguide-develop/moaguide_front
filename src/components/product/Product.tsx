@@ -50,7 +50,6 @@ const Product = ({
 
   return (
     <div className="">
-      {/* <Navbar /> */}
       <Filter />
       <div className="w-full h-[168px] bg-gradient-to-b from-[#713ce2] to-[#5100ff]">
         <Container>
