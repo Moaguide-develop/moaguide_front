@@ -7,11 +7,22 @@ import MypageMenu from '@/components/mypage/MypageMenu';
 import { logout } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
 import { getCookie, removeCookie } from '@/utils/cookie';
+import { axiosInstance } from '@/service/axiosInstance';
+import { useQuery } from '@tanstack/react-query';
 
 const Mypage = () => {
   const router = useRouter();
   const { isLoggedIn, setIsLoggedIn } = useAuthStore();
   const [loading, setLoading] = useState(true);
+
+  const fetchBookmarks = async () => {
+    const { data } = await axiosInstance.get('https://api.moaguide.com/user/bookmark');
+    return data;
+  };
+
+  const {
+    data: bookmarks,
+  } = useQuery({ queryKey: ['bookmarks'], queryFn: fetchBookmarks });
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -46,7 +57,7 @@ const Mypage = () => {
   return (
     <div className="min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]">
       <header>
-        <MypageHeader />
+        <MypageHeader bookmarks={bookmarks} />
       </header>
       <nav>
         <MypageMenu />
