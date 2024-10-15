@@ -8,6 +8,8 @@ import { INewsItem } from '@/types/BuildingProductType';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CATEGORY } from '@/static/category';
+import { axiosInstance } from '@/service/axiosInstance';
+import { useMutation } from '@tanstack/react-query';
 
 const News = () => {
   const pathname = usePathname();
@@ -46,13 +48,32 @@ const News = () => {
 export default News;
 
 const NewsItem = ({ title, date, id, category, link, imgUrl }: INewsItem) => {
+  const fetchData = async ({ id }: { id: number }) => {
+    console.log(id);
+    const response = await axiosInstance.post(`https://api.moaguide.com/news/view/${id}`);
+    return response.data;
+  };
+
+  const CountupView = () => {
+    const view = useMutation({
+      mutationFn: fetchData,
+      onError: () => {}
+    });
+    return view;
+  };
+
+  const view = CountupView();
+
   const Category = CATEGORY;
-  console.log(imgUrl);
+
   return (
     <Link
       href={link}
       key={id}
-      className=" flex justify-between border-b-[1px] border-gray-200 py-[20px] px-[20px] rounded-lg">
+      className=" flex justify-between border-b-[1px] border-gray-200 py-[20px] px-[20px] rounded-lg"
+      onClick={() => {
+        view.mutate({ id });
+      }}>
       <div className="flex w-full ">
         <div className=" flex-shrink-0 flex items-center justify-center ">
           <Image

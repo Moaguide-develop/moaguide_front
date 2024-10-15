@@ -7,9 +7,24 @@ const Filter = () => {
   const sort = searchParams.get('category');
 
   const handleClick = (key: string) => {
+    const scrollPosition = window.innerHeight * 0.7;
+
+    // 현재 미술품 콘텐츠가 없어서 특정하게 설정한 로직
+    params.set('subcategory', 'trade');
+    params.set('sort', 'lastDivide_rate desc');
+    if (key === 'art' || key === 'content') {
+      params.set('subcategory', 'end');
+      params.set('sort', 'end');
+    }
+    //////////////////
+
     params.set('category', key);
     params.set('page', '1');
     router.replace(`?${params.toString()}`, { scroll: false });
+    window.scrollTo({
+      top: scrollPosition,
+      behavior: 'smooth'
+    });
   };
   interface FilterElementType {
     [key: string]: { name: string; img: string };

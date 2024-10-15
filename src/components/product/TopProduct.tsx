@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { memo, useState } from 'react';
 import { ISummary } from '@/types/Diviend';
 import Link from 'next/link';
-
+import { CATEGORY } from '@/static/category';
 interface TopProductProps {
   summary: ISummary[];
 }
@@ -112,7 +112,7 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
                           <div className="w-full ">
                             <div className="flex  mt-[13px] ml-[20px]">
                               <div className="bg-gray-200 text-gray-400  rounded-md w-[54px] h-[26px] flex justify-center items-center ">
-                                부동산
+                                {CATEGORY[item.category]}
                               </div>
                               <div className="text-gray-400 ml-[3px]">
                                 {item.platform}

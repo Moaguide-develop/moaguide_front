@@ -12,6 +12,8 @@ export interface IMusicProductDetail {
   divideCycle: number;
   link: string;
   bookmark: boolean;
+  yearDvide: number;
+  yearDvideRate: number;
 }
 
 export interface IMusicProductProfitDetail {
@@ -71,6 +73,7 @@ export interface IMusicScheduleData {
   place: string;
   period: string;
   imageUrl: string;
+  link: string;
 }
 
 export type IMusicSchedule = IMusicScheduleData[];

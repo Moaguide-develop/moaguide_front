@@ -13,6 +13,7 @@ import ProductBookmarkContentList from './contentlist/ProductBookmarkContentList
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from '@/service/axiosInstance';
+import Link from 'next/link';
 interface IProductBuildingProps {
   content:
     | IProductDealDetailData['product']
@@ -55,14 +56,17 @@ const Bookmark = ({ content, totalPages, pageNumber }: IProductBuildingProps) =>
   return (
     <div className='min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0'>
       <Container>
-        <div>
-        <Image
-          src="/images/product/LeftVector.svg"
-          alt=""
-          width={10}
-          height={10}
-          className="mt-[15px]"
-        />
+
+        <Link href={'/mypage'}>
+          <Image
+            src="/images/product/LeftVector.svg"
+            alt=""
+            width={10}
+            height={10}
+            className="mt-[15px]"
+          />
+        </Link>
+
 
         <div className="  text-2xl font-bold mt-[20px]">
           관심종목{' '}
