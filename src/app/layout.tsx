@@ -42,9 +42,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/favicon.svg',
-        width: 1200,
-        height: 630,
+        url: '/moaguideLogo.svg',
         alt: '모아가이드 대표 이미지'
       }
     ]

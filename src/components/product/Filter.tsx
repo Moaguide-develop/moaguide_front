@@ -41,7 +41,7 @@ const Filter = () => {
   };
 
   return (
-    <div className="bg-white sticky desk:top-[117px]  md:top-[105px] z-[99999] h-[143px] flex flex-row desk2:justify-center md:gap-20  items-center desk:justify-start  desk:gap-4  overflow-x-scroll overflow-y-hidden scrollbar-hide">
+    <div className="bg-white sticky desk:top-[58px]  md:top-[105px] z-[99999] h-[143px] flex flex-row desk2:justify-center md:gap-20  items-center desk:justify-start  desk:gap-4  overflow-x-scroll overflow-y-hidden scrollbar-hide">
       {Object.keys(FilterElement).map((key) => (
         <div key={key} className="  cursor-pointer ">
           <div className=" w-[61px] flex flex-row justify-center items-center ">
