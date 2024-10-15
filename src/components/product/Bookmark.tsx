@@ -53,8 +53,9 @@ const Bookmark = ({ content, totalPages, pageNumber }: IProductBuildingProps) =>
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading bookmarks</div>;
   return (
-    <div>
+    <div className='min-h-[calc(100dvh-132.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto'>
       <Container>
+        <div>
         <Image
           src="/images/product/LeftVector.svg"
           alt=""
@@ -65,7 +66,7 @@ const Bookmark = ({ content, totalPages, pageNumber }: IProductBuildingProps) =>
 
         <div className="  text-2xl font-bold mt-[20px]">
           관심종목{' '}
-          <span className="ml-[10px] font-normal text-purple-500">{bookmarks} </span>
+          <span className="ml-[10px] font-normal text-purple-500">{bookmarks}</span>
         </div>
         <div className=" desk:overflow-scroll scrollbar-hide desk2:overflow-visible mb-3 mt-5 sm:mt-8 flex justify-between sm:justify-start items-center gap-5 border-b border-gray100 text-mobileTitle sm:text-title2 px-5 sm:px-0">
           <div
@@ -117,6 +118,7 @@ const Bookmark = ({ content, totalPages, pageNumber }: IProductBuildingProps) =>
           totalPages={totalPages}
           pageNumber={pageNumber}
         />
+        </div>
       </Container>
     </div>
   );
