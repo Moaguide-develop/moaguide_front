@@ -1,11 +1,23 @@
+import { axiosInstance } from '@/service/axiosInstance';
 import { useMemberStore } from '@/store/user.store';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 const MypageHeader = () => {
   const { member } = useMemberStore();
   const router = useRouter();
+
+  const fetchBookmarks = async () => {
+    const { data } = await axiosInstance.get('https://api.moaguide.com/user/bookmark');
+    return data;
+  };
+
+  const {
+    data: bookmarks,
+  } = useQuery({ queryKey: ['bookmarks'], queryFn: fetchBookmarks });
+
   return (
     <div className="flex flex-col gap-[28px] pb-5 border-b border-gray100">
       <div className="w-full flex justify-between items-center">
@@ -29,10 +41,10 @@ const MypageHeader = () => {
           </div>
           <div>
             <div className="flex items-center gap-[14px]">
-              <div className="text-normal text-white">24개</div>
+              <div className="text-normal text-white">{bookmarks}개</div>
               <img
                 src="/images/mypage/right_white.svg"
-                alt=""
+                alt="Bookmarks"
                 className="cursor-pointer"
               />
             </div>

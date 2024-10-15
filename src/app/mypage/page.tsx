@@ -44,7 +44,7 @@ const Mypage = () => {
   }
 
   return (
-    <div className="min-h-[calc(100dvh-132.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]">
+    <div className="min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]">
       <header>
         <MypageHeader />
       </header>
