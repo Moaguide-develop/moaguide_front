@@ -11,7 +11,7 @@ const CategorySubloadmapBottomArticle: React.FC<InvestmentGuideProps> = ({ id, t
   const formattedDate = date.split('T')[0];
 
   return (
-    <div className='w-full pt-5' onClick={handleClick}> 
+    <div className='w-full pb-5' onClick={handleClick}> 
       <div className="flex gap-5 items-center cursor-pointer">
         <Image
           src={imageLink} 
