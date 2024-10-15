@@ -8,6 +8,8 @@ import NaverLogin from './NaverLogin';
 import KakaoLogin from './KakaoLogin';
 import { login } from '@/service/auth';
 import GoogleLogin from './GoogleLogin';
+import Image from 'next/image';
+import LoginButton from '../../../public/images/sign/login-btn.svg';
 
 const SignLayout = () => {
   const [email, setEmail] = useState('');
@@ -39,6 +41,13 @@ const SignLayout = () => {
     }
   }, 1000);
 
+  // Enter key handler
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && email && password) {
+      throttledHandleLogin();
+    }
+  };
+
   return (
     <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-center sm:min-h-[100vh]">
       <section className="flex mt-8 mb-6">
@@ -46,28 +55,30 @@ const SignLayout = () => {
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
         </Link>
       </section>
-      <section className="flex flex-col items-center w-[90%] sm:w-full max-w-[340px] px-4">
-        <div className="mb-6">
+      <section className="flex flex-col items-center w-[90%] sm:w-full max-w-[320px]">
+        <div className="w-full mb-6">
           <div className='mb-2'>이메일</div>
           <input 
             type="email" 
             placeholder="이메일 입력" 
-            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm focus:outline-normal"
+            className="w-full p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm focus:outline-normal"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={handleKeyDown}  
           />
         </div>
-        <div className="mb-6">
+        <div className="w-full mb-6">
           <div className='mb-2'>비밀번호</div>
           <input 
             type="password" 
             placeholder="비밀번호 입력" 
-            className="w-[320px] p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm focus:outline-normal"
+            className="w-full p-4 rounded-lg border border-gray-300 bg-gray-50 text-sm focus:outline-normal"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={handleKeyDown}  
           />
         </div>
-        <div className="flex items-center w-[320px]">
+        <div className="flex items-center w-full">
           <input 
             type="checkbox" 
             id="rememberMe" 
@@ -79,19 +90,21 @@ const SignLayout = () => {
             로그인 상태 유지
           </label>
         </div>
-        <div className='min-h-[20px] my-2'>
+        <div className='min-h-[20px] my-2 w-full'>
           {errorMessage && (
-            <div className="w-[320px] text-red-500 text-xs text-center">
+            <div className="w-full text-error text-xs text-center">
               {errorMessage}
             </div>
           )}
         </div>
-        <button 
-          className="w-[320px] bg-gradient2 font-bold text-lg text-white py-3 rounded-lg mb-4"
-          onClick={throttledHandleLogin} 
-        >
-          로그인
-        </button>
+        <Image
+          onClick={throttledHandleLogin}
+          src={LoginButton}  
+          alt="네이버 로그인"
+          width={320}             
+          height={52}        
+          className='cursor-pointer pb-3'      
+        />
         <div className="flex text-center text-gray-500 text-sm">
           <Link href={'/signup'} className='cursor-pointer'>
             <div className="mr-4">회원가입</div>
@@ -99,7 +112,7 @@ const SignLayout = () => {
           <a href="/find">비밀번호 찾기</a>
         </div>
       </section>
-      <section className="mt-8 flex flex-col gap-3 mb-4">
+      <section className="w-[90%] sm:w-full max-w-[320px] mx-auto items-center mt-6 flex flex-col gap-3 mb-4">
         {/* <KakaoLogin setLoginType={setLoginType} />  */}
         <NaverLogin setLoginType={setLoginType} /> 
         <GoogleLogin setLoginType={setLoginType} /> 
