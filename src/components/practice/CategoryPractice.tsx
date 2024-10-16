@@ -69,55 +69,69 @@ const CategoryPractice = () => {
       </div>
 
       <div>
-        {showSkeleton || isLoading ? ( 
+        {/* 데이터 로딩 시 스켈레톤 표시 */}
+        {showSkeleton || isLoading ? (
           subCategory === 'guide' ? (
-            Array.from({ length: 6 }).map((_, i) => <CategoryPracticeItemSkeleton key={i} />) 
+            Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="skeleton-item">
+                <CategoryPracticeItemSkeleton />
+              </div>
+            ))
           ) : (
-            Array.from({ length: 10 }).map((_, i) => <SubLoadmapBottomArticleSkeleton key={i} />)
+            Array.from({ length: 10 }).map((_, i) => (
+              <div key={i} className="skeleton-item">
+                <SubLoadmapBottomArticleSkeleton />
+              </div>
+            ))
           )
         ) : (
           <Virtuoso
-            style={{ minHeight: '200px', height: '100vh', margin: '0px' }}
-            useWindowScroll
-            totalCount={allPosts.length}
-            data={allPosts}
-            endReached={loadMore}
-            itemContent={(index, item) => {
-              if (subCategory === 'guide') {
-                return <CategoryPracticeItem key={item.id} {...item} />;
-              } else {
-                const firstItem = allPosts[index * 2];
-                const secondItem = allPosts[index * 2 + 1];
-
-                return (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-8 w-full">
-                    {firstItem && (
-                      <CategorySubloadmapBottomArticle
-                        key={firstItem.id}
-                        id={firstItem.id}
-                        title={firstItem.title}
-                        description={firstItem.description}
-                        imageLink={firstItem.imageLink}
-                        date={firstItem.date}
-                        link={firstItem.link}
-                      />
-                    )}
-                    {secondItem && (
-                      <CategorySubloadmapBottomArticle
-                        key={secondItem.id}
-                        id={secondItem.id}
-                        title={secondItem.title}
-                        description={secondItem.description}
-                        imageLink={secondItem.imageLink}
-                        date={secondItem.date}
-                        link={secondItem.link}
-                      />
-                    )}
-                  </div>
-                );
-              }
-            }}
-          />
+          style={{ minHeight: '200px', height: '100vh', margin: '0px' }}
+          useWindowScroll
+          totalCount={allPosts.length}
+          data={allPosts}
+          endReached={loadMore}
+          itemContent={(index, item) => {
+            if (!item) {
+              // Zero-sized element 에러 해결 방법: 아이템이 없을 경우 1px 높이 적용
+              return <div style={{ height: '1px', overflow: 'hidden' }}></div>;
+            }
+        
+            if (subCategory === 'guide') {
+              return <CategoryPracticeItem key={item.id} {...item} />;
+            } else {
+              const firstItem = allPosts[index * 2];
+              const secondItem = allPosts[index * 2 + 1];
+        
+              return (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-8 w-full">
+                  {firstItem ? (
+                    <CategorySubloadmapBottomArticle
+                      key={firstItem.id}
+                      id={firstItem.id}
+                      title={firstItem.title}
+                      description={firstItem.description}
+                      imageLink={firstItem.imageLink}
+                      date={firstItem.date}
+                      link={firstItem.link}
+                    />
+                  ) : <div style={{ height: '1px', overflow: 'hidden' }}></div>}
+                  {secondItem ? (
+                    <CategorySubloadmapBottomArticle
+                      key={secondItem.id}
+                      id={secondItem.id}
+                      title={secondItem.title}
+                      description={secondItem.description}
+                      imageLink={secondItem.imageLink}
+                      date={secondItem.date}
+                      link={secondItem.link}
+                    />
+                  ) : <div style={{ height: '1px', overflow: 'hidden' }}></div>}
+                </div>
+              );
+            }
+          }}
+        />
         )}
       </div>
     </div>

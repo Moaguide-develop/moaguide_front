@@ -19,8 +19,8 @@ const ChangePasswordPage = () => {
   }, [isLoggedIn, router]);
 
   return (
-    <div className='min-h-[calc(100dvh-160px)] mb-[20px] sm:mb-0'>
-      <div className="w-[90%] mt-5 w-full mx-auto max-w-[340px] sm:max-w-[640px] sm:mt-10 sm:px-0">
+    <div className='min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]'>
+      <div className="w-full mx-auto max-w-[340px] sm:max-w-[640px] sm:px-0">
         {step === 2 ? null : (
           <div onClick={() => router.back()} className="py-[14px]">
             <img
@@ -31,7 +31,7 @@ const ChangePasswordPage = () => {
           </div>
         )}
       </div>
-      <section className="w-[90%] max-w-[340px] w-full mx-auto mt-0 sm:mt-[76px]">
+      <section className="max-w-[340px] w-full mx-auto mt-0 sm:mt-[60px]">
         {step === 0 ? <CertifyPassword setStep={setStep} /> : null}
         {step === 1 ? <NewPassword setStep={setStep} /> : null}
         {step === 2 ? <PasswordChangeSuccess /> : null}

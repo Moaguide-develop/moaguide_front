@@ -105,3 +105,8 @@
 .mySwiper2 .swiper-pagination-bullet-active {
   background-color: black;
 }
+
+.hidden-item {
+  height: 0.1px !important;
+  overflow: hidden;
+}

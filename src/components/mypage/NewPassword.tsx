@@ -67,14 +67,14 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
       <div className="flex flex-col gap-2 mt-10">
         <div className="text-body3">새 비밀번호</div>
         <input
-          value={newPassword}
-          onChange={handleNewPassword}
-          type="password"
-          placeholder="비밀번호 입력"
-          className={`px-4 py-[14px] bg-bg text-body2 rounded-[12px] w-full outline-none
-          ${isValid && 'outline-success'}
-          `}
-        />
+            value={newPassword}
+            onChange={handleNewPassword}
+            type="password"
+            placeholder="비밀번호 입력"
+            className={`px-4 py-[14px] bg-bg text-body2 rounded-[12px] w-full outline-none 
+            ${isValid ? 'outline-success' : 'focus:outline-normal'}
+            `}
+          />
         {isValid ? (
           <div className="text-caption3 text-success ml-2">
             사용 가능한 비밀번호입니다.
@@ -93,7 +93,7 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
           type="password"
           placeholder="비밀번호 입력"
           className={`px-4 py-[14px] bg-bg text-body2 rounded-[12px] w-full outline-none
-          ${isSame && 'outline-success'}
+          ${isSame ? 'outline-success' : 'focus:outline-normal'}
           `}
         />
         <div className='h-[14.5px]'>
