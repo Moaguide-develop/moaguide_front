@@ -1,7 +1,11 @@
 import React from 'react';
 import EventGuide from './EventGuide';
+import { useRouter } from 'next/navigation';
 
 const MypageMenu = () => {
+
+  const router = useRouter();
+
   return (
     <div className="mt-5 flex flex-col">
       {/* 공지사항 */}
@@ -33,6 +37,7 @@ const MypageMenu = () => {
             src="/images/mypage/right_menu.svg"
             alt="알림"
             className="cursor-pointer"
+            onClick={() => router.push('/mypage/alarm')}
           />
         </div>
       </div>
