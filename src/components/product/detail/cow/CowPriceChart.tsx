@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
-import { useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import { ICowProductPrice } from '@/types/CowProductType';
 
 const CowPriceChart = () => {
@@ -32,6 +32,7 @@ const CowPriceChart = () => {
   const HanWooDate = HanwooData?.object.map((item) => item.day) || [];
 
   const HanwooCount = HanwooData?.object.map((item) => item.value) || [];
+
   const sortedHanwooCount = [...HanwooCount].sort((a, b) => b - a);
   const maxHanwooCount = sortedHanwooCount[0] || 0;
   const averageHanwooCount =
@@ -42,12 +43,13 @@ const CowPriceChart = () => {
     labels: HanWooDate,
     data: HanwooCount
   };
-
+  console.log(dataSets.data);
   const data = {
     labels: dataSets.labels,
     datasets: [
       {
         label: '한우 가격',
+        // data: String(dataSets.data) + HanwooUnit,
         data: dataSets.data,
         borderColor: '#8a4af3',
         backgroundColor: '#8a4af3',
