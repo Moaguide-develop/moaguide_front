@@ -47,7 +47,7 @@ const Gnb = () => {
           <div
             onClick={() => {
               if (isLoggedIn) {
-                router.push('/notification');
+                router.push('/alarm');
               } else {
                 router.push('/sign');
               }
