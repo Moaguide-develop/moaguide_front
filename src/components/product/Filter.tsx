@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { getToken } from '@/utils/localStorage';
 const Filter = () => {
+  const token = getToken();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
   const router = useRouter();
@@ -15,6 +17,11 @@ const Filter = () => {
     if (key === 'art' || key === 'content') {
       params.set('subcategory', 'end');
       params.set('sort', 'end');
+    }
+    if (key === 'bookmark' && token === undefined) {
+      alert('로그인이 필요한 서비스입니다.');
+      window.location.href = '/sign';
+      return;
     }
     //////////////////
 

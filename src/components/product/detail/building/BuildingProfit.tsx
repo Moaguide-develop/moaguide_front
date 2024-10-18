@@ -160,7 +160,15 @@ const BuildingProfit = ({ url }: { url: string }) => {
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">대지면적</div>
             <div className="flex-1">
-              {data?.buildingDetail.landArea}m^2 / 전체 : {data?.buildingDetail.floorArea}
+              {data?.buildingDetail.landArea}m<sup>2</sup>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col  mb-[7px]">
+          <div className=" flex  w-[400px]">
+            <div className="text-gray-400  w-[150px]">연면적</div>
+            <div className="flex-1">
+              {data?.buildingDetail.floorArea}m<sup>2</sup>
             </div>
           </div>
         </div>

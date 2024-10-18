@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ICowMarketPrice } from '@/types/CowProductType';
 
 const CowMarketChart = () => {
@@ -27,6 +27,20 @@ const CowMarketChart = () => {
     queryFn: fetchData
   });
 
+  const HanwooName = HanwooMarketData?.name;
+  const [HanwooUnit, setHanwooUnit] = useState('');
+
+  useEffect(() => {
+    console.log(HanwooName);
+    if (HanwooName == '한우 사육두수' || HanwooName == '연간 매각두수') {
+      setHanwooUnit('두');
+    } else if (HanwooName == '한우 사육농가수') {
+      setHanwooUnit('가구');
+    } else {
+      setHanwooUnit('톤');
+    }
+  }, [HanwooMarketData, MarketfilteringData, HanwooName]);
+
   const MarketchartRef = useRef(null);
 
   const HanWooMarketDate = HanwooMarketData?.object.map((item) => item.day) || [];
@@ -47,7 +61,7 @@ const CowMarketChart = () => {
     labels: dataSets.labels,
     datasets: [
       {
-        label: '한우 가격',
+        label: `${HanwooName} (${HanwooUnit})`,
         data: dataSets.data,
         borderColor: '#8a4af3',
         backgroundColor: '#8a4af3',
@@ -128,7 +142,7 @@ const CowMarketChart = () => {
           onChange={handleFiltering}
         />
         <label htmlFor="cattleSale" className="mr-[10px]">
-          연각 매각 두수
+          연간 매각 두수
         </label>
         <input
           type="radio"
