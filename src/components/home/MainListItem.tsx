@@ -13,7 +13,8 @@ const MainListItem = ({
   price,
   priceRate,
   totalPrice,
-  lastDivide_rate
+  lastDivide_rate,
+  bookmark
 }: MainProductItem) => {
   const router = useRouter();
 
@@ -55,7 +56,10 @@ const MainListItem = ({
             {lastDivide_rate}%
           </div>
           <div className="cursor-pointer">
-            <img src="/images/home/bookmark.svg" alt="" />
+            <img 
+              src={bookmark ? "/images/product/BookmarkSimple.svg" : "/images/home/bookmark.svg"} 
+              alt="Bookmark" 
+            />
           </div>
         </div>
       </div>
