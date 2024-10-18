@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { useRouter } from 'next/navigation';
+import { Swiper as SwiperClass } from 'swiper/types';
 
 const Guide = () => {
   const router = useRouter();
@@ -33,7 +34,7 @@ const Guide = () => {
         loop={true}
         modules={[Pagination, Autoplay]}
         className="mySwiper2"
-        onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex + 1)} 
+        onSlideChange={(swiper: SwiperClass) => setCurrentSlide(swiper.realIndex + 1)} // Swiper 타입 사용
       >
         <SwiperSlide>
           <div 

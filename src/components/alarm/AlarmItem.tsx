@@ -45,14 +45,11 @@ const AlarmItem = () => {
     }
   };
 
-  const loadMore = useCallback(
-    _.throttle(() => {
-      if (hasNextPage && !isFetching && !isFetchingNextPage) {
-        fetchNextPage();
-      }
-    }, 2000),
-    [fetchNextPage, hasNextPage, isFetching, isFetchingNextPage]
-  );
+  const loadMore = _.throttle(() => {
+    if (hasNextPage && !isFetching && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, 2000);
 
   const notifications = data?.pages.flatMap(page => page.notifications) || []; 
 
@@ -80,15 +77,6 @@ const AlarmItem = () => {
           data={notifications}
           totalCount={notifications.length}
           endReached={loadMore} 
-          components={{
-            List: React.forwardRef(({ style, ...listProps }, ref) => (
-              <div
-                {...listProps}
-                ref={ref}
-                style={{ ...style, backgroundColor: 'rgba(247, 248, 251, 0.8)' }}
-              />
-            )),
-          }}
           itemContent={(index, notification) => (
             <>
               <div
