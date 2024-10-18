@@ -99,3 +99,20 @@ export interface IProductType extends IBuildingProductDetail {
   news: INewsItem[];
   reports: IreportItem[];
 }
+
+export interface ISubwayDayItem {
+  day: string;
+  boarding: number;
+  alighting: number;
+}
+
+export interface ISubwayMonthItem {
+  day: string;
+  boarding: number;
+  alighting: number;
+}
+
+export interface ISubwayData {
+  subwayDay: ISubwayDayItem[];
+  subwayMonth: ISubwayMonthItem[];
+}
