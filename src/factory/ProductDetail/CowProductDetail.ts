@@ -1,10 +1,11 @@
+import { axiosInstance } from '@/service/axiosInstance';
 import { ICowProductDetail } from '@/types/CowProductType';
 import { useQuery, QueryFunctionContext } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchCowProductDetail = async (context: QueryFunctionContext) => {
   const product_id = context.queryKey[1] as string;
-  const { data } = await axios.get(
+  const { data } = await axiosInstance.get(
     `https://api.moaguide.com/detail/hanwoo/${product_id}`
   );
   return data;
