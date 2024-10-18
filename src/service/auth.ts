@@ -92,6 +92,7 @@ export const login = async (email: string, password: string, rememberMe: boolean
       memberNickName: userInfo.nickname,
       memberPhone: userInfo.phonenumber,
       loginType: userInfo.loginType, 
+      marketing: userInfo.marketing || 0,
     });
 
     return response.data;
