@@ -57,21 +57,26 @@ const AlarmItem = () => {
   const notifications = data?.pages.flatMap(page => page.notifications) || []; 
 
   return (
-    <div className="min-h-screen">
+    <div className="">
        <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-[90%] lg:w-[100%] flex items-center gap-5 text-body5 sm:text-title2 mt-5">
         <div 
           className={'pb-4 cursor-pointer text-gray700 border-b-2 border-normal'}
         >
-          재테크 가이드
+          상품 알림
         </div>
       </div>
       <div className='h-4 bg-bg'>
       </div>
+
       {isLoading || showSkeleton ? (
         <div>
           {Array.from({ length: 10 }).map((_, i) => (
             <Skeleton key={i} />
           ))}
+        </div>
+      ) : notifications.length === 0 ? ( 
+        <div className="flex justify-center items-center min-h-[calc(100vh-210px)] sm:min-h-[calc(100dvh-132px)] bg-bg">
+          <p className="text-gray-500 text-lg mb-auto mt-[100px]">새로운 알림이 없어요</p>
         </div>
       ) : (
         <Virtuoso
