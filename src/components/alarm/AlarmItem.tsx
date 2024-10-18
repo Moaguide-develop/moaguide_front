@@ -7,9 +7,11 @@ import _ from 'lodash';
 import { useNotifications } from '@/factory/useNotification';
 import { axiosInstance } from '@/service/axiosInstance';
 import { useRouter } from 'next/navigation'; 
+import { useQueryClient } from '@tanstack/react-query'; 
 
 const AlarmItem = () => {
   const router = useRouter(); 
+  const queryClient = useQueryClient();
   const { 
     data, 
     fetchNextPage, 
@@ -39,6 +41,7 @@ const AlarmItem = () => {
   const handleNotificationClick = async (notificationId: number, notificationLink: string) => {
     try {
       await axiosInstance.delete(`/notification/${notificationId}`);
+      queryClient.invalidateQueries({ queryKey: ['NotificationList'] });
       router.push(notificationLink);
     } catch (error) {
       console.error('서버 에러가 발생했습니다. 잠시 후 다시 시도해주세요.', error);
