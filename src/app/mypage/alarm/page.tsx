@@ -1,20 +1,74 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useMemberStore } from '@/store/user.store'; 
+import { axiosInstance } from '@/service/axiosInstance';
 
 const AlarmPage = () => {
   const router = useRouter();
-  const [isInterestedProductAlarmOn, setIsInterestedProductAlarmOn] = useState(true);
-  const [isMoaguideAlarmOn, setIsMoaguideAlarmOn] = useState(true);
+  const { member, setMember } = useMemberStore(); 
+
+  const [isInterestedProductAlarmOn, setIsInterestedProductAlarmOn] = useState<boolean | null>(null);
+  const [isMoaguideAlarmOn, setIsMoaguideAlarmOn] = useState<boolean | null>(null);
+
+  const calculateStatus = (interestedOn: boolean, moaguideOn: boolean) => {
+    if (interestedOn && moaguideOn) return 3;
+    if (interestedOn && !moaguideOn) return 1;
+    if (!interestedOn && moaguideOn) return 2;
+    return 0;
+  };
+
+  const updateNotificationStatus = async (newInterestedOn: boolean, newMoaguideOn: boolean) => {
+    const newStatus = calculateStatus(newInterestedOn, newMoaguideOn);
+    
+    try {
+      await axiosInstance.patch(`/user/update/notify?status=${newStatus}`);
+      setMember({
+        ...member,
+        marketing: newStatus,
+      });
+    } catch (error) {
+      console.error('알림 상태 업데이트 실패:', error);
+    }
+  };
+
+  const initializeToggles = (marketing: number) => {
+    if (marketing === 0) {
+      setIsInterestedProductAlarmOn(false);
+      setIsMoaguideAlarmOn(false);
+    } else if (marketing === 1) {
+      setIsInterestedProductAlarmOn(true);
+      setIsMoaguideAlarmOn(false);
+    } else if (marketing === 2) {
+      setIsInterestedProductAlarmOn(false);
+      setIsMoaguideAlarmOn(true);
+    } else if (marketing === 3) {
+      setIsInterestedProductAlarmOn(true);
+      setIsMoaguideAlarmOn(true);
+    }
+  };
+
+  useEffect(() => {
+    const marketingValue = member?.marketing ?? 0; 
+    initializeToggles(marketingValue);
+  }, [member]);
 
   const toggleInterestedProductAlarm = () => {
-    setIsInterestedProductAlarmOn(!isInterestedProductAlarmOn);
+    const newInterestedOn = !isInterestedProductAlarmOn;
+    setIsInterestedProductAlarmOn(newInterestedOn);
+    updateNotificationStatus(newInterestedOn, isMoaguideAlarmOn!); 
   };
 
   const toggleMoaguideAlarm = () => {
-    setIsMoaguideAlarmOn(!isMoaguideAlarmOn);
+    const newMoaguideOn = !isMoaguideAlarmOn;
+    setIsMoaguideAlarmOn(newMoaguideOn);
+    updateNotificationStatus(isInterestedProductAlarmOn!, newMoaguideOn);
   };
+
+  if (isInterestedProductAlarmOn === null || isMoaguideAlarmOn === null) {
+    return null;
+  }
 
   return (
     <div className="min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]">

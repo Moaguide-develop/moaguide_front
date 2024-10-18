@@ -30,6 +30,7 @@ const HomePage = () => {
           memberNickName: user.nickname,
           memberPhone: user.phoneNumber,
           loginType: user.loginType,
+          marketing: user.marketing
         });
   
         setIsLoggedIn(true);
