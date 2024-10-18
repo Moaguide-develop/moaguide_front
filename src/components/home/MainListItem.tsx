@@ -1,4 +1,3 @@
-// MainListItem.tsx
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -6,6 +5,7 @@ import { useAuthStore } from '@/store/userAuth.store';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import type { MainProductItem } from '@/types/homeComponentsType';
 import { formatCategory } from '@/utils/formatCategory';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface MainListItemProps extends MainProductItem {
   handleBookmarkInvalidate: () => void;
@@ -24,6 +24,7 @@ const MainListItem = ({
 }: MainListItemProps) => {
   const router = useRouter();
   const { isLoggedIn } = useAuthStore();
+  const queryClient = useQueryClient();
 
   const addBookmarkMutation = useAddBookMark(); 
   const deleteBookmarkMutation = useDeleteBookMark();
@@ -35,6 +36,7 @@ const MainListItem = ({
         {
           onSuccess: () => {
             handleBookmarkInvalidate();
+            queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
           },
         }
       );
@@ -44,6 +46,7 @@ const MainListItem = ({
         {
           onSuccess: () => {
             handleBookmarkInvalidate();
+            queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
           },
         }
       );
