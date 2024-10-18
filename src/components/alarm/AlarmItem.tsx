@@ -5,8 +5,11 @@ import { Virtuoso } from 'react-virtuoso';
 import Skeleton from '../skeleton/NotificationSkeleton'; 
 import _ from 'lodash'; 
 import { useNotifications } from '@/factory/useNotification';
+import { axiosInstance } from '@/service/axiosInstance';
+import { useRouter } from 'next/navigation'; 
 
 const AlarmItem = () => {
+  const router = useRouter(); 
   const { 
     data, 
     fetchNextPage, 
@@ -32,6 +35,15 @@ const AlarmItem = () => {
       setShowSkeleton(false);
     }
   }, []);
+
+  const handleNotificationClick = async (notificationId: number, notificationLink: string) => {
+    try {
+      await axiosInstance.delete(`/notification/${notificationId}`);
+      router.push(notificationLink);
+    } catch (error) {
+      console.error('서버 에러가 발생했습니다. 잠시 후 다시 시도해주세요.', error);
+    }
+  };
 
   const loadMore = useCallback(
     _.throttle(() => {
@@ -78,25 +90,27 @@ const AlarmItem = () => {
             )),
           }}
           itemContent={(index, notification) => (
-            <><div
-            key={notification.id}
-            className="bg-white min-h-[109px] flex justify-between items-center p-4 shadow-md mx-auto lg:max-w-[1000px] w-[90%] lg:w-[100%] border border-[#ECEFF2] rounded-[12px]"
-          >
-            <div className='flex flex-col justify-between h-full w-[80%] gap-5'>
-              <div className="text-sm text-[#6E6F73] font-medium">
-                관심 상품 업데이트
+            <>
+              <div
+                key={notification.id}
+                className="bg-white min-h-[109px] flex justify-between items-center p-4 shadow-md mx-auto lg:max-w-[1000px] w-[90%] lg:w-[100%] border border-[#ECEFF2] rounded-[12px] cursor-pointer"
+                onClick={() => handleNotificationClick(notification.id, notification.link)}
+              >
+                <div className='flex flex-col justify-between h-full w-[80%] gap-5'>
+                  <div className="text-sm text-[#6E6F73] font-medium">
+                    관심 상품 업데이트
+                  </div>
+                  <div className="text-black text-md">
+                    {notification.message}
+                  </div>
+                </div>
+                <div className="min-w-[20px] pl-[10px] flex mb-auto text-[#A2A5AA] text-sm whitespace-nowrap">
+                  {notification.date}
+                </div>
               </div>
-              <div className="text-black text-md">
-                {notification.message}
+              <div className='h-4'>
               </div>
-            </div>
-            <div className="min-w-[20px] pl-[10px] flex mb-auto text-[#A2A5AA] text-sm whitespace-nowrap">
-              {notification.date}
-            </div>
-          </div>
-            <div className='h-4'>
-            </div>
-          </>
+            </>
           )}
         />
       )}
