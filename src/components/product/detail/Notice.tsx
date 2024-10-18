@@ -1,7 +1,7 @@
 import NoticeItemSkeleton from '@/components/skeleton/NoticeItemSkeleton';
 import UseNoticeLists from '@/factory/useNoticeLists';
 import { INoticeItem } from '@/types/BuildingProductType';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 
 const Notice = () => {
@@ -21,14 +21,14 @@ const Notice = () => {
   // const allPosts = data?.pages?.flat() || [];
   const allPosts = data?.pages.flatMap((page) => page.notice) || [];
   // const allPosts = data?.pages[0].notice;
-
+  const virtuosoStyle = useMemo(() => ({ height: '200px', margin: '0px' }), []);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       {isLoading ? (
         Array.from({ length: 5 }).map((_, i) => <NoticeItemSkeleton key={i} />)
       ) : (
         <Virtuoso
-          style={{ height: '200px', margin: '0px' }}
+          style={virtuosoStyle}
           useWindowScroll
           totalCount={allPosts.length}
           data={allPosts}
