@@ -1,12 +1,36 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useMemberStore } from '@/store/user.store'; 
 
 const AlarmPage = () => {
   const router = useRouter();
-  const [isInterestedProductAlarmOn, setIsInterestedProductAlarmOn] = useState(true);
-  const [isMoaguideAlarmOn, setIsMoaguideAlarmOn] = useState(true);
+  const { member } = useMemberStore(); 
+
+  const [isInterestedProductAlarmOn, setIsInterestedProductAlarmOn] = useState<boolean | null>(null);
+  const [isMoaguideAlarmOn, setIsMoaguideAlarmOn] = useState<boolean | null>(null);
+
+  const initializeToggles = (marketing: number) => {
+    if (marketing === 0) {
+      setIsInterestedProductAlarmOn(false);
+      setIsMoaguideAlarmOn(false);
+    } else if (marketing === 1) {
+      setIsInterestedProductAlarmOn(true);
+      setIsMoaguideAlarmOn(false);
+    } else if (marketing === 2) {
+      setIsInterestedProductAlarmOn(false);
+      setIsMoaguideAlarmOn(true);
+    } else if (marketing === 3) {
+      setIsInterestedProductAlarmOn(true);
+      setIsMoaguideAlarmOn(true);
+    }
+  };
+
+  useEffect(() => {
+    const marketingValue = member?.marketing ?? 0; 
+    initializeToggles(marketingValue);
+  }, [member]);
 
   const toggleInterestedProductAlarm = () => {
     setIsInterestedProductAlarmOn(!isInterestedProductAlarmOn);
@@ -15,6 +39,10 @@ const AlarmPage = () => {
   const toggleMoaguideAlarm = () => {
     setIsMoaguideAlarmOn(!isMoaguideAlarmOn);
   };
+
+  if (isInterestedProductAlarmOn === null || isMoaguideAlarmOn === null) {
+    return null;
+  }
 
   return (
     <div className="min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]">
