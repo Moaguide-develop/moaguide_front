@@ -1,9 +1,15 @@
-import type { MainProductItem } from '@/types/homeComponentsType';
-
-import { formatCategory } from '@/utils/formatCategory';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { useAuthStore } from '@/store/userAuth.store';
+import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
+import type { MainProductItem } from '@/types/homeComponentsType';
+import { formatCategory } from '@/utils/formatCategory';
+import { useQueryClient } from '@tanstack/react-query';
+
+interface MainListItemProps extends MainProductItem {
+  handleBookmarkInvalidate: () => void;
+}
 
 const MainListItem = ({
   product_Id,
@@ -12,28 +18,58 @@ const MainListItem = ({
   name,
   price,
   priceRate,
-  totalPrice,
-  lastDivide_rate
-}: MainProductItem) => {
+  lastDivide_rate,
+  bookmark,
+  handleBookmarkInvalidate,
+}: MainListItemProps) => {
   const router = useRouter();
+  const { isLoggedIn } = useAuthStore();
+  const queryClient = useQueryClient();
+
+  const addBookmarkMutation = useAddBookMark(); 
+  const deleteBookmarkMutation = useDeleteBookMark();
+
+  const handleBookmarkClick = () => {
+    if (bookmark) {
+      deleteBookmarkMutation.mutate(
+        { productId: product_Id },
+        {
+          onSuccess: () => {
+            handleBookmarkInvalidate();
+            queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+          },
+        }
+      );
+    } else {
+      addBookmarkMutation.mutate(
+        { productId: product_Id, bookmark: true },
+        {
+          onSuccess: () => {
+            handleBookmarkInvalidate();
+            queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+          },
+        }
+      );
+    }
+  };
 
   return (
-    <div
-      onClick={() => router.push(`/product/detail/${category}/${product_Id}`)}
-      className="mt-5 pb-5 border-b border-gray100 cursor-pointer">
+    <div className="mt-5 pb-5 border-b border-gray100">
       <div className="flex gap-4 sm:gap-5">
-        {/* 이미지 */}
         <div>
-        <Image
-          src={`https://d2qf2amuam62ps.cloudfront.net/img/${product_Id}.jpg`}
-          width={82}
-          height={82}
-          alt="Profile Image"
-          className='rounded-[8px] object-cover w-[82px] h-[82px]'
-        />
+          <Image
+            src={`https://d2qf2amuam62ps.cloudfront.net/img/${product_Id}.jpg`}
+            width={82}
+            height={82}
+            alt="Product Image"
+            className="rounded-[8px] object-cover w-[82px] h-[82px] cursor-pointer"
+            onClick={() => router.push(`/product/detail/${category}/${product_Id}`)}
+          />
         </div>
-        {/* 메인정보 */}
-        <div className="flex-1 flex flex-col gap-[10px]">
+        <div
+          className="flex-1 flex flex-col gap-[10px] cursor-pointer"
+          onClick={() => router.push(`/product/detail/${category}/${product_Id}`)}
+        >
           <div className="flex items-center gap-2">
             <div className="text-caption3 sm:text-caption3 text-gray400 p-[4px] sm:p-[6px] bg-bg rounded-[4px] flex items-center justify-center">
               {formatCategory(category)}
@@ -49,13 +85,25 @@ const MainListItem = ({
             </div>
           </div>
         </div>
-        {/* 부가정보 */}
         <div className="flex items-center gap-4">
           <div className="p-1 sm:p-[6px] bg-error bg-opacity-10 text-error text-caption3 sm:text-body7 rounded-[4px]">
             {lastDivide_rate}%
           </div>
           <div className="cursor-pointer">
-            <img src="/images/home/bookmark.svg" alt="" />
+            {isLoggedIn ? (
+              <img
+                src={bookmark ? '/images/product/BookmarkSimple.svg' : '/images/home/bookmark.svg'}
+                alt="Bookmark"
+                className="w-[24px] h-[24px]"
+                onClick={handleBookmarkClick} 
+              />
+            ) : (
+              <img
+                src="/images/home/bookmark.svg"
+                alt="Bookmark"
+                className="w-[24px] h-[24px]"
+              />
+            )}
           </div>
         </div>
       </div>
