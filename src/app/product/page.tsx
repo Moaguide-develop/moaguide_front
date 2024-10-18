@@ -1,7 +1,7 @@
 import Navbar from '@/components/common/Navbar';
 import Product from '@/components/product/Product';
 import { IProductCommon, IReport, ISummaryData } from '@/types/Diviend';
-
+import { cookies } from 'next/headers';
 const ProductPage = async ({
   params,
   searchParams
@@ -9,6 +9,11 @@ const ProductPage = async ({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
+  const getCookie = (key: string) => {
+    return cookies().get(key)?.value;
+  };
+  const token = getCookie('access_token') || '';
+
   const pages = searchParams['page'] || 1;
   const subcategory = searchParams['subcategory'] || 'trade';
   const sort = searchParams['sort'] || 'lastDivide_rate desc';
@@ -26,6 +31,9 @@ const ProductPage = async ({
   const productDetailResponse = await fetch(
     `https://api.moaguide.com/summary/list?category=${category}&subcategory=${subcategory}&sort=${sort}&page=${pages}&size=10`,
     {
+      headers: {
+        Authorization: `Bearer ${token} `
+      },
       // next: { revalidate: 300 }
       cache: 'no-store'
     }

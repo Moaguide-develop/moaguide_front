@@ -2,8 +2,9 @@ export interface IDivide {
   product_Id: string;
   category: string;
   name: string;
-  dividend: number;
-  dividendRate: number;
+  dividend?: number;
+  dividendRate?: number;
+  recruitmentRate: number;
 }
 
 export interface ISummary {

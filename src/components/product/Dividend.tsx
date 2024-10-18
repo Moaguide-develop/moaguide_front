@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { memo, useState } from 'react';
 import { IDivide } from '@/types/Diviend';
 import Link from 'next/link';
-
+import { CATEGORY } from '@/static/category';
 interface DividendProps {
   dividend: IDivide[];
 }
@@ -87,16 +87,16 @@ const Dividend = memo(({ dividend }: DividendProps) => {
 
                     <div className=" flex flex-col items-start justify-start md:ml-[20px] desk:ml-[16px] flex-grow ">
                       <div className="">
-                        <div className=" text-gray-300">부동산</div>
+                        {CATEGORY[item.category]}
                         <div className="w-full font-bold mt-1">{item.name}</div>
                       </div>
                       <div className=" font-bold flex justify-center items-center text-purple-600   desk:block  md:hidden">
-                        (1주당 {item.dividend.toLocaleString()}원)
+                        (모집률 {item.recruitmentRate.toLocaleString()}%)
                       </div>
                     </div>
 
                     <div className="ml-[46px] font-bold flex justify-center items-center text-purple-600 mt-[20px] desk:hidden md:block  ">
-                      (1주당 {item.dividend.toLocaleString()}원)
+                      (모집률 {item.recruitmentRate.toLocaleString()}%)
                     </div>
                   </div>
                 </Link>

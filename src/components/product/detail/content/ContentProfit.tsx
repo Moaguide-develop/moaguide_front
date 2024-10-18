@@ -93,7 +93,7 @@ const ContentProfit = ({
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px] ">총예산규모</div>
               <div className="flex-1">
-                {data?.base.investment && data?.base.investment.totalBudget}
+                {data?.base?.investment ? data?.base?.investment.totalBudget : null}
               </div>
             </div>
           </div>
@@ -156,7 +156,7 @@ const ContentProfit = ({
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px]">감독</div>
-              <div className="flex-1">{data?.object?.director}</div>
+              <div className="flex-1 ">{data?.object?.director}</div>
             </div>
           </div>
 

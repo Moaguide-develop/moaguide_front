@@ -44,9 +44,11 @@ export interface ICowPrice {
 }
 
 export interface ICowProductPrice {
+  name: string;
   object: ICowPrice[];
 }
 
 export interface ICowMarketPrice {
+  name: string;
   object: ICowPrice[];
 }

@@ -11,7 +11,7 @@ const fetchNoticeLists = async ({
 }) => {
   const [, category] = queryKey;
   const { data } = await axios.get(
-    `https://api.moaguide.com/detail/notice/list/${category}?page=${pageParam}&size=10`
+    `https://api.moaguide.com/notice?page=${pageParam}&size=10`
   );
   return data;
 };

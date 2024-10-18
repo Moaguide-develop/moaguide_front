@@ -1,10 +1,11 @@
+import { axiosInstance } from '@/service/axiosInstance';
 import { IContentProductDetail } from '@/types/ContentProductType';
 import { useQuery, QueryFunctionContext } from '@tanstack/react-query';
 import axios from 'axios';
 
 const fetchContentProductDetail = async (context: QueryFunctionContext) => {
   const product_id = context.queryKey[1] as string;
-  const { data } = await axios.get(
+  const { data } = await axiosInstance.get(
     `https://api.moaguide.com/detail/content/${product_id}`
   );
   return data;
