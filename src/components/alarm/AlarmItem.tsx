@@ -35,7 +35,6 @@ const AlarmItem = () => {
 
   const loadMore = useCallback(
     _.throttle(() => {
-      console.log("Loading more notifications...");
       if (hasNextPage && !isFetching && !isFetchingNextPage) {
         fetchNextPage();
       }

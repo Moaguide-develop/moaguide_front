@@ -2,10 +2,11 @@ import React from 'react';
 
 const NotificationSkeleton = () => {
   return (
-    <div className="animate-pulse flex justify-between items-center py-4 border-b">
-      <div className="w-3/4 h-6 bg-gray-200 rounded"></div>
-      <div className="w-1/4 h-6 bg-gray-200 rounded"></div>
-    </div>
+    <div className='w-full mx-auto bg-bg pb-4'>
+    <div className="w-full mx-auto animate-pulse flex justify-between items-center h-[109px]">
+    <div className="mx-auto lg:max-w-[1000px] w-[90%] lg:w-[100%] h-[109px] bg-gray-300 rounded-[12px]"></div>
+  </div>
+  </div>
   );
 };
 
