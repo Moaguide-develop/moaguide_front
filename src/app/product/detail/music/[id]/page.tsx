@@ -70,11 +70,11 @@ const MusicDetailpage = (props: any) => {
                 </div>
                 <div className="text-gray-400  ml-[3px]">{data?.platform}</div>
               </div>
-              <div className="w-80 flex   items-center ">
+              <div className="w-80 flex flex-col  items-start justify-center ">
                 <div className=" text-black text-2xl font-bold  ">{data?.name}</div>
-                <span className="text-sm font-bold mt-1 ml-3 ">{data?.singer}</span>
+                <div className="text-sm font-bold mt-1 ml-1 ">{data?.singer}</div>
               </div>
-              <div className="ml-2 mt-[10px]  font-bold">
+              <div className="ml-1 mt-[10px]  font-bold">
                 과거 1년 저작권료(1주){' '}
                 <span className="text-red-500 ml-1">
                   {data?.yearDvide.toLocaleString()} ({data?.yearDvideRate}%)

@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const DetailPublic = () => {
+  const router = useRouter();
   return (
     <div className=" max-w-[640px] mx-auto">
       <Image
@@ -9,6 +11,7 @@ const DetailPublic = () => {
         height={24}
         alt="Left Arrow"
         className="mb-[34px]"
+        onClick={() => router.back()}
       />
       <div className=" flex flex-col ">
         <div className=" text-base font-bold mb-[12px]">23기 배당금 지급 안내</div>
