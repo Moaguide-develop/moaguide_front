@@ -1,6 +1,17 @@
 'use client';
 import { getContentProductProfitDetail } from '@/factory/ProductProfitDetail/ContentProductProfitDetail';
-
+import { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { GetContentMoviePeopleData } from '@/factory/ContentMoviePeople';
+import {
+  IContentActorStats,
+  IContentProductContentActor
+} from '@/types/ContentProductType';
+import Image from 'next/image';
+import { InvalidateQueryFilters } from '@tanstack/react-query';
+interface MoviePeopleLayoutProps {
+  data: IContentProductContentActor | undefined;
+}
 const ContentProfit = ({
   url,
   invest,
@@ -10,9 +21,21 @@ const ContentProfit = ({
   invest: boolean;
   genre: string;
 }) => {
+  const [moviePeople, setMoviePeople] = useState('');
+  const { ContentMoviePeopleData } = GetContentMoviePeopleData(moviePeople);
+  const queryClient = useQueryClient();
   const { data, isLoading } = getContentProductProfitDetail(url, genre);
+
+  const [isModal, setIsModal] = useState(false);
+  console.log(ContentMoviePeopleData);
   return (
-    <div className="max-w-[1000px] mx-auto mt-[32px]">
+    <div
+      className="max-w-[1000px] mx-auto mt-[32px]"
+      onClick={() => {
+        if (isModal) {
+          setIsModal(false);
+        }
+      }}>
       <div>
         <div className="text-2xl font-bold  mb-[15px] mt-[20px] ">발행 정보</div>
         <div className="flex flex-col  mb-[7px]">
@@ -44,7 +67,7 @@ const ContentProfit = ({
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px]">최대모집목표금액</div>
-            <div classNameflex-1="">
+            <div className="flex-1">
               {Number(data?.base.publish.maxAmount).toLocaleString()}원
             </div>
           </div>
@@ -153,17 +176,43 @@ const ContentProfit = ({
             </div>
           </div>
 
-          <div className="flex flex-col  mb-[7px]">
-            <div className=" flex  ">
+          <div className="flex flex-col  mb-[7px] relative">
+            <div className=" flex ">
+              {isModal ? (
+                <div>
+                  <MoviePeopleLayout data={ContentMoviePeopleData} />
+                </div>
+              ) : null}
               <div className="text-gray-400  w-[150px]">감독</div>
-              <div className="flex-1 ">{data?.object?.director}</div>
+              <div
+                className=" max-w-[150px] text-blue-500 underline cursor-pointer"
+                onClick={() => {
+                  setIsModal(!isModal);
+                  setMoviePeople(data?.object?.director as string);
+                  console.log(isModal);
+                }}>
+                {data?.object?.director}
+              </div>
             </div>
           </div>
 
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px]">출연</div>
-              <div className="flex-1">{data?.object?.actor}</div>
+              <div className="flex-1 text-blue-500 underline cursor-pointer">
+                {data?.object?.actor?.map((item) => {
+                  return (
+                    <div
+                      key={item}
+                      onClick={() => {
+                        setIsModal(!isModal);
+                        setMoviePeople(item as string);
+                      }}>
+                      {item}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
 
@@ -199,7 +248,7 @@ const ContentProfit = ({
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px]">감독</div>
-              <div className="flex-1">{data?.object?.director}</div>
+              <div>{data?.object?.director}</div>
             </div>
           </div>
           <div className="flex flex-col  mb-[7px]">
@@ -272,3 +321,44 @@ const ContentProfit = ({
 };
 
 export default ContentProfit;
+
+const MoviePeopleLayout = (data: MoviePeopleLayoutProps) => {
+  return (
+    <div className="">
+      <div className=" desk:w-full  h-[full] md:w-[1000px] md:h-[300px] bg-gray-50 absolute desk:bottom-[-120px] desk:left-0  md:bottom-[-100px] md:left-[150px] flex items-center">
+        <div className="flex  desk:flex-col md:flex-row ">
+          {data?.data?.map((item: IContentActorStats) => {
+            return (
+              <div className="flex desk:my-5 md:my-0 ">
+                <div>
+                  <Image
+                    src={item.imgLink}
+                    width={80}
+                    height={170}
+                    alt={'movieimage'}
+                    className=" mx-3 object-cover "
+                  />
+                </div>
+
+                <div className="flex flex-col flex-1 ">
+                  <div className="text-lg font-bold">{item.movie}</div>
+                  <div className="text-base text-blue-500">{item.role}</div>
+
+                  <div className="text-sm ">{item.side}</div>
+                  <div className="text-sm ">
+                    [공식 통계]{item.officialMoney.toLocaleString()}원
+                    {item.officialPeople.toLocaleString()}명
+                  </div>
+                  <div className="text-sm ">
+                    [kobis 통계]{item.money.toLocaleString()}원
+                    {item.people.toLocaleString()}명
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};

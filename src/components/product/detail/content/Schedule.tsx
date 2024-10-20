@@ -46,7 +46,10 @@ const Schedule = () => {
               releaseDate.toISOString().split('T')[0]
                 ? 'border-blue-500 bg-blue-200 border-1 '
                 : 'border-gray-200'
-            }`}>
+            }
+            
+              
+            `}>
             <div>{item.dayOfWeek}</div>
             <div>{item.date.getDate()}</div>
           </div>
