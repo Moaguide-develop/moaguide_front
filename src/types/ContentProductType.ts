@@ -50,7 +50,7 @@ export interface IContentProductProfitDetail {
     grade?: string;
     runningTime?: number;
     // director?: string;
-    actor?: string;
+    actor?: string[];
     distributor?: string;
     originalInfo?: string;
 
@@ -114,3 +114,18 @@ export interface IMovieSchedule {
 }
 
 export type IMovieSchedules = IMovieSchedule[];
+
+export interface IContentActorStats {
+  id: number;
+  name: string;
+  imgLink: string;
+  movie: string;
+  role: string;
+  side: string;
+  officialMoney: number;
+  officialPeople: number;
+  money: number;
+  people: number;
+}
+
+export type IContentProductContentActor = IContentActorStats[];

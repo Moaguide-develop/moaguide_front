@@ -6,6 +6,7 @@ const bundleAnalyzer = withBundleAnalyzer({
   openAnalyzer: false
 });
 const nextConfig = {
+  styledComponents: true,
   output: 'standalone',
   experimental: { instrumentationHook: true },
   reactStrictMode: true,

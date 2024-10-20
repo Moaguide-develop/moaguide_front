@@ -7,7 +7,15 @@ import Schedule from './Schedule';
 import { usePathname } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 
-const ContentProductDetail = ({ url, genre }: { url: string; genre: string }) => {
+const ContentProductDetail = ({
+  url,
+  genre,
+  name
+}: {
+  url: string;
+  genre: string;
+  name: string | undefined;
+}) => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
 
@@ -27,14 +35,14 @@ const ContentProductDetail = ({ url, genre }: { url: string; genre: string }) =>
     <div>
       {genre === 'MOVIE' ? (
         <div className="max-w-[1000px] mx-auto mt-[32px]">
-          <div className=" text-2xl font-bold mb-[20px]">개봉 스케쥴</div>
+          <div className=" text-2xl font-bold mb-[20px]">개봉당시 2주 경쟁작</div>
           {data?.stats[0] && (
             <div>
               <Schedule />
             </div>
           )}
 
-          <MovieContent />
+          <MovieContent name={name} />
 
           {data?.stats[0] && (
             <div>
