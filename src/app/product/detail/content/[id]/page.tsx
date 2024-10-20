@@ -18,7 +18,7 @@ const ContentDetailpage = (props: { params: { id: string } }) => {
   const url = props.params.id;
 
   const { data, isLoading, isError } = getContentProductDetail(props.params.id);
-  console.log(data?.genre);
+
   const [localData, setLocalData] = useState(data);
 
   useEffect(() => {
@@ -181,7 +181,7 @@ const ContentDetailpage = (props: { params: { id: string } }) => {
           genre={data?.genre as string}
         />
       ) : sort === 'detail' ? (
-        <ContentProductDetail url={url} genre={data?.genre as string} />
+        <ContentProductDetail url={url} genre={data?.genre as string} name={data?.name} />
       ) : undefined}
     </div>
   );
