@@ -327,9 +327,9 @@ const MoviePeopleLayout = (data: MoviePeopleLayoutProps) => {
     <div className="">
       <div className=" desk:w-full  h-[full] md:w-[1000px] md:h-[300px] bg-gray-50 absolute desk:bottom-[-120px] desk:left-0  md:bottom-[-100px] md:left-[150px] flex items-center">
         <div className="flex  desk:flex-col md:flex-row ">
-          {data?.data?.map((item: IContentActorStats) => {
+          {data?.data?.map((item: IContentActorStats, index) => {
             return (
-              <div className="flex desk:my-5 md:my-0 ">
+              <div key={index} className="flex desk:my-5 md:my-0 ">
                 <div>
                   <Image
                     src={item.imgLink}

@@ -101,19 +101,19 @@ const CowProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">관리책임자</div>
-            <div className="">{data?.farm.manager.toLocaleString()}주</div>
+            <div className="">{data?.farm.manager.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">인증 두수</div>
-            <div className="">{data?.farm.certifiedHeads.toLocaleString()}원</div>
+            <div className="">{data?.farm.certifiedHeads.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">축종</div>
-            <div className="">{data?.farm.cattleBreed.toLocaleString()}원</div>
+            <div className="">{data?.farm.cattleBreed.toLocaleString()}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
