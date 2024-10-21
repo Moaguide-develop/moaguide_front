@@ -1,21 +1,23 @@
+import { refreshAccessToken } from "./auth";
 import { axiosInstance } from "./axiosInstance";
 import { getCookie, setCookie, removeCookie } from '@/utils/cookie';
 
 export const updateNickname = async (nickname: string): Promise<boolean> => {
     try {
-        const response = await axiosInstance.patch('/user/update/nickname', { nickname });
-      
-        if (response.status === 200) {
-            return true;
-        } else {
-            console.error('닉네임 수정 실패:', response.status);
-            return false;
-        }
-    } catch (error) {
-        console.error('API 호출 오류:', error);
+      const response = await axiosInstance.patch('/user/update/nickname', { nickname });
+  
+      if (response.status === 200) {
+        await refreshAccessToken();
+        return true;
+      } else {
+        console.error('닉네임 수정 실패:', response.status);
         return false;
+      }
+    } catch (error) {
+      console.error('API 호출 오류:', error);
+      return false;
     }
-};
+  };
 
 
 export const checkPassword = async (password: string): Promise<string> => {
