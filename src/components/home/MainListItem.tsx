@@ -9,6 +9,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 interface MainListItemProps extends MainProductItem {
   handleBookmarkInvalidate: () => void;
+  currentTab: string; 
 }
 
 const MainListItem = ({
@@ -21,10 +22,15 @@ const MainListItem = ({
   lastDivide_rate,
   bookmark,
   handleBookmarkInvalidate,
+  currentTab, 
 }: MainListItemProps) => {
   const router = useRouter();
   const { isLoggedIn } = useAuthStore();
   const queryClient = useQueryClient();
+
+  const displayedCategory = currentTab === 'all' ? 'all' : category;
+
+  console.log('현재 탭:', currentTab, '상품 카테고리:', displayedCategory);
 
   const addBookmarkMutation = useAddBookMark(); 
   const deleteBookmarkMutation = useDeleteBookMark();
@@ -37,6 +43,12 @@ const MainListItem = ({
           onSuccess: () => {
             handleBookmarkInvalidate();
             queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+  
+            if (currentTab === 'all') {
+              queryClient.invalidateQueries({ queryKey: ['MainProductLogin', category] });
+            } else {
+              queryClient.invalidateQueries({ queryKey: ['MainProductLogin', 'all'] });
+            }
           },
         }
       );
@@ -47,6 +59,12 @@ const MainListItem = ({
           onSuccess: () => {
             handleBookmarkInvalidate();
             queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+
+            if (currentTab === 'all') {
+              queryClient.invalidateQueries({ queryKey: ['MainProductLogin', category] });
+            } else {
+              queryClient.invalidateQueries({ queryKey: ['MainProductLogin', 'all'] });
+            }
           },
         }
       );
