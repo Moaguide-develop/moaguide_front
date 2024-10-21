@@ -41,7 +41,8 @@ const stationImageMap: { [key: string]: string } = {
   '9호선': '/images/product/detail/subway9.svg',
   분당선: '/images/product/detail/subwaybundang.svg',
   경의중앙선: '/images/product/detail/subwaygyeonghye.svg',
-  신분당선: '/images/product/detail/subwaysinbundang.svg'
+  신분당선: '/images/product/detail/subwaysinbundang.svg',
+  수인분당선: '/images/product/detail/subwaysuinbundang.svg'
 };
 
 const PublicTransport = () => {
@@ -61,7 +62,7 @@ const PublicTransport = () => {
   };
 
   const { data, isLoading, error } = useQuery<PublicTransportData>({
-    queryKey: ['PublicTransport'],
+    queryKey: ['PublicTransport', lastSegment],
     queryFn: fetchData
   });
 
