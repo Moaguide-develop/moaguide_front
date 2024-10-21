@@ -9,13 +9,13 @@ const CategoryNewsItem = ({ id, title, category, link, date, imgUrl }: IssueList
     building: 'images/home/default-real-estate.png',
     music: 'images/home/default-entertainment.png',
     cow: 'images/home/default-cow.png',
-    art: 'images/home/default-art.png',
-    content: 'images/home/default-contents.png',
+    art: 'images/home/default-art.png', 
+    content: 'images/home/default-art.png',
   };
 
   const imageSrc =
-    !imgUrl || imgUrl === 'No image' || imgUrl === 'null'
-      ? defaultImages[category]
+    (!imgUrl || imgUrl === 'No image' || imgUrl === 'null' || imgUrl.startsWith('http://')) 
+      ? defaultImages[category] 
       : imgUrl;
 
   const [objectPosition, setObjectPosition] = useState<'top' | 'center'>('center');
