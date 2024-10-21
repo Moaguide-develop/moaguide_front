@@ -40,7 +40,8 @@ const stationImageMap: { [key: string]: string } = {
   '8호선': '/images/product/detail/subway8.svg',
   '9호선': '/images/product/detail/subway9.svg',
   분당선: '/images/product/detail/subwaybundang.svg',
-  경의중앙선: '/images/product/detail/subwaygyeonghye.svg'
+  경의중앙선: '/images/product/detail/subwaygyeonghye.svg',
+  신분당선: '/images/product/detail/subwaysinbundang.svg'
 };
 
 const PublicTransport = () => {
@@ -49,10 +50,14 @@ const PublicTransport = () => {
 
   const [Ismodal, setIsModal] = useState(false);
   const fetchData = async () => {
-    const response = await axios.get(
-      `https://api.moaguide.com/detail/building/sub/${lastSegment}`
-    );
-    return response.data;
+    try {
+      const response = await axios.get(
+        `https://api.moaguide.com/detail/building/sub/${lastSegment}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   const { data, isLoading, error } = useQuery<PublicTransportData>({
@@ -62,7 +67,7 @@ const PublicTransport = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching data</div>;
-
+  console.log(data);
   return (
     <div>
       <div className="text-gray-400 mb-[10px]"> 주요 업무 지구</div>
@@ -102,33 +107,34 @@ const PublicTransport = () => {
       <div className="flex max-w-[1000px] w-full mx-auto h-auto">
         <div className="bg-gray-50 rounded-xl mr-[20px] flex flex-col w-[calc(50%-10px)] p-[20px] ">
           <div className="text-base font-bold">1km 이내 주변 지하철</div>
-          {data?.nearSubway.map((subway, index) => {
-            return (
-              <div key={index} className="flex  justify-between mt-2">
-                <div className="flex justify-start items-center ">
-                  <div className="mr-1 flex-1">
-                    <div className="flex">
-                      {subway.route.map((route, index) => (
-                        <Image
-                          src={stationImageMap[route]}
-                          alt={`이미지`}
-                          width={20}
-                          height={20}
-                          key={index}
-                          className="mr-1"
-                        />
-                      ))}
+          {data &&
+            data?.nearSubway?.map((subway, index) => {
+              return (
+                <div key={index} className="flex  justify-between mt-2">
+                  <div className="flex justify-start items-center ">
+                    <div className="mr-1 flex-1">
+                      <div className="flex">
+                        {subway.route.map((route, index) => (
+                          <Image
+                            src={stationImageMap[route]}
+                            alt={`이미지`}
+                            width={20}
+                            height={20}
+                            key={index}
+                            className="mr-1"
+                          />
+                        ))}
+                      </div>
                     </div>
+                    <div className="">{subway.station}</div>
                   </div>
-                  <div className="">{subway.station}</div>
+                  <div className="flex desk2:flex desk:hidden">
+                    <div className="mr-[30px]  ">{subway.distance}m</div>
+                    <div>{subway.time}분</div>
+                  </div>
                 </div>
-                <div className="flex desk2:flex desk:hidden">
-                  <div className="mr-[30px]  ">{subway.distance}m</div>
-                  <div>{subway.time}분</div>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
 
         <div className="bg-gray-50 rounded-xl w-[calc(50%-10px)] p-[20px]">

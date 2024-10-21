@@ -6,7 +6,6 @@ const BuildingProfit = ({ url }: { url: string }) => {
   const { data, isLoading } = getBuildingProductProfitDetail(url);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
-      <div className=" text-2xl font-bold mb-[20px]">위치</div>
       <div className="desk:flex  desk:justify-center desk2:justify-start">
         <KakaoMap />
       </div>
@@ -38,7 +37,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
-            <div className="text-gray-400  w-[150px]">발생 증권수</div>
+            <div className="text-gray-400  w-[150px]">발행 증권수</div>
             <div className="">{data?.publish.piece.toLocaleString()}</div>
           </div>
         </div>
@@ -128,7 +127,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px] ">상품명</div>
-            {/* <div className="">{data?.buildingDetail.productId.name}</div> */}
+            <div className="">{data?.buildingDetail.name}</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">

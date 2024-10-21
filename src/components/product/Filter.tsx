@@ -14,7 +14,7 @@ const Filter = () => {
     // 현재 미술품 콘텐츠가 없어서 특정하게 설정한 로직
     params.set('subcategory', 'trade');
     params.set('sort', 'lastDivide_rate desc');
-    if (key === 'art' || key === 'content') {
+    if (key === 'art' || key === 'content' || key === 'cow') {
       params.set('subcategory', 'end');
       params.set('sort', 'end');
     }

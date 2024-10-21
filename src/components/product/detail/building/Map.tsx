@@ -62,7 +62,7 @@ const KakaoMap = () => {
         });
 
         // API에서 가져온 데이터를 사용해 폴리곤을 그리기
-        data.areas.forEach((area: any) => {
+        data?.areas?.forEach((area: any) => {
           if (area.polygon.startsWith('HOLE')) {
             // HOLE 처리
             const polygons = area.polygon
@@ -121,7 +121,16 @@ const KakaoMap = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching data</div>;
 
-  return <div ref={mapRef} style={{ width: '400px', height: '300px' }} />;
+  return (
+    <div>
+      <div className="mb-[20px]  flex items-center">
+        <div className=" text-2xl font-bold ">위치</div>
+        <div className=" ml-[15px] text-base  ">{data?.location}</div>
+      </div>
+
+      <div ref={mapRef} style={{ width: '400px', height: '300px' }} />
+    </div>
+  );
 };
 
 export default KakaoMap;
