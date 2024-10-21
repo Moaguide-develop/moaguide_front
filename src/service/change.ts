@@ -1,6 +1,5 @@
-import { setVerifyToken } from "@/utils/localStorage";
 import { axiosInstance } from "./axiosInstance";
-import { getCookie } from "@/utils/cookie";
+import { getCookie, setCookie, removeCookie } from '@/utils/cookie';
 
 export const updateNickname = async (nickname: string): Promise<boolean> => {
     try {
@@ -24,7 +23,7 @@ export const checkPassword = async (password: string): Promise<string> => {
         const response = await axiosInstance.post('/user/check/password', { password });
 
         const token = response.headers['Verify'] || response.headers['verify'];
-        setVerifyToken(token);
+        setCookie('verify_token', token);
 
         return response.data;
     } catch (error) {
@@ -44,7 +43,7 @@ export const changePassword = async (password: string): Promise<string> => {
       { password },
       {
         headers: {
-          Authorization: `Bearer ${verifyToken}`,  
+          Verify: `${verifyToken}`,  
         },
       }
     );
