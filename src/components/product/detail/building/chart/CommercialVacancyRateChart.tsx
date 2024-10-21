@@ -77,9 +77,9 @@ const CommercialVacancyRateChart = ({ rentType }: { rentType: boolean | undefine
     const labelsSet: Set<string> = new Set();
     const datasets: any[] = [];
 
-    Object.keys(data.vacancyrate).forEach((region) => {
+    Object.keys(data.vacancyrate)?.forEach((region) => {
       const regionData = data.vacancyrate[region];
-      const values = regionData.map((item) => {
+      const values = regionData?.map((item) => {
         const label = `${item.year} Q${item.quarter}`;
         labelsSet.add(label);
         return item.value;

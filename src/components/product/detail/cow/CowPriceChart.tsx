@@ -29,9 +29,8 @@ const CowPriceChart = () => {
 
   const chartRef = useRef(null);
 
-  const HanWooDate = HanwooData?.object.map((item) => item.day) || [];
-
-  const HanwooCount = HanwooData?.object.map((item) => item.value) || [];
+  const HanWooDate = HanwooData?.object?.map((item) => item.day) || [];
+  const HanwooCount = HanwooData?.object?.map((item) => item.value) || [];
 
   const sortedHanwooCount = [...HanwooCount].sort((a, b) => b - a);
   const maxHanwooCount = sortedHanwooCount[0] || 0;

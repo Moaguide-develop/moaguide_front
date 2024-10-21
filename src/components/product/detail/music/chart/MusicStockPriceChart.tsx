@@ -54,12 +54,12 @@ const MusicStockPriceChart = () => {
 
   const StockPriceDate =
     (StockPriceData?.transaction &&
-      StockPriceData?.transaction.map((item) => item.day).reverse()) ||
+      StockPriceData?.transaction?.map((item) => item.day).reverse()) ||
     [];
 
   const StockPriceCount =
     (StockPriceData?.transaction &&
-      StockPriceData?.transaction.map((item) => Number(item.value)).reverse()) ||
+      StockPriceData?.transaction?.map((item) => Number(item.value)).reverse()) ||
     [];
   const sortedStockPriceCount = [...StockPriceCount].sort((a, b) => b - a);
   const maxStockPriceCount = sortedStockPriceCount[0] || 0;

@@ -58,12 +58,12 @@ const MusicCopyRightFeeChart = () => {
 
   const paymentDate =
     (CopyRightFeeData?.divide &&
-      CopyRightFeeData?.divide.map((item) => item.paymentDate)) ||
+      CopyRightFeeData?.divide?.map((item) => item.paymentDate)) ||
     [];
 
   const CopyRightFeeDivideCount =
     (CopyRightFeeData?.divide &&
-      CopyRightFeeData?.divide.map((item) => Number(item.divide))) ||
+      CopyRightFeeData?.divide?.map((item) => Number(item.divide))) ||
     [];
   const sortedCopyRightFeeDivideCount = [...CopyRightFeeDivideCount].sort(
     (a, b) => b - a
@@ -71,7 +71,7 @@ const MusicCopyRightFeeChart = () => {
   const maxCopyRightFeeDivideCount = sortedCopyRightFeeDivideCount[0] || 0;
   const averageCopyRightFeeDivideCount =
     CopyRightFeeDivideCount.length > 0
-      ? CopyRightFeeDivideCount.reduce((acc, val) => acc + val, 0) /
+      ? CopyRightFeeDivideCount?.reduce((acc, val) => acc + val, 0) /
           CopyRightFeeDivideCount.length || 0
       : 0;
 
@@ -82,7 +82,7 @@ const MusicCopyRightFeeChart = () => {
 
   const CopyRightFeeDivideRateCount =
     (CopyRightFeeData?.divide &&
-      CopyRightFeeData?.divide.map((item) => Number(item.divide_rate))) ||
+      CopyRightFeeData?.divide?.map((item) => Number(item.divide_rate))) ||
     [];
   const sortedCopyRightFeeDivideRateCount = [...CopyRightFeeDivideRateCount].sort(
     (a, b) => b - a
@@ -90,7 +90,7 @@ const MusicCopyRightFeeChart = () => {
   const maxCopyRightFeeDivideRateCount = sortedCopyRightFeeDivideRateCount[0] || 0;
   const averageCopyRightFeeDivideRateCount =
     CopyRightFeeDivideRateCount.length > 0
-      ? CopyRightFeeDivideRateCount.reduce((acc, val) => acc + val, 0) /
+      ? CopyRightFeeDivideRateCount?.reduce((acc, val) => acc + val, 0) /
           CopyRightFeeDivideRateCount.length || 0
       : 0;
 
