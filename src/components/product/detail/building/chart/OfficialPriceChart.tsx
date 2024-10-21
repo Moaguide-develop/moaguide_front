@@ -66,22 +66,22 @@ const OfficialPriceChart = () => {
 
   // 데이터를 필터링하고 변환하는 함수
   const transformAndFilterData = (): ChartData => {
-    if (!data || !data.lands) return { labels: [], datasets: [] };
+    if (!data || !data?.lands) return { labels: [], datasets: [] };
 
     // 사용자가 선택한 기간에 맞게 데이터를 필터링
-    const filteredLandPrices = data.lands.filter((item) => {
+    const filteredLandPrices = data?.lands?.filter((item) => {
       const year = parseInt(item.day);
       return year >= startYear && year <= endYear;
     });
 
     // 레이블 생성 및 역순으로 정렬
-    const labels = filteredLandPrices.map((item) => `${item.day}`).reverse();
+    const labels = filteredLandPrices?.map((item) => `${item.day}`).reverse();
 
     // 데이터셋 생성 및 역순으로 정렬
     const datasets = [
       {
         label: '공시지가',
-        data: filteredLandPrices.map((item) => item.value).reverse(),
+        data: filteredLandPrices?.map((item) => item.value).reverse(),
         borderColor: '#8A4AF3', // 선의 색상
         backgroundColor: '#8A4AF3',
         pointBackgroundColor: '#8A4AF3',

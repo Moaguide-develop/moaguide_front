@@ -81,7 +81,7 @@ const YoutubeSearchChart = () => {
   const sortedYoutubeSearchCount = [...YoutubeSearchCount].sort((a, b) => b - a);
   const maxYoutubeSearchCount = sortedYoutubeSearchCount[0] || 0;
   const averageYoutubeSearchCount =
-    YoutubeSearchCount.reduce((acc, val) => acc + val, 0) / YoutubeSearchCount.length ||
+    YoutubeSearchCount?.reduce((acc, val) => acc + val, 0) / YoutubeSearchCount.length ||
     0;
   const newVariable = Math.floor(maxYoutubeSearchCount + averageYoutubeSearchCount);
 

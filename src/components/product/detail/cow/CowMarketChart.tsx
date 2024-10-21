@@ -43,9 +43,9 @@ const CowMarketChart = () => {
 
   const MarketchartRef = useRef(null);
 
-  const HanWooMarketDate = HanwooMarketData?.object.map((item) => item.day) || [];
+  const HanWooMarketDate = HanwooMarketData?.object?.map((item) => item.day) || [];
+  const HanwooMarketCount = HanwooMarketData?.object?.map((item) => item.value) || [];
 
-  const HanwooMarketCount = HanwooMarketData?.object.map((item) => item.value) || [];
   const sortedHanwooMarketCount = [...HanwooMarketCount].sort((a, b) => b - a);
   const maxHanwooMarketCount = sortedHanwooMarketCount[0] || 0;
   const averageHanwooMarketCount =
