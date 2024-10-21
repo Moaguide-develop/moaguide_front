@@ -9,11 +9,18 @@ const IssueItem = ({ id, title, category, link, imgUrl, date }: MainNews) => {
     <Link href={link} target="_blank">
       <div className="flex flex-col gap-4 cursor-pointer w-full h-full">
         <div className="relative w-full" style={{ paddingTop: '55.36%' }}>
-          <img
-            src={imgUrl}
-            alt="Image"
-            className="absolute top-0 left-0 w-full h-full object-cover rounded-[12px]"
-          />
+        <img
+          src={imgUrl}
+          alt="Image"
+          className="absolute top-0 left-0 w-full h-full object-cover rounded-[12px]"
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectPosition: 'top' }}
+          srcSet={`
+            ${imgUrl}?w=300 300w,
+            ${imgUrl}?w=600 600w,
+            ${imgUrl}?w=1200 1200w
+          `}
+        />
         </div>
         <div className="text-mobileTitle sm:text-title2 text-gray600">
           {title}

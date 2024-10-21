@@ -13,23 +13,29 @@ interface BestNewsItemType {
 const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
   return (
     <Link href={item.link} target="_blank">
-      <div className="flex flex-col gap-4 cursor-pointer mt-5 sm:mt-0">
-        <div className="relative w-full" style={{ aspectRatio: '320 / 176' }}>  
-          <Image
-            src={item.imgUrl}
-            alt="img"
-            layout="fill"  
-            objectFit="cover" 
-            className="rounded-[12px]"
-          />
+      <div className="flex flex-col gap-4 cursor-pointer mt-5 sm:mt-0 h-full">
+      <div className="relative w-full" style={{ paddingTop: '55.36%' }}>
+        <img
+          src={item.imgUrl}
+          alt="Image"
+          className="absolute top-0 left-0 w-full h-full object-cover rounded-[12px]"
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          srcSet={`
+            ${item.imgUrl}?w=300 300w,
+            ${item.imgUrl}?w=600 600w,
+            ${item.imgUrl}?w=1200 1200w
+          `}
+        />
         </div>
         <img
           src={`/images/home/issue_rank${rank}.svg`}
           alt=""
           className="absolute mt-1 ml-1"
         />
-        <div className="sm:text-title2 text-title1 text-gray600 w-full">{item.title}</div>
-        <div className="flex items-center justify-between">
+        <div className="flex-1 sm:text-title2 text-title1 text-gray600 w-full">
+          {item.title}
+        </div>
+        <div className="flex items-center justify-between mt-auto">
           <div className="text-body4 sm:text-body7 text-gray400">
             {formatCategory(item.category)}
           </div>

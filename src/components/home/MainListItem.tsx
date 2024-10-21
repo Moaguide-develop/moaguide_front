@@ -30,8 +30,6 @@ const MainListItem = ({
 
   const displayedCategory = currentTab === 'all' ? 'all' : category;
 
-  console.log('현재 탭:', currentTab, '상품 카테고리:', displayedCategory);
-
   const addBookmarkMutation = useAddBookMark(); 
   const deleteBookmarkMutation = useDeleteBookMark();
 
