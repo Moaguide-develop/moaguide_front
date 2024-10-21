@@ -8,6 +8,7 @@ import { useNotifications } from '@/factory/useNotification';
 import { axiosInstance } from '@/service/axiosInstance';
 import { useRouter } from 'next/navigation'; 
 import { useQueryClient } from '@tanstack/react-query'; 
+import { getCookie, setCookie } from '@/utils/cookie'; 
 
 const AlarmItem = () => {
   const router = useRouter(); 
@@ -24,12 +25,12 @@ const AlarmItem = () => {
   const [showSkeleton, setShowSkeleton] = useState(true);
 
   useEffect(() => {
-    const hasVisited = sessionStorage.getItem('hasVisitedAlarmPage');
+    const hasVisited = getCookie('hasVisitedAlarmPage');
 
     if (!hasVisited) {
       const timer = setTimeout(() => {
         setShowSkeleton(false); 
-        sessionStorage.setItem('hasVisitedAlarmPage', 'true'); 
+        setCookie('hasVisitedAlarmPage', 'true', { maxAge: 300 }); 
       }, 2000);
 
       return () => clearTimeout(timer);

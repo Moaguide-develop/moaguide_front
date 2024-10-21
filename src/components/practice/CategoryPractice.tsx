@@ -20,7 +20,7 @@ const CategoryPractice = () => {
       : getArticles(); 
 
   useEffect(() => {
-    if (subCategory === 'guide' && !guideLoaded) {
+    if (subCategory === 'guide' && !guideLoaded && isLoading) {
       setShowSkeleton(true);
       const timer = setTimeout(() => {
         setShowSkeleton(false);
@@ -29,17 +29,19 @@ const CategoryPractice = () => {
       return () => clearTimeout(timer);
     }
 
-    if (subCategory === 'article' && !articleLoaded) {
+    if (subCategory === 'article' && !articleLoaded && isLoading) {
       setShowSkeleton(true);
       const timer = setTimeout(() => {
         setShowSkeleton(false);
-        setArticleLoaded(true);  
+        setArticleLoaded(true); 
       }, 1000);
       return () => clearTimeout(timer);
     }
 
-    setShowSkeleton(false);
-  }, [subCategory, guideLoaded, articleLoaded]);
+    if (!isLoading) {
+      setShowSkeleton(false);
+    }
+  }, [subCategory, guideLoaded, articleLoaded, isLoading]);
 
   const loadMore = useCallback(() => {
     if (hasNextPage && !isFetching && !isFetchingNextPage && !isLoading) {
@@ -69,8 +71,7 @@ const CategoryPractice = () => {
       </div>
 
       <div>
-        {/* 데이터 로딩 시 스켈레톤 표시 */}
-        {showSkeleton || isLoading ? (
+        {showSkeleton && isLoading ? (
           subCategory === 'guide' ? (
             Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="skeleton-item">
