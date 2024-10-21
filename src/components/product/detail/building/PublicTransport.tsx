@@ -40,7 +40,8 @@ const stationImageMap: { [key: string]: string } = {
   '8호선': '/images/product/detail/subway8.svg',
   '9호선': '/images/product/detail/subway9.svg',
   분당선: '/images/product/detail/subwaybundang.svg',
-  경의중앙선: '/images/product/detail/subwaygyeonghye.svg'
+  경의중앙선: '/images/product/detail/subwaygyeonghye.svg',
+  신분당선: '/images/product/detail/subwaysinbundang.svg'
 };
 
 const PublicTransport = () => {

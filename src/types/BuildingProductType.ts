@@ -52,6 +52,7 @@ export interface IBuildingProductProfitDetail {
     listingDate: string;
   };
   buildingDetail: {
+    name: string;
     productId: string | null;
     address: string;
     useArea: string;
