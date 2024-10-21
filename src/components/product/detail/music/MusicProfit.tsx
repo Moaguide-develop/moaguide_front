@@ -10,8 +10,8 @@ const MusicProfit = ({ url }: { url: string }) => {
   }: {
     categories: Array<{ label: string; value: number; color: string }>;
   }) => {
-    const totalValue = categories.reduce((acc, item) => acc + item.value, 0);
-    const segments = categories.map((item) => ({
+    const totalValue = categories?.reduce((acc, item) => acc + item.value, 0) || 0;
+    const segments = categories?.map((item) => ({
       ...item,
       width: (item.value / totalValue) * 100
     }));
