@@ -37,7 +37,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
-            <div className="text-gray-400  w-[150px]">발생 증권수</div>
+            <div className="text-gray-400  w-[150px]">발행 증권수</div>
             <div className="">{data?.publish.piece.toLocaleString()}</div>
           </div>
         </div>
