@@ -79,14 +79,15 @@ const SignLayout = () => {
           />
         </div>
         <div className="flex items-center w-full">
-          <input 
-            type="checkbox" 
-            id="rememberMe" 
-            checked={rememberMe} 
-            onChange={(e) => setRememberMe(e.target.checked)}
-            className="mr-2"
-          />
-          <label htmlFor="rememberMe" className="text-sm text-gray-700">
+        <input 
+          type="checkbox" 
+          id="rememberMe" 
+          checked={rememberMe} 
+          onChange={(e) => setRememberMe(e.target.checked)}
+          className="mr-2 cursor-pointer"
+          style={{ accentColor: "#8b5cf6" }} 
+        />
+          <label htmlFor="rememberMe" className="text-sm text-gray-700 cursor-pointer">
             로그인 상태 유지
           </label>
         </div>
@@ -100,10 +101,10 @@ const SignLayout = () => {
         <Image
           onClick={throttledHandleLogin}
           src={LoginButton}  
-          alt="네이버 로그인"
+          alt="로그인"
           width={320}             
           height={52}        
-          className='cursor-pointer pb-3'      
+          className='cursor-pointer pb-4'      
         />
         <div className="flex text-center text-gray-500 text-sm">
           <Link href={'/signup'} className='cursor-pointer'>
@@ -114,7 +115,7 @@ const SignLayout = () => {
       </section>
       <section className="w-[90%] sm:w-full max-w-[320px] mx-auto items-center mt-6 flex flex-col gap-3 mb-4">
         {/* <KakaoLogin setLoginType={setLoginType} />  */}
-        <NaverLogin setLoginType={setLoginType} /> 
+        {/* <NaverLogin setLoginType={setLoginType} />  */}
         <GoogleLogin setLoginType={setLoginType} /> 
       </section>
     </div>
