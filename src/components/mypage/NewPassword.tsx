@@ -43,12 +43,12 @@ const NewPassword = ({ setStep }: NewPasswordType) => {
       if (result === 'success') {
         setStep(2); 
       } else {
-        alert('비밀번호 변경 실패');
+        alert('비밀번호 변경 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
         setStep(0);
       }
     } catch (error) {
       console.error('비밀번호 변경 오류:', error);
-      alert('비밀번호 변경 중 오류가 발생했습니다.');
+      alert('비밀번호 변경 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
       setStep(0);
     } finally {
       setIsSubmitting(false); 

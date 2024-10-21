@@ -14,6 +14,9 @@ export const getToken = (): string | undefined => {
 
 export const removeToken = () => {
   removeCookie('access_token', { path: '/' });
+  removeCookie('refresh', { path: '/' });
+  removeCookie('rememberMe', { path: '/' });
+  removeCookie('verify_token', { path: '/' });
 };
 
 export const setVerifyToken = (token: string) => {
