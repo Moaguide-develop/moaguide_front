@@ -100,7 +100,7 @@ const SignLayout = () => {
         <Image
           onClick={throttledHandleLogin}
           src={LoginButton}  
-          alt="네이버 로그인"
+          alt="로그인"
           width={320}             
           height={52}        
           className='cursor-pointer pb-3'      
@@ -114,7 +114,7 @@ const SignLayout = () => {
       </section>
       <section className="w-[90%] sm:w-full max-w-[320px] mx-auto items-center mt-6 flex flex-col gap-3 mb-4">
         {/* <KakaoLogin setLoginType={setLoginType} />  */}
-        <NaverLogin setLoginType={setLoginType} /> 
+        {/* <NaverLogin setLoginType={setLoginType} />  */}
         <GoogleLogin setLoginType={setLoginType} /> 
       </section>
     </div>
