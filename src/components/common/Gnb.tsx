@@ -44,17 +44,17 @@ const Gnb = () => {
           <div onClick={() => router.push('/search')} className="cursor-pointer">
             <img src="/images/gnb/search.svg" alt="search_icon" className="w-6 h-6" />
           </div>
-          {/* <div
+          <div
             onClick={() => {
               if (isLoggedIn) {
-                router.push('/sign');
+                router.push('/alarm');
               } else {
-                router.push('/mypage');
+                router.push('/sign');
               }
             }}
             className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
-          </div> */}
+          </div>
           {/* <div className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
           </div> */}

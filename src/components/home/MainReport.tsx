@@ -11,6 +11,8 @@ const MainReport = () => {
   const { mainReport, isLoading } = getReportIssues();
   const router = useRouter();
 
+  
+
   const handleGuideClick = () => {
     window.open('https://contents.premium.naver.com/vestpie/pieceofmoney', '_blank');
   };

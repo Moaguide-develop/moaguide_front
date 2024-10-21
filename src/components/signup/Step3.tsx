@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface StepProps {
   onNext: () => void;
@@ -42,6 +43,11 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
   return (
     <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
       <div className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
+      {/* <section className="hidden sm:flex mt-8 mb-6 sm:items-center sm:justify-center">
+        <Link href={'/'} className='cursor-pointer'>
+          <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px] items-center justify-center" />
+        </Link>
+      </section> */}
         <Image
           src={'/sign/LeftArrowIcon.svg'}
           alt='뒤로가기'

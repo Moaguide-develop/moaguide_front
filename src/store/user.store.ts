@@ -1,5 +1,3 @@
-// src/store/user.store.ts
-
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -7,7 +5,8 @@ interface IUserInfo {
   memberEmail: string;
   memberNickName: string;
   memberPhone: string;
-  loginType: string;  
+  loginType: string;
+  marketing: number;  
 }
 
 interface IMember {
@@ -23,7 +22,8 @@ export const useMemberStore = create(
         memberEmail: '',
         memberNickName: '',
         memberPhone: '',
-        loginType: '',  
+        loginType: '',
+        marketing: 0,  
       },
       setMember: (userInfo: IUserInfo) => set({ member: userInfo }),
       clearMember: () => set({
@@ -31,12 +31,13 @@ export const useMemberStore = create(
           memberEmail: '',
           memberNickName: '',
           memberPhone: '',
-          loginType: '',  
+          loginType: '',
+          marketing: 0,  
         }
       }),
     }),
     {
-      name: 'userInfo'
+      name: 'userInfo'  
     }
   )
 );
