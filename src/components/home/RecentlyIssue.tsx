@@ -10,7 +10,7 @@ const RecentlyIssue = () => {
   const router = useRouter();
 
   return (
-    <div className="pb-[50px] sm:pb-0">
+    <div className="pb-[50px] sm:pb-[100px]">
       {/* 타이틀 */}
       <div className="flex items-center justify-between">
         <div className="text-heading4">최신 이슈</div>

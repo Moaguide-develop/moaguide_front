@@ -1,4 +1,6 @@
+import { setVerifyToken } from "@/utils/localStorage";
 import { axiosInstance } from "./axiosInstance";
+import { getCookie } from "@/utils/cookie";
 
 export const updateNickname = async (nickname: string): Promise<boolean> => {
     try {
@@ -20,6 +22,10 @@ export const updateNickname = async (nickname: string): Promise<boolean> => {
 export const checkPassword = async (password: string): Promise<string> => {
     try {
         const response = await axiosInstance.post('/user/check/password', { password });
+
+        const token = response.headers['Verify'] || response.headers['verify'];
+        setVerifyToken(token);
+
         return response.data;
     } catch (error) {
         console.error('비밀번호 검증 실패:', error);
@@ -30,8 +36,20 @@ export const checkPassword = async (password: string): Promise<string> => {
 
 export const changePassword = async (password: string): Promise<string> => {
     try {
-        const response = await axiosInstance.patch('/user/update/password', { password });
-        return response.data;
+    
+    const verifyToken = getCookie('verify_token');
+    
+    const response = await axiosInstance.patch(
+      '/user/update/password', 
+      { password },
+      {
+        headers: {
+          Authorization: `Bearer ${verifyToken}`,  
+        },
+      }
+    );
+    
+    return response.data;
     } catch (error) {
         console.error('비밀번호 변경 실패:', error);
         throw error;

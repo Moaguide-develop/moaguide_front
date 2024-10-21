@@ -12,7 +12,7 @@ const HomeFooter = () => {
   };
 
   return (
-    <div className="mt-0 sm:mt-[158px] bg-bg mx-auto w-full sm:block">
+    <div className="bg-bg mx-auto w-full sm:block">
       <div className='flex flex-col mx-auto'>
       <div className='flex flex-col justify-start sm:justify-between sm:items-center mt-[52px] py-[30px] w-[90%] lg:w-full mx-auto desk:max-w-[1000px] bg-gradient2 rounded-[12px]'>
         <div className='w-[90%] mx-auto'>

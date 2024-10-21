@@ -13,7 +13,7 @@ interface BestNewsItemType {
 const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
   return (
     <Link href={item.link} target="_blank">
-      <div className="flex flex-col gap-4 cursor-pointer mt-5 sm:mt-0">
+      <div className="flex flex-col gap-4 cursor-pointer mt-5 sm:mt-0 h-full">
       <div className="relative w-full" style={{ paddingTop: '55.36%' }}>
         <img
           src={item.imgUrl}
@@ -32,8 +32,10 @@ const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
           alt=""
           className="absolute mt-1 ml-1"
         />
-        <div className="sm:text-title2 text-title1 text-gray600 w-full">{item.title}</div>
-        <div className="flex items-center justify-between">
+        <div className="flex-1 sm:text-title2 text-title1 text-gray600 w-full">
+          {item.title}
+        </div>
+        <div className="flex items-center justify-between mt-auto">
           <div className="text-body4 sm:text-body7 text-gray400">
             {formatCategory(item.category)}
           </div>

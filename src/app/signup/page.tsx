@@ -87,11 +87,9 @@ const SignupPage: React.FC = () => {
       };
   
       const response = await finalSignup(formData, authHeaders);
-
-      console.log(response);
  
       if (response === '회원가입 완료') {
-        alert('회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
+        alert('알림 설정은 마이페이지에서 설정 가능합니다.\n회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
         router.push('/sign'); 
       }
       
