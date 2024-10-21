@@ -10,11 +10,11 @@ const PasswordChangeSuccess = () => {
   const handleLogout = async () => {
     await logout();
     setIsLoggedIn(false);
-    router.push('/sign');
+    router.push('/signup');
   };
   
   return (
-    <div className="pt-10">
+    <div className="flex flex-col min-h-[calc(100dvh-168px)] justify-between sm:justify-center sm:min-h-0 pt-10">
       <div className="flex flex-col gap-6">
         <div className="flex items-center justify-center">
           <img src="/images/mypage/change_success.svg" alt="" />
