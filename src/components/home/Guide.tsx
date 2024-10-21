@@ -1,14 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { useRouter } from 'next/navigation';
+import { Swiper as SwiperClass } from 'swiper/types';
 
 const Guide = () => {
   const router = useRouter();
+  const [currentSlide, setCurrentSlide] = useState(1); 
+  const totalSlides = 2;
 
   const handleGuideClick = () => {
     window.open('https://contents.premium.naver.com/vestpie/pieceofmoney', '_blank');
@@ -19,7 +22,7 @@ const Guide = () => {
   };
 
   return (
-    <div className="w-full sm:w-[65%] md:w-[70%] lg:w-full lg:max-w-[692px]">
+    <div className="w-full sm:w-[65%] md:w-[70%] lg:w-full lg:max-w-[692px] relative">
       <Swiper
         pagination={{
           clickable: true,
@@ -31,6 +34,7 @@ const Guide = () => {
         loop={true}
         modules={[Pagination, Autoplay]}
         className="mySwiper2"
+        onSlideChange={(swiper: SwiperClass) => setCurrentSlide(swiper.realIndex + 1)} // Swiper 타입 사용
       >
         <SwiperSlide>
           <div 
@@ -70,6 +74,9 @@ const Guide = () => {
           </div>
         </SwiperSlide>
       </Swiper>
+      <div className="absolute bottom-2 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-body7 z-[9999]">
+        {currentSlide}/{totalSlides}
+      </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 import React from 'react';
 import Image from 'next/image';
+
 const CategoryNewsItem = ({ id, title, category, link, date, imgUrl }: IssueListItem) => {
   const defaultImages: { [key: string]: string } = {
     building: 'images/home/default-real-estate.png',

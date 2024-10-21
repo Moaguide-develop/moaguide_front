@@ -45,6 +45,7 @@ export interface MainProductItem {
   priceRate: number;
   totalPrice: number;
   lastDivide_rate: number;
+  bookmark: boolean;
 }
 
 export interface ReportListsItem {
