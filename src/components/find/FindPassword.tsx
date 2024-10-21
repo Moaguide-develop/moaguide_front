@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { changePassword, changePasswordinFind } from '@/service/change';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { removeToken } from '@/utils/localStorage';
 
 const FindPassword = () => {
   const [email, setEmail] = useState<string>(''); 
@@ -119,6 +120,9 @@ const FindPassword = () => {
     if (passwordMatch && passwordValid) {
       try {
         await changePasswordinFind(email, password);
+        alert("비밀번호가 변경되었습니다. 새로 로그인해주세요.")
+        removeToken();
+        router.push('/sign');
       } catch (error) {
         console.error('비밀번호 재설정 실패:', error);
       }
