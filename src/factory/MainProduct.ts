@@ -39,7 +39,6 @@ export const getMainProduct = (category: string) => {
   };
 };
 
-
 const fetchMainProductLogin = async (category: string) => {
   try {
     let url = '';
@@ -57,9 +56,9 @@ const fetchMainProductLogin = async (category: string) => {
 };
 
 export const getMainProductLogin = (category: string) => {
-  const queryKey = ['MainProduct', category];
+  const queryKey = ['MainProductLogin', category];
 
-  const { data, error, ...queryProps } = useQuery<MainProductItem[]>({
+  const { data, error, refetch, ...queryProps } = useQuery<MainProductItem[]>({
     queryKey,
     queryFn: () => fetchMainProductLogin(category)
   });
@@ -71,6 +70,7 @@ export const getMainProductLogin = (category: string) => {
   return {
     data,
     error,
+    refetch,  
     ...queryProps
   };
 };

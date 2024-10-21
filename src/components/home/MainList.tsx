@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import MainListItem from './MainListItem';
 import { useRouter } from 'next/navigation';
 import { getMainProduct, getMainProductLogin } from '@/factory/MainProduct';
@@ -10,15 +10,14 @@ const MainList = () => {
   const [category, setCategory] = useState('all');
   const router = useRouter();
   const queryClient = useQueryClient();
-
   const { isLoggedIn } = useAuthStore();
 
   const { data, isLoading } = isLoggedIn
     ? getMainProductLogin(category)
-    : getMainProduct(category)
+    : getMainProduct(category);
 
   const handleBookmarkInvalidate = () => {
-    queryClient.invalidateQueries({ queryKey: ['MainProduct', category] });
+    queryClient.invalidateQueries({ queryKey: ['MainProductLogin', category] });
   };
 
   return (
@@ -75,7 +74,7 @@ const MainList = () => {
         {isLoading
           ? Array.from({ length: 3 }).map((_, i) => <MainListItemSkeleton key={i} />)
           : data?.map((item, i) => (
-            <MainListItem key={i} {...item} handleBookmarkInvalidate={handleBookmarkInvalidate} />
+            <MainListItem currentTab={category} key={i} {...item} handleBookmarkInvalidate={handleBookmarkInvalidate} />
           ))}
       </div>
     </div>
