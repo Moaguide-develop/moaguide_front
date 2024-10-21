@@ -22,22 +22,22 @@ const FloatingPopulationChart = () => {
     queryKey: ['floatingpopulation', lastSegment],
     queryFn: fetchData
   });
-  const subwayMonthDateData = data?.subwayMonth.map((subwayMonth) => subwayMonth.day);
-
-  const subwayMonthTotalBoardingData = data?.subwayMonth.map(
+  const subwayMonthDateData = data?.subwayMonth?.map((subwayMonth) => subwayMonth.day);
+  console.log(data);
+  const subwayMonthTotalBoardingData = data?.subwayMonth?.map(
     (subwayMonth) => subwayMonth.boarding
   );
 
-  const subwayMonthTotalAlightingData = data?.subwayMonth.map(
+  const subwayMonthTotalAlightingData = data?.subwayMonth?.map(
     (subwayMonth) => subwayMonth.alighting
   );
 
-  const subwayDayData = data?.subwayDay.map((subwayDay) => subwayDay.day);
-  const subwayDayTotalBoardingData = data?.subwayDay.map(
+  const subwayDayData = data?.subwayDay?.map((subwayDay) => subwayDay.day);
+  const subwayDayTotalBoardingData = data?.subwayDay?.map(
     (subwayDay) => subwayDay.boarding
   );
 
-  const subwayDayTotalAlightingData = data?.subwayDay.map(
+  const subwayDayTotalAlightingData = data?.subwayDay?.map(
     (subwayDay) => subwayDay.alighting
   );
   const stackedData = {

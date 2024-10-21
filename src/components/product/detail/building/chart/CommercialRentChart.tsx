@@ -73,7 +73,7 @@ const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) =>
 
     Object.keys(data.rent).forEach((region) => {
       const regionData = data.rent[region];
-      const values = regionData.map((item) => {
+      const values = regionData?.map((item) => {
         const label = `${item.year} Q${item.quarter}`;
         labelsSet.add(label);
         allValues.push(item.value);
