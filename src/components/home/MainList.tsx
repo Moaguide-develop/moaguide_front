@@ -10,12 +10,17 @@ const MainList = () => {
   const [category, setCategory] = useState('all');
   const router = useRouter();
   const queryClient = useQueryClient();
-
   const { isLoggedIn } = useAuthStore();
 
-  const { data, isLoading } = isLoggedIn
+  const { data, isLoading, refetch } = isLoggedIn
     ? getMainProductLogin(category)
-    : getMainProduct(category)
+    : getMainProduct(category);
+
+  useEffect(() => {
+    if (isLoggedIn && category === 'all') {
+      refetch(); 
+    }
+  }, [isLoggedIn, category, refetch]);
 
   const handleBookmarkInvalidate = () => {
     queryClient.invalidateQueries({ queryKey: ['MainProduct', category] });
