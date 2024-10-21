@@ -21,5 +21,6 @@ export const useNotifications = () => {
       return lastPage.isLast ? undefined : lastPage.nextPage;
     },
     initialPageParam: null,
+    staleTime: 5 * 60 * 1000, // 5분 동안 캐시된 데이터 유지
   });
 };
