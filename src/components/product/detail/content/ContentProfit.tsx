@@ -75,13 +75,15 @@ const ContentProfit = ({
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px]">최소 모집수량</div>
-            <div className="flex-1">{data?.base.publish.piece.toLocaleString()}원</div>
+            <div className="flex-1">{data?.base.publish.piece.toLocaleString()}계좌</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px]">1주당 가격</div>
-            <div className="flex-1">{data?.base.publish.basePrice.toLocaleString()}</div>
+            <div className="flex-1">
+              {data?.base.publish.basePrice.toLocaleString()}원
+            </div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
@@ -116,14 +118,20 @@ const ContentProfit = ({
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px] ">총예산규모</div>
               <div className="flex-1">
-                {data?.base?.investment ? data?.base?.investment.totalBudget : null}
+                {data?.base?.investment.totalBudget ? (
+                  <div>{data?.base?.investment?.totalBudget?.toLocaleString()}원</div>
+                ) : null}
               </div>
             </div>
           </div>
           <div className="flex flex-col  mb-[7px]">
             <div className=" flex  ">
               <div className="text-gray-400  w-[150px]">객단가</div>
-              <div className="flex-1">{data?.base.investment.unitPrice}</div>
+              <div className="flex-1">
+                {data?.base?.investment?.unitPrice && (
+                  <div>{data?.base?.investment?.unitPrice?.toLocaleString()}원</div>
+                )}
+              </div>
             </div>
           </div>
           <div className="flex flex-col  mb-[7px]">
