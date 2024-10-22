@@ -30,8 +30,8 @@ const MovieStats = () => {
 
   return (
     <div>
-      {data?.stats[0].region}
-      <div className="text-gray-400 mb-[10px]"> 주요 업무 지구</div>
+      {/* {data?.stats[0].region} */}
+      {/* <div className="text-gray-400 mb-[10px]"> 주요 업무 지구</div> */}
 
       <div className="bg-gray-50 rounded-xl flex flex-col  desk:pl-[10px] md:pl-[0px] ">
         <div className="grid grid-cols-4 gap-x-4 mb-[40px] mt-[20px] text-center">
