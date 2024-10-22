@@ -69,11 +69,17 @@ const MusicCopyRightFeeChart = () => {
     (a, b) => b - a
   );
   const maxCopyRightFeeDivideCount = sortedCopyRightFeeDivideCount[0] || 0;
-  const averageCopyRightFeeDivideCount =
-    CopyRightFeeDivideCount.length > 0
-      ? CopyRightFeeDivideCount?.reduce((acc, val) => acc + val, 0) /
-          CopyRightFeeDivideCount.length || 0
-      : 0;
+
+  const averageCopyRightFeeDivideCount = (() => {
+    if (CopyRightFeeDivideCount.length === 0) {
+      return 0;
+    }
+    let sum = 0;
+    for (let i = 0; i < CopyRightFeeDivideCount.length; i++) {
+      sum += CopyRightFeeDivideCount[i];
+    }
+    return sum / CopyRightFeeDivideCount.length;
+  })();
 
   const BarnewVariable =
     Math.floor(maxCopyRightFeeDivideCount + averageCopyRightFeeDivideCount) * 1.5;
@@ -88,11 +94,19 @@ const MusicCopyRightFeeChart = () => {
     (a, b) => b - a
   );
   const maxCopyRightFeeDivideRateCount = sortedCopyRightFeeDivideRateCount[0] || 0;
-  const averageCopyRightFeeDivideRateCount =
-    CopyRightFeeDivideRateCount.length > 0
-      ? CopyRightFeeDivideRateCount?.reduce((acc, val) => acc + val, 0) /
-          CopyRightFeeDivideRateCount.length || 0
-      : 0;
+
+  const averageCopyRightFeeDivideRateCount = (() => {
+    if (CopyRightFeeDivideRateCount.length === 0) {
+      return 0;
+    }
+
+    let sum = 0;
+    for (let i = 0; i < CopyRightFeeDivideRateCount.length; i++) {
+      sum += CopyRightFeeDivideRateCount[i];
+    }
+
+    return sum / CopyRightFeeDivideRateCount.length;
+  })();
 
   const LinenewVariable =
     Math.floor(maxCopyRightFeeDivideRateCount + averageCopyRightFeeDivideRateCount) * 1.5;
