@@ -100,9 +100,13 @@ const PopulationInformationChart = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
-      <div className="w-full max-w-4xl h-[400px]">
-        <Bar data={Chartdata} options={options} />
+    <div>
+      <div className="text-base  text-gray-400  mb-2">상품 주소의 행정동 인구정보</div>
+
+      <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
+        <div className="w-full max-w-4xl h-[400px]">
+          <Bar data={Chartdata} options={options} />
+        </div>
       </div>
     </div>
   );
