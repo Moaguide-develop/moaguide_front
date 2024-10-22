@@ -10,6 +10,10 @@ interface NearSubway {
   time: number;
 }
 
+interface NearBus {
+  node: string;
+}
+
 interface PublicTransportData {
   type: { type: string }[];
   cbd: string;
@@ -25,8 +29,9 @@ interface PublicTransportData {
   ybdCar: string;
   ybdSubway: string;
   nearSubway: NearSubway[];
-  busLine: number;
-  busNode: number;
+  line: string;
+  node: string;
+  nearBus: NearBus[];
 }
 
 const stationImageMap: { [key: string]: string } = {
@@ -105,8 +110,8 @@ const PublicTransport = () => {
 
       <div className="text-gray-400 mb-[10px]">대중교통</div>
 
-      <div className="flex max-w-[1000px] w-full mx-auto h-auto">
-        <div className="bg-gray-50 rounded-xl mr-[20px] flex flex-col w-[calc(50%-10px)] p-[20px] ">
+      <div className="flex desk2:flex-row desk:flex-col max-w-[1000px] w-full mx-auto h-auto">
+        <div className="bg-gray-50 rounded-xl mr-[20px] flex flex-col desk:w-full desk2:w-[calc(50%-10px)] p-[20px] ">
           <div className="text-base font-bold">1km 이내 주변 지하철</div>
           {data &&
             data?.nearSubway?.map((subway, index) => {
@@ -138,21 +143,21 @@ const PublicTransport = () => {
             })}
         </div>
 
-        <div className="bg-gray-50 rounded-xl w-[calc(50%-10px)] p-[20px]">
+        <div className="bg-gray-50 rounded-xl desk:w-full desk2:w-[calc(50%-10px)] p-[20px] desk:mt-5 desk2:mt-0">
           <div className="text-base font-bold">0.5km이내 주변 버스</div>
-          <div className="flex justify-between mt-2">
-            <div>정류장이름</div>
-          </div>
-          <div className="flex">
-            <div
-              className="mr-[20px] bg-gray-300  rounded-md  w-full max-w-[30px] flex justify-center items-center relative "
-              onClick={() => setIsModal(!Ismodal)}>
-              {data?.busLine}
-              {Ismodal ? <Busmodal /> : null}
-            </div>
-            <div className=" bg-gray-300  rounded-md w-full  max-w-[30px] flex justify-center items-center">
-              {data?.busNode}
-              {Ismodal ? <Busmodal /> : null}
+          <div className="flex justify-between mt-2">{/* <div>정류장이름</div> */}</div>
+          <div className="flex flex-col">
+            <div className=" grid grid-cols-2 gap-3" onClick={() => setIsModal(!Ismodal)}>
+              {data?.nearBus.map((item, index) => {
+                return (
+                  <div
+                    key={index}
+                    className=" bg-gray-300  rounded-md flex justify-center items-center p-2">
+                    {item.node}
+                  </div>
+                );
+              })}
+              {/* {Ismodal ? <Busmodal /> : null} */}
             </div>
           </div>
         </div>

@@ -3,5 +3,5 @@ export const CATEGORY: { [key: string]: string } = {
   art: '미술',
   cow: '한우',
   music: '음악',
-  content: '컨텐츠'
+  content: '콘텐츠'
 };

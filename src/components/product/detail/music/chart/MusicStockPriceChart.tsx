@@ -1,29 +1,10 @@
 import React, { useRef, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
+
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import { IMusicBulidingStockPriceChart } from '@/types/MusicProductType';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
 
 const MusicStockPriceChart = () => {
   const chartRef = useRef(null);
@@ -43,30 +24,26 @@ const MusicStockPriceChart = () => {
     }
   };
 
-  const {
-    data: StockPriceData,
-    isLoading,
-    error
-  } = useQuery({
+  const { data: MusicStockPriceData } = useQuery({
     queryKey: ['MusicStockPriceChart', filteringData, lastSegment],
     queryFn: fetchData
   });
 
-  const StockPriceDate =
-    (StockPriceData?.transaction &&
-      StockPriceData?.transaction?.map((item) => item.day).reverse()) ||
-    [];
+  const StockPriceDate = MusicStockPriceData?.transaction
+    ?.map((item) => item.day)
+    .reverse() || ['0'];
 
-  const StockPriceCount =
-    (StockPriceData?.transaction &&
-      StockPriceData?.transaction?.map((item) => Number(item.value)).reverse()) ||
-    [];
-  const sortedStockPriceCount = [...StockPriceCount].sort((a, b) => b - a);
-  const maxStockPriceCount = sortedStockPriceCount[0] || 0;
-  const averageStockPriceCount =
-    StockPriceCount.reduce((acc, val) => acc + val, 0) / StockPriceCount.length || 0;
+  const StockPriceCount = MusicStockPriceData?.transaction
+    ?.map((item) => Number(item.value))
+    .reverse() || [0];
 
-  const newVariable = Math.floor(maxStockPriceCount + averageStockPriceCount);
+  // const sortedStockPriceCount = [...StockPriceCount].sort((a, b) => b - a);
+  // const maxStockPriceCount = sortedStockPriceCount[0] || 0;
+
+  // const averageStockPriceCount =
+  //   StockPriceCount.reduce((acc, val) => acc + val, 0) / StockPriceCount.length || 0;
+
+  // const newVariable = Math.floor(maxStockPriceCount + averageStockPriceCount);
 
   const data = {
     labels: StockPriceDate,
@@ -97,6 +74,7 @@ const MusicStockPriceChart = () => {
         display: false
       },
       tooltip: {
+        // enabled: StockPriceCount.length > 0,
         enabled: true,
         intersect: false
       }
@@ -116,7 +94,7 @@ const MusicStockPriceChart = () => {
       y: {
         display: true,
         beginAtZero: true,
-        max: newVariable,
+        // max: newVariable,
         grid: {
           display: false
         }

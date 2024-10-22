@@ -141,15 +141,19 @@ const FloatingPopulationChart = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
-      <div className="w-full max-w-4xl h-[400px] mb-[50px]">
-        <div className="flex justify-end text-lg font-bold">일별 승하차 승객수</div>
-        <Bar data={groupedData} options={groupedOptions} />
-      </div>
+    <div>
+      <div className="text-gray-400 mb-[10px]"> 1km 이내 주변 지하철 승하차 승객수</div>
 
-      <div className="w-full max-w-4xl h-[400px] ">
-        <div className="flex justify-end text-lg font-bold">월별 승하차 승객수</div>
-        <Bar data={stackedData} options={stackedOptions} />
+      <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
+        <div className="w-full max-w-4xl h-[400px] mb-[50px]">
+          <div className="flex justify-end text-lg font-bold">일별 승하차 승객수</div>
+          <Bar data={groupedData} options={groupedOptions} />
+        </div>
+
+        <div className="w-full max-w-4xl h-[400px] ">
+          <div className="flex justify-end text-lg font-bold">월별 승하차 승객수</div>
+          <Bar data={stackedData} options={stackedOptions} />
+        </div>
       </div>
     </div>
   );

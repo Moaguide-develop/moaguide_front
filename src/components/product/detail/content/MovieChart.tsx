@@ -49,7 +49,7 @@ const MovieChart = () => {
     isLoading,
     error
   } = useQuery({
-    queryKey: ['MovieChart', filteringData],
+    queryKey: ['MovieChart', filteringData, lastSegment],
     queryFn: fetchData
   });
 
