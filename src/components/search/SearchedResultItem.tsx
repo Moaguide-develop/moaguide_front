@@ -40,11 +40,11 @@ const SearchedResultItem = ({ productId, product_Id, name, platform, category }:
           <div className="text-body1">{name}</div>
         </div>
         {/* 부가정보 */}
-        <div className="flex items-center gap-4">
+        {/* <div className="flex items-center gap-4">
           <div className="cursor-pointer">
             <img src="/images/home/bookmark.svg" alt="Bookmark" />
           </div>
-        </div>
+        </div> */}
       </div>
     </li>
   );
