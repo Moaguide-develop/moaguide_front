@@ -182,7 +182,7 @@ const FindPassword = () => {
                   </div>
                 )
               ) : (
-                <div className="ml-[6px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+                <div className="ml-[6px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
                   인증 요청
                 </div>
               )}
@@ -214,14 +214,15 @@ const FindPassword = () => {
                   인증 완료
                 </div>
               ) : (
-                <div className="ml-[8px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2">
+                <div className="ml-[8px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
                   인증 완료
                 </div>
               )}
             </div>
+            <div className='min-h-[20px] my-2 w-full'>
             {isRequest ? (
               <div
-                className={`text-xs text-normal mt-[10px]
+                className={`text-xs text-normal
             ${isComplete && 'hidden'}
             ${isError && 'hidden'}
             `}
@@ -229,7 +230,7 @@ const FindPassword = () => {
                 남은시간 : {validNumberToTime(validTime)}
               </div>
             ) : null}
-            {isComplete && (
+             {isComplete && (
               <div className="text-xs text-success mt-[10px]">
                 인증이 완료되었습니다.
               </div>
@@ -239,6 +240,7 @@ const FindPassword = () => {
                 인증번호가 일치하지 않습니다.
               </div>
             )}
+            </div>
           </div>
         </section><div className='w-[90%] sm:w-full max-w-[340px]'>
             {isComplete ? (
@@ -249,7 +251,7 @@ const FindPassword = () => {
                 다음으로
               </div>
             ) : (
-              <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px] mb-[20px] sm:mb-0">
+              <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px] mb-[20px] sm:mb-0 cursor-not-allowed">
                 다음으로
               </div>
             )}
@@ -342,7 +344,7 @@ const FindPassword = () => {
             비밀번호 재설정
           </div>
         ) : (
-          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px] mb-[20px] sm:mb-0">
+          <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gray100 text-heading4 text-gray400 mt-0 sm:mt-[40px] mb-[20px] sm:mb-0 cursor-not-allowed">
             비밀번호 재설정
           </div>
         )}

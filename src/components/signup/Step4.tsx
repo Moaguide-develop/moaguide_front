@@ -212,7 +212,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
       <button
         onClick={handleComplete}
         disabled={!isFormValid}
-        className={`w-[90%] sm:w-full sm:max-w-[340px] py-3 rounded-[12px] text-lg font-bold text-white mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 ${isFormValid ? 'bg-gradient2 text-heading4 text-white' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'}`}
+        className={`w-[90%] sm:w-full sm:max-w-[340px] py-3 rounded-[12px] text-lg font-bold text-white mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 ${isFormValid ? 'bg-gradient2 text-heading4 text-white cursor-pointer' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'}`}
       >
         완료
       </button>
