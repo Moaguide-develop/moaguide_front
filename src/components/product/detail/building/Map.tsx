@@ -128,7 +128,10 @@ const KakaoMap = () => {
         <div className=" ml-[15px] text-base  ">{data?.location}</div>
       </div>
 
-      <div ref={mapRef} style={{ width: '400px', height: '300px' }} />
+      <div
+        ref={mapRef}
+        className=" desk:w-[340px] desk:h-[280px]  desk2:w-[400px] desk2:h-[350px]"
+      />
     </div>
   );
 };

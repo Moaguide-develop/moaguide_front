@@ -47,7 +47,11 @@ const stationImageMap: { [key: string]: string } = {
   분당선: '/images/product/detail/subwaybundang.svg',
   경의중앙선: '/images/product/detail/subwaygyeonghye.svg',
   신분당선: '/images/product/detail/subwaysinbundang.svg',
-  수인분당선: '/images/product/detail/subwaysuinbundang.svg'
+  수인분당선: '/images/product/detail/subwaysuinbundang.svg',
+  부산1호선: '/images/product/detail/subwaybusan1.svg',
+  부산2호선: '/images/product/detail/subwaybusan2.svg',
+  부산3호선: '/images/product/detail/subwaybusan3.svg',
+  부산4호선: '/images/product/detail/subwaybusan4.svg'
 };
 
 const PublicTransport = () => {
@@ -122,7 +126,7 @@ const PublicTransport = () => {
                       <div className="flex">
                         {subway.route.map((route, index) => (
                           <Image
-                            src={stationImageMap[route]}
+                            src={`https://d2qf2amuam62ps.cloudfront.net/img/${route}.svg`}
                             alt={`이미지`}
                             width={20}
                             height={20}
@@ -145,15 +149,16 @@ const PublicTransport = () => {
 
         <div className="bg-gray-50 rounded-xl desk:w-full desk2:w-[calc(50%-10px)] p-[20px] desk:mt-5 desk2:mt-0">
           <div className="text-base font-bold">0.5km이내 주변 버스</div>
-          <div className="flex justify-between mt-2">{/* <div>정류장이름</div> */}</div>
-          <div className="flex flex-col">
-            <div className=" grid grid-cols-2 gap-3" onClick={() => setIsModal(!Ismodal)}>
+          <div className=" ">
+            <div
+              className="grid grid-cols-4  gap-3 "
+              onClick={() => setIsModal(!Ismodal)}>
               {data?.nearBus.map((item, index) => {
                 return (
-                  <div
-                    key={index}
-                    className=" bg-gray-300  rounded-md flex justify-center items-center p-2">
-                    {item.node}
+                  <div key={index} className="flex ">
+                    <div className=" w-full bg-gray-200 text-xs rounded-md flex justify-center items-center p-2 ">
+                      {item.node}
+                    </div>
                   </div>
                 );
               })}
