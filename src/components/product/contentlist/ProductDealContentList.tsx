@@ -58,7 +58,16 @@ const ProductDealContentList = ({
       <Container>
         <div>
           {content?.map((item) => (
-            <div key={item.product_Id} className=" lg:flex  ">
+            <div
+              key={item.product_Id}
+              className=" lg:flex  "
+              onClick={() => {
+                if (item.sale) {
+                  alert('현재는 매각이 완료 된 상품입니다');
+                  // console.log(item.sale)
+                  window.location.reload();
+                }
+              }}>
               <Link href={`product/detail/${item.category}/${item.product_Id}`}>
                 <div className="flex items-center  h-[110px] ">
                   <div className="mr-[10px] desk:ml-[10px] flex-shrink-0">

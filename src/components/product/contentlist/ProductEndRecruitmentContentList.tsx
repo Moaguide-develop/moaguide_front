@@ -71,7 +71,16 @@ const ProductEndRecruitmentContentList = ({
       <Container>
         <div>
           {content?.map((item) => (
-            <div key={item.productId} className=" lg:flex  ">
+            <div
+              key={item.productId}
+              className=" lg:flex"
+              onClick={() => {
+                if (item.sale) {
+                  alert('현재는 매각이 완료 된 상품입니다');
+                  // console.log(item.sale)
+                  window.location.reload();
+                }
+              }}>
               <Link href={`product/detail/${item.category}/${item.productId}`}>
                 <div className="flex items-center  h-[110px] ">
                   <div className="flex   desk:ml-[10px] mr-[16px] flex-shrink-0 ">

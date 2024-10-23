@@ -197,8 +197,8 @@ const MusicProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex">
             <div>
-              <div className="text-gray-400  w-[160px]">1년간 저작권료 수익률</div>
-              <div className="text-gray-400  w-[150px]">저작권료 상세정보</div>
+              <div className="text-gray-400  w-[160px]">최근 저작권료 수익률</div>
+              <div className="text-gray-400  w-[150px]"> 상세정보</div>
             </div>
             <div className="flex-1">
               <div className="max-w-[250px]  ">

@@ -78,7 +78,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
             </div>
           </div>
           <div className="flex flex-col  mb-[7px]">
-            <div className=" flex  w-[400px]">
+            <div className=" flex  ">
               <div className="text-gray-400  w-[150px]">임차인 소개</div>
               <div className=" flex-1">{data?.lease[0]?.tenantIntroduction}</div>
             </div>
