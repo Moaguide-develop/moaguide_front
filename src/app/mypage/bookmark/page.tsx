@@ -51,7 +51,7 @@ const BookmarkPage = async ({
           totalPages={productBookmarkData?.totalPages}
         />
       ) : (
-        <div>Error loading bookmarks</div>
+        <div>현재 북마크 하신 상품이 없습니다</div>
       )}
     </div>
   );
