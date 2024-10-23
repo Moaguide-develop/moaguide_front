@@ -3,13 +3,16 @@ import EventGuide from './EventGuide';
 import { useRouter } from 'next/navigation';
 
 const MypageMenu = () => {
-
   const router = useRouter();
 
   return (
     <div className="mt-5 flex flex-col">
       {/* 공지사항 */}
-      <div className="flex items-center justify-between px-5 py-6">
+      <div
+        className="flex items-center justify-between px-5 py-6"
+        onClick={() => {
+          router.push('mypage/notice');
+        }}>
         <div className="flex items-center gap-[14px]">
           <div>
             <img src="/images/mypage/notice.svg" alt="공지사항" />
@@ -57,7 +60,7 @@ const MypageMenu = () => {
           />
         </div>
       </div> */}
-      <EventGuide/>
+      <EventGuide />
     </div>
   );
 };

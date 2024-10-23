@@ -11,7 +11,7 @@ const PopulationInformationChart = () => {
 
   const fetchData = async () => {
     const response = await axios.get(
-      `https://api.moaguide.com/detail/building/population/${lastSegment}?year=2023&month=12`
+      `https://api.moaguide.com/detail/building/population/${lastSegment}`
     );
     return response.data;
   };
