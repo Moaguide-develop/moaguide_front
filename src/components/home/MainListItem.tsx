@@ -41,6 +41,7 @@ const MainListItem = ({
           onSuccess: () => {
             handleBookmarkInvalidate();
             queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+            alert('북마크 삭제가 완료되었습니다');
   
             if (currentTab === 'all') {
               queryClient.invalidateQueries({ queryKey: ['MainProductLogin', category] });
@@ -57,6 +58,7 @@ const MainListItem = ({
           onSuccess: () => {
             handleBookmarkInvalidate();
             queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+            alert('북마크 추가가 완료되었습니다');
 
             if (currentTab === 'all') {
               queryClient.invalidateQueries({ queryKey: ['MainProductLogin', category] });
@@ -68,6 +70,11 @@ const MainListItem = ({
       );
     }
   };
+
+  const handleLogin = () => {
+    alert('로그인이 필요한 서비스입니다.');
+    router.push('/sign');
+  }
 
   return (
     <div className="mt-5 pb-5 border-b border-gray100">
@@ -118,6 +125,7 @@ const MainListItem = ({
                 src="/images/home/bookmark.svg"
                 alt="Bookmark"
                 className="w-[24px] h-[24px]"
+                onClick={handleLogin} 
               />
             )}
           </div>
