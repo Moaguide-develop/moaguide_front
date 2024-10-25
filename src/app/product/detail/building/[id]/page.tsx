@@ -220,7 +220,11 @@ const BuildingDetailpage = (props: any) => {
       ) : sort === 'profit' ? (
         <BuildingProfit url={url} />
       ) : sort === 'detail' ? (
-        <BuildingProductDetail url={url} rentType={data?.rentType} />
+        <BuildingProductDetail
+          url={url}
+          rentType={data?.rentType}
+          stayType={data?.stayType}
+        />
       ) : undefined}
     </div>
   );

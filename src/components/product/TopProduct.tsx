@@ -131,7 +131,9 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
                           </div>
 
                           <div className="flex mt-[10px ] ml-[20px]">
-                            <div className="text-gray-400">{item.price}</div>
+                            <div className="text-gray-400">
+                              {item.price.toLocaleString()}원
+                            </div>
                             <div
                               className={`ml-[3px] ${
                                 item.lastDivide_rate > 0
