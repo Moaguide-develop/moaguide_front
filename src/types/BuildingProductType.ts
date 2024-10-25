@@ -37,6 +37,7 @@ export interface IBuildingProductDetail {
   link: string;
   rentType: boolean;
   bookmark: boolean;
+  stayType: boolean;
 }
 
 export interface IBuildingProductProfitDetail {
@@ -116,4 +117,27 @@ export interface ISubwayMonthItem {
 export interface ISubwayData {
   subwayDay: ISubwayDayItem[];
   subwayMonth: ISubwayMonthItem[];
+}
+
+export interface ISaydayItem {
+  day: string;
+  noday: number;
+  oneday: number;
+  twoday: number;
+  threeday: number;
+  total: number;
+}
+
+export interface IStayDayData {
+  object: ISaydayItem[];
+}
+
+export interface IStayRateItem {
+  day: string;
+  rate: number;
+  value: number;
+}
+
+export interface IStayRateData {
+  object: IStayRateItem[];
 }

@@ -1,10 +1,8 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { usePathname } from 'next/navigation';
-import { it } from 'node:test';
 import { ISubwayData } from '@/types/BuildingProductType';
 
 const FloatingPopulationChart = () => {
