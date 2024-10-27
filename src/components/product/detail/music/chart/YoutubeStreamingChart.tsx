@@ -26,25 +26,26 @@ const YoutubeStreamingChart = () => {
     }
   };
 
-  const {
-    data: StreamingData,
-    isLoading,
-    error
-  } = useQuery({
+  const { data: StreamingData } = useQuery({
     queryKey: ['StreamingChart', filteringData, lastSegment],
     queryFn: fetchData
   });
   const chartRef = useRef(null);
 
-  const StreamingDay = (StreamingData && StreamingData?.map((item) => item.day)) || [];
+  const StreamingDay =
+    (StreamingData?.steamingDto && StreamingData?.steamingDto?.map((item) => item.day)) ||
+    [];
 
   const StreamingCount =
-    (StreamingData && StreamingData?.map((item) => Number(item.value))) || [];
-  const sortedStreamingCount = [...StreamingCount].sort((a, b) => b - a);
-  const maxStreamingCount = sortedStreamingCount[0] || 0;
-  const averageStreamingCount =
-    StreamingCount.reduce((acc, val) => acc + val, 0) / StreamingCount.length || 0;
-  const newVariable = Math.floor(maxStreamingCount + averageStreamingCount);
+    (StreamingData?.steamingDto &&
+      StreamingData?.steamingDto?.map((item) => Number(item.value))) ||
+    [];
+
+  // const sortedStreamingCount = [...StreamingCount].sort((a, b) => b - a);
+  // const maxStreamingCount = sortedStreamingCount[0] || 0;
+  // const averageStreamingCount =
+  //   StreamingCount.reduce((acc, val) => acc + val, 0) / StreamingCount.length || 0;
+  // const newVariable = Math.floor(maxStreamingCount + averageStreamingCount);
 
   const dataSets = {
     labels: StreamingDay,
@@ -98,7 +99,8 @@ const YoutubeStreamingChart = () => {
       y: {
         display: true,
         beginAtZero: true,
-        max: newVariable,
+        max: StreamingData?.max,
+        min: StreamingData?.min,
         grid: {
           display: false
         }

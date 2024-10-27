@@ -49,7 +49,7 @@ const Dividend = memo(({ dividend }: DividendProps) => {
         spaceBetween={0}
         slidesPerView={2}
         autoplay={{
-          delay: 1000,
+          delay: 3000,
           disableOnInteraction: false // 사용자 상호작용시 슬라이더 일시 정지 비활성
         }}
         // navigation

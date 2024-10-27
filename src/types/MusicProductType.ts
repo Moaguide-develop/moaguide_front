@@ -98,9 +98,20 @@ export interface IMusicBulidingStockPriceChart {
   transaction: IMusicBuildingStockPrice[];
 }
 
-export interface IMusicStreaming {
+// export interface IMusicStreaming {
+//   day: string;
+//   value: string;
+// }
+
+// export type IMusicStreamingChart = IMusicStreaming[];
+
+export interface IMusicStreamingDto {
+  value: number;
   day: string;
-  value: string;
 }
 
-export type IMusicStreamingChart = IMusicStreaming[];
+export interface IMusicStreamingChart {
+  steamingDto: IMusicStreamingDto[];
+  max: number;
+  min: number;
+}
