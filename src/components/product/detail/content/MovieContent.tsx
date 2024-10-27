@@ -24,7 +24,6 @@ const MovieContent = ({ name }: { name: string | undefined }) => {
     data?.schedules.filter((item) =>
       item.imgLink.startsWith('https://www.kobis.or.kr/')
     ) || [];
-  console.log(name);
   // console.log
   return (
     <div className="flex mt-[50px]">

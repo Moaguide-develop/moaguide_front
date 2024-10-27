@@ -27,7 +27,6 @@ const ContentProfit = ({
   const { data, isLoading } = getContentProductProfitDetail(url, genre);
 
   const [isModal, setIsModal] = useState(false);
-  console.log(ContentMoviePeopleData);
   return (
     <div
       className="max-w-[1000px] mx-auto mt-[32px]"
@@ -197,7 +196,6 @@ const ContentProfit = ({
                 onClick={() => {
                   setIsModal(!isModal);
                   setMoviePeople(data?.object?.director as string);
-                  console.log(isModal);
                 }}>
                 {data?.object?.director}
               </div>

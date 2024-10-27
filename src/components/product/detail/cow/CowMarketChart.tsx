@@ -31,7 +31,6 @@ const CowMarketChart = () => {
   const [HanwooUnit, setHanwooUnit] = useState('');
 
   useEffect(() => {
-    console.log(HanwooName);
     if (HanwooName == '한우 사육두수' || HanwooName == '연간 매각두수') {
       setHanwooUnit('두');
     } else if (HanwooName == '한우 사육농가수') {

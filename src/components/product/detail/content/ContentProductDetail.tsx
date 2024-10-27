@@ -30,7 +30,6 @@ const ContentProductDetail = ({
     queryKey: ['Schedule', lastSegment],
     queryFn: fetchData
   });
-  console.log(data?.stats[0]);
   return (
     <div>
       {genre === 'MOVIE' ? (

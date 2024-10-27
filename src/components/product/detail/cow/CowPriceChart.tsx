@@ -42,7 +42,6 @@ const CowPriceChart = () => {
     labels: HanWooDate,
     data: HanwooCount
   };
-  console.log(dataSets.data);
   const data = {
     labels: dataSets.labels,
     datasets: [

@@ -77,7 +77,6 @@ const PublicTransport = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching data</div>;
-  console.log(data);
   return (
     <div>
       <div className="text-gray-400 mb-[10px]"> 주요 업무 지구</div>

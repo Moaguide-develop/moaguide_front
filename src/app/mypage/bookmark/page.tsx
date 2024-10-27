@@ -35,7 +35,6 @@ const BookmarkPage = async ({
     }
 
     productBookmarkData = await productBookmarkResponse.json();
-    console.log(productBookmarkData);
   } catch (error) {
     console.error('Failed to fetch product bookmark data:', error);
   }
