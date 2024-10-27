@@ -21,7 +21,6 @@ const FloatingPopulationChart = () => {
     queryFn: fetchData
   });
   const subwayMonthDateData = data?.subwayMonth?.map((subwayMonth) => subwayMonth.day);
-  console.log(data);
   const subwayMonthTotalBoardingData = data?.subwayMonth?.map(
     (subwayMonth) => subwayMonth.boarding
   );

@@ -18,7 +18,6 @@ const Schedule = () => {
     queryFn: fetchData
   });
 
-  console.log(typeof data?.stats[0].releaseDate);
   const releaseDate = new Date(data?.stats[0].releaseDate); // 예제 날짜 변경
   const dates = [];
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토']; // 요일 배열

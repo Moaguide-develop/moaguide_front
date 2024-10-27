@@ -15,8 +15,6 @@ const BuildingProductDetail = ({
   rentType: boolean | undefined;
   stayType: boolean | undefined;
 }) => {
-  console.log(rentType);
-  console.log(stayType);
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       {stayType ? (
