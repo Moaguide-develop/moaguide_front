@@ -7,10 +7,10 @@ import MusicYoutube from './MusicYoutube';
 const MusicProductDetail = () => {
   return (
     <div className="max-w-[1000px]   mx-auto mt-[32px]">
-      <div className="mb-[100px]">
+      <div className="desk:mb-[40px] md:mb-[100px]">
         <MusicYoutube />
       </div>
-      <div className="h-[50px]"></div>
+      <div className="desk:h-0 md:h-[50px]"></div>
       <div className="mt-[10px] text-2xl font-bold mb-[10px]">유튜브 조회수</div>
       <YoutubeViewChart />
 
