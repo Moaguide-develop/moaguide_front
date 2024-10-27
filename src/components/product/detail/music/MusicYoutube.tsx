@@ -44,9 +44,9 @@ const MusicYoutube = () => {
         </div>
       </div>
       <div className="mt-[40px] ">
-        <div className="text-2xl font-bold  mb-[20px]">대표곡 정보</div>
+        <div className="text-2xl font-bold  mb-[10px]">대표곡 정보</div>
 
-        <div className="text-2xl ">{data?.youtubeTitle}</div>
+        <div className="text-xl ">{data?.youtubeTitle}</div>
       </div>
     </div>
   );
