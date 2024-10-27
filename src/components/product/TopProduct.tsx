@@ -54,7 +54,7 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
           slidesPerView={2}
           pagination={{ el: '.swiper-pagination', clickable: true, enabled: false }}
           autoplay={{
-            delay: 1000,
+            delay: 4000,
             disableOnInteraction: false // 사용자 상호작용시 슬라이더 일시 정지 비활성
           }}
           // navigation
