@@ -98,6 +98,9 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
               alt="All Agree"
               width={24}
               height={24}
+              placeholder="blur"
+              priority
+              blurDataURL="/sign/CheckCircle.svg"
             />
             <span className="ml-2 font-medium">모두 동의합니다</span>
           </div>
@@ -114,6 +117,9 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
                   alt={`${key} checkbox`}
                   width={24}
                   height={24}
+                  placeholder="blur"
+                  priority
+                  blurDataURL="/sign/Check.svg"
                 />
                 <span className="ml-2 font-medium">
                   {index < 2 ? `[필수] ` : `[선택] `}
@@ -128,6 +134,9 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
                 width={24}
                 height={24}
                 onClick={(event) => handleArrowClick(key, event)}
+                placeholder="blur"
+                priority
+                blurDataURL="/sign/Arrow.svg"
               />
             </div>
           ))}

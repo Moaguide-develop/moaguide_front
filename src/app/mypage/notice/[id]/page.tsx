@@ -8,6 +8,9 @@ const NoticeDetailPage = () => {
         height={24}
         alt="Left Arrow"
         className="mb-[34px] mt-[15px]"
+        placeholder="blur"
+        priority
+        blurDataURL="/detail/CaretLeft.svg"
       />
       <div className=" flex flex-col ">
         <div className=" text-base font-bold mb-[12px]">23기 배당금 지급 안내</div>

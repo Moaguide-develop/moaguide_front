@@ -17,6 +17,9 @@ const PrivacyControllModal: React.FC<PrivacyControllModalProps> = ({ onClose }) 
             height={24}
             onClick={onClose}
             className="cursor-pointer mt-4 mb-8"
+            placeholder="blur"
+            priority
+            blurDataURL="/sign/leftArrow.svg"
           />
         </div>
         <h3 className="text-xl font-bold mb-4">개인정보처리방침</h3>

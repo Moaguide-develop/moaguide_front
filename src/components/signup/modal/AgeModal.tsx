@@ -21,6 +21,9 @@ const AgeModal: React.FC<AgeModalProps> = ({ onClose }) => {
             height={24}
             onClick={onClose}
             className="cursor-pointer mt-4 mb-8"
+            placeholder="blur"
+            priority
+            blurDataURL="/sign/leftArrow.svg"
           />
         </div>
         <h3 className="text-xl font-bold mb-4">만 14세 이상</h3>

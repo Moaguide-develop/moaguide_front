@@ -35,6 +35,9 @@ const NoticePage = () => {
         alt="Left Arrow"
         className="py-[14px]"
         onClick={() => router.back()}
+        placeholder="blur"
+        priority
+        blurDataURL="/detail/CaretLeft.svg"
       />
       <div>
         <div className="text-heading3 mt-3">

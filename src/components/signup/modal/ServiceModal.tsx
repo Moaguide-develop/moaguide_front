@@ -17,6 +17,9 @@ const ServiceModal: React.FC<ServiceModalProps> = ({ onClose }) => {
             height={24}
             onClick={onClose}
             className="cursor-pointer mt-4 mb-8"
+            placeholder="blur"
+            priority
+            blurDataURL="/sign/leftArrow.svg"
           />
         </div>
         <h3 className="text-xl font-bold mb-4">서비스 이용약관 동의</h3>
