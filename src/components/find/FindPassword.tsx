@@ -133,7 +133,7 @@ const FindPassword = () => {
   return (
     <div className='min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center'>
        {!showPasswordReset && (
-      <><section className="w-[90%] sm:w-full max-w-[340px] mx-auto mt-[30px] sm:mt-0">
+      <><section className="w-full mx-auto mt-[30px] sm:mt-0">
         <div className=''>
           <div className="self-start" style={{ width: '24px', height: '24px' }}>
             <Image
@@ -158,19 +158,19 @@ const FindPassword = () => {
 
           <div className="mt-10">
             <div className="text-body3">이메일</div>
-            <div className="w-full flex items-center justify-between mt-2">
+            <div className="w-full flex items-center gap-2 mt-2">
               <input
                 type="email"
                 disabled={isRequest}
                 value={email}
                 onChange={handleEmailChange}
                 placeholder="이메일 입력"
-                className="min-w-0  w-[65%] px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal" />
+                className="min-w-0 flex-grow px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"/>
               {emailValid ? (
                 isRequest ? (
                   <div
                     onClick={handleResending}
-                    className={`min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-black rounded-[12px] text-white text-title2
+                    className={`min-w-[84px] text-center px-3 py-[14px] bg-black rounded-[12px] text-white text-title2
                   ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                   `}
                   >
@@ -179,13 +179,13 @@ const FindPassword = () => {
                 ) : (
                   <div
                     onClick={handleRequest}
-                    className="min-w-[84px] text-center w-[30%] px-3 cursor-pointer  py-[14px] bg-black rounded-[12px] text-white text-title2"
+                    className="min-w-[84px] text-center  px-3 cursor-pointer  py-[14px] bg-black rounded-[12px] text-white text-title2"
                   >
                     인증 요청
                   </div>
                 )
               ) : (
-                <div className="min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
+                <div className="min-w-[84px] text-center px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
                   인증 요청
                 </div>
               )}
@@ -194,7 +194,7 @@ const FindPassword = () => {
 
           <div className="mt-[28px]">
             <div className="text-body3">인증번호</div>
-            <div className="w-full flex items-center justify-between mt-2">
+            <div className="w-full flex items-center gap-2 mt-2">
               <input
                 ref={inputRef}
                 value={verificationCode}
@@ -202,7 +202,7 @@ const FindPassword = () => {
                 onChange={handleVerificationCodeChange}
                 type="text"
                 placeholder="인증 번호 입력"
-                className={`min-w-0  w-[65%] px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
+                className={`min-w-0 flex-grow px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
               ${isRequest && !isComplete && !isError && 'outline-normal'}
               ${isRequest && isComplete && 'outline-success'}
               ${isRequest && isError && 'outline-error'}
@@ -210,14 +210,14 @@ const FindPassword = () => {
               {isRequest && verificationCodeValid ? (
                 <div
                   onClick={handleCertify} 
-                  className={`min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-black rounded-[12px] text-white text-title2
+                  className={`min-w-[84px] text-center px-3 py-[14px] bg-black rounded-[12px] text-white text-title2
                 ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                 `}
                 >
                   인증 완료
                 </div>
               ) : (
-                <div className="min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
+                <div className="min-w-[84px] text-center px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
                   인증 완료
                 </div>
               )}
@@ -267,7 +267,7 @@ const FindPassword = () => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 100 }}
           transition={{ duration: 0.5 }}
-          className="w-[90%] sm:w-full max-w-[340px] mx-auto"
+          className="w-full max-w-[330px] mx-auto"
         >
           <section>
           <div className=''>
@@ -277,8 +277,10 @@ const FindPassword = () => {
               alt='뒤로가기'
               width={24}
               height={24}
-              className='cursor-pointer'
-              onClick={() => router.back()} 
+              priority
+              blurDataURL="/sign/LeftArrowIcon.svg"
+              className="cursor-pointer"
+              onClick={() => router.back()}
             />
             </div>
         </div>
@@ -340,7 +342,7 @@ const FindPassword = () => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 100 }}
           transition={{ duration: 0.5 }}
-          className="w-[90%] sm:w-full max-w-[340px] mx-auto"
+          className="w-full max-w-[330px] mx-auto"
         >
         {passwordValid && passwordMatch ? (
           <div className="flex items-center justify-center px-5 py-3 w-full rounded-[12px] font-bold text-lg bg-gradient2 text-heading4 text-white cursor-pointer mt-0 sm:mt-[40px] mb-[20px] sm:mb-0" onClick={handlePasswordReset}>

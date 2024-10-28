@@ -16,10 +16,10 @@ const FindTabs = () => {
   const router = useRouter();
 
   return (
-    <div className='min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center'>
+    <div className='max-w-[330px] min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center'>
         <>
         <div className="flex flex-col items-center overflow-y-auto w-full">
-          <div className='w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0'>
+          <div className='w-full mx-auto mt-[30px] sm:mt-0'>
           <div className="self-start">
             <Image
               src={'/sign/LeftArrowIcon.svg'}
