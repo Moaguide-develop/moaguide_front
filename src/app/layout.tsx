@@ -39,7 +39,11 @@ export const metadata: Metadata = {
     description:
       '모아가이드는 조각투자 및 소액투자를 쉽게 시작할 수 있도록 돕는 정보 큐레이션 플랫폼입니다. 다양한 자산 정보와 투자 가이드를 한곳에서 확인하세요.',
     url: 'https://moaguide.com',
-    images: '/logo.png',
+    images: [
+      {
+        url: 'https://moaguide.com/logo.png'
+      }
+    ],
     siteName: '모아가이드',
     locale: 'ko_KR',
     type: 'website'
