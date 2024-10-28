@@ -11,6 +11,7 @@ import { getCookie, setCookie, removeCookie } from '@/utils/cookie';
 import { useAuthStore } from '@/store/userAuth.store';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useModalStore } from '@/store/modal.store';
 
 const SignupPage: React.FC = () => {
   const [isSocialLogin, setIsSocialLogin] = useState(false);
@@ -30,6 +31,9 @@ const SignupPage: React.FC = () => {
 
   const router = useRouter();
   const { isLoggedIn } = useAuthStore();
+
+  const { setOpen, setModalType } = useModalStore();
+  
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -89,8 +93,8 @@ const SignupPage: React.FC = () => {
       const response = await finalSignup(formData, authHeaders);
  
       if (response === '회원가입 완료') {
-        alert('알림 설정은 마이페이지에서 설정 가능합니다.\n회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.');
-        router.push('/sign'); 
+        setModalType('signupComplete');
+        setOpen(true);
       }
       
     } catch (error) {
