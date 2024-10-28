@@ -7,6 +7,7 @@ import ProductMobilePagenation from '../pagenation/ProductMobilePagenation';
 import { CATEGORY } from '@/static/category';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import { useState } from 'react';
+import { CountupProductView } from '@/factory/ViewCount';
 interface IProductContentListProps {
   content: IProductDealDetailData['product'];
   totalPages: IProductDealDetailData['totalPages'];
@@ -39,6 +40,7 @@ const ProductDealContentList = ({
   //   }
   // };
 
+  const view = CountupProductView();
   return (
     <div>
       <Container>
@@ -67,6 +69,7 @@ const ProductDealContentList = ({
                   // console.log(item.sale)
                   window.location.reload();
                 }
+                view.mutate({ productId: item.product_Id });
               }}>
               <Link href={`product/detail/${item.category}/${item.product_Id}`}>
                 <div className="flex items-center  h-[110px] ">
