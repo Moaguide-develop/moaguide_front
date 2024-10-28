@@ -27,17 +27,17 @@ const NoticePage = () => {
   // const allPosts = data?.pages[0].notice;
 
   return (
-    <Container>
+    <div className='min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]'>
       <Image
         src={'/images/detail/CaretLeft.svg'}
         width={24}
         height={24}
         alt="Left Arrow"
-        className="mb-[34px] mt-[15px] ml-[10px]"
+        className="py-[14px]"
         onClick={() => router.back()}
       />
       <div>
-        <div className="flex justify-start text-2xl ml-[10px] mt-[15px] font-bold">
+        <div className="text-heading3 mt-3">
           공지사항
         </div>
 
@@ -58,7 +58,7 @@ const NoticePage = () => {
           )}
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 
