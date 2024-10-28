@@ -52,7 +52,18 @@ const SignLayout = () => {
     <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-center sm:min-h-[100vh]">
       <section className="flex mt-8 mb-6">
         <Link href={'/'} className='cursor-pointer'>
-          <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
+          <div style={{ width: '202px', height: '28px' }}>
+            <Image
+              src="/images/logo.svg"
+              alt="logo"
+              width={202}
+              height={28}
+              placeholder="blur"
+              priority
+              blurDataURL="/images/logo.svg"
+              className="cursor-pointer"
+              />
+          </div>
         </Link>
       </section>
       <section className="flex flex-col items-center w-[90%] sm:w-full max-w-[320px]">
