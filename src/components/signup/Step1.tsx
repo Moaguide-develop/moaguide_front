@@ -52,8 +52,8 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const isNextEnabled = checks.privacy && checks.service;
 
   return (
-    <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
-      <section className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
+    <div className="max-w-[330px] min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
+      <section className="w-full mx-auto mt-[30px] sm:mt-0">
         <div style={{ width: '24px', height: '24px' }}>
           <Image
             src={'/sign/LeftArrowIcon.svg'}
@@ -68,12 +68,12 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           />
         </div>
 
-        <div className="w-[100%] sm:w-[340px] max-w-[340px] h-[20px] mx-auto">
+        <div className="w-[100%] sm:w-[330px] max-w-[330px] h-[20px] mx-auto">
           <Image
             className="mt-6 mb-6"
             src={'/sign/ProgressBar1.svg'}
             alt="ProgressBar"
-            width={340}
+            width={330}
             height={100}
             placeholder="blur"
             priority
@@ -136,7 +136,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
       <button
         onClick={onNext}
-        className={`w-[90%] sm:w-full sm:max-w-[340px] py-3 rounded-[12px] font-bold text-lg transition duration-300 mt-0 sm:mt-[40px] mb-[20px] sm:mb-0 ${
+        className={`w-full sm:max-w-[330px] py-3 rounded-[12px] font-bold text-lg transition duration-300 mt-0 sm:mt-[40px] mb-[20px] sm:mb-0 ${
           isNextEnabled
             ? 'bg-gradient2 text-white hover:bg-purple-700'
             : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'

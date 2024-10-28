@@ -129,8 +129,8 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
   }, [isError]);
 
   return (
-    <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
-      <section className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
+    <div className="max-w-[330px] min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
+      <section className="w-full mx-auto mt-[30px] sm:mt-0">
       {/* <section className="hidden sm:flex mt-8 mb-6 sm:items-center sm:justify-center">
         <Link href={'/'} className='cursor-pointer'>
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px] items-center justify-center" />
@@ -150,12 +150,12 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
         />
         </div>
 
-        <div className="w-[100%] sm:w-[340px] max-w-[340px] h-[20px] mx-auto">
+        <div className="w-[100%] sm:w-[330px] max-w-[330px] h-[20px] mx-auto">
         <Image
           className="mt-6 mb-6"
           src={'/sign/ProgressBar2.svg'}
           alt="ProgressBar"
-          width={340}
+          width={330}
           height={100}
           placeholder="blur"
           priority
@@ -168,94 +168,93 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
             <span className="text-purple-600">이메일</span>을 인증해주세요
           </h2>
         </div>
-
         <div className="mt-10">
-          <div className="text-body3">이메일</div>
-          <div className="w-full flex items-center justify-between mt-2">
-            <input
-              type="email"
-              disabled={isRequest}
-              value={email}
-              onChange={handleEmailChange}
-              placeholder="이메일 입력"
-              className="min-w-0  w-[65%]  px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
-            />
-            {emailValid && emailAvailable === true ? (
-              isRequest ? (
-                <div
-                  onClick={handleResendVerification}
-                  className={`min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-black rounded-[12px] text-white text-title2 
-                  ${isComplete ? 'cursor-default' : 'cursor-pointer'}`}
-                >
-                  재전송
-                </div>
-              ) : (
-                <div
-                  onClick={handleRequestVerification}
-                  className="min-w-[84px] text-center w-[30%] cursor-pointer px-3 py-[14px] bg-black rounded-[12px] text-white text-title2"
-                >
-                  인증 요청
-                </div>
-              )
-            ) : (
-              <div className="min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
-                인증 요청
-              </div>
-            )}
-          </div>
-          <div className='h-[20px] mt-2'>
-          {emailAvailable === true && (
-            <p className="text-xs text-success">사용 가능한 이메일입니다.</p>
-          )}
-          {emailAvailable === false && (
-            <p className="text-xs text-error">이미 사용 중인 이메일입니다.</p>
-          )}
-          </div>
+  <div className="text-body3">이메일</div>
+  <div className="w-full flex items-center gap-2 mt-2">
+    <input
+      type="email"
+      disabled={isRequest}
+      value={email}
+      onChange={handleEmailChange}
+      placeholder="이메일 입력"
+      className="min-w-0 flex-grow px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
+    />
+    {emailValid && emailAvailable === true ? (
+      isRequest ? (
+        <div
+          onClick={handleResendVerification}
+          className={`min-w-[84px] text-center px-3 py-[14px] bg-black rounded-[12px] text-white text-title2 
+            ${isComplete ? 'cursor-default' : 'cursor-pointer'}`}
+        >
+          재전송
         </div>
-
-        <div className="mt-4">
-          <div className="text-body3">인증번호</div>
-          <div className="w-full flex items-center justify-between mt-2">
-            <input
-              ref={inputRef}
-              value={verificationCode}
-              disabled={!isRequest || validTime === 0 || isComplete}
-              onChange={handleVerificationCodeChange}
-              type="text"
-              placeholder="인증 번호 입력"
-              className={`min-w-0 w-[65%] px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
-              ${isRequest && !isComplete && !isError && 'outline-normal'}
-              ${isRequest && isComplete && 'outline-success'}
-              ${isRequest && isError && 'outline-error'}`}
-            />
-            {isRequest && verificationCodeValid ? (
-              <div
-                onClick={handleVerifyCode}
-                className={`min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-black rounded-[12px] text-white text-title2 
-                ${isComplete ? 'cursor-default' : 'cursor-pointer'}`}
-              >
-                인증 완료
-              </div>
-            ) : (
-              <div className="min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
-              인증 완료
-            </div>
-          )}
+      ) : (
+        <div
+          onClick={handleRequestVerification}
+          className="min-w-[84px] text-center cursor-pointer px-3 py-[14px] bg-black rounded-[12px] text-white text-title2"
+        >
+          인증 요청
         </div>
-        <div className='h-[14px] mt-2 pb-4'>
-          {isRequest && (
-            <div className={`text-xs text-normal ${isComplete && 'hidden'} ${isError && 'hidden'}`}>
-              남은시간 : {validNumberToTime(validTime)}
-            </div>
-          )}
-          {isComplete && <div className="text-xs text-success">인증이 완료되었습니다.</div>}
-          {isError && <div className="text-xs text-error">인증번호가 일치하지 않습니다.</div>}
-        </div>
+      )
+    ) : (
+      <div className="min-w-[84px] text-center px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
+        인증 요청
       </div>
+    )}
+  </div>
+  <div className='h-[20px] mt-2'>
+    {emailAvailable === true && (
+      <p className="text-xs text-success">사용 가능한 이메일입니다.</p>
+    )}
+    {emailAvailable === false && (
+      <p className="text-xs text-error">이미 사용 중인 이메일입니다.</p>
+    )}
+  </div>
+</div>
+
+<div className="mt-4">
+  <div className="text-body3">인증번호</div>
+  <div className="w-full flex items-center gap-2 mt-2">
+    <input
+      ref={inputRef}
+      value={verificationCode}
+      disabled={!isRequest || validTime === 0 || isComplete}
+      onChange={handleVerificationCodeChange}
+      type="text"
+      placeholder="인증 번호 입력"
+      className={`min-w-0 flex-grow px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
+        ${isRequest && !isComplete && !isError && 'outline-normal'}
+        ${isRequest && isComplete && 'outline-success'}
+        ${isRequest && isError && 'outline-error'}`}
+    />
+    {isRequest && verificationCodeValid ? (
+      <div
+        onClick={handleVerifyCode}
+        className={`min-w-[84px] text-center px-3 py-[14px] bg-black rounded-[12px] text-white text-title2 
+          ${isComplete ? 'cursor-default' : 'cursor-pointer'}`}
+      >
+        인증 완료
+      </div>
+    ) : (
+      <div className="min-w-[84px] text-center px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
+        인증 완료
+      </div>
+    )}
+  </div>
+  <div className='h-[14px] mt-2 pb-4'>
+    {isRequest && (
+      <div className={`text-xs text-normal ${isComplete && 'hidden'} ${isError && 'hidden'}`}>
+        남은시간 : {validNumberToTime(validTime)}
+      </div>
+    )}
+    {isComplete && <div className="text-xs text-success">인증이 완료되었습니다.</div>}
+    {isError && <div className="text-xs text-error">인증번호가 일치하지 않습니다.</div>}
+  </div>
+</div>
     </section>
     <div
       onClick={handleComplete}
-      className={`w-[90%] sm:w-full sm:max-w-[340px] flex items-center justify-center px-5 py-3 rounded-[12px] font-bold text-lg mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 
+      className={`w-full sm:max-w-[330px] flex items-center justify-center px-5 py-3 rounded-[12px] font-bold text-lg mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 
       ${isComplete ? 'bg-gradient2 text-heading4 text-white cursor-pointer' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'}`}
   >
     다음으로

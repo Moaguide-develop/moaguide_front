@@ -101,8 +101,8 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   };
 
   return (
-    <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
-      <section className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
+    <div className="max-w-[335px] min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
+      <section className="w-full mx-auto mt-[30px] sm:mt-0">
       {/* <section className="hidden sm:flex mt-8 mb-6 sm:items-center sm:justify-center">
         <Link href={'/'} className='cursor-pointer'>
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px] items-center justify-center" />
@@ -122,12 +122,12 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         />
         </div>
 
-        <div className="w-[100%] sm:w-[340px] max-w-[340px] h-[20px] mx-auto">
+        <div className="w-[100%] sm:w-[330px] max-w-[330px] h-[20px] mx-auto">
         <Image
           className="mt-6 mb-6"
           src={'/sign/ProgressBar4.svg'}
           alt="ProgressBar"
-          width={340}
+          width={330}
           height={100}
           placeholder="blur"
           priority
@@ -224,7 +224,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
       <button
         onClick={handleComplete}
         disabled={!isFormValid}
-        className={`w-[90%] sm:w-full sm:max-w-[340px] py-3 rounded-[12px] text-lg font-bold text-white mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 ${isFormValid ? 'bg-gradient2 text-heading4 text-white cursor-pointer' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'}`}
+        className={`w-full sm:max-w-[330px] py-3 rounded-[12px] text-lg font-bold text-white mt-0 mb-[20px] sm:mt-[40px] sm:mb-0 ${isFormValid ? 'bg-gradient2 text-heading4 text-white cursor-pointer' : 'bg-gray100 text-heading4 text-gray400 cursor-not-allowed'}`}
       >
         완료
       </button>
