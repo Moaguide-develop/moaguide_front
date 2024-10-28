@@ -19,6 +19,9 @@ const MarketingModal: React.FC<MarketingModalProps> = ({ onClose }) => {
           height={24}
           onClick={onClose}
           className="cursor-pointer mt-4 mb-8"
+          placeholder="blur"
+          priority
+          blurDataURL="/sign/leftArrow.svg"
         />
       </div>
         <h3 className="text-xl font-bold mb-4">마케팅 정보 수집 동의</h3>
