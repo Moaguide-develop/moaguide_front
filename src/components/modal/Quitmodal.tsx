@@ -16,7 +16,7 @@ const QuitModal = () => {
     if (!isQuitSuccessful) {
       useOnClickOutside(ref, () => setOpen(false));
     }
-  }, [isQuitSuccessful]);
+  }, [isQuitSuccessful, setOpen]); 
 
   const handleQuit = async () => {
     try {
