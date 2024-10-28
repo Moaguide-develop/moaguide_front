@@ -1,28 +1,30 @@
-'use client';
-
 import Script from 'next/script';
 
-export default function NaverAnalytics({ waId }: { waId: string }) {
+interface NaverAnalyticsProps {
+  waId: string;
+}
+
+export default function NaverAnalytics({ waId }: NaverAnalyticsProps) {
   return (
     <>
-      {/* 네이버 애널리틱스 스크립트 파일 로드 */}
+      {/* 외부 스크립트 로드 */}
       <Script
-        type="text/javascript"
-        strategy="beforeInteractive"
         src="//wcs.naver.net/wcslog.js"
+        strategy="afterInteractive" // strategy를 afterInteractive로 수정
       />
-      {/* 네이버 애널리틱스 초기화 코드 */}
+
+      {/* 인라인 스크립트 */}
       <Script
-        type="text/javascript"
-        strategy="beforeInteractive"
+        id="naver-analytics-inline"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            if (!wcs_add) var wcs_add = {};
+            if(!wcs_add) var wcs_add = {};
             wcs_add["wa"] = "${waId}";
-            if (window.wcs) {
+            if(window.wcs) {
               wcs_do();
             }
-          `,
+          `
         }}
       />
     </>
