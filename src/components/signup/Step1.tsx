@@ -32,7 +32,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     };
     setChecks(newChecks);
     
-    onUpdate({ marketingConsent: newCheckedState ? 7 : 0 });
+    onUpdate({ marketingConsent: newCheckedState ? 3 : 0 });
   };
 
   const handleCheckChange = (key: string) => {
