@@ -10,6 +10,7 @@ import GoogleAnalytics from '@/lib/GoogleAnalytics';
 import GnbWrapper from '@/components/common/GnbWrapper';
 
 import './plugin';
+import NaverAnalytics from '@/lib/NaverAnalytics';
 
 declare global {
   interface Window {
@@ -61,6 +62,10 @@ export default function RootLayout({
       <body className={pretendard.className}>
         {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS ? (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS} />
+        ) : null}
+        
+        {process.env.NEXT_PUBLIC_NAVER_ANALYTICS ? (
+          <NaverAnalytics waId={process.env.NEXT_PUBLIC_NAVER_ANALYTICS} />
         ) : null}
         <IntegrateMSW>
           <QueryProvider>
