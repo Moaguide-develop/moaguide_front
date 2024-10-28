@@ -158,19 +158,19 @@ const FindPassword = () => {
 
           <div className="mt-10">
             <div className="text-body3">이메일</div>
-            <div className="flex items-center mt-2">
+            <div className="w-full flex items-center justify-between mt-2">
               <input
                 type="email"
                 disabled={isRequest}
                 value={email}
                 onChange={handleEmailChange}
                 placeholder="이메일 입력"
-                className="flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal" />
+                className="min-w-0  w-[65%] px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal" />
               {emailValid ? (
                 isRequest ? (
                   <div
                     onClick={handleResending}
-                    className={`ml-[6px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+                    className={`min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-black rounded-[12px] text-white text-title2
                   ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                   `}
                   >
@@ -179,13 +179,13 @@ const FindPassword = () => {
                 ) : (
                   <div
                     onClick={handleRequest}
-                    className="ml-[6px] flex-shrink-0 cursor-pointer px-4 py-[14px] bg-black rounded-[12px] text-white text-title2"
+                    className="min-w-[84px] text-center w-[30%] px-3 cursor-pointer  py-[14px] bg-black rounded-[12px] text-white text-title2"
                   >
                     인증 요청
                   </div>
                 )
               ) : (
-                <div className="ml-[6px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
+                <div className="min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
                   인증 요청
                 </div>
               )}
@@ -194,7 +194,7 @@ const FindPassword = () => {
 
           <div className="mt-[28px]">
             <div className="text-body3">인증번호</div>
-            <div className="flex items-center mt-2">
+            <div className="w-full flex items-center justify-between mt-2">
               <input
                 ref={inputRef}
                 value={verificationCode}
@@ -202,7 +202,7 @@ const FindPassword = () => {
                 onChange={handleVerificationCodeChange}
                 type="text"
                 placeholder="인증 번호 입력"
-                className={`flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
+                className={`min-w-0  w-[65%] px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 
               ${isRequest && !isComplete && !isError && 'outline-normal'}
               ${isRequest && isComplete && 'outline-success'}
               ${isRequest && isError && 'outline-error'}
@@ -210,14 +210,14 @@ const FindPassword = () => {
               {isRequest && verificationCodeValid ? (
                 <div
                   onClick={handleCertify} 
-                  className={`ml-[8px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2
+                  className={`min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-black rounded-[12px] text-white text-title2
                 ${isComplete ? 'cursor-default' : 'cursor-pointer'}
                 `}
                 >
                   인증 완료
                 </div>
               ) : (
-                <div className="ml-[8px] flex-shrink-0 px-4 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
+                <div className="min-w-[84px] text-center w-[30%] px-3 py-[14px] bg-gray100 rounded-[12px] text-gray400 text-title2 cursor-not-allowed">
                   인증 완료
                 </div>
               )}
