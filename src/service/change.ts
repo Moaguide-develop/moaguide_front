@@ -7,6 +7,8 @@ export const updateNickname = async (nickname: string): Promise<boolean> => {
       const response = await axiosInstance.patch('/user/update/nickname', { nickname });
   
       if (response.status === 200) {
+        removeCookie('access_token');
+        removeCookie('refresh');
         await refreshAccessToken();
         return true;
       } else {
