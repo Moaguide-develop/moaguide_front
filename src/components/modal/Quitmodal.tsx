@@ -1,5 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
-import useOnClickOutside from '@/hook/useOnClickOutside';
+import React, { useRef, useState } from 'react';
 import { useModalStore } from '@/store/modal.store';
 import Dimmed from './Dimmed';
 import { deleteUser } from '@/service/auth';
@@ -10,13 +9,6 @@ const QuitModal = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [isQuitSuccessful, setIsQuitSuccessful] = useState(false);
   const router = useRouter();
-
-  // 모달 외부 클릭 시 모달 닫기 (조건에 따라 다르게 적용)
-  useEffect(() => {
-    if (!isQuitSuccessful) {
-      useOnClickOutside(ref, () => setOpen(false));
-    }
-  }, [isQuitSuccessful, setOpen]); 
 
   const handleQuit = async () => {
     try {
