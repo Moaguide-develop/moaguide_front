@@ -96,6 +96,8 @@ export interface IMusicBuildingStockPrice {
 
 export interface IMusicBulidingStockPriceChart {
   transaction: IMusicBuildingStockPrice[];
+  max: number;
+  min: number;
 }
 
 // export interface IMusicStreaming {

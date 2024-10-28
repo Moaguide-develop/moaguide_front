@@ -41,12 +41,12 @@ const BuildingStockPriceChart = () => {
     (StockPriceData?.transaction &&
       StockPriceData?.transaction?.map((item) => Number(item.value)).reverse()) ||
     [];
-  const sortedStockPriceCount = [...StockPriceCount].sort((a, b) => b - a);
-  const maxStockPriceCount = sortedStockPriceCount[0] || 0;
-  const averageStockPriceCount =
-    StockPriceCount.reduce((acc, val) => acc + val, 0) / StockPriceCount.length || 0;
+  // const sortedStockPriceCount = [...StockPriceCount].sort((a, b) => b - a);
+  // const maxStockPriceCount = sortedStockPriceCount[0] || 0;
+  // const averageStockPriceCount =
+  //   StockPriceCount.reduce((acc, val) => acc + val, 0) / StockPriceCount.length || 0;
 
-  const newVariable = Math.floor(maxStockPriceCount + averageStockPriceCount);
+  // const newVariable = Math.floor(maxStockPriceCount + averageStockPriceCount);
 
   const data = {
     labels: StockPriceDate,
@@ -96,7 +96,9 @@ const BuildingStockPriceChart = () => {
       y: {
         display: true,
         beginAtZero: true,
-        max: newVariable,
+        // max: newVariable,
+        max: StockPriceData?.max,
+        min: StockPriceData?.min,
         grid: {
           display: false
         }

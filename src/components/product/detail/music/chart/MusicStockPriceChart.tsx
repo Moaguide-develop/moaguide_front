@@ -94,7 +94,8 @@ const MusicStockPriceChart = () => {
       y: {
         display: true,
         beginAtZero: true,
-        // max: newVariable,
+        max: MusicStockPriceData?.max,
+        min: MusicStockPriceData?.min,
         grid: {
           display: false
         }
