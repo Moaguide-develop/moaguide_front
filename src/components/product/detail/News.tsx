@@ -68,6 +68,7 @@ const NewsItem = ({ title, date, id, category, link, imgUrl }: INewsItem) => {
   return (
     <Link
       href={link}
+      target="_blank"
       key={id}
       className=" flex justify-between border-b-[1px] border-gray-200 py-[20px] px-[20px] rounded-lg"
       onClick={() => {
