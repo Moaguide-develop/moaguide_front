@@ -4,20 +4,24 @@ import GoogleLoginButton from '../../../public/images/sign/google-login.svg';
 
 const KakaoLogin = ({ setLoginType }: { setLoginType: (type: 'google') => void }) => {
 
-    const handleKakaoLogin = () => {
+    const handleGoogleLogin = () => {
       setLoginType('google');  
       window.location.href = 'https://api.moaguide.com/oauth2/authorization/google';
     };
   
   return (
+    <div className='cursor-pointer' style={{ width: '320px', height: '52px' }}>
     <Image
-      onClick={handleKakaoLogin}
+      onClick={handleGoogleLogin}
       src={GoogleLoginButton}  
       alt="구글 로그인"
       width={320}             
       height={52}   
-      className='cursor-pointer'           
+      placeholder="blur"
+      priority
+      blurDataURL="sign/google-login.svg" 
     />
+    </div>
   );
 };
 

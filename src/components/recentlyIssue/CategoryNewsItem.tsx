@@ -27,9 +27,24 @@ const CategoryNewsItem = ({ id, title, category, link, date, imgUrl }: IssueList
     setObjectPosition(isPortrait ? 'top' : 'center'); // 세로로 긴 이미지는 상단, 가로로 긴 이미지는 중앙
   };
 
+  const handleClick = async () => {
+    try {
+      const response = await fetch(`https://api.moaguide.com/news/view/${id}`, {
+        method: 'POST',
+      });
+      if (response.ok) {
+        const message = await response.text();
+      } else {
+        console.error('Failed to update view count');
+      }
+    } catch (error) {
+      console.error('Error fetching news view:', error);
+    }
+  };
+
   return (
     <Link href={link} target="_blank">
-      <div className="mt-5 pb-5 border-b border-gray100 flex gap-5 items-center cursor-pointer">
+      <div onClick={handleClick} className="mt-5 pb-5 border-b border-gray100 flex gap-5 items-center cursor-pointer">
         <div>
           <img
             src={imageSrc}

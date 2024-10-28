@@ -52,7 +52,18 @@ const SignLayout = () => {
     <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-center sm:min-h-[100vh]">
       <section className="flex mt-8 mb-6">
         <Link href={'/'} className='cursor-pointer'>
-          <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px]" />
+          <div style={{ width: '202px', height: '28px' }}>
+            <Image
+              src="/images/logo.svg"
+              alt="logo"
+              width={202}
+              height={28}
+              placeholder="blur"
+              priority
+              blurDataURL="/images/logo.svg"
+              className="cursor-pointer"
+              />
+          </div>
         </Link>
       </section>
       <section className="flex flex-col items-center w-[90%] sm:w-full max-w-[320px]">
@@ -98,15 +109,19 @@ const SignLayout = () => {
             </div>
           )}
         </div>
+        <div className='cursor-pointer' style={{ width: '320px', height: '52px' }}>
         <Image
           onClick={throttledHandleLogin}
           src={LoginButton}  
           alt="로그인"
           width={320}             
           height={52}        
-          className='cursor-pointer pb-4'      
+          placeholder="blur"
+          priority
+          blurDataURL="sign/login-btn.svg"
         />
-        <div className="flex text-center text-gray-500 text-sm">
+        </div>
+        <div className="flex text-center text-gray-500 text-sm pt-4">
           <Link href={'/signup'} className='cursor-pointer'>
             <div className="mr-4">회원가입</div>
           </Link>

@@ -7,7 +7,7 @@ interface PrivacyModalProps {
 
 const PrivacyModal: React.FC<PrivacyModalProps> = ({ onClose }) => {
   return (
-    <div className="fixed inset-0 bg-white z-50 overflow-auto">
+    <div className="fixed inset-0 bg-white z-50 overflow-auto z-[99999]">
       <div className="mx-auto w-[90%] mb-[100px] lg:max-w-[640px] lg:mb-[20px]">
         <div className="flex items-center mb-4">
           <Image
