@@ -3,7 +3,7 @@ import { sendEmail, verifyEmailCode, verifyEmail } from '@/service/auth';
 import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useModalStore } from '@/store/modal.store';
 
 interface EmailVerificationProps {
   onNext: () => void;
@@ -25,6 +25,8 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
   const router = useRouter();
 
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null); 
+
+  const { setOpen, setModalType } = useModalStore();
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const emailInput = e.target.value;
@@ -146,7 +148,10 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
           priority
           blurDataURL="/sign/LeftArrowIcon.svg"
           className="cursor-pointer"
-          onClick={() => router.back()}
+          onClick={() => {
+            setModalType('cancelSignup'); 
+            setOpen(true); 
+          }}
         />
         </div>
 

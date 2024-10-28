@@ -4,6 +4,7 @@ import { checkNicknameAvailability } from '@/service/auth';
 import { formatBirthDate } from '@/utils/dateUtils';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useModalStore } from '@/store/modal.store';
 
 interface StepProps {
   onNext: () => void;
@@ -20,6 +21,8 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   const [investmentYears, setInvestmentYears] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const router = useRouter(); 
+
+  const { setOpen, setModalType } = useModalStore();
 
   const validateForm = useCallback(() => {
     if (!name || !nickname || !isNicknameValid || !isBirthdateValid || !investmentExperience) {
@@ -118,7 +121,10 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
           priority
           blurDataURL="/sign/LeftArrowIcon.svg"
           className="cursor-pointer"
-          onClick={() => router.back()}
+          onClick={() => {
+            setModalType('cancelSignup'); 
+            setOpen(true); 
+          }}
         />
         </div>
 
