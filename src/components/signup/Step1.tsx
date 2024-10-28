@@ -53,7 +53,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
   return (
     <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
-      <div className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
+      <section className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
         <div style={{ width: '24px', height: '24px' }}>
           <Image
             src={'/sign/LeftArrowIcon.svg'}
@@ -132,7 +132,7 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       <button
         onClick={onNext}

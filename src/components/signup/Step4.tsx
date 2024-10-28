@@ -102,7 +102,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
 
   return (
     <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
-      <div className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
+      <section className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
       {/* <section className="hidden sm:flex mt-8 mb-6 sm:items-center sm:justify-center">
         <Link href={'/'} className='cursor-pointer'>
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px] items-center justify-center" />
@@ -140,18 +140,18 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
         </h2>
         <div className="">
           <div className="text-body3">닉네임</div>
-          <div className="flex items-center mt-2">
+          <div className="w-full flex items-center justify-between mt-2">
             <input
               type="text"
               value={nickname}
               onChange={handleNicknameChange}
               placeholder="닉네임 입력"
-              className={`flex-1 min-w-0 px-4 py-[14px] bg-bg rounded-[12px] text-body2 focus:outline-normal
+              className={`min-w-0 w-[65%] px-4 py-[14px] bg-bg rounded-[12px] text-body2 focus:outline-normal
               ${nickname ? (isNicknameValid === true ? 'outline-success' : 'outline-error') : 'outline-none'}`}
             />
             <div
               onClick={checkNickname}
-              className={`ml-[6px] flex-shrink-0 px-4 py-[14px] bg-black rounded-[12px] text-white text-title2 cursor-pointer flex-shrink-0`}
+              className={`min-w-[84px] text-center w-[30%] px-3  py-[14px] bg-black rounded-[12px] text-white text-title2 cursor-pointer flex-shrink-0`}
             >
               중복확인
             </div>
@@ -219,7 +219,7 @@ const Step4: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             </div>
           </div>
         )}
-      </div>
+      </section>
 
       <button
         onClick={handleComplete}
