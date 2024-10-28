@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import PrivacyModal from './modal/PrivacyModal';
 import ServiceModal from './modal/ServiceModal';
 import MarketingModal from './modal/MarketingModal';
-import Link from 'next/link';
 
 interface StepProps {
   onNext: () => void;
@@ -19,19 +18,16 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     marketing: false,
   });
   const [activePage, setActivePage] = useState<string | null>(null);
-
   const router = useRouter();
 
   const handleAllCheckedChange = () => {
     const newCheckedState = !allChecked;
     setAllChecked(newCheckedState);
-    const newChecks = {
+    setChecks({
       privacy: newCheckedState,
       service: newCheckedState,
       marketing: newCheckedState,
-    };
-    setChecks(newChecks);
-    
+    });
     onUpdate({ marketingConsent: newCheckedState ? 3 : 0 });
   };
 
@@ -39,13 +35,10 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
     const newChecks = { ...checks, [key]: !checks[key as keyof typeof checks] };
     setChecks(newChecks);
     setAllChecked(Object.values(newChecks).every(Boolean));
-
     if (key === 'marketing') {
-      const marketingConsentValue = newChecks.marketing ? 7 : 0;
-      onUpdate({ marketingConsent: marketingConsentValue });
+      onUpdate({ marketingConsent: newChecks.marketing ? 3 : 0 });
     }
   };
-
 
   const handleArrowClick = (key: string, event: React.MouseEvent) => {
     event.stopPropagation();
@@ -61,31 +54,39 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
   return (
     <div className="min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
       <div className="w-[90%] sm:max-w-[340px] sm:w-full mx-auto mt-[30px] sm:mt-0">
-      {/* <section className="hidden sm:flex mt-8 mb-6 sm:items-center sm:justify-center">
-        <Link href={'/'} className='cursor-pointer'>
-          <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px] items-center justify-center" />
-        </Link>
-      </section> */}
-        <Image
-          src={'/sign/LeftArrowIcon.svg'}
-          alt='뒤로가기'
-          width={24}
-          height={24}
-          className='cursor-pointer'
-          onClick={() => router.back()} 
-        />
-        <Image
-          className="mt-6 mb-6"
-          src={'/sign/ProgressBar1.svg'}
-          alt="ProgressBar"
-          width={360}
-          height={100}
-        />
+        <div style={{ width: '24px', height: '24px' }}>
+          <Image
+            src={'/sign/LeftArrowIcon.svg'}
+            alt='뒤로가기'
+            width={24}
+            height={24}
+            placeholder="blur"
+            priority
+            blurDataURL="/sign/LeftArrowIcon.svg"
+            className="cursor-pointer"
+            onClick={() => router.back()}
+          />
+        </div>
+
+        <div className="w-[100%] sm:w-[340px] max-w-[340px] h-[20px] mx-auto">
+          <Image
+            className="mt-6 mb-6"
+            src={'/sign/ProgressBar1.svg'}
+            alt="ProgressBar"
+            width={340}
+            height={100}
+            placeholder="blur"
+            priority
+            blurDataURL="/sign/ProgressBar1.svg"
+          />
+        </div>
+
         <h2 className="text-xl font-bold mb-6 text-left">
           회원가입을 위해<br />
           <span className="text-purple-600">이용약관에 동의</span>해주세요
         </h2>
-        <div className="">
+
+        <div>
           <div
             onClick={handleAllCheckedChange}
             className={`flex items-center p-4 border rounded-lg cursor-pointer ${
@@ -100,10 +101,11 @@ const Step1: React.FC<StepProps> = ({ onNext, onUpdate }) => {
             />
             <span className="ml-2 font-medium">모두 동의합니다</span>
           </div>
+
           {['privacy', 'service', 'marketing'].map((key, index) => (
             <div
               key={key}
-              className={`flex items-center justify-between py-4 rounded-lg cursor-pointer`}
+              className="flex items-center justify-between py-4 rounded-lg cursor-pointer"
               onClick={() => handleCheckChange(key)}
             >
               <div className="flex items-center">

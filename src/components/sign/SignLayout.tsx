@@ -98,15 +98,19 @@ const SignLayout = () => {
             </div>
           )}
         </div>
+        <div className='cursor-pointer' style={{ width: '320px', height: '52px' }}>
         <Image
           onClick={throttledHandleLogin}
           src={LoginButton}  
           alt="로그인"
           width={320}             
           height={52}        
-          className='cursor-pointer pb-4'      
+          placeholder="blur"
+          priority
+          blurDataURL="sign/login-btn.svg"
         />
-        <div className="flex text-center text-gray-500 text-sm">
+        </div>
+        <div className="flex text-center text-gray-500 text-sm pt-4">
           <Link href={'/signup'} className='cursor-pointer'>
             <div className="mr-4">회원가입</div>
           </Link>

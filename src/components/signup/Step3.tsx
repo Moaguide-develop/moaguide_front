@@ -48,21 +48,33 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px] items-center justify-center" />
         </Link>
       </section> */}
+       <div style={{ width: '24px', height: '24px' }}>
         <Image
           src={'/sign/LeftArrowIcon.svg'}
           alt='뒤로가기'
           width={24}
           height={24}
-          className='cursor-pointer'
-          onClick={() => router.back()} 
+          placeholder="blur"
+          priority
+          blurDataURL="/sign/LeftArrowIcon.svg"
+          className="cursor-pointer"
+          onClick={() => router.back()}
         />
+        </div>
+
+        <div className="w-[100%] sm:w-[340px] max-w-[340px] h-[20px] mx-auto">
         <Image
           className="mt-6 mb-6"
           src={'/sign/ProgressBar3.svg'}
           alt="ProgressBar"
-          width={360}
+          width={340}
           height={100}
+          placeholder="blur"
+          priority
+          blurDataURL="/sign/ProgressBar3.svg"
         />
+        </div>
+
         <h2 className="text-xl font-bold mb-6 leading-tight">
           로그인에 사용할 <br /><span className="text-purple-600">비밀번호</span>를 설정해주세요
         </h2>

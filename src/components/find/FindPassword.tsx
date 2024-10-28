@@ -135,14 +135,17 @@ const FindPassword = () => {
        {!showPasswordReset && (
       <><section className="w-[90%] sm:w-full max-w-[340px] mx-auto mt-[30px] sm:mt-0">
         <div className=''>
-          <div className="self-start">
+          <div className="self-start" style={{ width: '24px', height: '24px' }}>
             <Image
               src={'/sign/LeftArrowIcon.svg'}
               alt='뒤로가기'
               width={24}
               height={24}
-              className='cursor-pointer'
-              onClick={() => router.back()} 
+              placeholder="blur"
+              priority
+              blurDataURL="/sign/LeftArrowIcon.svg"
+              className="cursor-pointer"
+              onClick={() => router.back()}
             />
             </div>
         </div>
