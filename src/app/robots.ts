@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/'
     },
-    sitemap: 'https://.../sitemap.xml'
+    sitemap: 'https://moaguide.com/sitemap.xml'
   };
 }
