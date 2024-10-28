@@ -1,34 +1,36 @@
-'use client';
-
+import React, { useRef, useState, useEffect } from 'react';
 import useOnClickOutside from '@/hook/useOnClickOutside';
 import { useModalStore } from '@/store/modal.store';
-import React, { useRef, useState } from 'react';
 import Dimmed from './Dimmed';
 import { deleteUser } from '@/service/auth';
 import { useRouter } from 'next/navigation';
 
-const Quitmodal = () => {
+const QuitModal = () => {
   const { setOpen } = useModalStore();
   const ref = useRef<HTMLDivElement>(null);
-  const [isQuitSuccessful, setIsQuitSuccessful] = useState(false); 
+  const [isQuitSuccessful, setIsQuitSuccessful] = useState(false);
   const router = useRouter();
 
-  // 모달 바깥 클릭 시 모달 닫기
-  useOnClickOutside(ref, () => setOpen(false));
+  // 모달 외부 클릭 시 모달 닫기 (조건에 따라 다르게 적용)
+  useEffect(() => {
+    if (!isQuitSuccessful) {
+      useOnClickOutside(ref, () => setOpen(false));
+    }
+  }, [isQuitSuccessful]);
 
   const handleQuit = async () => {
     try {
-      await deleteUser();  
-      setIsQuitSuccessful(true); 
+      await deleteUser();
+      setIsQuitSuccessful(true);
     } catch (error) {
       console.error('회원탈퇴 실패:', error);
-      setIsQuitSuccessful(false); 
+      setIsQuitSuccessful(false);
     }
   };
 
   const handleConfirm = () => {
-    setOpen(false); 
-    router.push('/'); 
+    setOpen(false);
+    router.push('/');
   };
 
   return (
@@ -87,4 +89,4 @@ const Quitmodal = () => {
   );
 };
 
-export default Quitmodal;
+export default QuitModal;
