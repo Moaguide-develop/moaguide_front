@@ -1,7 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import ServiceModal from '../signup/modal/ServiceModal';
+
 import PrivacyControllModal from '../signup/modal/PrivacyControllModal';
+import ServiceControllModal from '../signup/modal/ServiceControllModal';
 
 
 const HomeFooter = () => {
@@ -85,7 +86,7 @@ const HomeFooter = () => {
       </div>
 
       {activeModal === 'privacy' && <PrivacyControllModal onClose={closeModal} />}
-      {activeModal === 'service' && <ServiceModal onClose={closeModal} />}
+      {activeModal === 'service' && <ServiceControllModal onClose={closeModal} />}
     </div>
   );
 };
