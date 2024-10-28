@@ -8,7 +8,6 @@ export const updateNickname = async (nickname: string): Promise<boolean> => {
     const response = await axiosInstance.patch('/user/update/nickname', { nickname });
 
     if (response.status === 200) {
-      // 기존 토큰 삭제
       removeToken();
 
       // 새로운 토큰 발급 요청에 지연을 추가
