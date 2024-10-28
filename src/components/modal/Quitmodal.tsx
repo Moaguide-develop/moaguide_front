@@ -31,7 +31,7 @@ const QuitModal = () => {
         ref={ref}
         className="absolute z-[99999] top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
         <div className="px-6 py-[28px] bg-white rounded-[12px]">
-          <div className="w-[290px] mx-auto">
+          <div className="w-[270px] mx-auto">
             {isQuitSuccessful ? (
               <>
                 {/* 탈퇴 성공 메시지 */}

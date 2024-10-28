@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { useModalStore } from '@/store/modal.store';
 
 interface StepProps {
   onNext: () => void;
@@ -16,6 +17,8 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
   const [passwordMatch, setPasswordMatch] = useState<boolean | null>(null);
 
   const router = useRouter();
+
+  const { setOpen, setModalType } = useModalStore();
 
   const validatePassword = (password: string) => {
     const isValid = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/.test(password);
@@ -58,7 +61,10 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
           priority
           blurDataURL="/sign/LeftArrowIcon.svg"
           className="cursor-pointer"
-          onClick={() => router.back()}
+          onClick={() => {
+            setModalType('cancelSignup'); 
+            setOpen(true); 
+          }}
         />
         </div>
 
