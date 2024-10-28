@@ -9,6 +9,7 @@ import { checkNicknameAvailability } from '@/service/auth';
 import { updateNickname } from '@/service/change';
 import { getSocialInfo } from '@/utils/checkEmail';
 import { useAuthStore } from '@/store/userAuth.store';
+import { removeCookie } from '@/utils/cookie';
 
 const Editpage = () => {
   const router = useRouter();
@@ -192,7 +193,7 @@ const Editpage = () => {
       </section>
 
       {/* 수정 완료 */}
-      <div className="mt-12 flex justify-end">
+      <div className="mt-12 flex justify-end mb-2 sm:mb-0">
         <div className="flex-1"></div>
         {isNameComplete === 'yes' ? (
           <div
