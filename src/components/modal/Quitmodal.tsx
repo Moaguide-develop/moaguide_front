@@ -22,7 +22,7 @@ const QuitModal = () => {
 
   const handleConfirm = () => {
     setOpen(false);
-    router.push('/');
+    router.push('/sign');
     router.refresh();
   };
 
