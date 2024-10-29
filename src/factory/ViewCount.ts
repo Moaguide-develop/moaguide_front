@@ -15,3 +15,18 @@ export const CountupProductView = () => {
   });
   return view;
 };
+
+const fetchNewsData = async ({ productId }: { productId: string }) => {
+  const response = await axiosInstance.post(
+    `https://api.moaguide.com/news/view/${productId}`
+  );
+  return response.data;
+};
+
+export const CountupNewsView = () => {
+  const view = useMutation({
+    mutationFn: fetchNewsData,
+    onError: () => {}
+  });
+  return view;
+};

@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuthStore } from '@/store/userAuth.store';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
+import { CountupProductView } from '@/factory/ViewCount'; 
 import type { MainProductItem } from '@/types/homeComponentsType';
 import { formatCategory } from '@/utils/formatCategory';
 import { useQueryClient } from '@tanstack/react-query';
@@ -32,6 +33,7 @@ const MainListItem = ({
 
   const addBookmarkMutation = useAddBookMark(); 
   const deleteBookmarkMutation = useDeleteBookMark();
+  const viewMutation = CountupProductView(); 
 
   const handleBookmarkClick = () => {
     if (bookmark) {
@@ -71,6 +73,11 @@ const MainListItem = ({
     }
   };
 
+  const handleProductClick = () => {
+    viewMutation.mutate({ productId: product_Id.toString() }); 
+    router.push(`/product/detail/${category}/${product_Id}`);
+  };
+
   const handleLogin = () => {
     alert('로그인이 필요한 서비스입니다.');
     router.push('/sign');
@@ -86,12 +93,12 @@ const MainListItem = ({
             height={82}
             alt="Product Image"
             className="rounded-[8px] object-cover w-[82px] h-[82px] cursor-pointer"
-            onClick={() => router.push(`/product/detail/${category}/${product_Id}`)}
+            onClick={handleProductClick}
           />
         </div>
         <div
           className="flex-1 flex flex-col gap-[10px] cursor-pointer"
-          onClick={() => router.push(`/product/detail/${category}/${product_Id}`)}
+          onClick={handleProductClick}
         >
           <div className="flex items-center gap-2">
             <div className="text-caption3 sm:text-caption3 text-gray400 p-[4px] sm:p-[6px] bg-bg rounded-[4px] flex items-center justify-center">
