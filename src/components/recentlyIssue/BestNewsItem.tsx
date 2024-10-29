@@ -57,12 +57,12 @@ const BestNewsItem = ({ item, rank }: BestNewsItemType) => {
             `}
             onLoad={handleImageLoad}
           />
+          </div>
           <img
             src={`/images/home/issue_rank${rank}.svg`}
             alt=""
             className="absolute mt-1 ml-1"
           />
-        </div>
         <div className="flex-1 sm:text-title2 text-title1 text-gray600 w-full">
           {item.title}
         </div>
