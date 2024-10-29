@@ -1,3 +1,4 @@
+import { CountupNewsView } from '@/factory/ViewCount';
 import { IssueListItem } from '@/types/homeComponentsType';
 import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
@@ -20,31 +21,21 @@ const CategoryNewsItem = ({ id, title, category, link, date, imgUrl }: IssueList
 
   const [objectPosition, setObjectPosition] = useState<'top' | 'center'>('center');
 
-  // 이미지 로드 후 가로 세로 비율을 감지하는 함수
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const img = e.currentTarget;
-    const isPortrait = img.naturalHeight > img.naturalWidth; // 세로가 더 긴지 확인
-    setObjectPosition(isPortrait ? 'top' : 'center'); // 세로로 긴 이미지는 상단, 가로로 긴 이미지는 중앙
+    const isPortrait = img.naturalHeight > img.naturalWidth;
+    setObjectPosition(isPortrait ? 'top' : 'center');
   };
+  
+  const viewMutation = CountupNewsView();
 
-  const handleClick = async () => {
-    try {
-      const response = await fetch(`https://api.moaguide.com/news/view/${id}`, {
-        method: 'POST',
-      });
-      if (response.ok) {
-        const message = await response.text();
-      } else {
-        console.error('Failed to update view count');
-      }
-    } catch (error) {
-      console.error('Error fetching news view:', error);
-    }
+  const handleClick = () => {
+    viewMutation.mutate({ productId: id.toString() });
   };
 
   return (
-    <Link href={link} target="_blank">
-      <div onClick={handleClick} className="mt-5 pb-5 border-b border-gray100 flex gap-5 items-center cursor-pointer">
+    <Link href={link} target="_blank" onClick={handleClick}>
+      <div className="mt-5 pb-5 border-b border-gray100 flex gap-5 items-center cursor-pointer">
         <div>
           <img
             src={imageSrc}
