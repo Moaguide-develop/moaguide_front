@@ -1,32 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { Line } from 'react-chartjs-2';
 import { useRef, useState } from 'react';
 import { IContentYoutubeSearchCharts } from '@/types/MusicProductType';
-
-// const customTextPlugin = {
-//   id: 'customText',
-//   beforeDraw: (chart: any) => {
-//     const { datasets } = chart.data;
-//     const hasData = datasets.some((dataset: any) =>
-//       dataset.data.some((value: number) => value !== 0)
-//     );
-//     if (!hasData) {
-//       const ctx = chart.ctx;
-//       const width = chart.width;
-//       const height = chart.height;
-//       ctx.save();
-//       ctx.textAlign = 'center';
-//       ctx.textBaseline = 'middle';
-//       ctx.font = '16px Arial';
-//       ctx.fillText('준비중입니다', width / 2, height / 2);
-//       ctx.restore();
-//     }
-//   }
-// };
-
-// ChartJS.register(customTextPlugin);
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const YoutubeSearchChart = () => {
   const pathname = usePathname();
@@ -39,8 +16,8 @@ const YoutubeSearchChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<IContentYoutubeSearchCharts>(
-        `https://api.moaguide.com/detail/music/search/${lastSegment}?month=${filteringData}`
+      const response = await basicAxiosInstance.get<IContentYoutubeSearchCharts>(
+        `/detail/music/search/${lastSegment}?month=${filteringData}`
       );
       return response.data;
     } catch (error) {

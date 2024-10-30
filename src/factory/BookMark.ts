@@ -9,13 +9,10 @@ const fetchAddBookMark = async ({
   bookmark: boolean | undefined;
 }) => {
   try {
-    const { data } = await axiosInstance.post(
-      `https://api.moaguide.com/summary/bookmark/${productId}`,
-      {
-        productId,
-        bookmark
-      }
-    );
+    const { data } = await axiosInstance.post(`/summary/bookmark/${productId}`, {
+      productId,
+      bookmark
+    });
     return data;
   } catch (error) {
     console.log(error);
@@ -36,9 +33,7 @@ export const useAddBookMark = () => {
 
 const fetchDeleteBookMark = async ({ productId }: { productId: string | undefined }) => {
   try {
-    const { data } = await axiosInstance.delete(
-      `https://api.moaguide.com/summary/bookmark/${productId}`
-    );
+    const { data } = await axiosInstance.delete(`/summary/bookmark/${productId}`);
     return data;
   } catch (error) {
     console.log(error);

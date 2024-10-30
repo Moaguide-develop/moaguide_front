@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import { IMusicBulidingStockPriceChart } from '@/types/MusicProductType';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const BuildingStockPriceChart = () => {
   const chartRef = useRef(null);
@@ -13,8 +13,8 @@ const BuildingStockPriceChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<IMusicBulidingStockPriceChart>(
-        `https://api.moaguide.com/detail/transaction/${lastSegment}?month=${filteringData}`
+      const response = await basicAxiosInstance.get<IMusicBulidingStockPriceChart>(
+        `/detail/transaction/${lastSegment}?month=${filteringData}`
       );
       return response.data;
     } catch (error) {

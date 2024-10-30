@@ -1,5 +1,5 @@
+import { basicAxiosInstance } from '@/service/axiosInstance';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 const fetchIssueLists = async ({
   queryKey,
@@ -10,8 +10,8 @@ const fetchIssueLists = async ({
 }) => {
   const [, category, sort] = queryKey;
 
-  const { data } = await axios.get(
-    `https://api.moaguide.com/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
+  const { data } = await basicAxiosInstance.get(
+    `/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
   );
 
   return {

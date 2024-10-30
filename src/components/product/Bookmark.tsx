@@ -41,7 +41,7 @@ const Bookmark = ({ content, totalPages, pageNumber }: IProductBuildingProps) =>
   };
 
   const fetchBookmarks = async () => {
-    const { data } = await axiosInstance.get('https://api.moaguide.com/user/bookmark');
+    const { data } = await axiosInstance.get(`/user/bookmark`);
     return data;
   };
 

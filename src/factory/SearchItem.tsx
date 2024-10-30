@@ -1,13 +1,11 @@
+import { basicAxiosInstance } from '@/service/axiosInstance';
 import type { SearchedItem } from '@/types/homeComponentsType';
 
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 const fetchSearchItem = async (keyword: string) => {
   try {
-    const { data } = await axios.get(
-      `https://api.moaguide.com/search?keyword=${keyword}`
-    );
+    const { data } = await basicAxiosInstance.get(`/search?keyword=${keyword}`);
     return data;
   } catch (e) {
     throw new Error('Failed to fetch');

@@ -1,19 +1,18 @@
-import { axiosInstance } from '@/service/axiosInstance';
+import { axiosInstance, basicAxiosInstance } from '@/service/axiosInstance';
 import type { MainProductItem } from '@/types/homeComponentsType';
 
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 const fetchMainProduct = async (category: string) => {
   try {
     let url = '';
     if (category === 'all') {
-      url = `https://api.moaguide.com/summary/list?category=${category}&subcategory=trade&sort=lastDivide_rate desc&page=1&size=3`;
+      url = `/summary/list?category=${category}&subcategory=trade&sort=lastDivide_rate desc&page=1&size=3`;
     } else {
-      url = `https://api.moaguide.com/home/list?category=${category}`;
+      url = `/home/list?category=${category}`;
     }
 
-    const { data } = await axios.get(url);
+    const { data } = await basicAxiosInstance.get(url);
     return data.product;
   } catch (e) {
     throw new Error('Failed to fetch main product data');
@@ -43,9 +42,9 @@ const fetchMainProductLogin = async (category: string) => {
   try {
     let url = '';
     if (category === 'all') {
-      url = `https://api.moaguide.com/summary/list?category=${category}&subcategory=trade&sort=lastDivide_rate desc&page=1&size=3`;
+      url = `/summary/list?category=${category}&subcategory=trade&sort=lastDivide_rate desc&page=1&size=3`;
     } else {
-      url = `https://api.moaguide.com/home/list?category=${category}`;
+      url = `/home/list?category=${category}`;
     }
 
     const { data } = await axiosInstance.get(url);
@@ -70,7 +69,7 @@ export const getMainProductLogin = (category: string) => {
   return {
     data,
     error,
-    refetch,  
+    refetch,
     ...queryProps
   };
 };

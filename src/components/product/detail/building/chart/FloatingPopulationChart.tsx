@@ -1,17 +1,17 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { ISubwayData } from '@/types/BuildingProductType';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const FloatingPopulationChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
 
   const fetchData = async () => {
-    const response = await axios.get<ISubwayData>(
-      `https://api.moaguide.com/detail/building/subway/${lastSegment}?year=2023&month=12`
+    const response = await basicAxiosInstance.get<ISubwayData>(
+      `/detail/building/subway/${lastSegment}?year=2023&month=12`
     );
     return response.data;
   };

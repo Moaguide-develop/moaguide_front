@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Line } from 'react-chartjs-2';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { ChartOptions } from 'chart.js';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 // API 데이터 타입 정의
 interface LandData {
@@ -37,9 +37,7 @@ const OfficialPriceChart = () => {
 
   // API에서 데이터를 가져오는 함수
   const fetchData = async (): Promise<ApiData> => {
-    const response = await axios.get(
-      `https://api.moaguide.com/detail/building/land/${lastSegment}`
-    );
+    const response = await basicAxiosInstance.get(`/detail/building/land/${lastSegment}`);
     return response.data;
   };
 

@@ -1,6 +1,6 @@
+import { basicAxiosInstance } from '@/service/axiosInstance';
 import { IContentMovieStats } from '@/types/ContentProductType';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 
 const MovieStats = () => {
@@ -8,8 +8,8 @@ const MovieStats = () => {
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
 
   const fetchData = async () => {
-    const response = await axios.get<IContentMovieStats>(
-      `https://api.moaguide.com/detail/content/sub/${lastSegment}`
+    const response = await basicAxiosInstance.get<IContentMovieStats>(
+      `/detail/content/sub/${lastSegment}`
     );
     return response.data;
   };

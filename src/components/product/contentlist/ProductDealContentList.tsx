@@ -109,7 +109,7 @@ const ProductDealContentList = ({
 
                     <div className=" flex  ">
                       <div className=" ml-[4px] mr-[4px] text-gray-500  ">
-                        {item.price.toLocaleString()}원
+                        {item?.price?.toLocaleString()}원
                       </div>
                       <div
                         className={`mr-[16px] ${
@@ -131,7 +131,7 @@ const ProductDealContentList = ({
 
                   <div className=" flex flex-col">
                     <div className="w-[108px] mr-[16px] text-gray-500  desk:hidden  md:flex  ">
-                      {item.price.toLocaleString()} 원
+                      {item?.price?.toLocaleString()} 원
                     </div>
                     <div
                       className={`w-[88px] mr-[16px] desk:hidden md:flex  ${
@@ -152,7 +152,7 @@ const ProductDealContentList = ({
                   </div>
 
                   <div className=" w-[140px] mr-[28px] text-gray-500    desk:hidden  md:flex ">
-                    {item.totalPrice.toLocaleString()}원
+                    {item?.totalPrice?.toLocaleString()}원
                   </div>
                   <div
                     className={`w-[61px] desk2:mr-[29px] desk:mr-[0px]  rounded-lg flex justify-center items-center desk:ml-auto px-2 ${

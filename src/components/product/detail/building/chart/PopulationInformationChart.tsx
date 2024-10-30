@@ -1,17 +1,17 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { usePathname } from 'next/navigation';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { TooltipItem } from 'chart.js';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const PopulationInformationChart = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
 
   const fetchData = async () => {
-    const response = await axios.get(
-      `https://api.moaguide.com/detail/building/population/${lastSegment}`
+    const response = await basicAxiosInstance.get(
+      `/detail/building/population/${lastSegment}`
     );
     return response.data;
   };

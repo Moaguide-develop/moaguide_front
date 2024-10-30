@@ -1,5 +1,5 @@
+import { basicAxiosInstance } from '@/service/axiosInstance';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { lastDayOfDecade } from 'date-fns';
 
 const fetchReportList = async ({
@@ -11,8 +11,8 @@ const fetchReportList = async ({
 }) => {
   const [, category] = queryKey;
 
-  const { data } = await axios.get(
-    `https://api.moaguide.com/detail/report/building?page=${pageParam}&size=10&subCategory=${category}`
+  const { data } = await basicAxiosInstance.get(
+    `/detail/report/building?page=${pageParam}&size=10&subCategory=${category}`
   );
   return data;
 };

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import MovieChart from './MovieChart';
 import MovieContent from './MovieContent';
 import MovieStats from './MovieStats';
@@ -6,6 +5,7 @@ import MovieTenChart from './MovieTenChart';
 import Schedule from './Schedule';
 import { usePathname } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const ContentProductDetail = ({
   url,
@@ -20,9 +20,7 @@ const ContentProductDetail = ({
   const lastSegment = pathname.split('/').pop(); // 경로의 마지막 부분 추출
 
   const fetchData = async () => {
-    const response = await axios.get(
-      `https://api.moaguide.com/detail/content/sub/${lastSegment}`
-    );
+    const response = await basicAxiosInstance.get(`/detail/content/sub/${lastSegment}`);
     return response.data;
   };
 

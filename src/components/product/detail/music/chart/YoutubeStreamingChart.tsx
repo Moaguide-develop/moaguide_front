@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { Line } from 'react-chartjs-2';
 import { useRef, useState } from 'react';
 import { IMusicStreamingChart } from '@/types/MusicProductType';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const YoutubeStreamingChart = () => {
   const pathname = usePathname();
@@ -16,8 +16,8 @@ const YoutubeStreamingChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<IMusicStreamingChart>(
-        `https://api.moaguide.com/detail/music/streaming/${lastSegment}?month=${filteringData}`
+      const response = await basicAxiosInstance.get<IMusicStreamingChart>(
+        `/detail/music/streaming/${lastSegment}?month=${filteringData}`
       );
       return response.data;
     } catch (error) {

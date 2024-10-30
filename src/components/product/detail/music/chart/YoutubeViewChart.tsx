@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { Line } from 'react-chartjs-2';
 import { useRef, useState } from 'react';
 import { IContentYoutubeViewCharts } from '@/types/MusicProductType';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const YoutubeViewChart = () => {
   const pathname = usePathname();
@@ -16,8 +16,8 @@ const YoutubeViewChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<IContentYoutubeViewCharts>(
-        `https://api.moaguide.com/detail/music/view/${lastSegment}?month=${filteringData}`
+      const response = await basicAxiosInstance.get<IContentYoutubeViewCharts>(
+        `/detail/music/view/${lastSegment}?month=${filteringData}`
       );
       return response.data;
     } catch (error) {

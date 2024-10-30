@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import { ChartOptions } from 'chart.js';
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 interface RentData {
   year: number;
@@ -41,8 +41,8 @@ const CommercialVacancyRateChart = ({ rentType }: { rentType: boolean | undefine
   }, [rentType, setBuildingType]);
 
   const fetchData = async () => {
-    const response = await axios.get<ApiResponse>(
-      `https://api.moaguide.com/detail/building/vacancyrate/${lastSegment}?type=${buildingType}&syear=${startYear}&eyear=${endYear}`
+    const response = await basicAxiosInstance.get<ApiResponse>(
+      `/detail/building/vacancyrate/${lastSegment}?type=${buildingType}&syear=${startYear}&eyear=${endYear}`
     );
     return response.data;
   };

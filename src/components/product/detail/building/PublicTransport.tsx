@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 interface NearSubway {
   station: string;
   route: string[];
@@ -61,8 +61,8 @@ const PublicTransport = () => {
   const [Ismodal, setIsModal] = useState(false);
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `https://api.moaguide.com/detail/building/sub/${lastSegment}`
+      const response = await basicAxiosInstance.get(
+        `/detail/building/sub/${lastSegment}`
       );
       return response.data;
     } catch (error) {

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Chart } from 'react-chartjs-2';
 import { usePathname } from 'next/navigation';
-import axios from 'axios';
 import { IMusicCopyRightFeeChart } from '@/types/MusicProductType';
 import { useQuery } from '@tanstack/react-query';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const BuildingCopyRightFeeChart = () => {
   const pathname = usePathname();
@@ -12,8 +12,8 @@ const BuildingCopyRightFeeChart = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<IMusicCopyRightFeeChart>(
-        `https://api.moaguide.com/detail/divide/${lastSegment}?month=${filteringData}`
+      const response = await basicAxiosInstance.get<IMusicCopyRightFeeChart>(
+        `/detail/divide/${lastSegment}?month=${filteringData}`
       );
       return response.data;
     } catch (error) {
