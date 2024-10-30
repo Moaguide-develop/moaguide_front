@@ -2,27 +2,29 @@ import axios from 'axios';
 import { getToken, setToken, removeToken } from '@/utils/localStorage';
 import { refreshAccessToken } from './auth';
 
+let backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+process.env.NODE_ENV === 'development'
+  ? (backendUrl = process.env.NEXT_PUBLIC_DATA)
+  : (backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL);
 
 // 토큰을 사용하는 Axios 인스턴스
 export const axiosInstance = axios.create({
   baseURL: backendUrl,
-  withCredentials: true,
+  withCredentials: true
 });
 
 // 토큰을 사용하지 않는 Axios 인스턴스
 export const basicAxiosInstance = axios.create({
   baseURL: backendUrl,
-  withCredentials: true,
+  withCredentials: true
 });
 
 // 리프레시 토큰 요청을 위한 Axios 인스턴스
 export const refreshAxiosInstance = axios.create({
   baseURL: backendUrl,
-  withCredentials: true,
+  withCredentials: true
 });
-
 
 axiosInstance.interceptors.request.use(
   (config) => {
@@ -34,7 +36,6 @@ axiosInstance.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-
 
 axiosInstance.interceptors.response.use(
   (response) => {
@@ -57,7 +58,7 @@ axiosInstance.interceptors.response.use(
         }
       } catch (refreshError) {
         console.error('리프레시 토큰 갱신 오류:', refreshError);
-        
+
         // 리프레시 토큰 갱신 실패 시 로그아웃 처리 또는 에러 핸들링
         removeToken(); // 만료된 토큰 제거
         window.location.href = '/sign'; // 로그인 페이지로 리디렉션

@@ -129,10 +129,27 @@ const MusicDetailpage = (props: any) => {
                 {data?.name}
               </div>
               <div className="text-sm font-bold mb-[5px] "> {data?.singer}</div>
-              <div className=" mb-[20px]  font-bold">
+              <div className="mb-[20px] font-bold">
                 과거 1년 저작권료(1주)
-                <span className="text-red-500 ml-1">
-                  {data?.yearDvide.toLocaleString()} ({data?.yearDvideRate}%)
+                <span
+                  className={`ml-1 ${
+                    data?.yearDvideRate !== undefined
+                      ? data.yearDvideRate > 0
+                        ? 'text-red-500'
+                        : data.yearDvideRate < 0
+                          ? 'text-blue-500'
+                          : 'text-gray-500'
+                      : 'text-gray-500'
+                  }`}>
+                  {data?.yearDvide.toLocaleString()} (
+                  {data?.yearDvideRate !== undefined
+                    ? data.yearDvideRate > 0
+                      ? `+${data.yearDvideRate}%`
+                      : data.yearDvideRate < 0
+                        ? `${data.yearDvideRate}%`
+                        : `0%`
+                    : '0%'}
+                  )
                 </span>
               </div>
             </div>
@@ -143,7 +160,26 @@ const MusicDetailpage = (props: any) => {
               <div className="text-gray-400">현재가</div>
               <div className="flex flex-row ">
                 <div>{data?.price.toLocaleString()}원</div>
-                <div className="text-red-500 "> ({data?.priceRate}%)</div>
+                <div
+                  className={`${
+                    data?.priceRate !== undefined
+                      ? data.priceRate > 0
+                        ? 'text-red-500'
+                        : data.priceRate < 0
+                          ? 'text-blue-500'
+                          : 'text-gray-500'
+                      : 'text-gray-500'
+                  }`}>
+                  (
+                  {data?.priceRate !== undefined
+                    ? data.priceRate > 0
+                      ? `+${data.priceRate}%`
+                      : data.priceRate < 0
+                        ? `${data.priceRate}%`
+                        : `0%`
+                    : '0%'}
+                  )
+                </div>
               </div>
             </div>
 
@@ -159,7 +195,24 @@ const MusicDetailpage = (props: any) => {
 
             <div className="flex mt-[10px]  w-full desk:max-w-[360px] md:w-[300px] justify-between ">
               <div className="text-gray-400">배당 수익률</div>
-              <div className="text-red-500">{data?.lastDivide_rate}%</div>
+              <div
+                className={`${
+                  data?.lastDivide_rate !== undefined
+                    ? data.lastDivide_rate > 0
+                      ? 'text-red-500'
+                      : data.lastDivide_rate < 0
+                        ? 'text-blue-500'
+                        : 'text-gray-500'
+                    : 'text-gray-500'
+                }`}>
+                {data?.lastDivide_rate !== undefined
+                  ? data.lastDivide_rate > 0
+                    ? `+${data.lastDivide_rate}%`
+                    : data.lastDivide_rate < 0
+                      ? `${data.lastDivide_rate}%`
+                      : `0%`
+                  : '0%'}
+              </div>
             </div>
 
             <div className="flex mt-[10px]  w-full desk:max-w-[360px] md:w-[300px] justify-between ">
