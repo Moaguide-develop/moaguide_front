@@ -1,6 +1,6 @@
+import { basicAxiosInstance } from '@/service/axiosInstance';
 import { IMusicSchedule } from '@/types/MusicProductType';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
 
 const MusicSchedule = () => {
@@ -9,8 +9,8 @@ const MusicSchedule = () => {
   const lastSegment = pathname.split('/').pop();
 
   const fetchData = async () => {
-    const response = await axios.get<IMusicSchedule>(
-      `https://api.moaguide.com/detail/music/consert/${lastSegment}`
+    const response = await basicAxiosInstance.get<IMusicSchedule>(
+      `/detail/music/consert/${lastSegment}`
     );
     return response.data;
   };

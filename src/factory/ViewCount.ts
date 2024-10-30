@@ -2,9 +2,7 @@ import { axiosInstance } from '@/service/axiosInstance';
 import { useMutation } from '@tanstack/react-query';
 
 const fetchData = async ({ productId }: { productId: string }) => {
-  const response = await axiosInstance.post(
-    `https://api.moaguide.com/product/view/${productId}`
-  );
+  const response = await axiosInstance.post(`/product/view/${productId}`);
   return response.data;
 };
 
@@ -17,9 +15,7 @@ export const CountupProductView = () => {
 };
 
 const fetchNewsData = async ({ productId }: { productId: string }) => {
-  const response = await axiosInstance.post(
-    `https://api.moaguide.com/news/view/${productId}`
-  );
+  const response = await axiosInstance.post(`/news/view/${productId}`);
   return response.data;
 };
 

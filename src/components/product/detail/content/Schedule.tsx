@@ -1,15 +1,14 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const Schedule = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
 
   const fetchData = async () => {
-    const response = await axios.get(
-      `https://api.moaguide.com/detail/content/sub/${lastSegment}`
-    );
+    const response = await basicAxiosInstance.get(`/detail/content/sub/${lastSegment}`);
     return response.data;
   };
 

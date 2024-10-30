@@ -1,11 +1,11 @@
+import { basicAxiosInstance } from '@/service/axiosInstance';
 import type { RealtimeRankType } from '@/types/homeComponentsType';
 
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 const fetchRealtimeRank = async () => {
   try {
-    const { data } = await axios.get(`https://api.moaguide.com/searchRank`);
+    const { data } = await basicAxiosInstance.get(`/searchRank`);
     return data;
   } catch (e) {
     console.log(e);

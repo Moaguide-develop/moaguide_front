@@ -1,13 +1,10 @@
 import { axiosInstance } from '@/service/axiosInstance';
 import { IMusicProductProfitDetail } from '@/types/MusicProductType';
 import { useQuery, QueryFunctionContext } from '@tanstack/react-query';
-import axios from 'axios';
 
 const fetchMusicProductProfitDetail = async (context: QueryFunctionContext) => {
   const product_id = context.queryKey[1] as string;
-  const { data } = await axiosInstance.get(
-    `https://api.moaguide.com/detail/music/base/${product_id}`
-  );
+  const { data } = await axiosInstance.get(`/detail/music/base/${product_id}`);
   return data;
 };
 

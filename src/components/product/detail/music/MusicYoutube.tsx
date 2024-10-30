@@ -1,16 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 import { IMusicYoutube } from '@/types/MusicProductType';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const MusicYoutube = () => {
   const pathname = usePathname();
   const lastSegment = pathname.split('/').pop();
 
   const fetchData = async () => {
-    const response = await axios.get<IMusicYoutube>(
-      `https://api.moaguide.com/detail/music/sub/${lastSegment}`
+    const response = await basicAxiosInstance.get<IMusicYoutube>(
+      `/detail/music/sub/${lastSegment}`
     );
     return response.data;
   };

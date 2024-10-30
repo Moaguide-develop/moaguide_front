@@ -49,7 +49,7 @@ export default News;
 
 const NewsItem = ({ title, date, id, category, link, imgUrl }: INewsItem) => {
   const fetchData = async ({ id }: { id: number }) => {
-    const response = await axiosInstance.post(`https://api.moaguide.com/news/view/${id}`);
+    const response = await axiosInstance.post(`/news/view/${id}`);
     return response.data;
   };
 

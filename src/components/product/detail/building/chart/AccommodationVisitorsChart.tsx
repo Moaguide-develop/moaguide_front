@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { IStayDayData } from '@/types/BuildingProductType';
 import { TooltipItem } from 'chart.js';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const AccommodationVisitorsChart = () => {
   const pathname = usePathname();
@@ -12,8 +12,8 @@ const AccommodationVisitorsChart = () => {
   const [startYear, setStartYear] = useState<number>(2022);
   const [endYear, setEndYear] = useState<number>(2024);
   const fetchData = async () => {
-    const response = await axios.get<IStayDayData>(
-      `https://api.moaguide.com/detail/building/stay/day/${lastSegment}?syear=${startYear}&eyear=${endYear}`
+    const response = await basicAxiosInstance.get<IStayDayData>(
+      `/detail/building/stay/day/${lastSegment}?syear=${startYear}&eyear=${endYear}`
     );
     return response.data;
   };

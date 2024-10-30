@@ -1,13 +1,13 @@
 import { IContentProductContentActor } from '@/types/ContentProductType';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { QueryFunctionContext } from '@tanstack/react-query';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const FetchContentMoviePeopleData = async ({ queryKey }: QueryFunctionContext) => {
   const [_, people] = queryKey;
   try {
-    const response = await axios.get(
-      `https://api.moaguide.com/detail/content/people/${people}?page=1`
+    const response = await basicAxiosInstance.get(
+      `/detail/content/people/${people}?page=1`
     );
     return response.data;
   } catch (e) {

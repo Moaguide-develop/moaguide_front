@@ -16,13 +16,14 @@ const Mypage = () => {
   const [loading, setLoading] = useState(true);
 
   const fetchBookmarks = async () => {
-    const { data } = await axiosInstance.get('https://api.moaguide.com/user/bookmark');
+    const { data } = await axiosInstance.get('/user/bookmark');
     return data;
   };
 
-  const {
-    data: bookmarks,
-  } = useQuery({ queryKey: ['bookmarks'], queryFn: fetchBookmarks });
+  const { data: bookmarks } = useQuery({
+    queryKey: ['bookmarks'],
+    queryFn: fetchBookmarks
+  });
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -62,10 +63,9 @@ const Mypage = () => {
       <nav>
         <MypageMenu />
       </nav>
-      <div 
+      <div
         className="text-gray400 body7 cursor-pointer max-w-max w-full mx-auto mt-10 pb-4 hover:underline"
-        onClick={handleLogout}
-      >
+        onClick={handleLogout}>
         <span className="max-w-max mb-[40px] sm:mb-0">로그아웃</span>
       </div>
     </div>

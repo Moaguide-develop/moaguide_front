@@ -1,6 +1,5 @@
 import { IContentMovieCharts } from '@/types/ContentProductType';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { usePathname } from 'next/navigation';
 import { Line } from 'react-chartjs-2';
 import {
@@ -16,6 +15,7 @@ import {
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { useRef, useState } from 'react';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 ChartJS.register(
   CategoryScale,
@@ -47,8 +47,8 @@ const MovieTenChart = () => {
   };
 
   const fetchData = async () => {
-    const response = await axios.get<IContentMovieCharts>(
-      `https://api.moaguide.com/detail/content/${filteringData}/ten/${lastSegment}`
+    const response = await basicAxiosInstance.get<IContentMovieCharts>(
+      `/detail/content/${filteringData}/ten/${lastSegment}`
     );
     return response.data;
   };

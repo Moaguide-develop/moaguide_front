@@ -1,12 +1,12 @@
+import { basicAxiosInstance } from '@/service/axiosInstance';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 const fetchStudyGuides = async ({ pageParam = 1 }) => {
-  const { data } = await axios.get(`https://api.moaguide.com/study/guide`);
+  const { data } = await basicAxiosInstance.get(`/study/guide`);
   return {
-    content: data.roadmap, 
+    content: data.roadmap,
     nextPage: pageParam + 1,
-    isLast: data.roadmap.length < 10 || !data.roadmap.length || data.nextCursor === null,
+    isLast: data.roadmap.length < 10 || !data.roadmap.length || data.nextCursor === null
   };
 };
 
@@ -16,7 +16,7 @@ export const getStudyGuides = (category: string, subCategory: string, sort: stri
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
       queryKey,
-      queryFn: fetchStudyGuides, 
+      queryFn: fetchStudyGuides,
       getNextPageParam: (lastPage) => {
         return lastPage.isLast ? undefined : lastPage.nextPage;
       },
@@ -25,39 +25,38 @@ export const getStudyGuides = (category: string, subCategory: string, sort: stri
     });
 
   return {
-    data: data?.pages.flatMap((page) => page.content) || [], 
+    data: data?.pages.flatMap((page) => page.content) || [],
     fetchNextPage,
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-    isLoading,
+    isLoading
   };
 };
 
-
 const fetchArticleList = async ({ pageParam = null }) => {
-  const url = pageParam ? `https://api.moaguide.com/study/article?nextCursor=${pageParam}` : 'https://api.moaguide.com/study/article';
-  
-  const { data } = await axios.get(url);
+  const url = pageParam ? `/study/article?nextCursor=${pageParam}` : '/study/article';
+
+  const { data } = await basicAxiosInstance.get(url);
 
   return {
-    content: data.articleList, 
-    nextPage: data.nextCursor,  
-    isLast: !data.nextCursor,  
+    content: data.articleList,
+    nextPage: data.nextCursor,
+    isLast: !data.nextCursor
   };
 };
 
 export const getArticles = () => {
-  const queryKey = ['ArticleList']; 
+  const queryKey = ['ArticleList'];
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
     useInfiniteQuery({
       queryKey,
-      queryFn: fetchArticleList,  
+      queryFn: fetchArticleList,
       getNextPageParam: (lastPage) => {
         return lastPage.isLast ? undefined : lastPage.nextPage;
       },
-      initialPageParam: null, 
+      initialPageParam: null
     });
 
   return {
@@ -66,6 +65,6 @@ export const getArticles = () => {
     hasNextPage,
     isFetching,
     isFetchingNextPage,
-    isLoading,
+    isLoading
   };
 };

@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { Line } from 'react-chartjs-2';
-import { use, useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { ICowProductPrice } from '@/types/CowProductType';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const CowPriceChart = () => {
   const [filteringData, setFilteringData] = useState('averagePrice');
@@ -12,8 +12,8 @@ const CowPriceChart = () => {
   };
 
   const fetchData = async () => {
-    const response = await axios.get<ICowProductPrice>(
-      `https://api.moaguide.com/detail/hanwoo/sub/hanwooPrice?category=${filteringData}&month=${DateData}`
+    const response = await basicAxiosInstance.get<ICowProductPrice>(
+      `/detail/hanwoo/sub/hanwooPrice?category=${filteringData}&month=${DateData}`
     );
     return response.data;
   };

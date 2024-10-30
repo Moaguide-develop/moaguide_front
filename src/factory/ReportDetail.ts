@@ -1,11 +1,11 @@
+import { basicAxiosInstance } from '@/service/axiosInstance';
 import type { ReportListsItem } from '@/types/homeComponentsType';
 
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 const fetchReportDetail = async (id: number) => {
   try {
-    const { data } = await axios.get(`https://api.moaguide.com/content/report/${id}`);
+    const { data } = await basicAxiosInstance.get(`/content/report/${id}`);
     return data;
   } catch (e) {
     throw new Error('Failed to fetch main product data');

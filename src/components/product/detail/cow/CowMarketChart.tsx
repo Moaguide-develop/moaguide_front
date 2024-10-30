@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import { useEffect, useRef, useState } from 'react';
 import { ICowMarketPrice } from '@/types/CowProductType';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const CowMarketChart = () => {
   const [MarketfilteringData, setMarketFilteringData] = useState('cattlePopulation');
@@ -12,8 +12,8 @@ const CowMarketChart = () => {
   };
 
   const fetchData = async () => {
-    const response = await axios.get<ICowMarketPrice>(
-      `https://api.moaguide.com/detail/hanwoo/sub/hanwoomarket?category=${MarketfilteringData}&month=${MarketDateData}`
+    const response = await basicAxiosInstance.get<ICowMarketPrice>(
+      `/detail/hanwoo/sub/hanwoomarket?category=${MarketfilteringData}&month=${MarketDateData}`
     );
     return response.data;
   };
