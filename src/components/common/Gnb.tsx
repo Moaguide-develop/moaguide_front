@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/userAuth.store';
 import { getCookie } from '@/utils/cookie';
+import { refreshAccessToken } from '@/service/auth';
 
 const Gnb = () => {
   const pathname = usePathname();
@@ -12,20 +13,40 @@ const Gnb = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
+  const checkAndRefreshToken = async () => {
     const accessToken = getCookie('access_token');
+    const refreshToken = getCookie('refresh');
 
-    if (accessToken && accessToken !== 'undefined') {
-      setIsLoggedIn(true);
+    // 만약 accessToken이 없고 refreshToken이 있으면 토큰 갱신 시도
+    if (!accessToken && refreshToken) {
+      try {
+        const newAccessToken = await refreshAccessToken();
+        if (newAccessToken) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        console.error('토큰 갱신 실패:', error);
+        setIsLoggedIn(false);
+      }
     } else {
-      setIsLoggedIn(false);
+      setIsLoggedIn(!!accessToken); // accessToken이 있으면 로그인 상태 유지
     }
     setIsLoading(false);
+  };
+
+  useEffect(() => {
+    checkAndRefreshToken();
+
+    // 주기적으로 토큰 갱신
+    const interval = setInterval(checkAndRefreshToken, 30 * 1000); // 55분마다 갱신
+
+    // 컴포넌트가 언마운트될 때 interval 해제
+    return () => clearInterval(interval);
   }, [setIsLoggedIn]);
 
-  if (isLoading) {
-    return null;
-  }
+  if (isLoading) return null;
 
   return (
     <div
@@ -55,9 +76,6 @@ const Gnb = () => {
             className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
           </div>
-          {/* <div className="cursor-pointer">
-            <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
-          </div> */}
           <div className="hidden items-center min-h-[35px] sm:flex">
             {isLoggedIn ? (
               <Link href={'/mypage'}>
