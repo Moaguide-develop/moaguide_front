@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/userAuth.store';
 import { getCookie } from '@/utils/cookie';
 import { refreshAccessToken } from '@/service/auth';
@@ -13,11 +13,11 @@ const Gnb = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  const checkAndRefreshToken = async () => {
+  // checkAndRefreshToken을 useCallback으로 정의
+  const checkAndRefreshToken = useCallback(async () => {
     const accessToken = getCookie('access_token');
     const refreshToken = getCookie('refresh');
 
-    // 만약 accessToken이 없고 refreshToken이 있으면 토큰 갱신 시도
     if (!accessToken && refreshToken) {
       try {
         const newAccessToken = await refreshAccessToken();
@@ -34,19 +34,18 @@ const Gnb = () => {
       setIsLoggedIn(!!accessToken); // accessToken이 있으면 로그인 상태 유지
     }
     setIsLoading(false);
-  };
+  }, [setIsLoggedIn]);
 
   useEffect(() => {
     checkAndRefreshToken();
 
-    // 주기적으로 토큰 갱신
-    const interval = setInterval(checkAndRefreshToken, 30 * 1000); // 55분마다 갱신
+    const interval = setInterval(checkAndRefreshToken, 30 * 1000);
 
-    // 컴포넌트가 언마운트될 때 interval 해제
     return () => clearInterval(interval);
-  }, [setIsLoggedIn]);
+  }, [checkAndRefreshToken]);
 
   if (isLoading) return null;
+
 
   return (
     <div
