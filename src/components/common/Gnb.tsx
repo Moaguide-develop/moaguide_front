@@ -2,9 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useAuthStore } from '@/store/userAuth.store';
-import { getCookie } from '@/utils/cookie';
+import { getCookie, removeCookie } from '@/utils/cookie';
+import { refreshAccessToken } from '@/service/auth';
 
 const Gnb = () => {
   const pathname = usePathname();
@@ -12,20 +13,37 @@ const Gnb = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
+  const handleLogout = useCallback(() => {
+    removeCookie('access_token');
+    removeCookie('refresh');
+    setIsLoggedIn(false);
+    router.push('/sign');
+  }, [setIsLoggedIn, router]);
+
+  const checkAndRefreshToken = useCallback(async () => {
     const accessToken = getCookie('access_token');
-
-    if (accessToken && accessToken !== 'undefined') {
-      setIsLoggedIn(true);
+    const refreshToken = getCookie('refresh');
+    
+    if (!accessToken && refreshToken) {
+      try {
+        await refreshAccessToken();
+        setIsLoggedIn(true);
+      } catch (error) {
+        handleLogout();
+      }
+    } else if (!accessToken) {
+      handleLogout();
     } else {
-      setIsLoggedIn(false);
+      setIsLoggedIn(true);
     }
-    setIsLoading(false);
-  }, [setIsLoggedIn]);
+  }, [handleLogout, setIsLoggedIn]);
 
-  if (isLoading) {
-    return null;
-  }
+  useEffect(() => {
+    checkAndRefreshToken();
+    setIsLoading(false);
+  }, [checkAndRefreshToken]);
+
+  if (isLoading) return null;
 
   return (
     <div
@@ -55,9 +73,6 @@ const Gnb = () => {
             className="cursor-pointer">
             <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
           </div>
-          {/* <div className="cursor-pointer">
-            <img src="/images/gnb/alert.svg" alt="alert" className="w-6 h-6" />
-          </div> */}
           <div className="hidden items-center min-h-[35px] sm:flex">
             {isLoggedIn ? (
               <Link href={'/mypage'}>
