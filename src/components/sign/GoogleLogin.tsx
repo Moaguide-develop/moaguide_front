@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import GoogleLoginButton from '../../../public/images/sign/google-login.svg'; 
 
-const KakaoLogin = ({ setLoginType }: { setLoginType: (type: 'google') => void }) => {
+const GoogleLogin = ({ setLoginType }: { setLoginType: (type: 'google') => void }) => {
 
     const handleGoogleLogin = () => {
       setLoginType('google');  
@@ -25,4 +25,4 @@ const KakaoLogin = ({ setLoginType }: { setLoginType: (type: 'google') => void }
   );
 };
 
-export default KakaoLogin;
+export default GoogleLogin;
