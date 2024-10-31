@@ -1,10 +1,10 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import MypageHeader from '@/components/mypage/MypageHeader';
 import MypageMenu from '@/components/mypage/MypageMenu';
-import { logout } from '@/service/auth';
+import { logout, refreshAccessToken } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
 import { getCookie, removeCookie } from '@/utils/cookie';
 import { axiosInstance } from '@/service/axiosInstance';
@@ -25,31 +25,37 @@ const Mypage = () => {
     queryFn: fetchBookmarks
   });
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push('/');
-    }
-  }, [isLoggedIn, router]);
-
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      const accessToken = getCookie('access_token');
-      if (!accessToken || accessToken === 'undefined') {
-        router.push('/sign');
-      } else {
-        setLoading(false);
-      }
-    };
-
-    checkLoginStatus();
-  }, [router]);
-
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     await logout();
     setIsLoggedIn(false);
     removeCookie('access_token');
+    removeCookie('refresh');
     router.push('/sign');
-  };
+  }, [router, setIsLoggedIn]);
+
+  const checkAndRefreshToken = useCallback(async () => {
+    const accessToken = getCookie('access_token');
+    const refreshToken = getCookie('refresh');
+    
+    if (!accessToken && refreshToken) {
+      try {
+        await refreshAccessToken();
+        setIsLoggedIn(true);
+        setLoading(false);
+      } catch (error) {
+        handleLogout();
+      }
+    } else if (!accessToken) {
+      handleLogout();
+    } else {
+      setIsLoggedIn(true);
+      setLoading(false);
+    }
+  }, [setIsLoggedIn, handleLogout]);
+
+  useEffect(() => {
+    checkAndRefreshToken();
+  }, [checkAndRefreshToken]);
 
   if (loading) {
     return null;
