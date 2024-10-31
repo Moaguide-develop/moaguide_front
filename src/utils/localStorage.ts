@@ -1,6 +1,6 @@
 import { getCookie, removeCookie, setCookie } from "./cookie";
 
-const TOKEN_EXPIRATION_TIME = 30 * 1000;
+const TOKEN_EXPIRATION_TIME = 60 * 60 * 1000;
 
 export const setToken = (token: string) => {
   const expires = new Date(Date.now() + TOKEN_EXPIRATION_TIME); 

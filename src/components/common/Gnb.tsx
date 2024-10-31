@@ -17,6 +17,7 @@ const Gnb = () => {
   const checkAndRefreshToken = useCallback(async () => {
     const accessToken = getCookie('access_token');
     const refreshToken = getCookie('refresh');
+    console.log('Checking tokens:', { accessToken, refreshToken }); // 로그 추가
 
     if (!accessToken && refreshToken) {
       try {
