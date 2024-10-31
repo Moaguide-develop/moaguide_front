@@ -12,51 +12,51 @@ const Gnb = () => {
   const { isLoggedIn, setIsLoggedIn } = useAuthStore();
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
-  const intervalId = useRef<NodeJS.Timeout | null>(null); // useRef로 intervalId 관리
+  const intervalId = useRef<NodeJS.Timeout | null>(null);
 
-
+  // accessToken 갱신 함수
   const checkAndRefreshToken = useCallback(async () => {
-    const accessToken = getCookie('access_token');
-    console.log(accessToken);
+    try {
+      const newAccessToken = await refreshAccessToken();
+      setIsLoggedIn(!!newAccessToken);
+      console.log('로그인 유지 성공');
+    } catch (error) {
+      console.error('토큰 갱신 실패:', error);
+      setIsLoggedIn(false);
 
-    // accessToken이 없을 경우 갱신 시도
-    if (!accessToken) {
-      try {
-        // 새로운 accessToken 요청 시도
-        const newAccessToken = await refreshAccessToken();
-        setIsLoggedIn(!!newAccessToken); // 새 토큰 있으면 로그인 상태 유지, 없으면 로그아웃
-        console.log('로그인 유지 성공');
-      } catch (error) {
-        console.error('토큰 갱신 실패:', error);
-        setIsLoggedIn(false);
+      // 요청 실패 시 interval 정지
+      if (intervalId.current) {
+        clearInterval(intervalId.current);
+        intervalId.current = null;
       }
-    } else {
-      // accessToken이 존재하면 로그인 상태 유지
-      setIsLoggedIn(true);
     }
-
-    setIsLoading(false);
   }, [setIsLoggedIn]);
 
   useEffect(() => {
-    checkAndRefreshToken();
+    const accessToken = getCookie('access_token');
 
-    intervalId.current = setInterval(checkAndRefreshToken, 20 * 1000); // 20초마다 갱신 시도
+    if (accessToken) {
+      setIsLoggedIn(true);
+      setIsLoading(false);
+
+      // 29분마다 토큰 갱신 시도
+      intervalId.current = setInterval(checkAndRefreshToken, 20 * 1000);
+    } else {
+      setIsLoggedIn(false);
+      setIsLoading(false);
+    }
 
     return () => {
       if (intervalId.current) clearInterval(intervalId.current);
     };
-  }, [checkAndRefreshToken]);
+  }, [checkAndRefreshToken, setIsLoggedIn]);
 
   if (isLoading) return null;
 
-
   return (
     <div
-      className={` sticky top-0 z-[99999] bg-white h-[59px] ${
-        pathname.includes('/mypage') ||
-        pathname.includes('/report/') ||
-        pathname.includes('/payment')
+      className={`sticky top-0 z-[99999] bg-white h-[59px] ${
+        pathname.includes('/mypage') || pathname.includes('/report/') || pathname.includes('/payment')
           ? 'shadow-custom-light border-b border-gray100'
           : ''
       }`}>
