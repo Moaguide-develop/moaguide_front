@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/userAuth.store';
 import { useMemberStore } from '@/store/user.store';
 import { setCookie } from '@/utils/cookie';
+import { setToken } from '@/utils/localStorage';
 
 const HomePage = () => {
   const { setIsLoggedIn } = useAuthStore();
@@ -23,7 +24,7 @@ const HomePage = () => {
         const parsedUser = JSON.parse(decodeURIComponent(userParam));
         
         const user = JSON.parse(parsedUser.user); 
-        setCookie('access_token', accessToken);
+        setToken(accessToken);
   
         setMember({
           memberEmail: user.email,
