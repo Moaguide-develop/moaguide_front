@@ -43,7 +43,7 @@ const MainListItem = ({
           onSuccess: () => {
             handleBookmarkInvalidate();
             queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
-            alert('북마크 삭제가 완료되었습니다');
+            alert('북마크 삭제가 완료되었습니다.');
   
             if (currentTab === 'all') {
               queryClient.invalidateQueries({ queryKey: ['MainProductLogin', category] });
@@ -60,7 +60,7 @@ const MainListItem = ({
           onSuccess: () => {
             handleBookmarkInvalidate();
             queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
-            alert('북마크 추가가 완료되었습니다');
+            alert('북마크 추가가 완료되었습니다.');
 
             if (currentTab === 'all') {
               queryClient.invalidateQueries({ queryKey: ['MainProductLogin', category] });

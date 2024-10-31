@@ -14,14 +14,13 @@ const Gnb = () => {
   const router = useRouter();
   const intervalId = useRef<NodeJS.Timeout | null>(null);
 
-  // accessToken 갱신 함수
+  // access_token 갱신
   const checkAndRefreshToken = useCallback(async () => {
     try {
       const newAccessToken = await refreshAccessToken();
       setIsLoggedIn(!!newAccessToken);
-      console.log('로그인 유지 성공');
     } catch (error) {
-      console.error('토큰 갱신 실패:', error);
+      alert('로그인이 만료되었습니다. 다시 로그인해주세요.');
       setIsLoggedIn(false);
 
       // 요청 실패 시 interval 정지
@@ -40,7 +39,7 @@ const Gnb = () => {
       setIsLoading(false);
 
       // 29분마다 토큰 갱신 시도
-      intervalId.current = setInterval(checkAndRefreshToken, 20 * 1000);
+      intervalId.current = setInterval(checkAndRefreshToken, 29 * 60 * 1000); 
     } else {
       setIsLoggedIn(false);
       setIsLoading(false);

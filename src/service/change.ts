@@ -17,7 +17,7 @@ export const updateNickname = async (nickname: string): Promise<boolean> => {
         return true;
       } catch (error) {
         console.error('토큰 갱신 실패:', error);
-        alert('토큰 갱신에 실패했습니다. 다시 로그인해 주세요.');
+        alert('서버 오류가 발생했습니다. 다시 로그인해 주세요.');
         return false;
       }
     } else {

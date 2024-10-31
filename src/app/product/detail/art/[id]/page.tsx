@@ -42,11 +42,11 @@ const ArtDetailpage = (props: { params: { id: string } }) => {
       );
       if (!bookmark) {
         addmutation.mutate({ productId, bookmark });
-        alert('북마크 추가가 완료되었습니다');
+        alert('북마크 추가가 완료되었습니다.');
         window.location.reload();
       } else if (bookmark) {
         deletemutation.mutate({ productId });
-        alert('북마크 삭제가 완료되었습니다');
+        alert('북마크 삭제가 완료되었습니다.');
         window.location.reload();
       }
     } else {
