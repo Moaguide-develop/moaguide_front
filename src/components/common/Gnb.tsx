@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useAuthStore } from '@/store/userAuth.store';
-import { getCookie } from '@/utils/cookie';
+import { getCookie } from '@/utils/cookies';
 import { refreshAccessToken } from '@/service/auth';
 
 const Gnb = () => {
