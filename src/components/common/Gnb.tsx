@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '@/store/userAuth.store';
-import { getCookie, removeCookie } from '@/utils/cookie';
+import { getCookie } from '@/utils/cookie';
 import { refreshAccessToken } from '@/service/auth';
 
 const Gnb = () => {
@@ -13,35 +13,38 @@ const Gnb = () => {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  const handleLogout = useCallback(() => {
-    removeCookie('access_token');
-    removeCookie('refresh');
-    setIsLoggedIn(false);
-    router.push('/sign');
-  }, [setIsLoggedIn, router]);
-
-  const checkAndRefreshToken = useCallback(async () => {
+  const checkAndRefreshToken = async () => {
     const accessToken = getCookie('access_token');
     const refreshToken = getCookie('refresh');
-    
+
+    // 만약 accessToken이 없고 refreshToken이 있으면 토큰 갱신 시도
     if (!accessToken && refreshToken) {
       try {
-        await refreshAccessToken();
-        setIsLoggedIn(true);
+        const newAccessToken = await refreshAccessToken();
+        if (newAccessToken) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
       } catch (error) {
-        handleLogout();
+        console.error('토큰 갱신 실패:', error);
+        setIsLoggedIn(false);
       }
-    } else if (!accessToken) {
-      handleLogout();
     } else {
-      setIsLoggedIn(true);
+      setIsLoggedIn(!!accessToken); // accessToken이 있으면 로그인 상태 유지
     }
-  }, [handleLogout, setIsLoggedIn]);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     checkAndRefreshToken();
-    setIsLoading(false);
-  }, [checkAndRefreshToken]);
+
+    // 주기적으로 토큰 갱신
+    const interval = setInterval(checkAndRefreshToken, 30 * 1000); // 55분마다 갱신
+
+    // 컴포넌트가 언마운트될 때 interval 해제
+    return () => clearInterval(interval);
+  }, [setIsLoggedIn]);
 
   if (isLoading) return null;
 
