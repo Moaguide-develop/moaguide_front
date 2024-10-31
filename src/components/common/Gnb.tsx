@@ -7,44 +7,45 @@ import { useAuthStore } from '@/store/userAuth.store';
 import { getCookie } from '@/utils/cookie';
 import { refreshAccessToken } from '@/service/auth';
 
-const Gnb = () => {
-  const pathname = usePathname();
-  const { isLoggedIn, setIsLoggedIn } = useAuthStore();
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
-
-  // checkAndRefreshToken을 useCallback으로 정의
-  const checkAndRefreshToken = useCallback(async () => {
-    const accessToken = getCookie('access_token');
-    const refreshToken = getCookie('refresh');
-
-    if (!accessToken && refreshToken) {
-      try {
-        const newAccessToken = await refreshAccessToken();
-        if (newAccessToken) {
-          setIsLoggedIn(true);
-        } else {
+  const Gnb = () => {
+    const pathname = usePathname();
+    const { isLoggedIn, setIsLoggedIn } = useAuthStore();
+    const [isLoading, setIsLoading] = useState(true);
+    const router = useRouter();
+    let intervalId: NodeJS.Timeout;
+  
+    const checkAndRefreshToken = useCallback(async () => {
+      const accessToken = getCookie('access_token');
+      const refreshToken = getCookie('refresh');
+  
+      if (!accessToken && refreshToken) {
+        try {
+          const newAccessToken = await refreshAccessToken();
+          if (newAccessToken) {
+            setIsLoggedIn(true);
+          } else {
+            setIsLoggedIn(false);
+          }
+        } catch (error) {
+          console.error('토큰 갱신 실패:', error);
           setIsLoggedIn(false);
         }
-      } catch (error) {
-        console.error('토큰 갱신 실패:', error);
-        setIsLoggedIn(false);
+      } else {
+        setIsLoggedIn(!!accessToken); // accessToken이 있으면 로그인 상태 유지
       }
-    } else {
-      setIsLoggedIn(!!accessToken); // accessToken이 있으면 로그인 상태 유지
-    }
-    setIsLoading(false);
-  }, [setIsLoggedIn]);
+      setIsLoading(false);
+    }, [setIsLoggedIn]);
+  
+    useEffect(() => {
+      checkAndRefreshToken();
+  
+      intervalId = setInterval(checkAndRefreshToken, 30 * 1000); // 30초마다 실행
+  
+      return () => clearInterval(intervalId);
+    }, [checkAndRefreshToken]);
+  
+    if (isLoading) return null;
 
-  useEffect(() => {
-    checkAndRefreshToken();
-
-    const interval = setInterval(checkAndRefreshToken, 30 * 1000);
-
-    return () => clearInterval(interval);
-  }, [checkAndRefreshToken]);
-
-  if (isLoading) return null;
 
 
   return (
