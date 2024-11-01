@@ -4,6 +4,7 @@ import { Line } from 'react-chartjs-2';
 import { useRef, useState } from 'react';
 import { IMusicStreamingChart } from '@/types/MusicProductType';
 import { basicAxiosInstance } from '@/service/axiosInstance';
+import { TooltipItem } from 'chart.js';
 
 const YoutubeStreamingChart = () => {
   const pathname = usePathname();
@@ -41,12 +42,6 @@ const YoutubeStreamingChart = () => {
       StreamingData?.steamingDto?.map((item) => Number(item.value))) ||
     [];
 
-  // const sortedStreamingCount = [...StreamingCount].sort((a, b) => b - a);
-  // const maxStreamingCount = sortedStreamingCount[0] || 0;
-  // const averageStreamingCount =
-  //   StreamingCount.reduce((acc, val) => acc + val, 0) / StreamingCount.length || 0;
-  // const newVariable = Math.floor(maxStreamingCount + averageStreamingCount);
-
   const dataSets = {
     labels: StreamingDay,
     data: StreamingCount
@@ -79,9 +74,22 @@ const YoutubeStreamingChart = () => {
       legend: {
         display: false
       },
-      tooltip: {
+      _tooltip: {
         enabled: true,
-        intersect: false
+        intersect: false,
+        callbacks: {
+          label: function (context: TooltipItem<'line'>) {
+            const label = context.dataset.label || '';
+            const value = context.raw;
+            return `${label} : ${value?.toLocaleString()}회\n`;
+          }
+        }
+      },
+      get tooltip() {
+        return this._tooltip;
+      },
+      set tooltip(value) {
+        this._tooltip = value;
       }
     },
     scales: {

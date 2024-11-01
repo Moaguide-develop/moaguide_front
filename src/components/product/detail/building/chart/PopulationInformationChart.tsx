@@ -67,6 +67,9 @@ const PopulationInformationChart = () => {
         },
         formatter: function (value: number) {
           return value.toLocaleString(); // 차트 바 데이터 위에 표시되는 숫자를 포맷팅
+        },
+        display: function () {
+          return window.innerWidth > 768; // 모바일에서는 데이터 레이블을 숨김
         }
       }
     },

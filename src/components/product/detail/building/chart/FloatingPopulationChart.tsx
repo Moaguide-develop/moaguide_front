@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import { ISubwayData } from '@/types/BuildingProductType';
 import { basicAxiosInstance } from '@/service/axiosInstance';
+import { TooltipItem } from 'chart.js';
 
 const FloatingPopulationChart = () => {
   const pathname = usePathname();
@@ -79,7 +80,14 @@ const FloatingPopulationChart = () => {
       },
       tooltip: {
         enabled: true,
-        intersect: false
+        intersect: false,
+        callbacks: {
+          label: function (context: TooltipItem<'bar'>) {
+            const label = context.dataset.label || '';
+            const value = context.raw;
+            return `${label} : ${value?.toLocaleString()}명\n`;
+          }
+        }
       },
       datalabels: {
         display: false // 데이터 레이블 숨기기
@@ -113,7 +121,14 @@ const FloatingPopulationChart = () => {
       },
       tooltip: {
         enabled: true,
-        intersect: false
+        intersect: false,
+        callbacks: {
+          label: function (context: TooltipItem<'bar'>) {
+            const label = context.dataset.label || '';
+            const value = context.raw;
+            return `${label} : ${value?.toLocaleString()}명\n`;
+          }
+        }
       },
       datalabels: {
         display: false // 데이터 레이블 숨기기

@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import { IMusicBulidingStockPriceChart } from '@/types/MusicProductType';
 import { basicAxiosInstance } from '@/service/axiosInstance';
+import { TooltipItem } from 'chart.js';
 
 const BuildingStockPriceChart = () => {
   const chartRef = useRef(null);
@@ -78,7 +79,14 @@ const BuildingStockPriceChart = () => {
       },
       tooltip: {
         enabled: true,
-        intersect: false
+        intersect: false,
+        callbacks: {
+          label: function (context: TooltipItem<'line'>) {
+            const label = context.dataset.label || '';
+            const value = context.raw || 0;
+            return `${label} : ${value?.toLocaleString()}원\n`;
+          }
+        }
       }
     },
     scales: {

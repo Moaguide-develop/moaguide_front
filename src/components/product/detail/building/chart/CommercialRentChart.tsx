@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { basicAxiosInstance } from '@/service/axiosInstance';
+import { TooltipItem } from 'chart.js';
 
 interface RentData {
   year: number;
@@ -109,7 +110,14 @@ const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) =>
         },
         tooltip: {
           enabled: true,
-          intersect: false
+          intersect: false,
+          callbacks: {
+            label: function (context: TooltipItem<'line'>) {
+              const label = context.dataset.label || '';
+              const value = context.raw;
+              return `${label} : ${value?.toLocaleString()} 천원/m²\n`;
+            }
+          }
         }
       },
       scales: {

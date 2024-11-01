@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Bar } from 'react-chartjs-2';
-import { ChartOptions } from 'chart.js';
+import { ChartOptions, TooltipItem } from 'chart.js';
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
@@ -109,7 +109,14 @@ const CommercialVacancyRateChart = ({ rentType }: { rentType: boolean | undefine
       },
       tooltip: {
         enabled: true,
-        intersect: false
+        intersect: false,
+        callbacks: {
+          label: function (context: TooltipItem<'bar'>) {
+            const label = context.dataset.label || '';
+            const value = context.raw;
+            return `${label} : ${value?.toLocaleString()}%\n`;
+          }
+        }
       },
       datalabels: {
         anchor: 'end',
