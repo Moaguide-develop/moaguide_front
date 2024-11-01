@@ -352,11 +352,11 @@ const MoviePeopleLayout = (data: MoviePeopleLayoutProps) => {
 
                   <div className="text-sm ">{item.side}</div>
                   <div className="text-sm ">
-                    [공식 통계]{item.officialMoney.toLocaleString()}원
+                    [공식 통계]💸{item.officialMoney.toLocaleString()}원 👪{' '}
                     {item.officialPeople.toLocaleString()}명
                   </div>
                   <div className="text-sm ">
-                    [kobis 통계]{item.money.toLocaleString()}원
+                    [kobis 통계]💸{item.money.toLocaleString()}원 👪{' '}
                     {item.people.toLocaleString()}명
                   </div>
                 </div>

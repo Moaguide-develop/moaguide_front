@@ -187,7 +187,9 @@ const MusicProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex">
             <div className="text-gray-400  w-[150px] ">최근 1주당 저작권료</div>
-            <div className="flex-1 ">{data?.musicDivide?.lastDividend}원</div>
+            <div className="flex-1 ">
+              {data?.musicDivide?.lastDividend.toLocaleString()}원
+            </div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
