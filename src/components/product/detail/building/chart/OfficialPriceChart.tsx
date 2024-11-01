@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Line } from 'react-chartjs-2';
 import { usePathname } from 'next/navigation';
-import { ChartOptions } from 'chart.js';
+import { ChartOptions, TooltipItem } from 'chart.js';
 import { basicAxiosInstance } from '@/service/axiosInstance';
 
 // API 데이터 타입 정의
@@ -143,7 +143,14 @@ const OfficialPriceChart = () => {
       },
       tooltip: {
         enabled: true,
-        intersect: false
+        intersect: false,
+        callbacks: {
+          label: function (context: TooltipItem<'line'>) {
+            const label = context.dataset.label || '';
+            const value = context.raw as number;
+            return `${label} : ${value?.toLocaleString()} 원/m²\n`;
+          }
+        }
       },
       datalabels: {
         display: false,

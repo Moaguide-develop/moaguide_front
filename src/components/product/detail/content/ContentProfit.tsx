@@ -59,7 +59,7 @@ const ContentProfit = ({
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px]">최소모집목표금액</div>
             <div className="flex-1">
-              {data?.base.publish.minAmount.toLocaleString()}주
+              {data?.base.publish.minAmount.toLocaleString()}원
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@ const ContentProfit = ({
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px]">최소 모집수량</div>
-            <div className="flex-1">{data?.base.publish.piece.toLocaleString()}계좌</div>
+            <div className="flex-1">{data?.base.publish.piece.toLocaleString()}주</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
@@ -89,7 +89,7 @@ const ContentProfit = ({
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px]">최소투자금액</div>
             <div className="flex-1">
-              {data?.base.publish.minInvestment.toLocaleString()}
+              {data?.base.publish.minInvestment.toLocaleString()}원
             </div>
           </div>
         </div>
@@ -352,11 +352,11 @@ const MoviePeopleLayout = (data: MoviePeopleLayoutProps) => {
 
                   <div className="text-sm ">{item.side}</div>
                   <div className="text-sm ">
-                    [공식 통계]{item.officialMoney.toLocaleString()}원
+                    [공식 통계]💸{item.officialMoney.toLocaleString()}원 👪{' '}
                     {item.officialPeople.toLocaleString()}명
                   </div>
                   <div className="text-sm ">
-                    [kobis 통계]{item.money.toLocaleString()}원
+                    [kobis 통계]💸{item.money.toLocaleString()}원 👪{' '}
                     {item.people.toLocaleString()}명
                   </div>
                 </div>

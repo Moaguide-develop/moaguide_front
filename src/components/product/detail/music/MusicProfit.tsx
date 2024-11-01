@@ -115,20 +115,22 @@ const MusicProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">발행수량</div>
-            <div className="flex-1">{data?.musicPublish?.piece.toLocaleString()}</div>
+            <div className="flex-1">{data?.musicPublish?.piece.toLocaleString()}주</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">발행가액</div>
-            <div className="flex-1">{data?.musicPublish?.basePrice.toLocaleString()}</div>
+            <div className="flex-1">
+              {data?.musicPublish?.basePrice.toLocaleString()}원
+            </div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">총 모집액</div>
             <div className="flex-1">
-              {data?.musicPublish?.totalPrice.toLocaleString()}
+              {data?.musicPublish?.totalPrice.toLocaleString()}원
             </div>
           </div>
         </div>
@@ -185,13 +187,15 @@ const MusicProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex">
             <div className="text-gray-400  w-[150px] ">최근 1주당 저작권료</div>
-            <div className="flex-1 ">{data?.musicDivide?.lastDividend}</div>
+            <div className="flex-1 ">
+              {data?.musicDivide?.lastDividend.toLocaleString()}원
+            </div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex">
             <div className="text-gray-400  w-[150px]">최근 저작권료 수익률</div>
-            <div className="flex-1 ">{data?.musicDivide?.lastDividendRate}</div>
+            <div className="flex-1 ">{data?.musicDivide?.lastDividendRate}%</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">

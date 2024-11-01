@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { IMusicCopyRightFeeChart } from '@/types/MusicProductType';
 import { useQuery } from '@tanstack/react-query';
 import { basicAxiosInstance } from '@/service/axiosInstance';
+import { TooltipItem } from 'chart.js';
 
 const MusicCopyRightFeeChart = () => {
   const pathname = usePathname();
@@ -186,7 +187,19 @@ const MusicCopyRightFeeChart = () => {
         position: 'top' as const
       },
       tooltip: {
-        enabled: true
+        enabled: true,
+        callbacks: {
+          label: function (context: TooltipItem<'line' | 'bar'>) {
+            const label = context.dataset.label || '';
+            const value = context.raw as number;
+            if (context.dataset.type === 'line') {
+              return `${label} : ${value?.toLocaleString()}%\n`;
+            } else if (context.dataset.type === 'bar') {
+              return `${label} : ${value?.toLocaleString()}원\n`;
+            }
+            return `${label} : ${value?.toLocaleString()}\n`;
+          }
+        }
       },
       datalabels: {
         display: false

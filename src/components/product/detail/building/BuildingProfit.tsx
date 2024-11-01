@@ -38,19 +38,19 @@ const BuildingProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">발행 증권수</div>
-            <div className="">{data?.publish?.piece?.toLocaleString()}</div>
+            <div className="">{data?.publish?.piece?.toLocaleString()}주</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">1주 당 발행 가액</div>
-            <div className="">{data?.publish?.basePrice?.toLocaleString()}</div>
+            <div className="">{data?.publish?.basePrice?.toLocaleString()}원</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">총 모집 액</div>
-            <div className="">{data?.publish?.totalPrice?.toLocaleString()}</div>
+            <div className="">{data?.publish?.totalPrice?.toLocaleString()}원</div>
           </div>
         </div>
         <div className="flex flex-col  mb-[7px]">
@@ -280,7 +280,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
             <div className="text-gray-400  w-[150px]">배당 수익률</div>
-            <div className="">{data?.divide?.divideRate}</div>
+            <div className="">{data?.divide?.divideRate}%</div>
           </div>
         </div>
       </div>
