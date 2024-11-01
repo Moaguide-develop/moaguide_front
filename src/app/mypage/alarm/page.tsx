@@ -57,13 +57,23 @@ const AlarmPage = () => {
   const toggleInterestedProductAlarm = () => {
     const newInterestedOn = !isInterestedProductAlarmOn;
     setIsInterestedProductAlarmOn(newInterestedOn);
-    updateNotificationStatus(newInterestedOn, isMoaguideAlarmOn!); 
+    updateNotificationStatus(newInterestedOn, isMoaguideAlarmOn!);
+    alert(
+      `관심 상품 업데이트 알림이 ${
+        newInterestedOn ? '설정되었습니다.' : '해제되었습니다.'
+      }`
+    );
   };
 
   const toggleMoaguideAlarm = () => {
     const newMoaguideOn = !isMoaguideAlarmOn;
     setIsMoaguideAlarmOn(newMoaguideOn);
     updateNotificationStatus(isInterestedProductAlarmOn!, newMoaguideOn);
+    alert(
+      `모아가이드 제공 알림이 ${
+        newMoaguideOn ? '설정되었습니다.' : '해제되었습니다.'
+      }`
+    );
   };
 
   if (isInterestedProductAlarmOn === null || isMoaguideAlarmOn === null) {
