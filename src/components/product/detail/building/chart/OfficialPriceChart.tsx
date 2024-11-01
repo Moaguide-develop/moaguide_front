@@ -147,7 +147,7 @@ const OfficialPriceChart = () => {
         callbacks: {
           label: function (context: TooltipItem<'line'>) {
             const label = context.dataset.label || '';
-            const value = context.raw;
+            const value = context.raw as number;
             return `${label} : ${value?.toLocaleString()} 원/m²\n`;
           }
         }

@@ -113,7 +113,7 @@ const CommercialVacancyRateChart = ({ rentType }: { rentType: boolean | undefine
         callbacks: {
           label: function (context: TooltipItem<'bar'>) {
             const label = context.dataset.label || '';
-            const value = context.raw;
+            const value = context.raw as number;
             return `${label} : ${value?.toLocaleString()}%\n`;
           }
         }

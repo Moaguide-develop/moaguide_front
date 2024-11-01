@@ -191,7 +191,7 @@ const MusicCopyRightFeeChart = () => {
         callbacks: {
           label: function (context: TooltipItem<'line' | 'bar'>) {
             const label = context.dataset.label || '';
-            const value = context.raw || 0;
+            const value = context.raw as number;
             if (context.dataset.type === 'line') {
               return `${label} : ${value?.toLocaleString()}%\n`;
             } else if (context.dataset.type === 'bar') {
