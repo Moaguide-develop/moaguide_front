@@ -34,7 +34,7 @@ const MainReport = () => {
       <div className="hidden mt-[26px] sm:block cursor-pointer" onClick={handleGuideClick}>
         <img src="/images/home/report_main.svg" alt="" />
       </div>
-      <div className="mt-5 sm:hidden mx-auto rounded-[12px] h-[130px] w-full bg-cover bg-[url('/images/home/report_layout.svg')]">
+      <div className="mt-5 sm:hidden mx-auto rounded-[12px] h-[130px] w-full bg-cover bg-[url('/images/home/report_layout.svg')] cursor-pointer" onClick={handleGuideClick}>
         <div className="text-normal text-title2 ml-6 sm:ml-11 pt-5">
           <div>투자 가이드</div>
         </div>
