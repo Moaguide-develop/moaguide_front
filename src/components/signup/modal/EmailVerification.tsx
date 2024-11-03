@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { validNumberToTime } from '@/utils/validNumberToTime';
 import { useRouter } from 'next/navigation';
 import { useModalStore } from '@/store/modal.store';
+import { LoadingSpinner } from './LoadingSpinner';
 
 interface EmailVerificationProps {
   onNext: () => void;
@@ -21,6 +22,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
   const [isError, setIsError] = useState(false); 
   const [validTime, setValidTime] = useState<number>(300); 
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
@@ -67,25 +69,31 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
   };
 
   const handleRequestVerification = async () => {
+    setIsLoading(true);
     try {
       await sendEmail(email);
+      setIsLoading(false); 
       setIsRequest(true);
       setValidTime(300);
     } catch (error) {
       console.error('인증 요청 실패:', error);
       setIsRequest(false);
+      setIsLoading(false); 
     }
   };
 
   const handleResendVerification = async () => {
     if (isComplete) return;
+    setIsLoading(true);
     try {
       await sendEmail(email);
+      setIsLoading(false);
       setVerificationCode('');
       inputRef.current?.focus();
       setIsRequest(true);
       setValidTime(300); 
     } catch (error) {
+      setIsLoading(false); 
       console.error('재요청 실패:', error);
     }
   };
@@ -133,6 +141,7 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
   return (
     <div className="max-w-[330px] min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center">
       <section className="w-full mx-auto mt-[30px] sm:mt-0">
+      {isLoading && <LoadingSpinner />}
       {/* <section className="hidden sm:flex mt-8 mb-6 sm:items-center sm:justify-center">
         <Link href={'/'} className='cursor-pointer'>
           <img src="/images/logo.svg" alt="logo" className="w-[202px] h-[28px] items-center justify-center" />
