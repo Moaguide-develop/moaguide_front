@@ -6,6 +6,7 @@ import { changePassword, changePasswordinFind } from '@/service/change';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { removeToken } from '@/utils/localStorage';
+import { LoadingSpinner } from '../signup/modal/LoadingSpinner';
 
 const FindPassword = () => {
   const [email, setEmail] = useState<string>(''); 
@@ -18,6 +19,7 @@ const FindPassword = () => {
   const [validTime, setValidTime] = useState<number>(300); 
   const inputRef = useRef<HTMLInputElement>(null);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -35,25 +37,31 @@ const FindPassword = () => {
   };
 
   const handleRequest = async () => {
+    setIsLoading(true);
     try {
       await sendEmail(email);
+      setIsLoading(false); 
       setIsRequest(true); 
       setValidTime(300); 
     } catch (error) {
       console.error('인증 요청 실패:', error);
       setIsRequest(false); 
+      setIsLoading(false); 
     }
   };
 
   const handleResending = async () => {
     if (isComplete) return;
+    setIsLoading(true);
     try {
       await sendEmail(email);
+      setIsLoading(false);
       setVerificationCode('');
       inputRef.current?.focus();
       setIsRequest(true); 
       setValidTime(300); 
     } catch (error) {
+      setIsLoading(false); 
       console.error('인증 재요청 실패:', error);
     }
   };
@@ -129,11 +137,11 @@ const FindPassword = () => {
     }
   };
 
-
   return (
     <div className='max-w-[330px] mx-auto min-h-[calc(100dvh-75.5px)] flex flex-col items-center justify-between sm:min-h-[100vh] sm:justify-center'>
        {!showPasswordReset && (
       <><section className="w-full mx-auto mt-[30px] sm:mt-0">
+         {isLoading && <LoadingSpinner/>}
         <div className=''>
           <div className="self-start" style={{ width: '24px', height: '24px' }}>
             <Image
