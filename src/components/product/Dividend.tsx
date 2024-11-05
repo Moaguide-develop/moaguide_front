@@ -56,15 +56,15 @@ const Dividend = memo(({ dividend }: DividendProps) => {
         modules={[Navigation]}
         breakpoints={{
           320: {
-            slidesPerView: 1,
+            slidesPerView: dividend.length === 1 ? 1 : 2,
             spaceBetween: 10
           },
           480: {
-            slidesPerView: 1,
+            slidesPerView: dividend.length === 1 ? 1 : 2,
             spaceBetween: 10
           },
           640: {
-            slidesPerView: 2,
+            slidesPerView: dividend.length === 1 ? 1 : 2,
             spaceBetween: 10
           }
         }}
