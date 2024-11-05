@@ -3,7 +3,7 @@ import type { MainReportType } from '@/types/homeComponentsType';
 import { formatCategory } from '@/utils/formatCategory';
 import { format, parseISO } from 'date-fns';
 import React from 'react';
-
+import Image from 'next/image';
 const MainReportItem = ({ category, title, date, link, description, imageLink }: MainReportType) => {
 
   const handleClick = () => {
@@ -22,9 +22,11 @@ const MainReportItem = ({ category, title, date, link, description, imageLink }:
       </div>
       {/* 오른쪽 */}
       <div className='h-full'>
-        <img
+        <Image
           src={imageLink}
           alt="img"
+          width={90}
+          height={75}
           className="w-[90px] h-[75px] sm:w-[132px] sm:h-[93px] rounded-[8px] mb-auto"
         />
       </div>
