@@ -64,13 +64,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
-      <meta
+      {/* <meta
         name="google-site-verification"
         content={`${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       />
       <meta
         name="naver-site-verification"
         content={`${process.env.NEXT_PUBLIC_NAVER_ANALYTICS}`}
+      /> */}
+      <meta
+        name="google-site-verification"
+        content="N2QWerrLhGZ2wlJ_o4ebUAA0u2lFTUjHryP3Ya7Uji0"
       />
       {/* <link rel="icon" href="/moaguideLogo.svg" /> */}
       <body className={pretendard.className}>
