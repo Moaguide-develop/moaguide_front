@@ -64,7 +64,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
-      <link rel="icon" href="/favicon1.ico" type="image/x-icon" sizes="16x16" />
+      <link
+        rel="icon"
+        href="https://moaguide.com/favicon1.ico"
+        type="image/x-icon"
+        sizes="16x16"
+      />
 
       <meta
         name="naver-site-verification"
