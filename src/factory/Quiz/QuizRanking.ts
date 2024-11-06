@@ -13,7 +13,7 @@ const fetchQuizRanking = async () => {
 };
 
 export const useQuizRanking = () => {
-  const queryKey = ['quizRankinga'];
+  const queryKey = ['quizRanking'];
   const { data, error } = useQuery({
     queryKey,
     queryFn: fetchQuizRanking
@@ -37,7 +37,7 @@ const fetchQuizTopRanking = async () => {
 };
 
 export const useQuizTopRanking = () => {
-  const queryKey = ['quizRankinga'];
+  const queryKey = ['TopQuizRanking'];
   const { data, error } = useQuery({
     queryKey,
     queryFn: fetchQuizTopRanking

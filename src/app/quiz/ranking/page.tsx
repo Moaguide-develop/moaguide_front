@@ -7,7 +7,6 @@ import Link from 'next/link';
 const RankingPage = () => {
   const { Ranking } = useQuizRanking();
   const { data: QuizData } = useQuizTopRanking();
-  console.log(Ranking);
 
   return (
     <div>
@@ -26,15 +25,22 @@ const RankingPage = () => {
               {/* 점수  api*/} <span className=" text-violet-600">{QuizData?.score}</span>
               / 100점
             </div>
-            <div className="mt-2 mb-2">걸린 시간 {QuizData?.time}</div>
+            <div className="mt-2 mb-2">걸린 시간 {QuizData?.time?.substring(3)}</div>
 
             {/* 여기만 끝내면 됨 */}
-            <div>오답수 {QuizData?.fail}개(84점) + 가점( 5점)</div>
+            <div>
+              오답수 {QuizData?.fail}개(
+              {(QuizData?.score as number) - (QuizData?.plus as number)}
+              점) + 가점(
+              {QuizData?.plus}점)
+            </div>
           </div>
-          {/* 여기만 끝내면 됨 */}
 
           <div className="text-4xl font-bold mb-10 ">
-            전체 평균 <span className=" text-violet-600">{QuizData?.avag}</span>
+            전체 평균
+            <span className=" text-violet-600 ml-2">
+              {Math.round(QuizData?.avag as number)}점
+            </span>
           </div>
 
           <div className="flex flex-col items-center">
@@ -48,7 +54,9 @@ const RankingPage = () => {
             <div className=" md:w-[450px]   desk:w-[300px] flex flex-col justify-between font-bold  ">
               {Ranking?.map((item, index) => {
                 return (
-                  <div key={index} className="flex justify-between mt-[30px]">
+                  <div
+                    key={index}
+                    className={` px-2 h-[36px] flex justify-between items-center mt-[20px] ${QuizData?.nickname === item.name ? ' bg-violet-300 ' : null}`}>
                     <div
                       className={`${index < 5 ? ' text-violet-600  ' : null} flex justify-center`}
                       style={{ minWidth: '24px', textAlign: 'center' }}>
