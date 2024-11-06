@@ -27,12 +27,7 @@ const pretendard = localFont({
 
 export const metadata: Metadata = {
   title: '모아가이드',
-  // verification: {
-  //   google: "구글에서 받은 코드",
-  //   other: {
-  //     "naver-site-verification": ["네이버에서 받은 코드"],
-  //   },
-  // },
+
   description:
     '모아가이드는 조각투자 및 소액투자를 쉽게 시작할 수 있도록 돕는 서비스입니다. 다양한 자산 정보와 투자 가이드를 한 곳에서 확인하세요.',
   icons: {
