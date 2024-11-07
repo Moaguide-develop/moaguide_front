@@ -94,7 +94,7 @@ const QuizTestPage = () => {
       )}
 
       <div className={`${showCountdown ? 'blur-lg' : ''}`}>
-        <div className="text-center mt-8">
+        <div className="text-center mt-4">
           <QuizTimer onTimeUp={handleTimeUp} isCountdownFinished={isCountdownFinished} />
           <div className="max-w-[460px] my-4 items-center mx-auto text-center text-black text-xl font-semibold font-['Pretendard']">
             인스타그램 스토리를 통해 @moaguide.official 태그 후 게시물을 공유하셨다면 인스타그램 아이디를 입력해주세요! <br/>(가점 제공 확인용)

@@ -6,13 +6,13 @@ interface QuizTimerProps {
 }
 
 const QuizTimer: React.FC<QuizTimerProps> = ({ onTimeUp, isCountdownFinished }) => {
-  const [timeLeft, setTimeLeft] = useState(30 * 60);
+  const [timeLeft, setTimeLeft] = useState(30 * 60); 
 
   useEffect(() => {
-    if (!isCountdownFinished) return; 
+    if (!isCountdownFinished) return;
 
     const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
+      setTimeLeft((prev) => Math.max(prev - 1, 0));
     }, 1000);
 
     if (timeLeft === 0) {
@@ -30,18 +30,19 @@ const QuizTimer: React.FC<QuizTimerProps> = ({ onTimeUp, isCountdownFinished }) 
   };
 
   const progressWidth = (timeLeft / (30 * 60)) * 100;
+  const isTimeLow = timeLeft <= 5 * 60; 
 
   return (
-    <div>
-      <div className="text-center mb-2">남은 시간: {formatTime(timeLeft)}</div>
-      <div
-        style={{
-          width: `${progressWidth}%`,
-          height: '8px',
-          backgroundColor: '#6b46c1',
-          transition: 'width 1s linear'
-        }}
-      />
+    <div className="max-w-[300px] mx-auto">
+      <div className="relative h-[25px] w-full bg-gray-100 rounded-full overflow-hidden">
+        <div
+          style={{ width: `${progressWidth}%` }}
+          className="h-full bg-gradient2 transition-width duration-1000 rounded-full"
+        />
+      </div>
+      <div className={`text-center mt-2 font-semibold ${isTimeLow ? 'text-red-500' : 'text-black'}`}>
+        남은 시간: {formatTime(timeLeft)}
+      </div>
     </div>
   );
 };
