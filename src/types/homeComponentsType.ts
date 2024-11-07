@@ -113,3 +113,15 @@ export interface ArticleItem {
   content?: string;
   pdfLink: string;
 }
+
+export interface QuizTitle {
+  id: number;
+  title: string;
+  questionRange: string;
+  startDate: string;
+  endDate: string;
+  prize: string;
+  questions: number;
+  paymentDate: string;
+  ranking: string;
+}
