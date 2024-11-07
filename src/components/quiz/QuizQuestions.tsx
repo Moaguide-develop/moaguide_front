@@ -22,17 +22,17 @@ const QuizQuestions: React.FC<QuizQuestionsProps> = ({ questions, answers, onAns
   return (
     <div className="quiz-questions">
       {questions.map((question, index) => (
-        <div key={index} className="mb-6">
-          <div className="text-lg font-semibold mb-2">{question.explanation}</div>
+        <div key={index} className={`mb-6 ${index !== questions.length - 1 ? 'border-b border-gray-300 pb-6' : ''}`}>
+          <div className="text-xl font-semibold mb-4">{question.explanation}</div>
           <div className="flex flex-col space-y-2">
             {[question.choice1, question.choice2, question.choice3, question.choice4, question.choice5].map(
               (choice, choiceIndex) => {
-                const isSelected = answers[index] === choiceIndex + 1; // 선택된 답 확인
+                const isSelected = answers[index] === choiceIndex + 1;
                 return (
                   <button
                     key={choiceIndex}
                     onClick={() => handleOptionClick(index, choiceIndex + 1)}
-                    className="flex items-center space-x-2"
+                    className="flex items-center space-x-2 text-left w-full"
                   >
                     <Image
                       src={`/sign/${isSelected ? 'Checked' : 'Check'}.svg`}
@@ -40,7 +40,7 @@ const QuizQuestions: React.FC<QuizQuestionsProps> = ({ questions, answers, onAns
                       width={24}
                       height={24}
                     />
-                    <span>{choice}</span>
+                    <span className="flex-1 text-left">{choice}</span>
                   </button>
                 );
               }

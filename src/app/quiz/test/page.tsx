@@ -129,7 +129,7 @@ const QuizTestPage = () => {
           </div>
         </div>
 
-        <div className="mt-8 max-w-[600px] mx-auto">
+        <div className="mt-12 max-w-[600px] mx-auto">
           <QuizQuestions questions={quizQuestions} onAnswerChange={handleAnswerChange} answers={answers} />
         </div>
 
