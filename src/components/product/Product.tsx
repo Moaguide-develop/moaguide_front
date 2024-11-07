@@ -51,16 +51,21 @@ const Product = ({
   return (
     <div className="">
       <Filter />
-      <div className="w-full h-[168px] bg-gradient-to-b from-[#713ce2] to-[#5100ff]">
-        <Container>
-          <div className=" text-white text-base font-bold pt-[20px] mb-[30px]  ml-[10px]  desk:mb-[20px] ">
-            현재 모집중인 상품
-          </div>
-          <div className="  flex flex-col justify-center items-center">
-            <Dividend dividend={divideData} />
-          </div>
-        </Container>
-      </div>
+      {divideData.length ? (
+        <div className="w-full h-[168px] bg-gradient-to-b from-[#713ce2] to-[#5100ff]">
+          <Container>
+            <div className=" text-white text-base font-bold pt-[20px] mb-[30px]  ml-[10px]  desk:mb-[20px] ">
+              현재 모집중인 상품
+            </div>
+            <div className="  flex flex-col justify-center items-center">
+              <Dividend dividend={divideData} />
+            </div>
+          </Container>
+        </div>
+      ) : (
+        <div className="  mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
+      )}
+
       <Container>
         <div className="max-w-[1000px] h-[59px] p-1 bg-white flex-col justify-center items-center gap-1 inline-flex">
           <div className="max-w-80 justify-start items-center gap-5 inline-flex">
