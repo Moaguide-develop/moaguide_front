@@ -10,7 +10,7 @@ import { submitQuizAnswers } from '@/factory/Quiz/QuizSubmit';
 import CircleSkeleton from '@/components/skeleton/CircleSkeleton';
 
 const QuizTestPage = () => {
-  const { data: quizQuestions, isLoading } = useQuizQuestions();
+  const { data: quizQuestions, isLoading, error } = useQuizQuestions();
   const [answers, setAnswers] = useState(Array(30).fill(0));
   const [insta, setInsta] = useState('');
   const [naver, setNaver] = useState('');
@@ -34,14 +34,21 @@ const QuizTestPage = () => {
       const countdownTimer = setInterval(() => {
         setCountdown((prev) => prev - 1);
       }, 1000);
+
+      if (countdown === 1) {
+        setTimeout(() => {
+          setShowCountdown(false);
+          setIsCountdownFinished(true);
+        }, 1000);
+      }
+
       return () => clearInterval(countdownTimer);
-    } else if (countdown === 0) {
-      setShowCountdown(false);
-      setIsCountdownFinished(true); 
     }
   }, [showCountdown, countdown]);
 
   if (showLoading || isLoading) return <CircleSkeleton />;
+
+  if (error) return <div>Failed to load questions.</div>;
 
   const handleAnswerChange = (index: number, answer: number) => {
     const updatedAnswers = [...answers];
@@ -80,7 +87,9 @@ const QuizTestPage = () => {
 
       {showCountdown && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div className="text-6xl font-bold text-white animate-fadeInOut">{countdown}</div>
+          <div key={countdown} className="text-6xl font-bold text-white animate-countdown">
+            {countdown}
+          </div>
         </div>
       )}
 

@@ -65,7 +65,17 @@ const config: Config = {
       boxShadow: {
         'custom-light': '0px 2px 8px 0px rgba(95, 95, 95, 0.03)',
         'custom-normal': '0px 2px 12px 0px rgba(185, 191, 201, 0.25)'
-      }
+      },
+      keyframes: {
+        countdownAnimation: {
+          '0%': { transform: 'scale(1)', opacity: '1' },
+          '50%': { transform: 'scale(1.5)', opacity: '1' },
+          '100%': { transform: 'scale(0.5)', opacity: '0' },
+        },
+      },
+      animation: {
+        countdown: 'countdownAnimation 1s ease-in-out',
+      },
     }
   },
   plugins: [require('@tailwindcss/line-clamp')]
