@@ -1,11 +1,13 @@
 import { axiosInstance } from '@/service/axiosInstance';
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
 const fetchQuizQuestions = async () => {
   try {
     const response = await axiosInstance.get('quiz/1');
-    return response.data.question;
+    return {
+      questions: response.data.question,
+      type: response.data.type, 
+    };
   } catch (error: any) {
     if (error.response && error.response.status === 409) {
       alert("이미 시험에 응시했습니다!");

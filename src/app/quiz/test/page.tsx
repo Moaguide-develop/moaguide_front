@@ -10,7 +10,7 @@ import { submitQuizAnswers } from '@/factory/Quiz/QuizSubmit';
 import CircleSkeleton from '@/components/skeleton/CircleSkeleton';
 
 const QuizTestPage = () => {
-  const { data: quizQuestions, isLoading, error } = useQuizQuestions();
+  const { data, isLoading } = useQuizQuestions();
   const [answers, setAnswers] = useState(Array(30).fill(0));
   const [insta, setInsta] = useState('');
   const [naver, setNaver] = useState('');
@@ -19,6 +19,9 @@ const QuizTestPage = () => {
   const [countdown, setCountdown] = useState(5);
   const [isCountdownFinished, setIsCountdownFinished] = useState(false);
 
+  const quizType = data?.type; 
+  const questions = data?.questions; 
+  
   useEffect(() => {
     if (!isLoading) {
       const loadingTimer = setTimeout(() => {
@@ -48,8 +51,6 @@ const QuizTestPage = () => {
 
   if (showLoading || isLoading) return <CircleSkeleton />;
 
-  if (error) return <div>Failed to load questions.</div>;
-
   const handleAnswerChange = (index: number, answer: number) => {
     const updatedAnswers = [...answers];
     updatedAnswers[index] = answer;
@@ -72,7 +73,7 @@ const QuizTestPage = () => {
         insta,
         naver,
         time: '00:30:00',
-        type: 'a',
+        type: quizType,
       };
       await submitQuizAnswers(payload);
       alert('퀴즈가 제출되었습니다.');
@@ -128,7 +129,7 @@ const QuizTestPage = () => {
         </div>
 
         <div className="mt-12 max-w-[600px] mx-auto">
-          <QuizQuestions questions={quizQuestions} onAnswerChange={handleAnswerChange} answers={answers} />
+          <QuizQuestions questions={questions} onAnswerChange={handleAnswerChange} answers={answers} />
         </div>
         
         <div className='w-full mx-auto'>
