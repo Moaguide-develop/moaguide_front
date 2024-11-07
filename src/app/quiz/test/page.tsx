@@ -83,8 +83,6 @@ const QuizTestPage = () => {
 
   return (
     <Container>
-      <div className="text-center text-2xl font-bold mt-5">🎯 시험을 시작합니다 🎯</div>
-
       {showCountdown && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div key={countdown} className="text-6xl font-bold text-white animate-countdown">
@@ -92,8 +90,8 @@ const QuizTestPage = () => {
           </div>
         </div>
       )}
-
       <div className={`${showCountdown ? 'blur-lg' : ''}`}>
+      <div className="text-center text-2xl font-bold mt-5">🎯 시험을 시작합니다 🎯</div>
         <div className="text-center mt-4">
           <QuizTimer onTimeUp={handleTimeUp} isCountdownFinished={isCountdownFinished} />
           <div className="max-w-[460px] my-4 items-center mx-auto text-center text-black text-xl font-semibold font-['Pretendard']">
@@ -132,8 +130,10 @@ const QuizTestPage = () => {
         <div className="mt-12 max-w-[600px] mx-auto">
           <QuizQuestions questions={quizQuestions} onAnswerChange={handleAnswerChange} answers={answers} />
         </div>
-
-        <QuizSubmitButton onSubmit={submitQuiz} />
+        
+        <div className='w-full mx-auto'>
+          <QuizSubmitButton onSubmit={submitQuiz} />
+        </div>
       </div>
     </Container>
   );

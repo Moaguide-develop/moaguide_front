@@ -6,12 +6,14 @@ interface QuizSubmitButtonProps {
 
 const QuizSubmitButton: React.FC<QuizSubmitButtonProps> = ({ onSubmit }) => {
   return (
-    <button
-      onClick={onSubmit}
-      className="px-4 py-2 bg-purple-600 text-white rounded"
-    >
-      제출하기
-    </button>
+    <div className="flex justify-center mt-8 mb-4"> 
+      <button
+        onClick={onSubmit}
+        className="w-[330px] py-3 text-center rounded-[12px] text-lg font-bold bg-gradient2 text-heading4 text-white cursor-pointer"
+      >
+        제출하기
+      </button>
+    </div>
   );
 };
 
