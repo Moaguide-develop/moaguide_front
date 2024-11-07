@@ -2,23 +2,26 @@ import React, { useEffect, useState } from 'react';
 
 interface QuizTimerProps {
   onTimeUp: () => void;
+  isCountdownFinished: boolean;
 }
 
-const QuizTimer: React.FC<QuizTimerProps> = ({ onTimeUp }) => {
+const QuizTimer: React.FC<QuizTimerProps> = ({ onTimeUp, isCountdownFinished }) => {
   const [timeLeft, setTimeLeft] = useState(30 * 60);
 
   useEffect(() => {
+    if (!isCountdownFinished) return; 
+
     const timer = setInterval(() => {
       setTimeLeft((prev) => prev - 1);
     }, 1000);
 
     if (timeLeft === 0) {
       clearInterval(timer);
-      onTimeUp(); 
+      onTimeUp();
     }
 
     return () => clearInterval(timer);
-  }, [timeLeft, onTimeUp]);
+  }, [isCountdownFinished, timeLeft, onTimeUp]);
 
   const formatTime = (seconds: number) => {
     const min = String(Math.floor(seconds / 60)).padStart(2, '0');
@@ -26,7 +29,7 @@ const QuizTimer: React.FC<QuizTimerProps> = ({ onTimeUp }) => {
     return `${min}:${sec}`;
   };
 
-  const progressWidth = (timeLeft / (30 * 60)) * 100; 
+  const progressWidth = (timeLeft / (30 * 60)) * 100;
 
   return (
     <div>

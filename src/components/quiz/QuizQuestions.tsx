@@ -10,10 +10,11 @@ interface QuizQuestionsProps {
     choice4: string;
     choice5: string;
   }[];
+  answers: number[];
   onAnswerChange: (index: number, answer: number) => void;
 }
 
-const QuizQuestions: React.FC<QuizQuestionsProps> = ({ questions, onAnswerChange }) => {
+const QuizQuestions: React.FC<QuizQuestionsProps> = ({ questions, answers, onAnswerChange }) => {
   const handleOptionClick = (questionIndex: number, choiceNumber: number) => {
     onAnswerChange(questionIndex, choiceNumber);
   };
@@ -25,21 +26,24 @@ const QuizQuestions: React.FC<QuizQuestionsProps> = ({ questions, onAnswerChange
           <div className="text-lg font-semibold mb-2">{question.explanation}</div>
           <div className="flex flex-col space-y-2">
             {[question.choice1, question.choice2, question.choice3, question.choice4, question.choice5].map(
-              (choice, choiceIndex) => (
-                <button
-                  key={choiceIndex}
-                  onClick={() => handleOptionClick(index, choiceIndex + 1)}
-                  className="flex items-center space-x-2"
-                >
-                  <Image
-                    src={`/sign/${choiceIndex + 1 === 0 ? 'Check' : 'Checked'}.svg`}
-                    alt={`Option ${choiceIndex + 1}`}
-                    width={24}
-                    height={24}
-                  />
-                  <span>{choice}</span>
-                </button>
-              )
+              (choice, choiceIndex) => {
+                const isSelected = answers[index] === choiceIndex + 1; // 선택된 답 확인
+                return (
+                  <button
+                    key={choiceIndex}
+                    onClick={() => handleOptionClick(index, choiceIndex + 1)}
+                    className="flex items-center space-x-2"
+                  >
+                    <Image
+                      src={`/sign/${isSelected ? 'Checked' : 'Check'}.svg`}
+                      alt={`Option ${choiceIndex + 1}`}
+                      width={24}
+                      height={24}
+                    />
+                    <span>{choice}</span>
+                  </button>
+                );
+              }
             )}
           </div>
         </div>
