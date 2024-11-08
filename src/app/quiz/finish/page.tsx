@@ -31,6 +31,21 @@ const QuizFinishPage: React.FC = () => {
 
   const { score, faillist, failanswer, plus, time } = scoreData;
 
+  const calculateElapsedTime = (remainingTime: string) => {
+    const [remainingMinutes, remainingSeconds] = remainingTime.split(':').map(Number);
+    const totalRemainingSeconds = remainingMinutes * 60 + remainingSeconds;
+    
+    // 전체 시간을 초 단위로 설정
+    const totalExamSeconds = 30 * 60; 
+    const totalElapsedSeconds = totalExamSeconds - totalRemainingSeconds;
+
+    const elapsedMinutes = Math.floor(totalElapsedSeconds / 60);
+    const elapsedSeconds = totalElapsedSeconds % 60;
+
+    return `${elapsedMinutes}분 ${String(elapsedSeconds).padStart(2, '0')}초`;
+};
+
+  const elapsedTime = calculateElapsedTime(time);
   const calculatedScore = Math.max(90 - faillist.length * 3, 0);
 
   return (
@@ -40,7 +55,7 @@ const QuizFinishPage: React.FC = () => {
       <p className="text-4xl font-extrabold mb-2">
         <span className="text-[#5B11F7]">{calculatedScore}점</span> / 100점
       </p>
-      <p className="text-base text-gray-500 mt-2">걸린 시간: {time}</p>
+      <p className="text-base text-gray-500 mt-2">걸린 시간: {elapsedTime}</p>
       <p className="text-base text-gray-500 mt-2">오답수 {faillist.length}개 ({calculatedScore}점) + 가점 ({plus}점)</p>
       <div className="min-w-0 max-w-[330px] h-[50px] w-[90%] py-3 my-4 items-center mx-auto text-center rounded-[12px] text-lg font-semibold bg-gray-200 text-black">
         내가 틀린 문제
