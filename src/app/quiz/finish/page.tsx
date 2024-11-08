@@ -17,10 +17,14 @@ const QuizFinishPage: React.FC = () => {
 
   const { data, isLoading: isQuizLoading, isError } = useQuizScore();
   const [isLoading, setIsLoading] = useState(true);
-  
-  // 세션 스토리지에서 값 제거
-  sessionStorage.removeItem('insta');
-  sessionStorage.removeItem('email');
+
+    useEffect(() => {
+    // 클라이언트 측에서만 sessionStorage를 사용하도록 설정
+    if (typeof window !== 'undefined') {
+      sessionStorage.removeItem('insta');
+      sessionStorage.removeItem('email');
+    }
+  }, []);
 
   const scoreData: ScoreData | null = data
     ? {
