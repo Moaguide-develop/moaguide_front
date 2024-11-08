@@ -6,6 +6,7 @@ import { FailItem } from '@/types/Quiz';
 import { useMemberStore } from '@/store/user.store';
 import Image from 'next/image';
 import QuizSkeleton from '@/components/skeleton/QuizSkeleton';
+import { useAuthStore } from '@/store/userAuth.store';
 
 const QuizFinishPage: React.FC = () => {
   const router = useRouter();
@@ -19,8 +20,17 @@ const QuizFinishPage: React.FC = () => {
   } | null>(null);
   const [isLoading, setIsLoading] = useState(true); 
   const hasRedirected = useRef(false); 
+  const { isLoggedIn } = useAuthStore();
+  const alertShownRef = useRef(false);
 
   useEffect(() => {
+    if (!isLoggedIn && !alertShownRef.current) {
+      alertShownRef.current = true; 
+      alert('로그인이 필요한 서비스입니다.');
+      router.push('/sign');
+      return; 
+    }
+
     if (!hasRedirected.current) {
       setIsLoading(true);
       document.body.style.overflow = 'hidden'; 
@@ -41,16 +51,13 @@ const QuizFinishPage: React.FC = () => {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [router]);
+  }, [isLoggedIn, router]);
 
   if (isLoading) {
-    return (
-      <QuizSkeleton />
-    );
+    return <QuizSkeleton />;
   }
 
   if (!scoreData) return null;
-
   const { score, faillist, failanswer, plus, time } = scoreData;
 
   const formatElapsedTime = (timeString: string) => {

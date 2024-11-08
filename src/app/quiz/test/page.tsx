@@ -9,6 +9,7 @@ import { submitQuizAnswers } from '@/factory/Quiz/QuizSubmit';
 import QuizSkeleton from '@/components/skeleton/QuizSkeleton';
 import { useRouter } from 'next/navigation';
 import { axiosInstance } from '@/service/axiosInstance';
+import { useAuthStore } from '@/store/userAuth.store';
 
 const QuizTestPage = () => {
   const { data, isLoading } = useQuizQuestions();
@@ -20,6 +21,8 @@ const QuizTestPage = () => {
   const [countdown, setCountdown] = useState(5);
   const [isCountdownFinished, setIsCountdownFinished] = useState(false);
   const [timeLeft, setTimeLeft] = useState(30 * 60);
+  const { isLoggedIn } = useAuthStore();
+  const alertShownRef = useRef(false);
 
   const router = useRouter();
   const hasFetched = useRef(false);
@@ -79,6 +82,14 @@ const QuizTestPage = () => {
 
     checkQuizParticipation();
   }, [router]);
+
+  useEffect(() => {
+    if (!isLoggedIn && !alertShownRef.current) {
+      alertShownRef.current = true; 
+      alert('로그인이 필요한 서비스입니다.');
+      router.push('/sign');
+    }
+  }, [isLoggedIn, router]);
 
   useEffect(() => {
     if (showLoading || showCountdown) {
