@@ -85,7 +85,7 @@ const QuizFinishPage: React.FC = () => {
           <div className="min-w-0 max-w-[330px] h-[50px] w-[90%] py-3 my-4 items-center mx-auto text-center rounded-[12px] text-lg font-semibold bg-gray-200 text-black">
             내가 틀린 문제
           </div>
-          <div className="mt-6 space-y-8 w-[90%] max-w-[600px] mx-auto">
+          <div className="mt-6 space-y-8 max-w-[600px] mx-auto">
             {faillist.map((fail, index) => (
               <div
                 key={index}
