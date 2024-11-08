@@ -7,7 +7,7 @@ import QuizQuestions from '@/components/quiz/QuizQuestions';
 import QuizSubmitButton from '@/components/quiz/QuizSubmitButton';
 import { useQuizQuestions } from '@/factory/Quiz/QuizFetch';
 import { submitQuizAnswers } from '@/factory/Quiz/QuizSubmit';
-import CircleSkeleton from '@/components/skeleton/CircleSkeleton';
+import QuizSkeleton from '@/components/skeleton/QuizSkeleton';
 
 const QuizTestPage = () => {
   const { data, isLoading } = useQuizQuestions();
@@ -49,7 +49,7 @@ const QuizTestPage = () => {
     }
   }, [showCountdown, countdown]);
 
-  if (showLoading || isLoading) return <CircleSkeleton />;
+  if (showLoading || isLoading) return <QuizSkeleton />;
 
   const handleAnswerChange = (index: number, answer: number) => {
     const updatedAnswers = [...answers];
@@ -83,7 +83,7 @@ const QuizTestPage = () => {
   };
 
   return (
-    <Container>
+      <Container>
       {showCountdown && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div key={countdown} className="text-6xl font-bold text-white animate-countdown">
