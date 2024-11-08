@@ -103,6 +103,27 @@ const SignupPage: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+
+    const pushStateAndShowAlert = () => {
+      window.history.pushState(null, '', window.location.href);
+      alert('페이지를 나가시면 진행 중인 작업이 저장되지 않습니다.');
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', pushStateAndShowAlert);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', pushStateAndShowAlert);
+    };
+  }, []);
+
   return (
     <>
       <Suspense fallback={<div></div>}>
