@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Container from '@/components/common/Container';
 import QuizQuestions from '@/components/quiz/QuizQuestions';
 import QuizSubmitButton from '@/components/quiz/QuizSubmitButton';
@@ -31,7 +31,7 @@ const QuizTestPage = () => {
       if (!hasFetched.current) {
         try {
           hasFetched.current = true;
-          const response = await axiosInstance.get('/quiz/check/1');
+          await axiosInstance.get('/quiz/check/1');
         } catch (error: any) {
           if (error.response && error.response.status === 409) {
             alert("이미 시험에 응시했습니다!");
@@ -82,37 +82,7 @@ const QuizTestPage = () => {
     }
   }, [showCountdown, countdown]);
 
-  useEffect(() => {
-    if (isCountdownFinished) {
-      const timer = setInterval(() => {
-        setTimeLeft((prevTime) => {
-          if (prevTime <= 1) {
-            clearInterval(timer);
-            submitQuiz();
-            return 0;
-          }
-          return prevTime - 1;
-        });
-      }, 1000);
-      return () => clearInterval(timer);
-    }
-  }, [isCountdownFinished]);
-
-  if (showLoading || isLoading) return <QuizSkeleton />;
-
-  const handleAnswerChange = (index: number, answer: number) => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[index] = answer;
-    setAnswers(updatedAnswers);
-  };
-
-  const formatTime = (seconds: number) => {
-    const min = String(Math.floor(seconds / 60)).padStart(2, '0');
-    const sec = String(seconds % 60).padStart(2, '0');
-    return `${min}:${sec}`;
-  };
-
-  const submitQuiz = async () => {
+  const submitQuiz = useCallback(async () => {
     try {
       const elapsedTime = 30 * 60 - timeLeft;
       const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
@@ -134,6 +104,36 @@ const QuizTestPage = () => {
     } catch (error) {
       console.error('제출 실패:', error);
     }
+  }, [answers, insta, naver, quizType, timeLeft, router]);
+
+  useEffect(() => {
+    if (isCountdownFinished) {
+      const timer = setInterval(() => {
+        setTimeLeft((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timer);
+            submitQuiz();
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [isCountdownFinished, submitQuiz]);
+
+  if (showLoading || isLoading) return <QuizSkeleton />;
+
+  const handleAnswerChange = (index: number, answer: number) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[index] = answer;
+    setAnswers(updatedAnswers);
+  };
+
+  const formatTime = (seconds: number) => {
+    const min = String(Math.floor(seconds / 60)).padStart(2, '0');
+    const sec = String(seconds % 60).padStart(2, '0');
+    return `${min}:${sec}`;
   };
 
   return (
