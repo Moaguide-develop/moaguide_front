@@ -56,7 +56,7 @@ const QuizTestPage = () => {
         alert('퀴즈가 제출되었습니다.');
         hasAlertShown.current = true;
       }
-      sessionStorage.setItem('scoreData', JSON.stringify(response));
+
       router.push('/quiz/finish');
     } catch (error) {
       console.error('제출 실패:', error);
@@ -73,7 +73,7 @@ const QuizTestPage = () => {
           await axiosInstance.get('/quiz/check/1');
         } catch (error: any) {
           if (error.response && error.response.status === 409) {
-            alert("이미 시험에 응시했습니다!");
+            alert("이미 시험에 응시했습니다.");
             router.push('/');
           }
         }

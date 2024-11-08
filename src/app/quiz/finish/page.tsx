@@ -1,63 +1,52 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { FailItem } from '@/types/Quiz';
 import { useMemberStore } from '@/store/user.store';
 import Image from 'next/image';
 import QuizSkeleton from '@/components/skeleton/QuizSkeleton';
 import { useAuthStore } from '@/store/userAuth.store';
+import { ScoreData } from '@/types/Quiz';
+import { useQuizScore } from '@/factory/Quiz/QuizScore';
 
 const QuizFinishPage: React.FC = () => {
   const router = useRouter();
   const { member } = useMemberStore();
-  const [scoreData, setScoreData] = useState<{
-    score: number;
-    faillist: FailItem[];
-    failanswer: number[];
-    plus: number;
-    time: string;
-  } | null>(null);
-  const [isLoading, setIsLoading] = useState(true); 
-  const hasRedirected = useRef(false); 
   const { isLoggedIn } = useAuthStore();
   const alertShownRef = useRef(false);
 
+  const { data, isLoading, isError } = useQuizScore();
+
+  const scoreData: ScoreData | null = data
+    ? {
+        score: data.score,
+        faillist: data.failList,
+        failanswer: JSON.parse(data.failanswer),
+        plus: data.plus,
+        time: data.time,
+      }
+    : null;
+
   useEffect(() => {
     if (!isLoggedIn && !alertShownRef.current) {
-      alertShownRef.current = true; 
+      alertShownRef.current = true;
       alert('로그인이 필요한 서비스입니다.');
       router.push('/sign');
-      return; 
+      return;
     }
 
-    if (!hasRedirected.current) {
-      setIsLoading(true);
-      document.body.style.overflow = 'hidden'; 
-      const data = sessionStorage.getItem('scoreData');
-      setTimeout(() => { 
-        if (data) {
-          setScoreData(JSON.parse(data));
-        } else {
-          alert('점수를 불러오는데 실패했습니다.');
-          hasRedirected.current = true; 
-          router.push('/');
-        }
-        setIsLoading(false);
-        document.body.style.overflow = '';
-      }, 1500);
+    if (isError) {
+      alert('점수를 불러오는데 실패했습니다.');
+      router.push('/');
     }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isLoggedIn, router]);
+  }, [isLoggedIn, isError, router]);
 
   if (isLoading) {
     return <QuizSkeleton />;
   }
 
   if (!scoreData) return null;
+
   const { score, faillist, failanswer, plus, time } = scoreData;
 
   const formatElapsedTime = (timeString: string) => {
