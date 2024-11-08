@@ -8,6 +8,7 @@ import { useQuizQuestions } from '@/factory/Quiz/QuizFetch';
 import { submitQuizAnswers } from '@/factory/Quiz/QuizSubmit';
 import QuizSkeleton from '@/components/skeleton/QuizSkeleton';
 import { useRouter } from 'next/navigation';
+import { axiosInstance } from '@/service/axiosInstance';
 
 const QuizTestPage = () => {
   const { data, isLoading } = useQuizQuestions();
@@ -18,11 +19,30 @@ const QuizTestPage = () => {
   const [showCountdown, setShowCountdown] = useState(false);
   const [countdown, setCountdown] = useState(5);
   const [isCountdownFinished, setIsCountdownFinished] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(30 * 60); 
+  const [timeLeft, setTimeLeft] = useState(30 * 60);
 
   const router = useRouter();
+  const hasFetched = useRef(false);
   const quizType = data?.type;
   const questions = data?.questions;
+
+  useEffect(() => {
+    const checkQuizParticipation = async () => {
+      if (!hasFetched.current) {
+        try {
+          hasFetched.current = true;
+          const response = await axiosInstance.get('/quiz/check/1');
+        } catch (error: any) {
+          if (error.response && error.response.status === 409) {
+            alert("이미 시험에 응시했습니다!");
+            router.push('/');
+          }
+        }
+      }
+    };
+
+    checkQuizParticipation();
+  }, [router]);
 
   useEffect(() => {
     if (showLoading || showCountdown) {
@@ -94,7 +114,7 @@ const QuizTestPage = () => {
 
   const submitQuiz = async () => {
     try {
-      const elapsedTime = 30 * 60 - timeLeft; 
+      const elapsedTime = 30 * 60 - timeLeft;
       const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
       const seconds = String(elapsedTime % 60).padStart(2, '0');
       const elapsedFormattedTime = `00:${minutes}:${seconds}`;
