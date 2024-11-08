@@ -16,3 +16,19 @@ export interface IQuizScore {
   nickname: string;
   time: string;
 }
+
+export interface QuizTitle {
+  id: number;
+  title: string;
+  questionRange: string;
+  startDate: string;
+  endDate: string;
+  prize: string;
+  questions: number;
+  paymentDate: string;
+  ranking: string;
+}
+
+export interface QuizResponse {
+  quiz: QuizTitle;
+}
