@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMemberStore } from '@/store/user.store';
 import Image from 'next/image';
@@ -15,7 +15,8 @@ const QuizFinishPage: React.FC = () => {
   const { isLoggedIn } = useAuthStore();
   const alertShownRef = useRef(false);
 
-  const { data, isLoading, isError } = useQuizScore();
+  const { data, isLoading: isQuizLoading, isError } = useQuizScore();
+  const [isLoading, setIsLoading] = useState(true);
 
   const scoreData: ScoreData | null = data
     ? {
@@ -26,6 +27,11 @@ const QuizFinishPage: React.FC = () => {
         time: data.time,
       }
     : null;
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timer); 
+  }, []);
 
   useEffect(() => {
     if (!isLoggedIn && !alertShownRef.current) {
@@ -41,7 +47,7 @@ const QuizFinishPage: React.FC = () => {
     }
   }, [isLoggedIn, isError, router]);
 
-  if (isLoading) {
+  if (isLoading || isQuizLoading) {
     return <QuizSkeleton />;
   }
 
