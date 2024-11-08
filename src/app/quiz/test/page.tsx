@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Container from '@/components/common/Container';
 import QuizQuestions from '@/components/quiz/QuizQuestions';
 import QuizSubmitButton from '@/components/quiz/QuizSubmitButton';
@@ -25,6 +25,36 @@ const QuizTestPage = () => {
   const hasFetched = useRef(false);
   const quizType = data?.type;
   const questions = data?.questions;
+  const timeLeftRef = useRef(timeLeft);
+  const handleSubmitQuizRef = useRef<() => void>();
+
+  timeLeftRef.current = timeLeft;
+
+  const handleSubmitQuiz = async () => {
+    try {
+      const elapsedTime = 30 * 60 - timeLeftRef.current;
+      const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
+      const seconds = String(elapsedTime % 60).padStart(2, '0');
+      const elapsedFormattedTime = `00:${minutes}:${seconds}`;
+
+      const payload = {
+        answer: answers,
+        insta,
+        naver,
+        time: elapsedFormattedTime,
+        type: quizType,
+      };
+      const response = await submitQuizAnswers(payload);
+
+      alert('퀴즈가 제출되었습니다.');
+      sessionStorage.setItem('scoreData', JSON.stringify(response));
+      router.push('/quiz/finish');
+    } catch (error) {
+      console.error('제출 실패:', error);
+    }
+  };
+
+  handleSubmitQuizRef.current = handleSubmitQuiz; 
 
   useEffect(() => {
     const checkQuizParticipation = async () => {
@@ -82,37 +112,13 @@ const QuizTestPage = () => {
     }
   }, [showCountdown, countdown]);
 
-  const submitQuiz = useCallback(async () => {
-    try {
-      const elapsedTime = 30 * 60 - timeLeft;
-      const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
-      const seconds = String(elapsedTime % 60).padStart(2, '0');
-      const elapsedFormattedTime = `00:${minutes}:${seconds}`;
-
-      const payload = {
-        answer: answers,
-        insta,
-        naver,
-        time: elapsedFormattedTime,
-        type: quizType,
-      };
-      const response = await submitQuizAnswers(payload);
-
-      alert('퀴즈가 제출되었습니다.');
-      sessionStorage.setItem('scoreData', JSON.stringify(response));
-      router.push('/quiz/finish');
-    } catch (error) {
-      console.error('제출 실패:', error);
-    }
-  }, [answers, insta, naver, quizType, timeLeft, router]);
-
   useEffect(() => {
     if (isCountdownFinished) {
       const timer = setInterval(() => {
         setTimeLeft((prevTime) => {
           if (prevTime <= 1) {
             clearInterval(timer);
-            submitQuiz();
+            handleSubmitQuizRef.current?.();
             return 0;
           }
           return prevTime - 1;
@@ -120,7 +126,7 @@ const QuizTestPage = () => {
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [isCountdownFinished, submitQuiz]);
+  }, [isCountdownFinished]); 
 
   if (showLoading || isLoading) return <QuizSkeleton />;
 
@@ -202,7 +208,7 @@ const QuizTestPage = () => {
         </div>
 
         <div className="w-full mx-auto">
-          <QuizSubmitButton onSubmit={submitQuiz} />
+          <QuizSubmitButton onSubmit={handleSubmitQuiz} /> 
         </div>
       </div>
     </Container>
