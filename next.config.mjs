@@ -23,7 +23,8 @@ const nextConfig = {
       'imgnews.pstatic.net',
       'mimgnews.pstatic.net',
       'image.newsis.com',
-      'www.chuksannews.co.kr'
+      'www.chuksannews.co.kr',
+      'ssl.pstatic.net'
     ]
   },
 
