@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { FailItem } from '@/types/Quiz';
 import { useMemberStore } from '@/store/user.store';
@@ -16,14 +16,18 @@ const QuizFinishPage: React.FC = () => {
     plus: number;
     time: string;
   } | null>(null);
+  const hasRedirected = useRef(false); 
 
   useEffect(() => {
-    const data = sessionStorage.getItem('scoreData');
-    if (data) {
-      setScoreData(JSON.parse(data));
-    } else {
-      alert('점수를 불러오는데 실패했습니다.');
-      router.push('/');
+    if (!hasRedirected.current) {
+      const data = sessionStorage.getItem('scoreData');
+      if (data) {
+        setScoreData(JSON.parse(data));
+      } else {
+        alert('점수를 불러오는데 실패했습니다.');
+        hasRedirected.current = true; 
+        router.push('/');
+      }
     }
   }, [router]);
 
