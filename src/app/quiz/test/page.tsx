@@ -21,7 +21,19 @@ const QuizTestPage = () => {
 
   const quizType = data?.type; 
   const questions = data?.questions; 
-  
+
+  useEffect(() => {
+    if (showLoading || showCountdown) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [showLoading, showCountdown]);
+
   useEffect(() => {
     if (!isLoading) {
       const loadingTimer = setTimeout(() => {
