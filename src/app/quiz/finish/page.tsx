@@ -48,7 +48,7 @@ const QuizFinishPage: React.FC = () => {
         <span className="text-[#5B11F7]">{score}점</span> / 100점
       </p>
       <p className="text-base text-gray-500 mt-2">걸린 시간: {elapsedTime}</p>
-      <p className="text-base text-gray-500 mt-2">오답수 {faillist.length}개 ({calculatedScore}점) + 가점 ({plus}점)</p>
+      <p className="text-base text-gray-500 mt-2">정답수 {30-faillist.length}개 ({calculatedScore}점) + 가점 ({plus}점)</p>
       <div className="min-w-0 max-w-[330px] h-[50px] w-[90%] py-3 my-4 items-center mx-auto text-center rounded-[12px] text-lg font-semibold bg-gray-200 text-black">
         내가 틀린 문제
       </div>
