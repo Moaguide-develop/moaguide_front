@@ -140,6 +140,10 @@ const QuizTestPage = () => {
             </div>
           </div>
 
+          <div className='text-red-500 my-2 font-semibold'>
+          ※ 시험 도중 페이지를 나가시면 다시 응시하실 수 없습니다! ※
+          </div>
+
           <div className="max-w-[460px] my-4 items-center mx-auto text-center text-black text-xl font-semibold font-['Pretendard']">
             인스타그램 스토리를 통해 @moaguide.official 태그 후 게시물을 공유하셨다면 인스타그램 아이디를 입력해주세요! <br/>(가점 제공 확인용)
           </div>
