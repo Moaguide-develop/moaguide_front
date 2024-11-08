@@ -8,6 +8,8 @@ import QuizSubmitButton from '@/components/quiz/QuizSubmitButton';
 import { useQuizQuestions } from '@/factory/Quiz/QuizFetch';
 import { submitQuizAnswers } from '@/factory/Quiz/QuizSubmit';
 import QuizSkeleton from '@/components/skeleton/QuizSkeleton';
+import { useRouter } from 'next/navigation';
+import { useMemberStore } from '@/store/user.store';
 
 const QuizTestPage = () => {
   const { data, isLoading } = useQuizQuestions();
@@ -18,6 +20,9 @@ const QuizTestPage = () => {
   const [showCountdown, setShowCountdown] = useState(false);
   const [countdown, setCountdown] = useState(5);
   const [isCountdownFinished, setIsCountdownFinished] = useState(false);
+
+  const router = useRouter();
+  const memberNickName = useMemberStore((state) => state.member.memberNickName);
 
   const quizType = data?.type; 
   const questions = data?.questions; 
@@ -74,11 +79,6 @@ const QuizTestPage = () => {
   };
 
   const submitQuiz = async () => {
-    if (answers.includes(0)) {
-      alert('모든 문제를 풀어주세요.');
-      return;
-    }
-
     try {
       const payload = {
         answer: answers,
@@ -87,8 +87,13 @@ const QuizTestPage = () => {
         time: '00:30:00',
         type: quizType,
       };
-      await submitQuizAnswers(payload);
+      const response = await submitQuizAnswers(payload);
+
       alert('퀴즈가 제출되었습니다.');
+
+      sessionStorage.setItem('scoreData', JSON.stringify(response));
+
+      router.push('/quiz/finish');
     } catch (error) {
       console.error('제출 실패:', error);
     }
