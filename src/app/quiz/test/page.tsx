@@ -174,7 +174,7 @@ const QuizTestPage = () => {
   const formatTime = (seconds: number) => {
     const min = String(Math.floor(seconds / 60)).padStart(2, '0');
     const sec = String(seconds % 60).padStart(2, '0');
-    return `${min}:${sec}`;
+    return `${min}분 ${sec}초`;
   };
 
   return (
@@ -202,7 +202,7 @@ const QuizTestPage = () => {
           </div>
 
           <div className='text-red-500 my-2 font-semibold'>
-          ※ 시험 도중 페이지를 나가시면 다시 응시하실 수 없습니다! ※
+          ※ 페이지를 나가면 다시 응시할 수 없습니다! ※
           </div>
 
           <div className="max-w-[460px] my-4 items-center mx-auto text-center text-black text-xl font-semibold font-['Pretendard']">
