@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { FailItem } from '@/types/Quiz';
 import { useMemberStore } from '@/store/user.store';
 import Image from 'next/image';
+import QuizSkeleton from '@/components/skeleton/QuizSkeleton';
 
 const QuizFinishPage: React.FC = () => {
   const router = useRouter();
@@ -16,20 +17,37 @@ const QuizFinishPage: React.FC = () => {
     plus: number;
     time: string;
   } | null>(null);
+  const [isLoading, setIsLoading] = useState(true); 
   const hasRedirected = useRef(false); 
 
   useEffect(() => {
     if (!hasRedirected.current) {
+      setIsLoading(true);
+      document.body.style.overflow = 'hidden'; 
       const data = sessionStorage.getItem('scoreData');
-      if (data) {
-        setScoreData(JSON.parse(data));
-      } else {
-        alert('점수를 불러오는데 실패했습니다.');
-        hasRedirected.current = true; 
-        router.push('/');
-      }
+      setTimeout(() => { 
+        if (data) {
+          setScoreData(JSON.parse(data));
+        } else {
+          alert('점수를 불러오는데 실패했습니다.');
+          hasRedirected.current = true; 
+          router.push('/');
+        }
+        setIsLoading(false);
+        document.body.style.overflow = '';
+      }, 1500);
     }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [router]);
+
+  if (isLoading) {
+    return (
+      <QuizSkeleton />
+    );
+  }
 
   if (!scoreData) return null;
 
@@ -57,7 +75,7 @@ const QuizFinishPage: React.FC = () => {
           정답수 {30 - faillist.length}개 ({calculatedScore}점) + 가점 ({plus}점)
         </p>
       </div>
-  
+
       {calculatedScore === 90 ? (
         <div className="flex flex-col items-center justify-center text-center mt-0 flex-grow sm:flex-grow-0 sm:mt-8">
           <p className="text-2xl font-bold text-black">축하합니다!<br />모든 문제를 다 맞추셨습니다!</p>
@@ -104,7 +122,7 @@ const QuizFinishPage: React.FC = () => {
           </div>
         </>
       )}
-  
+
       <div className="flex flex-col mx-auto items-center justify-center space-y-4 mt-12 w-full max-w-[330px] mb-4 sm:mb-2">
         <button
           onClick={() => router.push('/quiz/ranking')}
