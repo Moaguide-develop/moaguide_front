@@ -27,7 +27,7 @@ const QuizTestPage = () => {
   const questions = data?.questions;
   const timeLeftRef = useRef(timeLeft);
   const handleSubmitQuizRef = useRef<(autoSubmit?: boolean) => void>();
-  const hasAlertShown = useRef(false); 
+  const hasAlertShown = useRef(false);
 
   timeLeftRef.current = timeLeft;
 
@@ -137,6 +137,21 @@ const QuizTestPage = () => {
       return () => clearInterval(timer);
     }
   }, [isCountdownFinished]);
+
+  useEffect(() => {
+    const handleBeforeUnload = async (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = ''; 
+  
+      await handleSubmitQuizRef.current?.(true);
+    };
+  
+    window.addEventListener('beforeunload', handleBeforeUnload);
+  
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   if (showLoading || isLoading) return <QuizSkeleton />;
 
