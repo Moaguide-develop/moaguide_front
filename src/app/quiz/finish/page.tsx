@@ -31,21 +31,13 @@ const QuizFinishPage: React.FC = () => {
 
   const { score, faillist, failanswer, plus, time } = scoreData;
 
-  const calculateElapsedTime = (remainingTime: string) => {
-    const [remainingMinutes, remainingSeconds] = remainingTime.split(':').map(Number);
-    const totalRemainingSeconds = remainingMinutes * 60 + remainingSeconds;
-    
-    // 전체 시간을 초 단위로 설정
-    const totalExamSeconds = 30 * 60; 
-    const totalElapsedSeconds = totalExamSeconds - totalRemainingSeconds;
+  const formatElapsedTime = (timeString: string) => {
+    const [hours, minutes, seconds] = timeString.split(':').map(Number);
+    const totalMinutes = hours * 60 + minutes;
+    return `${totalMinutes}분 ${seconds}초`;
+  };
 
-    const elapsedMinutes = Math.floor(totalElapsedSeconds / 60);
-    const elapsedSeconds = totalElapsedSeconds % 60;
-
-    return `${elapsedMinutes}분 ${String(elapsedSeconds).padStart(2, '0')}초`;
-};
-
-  const elapsedTime = calculateElapsedTime(time);
+  const elapsedTime = formatElapsedTime(time);
   const calculatedScore = Math.max(90 - faillist.length * 3, 0);
 
   return (
@@ -53,7 +45,7 @@ const QuizFinishPage: React.FC = () => {
       <h2 className="text-2xl font-bold mb-4">🎉 고생하셨습니다 🎉</h2>
       <p className="text-4xl font-extrabold mb-2">{member.memberNickName}님의 점수는</p>
       <p className="text-4xl font-extrabold mb-2">
-        <span className="text-[#5B11F7]">{calculatedScore}점</span> / 100점
+        <span className="text-[#5B11F7]">{score}점</span> / 100점
       </p>
       <p className="text-base text-gray-500 mt-2">걸린 시간: {elapsedTime}</p>
       <p className="text-base text-gray-500 mt-2">오답수 {faillist.length}개 ({calculatedScore}점) + 가점 ({plus}점)</p>
