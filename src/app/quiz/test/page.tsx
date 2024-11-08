@@ -26,19 +26,22 @@ const QuizTestPage = () => {
   const quizType = data?.type;
   const questions = data?.questions;
   const timeLeftRef = useRef(timeLeft);
-  const handleSubmitQuizRef = useRef<() => void>();
+  const handleSubmitQuizRef = useRef<(autoSubmit?: boolean) => void>();
+  const hasAlertShown = useRef(false); 
 
   timeLeftRef.current = timeLeft;
 
-  const handleSubmitQuiz = async () => {
+  const handleSubmitQuiz = async (autoSubmit = false) => {
     try {
-      const elapsedTime = 30 * 60 - timeLeftRef.current;
+      const adjustedAnswers = answers.map((answer) => (answer === 0 && autoSubmit ? 0 : answer));
+
+      const elapsedTime = 30 * 60 - timeLeftRef.current; 
       const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
       const seconds = String(elapsedTime % 60).padStart(2, '0');
       const elapsedFormattedTime = `00:${minutes}:${seconds}`;
 
       const payload = {
-        answer: answers,
+        answer: adjustedAnswers,
         insta,
         naver,
         time: elapsedFormattedTime,
@@ -46,7 +49,10 @@ const QuizTestPage = () => {
       };
       const response = await submitQuizAnswers(payload);
 
-      alert('퀴즈가 제출되었습니다.');
+      if (!hasAlertShown.current) {
+        alert('퀴즈가 제출되었습니다.');
+        hasAlertShown.current = true;
+      }
       sessionStorage.setItem('scoreData', JSON.stringify(response));
       router.push('/quiz/finish');
     } catch (error) {
@@ -54,7 +60,7 @@ const QuizTestPage = () => {
     }
   };
 
-  handleSubmitQuizRef.current = handleSubmitQuiz; 
+  handleSubmitQuizRef.current = handleSubmitQuiz;
 
   useEffect(() => {
     const checkQuizParticipation = async () => {
@@ -118,7 +124,11 @@ const QuizTestPage = () => {
         setTimeLeft((prevTime) => {
           if (prevTime <= 1) {
             clearInterval(timer);
-            handleSubmitQuizRef.current?.();
+            if (!hasAlertShown.current) {
+              alert('시간이 만료되었습니다. 자동으로 시험을 제출합니다.');
+              handleSubmitQuizRef.current?.(true);
+              hasAlertShown.current = true;
+            }
             return 0;
           }
           return prevTime - 1;
@@ -126,7 +136,7 @@ const QuizTestPage = () => {
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [isCountdownFinished]); 
+  }, [isCountdownFinished]);
 
   if (showLoading || isLoading) return <QuizSkeleton />;
 
@@ -134,6 +144,16 @@ const QuizTestPage = () => {
     const updatedAnswers = [...answers];
     updatedAnswers[index] = answer;
     setAnswers(updatedAnswers);
+  };
+
+  const handleAlertSubmit = () => {
+    if (answers.includes(0)) {
+      if (window.confirm('풀지 않은 문제가 있습니다. 그래도 제출하시겠습니까?')) {
+        handleSubmitQuiz(true);
+      }
+    } else {
+      handleSubmitQuiz();
+    }
   };
 
   const formatTime = (seconds: number) => {
@@ -157,11 +177,11 @@ const QuizTestPage = () => {
           <div className="max-w-[300px] mx-auto">
             <div className="relative h-[25px] w-full bg-gray-100 rounded-full overflow-hidden">
               <div
-                style={{ width: `${(timeLeft / (30 * 60)) * 100}%` }}
+                 style={{ width: `${(timeLeft / (30 * 60)) * 100}%` }}
                 className="h-full bg-gradient2 transition-width duration-1000 rounded-full"
               />
             </div>
-            <div className={`text-center mt-2 font-semibold ${timeLeft <= 5 * 60 ? 'text-red-500' : 'text-black'}`}>
+            <div className={`text-center mt-2 font-semibold ${timeLeft <= 5 ? 'text-red-500' : 'text-black'}`}>
               남은 시간: {formatTime(timeLeft)}
             </div>
           </div>
@@ -199,20 +219,21 @@ const QuizTestPage = () => {
               onChange={(e) => setNaver(e.target.value)}
               className="w-full max-w-[360px] px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
               placeholder="성함/이메일 입력"
-            />
+              />
+            </div>
+          </div>
+  
+          <div className="mt-12 max-w-[600px] mx-auto">
+            <QuizQuestions questions={questions} onAnswerChange={handleAnswerChange} answers={answers} />
+          </div>
+  
+          <div className="w-full mx-auto">
+            <QuizSubmitButton onSubmit={handleAlertSubmit} />
           </div>
         </div>
-
-        <div className="mt-12 max-w-[600px] mx-auto">
-          <QuizQuestions questions={questions} onAnswerChange={handleAnswerChange} answers={answers} />
-        </div>
-
-        <div className="w-full mx-auto">
-          <QuizSubmitButton onSubmit={handleSubmitQuiz} /> 
-        </div>
-      </div>
-    </Container>
-  );
-};
-
-export default QuizTestPage;
+      </Container>
+    );
+  };
+  
+  export default QuizTestPage;
+              
