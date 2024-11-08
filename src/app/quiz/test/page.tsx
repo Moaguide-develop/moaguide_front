@@ -15,7 +15,7 @@ const QuizTestPage = () => {
   const { data, isLoading } = useQuizQuestions();
   const [answers, setAnswers] = useState(Array(30).fill(0));
   const [insta, setInsta] = useState('');
-  const [naver, setNaver] = useState('');
+  const [naver, setnaver] = useState('');
   const [showLoading, setShowLoading] = useState(true);
   const [showCountdown, setShowCountdown] = useState(false);
   const [countdown, setCountdown] = useState(5);
@@ -34,6 +34,13 @@ const QuizTestPage = () => {
 
   timeLeftRef.current = timeLeft;
 
+  useEffect(() => {
+    const storedInsta = sessionStorage.getItem('insta') || '';
+    const storednaver = sessionStorage.getItem('naver') || '';
+    setInsta(storedInsta);
+    setnaver(storednaver);
+  }, []);
+
   const handleSubmitQuiz = async (autoSubmit = false) => {
     try {
       const adjustedAnswers = answers.map((answer) => (answer === 0 && autoSubmit ? 0 : answer));
@@ -50,6 +57,7 @@ const QuizTestPage = () => {
         time: elapsedFormattedTime,
         type: quizType,
       };
+      console.log("Payload:", payload); 
       const response = await submitQuizAnswers(payload);
 
       if (!hasAlertShown.current) {
@@ -216,7 +224,7 @@ const QuizTestPage = () => {
           ※ 페이지를 나가면 다시 응시할 수 없습니다! ※
           </div>
 
-          <div className="max-w-[460px] my-4 items-center mx-auto text-center text-black text-xl font-semibold font-['Pretendard']">
+          {/* <div className="max-w-[460px] my-4 items-center mx-auto text-center text-black text-xl font-semibold font-['Pretendard']">
             인스타그램 스토리를 통해 @moaguide.official 태그 후 게시물을 공유하셨다면 인스타그램 아이디를 입력해주세요! <br/>(가점 제공 확인용)
           </div>
 
@@ -236,30 +244,29 @@ const QuizTestPage = () => {
 
           <div className="max-w-[350px] mb-4 items-center mx-auto text-center text-black text-sm font-base font-['Pretendard']">
             (ex. 모아가이드 / moaguide@naver.com)
-          </div>
+          </div> */}
 
-          <div className="mt-2 w-full max-w-md mx-auto">
+          {/* <div className="mt-2 w-full max-w-md mx-auto">
             <input
               type="text"
               value={naver}
-              onChange={(e) => setNaver(e.target.value)}
+              onChange={(e) => setnaver(e.target.value)}
               className="w-full max-w-[360px] px-4 py-[14px] bg-bg rounded-[12px] outline-none text-body2 focus:outline-normal"
               placeholder="성함/이메일 입력"
               />
-            </div>
+            </div> */}
           </div>
   
-          <div className="mt-12 max-w-[600px] mx-auto">
-            <QuizQuestions questions={questions} onAnswerChange={handleAnswerChange} answers={answers} />
-          </div>
-  
-          <div className="w-full mx-auto">
-            <QuizSubmitButton onSubmit={handleAlertSubmit} />
-          </div>
+        <div className="mt-12 max-w-[600px] mx-auto">
+          <QuizQuestions questions={questions} onAnswerChange={handleAnswerChange} answers={answers} />
         </div>
-      </Container>
-    );
-  };
   
-  export default QuizTestPage;
-              
+        <div className="w-full mx-auto">
+          <QuizSubmitButton onSubmit={handleAlertSubmit} />
+        </div>
+      </div>
+    </Container>
+  );
+};
+
+export default QuizTestPage;
