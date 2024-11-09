@@ -54,7 +54,7 @@ const Guide = () => {
           </div>
         </SwiperSlide>
 
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <div 
             className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[url('/images/home/moaguide-main-event.png')] bg-cover cursor-pointer"
             onClick={handleEventClick} 
@@ -72,11 +72,11 @@ const Guide = () => {
               </div>
             </div>
           </div>
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
-      <div className="absolute bottom-2 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-body7 z-[9999]">
+      {/* <div className="absolute bottom-2 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-body7 z-[9999]">
         {currentSlide}/{totalSlides}
-      </div>
+      </div> */}
     </div>
   );
 };
