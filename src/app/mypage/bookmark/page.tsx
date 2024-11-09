@@ -12,6 +12,7 @@ const BookmarkPage = async ({
   const getCookie = (key: string) => {
     return cookies().get(key)?.value;
   };
+  //
   const token = getCookie('access_token');
   const pages = searchParams['page'] || 1;
   const category = searchParams['category'] || 'all';
