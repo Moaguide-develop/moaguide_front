@@ -60,7 +60,7 @@ const MypageMenu = () => {
           />
         </div>
       </div> */}
-      <EventGuide />
+      {/* <EventGuide /> */}
     </div>
   );
 };
