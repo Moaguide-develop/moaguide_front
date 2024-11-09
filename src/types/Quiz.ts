@@ -54,3 +54,13 @@ export interface QuizFinishPageProps {
   scoreData: ScoreData;
   userName: string;
 }
+
+export interface IHomeQuizRank {
+  name: string;
+  score: number;
+  time: string;
+}
+
+export interface IHomeQuiz {
+  Ranking: IHomeQuizRank[];
+}
