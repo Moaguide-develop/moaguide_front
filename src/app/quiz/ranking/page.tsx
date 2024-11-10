@@ -47,7 +47,7 @@ const RankingPage = () => {
             </div>
 
             <div
-              className=" flex flex-col justify-center items-center mb-[40px]"
+              className=" flex flex-col justify-center items-center mb-[40px] cursor-pointer"
               onClick={() => {
                 router.push('/quiz/start');
               }}>

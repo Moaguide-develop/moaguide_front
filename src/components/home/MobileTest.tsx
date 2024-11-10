@@ -13,7 +13,7 @@ const MobileTest = () => {
       const response = await axiosInstance.post('/quiz/confirm');
 
       alert('시험 응시 후 이용 가능합니다.');
-      router.push('/quiz/start');
+      router.push('/quiz/ranking');
     } catch (error) {
       router.push('/quiz/finish');
     }
