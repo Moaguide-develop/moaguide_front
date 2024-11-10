@@ -1,8 +1,24 @@
+import { axiosInstance } from '@/service/axiosInstance';
+import { useAuthStore } from '@/store/userAuth.store';
+import { useQuery } from '@tanstack/react-query';
 import { Router } from 'express';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { use } from 'react';
 const MobileTest = () => {
+  const { isLoggedIn } = useAuthStore();
   const router = useRouter();
+  const fetchQuiz = async () => {
+    try {
+      const response = await axiosInstance.post('/quiz/confirm');
+
+      alert('시험 응시 후 이용 가능합니다.');
+      router.push('/quiz/start');
+    } catch (error) {
+      router.push('/quiz/finish');
+    }
+  };
+
   return (
     <div className="flex gap-[5px] md:hidden desk:flex justify-center mt-6">
       <div
@@ -44,7 +60,12 @@ const MobileTest = () => {
         items-center justify-center cursor-pointer
         "
         onClick={() => {
-          router.push('/quiz/ranking');
+          if (!isLoggedIn) {
+            alert('로그인이 필요한 서비스입니다.');
+            router.push('/sign');
+            return;
+          }
+          fetchQuiz();
         }}>
         <Image
           src="/images/quiz/Rank.svg"
@@ -59,7 +80,7 @@ const MobileTest = () => {
           </div>
           <div className="flex">
             <div className=" text-white desk:text-xs desk1:text-base mr-3">
-              순위 확인하기
+              내 점수 보기
             </div>
 
             <Image

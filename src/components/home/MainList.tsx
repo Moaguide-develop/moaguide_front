@@ -7,13 +7,23 @@ import { useAuthStore } from '@/store/userAuth.store';
 import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useHomeQuizRanking } from '@/factory/Quiz/HomeQuizRanking';
+import { axiosInstance } from '@/service/axiosInstance';
 
 const MainList = () => {
   const [category, setCategory] = useState('all');
   const router = useRouter();
   const queryClient = useQueryClient();
   const { isLoggedIn } = useAuthStore();
+  const fetchQuiz = async () => {
+    try {
+      const response = await axiosInstance.post('/quiz/confirm');
 
+      alert('시험 응시 후 이용 가능합니다.');
+      router.push('/quiz/start');
+    } catch (error) {
+      router.push('/quiz/finish');
+    }
+  };
   const { data, isLoading } = isLoggedIn
     ? getMainProductLogin(category)
     : getMainProduct(category);
@@ -87,8 +97,15 @@ const MainList = () => {
           <div className="text-lg font-bold ">시험순위</div>
           <div
             className="flex items-center mr-2 cursor-pointer"
-            onClick={() => router.push('/quiz/ranking')}>
-            <div className="text-gray-500 mr-2">전체보기</div>{' '}
+            onClick={() => {
+              if (!isLoggedIn) {
+                alert('로그인이 필요한 서비스입니다.');
+                router.push('/sign');
+                return;
+              }
+              fetchQuiz();
+            }}>
+            <div className="text-gray-500 mr-2">내 점수 보기</div>{' '}
             <Image
               src={'/images/home/item_right.svg'}
               alt="image"
