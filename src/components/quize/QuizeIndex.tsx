@@ -28,7 +28,7 @@ const QuizePage = () => {
     if (isLoggedIn && !isParticipated) {
       sessionStorage.setItem('insta', insta);
       sessionStorage.setItem('naver', naver);
-      router.push(`/quiz/${QuizData?.quiz?.id}`);
+      router.push(`/quiz/test`);
     } else if (!isLoggedIn) {
       alert('로그인 후 시험응시가 가능합니다.');
       router.push('/sign');
@@ -201,8 +201,9 @@ const QuizePage = () => {
         />
       </div>
 
-      <div className="max-w-[380px] max-md:text-caption3 mt-4 mb-2 items-center mx-auto text-center text-black text-xl font-semibold">
-        프리미엄 콘텐츠(학습하기)를 구독하셨다면 성함과 구독하신 아이디를 입력해주세요.
+      <div className="max-w-[390px] max-md:text-caption3 mt-4 mb-2 items-center mx-auto text-center text-black text-xl font-semibold">
+        프리미엄 콘텐츠(학습하기)를 구독하셨다면 
+        <br />성함과 구독하신 아이디를 입력해주세요.
       </div>
 
       <div className="max-w-[350px] max-md:text-caption1 mb-4 items-center mx-auto text-center text-black text-base">
