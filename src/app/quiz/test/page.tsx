@@ -43,9 +43,11 @@ const QuizTestPage = () => {
 
   const handleSubmitQuiz = async (autoSubmit = false) => {
     try {
-      const adjustedAnswers = answers.map((answer) => (answer === 0 && autoSubmit ? 0 : answer));
+      const adjustedAnswers = answers.map((answer) =>
+        answer === 0 && autoSubmit ? 0 : answer
+      );
 
-      const elapsedTime = 30 * 60 - timeLeftRef.current; 
+      const elapsedTime = 30 * 60 - timeLeftRef.current;
       const minutes = String(Math.floor(elapsedTime / 60)).padStart(2, '0');
       const seconds = String(elapsedTime % 60).padStart(2, '0');
       const elapsedFormattedTime = `00:${minutes}:${seconds}`;
@@ -55,9 +57,9 @@ const QuizTestPage = () => {
         insta,
         naver,
         time: elapsedFormattedTime,
-        type: quizType,
+        type: quizType
       };
-      console.log("Payload:", payload); 
+      console.log('Payload:', payload);
       const response = await submitQuizAnswers(payload);
 
       if (!hasAlertShown.current) {
@@ -81,7 +83,7 @@ const QuizTestPage = () => {
           await axiosInstance.get('/quiz/check/1');
         } catch (error: any) {
           if (error.response && error.response.status === 409) {
-            alert("이미 시험에 응시했습니다.");
+            alert('이미 시험에 응시했습니다.');
             router.push('/');
           }
         }
@@ -93,7 +95,7 @@ const QuizTestPage = () => {
 
   useEffect(() => {
     if (!isLoggedIn && !alertShownRef.current) {
-      alertShownRef.current = true; 
+      alertShownRef.current = true;
       alert('로그인이 필요한 서비스입니다.');
       router.push('/sign');
     }
@@ -157,20 +159,52 @@ const QuizTestPage = () => {
     }
   }, [isCountdownFinished]);
 
+  // useEffect(() => {
+  //   const handleBeforeUnload = async (e: BeforeUnloadEvent) => {
+  //     e.preventDefault();
+  //     e.returnValue = '';
+
+  //     await handleSubmitQuizRef.current?.(true);
+  //   };
+
+  //   window.addEventListener('beforeunload', handleBeforeUnload);
+
+  //   return () => {
+  //     window.removeEventListener('beforeunload', handleBeforeUnload);
+  //   };
+  // }, []);
   useEffect(() => {
+    window.history.pushState(null, '', '/quiz/test');
+    let preventMultiplePopstate = false; // 중복 호출 방지
     const handleBeforeUnload = async (e: BeforeUnloadEvent) => {
       e.preventDefault();
-      e.returnValue = ''; 
-  
+      e.returnValue = '';
+
       await handleSubmitQuizRef.current?.(true);
     };
-  
+
+    const handlePopState = () => {
+      if (preventMultiplePopstate) return;
+      preventMultiplePopstate = true;
+      const confirmed = window.confirm(
+        '페이지 이탈 시 자동으로 시험이 제출됩니다. 정말로 페이지를 떠나시겠습니까?'
+      );
+      if (confirmed) {
+        handleSubmitQuizRef.current?.(true);
+      } else {
+        window.history.pushState(null, '', '/quiz/test');
+        preventMultiplePopstate = false;
+      }
+    };
+
     window.addEventListener('beforeunload', handleBeforeUnload);
-  
+    window.addEventListener('popstate', handlePopState);
+
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('popstate', handlePopState);
     };
-  }, []);
+  }, [router]);
 
   if (showLoading || isLoading) return <QuizSkeleton />;
 
@@ -200,7 +234,9 @@ const QuizTestPage = () => {
     <Container>
       {showCountdown && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-          <div key={countdown} className="text-6xl font-bold text-white animate-countdown">
+          <div
+            key={countdown}
+            className="text-6xl font-bold text-white animate-countdown">
             {countdown}
           </div>
         </div>
@@ -211,17 +247,18 @@ const QuizTestPage = () => {
           <div className="max-w-[300px] mx-auto">
             <div className="relative h-[25px] w-full bg-gray-100 rounded-full overflow-hidden">
               <div
-                 style={{ width: `${(timeLeft / (30 * 60)) * 100}%` }}
+                style={{ width: `${(timeLeft / (30 * 60)) * 100}%` }}
                 className="h-full bg-gradient2 transition-width duration-1000 rounded-full"
               />
             </div>
-            <div className={`text-center mt-2 font-semibold ${timeLeft <= 5 ? 'text-red-500' : 'text-black'}`}>
+            <div
+              className={`text-center mt-2 font-semibold ${timeLeft <= 5 ? 'text-red-500' : 'text-black'}`}>
               남은 시간: {formatTime(timeLeft)}
             </div>
           </div>
 
-          <div className='text-red-500 my-2 font-semibold'>
-          ※ 페이지를 나가면 다시 응시할 수 없습니다! ※
+          <div className="text-red-500 my-2 font-semibold">
+            ※ 페이지를 나가면 다시 응시할 수 없습니다! ※
           </div>
 
           {/* <div className="max-w-[460px] my-4 items-center mx-auto text-center text-black text-xl font-semibold font-['Pretendard']">
@@ -255,12 +292,16 @@ const QuizTestPage = () => {
               placeholder="성함/이메일 입력"
               />
             </div> */}
-          </div>
-  
-        <div className="mt-12 max-w-[600px] mx-auto">
-          <QuizQuestions questions={questions} onAnswerChange={handleAnswerChange} answers={answers} />
         </div>
-  
+
+        <div className="mt-12 max-w-[600px] mx-auto">
+          <QuizQuestions
+            questions={questions}
+            onAnswerChange={handleAnswerChange}
+            answers={answers}
+          />
+        </div>
+
         <div className="w-full mx-auto">
           <QuizSubmitButton onSubmit={handleAlertSubmit} />
         </div>
