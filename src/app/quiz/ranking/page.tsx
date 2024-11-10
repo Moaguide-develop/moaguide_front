@@ -3,16 +3,18 @@ import Container from '@/components/common/Container';
 import { useQuizRanking, useQuizTopRanking } from '@/factory/Quiz/QuizRanking';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const RankingPage = () => {
   const { Ranking } = useQuizRanking();
   const { data: QuizData } = useQuizTopRanking();
+  const router = useRouter();
   console.log(QuizData);
   return (
     <div>
       {/* <Container> */}
       <div className=" flex flex-col justify-center items-center">
-        {QuizData?.nickname !== 'null' ? (
+        {QuizData?.score !== null ? (
           <div className="flex flex-col justify-center items-center">
             <div className="text-2xl font-bold  mt-5 mb-7 ">나의 경제지식은?</div>
 
@@ -44,7 +46,11 @@ const RankingPage = () => {
               아직 시험에 응시하지 않았네요
             </div>
 
-            <div className=" flex flex-col justify-center items-center mb-[40px]">
+            <div
+              className=" flex flex-col justify-center items-center mb-[40px] cursor-pointer"
+              onClick={() => {
+                router.push('/quiz/start');
+              }}>
               <div>
                 <div className=" text-xl font-bold text-violet-600  border-b-2 border-violet-600">
                   응시하러 가기
@@ -95,7 +101,7 @@ const RankingPage = () => {
           </div>
         </div>
         <Link href="/">
-          <div className=" mt-7 mb-7 w-[150px] h-[30px] rounded-[8px] bg-violet-600 text-white flex justify-center items-center text-lg ">
+          <div className=" mt-7 mb-7 w-[300px] h-[50px] rounded-[8px] bg-gradient2 text-white flex justify-center items-center text-lg font-bold ">
             홈으로 이동
             <Image src="/images/quiz/CaretRight.svg" alt="arrow" width={20} height={20} />
           </div>
