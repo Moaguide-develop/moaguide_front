@@ -89,6 +89,9 @@ const QuizTestPage = () => {
           if (error.response && error.response.status === 409) {
             alert('이미 시험에 응시했습니다.');
             router.push('/');
+          } else {
+            alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            router.push('/');
           }
         }
       }

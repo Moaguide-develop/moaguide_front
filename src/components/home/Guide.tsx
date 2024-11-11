@@ -54,7 +54,7 @@ const Guide = () => {
           </div>
         </SwiperSlide>
 
-        {/* <SwiperSlide> // 이벤트 배너 추가 시 수정 후 사용
+        {/* <SwiperSlide>
           <div 
             className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[url('/images/home/moaguide-main-event.png')] bg-cover cursor-pointer"
             onClick={handleEventClick} 
