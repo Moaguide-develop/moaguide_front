@@ -10,7 +10,7 @@ const GnbWrapper = () => {
 
   useEffect(() => {
     const checkIfGnbShouldBeHidden = () => {
-      const pathsToHideGnb = ['/signup', '/sign', '/find', '/detail', '/login'];
+      const pathsToHideGnb = ['/signup', '/sign', '/find', '/detail', '/login', '/quiz'];
       const shouldHideGnb = pathsToHideGnb.some((path) => pathname.includes(path));
       setIsGnbHidden(shouldHideGnb);
     };

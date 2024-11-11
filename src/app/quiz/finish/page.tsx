@@ -78,7 +78,7 @@ const QuizFinishPage: React.FC = () => {
 
   return (
     <div className="min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] text-center sm:mb-0 w-[90%] mx-auto sm:max-w-[640px] justify-between sm:justify-start">
-      <div>
+      <div className="mt-6">
         <h2 className="text-2xl font-bold mb-4">🎉 고생하셨습니다 🎉</h2>
         <p className="text-4xl font-extrabold mb-2">{member.memberNickName}님의 점수는</p>
         <p className="text-4xl font-extrabold mb-2">
