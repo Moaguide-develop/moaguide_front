@@ -85,6 +85,21 @@ const QuizFinishPage: React.FC = () => {
           정답수 {30 - faillist.length}개 ({calculatedScore}점) + 가점 ({plus}점)
         </p>
       </div>
+      
+      <div className="flex flex-col mx-auto items-center justify-center space-y-4 mt-12 w-full max-w-[330px] mb-4 sm:mb-2">
+        <button
+          onClick={() => router.push('/quiz/ranking')}
+          className="w-full h-[50px] py-3 rounded-[12px] text-lg font-bold bg-gradient2 text-heading4 text-white text-center"
+        >
+          내 순위 확인하기
+        </button>
+        <button
+          onClick={() => router.push('/')}
+          className="w-full h-[50px] py-3 rounded-[12px] text-lg font-bold bg-gradient2 text-heading4 text-white text-center"
+        >
+          홈으로 이동
+        </button>
+      </div>
 
       {calculatedScore === 90 ? (
         <div className="flex flex-col items-center justify-center text-center mt-0 flex-grow sm:flex-grow-0 sm:mt-8">
@@ -133,20 +148,6 @@ const QuizFinishPage: React.FC = () => {
         </>
       )}
 
-      <div className="flex flex-col mx-auto items-center justify-center space-y-4 mt-12 w-full max-w-[330px] mb-4 sm:mb-2">
-        <button
-          onClick={() => router.push('/quiz/ranking')}
-          className="w-full h-[50px] py-3 rounded-[12px] text-lg font-bold bg-gradient2 text-heading4 text-white text-center"
-        >
-          내 순위 확인하기
-        </button>
-        <button
-          onClick={() => router.push('/')}
-          className="w-full h-[50px] py-3 rounded-[12px] text-lg font-bold bg-gradient2 text-heading4 text-white text-center"
-        >
-          홈으로 이동
-        </button>
-      </div>
     </div>
   );
 };
