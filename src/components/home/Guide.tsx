@@ -45,22 +45,15 @@ const Guide = () => {
         onSlideChange={(swiper: SwiperClass) => setCurrentSlide(swiper.realIndex + 1)} // Swiper 타입 사용
       >
         <SwiperSlide>
-          <div
-            className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[url('/images/home/moaguide-main-quiz-event.png')] bg-cover cursor-pointer"
-            onClick={handleStartQuiz}>
-            {/* <div className="absolute top-[70px] sm:top-[120px] text-white text-heading3 sm:text-heading1 ml-5 md:ml-11">
-              <div>모아가이드 오픈이벤트</div>
-              <div>사용후기 남기고 사은품 받자!</div>
-            </div>
-            <div className="absolute top-[130px] sm:top-[200px] flex items-center gap-1 ml-5 md:ml-11 mt-4 cursor-pointer max-w-max z-10">
-              <div className="bg-black bg-opacity-50 rounded-[10px] p-2 flex items-center gap-1">
-                <div className="ml-[5px] text-white text-body7 sm:text-body2">참여하러 가기</div>
-                <div>
-                  <img src="/images/home/guide_right.svg" alt="guide_right" />
-                </div>
-              </div>
-            </div> */}
+          <div className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[#D3D3D3] bg-cover cursor-pointer">
+            <img
+              src="/images/home/moaguide-main-quiz-event.png"
+              alt="모아가이드 투자능력고사"
+              className="h-[200px] sm:h-[290px] w-full object-contain"
+              onClick={handleStartQuiz}
+            />
           </div>
+
           {/* <SwiperSlide> // 이벤트 배너 추가 시 수정 후 사용
           <div 
             className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[url('/images/home/moaguide-main-event.png')] bg-cover cursor-pointer"

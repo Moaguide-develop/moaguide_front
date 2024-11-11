@@ -63,13 +63,14 @@ const MypageMenu = () => {
         </div>
       </div> */}
       {/* <EventGuide /> */}
-      <img
-        src="/images/home/moaguide-main-quiz-event.png"
-        alt="모아가이드 오픈이벤트"
-        className="mx-auto rounded-[12px] sm:max-w-[692px] w-full h-[290px] mt-[10px] bg-cover cursor-pointer"
-        onClick={handleStartQuiz}
-      />
-      {/* <div className="absolute top-[70px] sm:top-[120px] text-white text-heading3 sm:text-heading1 ml-5 md:ml-11">
+      <div className="mx-auto flex-1 rounded-[12px] w-full h-[290px] mt-[10px] bg-[#D3D3D3] cursor-pointer">
+        <img
+          src="/images/home/moaguide-main-quiz-event.png"
+          alt="모아가이드 투자능력고사"
+          className="mx-auto rounded-[12px] object-contain"
+          onClick={handleStartQuiz}
+        />
+        {/* <div className="absolute top-[70px] sm:top-[120px] text-white text-heading3 sm:text-heading1 ml-5 md:ml-11">
               <div>모아가이드 오픈이벤트</div>
               <div>사용후기 남기고 사은품 받자!</div>
             </div>
@@ -79,8 +80,8 @@ const MypageMenu = () => {
                 <div>
                   <img src="/images/home/guide_right.svg" alt="guide_right" />
                 </div>
-              </div>
-            </div> */}
+              </div> */}
+      </div>
     </div>
   );
 };

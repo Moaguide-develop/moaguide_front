@@ -4,8 +4,8 @@ import React from 'react';
 
 const MobileFooter = () => {
   const router = useRouter();
-  const pathname = usePathname();
-
+  const pathname = usePathname(); // 추가된 부분
+  if (pathname.startsWith('/quiz/')) return null;
   return (
     <div className="sm:hidden z-[999999] sticky bottom-0 pt-[14px] pb-[18px] px-[6px] flex items-center border-t border-gray100 bg-white w-full ">
       <div
