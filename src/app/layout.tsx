@@ -1,5 +1,3 @@
-'use client'; // suePathname 훅을 사용하기 위해 추가된 부분
-
 import { Metadata } from 'next';
 import './globals.css';
 import localFont from 'next/font/local';
@@ -13,7 +11,6 @@ import GnbWrapper from '@/components/common/GnbWrapper';
 
 import './plugin';
 import NaverAnalytics from '@/lib/NaverAnalytics';
-import { usePathname } from 'next/navigation';
 
 declare global {
   interface Window {
@@ -28,40 +25,38 @@ const pretendard = localFont({
   variable: '--font-pretendard'
 });
 
-// 클라이언트 컴포넌트 로 전환하기 위해 src/app/metadata.ts 로 이동
-// export const metadata: Metadata = {
-//   title: '모아가이드',
+export const metadata: Metadata = {
+  title: '모아가이드',
 
-//   description:
-//     '모아가이드는 조각투자 및 소액투자를 쉽게 시작할 수 있도록 돕는 서비스입니다. 다양한 자산 정보와 투자 가이드를 한 곳에서 확인하세요.',
-//   icons: {
-//     icon: '/favicon1.ico'
-//   },
+  description:
+    '모아가이드는 조각투자 및 소액투자를 쉽게 시작할 수 있도록 돕는 서비스입니다. 다양한 자산 정보와 투자 가이드를 한 곳에서 확인하세요.',
+  icons: {
+    icon: '/favicon1.ico'
+  },
 
-//   keywords: ['모아가이드', 'moaguide', 'STO 큐레이션', '블록체인', '투자 플랫폼'], // 추가된 부분
-//   openGraph: {
-//     title: '모아가이드',
-//     description:
-//       '모아가이드는 조각투자 및 소액투자를 쉽게 시작할 수 있도록 돕는 서비스입니다. 다양한 자산 정보와 투자 가이드를 한 곳에서 확인하세요.',
-//     url: 'https://moaguide.com',
-//     images: [
-//       {
-//         url: 'https://moaguide.com/logo.png'
-//       }
-//     ],
-//     siteName: '모아가이드',
+  keywords: ['모아가이드', 'moaguide', 'STO 큐레이션', '블록체인', '투자 플랫폼'], // 추가된 부분
+  openGraph: {
+    title: '모아가이드',
+    description:
+      '모아가이드는 조각투자 및 소액투자를 쉽게 시작할 수 있도록 돕는 서비스입니다. 다양한 자산 정보와 투자 가이드를 한 곳에서 확인하세요.',
+    url: 'https://moaguide.com',
+    images: [
+      {
+        url: 'https://moaguide.com/logo.png'
+      }
+    ],
+    siteName: '모아가이드',
 
-//     locale: 'ko_KR',
-//     type: 'website'
-//   }
-// };
+    locale: 'ko_KR',
+    type: 'website'
+  }
+};
 
 export default function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname(); // 추가된 부분
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
       <link
@@ -101,7 +96,7 @@ export default function RootLayout({
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
             />
-            {!pathname.startsWith('/quiz') && <GnbWrapper />}
+            <GnbWrapper />
             {children}
             <MobileFooter />
             <ModalProvider />
