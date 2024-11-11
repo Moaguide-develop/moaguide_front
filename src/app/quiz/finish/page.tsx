@@ -17,6 +17,10 @@ const QuizFinishPage: React.FC = () => {
 
   const { data, isLoading: isQuizLoading, isError } = useQuizScore();
   const [isLoading, setIsLoading] = useState(true);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
     useEffect(() => {
     // 클라이언트 측에서만 sessionStorage를 사용하도록 설정

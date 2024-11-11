@@ -41,6 +41,10 @@ const QuizTestPage = () => {
     setnaver(storednaver);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleSubmitQuiz = async (autoSubmit = false) => {
     try {
       const adjustedAnswers = answers.map((answer) =>
