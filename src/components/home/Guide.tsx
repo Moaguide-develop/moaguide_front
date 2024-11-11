@@ -45,7 +45,9 @@ const Guide = () => {
         onSlideChange={(swiper: SwiperClass) => setCurrentSlide(swiper.realIndex + 1)} // Swiper 타입 사용
       >
         <SwiperSlide>
-          <div className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-cover cursor-pointer bg-[#D3D3D3] desk2:bg-[url('/images/home/moaguide-main-quiz-event.png')] max-md:bg-[#D3D3D3] lg:bg-[url('/images/home/moaguide-main-quiz-event.png')]">
+          <div
+            className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-cover cursor-pointer bg-[#D3D3D3] desk2:bg-[url('/images/home/moaguide-main-quiz-event.png')] max-md:bg-[#D3D3D3] lg:bg-[url('/images/home/moaguide-main-quiz-event.png')]"
+            onClick={handleStartQuiz}>
             <div className="absolute top-[70px] sm:top-[80px] text-black text-heading3 sm:text-heading1 ml-5 md:ml-7">
               <div>제 1회 투자능력고사</div>
               <div>내 경제지식은 몇등?</div>
@@ -82,7 +84,7 @@ const Guide = () => {
         </SwiperSlide> */}
         </SwiperSlide>
 
-        {/* <SwiperSlide>
+        <SwiperSlide>
           <div
             className="relative mx-auto flex-1 rounded-[12px] h-[200px] sm:max-w-[692px] w-full sm:h-[290px] bg-[url('/images/home/guide.svg')] cursor-pointer"
             onClick={handleGuideClick}>
@@ -97,11 +99,11 @@ const Guide = () => {
               </div>
             </div>
           </div>
-        </SwiperSlide> */}
+        </SwiperSlide>
       </Swiper>
-      {/* <div className="absolute bottom-2 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-body7 z-[9999]">
+      <div className="absolute bottom-2 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-body7 z-[9999]">
         {currentSlide}/{totalSlides}
-      </div> */}
+      </div>
     </div>
   );
 };
