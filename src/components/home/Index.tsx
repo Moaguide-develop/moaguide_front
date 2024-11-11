@@ -9,6 +9,7 @@ import RecentlyIssue from './RecentlyIssue';
 import Container from '../common/Container';
 import HomeFooter from './HomeFooter';
 import MoblieRank from './MoblieRank';
+import MobileTest from './MobileTest';
 
 const HomeIndex = () => {
   return (
@@ -18,11 +19,12 @@ const HomeIndex = () => {
         <RealtimeRank />
       </section>
       <Container>
-        <aside className="max-w-[692px] w-full mt-[28px]">
+        <aside className="max-w-[992px] w-full mt-[28px]">
           <SubMenu />
+          <MobileTest />
           <MoblieRank />
         </aside>
-        <article className="max-w-[692px] w-full mt-[18px] sm:mt-10">
+        <article className="max-w-[992px] w-full mt-[18px] sm:mt-10">
           <MainItem />
         </article>
         <article className=" mt-[28px] max-w-[692px] w-full">

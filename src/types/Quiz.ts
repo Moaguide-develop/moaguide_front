@@ -16,6 +16,22 @@ export interface IQuizScore {
   nickname: string;
   time: string;
 }
+
+export interface QuizTitle {
+  id: number;
+  title: string;
+  questionRange: string;
+  startDate: string;
+  endDate: string;
+  prize: string;
+  questions: number;
+  paymentDate: string;
+  ranking: string;
+}
+
+export interface QuizResponse {
+  quiz: QuizTitle;
+}
 export interface FailItem {
   explanation: string;
   choice1: string;
@@ -37,4 +53,14 @@ export interface ScoreData {
 export interface QuizFinishPageProps {
   scoreData: ScoreData;
   userName: string;
+}
+
+export interface IHomeQuizRank {
+  name: string;
+  score: number;
+  time: string;
+}
+
+export interface IHomeQuiz {
+  Ranking: IHomeQuizRank[];
 }

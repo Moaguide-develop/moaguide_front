@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
@@ -38,6 +39,29 @@ const SubMenu = () => {
           <div className=" text-body5 text-gray700 desk2:text-title2">학습하기</div>
           <div>
             <img src="/images/home/paper.svg" alt="paper" className="w-10 desk2:w-full" />
+          </div>
+        </div>
+
+        <div
+          className="w-[260px] h-[95px] pl-2  bg-[#6e35e8] rounded-[27.10px] gap-[10px] flex
+        items-center desk:hidden md:flex cursor-pointer
+        "
+          onClick={() => {
+            router.push('/quiz/start');
+          }}>
+          <Image src="/images/quiz/Test.svg" alt="arrow" width={62} height={67} />
+          <div className="flex flex-col ">
+            <div className=" text-white text-lg">내 경제지식은 몇등?</div>
+            <div className="flex">
+              <div className=" text-white text-lg mr-3">시험보러 가기</div>
+
+              <Image
+                src="/images/quiz/RightArrow.svg"
+                alt="arrow"
+                width={30}
+                height={20}
+              />
+            </div>
           </div>
         </div>
       </div>

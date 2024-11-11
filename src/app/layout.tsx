@@ -69,7 +69,13 @@ export default function RootLayout({
         name="naver-site-verification"
         content="04dacb01e59bc7de3fb1e9260ae7e5f98ee465ac"
       />
+      {/* 본서버 */}
+      <meta
+        name="google-site-verification"
+        content="ny0xpJ4euXAdB5ZrnFoFXHokC41qTBx40mpoBpNRL_M"
+      />
 
+      {/* vercel */}
       <meta
         name="google-site-verification"
         content="N2QWerrLhGZ2wlJ_o4ebUAA0u2lFTUjHryP3Ya7Uji0"
