@@ -65,7 +65,7 @@ const MypageMenu = () => {
       {/* <EventGuide /> */}
       <div className="mx-auto flex-1 rounded-[12px] w-full h-[290px] mt-[10px] bg-[#D3D3D3] cursor-pointer">
         <img
-          src="/images/home/moaguide-main-quiz-event.png"
+          src="/images/home/quiz-event.png"
           alt="모아가이드 투자능력고사"
           className="mx-auto rounded-[12px] object-contain"
           onClick={handleStartQuiz}
