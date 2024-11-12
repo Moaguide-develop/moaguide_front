@@ -46,19 +46,24 @@ const Guide = () => {
       >
         <SwiperSlide>
           <div
-            className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-cover cursor-pointer bg-[#D3D3D3] desk2:bg-[url('/images/home/moaguide-main-quiz-event.png')] max-md:bg-[#D3D3D3] lg:bg-[url('/images/home/moaguide-main-quiz-event.png')]"
+            className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[#D3D3D3] bg-[url('/images/home/moaguide-quiz-event.png')] md:bg-[url('/images/home/moaguide-main-quiz-event.png')] bg-cover max-md:bg-contain max-md:bg-no-repeat max-md:bg-right-top cursor-pointer"
             onClick={handleStartQuiz}>
-            <div className="absolute top-[70px] sm:top-[80px] text-black text-heading3 sm:text-heading1 ml-5 md:ml-7">
+            <div className="absolute inset-0 max-md:custom-blur rounded-[12px]"></div>
+            <div className="absolute top-[90px] text-black text-heading1 max-sm:text-title1 sm:top-[70px] ml-5 sm:ml-7 z-10">
               <div>제 1회 투자능력고사</div>
               <div>내 경제지식은 몇등?</div>
             </div>
-            <div className="absolute top-[130px] sm:top-[167px] flex items-center gap-1 ml-5 md:ml-7 mt-4 cursor-pointer max-w-max z-10">
-              <div className="bg-white rounded-full p-[5px] flex items-center gap-5">
-                <div className="ml-[7px] text-black text-body7 sm:text-body2">
+            <div className="absolute top-[167px] flex items-center gap-1 ml-7 mt-4 cursor-pointer max-w-max z-10 max-sm:top-[135px] max-sm:ml-5">
+              <div className="bg-white rounded-full flex items-center gap-3 sm:p-[5px] sm:gap-5">
+                <div className="ml-[7px] text-black text-caption4 sm:text-body2">
                   시험보러 가기
                 </div>
-                <div className="">
-                  <img src="/images/home/item_right.svg" alt="item_right" />
+                <div>
+                  <img
+                    src="/images/home/item_right.svg"
+                    alt="item_right"
+                    className="w-[18px] h-[18px] sm:w-[30px] sm:h-[30px]"
+                  />
                 </div>
               </div>
             </div>
