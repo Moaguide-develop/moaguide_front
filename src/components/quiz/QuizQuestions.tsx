@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 
 interface QuizQuestionsProps {
@@ -15,6 +15,30 @@ interface QuizQuestionsProps {
 }
 
 const QuizQuestions: React.FC<QuizQuestionsProps> = ({ questions, answers, onAnswerChange }) => {
+  useEffect(() => {
+    // 오른쪽 클릭 방지
+    const handleContextMenu = (e: MouseEvent) => e.preventDefault();
+    document.addEventListener('contextmenu', handleContextMenu);
+
+    // 텍스트 선택 방지
+    document.body.style.userSelect = 'none';
+
+    // Ctrl+C, Ctrl+X 복사 및 잘라내기 단축키 방지
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'c' || e.key === 'x')) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
+    // 컴포넌트 언마운트 시 이벤트 제거
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.userSelect = 'auto';
+    };
+  }, []);
+
   const handleOptionClick = (questionIndex: number, choiceNumber: number) => {
     onAnswerChange(questionIndex, choiceNumber);
   };
