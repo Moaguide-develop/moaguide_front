@@ -120,13 +120,13 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
 
                             <div
                               className={`${
-                                item.priceRate > 0
+                                item.lastDivide_rate > 0
                                   ? 'text-red-500 bg-red-100'
-                                  : item.priceRate < 0
+                                  : item.lastDivide_rate < 0
                                     ? 'text-blue-500 bg-blue-100'
                                     : 'text-gray-500 bg-gray-100'
                               } rounded-md w-auto h-[25px] flex justify-center items-center px-[4px] py-[4px] mr-[20px]`}>
-                              {item.priceRate}%
+                              {item.lastDivide_rate}%
                             </div>
                           </div>
 
@@ -136,16 +136,16 @@ const TopProduct = memo(({ summary }: TopProductProps) => {
                             </div>
                             <div
                               className={`ml-[3px] ${
-                                item.lastDivide_rate > 0
+                                item.priceRate > 0
                                   ? 'text-red-500'
-                                  : item.lastDivide_rate < 0
+                                  : item.priceRate < 0
                                     ? 'text-blue-500'
                                     : 'text-gray-500'
                               }`}>
-                              {item.lastDivide_rate > 0
-                                ? `(+ ${item.lastDivide_rate}%)`
-                                : item.lastDivide_rate < 0
-                                  ? `(${item.lastDivide_rate}%)`
+                              {item.priceRate > 0
+                                ? `(+ ${item.priceRate}%)`
+                                : item.priceRate < 0
+                                  ? `(${item.priceRate}%)`
                                   : `(0%)`}
                             </div>
                           </div>
