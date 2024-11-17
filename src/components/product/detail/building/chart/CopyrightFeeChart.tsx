@@ -167,10 +167,17 @@ const BuildingCopyRightFeeChart = () => {
       tooltip: {
         enabled: true,
         callbacks: {
-          label: function (context: TooltipItem<'line'>) {
+          label: function (context: TooltipItem<'line' | 'bar'>) {
             const label = context.dataset.label || '';
             const value = context.raw as number;
-            return `${label} : ${value?.toLocaleString()}원\n`;
+            const customType = context.dataset.type;
+
+            if (customType === 'line') {
+              return `${label} : ${value?.toLocaleString()}%`;
+            } else if (customType === 'bar') {
+              return `${label} : ${value?.toLocaleString()}원`;
+            }
+            return `${label} : ${value?.toLocaleString()}`;
           }
         }
       },
