@@ -58,7 +58,7 @@ const MusicCopyRightFeeChart = () => {
   })();
 
   const BarnewVariable =
-    Math.floor(maxCopyRightFeeDivideCount + averageCopyRightFeeDivideCount) * 1.5;
+    Math.ceil(maxCopyRightFeeDivideCount + averageCopyRightFeeDivideCount) * 1.5;
 
   //////
 
@@ -85,7 +85,7 @@ const MusicCopyRightFeeChart = () => {
   })();
 
   const LinenewVariable =
-    Math.floor(maxCopyRightFeeDivideRateCount + averageCopyRightFeeDivideRateCount) * 1.5;
+    Math.ceil(maxCopyRightFeeDivideRateCount + averageCopyRightFeeDivideRateCount) * 1.5;
 
   const data = {
     labels: paymentDate,
