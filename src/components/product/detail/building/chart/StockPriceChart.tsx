@@ -20,15 +20,11 @@ const BuildingStockPriceChart = () => {
       return response.data;
     } catch (error) {
       console.error('Error fetching data:', error);
-      throw error; // 에러를 다시 던져서 useQuery의 onError로 전달
+      throw error;
     }
   };
 
-  const {
-    data: StockPriceData,
-    isLoading,
-    error
-  } = useQuery({
+  const { data: StockPriceData } = useQuery({
     queryKey: ['BuildingStockPriceChart', filteringData, lastSegment],
     queryFn: fetchData
   });
@@ -42,12 +38,6 @@ const BuildingStockPriceChart = () => {
     (StockPriceData?.transaction &&
       StockPriceData?.transaction?.map((item) => Number(item.value)).reverse()) ||
     [];
-  // const sortedStockPriceCount = [...StockPriceCount].sort((a, b) => b - a);
-  // const maxStockPriceCount = sortedStockPriceCount[0] || 0;
-  // const averageStockPriceCount =
-  //   StockPriceCount.reduce((acc, val) => acc + val, 0) / StockPriceCount.length || 0;
-
-  // const newVariable = Math.floor(maxStockPriceCount + averageStockPriceCount);
 
   const data = {
     labels: StockPriceDate,
@@ -99,7 +89,7 @@ const BuildingStockPriceChart = () => {
           maxRotation: 45,
           minRotation: 45
         },
-        offset: true // x축의 첫 번째 데이터 포인트를 약간 오른쪽으로 이동
+        offset: true
       },
       y: {
         display: true,

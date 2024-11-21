@@ -63,7 +63,6 @@ const QuizTestPage = () => {
         time: elapsedFormattedTime,
         type: quizType
       };
-      console.log('Payload:', payload);
       const response = await submitQuizAnswers(payload);
 
       if (!hasAlertShown.current) {
