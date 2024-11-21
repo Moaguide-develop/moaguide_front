@@ -29,7 +29,6 @@ const MainList = () => {
     : getMainProduct(category);
 
   const { Ranking } = useHomeQuizRanking();
-  console.log(Ranking);
   const handleBookmarkInvalidate = () => {
     queryClient.invalidateQueries({ queryKey: ['MainProductLogin', category] });
   };

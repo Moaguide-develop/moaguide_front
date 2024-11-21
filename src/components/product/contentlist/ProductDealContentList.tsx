@@ -5,8 +5,6 @@ import ProductPagenation from '../pagenation/ProductPagenation';
 import Link from 'next/link';
 import ProductMobilePagenation from '../pagenation/ProductMobilePagenation';
 import { CATEGORY } from '@/static/category';
-import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
-import { useState } from 'react';
 import { CountupProductView } from '@/factory/ViewCount';
 interface IProductContentListProps {
   content: IProductDealDetailData['product'];
