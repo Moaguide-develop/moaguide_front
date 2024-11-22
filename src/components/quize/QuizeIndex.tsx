@@ -17,6 +17,7 @@ const QuizePage = () => {
   const hasFetched = useRef(false);
   const [insta, setInsta] = useState('');
   const [naver, setNaver] = useState('');
+
   // 날짜 형식 변환 함수
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
@@ -28,7 +29,20 @@ const QuizePage = () => {
     if (isLoggedIn && !isParticipated) {
       sessionStorage.setItem('insta', insta);
       sessionStorage.setItem('naver', naver);
-      router.push(`/quiz/test`);
+      // router.push(`/quiz/test`);
+      alert('시험 응시기간이 지났습니다.');
+      router.push('/');
+      // if (QuizData?.quiz.endDate) {
+      //   const now = new Date();
+      //   const currentTime = new Date(QuizData?.quiz.endDate);
+      //   currentTime.setHours(23, 59, 59, 0); // 오후 11시 59분 59초로 시간 설정
+
+      //   if (now >= currentTime) {
+      //     alert('시험 응시기간이 지났습니다.');
+      //     router.push('/');
+      //   }
+      //   router.push(`/quiz/test`);
+      // }
     } else if (!isLoggedIn) {
       alert('로그인 후 시험응시가 가능합니다.');
       router.push('/sign');
@@ -202,8 +216,9 @@ const QuizePage = () => {
       </div>
 
       <div className="max-w-[390px] max-md:text-caption3 mt-4 mb-2 items-center mx-auto text-center text-black text-xl font-semibold">
-        프리미엄 콘텐츠(학습하기)를 구독하셨다면 
-        <br />성함과 구독하신 아이디를 입력해주세요.
+        프리미엄 콘텐츠(학습하기)를 구독하셨다면
+        <br />
+        성함과 구독하신 아이디를 입력해주세요.
       </div>
 
       <div className="max-w-[350px] max-md:text-caption1 mb-4 items-center mx-auto text-center text-black text-base">

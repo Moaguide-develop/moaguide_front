@@ -44,11 +44,10 @@ const Guide = () => {
         className="mySwiper2"
         onSlideChange={(swiper: SwiperClass) => setCurrentSlide(swiper.realIndex + 1)} // Swiper 타입 사용
       >
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <div
             className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[#D3D3D3] bg-[url('/images/home/moaguide-quiz-event.png')] md:bg-[url('/images/home/moaguide-main-quiz-event.png')] bg-cover max-md:bg-contain max-md:bg-no-repeat max-md:bg-right-top cursor-pointer"
             onClick={handleStartQuiz}>
-            {/* <div className="absolute inset-0 max-md:custom-blur rounded-[12px]"></div> */}
             <div className="absolute top-[90px] text-black text-heading1 max-sm:text-title1 sm:top-[70px] ml-5 sm:ml-7 z-10">
               <div>제 1회 투자능력고사</div>
               <div>내 경제지식은 몇등?</div>
@@ -68,7 +67,8 @@ const Guide = () => {
               </div>
             </div>
           </div>
-          {/* <SwiperSlide> // 이벤트 배너 추가 시 수정 후 사용
+        </SwiperSlide> */}
+          {/* <SwiperSlide>
           <div 
             className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[url('/images/home/moaguide-main-event.png')] bg-cover cursor-pointer"
             onClick={handleEventClick} 
@@ -87,7 +87,6 @@ const Guide = () => {
             </div>
           </div>
         </SwiperSlide> */}
-        </SwiperSlide>
 
         <SwiperSlide>
           <div
@@ -106,9 +105,9 @@ const Guide = () => {
           </div>
         </SwiperSlide>
       </Swiper>
-      <div className="absolute bottom-2 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-body7 z-[9999]">
+      {/* <div className="absolute bottom-2 right-4 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full text-body7 z-[9999]">
         {currentSlide}/{totalSlides}
-      </div>
+      </div> */}
     </div>
   );
 };
