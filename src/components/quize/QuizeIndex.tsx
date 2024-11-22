@@ -30,7 +30,8 @@ const QuizePage = () => {
     if (isLoggedIn && !isParticipated) {
       sessionStorage.setItem('insta', insta);
       sessionStorage.setItem('naver', naver);
-      router.push(`/quiz/test`);
+      // router.push(`/quiz/test`);
+      alert('시험 응시기간이 지났습니다.');
     } else if (!isLoggedIn) {
       alert('로그인 후 시험응시가 가능합니다.');
       router.push('/sign');
