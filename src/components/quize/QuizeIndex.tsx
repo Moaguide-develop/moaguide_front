@@ -31,6 +31,7 @@ const QuizePage = () => {
       sessionStorage.setItem('naver', naver);
       // router.push(`/quiz/test`);
       alert('시험 응시기간이 지났습니다.');
+      router.push('/');
       // if (QuizData?.quiz.endDate) {
       //   const now = new Date();
       //   const currentTime = new Date(QuizData?.quiz.endDate);
