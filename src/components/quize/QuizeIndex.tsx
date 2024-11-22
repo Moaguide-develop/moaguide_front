@@ -17,6 +17,8 @@ const QuizePage = () => {
   const hasFetched = useRef(false);
   const [insta, setInsta] = useState('');
   const [naver, setNaver] = useState('');
+  const hasAlertShown = useRef(false); // alert 실행 여부 상태
+
   // 날짜 형식 변환 함수
   const formatDate = (dateString: string) => {
     if (!dateString) return '';
@@ -50,6 +52,18 @@ const QuizePage = () => {
     };
     checkQuizParticipation();
   }, []);
+
+  useEffect(() => {
+    const now = new Date();
+    const cutoffTime = new Date('2024-11-22T23:59:59');
+    // const cutoffTime = new Date('2024-11-22T14:59:59Z'); // KST 오후 11:59:59 = UTC 오후 2:59:59
+
+    if (now >= cutoffTime && !hasAlertShown.current) {
+      hasAlertShown.current = true;
+      alert('시험 응시기간이 지났습니다.');
+      router.push('/');
+    }
+  }, [router]);
 
   if (isLoading) {
     return <QuizSkeleton />;
@@ -202,8 +216,9 @@ const QuizePage = () => {
       </div>
 
       <div className="max-w-[390px] max-md:text-caption3 mt-4 mb-2 items-center mx-auto text-center text-black text-xl font-semibold">
-        프리미엄 콘텐츠(학습하기)를 구독하셨다면 
-        <br />성함과 구독하신 아이디를 입력해주세요.
+        프리미엄 콘텐츠(학습하기)를 구독하셨다면
+        <br />
+        성함과 구독하신 아이디를 입력해주세요.
       </div>
 
       <div className="max-w-[350px] max-md:text-caption1 mb-4 items-center mx-auto text-center text-black text-base">
