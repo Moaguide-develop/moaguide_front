@@ -17,7 +17,6 @@ const QuizePage = () => {
   const hasFetched = useRef(false);
   const [insta, setInsta] = useState('');
   const [naver, setNaver] = useState('');
-  const hasAlertShown = useRef(false); // alert 실행 여부 상태
 
   // 날짜 형식 변환 함수
   const formatDate = (dateString: string) => {
@@ -32,6 +31,17 @@ const QuizePage = () => {
       sessionStorage.setItem('naver', naver);
       // router.push(`/quiz/test`);
       alert('시험 응시기간이 지났습니다.');
+      // if (QuizData?.quiz.endDate) {
+      //   const now = new Date();
+      //   const currentTime = new Date(QuizData?.quiz.endDate);
+      //   currentTime.setHours(23, 59, 59, 0); // 오후 11시 59분 59초로 시간 설정
+
+      //   if (now >= currentTime) {
+      //     alert('시험 응시기간이 지났습니다.');
+      //     router.push('/');
+      //   }
+      //   router.push(`/quiz/test`);
+      // }
     } else if (!isLoggedIn) {
       alert('로그인 후 시험응시가 가능합니다.');
       router.push('/sign');
@@ -53,18 +63,6 @@ const QuizePage = () => {
     };
     checkQuizParticipation();
   }, []);
-
-  useEffect(() => {
-    const now = new Date();
-    const cutoffTime = new Date('2024-11-22T23:59:59');
-    // const cutoffTime = new Date('2024-11-22T14:59:59Z'); // KST 오후 11:59:59 = UTC 오후 2:59:59
-
-    if (now >= cutoffTime && !hasAlertShown.current) {
-      hasAlertShown.current = true;
-      alert('시험 응시기간이 지났습니다.');
-      router.push('/');
-    }
-  }, [router]);
 
   if (isLoading) {
     return <QuizSkeleton />;
