@@ -6,7 +6,7 @@ import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { CATEGORY } from '@/static/category';
-import { getMusicProductDetail } from '@/factory/ProductDetail/MusicProductDetail';
+import { getMusicProductDetail } from '@/factory/Product/ProductDetail/MusicProductDetail';
 import MusicProfit from '@/components/product/detail/music/MusicProfit';
 import MusicProductDetail from '@/components/product/detail/music/MusicProductDetail';
 import Link from 'next/link';

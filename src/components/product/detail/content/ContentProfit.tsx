@@ -1,5 +1,5 @@
 'use client';
-import { getContentProductProfitDetail } from '@/factory/ProductProfitDetail/ContentProductProfitDetail';
+import { getContentProductProfitDetail } from '@/factory/Product/ProductProfitDetail/ContentProductProfitDetail';
 import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { GetContentMoviePeopleData } from '@/factory/ContentMoviePeople';

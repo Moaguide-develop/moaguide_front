@@ -1,4 +1,4 @@
-import { getBuildingProductProfitDetail } from '@/factory/ProductProfitDetail/BuildingProductProfitDetail';
+import { getBuildingProductProfitDetail } from '@/factory/Product/ProductProfitDetail/BuildingProductProfitDetail';
 import CopyRightFeeChart from './chart/CopyrightFeeChart';
 import KakaoMap from './Map';
 import StockPriceChart from './chart/StockPriceChart';

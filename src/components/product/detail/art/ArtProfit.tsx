@@ -1,5 +1,5 @@
 'use client';
-import { getArtProductProfitDetail } from '@/factory/ProductProfitDetail/ArtProductProfitDetail';
+import { getArtProductProfitDetail } from '@/factory/Product/ProductProfitDetail/ArtProductProfitDetail';
 
 const ArtProfit = ({ url }: { url: string }) => {
   const { data, isLoading } = getArtProductProfitDetail(url);
