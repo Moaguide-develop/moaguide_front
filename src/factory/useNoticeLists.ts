@@ -1,32 +1,44 @@
-import { axiosInstance } from '@/service/axiosInstance';
+import { basicAxiosInstance } from '@/service/axiosInstance';
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { lastDayOfDecade } from 'date-fns';
 
-const fetchNotificationList = async ({ pageParam = null }) => {
-  try {
-    const url = pageParam
-      ? `/notificationList?nextCursor=${pageParam}`
-      : '/notificationList';
-    const { data } = await axiosInstance.get(url);
-
-    return {
-      notifications: data.notification,
-      nextPage: data.nextCursor,
-      isLast: !data.nextCursor
-    };
-  } catch (error) {
-    console.error('알림 리스트를 가져오는 중 오류가 발생했습니다:', error);
-    throw error;
-  }
+const fetchNoticeLists = async ({
+  queryKey,
+  pageParam = 1
+}: {
+  queryKey: string[];
+  pageParam: number;
+}) => {
+  const [, category] = queryKey;
+  const { data } = await basicAxiosInstance.get(`/notice?page=${pageParam}&size=10`);
+  return data;
 };
 
-export const useNotifications = () => {
-  return useInfiniteQuery({
-    queryKey: ['NotificationList'],
-    queryFn: fetchNotificationList,
-    getNextPageParam: (lastPage) => {
-      return lastPage.isLast ? undefined : lastPage.nextPage;
-    },
-    initialPageParam: null,
-    staleTime: 5 * 60 * 1000
-  });
+const UseNoticeLists = (category: string) => {
+  const queryKey = ['NoticeLists', category];
+
+  const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
+    useInfiniteQuery({
+      queryKey,
+      queryFn: fetchNoticeLists,
+      getNextPageParam: (lastPage, allPages) => {
+        if (lastPage.length === 0) {
+          return undefined;
+        }
+        return allPages.length + 1;
+      },
+      initialPageParam: 1,
+      enabled: !!category
+    });
+
+  return {
+    data,
+    fetchNextPage,
+    hasNextPage: !!data?.pages.length,
+    isFetching,
+    isFetchingNextPage,
+    isLoading
+  };
 };
+
+export default UseNoticeLists;
