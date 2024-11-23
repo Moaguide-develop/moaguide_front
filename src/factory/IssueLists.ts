@@ -5,23 +5,27 @@ const fetchIssueLists = async ({
   queryKey,
   pageParam = 1
 }: {
-  queryKey: any[];
-  pageParam?: number;
+  queryKey: string[];
+  pageParam: number;
 }) => {
-  const [, category, sort] = queryKey;
+  try {
+    const [, category, sort] = queryKey;
+    const { data } = await basicAxiosInstance.get(
+      `/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
+    );
 
-  const { data } = await basicAxiosInstance.get(
-    `/content/news/${category}?page=${pageParam}&size=10&sort=${sort}`
-  );
-
-  return {
-    content: data.content,
-    nextPage: pageParam + 1,
-    totalPages: data.totalPages,
-    totalElements: data.totalElements,
-    currentPage: data.number,
-    isLast: data.last
-  };
+    return {
+      content: data.content,
+      nextPage: pageParam + 1,
+      totalPages: data.totalPages,
+      totalElements: data.totalElements,
+      currentPage: data.number,
+      isLast: data.last
+    };
+  } catch (error) {
+    console.error('IssueLists 를 가져오는 중 오류가 발생했습니다:', error);
+    throw error;
+  }
 };
 
 export const getIssueLists = (category: string, sort: string) => {

@@ -1,6 +1,5 @@
 import { basicAxiosInstance } from '@/service/axiosInstance';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { lastDayOfDecade } from 'date-fns';
 
 const fetchNewsList = async ({
   queryKey,
@@ -9,14 +8,19 @@ const fetchNewsList = async ({
   queryKey: string[];
   pageParam: number;
 }) => {
-  const [, category] = queryKey;
-  const { data } = await basicAxiosInstance.get(
-    `/detail/news/${category}?page=${pageParam}&size=10`
-  );
-  return data;
+  try {
+    const [, category] = queryKey;
+    const { data } = await basicAxiosInstance.get(
+      `/detail/news/${category}?page=${pageParam}&size=10`
+    );
+    return data;
+  } catch (error) {
+    console.error('뉴스 리스트를 가져오는 중 오류가 발생했습니다:', error);
+    throw error;
+  }
 };
 
-const UseNewsList = (category: string) => {
+const useNewsList = (category: string) => {
   const queryKey = ['NewsList', category];
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
@@ -36,11 +40,11 @@ const UseNewsList = (category: string) => {
   return {
     data,
     fetchNextPage,
-    hasNextPage: !!data?.pages.length,
+    hasNextPage,
     isFetching,
     isFetchingNextPage,
     isLoading
   };
 };
 
-export default UseNewsList;
+export default useNewsList;

@@ -3,8 +3,13 @@ import { MainReportNewsType } from '@/types/homeComponentsType';
 import { useQuery } from '@tanstack/react-query';
 
 const fetchReportIssues = async () => {
-  const { data } = await basicAxiosInstance.get(`/`);
-  return data;
+  try {
+    const { data } = await basicAxiosInstance.get(`/`);
+    return data;
+  } catch (error) {
+    console.error('ReportIssues 를 가져오는 중 오류가 발생했습니다:', error);
+    throw error;
+  }
 };
 
 export const getReportIssues = () => {
