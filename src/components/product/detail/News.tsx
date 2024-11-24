@@ -85,7 +85,6 @@ const NewsItem = ({ title, date, id, category, link, imgUrl }: INewsItem) => {
           />
         </div>
 
-        {/* <div className="ml-[16px] mt-[15px] desk:max-w-[180px] desk2:max-w-full  flex-shrink  "> */}
         <div className="flex flex-col ml-[16px] mt-[10px] w-full">
           <div className="text-base font-bold  desk:h-[48px] line-clamp-2 ">{title}</div>
           <div className="flex justify-between w-full desk:mt-[10px] ">
@@ -94,7 +93,6 @@ const NewsItem = ({ title, date, id, category, link, imgUrl }: INewsItem) => {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </Link>
   );
 };

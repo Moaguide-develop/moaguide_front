@@ -9,13 +9,13 @@ import Notice from '@/components/product/detail/Notice';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getBuildingProductDetail } from '@/factory/ProductDetail/BuildingProductDetail';
+import { getBuildingProductDetail } from '@/factory/Product/ProductDetail/BuildingProductDetail';
 import { CATEGORY } from '@/static/category';
 import Link from 'next/link';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import { useAuthStore } from '@/store/userAuth.store';
 import '../../../../plugin';
-const BuildingDetailpage = (props: any) => {
+const BuildingDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
 

@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { CATEGORY } from '@/static/category';
 import ContentProfit from '@/components/product/detail/content/ContentProfit';
 import ContentProductDetail from '@/components/product/detail/content/ContentProductDetail';
-import { getContentProductDetail } from '@/factory/ProductDetail/ContentProductDetail';
+import { getContentProductDetail } from '@/factory/Product/ProductDetail/ContentProductDetail';
 import Link from 'next/link';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import { useAuthStore } from '@/store/userAuth.store';

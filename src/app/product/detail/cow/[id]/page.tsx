@@ -5,7 +5,7 @@ import News from '@/components/product/detail/News';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getCowProductDetail } from '@/factory/ProductDetail/CowProductDetail';
+import { getCowProductDetail } from '@/factory/Product/ProductDetail/CowProductDetail';
 import CowProductDetail from '@/components/product/detail/cow/CowProductDetail';
 import CowProfit from '@/components/product/detail/cow/CowProfit';
 import { CATEGORY } from '@/static/category';

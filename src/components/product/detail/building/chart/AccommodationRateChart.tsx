@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import { IStayRateData } from '@/types/BuildingProductType';
 import { Chart } from 'react-chartjs-2';
-import { TooltipItem } from 'chart.js';
+import { ScriptableContext, TooltipItem } from 'chart.js';
 import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const AccommoationRateChart = () => {
@@ -45,12 +45,12 @@ const AccommoationRateChart = () => {
         type: 'bar' as const,
         label: '평균 숙박 일수',
         data: AccommodationRatevalue,
-        backgroundColor: (context: any) => {
+        backgroundColor: (context: ScriptableContext<'bar'>) => {
           const chart = context.chart;
           const { ctx, chartArea } = chart;
 
           if (!chartArea) {
-            return null;
+            return undefined;
           }
 
           const gradient = ctx.createLinearGradient(

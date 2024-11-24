@@ -1,6 +1,6 @@
 import CopyRightFeeChart from '../building/chart/CopyrightFeeChart';
 import StockPriceChart from '../building/chart/StockPriceChart';
-import { getMusicProductProfitDetail } from '@/factory/ProductProfitDetail/MusiProductProfitDetail';
+import { getMusicProductProfitDetail } from '@/factory/Product/ProductProfitDetail/MusiProductProfitDetail';
 import MusicCopyRightFeeChart from './chart/MusicCopyrightFee';
 import MusicStockPriceChart from './chart/MusicStockPriceChart';
 import BuildingStockPriceChart from '../building/chart/StockPriceChart';

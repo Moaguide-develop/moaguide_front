@@ -5,7 +5,7 @@ import News from '@/components/product/detail/News';
 import Report from '@/components/product/detail/Report';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getArtProductDetail } from '@/factory/ProductDetail/ArtProductDetail';
+import { getArtProductDetail } from '@/factory/Product/ProductDetail/ArtProductDetail';
 import { CATEGORY } from '@/static/category';
 import ArtProfit from '@/components/product/detail/art/ArtProfit';
 import ArtProductDetail from '@/components/product/detail/art/ArtProductDetail';

@@ -1,14 +1,14 @@
 import { basicAxiosInstance } from '@/service/axiosInstance';
 import type { RealtimeRankType } from '@/types/homeComponentsType';
-
 import { useQuery } from '@tanstack/react-query';
 
 const fetchRealtimeRank = async () => {
   try {
     const { data } = await basicAxiosInstance.get(`/searchRank`);
     return data;
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.error('RealtimeRank 를 가져오는 중 오류가 발생했습니다:', error);
+    throw error;
   }
 };
 
@@ -21,8 +21,9 @@ export const getRealtimeRank = () => {
   });
 
   if (error) {
-    console.error('Error fetching realtime rank:', error);
+    console.error('RealtimeRank 를 가져오는 중 오류가 발생했습니다:', error);
   }
+
   return {
     data,
     error,
