@@ -1,10 +1,8 @@
 'use client';
 import Container from '@/components/common/Container';
-import Navbar from '@/components/common/Navbar';
 import Dividend from '@/components/product/Dividend';
 import Filter from '@/components/product/Filter';
 import TopProduct from '@/components/product/TopProduct';
-import Report from '@/components/product/Report';
 import React, { useState } from 'react';
 import ProductIsdealSort from '@/components/product/sort/ProductIsdealSort';
 import ProductDealContentList from '@/components/product/contentlist/ProductDealContentList';
@@ -16,7 +14,7 @@ import {
   IProductRecruitmentData
 } from '@/types/Diviend';
 import ProductClassification from './sort/ProductClassification';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import ProductRecruitmentSort from './sort/ProductRecruitmentSort';
 import ProductEndRecruitmentSort from './sort/ProductEndRecruitmentSort';
 import ProductRecruitmentContentList from './contentlist/ProductRecruitmentContentList';
@@ -34,14 +32,12 @@ interface IProductBuildingProps extends ISummaryData, IReportData {
 const Product = ({
   divide,
   summary,
-  report,
   content,
   totalPages,
   pageNumber
 }: IProductBuildingProps) => {
   const divideData = divide;
   const summaryData = summary;
-  const reportData = report;
   const contentData = content;
   const [classification, setClassification] = useState('isdeal');
   const [sort, setSort] = useState('profit');
@@ -77,16 +73,6 @@ const Product = ({
         </div>
         <TopProduct summary={summaryData} />
       </Container>
-
-      {/* <div className=" mt-[40px] mb-[40px] w-atuo h-[0px] border border-[#eceef2]" /> */}
-
-      {/* <Container>
-        <div className="text-black text-lg font-bold mb-[26px] ml-[20px]">
-          관련 리포트
-        </div>
-
-        <Report report={reportData} />
-      </Container> */}
 
       <div className=" mt-[40px] mb-[10px] w-atuo h-[1px] border border-[#eceef2]" />
       <Container>
