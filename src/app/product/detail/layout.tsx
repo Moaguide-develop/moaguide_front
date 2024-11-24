@@ -7,11 +7,9 @@ import CowDetailGnb from '@/components/product/gnb/CowDetailGnb';
 import MusicDetailGnb from '@/components/product/gnb/MusicDetailGnb';
 import { usePathname } from 'next/navigation';
 export default function ProductDetailLayout({
-  children,
-  props
+  children
 }: Readonly<{
   children: React.ReactNode;
-  props: any;
 }>) {
   const pathname = usePathname();
   const pathSegments = pathname.split('/');

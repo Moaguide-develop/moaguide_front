@@ -8,16 +8,22 @@ import {
   ChartOptions,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ChartDataset
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 const customTextPlugin = {
   id: 'customText',
-  beforeDraw: (chart: any) => {
+  beforeDraw: (chart: ChartJS) => {
     const { datasets } = chart.data;
-    const hasData = datasets.some((dataset: any) =>
-      dataset.data.some((value: number) => value !== 0)
+    const hasData = datasets.some((dataset: ChartDataset) =>
+      dataset.data.some((value) => {
+        if (typeof value === 'number') {
+          return value !== 0;
+        }
+        return false;
+      })
     );
     if (!hasData) {
       const ctx = chart.ctx;

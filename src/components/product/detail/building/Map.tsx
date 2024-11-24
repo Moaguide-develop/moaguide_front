@@ -60,7 +60,7 @@ const KakaoMap = () => {
         });
 
         // API에서 가져온 데이터를 사용해 폴리곤을 그리기
-        data?.areas?.forEach((area: any) => {
+        data?.areas?.forEach((area: { polygon: string; color: string }) => {
           if (area.polygon.startsWith('HOLE')) {
             // HOLE 처리
             const polygons = area.polygon

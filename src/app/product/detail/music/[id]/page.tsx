@@ -14,7 +14,7 @@ import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import { useAuthStore } from '@/store/userAuth.store';
 import '../../../../plugin';
 
-const MusicDetailpage = (props: any) => {
+const MusicDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
   const { data, isLoading, isError } = getMusicProductDetail(props.params.id);
