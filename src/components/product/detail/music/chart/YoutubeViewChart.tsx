@@ -125,7 +125,7 @@ const YoutubeViewChart = () => {
 
   return (
     <div>
-      <div className="text-base text-gray-500 mb-[10px]">매월 1일 누적 조회수 차트</div>
+      {/* <div className="text-base text-gray-500 mb-[10px]">매월 1일 누적 조회수 차트</div> */}
       <section className=" mb-[30px] h-[70px] flex  items-center desk:overflow-x-scroll desk2:overflow-x-visible scrollbar-hide  ">
         {/* <input
           type="radio"
