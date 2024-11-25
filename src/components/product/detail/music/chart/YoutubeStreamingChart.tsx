@@ -126,7 +126,7 @@ const YoutubeStreamingChart = () => {
 
   return (
     <div>
-      <div className="text-base text-gray-500 mb-[10px]">매월 1일 누적 조회수 차트</div>
+      {/* <div className="text-base text-gray-500 mb-[10px]">매월 1일 누적 조회수 차트</div> */}
       <div className="mb-4  flex justify-start">
         <button
           className={`w-[55px] mr-2 p-2  rounded-lg ${filteringData === '3' ? 'bg-purple-500 text-white' : 'bg-gray-300  '}`}
