@@ -91,7 +91,7 @@ const MainList = () => {
               ))}
         </div>
       </div>
-      <div className="w-[280px] h-[257px] ml-5  desk:hidden md:block">
+      {/* <div className="w-[280px] h-[257px] ml-5  desk:hidden md:block">
         <div className="flex justify-between mb-2">
           <div className="text-lg font-bold ">시험순위</div>
           <div
@@ -130,7 +130,7 @@ const MainList = () => {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
