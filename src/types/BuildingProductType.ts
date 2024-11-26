@@ -28,9 +28,9 @@ export interface IBuildingProductDetail {
   name: string;
   category: string;
   platform: string;
-  price: string;
+  price: number;
   priceRate: number;
-  totalPrice: string;
+  totalPrice: number;
   lastDivide: number;
   lastDivide_rate: number;
   divideCycle: number;
