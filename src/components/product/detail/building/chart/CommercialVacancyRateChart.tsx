@@ -18,12 +18,17 @@ interface ApiResponse {
     [region: string]: RentData[];
   };
 }
+const getRandomColor = (() => {
+  const colors = ['#800080', '#0000FF', '#008000', '#00FFFF']; // 정해진 색상 배열
+  let index = 0;
 
-const getRandomColor = () => {
-  const colors = ['#800080', '#0000FF', '#008000', '#00FFFF']; // 보라색, 파란색, 녹색, 하늘색
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  return colors[randomIndex];
-};
+  return () => {
+    const color = colors[index];
+    index = (index + 1) % colors.length; // 마지막 색상 이후 처음으로 돌아가도록 순환
+    return color;
+  };
+})();
+
 const CommercialVacancyRateChart = ({ rentType }: { rentType: boolean | undefined }) => {
   const [buildingType, setBuildingType] = useState<string>('오피스'); // 소규모 or 중대형
   const [startYear, setStartYear] = useState<number>(2022);
