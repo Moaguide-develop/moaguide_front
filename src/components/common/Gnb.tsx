@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useAuthStore } from '@/store/userAuth.store';
-import { getCookie } from '@/utils/cookies';
+import { getCookie } from '@/utils/cookie';
 import { refreshAccessToken } from '@/service/auth';
 
 const Gnb = () => {
@@ -33,7 +33,6 @@ const Gnb = () => {
 
   useEffect(() => {
     const accessToken = getCookie('access_token');
-
     if (accessToken) {
       setIsLoggedIn(true);
       setIsLoading(false);
@@ -49,6 +48,7 @@ const Gnb = () => {
       if (intervalId.current) clearInterval(intervalId.current);
     };
   }, [checkAndRefreshToken, setIsLoggedIn]);
+  if (pathname.includes('detail') && isLoading) return null;
 
   return (
     <div

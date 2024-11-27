@@ -19,6 +19,7 @@ import ProductRecruitmentSort from './sort/ProductRecruitmentSort';
 import ProductEndRecruitmentSort from './sort/ProductEndRecruitmentSort';
 import ProductRecruitmentContentList from './contentlist/ProductRecruitmentContentList';
 import ProductEndRecruitmentContentList from './contentlist/ProductEndRecruitmentContentList';
+import { Line } from '../common/Line';
 
 interface IProductBuildingProps extends ISummaryData, IReportData {
   content:
@@ -45,43 +46,36 @@ const Product = ({
   const sorted = searchParams.get('subcategory');
 
   return (
-    <div className="">
+    <div>
       <Filter />
+
+      {/* 현재 모집중인 상품 */}
       {divideData.length ? (
         <div className="w-full h-[168px] bg-gradient-to-b from-[#713ce2] to-[#5100ff]">
           <Container>
-            <div className=" text-white text-base font-bold pt-[20px] mb-[30px]  ml-[10px]  desk:mb-[20px] ">
-              현재 모집중인 상품
-            </div>
-            <div className="  flex flex-col justify-center items-center">
-              <Dividend dividend={divideData} />
-            </div>
+            <Dividend dividend={divideData} />
           </Container>
         </div>
       ) : (
-        <div className="  mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
+        <Line mb={10} />
       )}
 
+      {/* 최근 주목받는 상품 */}
       <Container>
-        <div className="max-w-[1000px] h-[59px] p-1 bg-white flex-col justify-center items-center gap-1 inline-flex">
-          <div className="max-w-80 justify-start items-center gap-5 inline-flex">
-            <div className="grow shrink basis-0">
-              <span className="text-black text-lg font-bold">최근 주목 받는 상품</span>
-              <span className="text-[#713ce2] text-lg font-bold ml-1">TOP 3</span>
-            </div>
-          </div>
-        </div>
         <TopProduct summary={summaryData} />
       </Container>
 
-      <div className=" mt-[40px] mb-[10px] w-atuo h-[1px] border border-[#eceef2]" />
+      <Line mt={10} mb={10} />
+
       <Container>
         <ProductClassification
           classification={classification}
           setClassification={setClassification}
         />
       </Container>
-      <div className=" mt-[5px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
+
+      <Line mt={10} mb={10} />
+
       <Container>
         {sorted === 'start' ? (
           <ProductRecruitmentSort sort={sort} setSort={setSort} />
@@ -91,7 +85,8 @@ const Product = ({
           <ProductIsdealSort sort={sort} setSort={setSort} />
         )}
       </Container>
-      <div className=" mt-[10px] mb-[10px] w-atuo h-[0px] border border-[#eceef2]" />
+
+      <Line mt={10} mb={10} />
 
       {sorted === 'start' ? (
         //모집중
