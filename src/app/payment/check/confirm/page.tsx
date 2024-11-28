@@ -10,7 +10,7 @@ import { useSearchParams } from 'next/navigation';
 import { useMemberStore } from '@/store/user.store';
 import LoaderSkeleton from '@/components/skeleton/LoaderSkeleton';
 
-const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
+const clientKey = 'test_gck_oEjb0gm23PJ4bl0mvmWvrpGwBJn5';
 
 const PaymentConfirmPage = () => {
   const { member } = useMemberStore();
