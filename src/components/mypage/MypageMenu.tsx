@@ -1,67 +1,50 @@
 import React from 'react';
 import EventGuide from './EventGuide';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const MypageMenu = () => {
-  const router = useRouter();
-  const handleStartQuiz = () => {
-    router.push('/quiz/start');
-  };
+  const MenuList = [
+    {
+      name: '구독 관리',
+      img: '/images/mypage/subscribe.svg',
+      routing: 'mypage/subscribe'
+    },
+    {
+      name: '공지사항',
+      img: '/images/mypage/notice.svg',
+      routing: 'mypage/notice'
+    },
+    {
+      name: '쿠폰 관리',
+      img: '/images/mypage/coupon.svg',
+      routing: 'mypage/coupon'
+    },
+    {
+      name: '알림 설정',
+      img: '/images/mypage/alarm.svg',
+      routing: '/mypage/alarm'
+    },
+    {
+      name: '결제 관리',
+      img: '/images/mypage/payment.svg',
+      routing: 'mypage/payment'
+    },
+    {
+      name: '카카오톡 1:1 문의',
+      img: '/images/mypage/chat.svg',
+      routing: 'mypage/chat'
+    }
+  ];
+  // const handleStartQuiz = () => {
+  //   router.push('/quiz/start');
+  // };
   return (
     <div className="mt-5 flex flex-col">
-      {/* 공지사항 */}
-      <div
-        className="flex items-center justify-between px-5 py-6"
-        onClick={() => {
-          router.push('mypage/notice');
-        }}>
-        <div className="flex items-center gap-[14px]">
-          <div>
-            <img src="/images/mypage/notice.svg" alt="공지사항" />
-          </div>
-          <div className="text-gray700 text-body1">공지사항</div>
-        </div>
-        <div>
-          <img
-            src="/images/mypage/right_menu.svg"
-            alt="공지사항"
-            className="cursor-pointer"
-          />
-        </div>
-      </div>
-      {/* 알림 설정 */}
-      <div className="flex items-center justify-between px-5 py-6">
-        <div className="flex items-center gap-[14px]">
-          <div>
-            <img src="/images/mypage/bell.svg" alt="알림" />
-          </div>
-          <div className="text-gray700 text-body1">알림 설정</div>
-        </div>
-        <div>
-          <img
-            src="/images/mypage/right_menu.svg"
-            alt="알림"
-            className="cursor-pointer"
-            onClick={() => router.push('/mypage/alarm')}
-          />
-        </div>
-      </div>
-      {/* 카카로톡 1:1 문의 */}
-      {/* <div className="flex items-center justify-between px-5 py-6">
-        <div className="flex items-center gap-[14px]">
-          <div>
-            <img src="/images/mypage/chat.svg" alt="카카로톡" />
-          </div>
-          <div className="text-gray700 text-body1">카카오톡 1:1 문의</div>
-        </div>
-        <div>
-          <img
-            src="/images/mypage/right_menu.svg"
-            alt="카카로톡"
-            className="cursor-pointer"
-          />
-        </div>
-      </div> */}
+      {MenuList.map((item, index) => (
+        <MenuLayout key={index} item={item.name} img={item.img} routing={item.routing} />
+      ))}
+
       {/* <EventGuide /> */}
       <div className="mx-auto flex-1 rounded-[12px] w-full h-[290px] mt-[10px] bg-[#D3D3D3] cursor-pointer">
         {/* <img
@@ -87,3 +70,39 @@ const MypageMenu = () => {
 };
 
 export default MypageMenu;
+
+const MenuLayout = ({
+  item,
+  routing,
+  img
+}: {
+  item: string;
+  routing: string;
+  img: string;
+}) => {
+  const router = useRouter();
+
+  return (
+    <div
+      className="flex items-center justify-between px-5 py-6"
+      onClick={() => {
+        router.push(routing);
+      }}>
+      <div className="flex items-center gap-[14px]">
+        <div>
+          <Image src={img} alt={`${item} img`} width={20} height={20} />
+        </div>
+        <div className="text-gray700 text-body1">{item}</div>
+      </div>
+      <div>
+        <Image
+          src="/images/mypage/right_menu.svg"
+          alt={`${item} right icon`}
+          className="cursor-pointer"
+          width={20}
+          height={20}
+        />
+      </div>
+    </div>
+  );
+};

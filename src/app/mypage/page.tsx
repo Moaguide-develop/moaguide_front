@@ -8,9 +8,10 @@ import useCheckLoginStatus from '@/hook/useCheckLoginStatus';
 
 const Mypage = () => {
   const { handleLogout } = useLogout();
-  const { bookmarks } = useBookmarks();
-  const { loading } = useCheckLoginStatus();
-  if (loading) {
+  const { loading: loginLoading } = useCheckLoginStatus();
+  const { bookmarks, isLoading: bookmarksLoading } = useBookmarks();
+
+  if (loginLoading || bookmarksLoading) {
     return null;
   }
 

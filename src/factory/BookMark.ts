@@ -58,10 +58,10 @@ const fetchBookmarks = async () => {
 };
 
 export const useBookmarks = () => {
-  const { data: bookmarks } = useQuery({
+  const { data: bookmarks, isLoading } = useQuery({
     queryKey: ['bookmarks'],
     queryFn: fetchBookmarks
   });
 
-  return { bookmarks };
+  return { bookmarks, isLoading };
 };
