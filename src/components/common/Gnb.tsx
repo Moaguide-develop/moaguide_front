@@ -52,7 +52,7 @@ const Gnb = () => {
 
   return (
     <div
-      className={`sticky top-0 z-[99999] bg-white h-[59px] ${
+      className={`sticky top-0 z-[999] bg-white h-[59px] ${
         pathname.includes('/mypage') ||
         pathname.includes('/report/') ||
         pathname.includes('/payment')
