@@ -82,10 +82,20 @@ const config: Config = {
           '0%': { transform: 'scale(1)', opacity: '1' },
           '50%': { transform: 'scale(1.5)', opacity: '1' },
           '100%': { transform: 'scale(0.5)', opacity: '0' }
+        },
+        'slide-in': {
+          '0%': { opacity: '0', transform: 'translateY(-20px) translateX(-50%)' },
+          '100%': { opacity: '1', transform: 'translateY(0) translateX(-50%)' }
+        },
+        'slide-out': {
+          '0%': { opacity: '1', transform: 'translateY(0) translateX(-50%)' },
+          '100%': { opacity: '0', transform: 'translateY(-20px) translateX(-50%)' }
         }
       },
       animation: {
-        countdown: 'countdownAnimation 1s ease-in-out'
+        countdown: 'countdownAnimation 1s ease-in-out',
+        'slide-in': 'slide-in 0.5s forwards',
+        'slide-out': 'slide-out 0.5s forwards'
       }
     }
   },
