@@ -43,7 +43,11 @@ const config: Config = {
         black: '#000000',
         normal: '#6F36E8',
         light: '#01BA77',
-
+        gradient: '#713CE2',
+        gradient1: 'linear-gradient(180deg, #713CE2 10.45%, #5200FF 100%)',
+        gradient2: 'linear-gradient(136deg, #713CE2 -0.72%, #5200FF 100.49%)',
+        gradient3: 'linear-gradient(176deg, #9C6DFF 14.56%, #8000FF 98.72%)',
+        gradient4: 'linear-gradient(180deg, #0A84FF 0%, rgba(10, 132, 255, 0.50) 100%)',
         error: '#FF453A',
         success: '#0A84FF'
       },
@@ -67,16 +71,22 @@ const config: Config = {
         'custom-light': '0px 2px 8px 0px rgba(95, 95, 95, 0.03)',
         'custom-normal': '0px 2px 12px 0px rgba(185, 191, 201, 0.25)'
       },
+      borderColor: {
+        gradient1: 'linear-gradient(180deg, #713CE2 10.45%, #5200FF 100%)',
+        gradient2: 'linear-gradient(136deg, #713CE2 -0.72%, #5200FF 100.49%)',
+        gradient3: 'linear-gradient(176deg, #9C6DFF 14.56%, #8000FF 98.72%)',
+        gradient4: 'linear-gradient(180deg, #0A84FF 0%, rgba(10, 132, 255, 0.50) 100%)'
+      },
       keyframes: {
         countdownAnimation: {
           '0%': { transform: 'scale(1)', opacity: '1' },
           '50%': { transform: 'scale(1.5)', opacity: '1' },
-          '100%': { transform: 'scale(0.5)', opacity: '0' },
-        },
+          '100%': { transform: 'scale(0.5)', opacity: '0' }
+        }
       },
       animation: {
-        countdown: 'countdownAnimation 1s ease-in-out',
-      },
+        countdown: 'countdownAnimation 1s ease-in-out'
+      }
     }
   },
   plugins: [require('@tailwindcss/line-clamp')]
