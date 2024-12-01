@@ -26,14 +26,13 @@ const SignupPage: React.FC = () => {
     marketingConsent?: number;
     loginType: 'local' | 'social' | 'naver' | 'google' | 'kakao';
   }>({
-    loginType: 'local',
+    loginType: 'local'
   });
 
   const router = useRouter();
   const { isLoggedIn } = useAuthStore();
 
   const { setOpen, setModalType } = useModalStore();
-  
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -45,14 +44,18 @@ const SignupPage: React.FC = () => {
     const searchParams = new URLSearchParams(window.location.search);
     const verifyToken = searchParams.get('verify');
     const email = searchParams.get('email');
-    const loginType = searchParams.get('loginType') as 'naver' | 'google' | 'kakao' | null;
+    const loginType = searchParams.get('loginType') as
+      | 'naver'
+      | 'google'
+      | 'kakao'
+      | null;
 
     if (verifyToken && email && loginType && !isSocialLogin) {
       setIsSocialLogin(true);
       setFormData((prev) => ({
         ...prev,
         email,
-        loginType,
+        loginType
       }));
 
       setCookie('verify_token', verifyToken);
@@ -80,23 +83,22 @@ const SignupPage: React.FC = () => {
   const handleSubmit = async () => {
     try {
       const verifyToken = getCookie('verify_token');
-  
+
       if (!verifyToken) {
         throw new Error('Verify token이 없습니다.');
       }
-  
+
       const authHeaders = {
         cookie: '',
-        Verify: verifyToken,
+        Verify: verifyToken
       };
-  
+
       const response = await finalSignup(formData, authHeaders);
- 
+
       if (response === '회원가입 완료') {
         setModalType('signupComplete');
         setOpen(true);
       }
-      
     } catch (error) {
       console.error('서버 요청 오류:', error);
       alert('회원가입에 실패했습니다. 다시 시도해주세요.');
@@ -109,9 +111,18 @@ const SignupPage: React.FC = () => {
       e.returnValue = '';
     };
 
+    let hasShownAlert = false; // 추가
+
     const pushStateAndShowAlert = () => {
-      window.history.pushState(null, '', window.location.href);
-      alert('페이지를 나가시면 진행 중인 작업이 저장되지 않습니다.');
+      // alert('페이지를 나가시면 진행 중인 작업이 저장되지 않습니다.');
+      // window.history.pushState(null, '', window.location.href);
+      if (!hasShownAlert) {
+        alert('페이지를 나가시면 진행 중인 작업이 저장되지 않습니다.');
+        hasShownAlert = true;
+      } else {
+        window.removeEventListener('popstate', pushStateAndShowAlert);
+        window.history.back();
+      }
     };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
@@ -135,7 +146,11 @@ const SignupPage: React.FC = () => {
             <Step2 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
           )}
           {currentStep === 3 && (
-            <Step3 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} email={formData.email || ''} />
+            <Step3
+              onNext={handleNext}
+              onUpdate={(data) => handleUpdate(data)}
+              email={formData.email || ''}
+            />
           )}
           {currentStep === 4 && (
             <Step4 onNext={handleSubmit} onUpdate={(data) => handleUpdate(data)} />
