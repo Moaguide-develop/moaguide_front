@@ -66,6 +66,11 @@ const SignupPage: React.FC = () => {
 
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
+    // window.history.pushState(
+    //   { step: currentStep + 1 },
+    //   '',
+    //   `/signup?step=${currentStep + 1}`
+    // );
   };
 
   const handleUpdate = (data: Partial<typeof formData>) => {
@@ -104,6 +109,12 @@ const SignupPage: React.FC = () => {
       alert('회원가입에 실패했습니다. 다시 시도해주세요.');
     }
   };
+
+useEffect(() => {
+  const searchParams = new URLSearchParams(window.location.search);
+  const stepFromUrl = parseInt(searchParams.get('step') || '1', 10);
+  setCurrentStep(stepFromUrl);
+}, []);
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
