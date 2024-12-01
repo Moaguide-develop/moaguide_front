@@ -111,29 +111,37 @@ const SignupPage: React.FC = () => {
       e.returnValue = '';
     };
 
-    let hasShownAlert = false; // 추가
-
-    const pushStateAndShowAlert = () => {
-      // alert('페이지를 나가시면 진행 중인 작업이 저장되지 않습니다.');
-      // window.history.pushState(null, '', window.location.href);
-      if (!hasShownAlert) {
-        alert('페이지를 나가시면 진행 중인 작업이 저장되지 않습니다.');
-        hasShownAlert = true;
-      } else {
-        window.removeEventListener('popstate', pushStateAndShowAlert);
-        window.history.back();
-      }
-    };
+    // const pushStateAndShowAlert = () => {
+    //   alert('페이지를 나가시면 진행 중인 작업이 저장되지 않습니다.');
+    //   window.history.pushState(null, '', window.location.href);
+    // };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
     window.history.pushState(null, '', window.location.href);
-    window.addEventListener('popstate', pushStateAndShowAlert);
+    // window.addEventListener('popstate', pushStateAndShowAlert);
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
-      window.removeEventListener('popstate', pushStateAndShowAlert);
+      // window.removeEventListener('popstate', pushStateAndShowAlert);
     };
   }, []);
+
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const step = event.state?.step || 1;
+      if (step < currentStep) {
+        setCurrentStep(step);
+      } else {
+        router.back();
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [currentStep, router]);
 
   return (
     <>
