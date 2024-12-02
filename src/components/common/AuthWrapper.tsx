@@ -9,7 +9,6 @@ const GnbWrapper = () => {
   const router = useRouter();
   const token = getCookie('access_token');
   useEffect(() => {
-    console.log('client middleware', pathname);
     if (
       !token &&
       pathname !== '/sign' &&
