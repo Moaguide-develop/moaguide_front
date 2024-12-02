@@ -1,12 +1,10 @@
 'use client';
-import { useAuthStore } from '@/store/userAuth.store';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 
 const MobileFooter = () => {
   const router = useRouter();
   const pathname = usePathname(); // 추가된 부분
-  const { isLoggedIn } = useAuthStore();
   if (pathname.startsWith('/quiz/')) return null;
   return (
     <div className="sm:hidden z-[999999] sticky bottom-0 pt-[14px] pb-[18px] px-[6px] flex items-center border-t border-gray100 bg-white w-full ">
@@ -23,10 +21,7 @@ const MobileFooter = () => {
       </div>
       <div
         onClick={() => {
-          isLoggedIn
-            ? router.push('/newissue')
-            : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-          // router.push('/newissue');
+          router.push('/newissue');
         }}
         className="flex-1 flex flex-col gap-1 items-center">
         <div>
@@ -39,10 +34,7 @@ const MobileFooter = () => {
       </div>
       <div
         onClick={() => {
-          isLoggedIn
-            ? router.push('/product')
-            : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-          // router.push('/product');
+          router.push('/product');
         }}
         className="flex-1 flex flex-col gap-1 items-center">
         <div>
@@ -55,10 +47,7 @@ const MobileFooter = () => {
       </div>
       <div
         onClick={() => {
-          isLoggedIn
-            ? router.push('/practicepage')
-            : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-          // router.push('/practicepage');
+          router.push('/practicepage');
         }}
         className="flex-1 flex flex-col gap-1 items-center">
         <div>

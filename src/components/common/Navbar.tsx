@@ -2,12 +2,10 @@
 
 import React from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useAuthStore } from '@/store/userAuth.store';
 
 const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const { isLoggedIn } = useAuthStore();
   return (
     <div className="hidden  bg-white shadow-custom-light border-b desk:h-[60px] md:h-full border-gray100 sm:block desk:w-full  lg:w-[100%] sticky top-[58px] z-[99998]">
       <div className="max-w-[1000px] mx-auto flex items-center">
@@ -22,10 +20,7 @@ const Navbar = () => {
         </div>
         <div
           onClick={() => {
-            isLoggedIn
-              ? router.push('/newissue')
-              : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-            // router.push('/newissue');
+            router.push('/newissue');
           }}
           className={` desk:whitespace-nowrap px-4 py-3 flex-1 flex justify-center items-center cursor-pointer text-body5 desk2:text-heading4
         ${pathname === '/newissue' ? 'text-black border-b-[2px] border-black' : 'text-gray300'}
@@ -34,10 +29,7 @@ const Navbar = () => {
         </div>
         <div
           onClick={() => {
-            isLoggedIn
-              ? router.push('/product')
-              : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-            // router.push('/product');
+            router.push('/product');
           }}
           className={`  desk:whitespace-nowrap px-4 py-3 flex-1 flex justify-center items-center cursor-pointer text-body5 desk2:text-heading4
         ${pathname === '/product' ? 'text-black border-b-[2px] border-black' : 'text-gray300'}
@@ -46,10 +38,7 @@ const Navbar = () => {
         </div>
         <div
           onClick={() => {
-            isLoggedIn
-              ? router.push('/practicepage')
-              : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-            // router.push('/practicepage');
+            router.push('/practicepage');
           }}
           className={` desk:whitespace-nowrap px-4 py-3 flex-1 flex justify-center items-center cursor-pointer text-body5 desk2:text-heading4
         ${pathname === '/practicepage' ? 'text-black border-b-[2px] border-black' : 'text-gray300'}

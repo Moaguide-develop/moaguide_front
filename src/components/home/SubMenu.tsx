@@ -1,21 +1,15 @@
-import { useAuthStore } from '@/store/userAuth.store';
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const SubMenu = () => {
   const router = useRouter();
-  const { isLoggedIn } = useAuthStore();
   return (
     <div>
       {/* 데스크톱 */}
       <div className="items-center gap-3 hidden sm:flex">
         <div
           onClick={() => {
-            isLoggedIn
-              ? router.push('/newissue')
-              : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-            // router.push('/newissue');
+            router.push('/newissue');
           }}
           className="cursor-pointer flex-1 flex items-center justify-between px-[16px] md:px-[28px] py-[22px] rounded-[12px] bg-bg">
           <div className=" text-body5 text-gray700 desk2:text-title2">최신 이슈</div>
@@ -25,10 +19,7 @@ const SubMenu = () => {
         </div>
         <div
           onClick={() => {
-            isLoggedIn
-              ? router.push('/product')
-              : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-            // router.push('/product');
+            router.push('/product');
           }}
           className="cursor-pointer flex-1 flex items-center justify-between px-[16px] md:px-[28px] py-[22px] rounded-[12px] bg-bg">
           <div className=" text-caption1 text-gray700 desk2:text-title2">
@@ -40,10 +31,7 @@ const SubMenu = () => {
         </div>
         <div
           onClick={() => {
-            isLoggedIn
-              ? router.push('/practicepage')
-              : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-            // router.push('/practicepage');
+            router.push('/practicepage');
           }}
           className="cursor-pointer flex-1 flex items-center justify-between px-[16px] md:px-[28px] py-[22px] rounded-[12px] bg-bg">
           <div className=" text-body5 text-gray700 desk2:text-title2">학습하기</div>
@@ -79,10 +67,7 @@ const SubMenu = () => {
       <div className="sm:hidden flex justify-center gap-[12px]">
         <div
           onClick={() => {
-            isLoggedIn
-              ? router.push('/newissue')
-              : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-            // router.push('/newissue');
+            router.push('/newissue');
           }}
           className="max-w-[110px] w-full py-4 flex flex-col justify-center items-center gap-3   rounded-[12px] border border-gray100">
           <div>
@@ -92,10 +77,7 @@ const SubMenu = () => {
         </div>
         <div
           onClick={() => {
-            isLoggedIn
-              ? router.push('/product')
-              : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-            // router.push('/product');
+            router.push('/product');
           }}
           className="max-w-[110px] w-full py-4 flex flex-col justify-center items-center gap-3  rounded-[12px] border border-gray100">
           <div>
@@ -105,10 +87,7 @@ const SubMenu = () => {
         </div>
         <div
           onClick={() => {
-            isLoggedIn
-              ? router.push('/practicepage')
-              : (alert('로그인이 필요한 서비스입니다 '), router.push('/sign'));
-            // router.push('/practicepage');
+            router.push('/practicepage');
           }}
           className="max-w-[110px] w-full py-4 flex flex-col justify-center items-center gap-3  rounded-[12px] border border-gray100">
           <div>
