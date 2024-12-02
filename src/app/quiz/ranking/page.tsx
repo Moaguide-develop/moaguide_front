@@ -9,7 +9,6 @@ const RankingPage = () => {
   const { Ranking } = useQuizRanking();
   const { data: QuizData } = useQuizTopRanking();
   const router = useRouter();
-  console.log(QuizData);
   return (
     <div>
       {/* <Container> */}

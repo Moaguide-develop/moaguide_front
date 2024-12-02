@@ -1,6 +1,5 @@
 import { basicAxiosInstance } from '@/service/axiosInstance';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { lastDayOfDecade } from 'date-fns';
 
 const fetchReportList = async ({
   queryKey,
@@ -9,15 +8,20 @@ const fetchReportList = async ({
   queryKey: string[];
   pageParam: number;
 }) => {
-  const [, category] = queryKey;
+  try {
+    const [, category] = queryKey;
 
-  const { data } = await basicAxiosInstance.get(
-    `/detail/report/building?page=${pageParam}&size=10&subCategory=${category}`
-  );
-  return data;
+    const { data } = await basicAxiosInstance.get(
+      `/detail/report/building?page=${pageParam}&size=10&subCategory=${category}`
+    );
+    return data;
+  } catch (error) {
+    console.error('오류가 발생했습니다:', error);
+    throw error;
+  }
 };
 
-const UseReportList = (category: string) => {
+const useReportList = (category: string) => {
   const queryKey = ['NewsList', category];
 
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage, isLoading } =
@@ -37,11 +41,11 @@ const UseReportList = (category: string) => {
   return {
     data,
     fetchNextPage,
-    hasNextPage: !!data?.pages.length,
+    hasNextPage,
     isFetching,
     isFetchingNextPage,
     isLoading
   };
 };
 
-export default UseReportList;
+export default useReportList;

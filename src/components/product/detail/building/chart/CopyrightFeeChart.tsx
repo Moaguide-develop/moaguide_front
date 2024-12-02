@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { IMusicCopyRightFeeChart } from '@/types/MusicProductType';
 import { useQuery } from '@tanstack/react-query';
 import { basicAxiosInstance } from '@/service/axiosInstance';
-import { TooltipItem } from 'chart.js';
+import { ScriptableContext, TooltipItem } from 'chart.js';
 
 const BuildingCopyRightFeeChart = () => {
   const pathname = usePathname();
@@ -74,12 +74,12 @@ const BuildingCopyRightFeeChart = () => {
         type: 'bar' as const,
         label: '배당금',
         data: CopyRightFeeDivideCount,
-        backgroundColor: (context: any) => {
+        backgroundColor: (context: ScriptableContext<'bar'>) => {
           const chart = context.chart;
           const { ctx, chartArea } = chart;
 
           if (!chartArea) {
-            return null;
+            return undefined;
           }
 
           const gradient = ctx.createLinearGradient(

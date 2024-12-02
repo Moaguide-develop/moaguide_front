@@ -6,8 +6,6 @@ import Link from 'next/link';
 import ProductMobilePagenation from '../pagenation/ProductMobilePagenation';
 import { CATEGORY } from '@/static/category';
 import { useSearchParams } from 'next/navigation';
-import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
-import { useState } from 'react';
 
 interface IProductContentListProps {
   content: IProductEndRecruitmentData['product'];

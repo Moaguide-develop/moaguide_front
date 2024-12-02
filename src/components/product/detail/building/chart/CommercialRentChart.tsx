@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { basicAxiosInstance } from '@/service/axiosInstance';
-import { TooltipItem } from 'chart.js';
+import { ChartDataset, TooltipItem } from 'chart.js';
 
 interface RentData {
   year: number;
@@ -18,15 +18,16 @@ interface ApiResponse {
   };
 }
 
-const getRandomColor = () => {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
+const getRandomColor = (() => {
+  const colors = ['#800080', '#0000FF', '#008000', '#00FFFF']; // 정해진 색상 배열
+  let index = 0;
 
+  return () => {
+    const color = colors[index];
+    index = (index + 1) % colors.length; // 마지막 색상 이후 처음으로 돌아가도록 순환
+    return color;
+  };
+})();
 const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) => {
   const [buildingType, setBuildingType] = useState<string>('오피스'); // 소규모 or 중대형
   const [startYear, setStartYear] = useState<number>(2022);
@@ -69,7 +70,7 @@ const CommercialRentChart = ({ rentType }: { rentType: boolean | undefined }) =>
     if (!data || !data.rent) return; // data 또는 data.rent가 유효한지 확인
 
     const labelsSet: Set<string> = new Set();
-    const datasets: any[] = [];
+    const datasets: ChartDataset<'line'>[] = [];
     const allValues: number[] = [];
 
     Object.keys(data.rent).forEach((region) => {

@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { IMusicCopyRightFeeChart } from '@/types/MusicProductType';
 import { useQuery } from '@tanstack/react-query';
 import { basicAxiosInstance } from '@/service/axiosInstance';
-import { TooltipItem } from 'chart.js';
+import { ScriptableContext, TooltipItem } from 'chart.js';
 
 const MusicCopyRightFeeChart = () => {
   const pathname = usePathname();
@@ -58,7 +58,7 @@ const MusicCopyRightFeeChart = () => {
   })();
 
   const BarnewVariable =
-    Math.floor(maxCopyRightFeeDivideCount + averageCopyRightFeeDivideCount) * 1.5;
+    Math.ceil(maxCopyRightFeeDivideCount + averageCopyRightFeeDivideCount) * 1.5;
 
   //////
 
@@ -85,7 +85,7 @@ const MusicCopyRightFeeChart = () => {
   })();
 
   const LinenewVariable =
-    Math.floor(maxCopyRightFeeDivideRateCount + averageCopyRightFeeDivideRateCount) * 1.5;
+    Math.ceil(maxCopyRightFeeDivideRateCount + averageCopyRightFeeDivideRateCount) * 1.5;
 
   const data = {
     labels: paymentDate,
@@ -112,12 +112,12 @@ const MusicCopyRightFeeChart = () => {
         type: 'bar' as const,
         label: '저작권료',
         data: CopyRightFeeDivideCount,
-        backgroundColor: (context: any) => {
+        backgroundColor: (context: ScriptableContext<'bar'>) => {
           const chart = context.chart;
           const { ctx, chartArea } = chart;
 
           if (!chartArea) {
-            return null;
+            return 'rgba(140, 192, 250, 0.8)';
           }
 
           const gradient = ctx.createLinearGradient(

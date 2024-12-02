@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Bar } from 'react-chartjs-2';
-import { ChartOptions, TooltipItem } from 'chart.js';
+import { ChartDataset, ChartOptions, TooltipItem } from 'chart.js';
 
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
@@ -18,15 +18,16 @@ interface ApiResponse {
     [region: string]: RentData[];
   };
 }
+const getRandomColor = (() => {
+  const colors = ['#800080', '#0000FF', '#008000', '#00FFFF']; // 정해진 색상 배열
+  let index = 0;
 
-const getRandomColor = () => {
-  const letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
+  return () => {
+    const color = colors[index];
+    index = (index + 1) % colors.length; // 마지막 색상 이후 처음으로 돌아가도록 순환
+    return color;
+  };
+})();
 
 const CommercialVacancyRateChart = ({ rentType }: { rentType: boolean | undefined }) => {
   const [buildingType, setBuildingType] = useState<string>('오피스'); // 소규모 or 중대형
@@ -75,7 +76,7 @@ const CommercialVacancyRateChart = ({ rentType }: { rentType: boolean | undefine
     if (!data || !data.vacancyrate) return; // data 또는 data.vacancyrate가 유효한지 확인
 
     const labelsSet: Set<string> = new Set();
-    const datasets: any[] = [];
+    const datasets: ChartDataset<'bar'>[] = [];
 
     Object.keys(data.vacancyrate)?.forEach((region) => {
       const regionData = data.vacancyrate[region];

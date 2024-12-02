@@ -1,10 +1,8 @@
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const SubMenu = () => {
   const router = useRouter();
-
   return (
     <div>
       {/* 데스크톱 */}
@@ -42,7 +40,7 @@ const SubMenu = () => {
           </div>
         </div>
 
-        <div
+        {/* <div
           className="w-[260px] h-[95px] pl-2  bg-[#6e35e8] rounded-[27.10px] gap-[10px] flex
         items-center desk:hidden md:flex cursor-pointer
         "
@@ -63,7 +61,7 @@ const SubMenu = () => {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       {/* 모바일 */}
       <div className="sm:hidden flex justify-center gap-[12px]">

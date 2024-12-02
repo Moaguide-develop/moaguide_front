@@ -16,7 +16,7 @@ const MusicProductDetail = () => {
 
       <div className="mt-[10px] text-2xl font-bold mb-[10px]">검색량</div>
       <YoutubeSearchChart />
-      <div className="mt-[10px] text-2xl font-bold mb-[10px]">일간/월간 스트리밍 수</div>
+      <div className="mt-[10px] text-2xl font-bold mb-[10px]">일간 스트리밍 수</div>
       <YoutubeStreamingChart />
 
       <div className="mt-[10px] text-2xl font-bold mb-[10px]">공연일정</div>

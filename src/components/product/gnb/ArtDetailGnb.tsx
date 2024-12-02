@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
-import { getMusicProductDetail } from '@/factory/ProductDetail/MusicProductDetail';
+import { getMusicProductDetail } from '@/factory/Product/ProductDetail/MusicProductDetail';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { getCowProductDetail } from '@/factory/ProductDetail/CowProductDetail';
-import { getArtProductDetail } from '@/factory/ProductDetail/ArtProductDetail';
+import { getCowProductDetail } from '@/factory/Product/ProductDetail/CowProductDetail';
+import { getArtProductDetail } from '@/factory/Product/ProductDetail/ArtProductDetail';
 import { useAuthStore } from '@/store/userAuth.store';
 
 const ArtDetailGnb = () => {

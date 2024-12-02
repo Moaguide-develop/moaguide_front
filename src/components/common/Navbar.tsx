@@ -6,9 +6,8 @@ import { useRouter, usePathname } from 'next/navigation';
 const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
-
   return (
-    <div className="hidden sm:block bg-white shadow-custom-light border-b desk:h-[60px] md:h-full border-gray100 sm:block desk:w-full  lg:w-[100%] sticky top-[58px] z-[99998]">
+    <div className="hidden  bg-white shadow-custom-light border-b desk:h-[60px] md:h-full border-gray100 sm:block desk:w-full  lg:w-[100%] sticky top-[58px] z-[99998]">
       <div className="max-w-[1000px] mx-auto flex items-center">
         <div
           onClick={() => {

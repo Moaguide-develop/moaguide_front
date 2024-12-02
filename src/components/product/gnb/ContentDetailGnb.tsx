@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { getContentProductDetail } from '@/factory/ProductDetail/ContentProductDetail';
+import { getContentProductDetail } from '@/factory/Product/ProductDetail/ContentProductDetail';
 import { useAuthStore } from '@/store/userAuth.store';
 
 const ContentDetailGnb = () => {

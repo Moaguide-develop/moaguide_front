@@ -2,15 +2,21 @@ import { axiosInstance } from '@/service/axiosInstance';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 const fetchNotificationList = async ({ pageParam = null }) => {
-  const url = pageParam ? `/notificationList?nextCursor=${pageParam}` : '/notificationList';
-  
-  const { data } = await axiosInstance.get(url);
+  try {
+    const url = pageParam
+      ? `/notificationList?nextCursor=${pageParam}`
+      : '/notificationList';
+    const { data } = await axiosInstance.get(url);
 
-  return {
-    notifications: data.notification, // 알림 리스트
-    nextPage: data.nextCursor, // 다음 페이지 커서
-    isLast: !data.nextCursor, // 다음 페이지가 없으면 true
-  };
+    return {
+      notifications: data.notification,
+      nextPage: data.nextCursor,
+      isLast: !data.nextCursor
+    };
+  } catch (error) {
+    console.error('알림 리스트를 가져오는 중 오류가 발생했습니다:', error);
+    throw error;
+  }
 };
 
 export const useNotifications = () => {
@@ -21,6 +27,6 @@ export const useNotifications = () => {
       return lastPage.isLast ? undefined : lastPage.nextPage;
     },
     initialPageParam: null,
-    staleTime: 5 * 60 * 1000, // 5분 동안 캐시된 데이터 유지
+    staleTime: 5 * 60 * 1000
   });
 };

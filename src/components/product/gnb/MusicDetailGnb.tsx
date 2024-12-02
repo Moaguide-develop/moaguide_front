@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
-import { getMusicProductDetail } from '@/factory/ProductDetail/MusicProductDetail';
+import { getMusicProductDetail } from '@/factory/Product/ProductDetail/MusicProductDetail';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuthStore } from '@/store/userAuth.store';

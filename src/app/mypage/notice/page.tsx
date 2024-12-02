@@ -1,5 +1,4 @@
 'use client';
-import Container from '@/components/common/Container';
 import NoticeItemSkeleton from '@/components/skeleton/NoticeItemSkeleton';
 import UseNoticeLists from '@/factory/useNoticeLists';
 import { INoticeItem } from '@/types/BuildingProductType';
@@ -27,7 +26,7 @@ const NoticePage = () => {
   // const allPosts = data?.pages[0].notice;
 
   return (
-    <div className='min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]'>
+    <div className="min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]">
       <Image
         src={'/images/detail/CaretLeft.svg'}
         width={24}
@@ -40,9 +39,7 @@ const NoticePage = () => {
         blurDataURL="/detail/CaretLeft.svg"
       />
       <div>
-        <div className="text-heading3 mt-3">
-          공지사항
-        </div>
+        <div className="text-heading3 mt-3">공지사항</div>
 
         <div className="max-w-[1000px] mx-auto mt-[32px]">
           {isLoading ? (

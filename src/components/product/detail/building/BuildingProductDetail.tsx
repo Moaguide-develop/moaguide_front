@@ -33,7 +33,6 @@ const BuildingProductDetail = ({
         </>
       ) : (
         <>
-          {' '}
           <div>
             <span className=" text-2xl font-bold mb-[20px]"> 상권 임대료 </span>
             <span className="text-lg ml-4 text-red-500"> (단위: 천원/m&sup2;)</span>

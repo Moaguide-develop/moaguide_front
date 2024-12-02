@@ -1,5 +1,5 @@
 'use client';
-import { getCowProductProfitDetail } from '@/factory/ProductProfitDetail/CowProductProfitDetail';
+import { getCowProductProfitDetail } from '@/factory/Product/ProductProfitDetail/CowProductProfitDetail';
 
 const CowProfit = ({ url }: { url: string }) => {
   const { data, isLoading } = getCowProductProfitDetail(url);
