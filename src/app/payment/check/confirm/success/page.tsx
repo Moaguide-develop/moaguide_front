@@ -84,7 +84,7 @@ async function getPayment({ paymentKey, orderId, amount }: PaymentRequestProps) 
 
     return {
       redirect: {
-        destination: `/payments/fail?code=${err.code}&message=${err.message}&orderId=${orderId}`
+        destination: `payment/check/confirm/fail?code=${err.code}&message=${err.message}&orderId=${orderId}`
       }
     };
   }

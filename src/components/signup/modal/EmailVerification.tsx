@@ -157,10 +157,11 @@ const EmailVerification: React.FC<EmailVerificationProps> = ({ onNext, onEmailCh
           priority
           blurDataURL="/sign/LeftArrowIcon.svg"
           className="cursor-pointer"
-          onClick={() => {
-            setModalType('cancelSignup'); 
-            setOpen(true); 
-          }}
+          // onClick={() => {
+          //   setModalType('cancelSignup'); 
+          //   setOpen(true); 
+          // }}
+          onClick={() => router.back()}
         />
         </div>
 
