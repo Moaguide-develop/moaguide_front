@@ -33,6 +33,7 @@ const SignupPage: React.FC = () => {
   const { isLoggedIn } = useAuthStore();
 
   const { setOpen, setModalType } = useModalStore();
+  const [popstateActive, setPopstateActive] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -66,11 +67,6 @@ const SignupPage: React.FC = () => {
 
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
-    // window.history.pushState(
-    //   { step: currentStep + 1 },
-    //   '',
-    //   `/signup?step=${currentStep + 1}`
-    // );
   };
 
   const handleUpdate = (data: Partial<typeof formData>) => {
@@ -110,11 +106,11 @@ const SignupPage: React.FC = () => {
     }
   };
 
-useEffect(() => {
-  const searchParams = new URLSearchParams(window.location.search);
-  const stepFromUrl = parseInt(searchParams.get('step') || '1', 10);
-  setCurrentStep(stepFromUrl);
-}, []);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const stepFromUrl = parseInt(searchParams.get('step') || '1', 10);
+    setCurrentStep(stepFromUrl);
+  }, []);
 
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -138,12 +134,10 @@ useEffect(() => {
   }, []);
 
   useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
-      const step = event.state?.step || 1;
-      if (step < currentStep) {
-        setCurrentStep(step);
-      } else {
-        router.back();
+    const handlePopState = (e: PopStateEvent) => {
+      if (!popstateActive) {
+        setModalType('cancelSignup'); // 'cancelSignup' 모달 열기
+        setOpen(true); // 모달 표시
       }
     };
 
@@ -152,7 +146,7 @@ useEffect(() => {
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, [currentStep, router]);
+  }, [popstateActive, setModalType, setOpen]);
 
   return (
     <>
