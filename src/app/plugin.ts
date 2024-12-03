@@ -1,3 +1,4 @@
+'use client';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,6 +13,7 @@ import {
   ChartDataset
 } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 const customTextPlugin = {
   id: 'customText',
@@ -49,5 +51,6 @@ ChartJS.register(
   Tooltip,
   Legend,
   ChartDataLabels,
-  customTextPlugin
+  customTextPlugin,
+  zoomPlugin
 );

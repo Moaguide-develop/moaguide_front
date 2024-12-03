@@ -14,16 +14,16 @@ const MainList = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { isLoggedIn } = useAuthStore();
-  const fetchQuiz = async () => {
-    try {
-      const response = await axiosInstance.post('/quiz/confirm');
+  // const fetchQuiz = async () => {
+  //   try {
+  //     const response = await axiosInstance.post('/quiz/confirm');
 
-      alert('시험 응시 후 이용 가능합니다.');
-      router.push('/quiz/ranking');
-    } catch (error) {
-      router.push('/quiz/finish');
-    }
-  };
+  //     alert('시험 응시 후 이용 가능합니다.');
+  //     router.push('/quiz/ranking');
+  //   } catch (error) {
+  //     router.push('/quiz/finish');
+  //   }
+  // };
   const { data, isLoading } = isLoggedIn
     ? getMainProductLogin(category)
     : getMainProduct(category);

@@ -641,6 +641,11 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/hammerjs@^2.0.45":
+  version "2.0.46"
+  resolved "https://registry.yarnpkg.com/@types/hammerjs/-/hammerjs-2.0.46.tgz#381daaca1360ff8a7c8dff63f32e69745b9fb1e1"
+  integrity sha512-ynRvcq6wvqexJ9brDMS4BnBLzmr0e14d6ZJTEShTBWKymQiHwlAyGu0ZPEFI2Fh1U53F7tN9ufClWM5KvqkKOw==
+
 "@types/hast@^3.0.0":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@types/hast/-/hast-3.0.4.tgz#1d6b39993b82cea6ad783945b0508c25903e15aa"
@@ -1430,10 +1435,23 @@ chart.js@^4.4.3:
   dependencies:
     "@kurkle/color" "^0.3.0"
 
+chartjs-chart-financial@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/chartjs-chart-financial/-/chartjs-chart-financial-0.2.1.tgz#c488fec6f7528838bf7d5813c615ae4f60941082"
+  integrity sha512-RI3zrszyf2YdW7ME8I5XDsicy6YaU+uA1XZmGddR3rdcQlGf4pSgGFK8O0PWPO5Szdc8wZ8qpns++yib6pWBaw==
+
 chartjs-plugin-datalabels@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/chartjs-plugin-datalabels/-/chartjs-plugin-datalabels-2.2.0.tgz#369578e131d743c2e34b5fbe2d3f9335f6639b8f"
   integrity sha512-14ZU30lH7n89oq+A4bWaJPnAG8a7ZTk7dKf48YAzMvJjQtjrgg5Dpk9f+LbjCF6bpx3RAGTeL13IXpKQYyRvlw==
+
+chartjs-plugin-zoom@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/chartjs-plugin-zoom/-/chartjs-plugin-zoom-2.2.0.tgz#79928acf2d22bd60b5442e0ef73139b261c65d19"
+  integrity sha512-in6kcdiTlP6npIVLMd4zXZ08PDUXC52gZ4FAy5oyjk1zX3gKarXMAof7B9eFiisf9WOC3bh2saHg+J5WtLXZeA==
+  dependencies:
+    "@types/hammerjs" "^2.0.45"
+    hammerjs "^2.0.8"
 
 check-more-types@^2.24.0:
   version "2.24.0"
@@ -2792,6 +2810,11 @@ gzip-size@^6.0.0:
   integrity sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==
   dependencies:
     duplexer "^0.1.2"
+
+hammerjs@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+  integrity sha512-tSQXBXS/MWQOn/RKckawJ61vvsDpCom87JgxiYdGwHdOa0ht0vzUWDlfioofFCRU0L+6NGDt6XzbgoJvZkMeRQ==
 
 has-bigints@^1.0.1, has-bigints@^1.0.2:
   version "1.0.2"
