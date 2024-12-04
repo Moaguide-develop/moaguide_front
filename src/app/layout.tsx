@@ -11,6 +11,7 @@ import GnbWrapper from '@/components/common/GnbWrapper';
 
 import './plugin';
 import NaverAnalytics from '@/lib/NaverAnalytics';
+import AuthWrapper from '@/components/common/AuthWrapper';
 import ToastProvider from '@/providers/ToastProvider';
 
 declare global {
@@ -97,6 +98,7 @@ export default function RootLayout({
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
             />
+            {/* <AuthWrapper /> */}
             <GnbWrapper />
             {children}
             <MobileFooter />

@@ -61,10 +61,11 @@ const Step3: React.FC<StepProps> = ({ onNext, onUpdate, email }) => {
           priority
           blurDataURL="/sign/LeftArrowIcon.svg"
           className="cursor-pointer"
-          onClick={() => {
-            setModalType('cancelSignup'); 
-            setOpen(true); 
-          }}
+          // onClick={() => {
+          //   setModalType('cancelSignup'); 
+          //   setOpen(true); 
+          // }}
+          onClick={() => router.back()}
         />
         </div>
 

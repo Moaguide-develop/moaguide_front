@@ -22,7 +22,9 @@ const MobileFooter = () => {
         <div className="text-caption1 text-gray300">홈</div>
       </div>
       <div
-        onClick={() => router.push('/newissue')}
+        onClick={() => {
+          router.push('/newissue');
+        }}
         className="flex-1 flex flex-col gap-1 items-center">
         <div>
           <img
@@ -33,7 +35,9 @@ const MobileFooter = () => {
         <div className="text-caption1 text-gray300">최신 이슈</div>
       </div>
       <div
-        onClick={() => router.push('/product')}
+        onClick={() => {
+          router.push('/product');
+        }}
         className="flex-1 flex flex-col gap-1 items-center">
         <div>
           <img
@@ -44,7 +48,9 @@ const MobileFooter = () => {
         <div className="text-caption1 text-gray300">조각투자 상품</div>
       </div>
       <div
-        onClick={() => router.push('/practicepage')}
+        onClick={() => {
+          router.push('/practicepage');
+        }}
         className="flex-1 flex flex-col gap-1 items-center">
         <div>
           <img

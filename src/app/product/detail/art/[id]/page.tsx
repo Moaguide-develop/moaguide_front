@@ -10,6 +10,12 @@ import ArtProductDetail from '@/components/product/detail/art/ArtProductDetail';
 import '../../../../plugin';
 import { BookmarkUpdate } from '@/components/product/detail/BookmarkUpdate';
 import { ArtTopDetail } from '@/components/product/detail/art/ArtTopDetail';
+import dynamic from 'next/dynamic';
+
+const BlurWrapper = dynamic(() => import('@/components/common/BlurWrapper'), {
+  ssr: false
+});
+
 const ArtDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
@@ -27,16 +33,17 @@ const ArtDetailpage = (props: { params: { id: string } }) => {
         />
       </Container>
       <NavBar sort={sort} setSort={setSort} />
-
-      {sort === 'news' ? (
-        <News />
-      ) : sort === 'report' ? (
-        <Report />
-      ) : sort === 'profit' ? (
-        <ArtProfit url={url} />
-      ) : sort === 'detail' ? (
-        <ArtProductDetail url={url} />
-      ) : undefined}
+      <BlurWrapper>
+        {sort === 'news' ? (
+          <News />
+        ) : sort === 'report' ? (
+          <Report />
+        ) : sort === 'profit' ? (
+          <ArtProfit url={url} />
+        ) : sort === 'detail' ? (
+          <ArtProductDetail url={url} />
+        ) : undefined}
+      </BlurWrapper>
     </div>
   );
 };

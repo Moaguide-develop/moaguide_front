@@ -3,16 +3,18 @@ import Container from '@/components/common/Container';
 import NavBar from '@/components/product/detail/NavBar';
 import News from '@/components/product/detail/News';
 import Report from '@/components/product/detail/Report';
-import Image from 'next/image';
 import { useState } from 'react';
 import { getCowProductDetail } from '@/factory/Product/ProductDetail/CowProductDetail';
 import CowProductDetail from '@/components/product/detail/cow/CowProductDetail';
 import CowProfit from '@/components/product/detail/cow/CowProfit';
-import { CATEGORY } from '@/static/category';
-import Link from 'next/link';
 import '../../../../plugin';
 import { BookmarkUpdate } from '@/components/product/detail/BookmarkUpdate';
 import { CowTopDetail } from '@/components/product/detail/cow/CowTopDetail';
+import dynamic from 'next/dynamic';
+
+const BlurWrapper = dynamic(() => import('@/components/common/BlurWrapper'), {
+  ssr: false
+});
 
 const CowDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
@@ -33,16 +35,17 @@ const CowDetailpage = (props: { params: { id: string } }) => {
         />
       </Container>
       <NavBar sort={sort} setSort={setSort} />
-
-      {sort === 'news' ? (
-        <News />
-      ) : sort === 'report' ? (
-        <Report />
-      ) : sort === 'profit' ? (
-        <CowProfit url={url} />
-      ) : sort === 'detail' ? (
-        <CowProductDetail url={url} />
-      ) : undefined}
+      <BlurWrapper>
+        {sort === 'news' ? (
+          <News />
+        ) : sort === 'report' ? (
+          <Report />
+        ) : sort === 'profit' ? (
+          <CowProfit url={url} />
+        ) : sort === 'detail' ? (
+          <CowProductDetail url={url} />
+        ) : undefined}
+      </BlurWrapper>
     </div>
   );
 };
