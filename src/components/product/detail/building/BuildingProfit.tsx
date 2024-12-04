@@ -273,7 +273,7 @@ const BuildingProfit = ({ url }: { url: string }) => {
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  w-[400px]">
-            <div className="text-gray-400  w-[150px]">배당 지급일</div>
+            <div className="text-gray-400  w-[150px]">배당 기준일</div>
             <div className="">{data?.divide?.paymentDay}</div>
           </div>
         </div>
