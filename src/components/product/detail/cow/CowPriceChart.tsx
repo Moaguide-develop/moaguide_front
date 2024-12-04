@@ -113,13 +113,12 @@ const CowPriceChart = () => {
 
 export default CowPriceChart;
 
-const ChartLayout = ({
-  dataSets,
-  newVariable
-}: {
+interface ChartLayoutProps {
   dataSets: { labels: string[]; data: number[] };
   newVariable: number;
-}) => {
+}
+
+const ChartLayout = ({ dataSets, newVariable }: ChartLayoutProps) => {
   const chartRef = useRef(null);
 
   const data = {
@@ -127,7 +126,6 @@ const ChartLayout = ({
     datasets: [
       {
         label: '한우 가격',
-
         data: dataSets.data,
         borderColor: '#8a4af3',
         backgroundColor: '#8a4af3',
