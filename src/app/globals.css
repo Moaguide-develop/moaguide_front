@@ -130,3 +130,27 @@
     backdrop-filter: blur(2px);
   }
 }
+/* .mySwiper2 .swiper-pagination2 {
+  position: absolute !important;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
+.mySwiper2 .swiper-pagination2-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: gray;
+  border-radius: 50%;
+  opacity: 0.7;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.mySwiper2 .swiper-pagination2-bullet-active {
+  background-color: black;
+  opacity: 1;
+  transform: scale(1.2);
+} */
