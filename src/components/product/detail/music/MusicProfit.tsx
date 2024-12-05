@@ -216,7 +216,7 @@ const MusicProfit = ({ url }: { url: string }) => {
         </div>
         <div className="flex flex-col  mb-[7px]">
           <div className=" flex  ">
-            <div className="text-gray-400  w-[150px]">저작권료 지급일</div>
+            <div className="text-gray-400  w-[150px]">저작권료 기준일</div>
             <div className="">{data?.musicDivide?.paymentDay}</div>
           </div>
         </div>

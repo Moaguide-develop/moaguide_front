@@ -43,7 +43,7 @@ const ArtProfit = ({ url }: { url: string }) => {
           <div className=" flex  ">
             <div className="text-gray-400  w-[150px]">총 모집액</div>
             <div className="flex-1">
-              {data?.artPublish?.totalPrice.toLocaleString()}원
+              {Number(data?.artPublish?.totalPrice).toLocaleString()}원
             </div>
           </div>
         </div>

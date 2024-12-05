@@ -12,6 +12,11 @@ import { getBuildingProductDetail } from '@/factory/Product/ProductDetail/Buildi
 import '../../../../plugin';
 import { BookmarkUpdate } from '@/components/product/detail/BookmarkUpdate';
 import { BuildingTopDetail } from '@/components/product/detail/building/BuildingTopDetail';
+import dynamic from 'next/dynamic';
+
+const BlurWrapper = dynamic(() => import('@/components/common/BlurWrapper'), {
+  ssr: false
+});
 
 const BuildingDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
@@ -32,22 +37,23 @@ const BuildingDetailpage = (props: { params: { id: string } }) => {
         />
       </Container>
       <NavBar sort={sort} setSort={setSort} />
-
-      {sort === 'public' ? (
-        <Notice />
-      ) : sort === 'news' ? (
-        <News />
-      ) : sort === 'report' ? (
-        <Report />
-      ) : sort === 'profit' ? (
-        <BuildingProfit url={url} />
-      ) : sort === 'detail' ? (
-        <BuildingProductDetail
-          url={url}
-          rentType={data?.rentType}
-          stayType={data?.stayType}
-        />
-      ) : undefined}
+      <BlurWrapper>
+        {sort === 'public' ? (
+          <Notice />
+        ) : sort === 'news' ? (
+          <News />
+        ) : sort === 'report' ? (
+          <Report />
+        ) : sort === 'profit' ? (
+          <BuildingProfit url={url} />
+        ) : sort === 'detail' ? (
+          <BuildingProductDetail
+            url={url}
+            rentType={data?.rentType}
+            stayType={data?.stayType}
+          />
+        ) : undefined}
+      </BlurWrapper>
     </div>
   );
 };

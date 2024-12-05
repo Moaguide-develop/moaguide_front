@@ -97,7 +97,7 @@ export default function RootLayout({
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
             />
-            <AuthWrapper />
+            {/* <AuthWrapper /> */}
             <GnbWrapper />
             {children}
             <MobileFooter />
