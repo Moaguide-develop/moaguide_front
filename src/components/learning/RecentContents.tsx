@@ -55,13 +55,13 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
         </div>
       </div>
       <div className="sm:hidden mx-auto w-[100%]">
-        <Swiper
+      <Swiper
           slidesPerView={1.3}
           centeredSlides={true}
           spaceBetween={16}
           pagination={{ clickable: true }}
           modules={[Pagination]}
-          className="w-full mySwiper2"
+          className="w-full mySwiper2 custom-swiper-pagination"
         >
           {contents.map((content, index) => (
             <SwiperSlide key={index} className="relative">
@@ -80,6 +80,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
             </SwiperSlide>
           ))}
         </Swiper>
+        <div className="swiper-pagination mt-4"></div>
       </div>
     </section>
   );
