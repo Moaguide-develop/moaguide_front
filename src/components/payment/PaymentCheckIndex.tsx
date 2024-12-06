@@ -2,6 +2,7 @@
 import { useModalStore } from '@/store/modal.store';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import TossPaymentsCardWidget from './TossPaymentsCardWidget';
 
 const PaymentCheckIndex = () => {
   const router = useRouter();
@@ -23,7 +24,7 @@ const PaymentCheckIndex = () => {
     setModalType('coupon');
     setOpen(true);
   };
-
+  const { requestBillingAuth } = TossPaymentsCardWidget();
   return (
     <div className="px-5 pb-20 sm:px-0 sm:pb-0">
       {/* 뒤로가기 */}
@@ -53,7 +54,7 @@ const PaymentCheckIndex = () => {
         <div>최종 결제 금액</div>
         <div className="text-heading4 text-normal">0원</div>
       </div>
-      <div className="flex items-center gap-2 py-5">
+      <div className="flex items-center gap-2 py-5 ">
         <div>
           <input
             type="checkbox"
@@ -62,12 +63,18 @@ const PaymentCheckIndex = () => {
             className="cursor-pointer"
           />
         </div>
-        <div onClick={() => setIsChecked((prev) => !prev)} className="text-body8">
+        <div
+          onClick={() => setIsChecked((prev) => !prev)}
+          className="text-body8 cursor-pointer">
           거래 내용을 확인하였으며, 동의합니다
         </div>
       </div>
+
+      {/* <TossPaymentsCardWidget /> */}
       <div
-        onClick={handleClick}
+        onClick={() => {
+          isChecked && requestBillingAuth();
+        }}
         className={` my-10 py-[18px] w-full rounded-[12px] flex items-center justify-center text-title1
       ${isChecked ? 'cursor-pointer bg-gradient2 text-white' : 'bg-gray100 text-gray300'}
       `}>
