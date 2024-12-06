@@ -8,7 +8,7 @@ const MypageMenu = () => {
     {
       name: '구독 관리',
       img: '/images/mypage/subscribe.svg',
-      routing: 'mypage/subscribe'
+      routing: '/payment'
     },
     {
       name: '공지사항',
@@ -28,7 +28,7 @@ const MypageMenu = () => {
     {
       name: '결제 관리',
       img: '/images/mypage/payment.svg',
-      routing: 'mypage/payment'
+      routing: 'mypage/cardmanagement'
     },
     {
       name: '카카오톡 1:1 문의',
@@ -84,7 +84,7 @@ const MenuLayout = ({
 
   return (
     <div
-      className="flex items-center justify-between px-5 py-6"
+      className="flex items-center justify-between px-5 py-6 cursor-pointer"
       onClick={() => {
         router.push(routing);
       }}>
