@@ -1,11 +1,30 @@
 'use client';
+import { axiosInstance } from '@/service/axiosInstance';
 import { useModalStore } from '@/store/modal.store';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
+interface ICardData {
+  cardName?: string;
+  cardNumber?: number;
+}
+const fetchcardCheck = async () => {
+  try {
+    const { data } = await axiosInstance.get<ICardData>('/card/mycard');
+    return data;
+  } catch (error) {
+    console.error('Error fetching payment:', error);
+    throw new Error('결제에 실패했습니다.');
+  }
+};
+
 const CardManagementPage = () => {
+  const { data } = useQuery({ queryKey: ['cardchecking'], queryFn: fetchcardCheck });
+
   const { setOpen, setModalType } = useModalStore();
+
   const [ispayment, setIspayment] = useState(true);
   return (
     <div>
@@ -23,8 +42,7 @@ const CardManagementPage = () => {
         <div className="text-lg font-bold mt-5">결제 관리</div>
         {ispayment ? (
           <div>
-            {' '}
-            <PaymentCard />
+            <PaymentCard cardName={data?.cardName} cardNumber={data?.cardNumber} />
             <div className="text-gray-500 mt-2 flex justify-center">
               결제수단 삭제를 원하시면,
               <span
@@ -48,12 +66,12 @@ const CardManagementPage = () => {
 
 export default CardManagementPage;
 
-const PaymentCard = () => {
+const PaymentCard = ({ cardName, cardNumber }: ICardData) => {
   return (
     <div className="max-w-[640px] w-full h-[128px]  shadow rounded-[8px] shadow-gray-300 flex flex-col px-[20px] py-[24px]  mt-[20px]">
       <div className="flex justify-between">
-        <div className="font-bold">하나카드</div>
-        <div className=" text-gray-400  font-bold">xxxx-xxxx-xxxx-1234</div>
+        <div className="font-bold">{cardName}카드</div>
+        <div className=" text-gray-400  font-bold">{cardNumber}xx-xxxx-xxxx-1234</div>
       </div>
 
       <div className=" flex justify-end mt-5">
