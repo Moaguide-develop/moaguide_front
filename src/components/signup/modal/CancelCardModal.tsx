@@ -2,12 +2,13 @@ import React, { useRef } from 'react';
 import { useModalStore } from '@/store/modal.store';
 import Dimmed from '@/components/modal/Dimmed';
 import { useRouter } from 'next/navigation';
+import { deletePayment } from '@/factory/Payment';
 
 const CancelCardModal = () => {
   const { setOpen } = useModalStore();
   const ref = useRef<HTMLDivElement>(null);
   const router = useRouter();
-
+  const deletepayment = deletePayment();
   const handleCancel = () => {
     setOpen(false);
   };
@@ -37,7 +38,7 @@ const CancelCardModal = () => {
                 아니요
               </div>
               <div
-                onClick={handleConfirm}
+                onClick={() => deletepayment}
                 className="py-[18px] cursor-pointer flex-1 flex items-center justify-center text-title2 text-white bg-black rounded-[12px]">
                 삭제하기
               </div>
