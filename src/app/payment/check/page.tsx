@@ -3,28 +3,19 @@ import { useModalStore } from '@/store/modal.store';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import TossPaymentsCardWidget from '@/components/payment/TossPaymentsCardWidget';
+import { Line } from '@/components/common/Line';
 
 const PaymentCheckPage = () => {
   const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
   const { setModalType, setOpen } = useModalStore();
 
-  const handleClick = () => {
-    if (!isChecked) return;
-    {
-      /* 유저 id 같이 내려달라고 해서 zustand의 유저 id받고 같이 쿼리로 보내기 */
-    }
-    //paytodo : 결제권 이름, 결제권 ID 추가하기
-    router.push(
-      `/payment/check/confirm?customerKey=asdf&totalAmount=1&orderTitle=첫달무료체험이벤트`
-    );
-  };
-
   const handleCoupon = () => {
     setModalType('coupon');
     setOpen(true);
   };
   const { requestBillingAuth } = TossPaymentsCardWidget();
+
   return (
     <div className="px-5 pb-20 sm:px-0 sm:pb-0">
       {/* 뒤로가기 */}

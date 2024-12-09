@@ -1,9 +1,18 @@
 'use client';
+import { Line } from '@/components/common/Line';
 import { getCookie } from '@/utils/cookie';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const PaymentPage = () => {
+  const [isActive, setIsActive] = useState(true);
+
+  return <>{isActive ? <NotPayment /> : <Payment />}</>;
+};
+
+export default PaymentPage;
+
+const NotPayment = () => {
   const router = useRouter();
   const [isActive, setIsActive] = useState('first');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -115,4 +124,70 @@ const PaymentPage = () => {
   );
 };
 
-export default PaymentPage;
+const Payment = () => {
+  const router = useRouter();
+  return (
+    <div>
+      <div onClick={() => router.back()} className="py-[14px] cursor-pointer max-w-max">
+        <img src="/images/payment/back.svg" alt="" />
+      </div>
+      <div className="font-bold text-xl mb-[12px]"> 구독 관리</div>
+
+      <div className="max-w-[640px] w-full h-[72px] bg-gradient rounded-[12px] flex justify-between items-center px-[20px]">
+        <div className="text-white">1개월 구독 이용 중</div>
+
+        <div className="text-white">
+          월 <span>9,900</span>원
+        </div>
+      </div>
+
+      <div className="max-w-[640px] w-full border-gray-200 border-[2px]  rounded-[12px] mt-3 h-[49px] px-[12px] py-[16px] flex justify-center items-center mb-[20px]">
+        <div className="">구독 해지</div>
+      </div>
+
+      <div className="flex justify-between">
+        <div>구독 시작일</div>
+
+        <div>2024.06.06</div>
+      </div>
+
+      <Line mt={20} mb={20} />
+
+      <div className="flex justify-between">
+        <div>구독 만료일</div>
+
+        <div>2024.06.06</div>
+      </div>
+      <Line mt={20} mb={20} />
+      <div className="flex justify-between">
+        <div>다음 결제일</div>
+
+        <div>2024.06.06</div>
+      </div>
+
+      <Line mt={50} mb={50} />
+
+      <div className="font-bold text-xl "> 결제 내역</div>
+
+      <div className="flex  justify-between mt-[15px]">
+        <div> 1개월 구독 </div>
+
+        <div className="flex flex-col ">
+          <div className="text-gray-400  mb-5">2024.06.06 결제</div>
+
+          <div className="flex justify-end">9,900원</div>
+        </div>
+      </div>
+      <Line mt={10} mb={10} />
+      <div className="flex  justify-between mt-[15px]">
+        <div> 1개월 구독 </div>
+
+        <div className="flex flex-col ">
+          <div className="text-gray-400  mb-5">2024.06.06 결제</div>
+
+          <div className="flex justify-end">9,900원</div>
+        </div>
+      </div>
+    </div>
+  );
+};
