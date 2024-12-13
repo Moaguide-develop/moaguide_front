@@ -9,7 +9,7 @@ const PaymentCheckPage = () => {
   const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
   const { setModalType, setOpen } = useModalStore();
-
+  const [couponId, setCouponId] = useState(1);
   const handleCoupon = () => {
     setModalType('coupon');
     setOpen(true);
@@ -64,7 +64,7 @@ const PaymentCheckPage = () => {
       {/* <TossPaymentsCardWidget /> */}
       <div
         onClick={() => {
-          isChecked && requestBillingAuth();
+          isChecked && requestBillingAuth(couponId);
         }}
         className={` my-10 py-[18px] w-full rounded-[12px] flex items-center justify-center text-title1
       ${isChecked ? 'cursor-pointer bg-gradient2 text-white' : 'bg-gray100 text-gray300'}
