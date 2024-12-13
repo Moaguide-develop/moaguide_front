@@ -29,19 +29,37 @@ const PaymentSuccessLoading = () => {
   const searchParams = useSearchParams();
   const customerKey = searchParams.get('customerKey');
   const authKey = searchParams.get('authKey');
+  const couponId = searchParams.get('couponId');
 
-  // console.log(customerKey, authKey);
-
+  const fetchNextAPI = async () => {
+    try {
+      const { data } = await axiosInstance.post(`/billing/start?couponId=${couponId}`);
+      console.log('다음 API 호출 성공:', data);
+      return data;
+    } catch (error) {
+      console.error('다음 API 호출 실패:', error);
+      throw new Error('추가 작업에 실패했습니다.');
+    }
+  };
   const mutation = useMutation({
     mutationFn: fetchPayment,
     retry: 0, // 재시도 비활성화
     onSuccess: (data) => {
       console.log('결제 성공:', data);
-      // router.push('/payment/check/confirm/success');
+
+      fetchNextAPI()
+        .then((response) => {
+          console.log('연쇄 호출 성공:', response);
+          router.push('/payment/check/confirm/success'); // 성공 시 페이지 이동
+        })
+        .catch((error) => {
+          console.error('연쇄 호출 실패:', error);
+          router.push(`/payment/check/confirm/fail`);
+        });
     },
     onError: (error) => {
       console.error('결제 실패:', error);
-      // router.push(`/payment/check/confirm/fail`);
+      router.push(`/payment/check/confirm/fail`);
     },
     onSettled: () => {
       console.log('결제 요청 완료');
