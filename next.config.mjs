@@ -6,10 +6,10 @@ const bundleAnalyzer = withBundleAnalyzer({
   openAnalyzer: false
 });
 const nextConfig = {
+  reactStrictMode: false,
   styledComponents: true,
   output: 'standalone',
   experimental: { instrumentationHook: true },
-  reactStrictMode: true,
 
   images: {
     domains: [
