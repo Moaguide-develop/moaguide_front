@@ -1,4 +1,5 @@
 'use client';
+import TossPaymentsCardRegister from '@/components/card/TossPaymentsCardRegister';
 import { axiosInstance } from '@/service/axiosInstance';
 import { useModalStore } from '@/store/modal.store';
 import { useQuery } from '@tanstack/react-query';
@@ -67,6 +68,7 @@ const CardManagementPage = () => {
 export default CardManagementPage;
 
 const PaymentCard = ({ cardName, cardNumber }: ICardData) => {
+  const { requestBillingAuth } = TossPaymentsCardRegister();
   return (
     <div className="max-w-[640px] w-full h-[128px]  shadow rounded-[8px] shadow-gray-300 flex flex-col px-[20px] py-[24px]  mt-[20px]">
       <div className="flex justify-between">
@@ -75,7 +77,11 @@ const PaymentCard = ({ cardName, cardNumber }: ICardData) => {
       </div>
 
       <div className=" flex justify-end mt-5">
-        <div className="text-sm font-bold flex justify-center items-center w-[76px] h-[40px]  text-gradient border-gradient border-[1px] rounded-[12px] cursor-pointer">
+        <div
+          className="text-sm font-bold flex justify-center items-center w-[76px] h-[40px]  text-gradient border-gradient border-[1px] rounded-[12px] cursor-pointer"
+          onClick={() => {
+            requestBillingAuth();
+          }}>
           카드 변경
         </div>
       </div>
