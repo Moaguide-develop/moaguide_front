@@ -35,8 +35,8 @@ const TossPaymentsCardRegister = () => {
     try {
       await payment?.requestBillingAuth({
         method: 'CARD', // 자동결제(빌링)는 카드만 지원합니다
-        successUrl: window.location.origin + '/payment/check/confirm/successloading',
-        failUrl: window.location.origin + '/payment/check/confirm/fail',
+        successUrl: window.location.origin + '/mypage/cardmanagement/successloading',
+        failUrl: window.location.origin + '/mypage/cardmanagement/fail',
 
         customerName: '김토스'
       });
@@ -46,15 +46,6 @@ const TossPaymentsCardRegister = () => {
   }
 
   return { requestBillingAuth };
-  // return (
-  // 카드 등록하기 버튼
-
-  // <div
-  //   onClick={() => requestBillingAuth()}
-  //   className={` my-10 py-[18px] w-full rounded-[12px] cursor-pointer bg-gradient2 text-white flex items-center justify-center text-heading4`}>
-  //   결제하기
-  // </div>
-  // );
 };
 
 export default TossPaymentsCardRegister;
