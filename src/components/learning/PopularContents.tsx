@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 const PopularContents = ({ contents }: { contents: any[] }) => {
   return (
     <section className="relative mt-8">
-      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-[90%] lg:w-[100%]">
+      <div className="">
         <h2 className="text-lg font-bold mb-4 text-black z-10 relative">
           이 달의 인기 콘텐츠
         </h2>

@@ -96,7 +96,15 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
                 {selectedType
                   ? dropdownOptions.type.find((o) => o.value === selectedType)?.label
                   : '콘텐츠 유형'}
-                <Image src={ArrowIcon} alt="Arrow Icon" width={12} height={12} />
+                <Image
+                    src={ArrowIcon}
+                    alt="Arrow Icon"
+                    width={12}
+                    height={12}
+                    className={`transition-transform duration-300 ${
+                        activeDropdown === 'type' ? 'rotate-180' : ''
+                    }`}
+                    />
               </button>
   
               {activeDropdown === 'type' && (
@@ -105,7 +113,7 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
                     <button
                       key={option.value}
                       onClick={() => handleTypeChange(option.value)}
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="w-full block px-4 py-2 hover:bg-gray-100 text-start"
                     >
                       {option.label}
                     </button>
@@ -124,7 +132,15 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
                 {selectedCategory
                   ? dropdownOptions.category.find((o) => o.value === selectedCategory)?.label
                   : '카테고리'}
-                <Image src={ArrowIcon} alt="Arrow Icon" width={12} height={12} />
+                <Image
+                    src={ArrowIcon}
+                    alt="Arrow Icon"
+                    width={12}
+                    height={12}
+                    className={`transition-transform duration-300 ${
+                        activeDropdown === 'category' ? 'rotate-180' : ''
+                    }`}
+                    />
               </button>
   
               {activeDropdown === 'category' && (
@@ -133,7 +149,7 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
                     <button
                       key={option.value}
                       onClick={() => handleCategoryChange(option.value)}
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="w-full block px-4 py-2 hover:bg-gray-100 text-start"
                     >
                       {option.label}
                     </button>
