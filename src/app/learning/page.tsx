@@ -1,27 +1,22 @@
 import Navbar from '@/components/common/Navbar';
-import LatestNewsClipping from '@/components/learning/LatestNewsClipping';
-import PopularContents from '@/components/learning/PopularContents';
-import RecentContents from '@/components/learning/RecentContents';
+import LearningPageClient from '@/components/learning/LearningPageClient';
 
 const LearningPage = async () => {
-  const response = await fetch('http://43.200.90.72/contents/overview', {
-    cache: 'no-store',
-  });
+
+  const response = await fetch('http://43.200.90.72/contents/overview', { cache: 'no-store' });
 
   if (!response.ok) {
     console.error('Failed to fetch Overview API');
     return <div>데이터를 가져오지 못했습니다.</div>;
   }
 
-  const { popularContents, recentContents, latestNewsClipping } = await response.json();
+  const initialData = await response.json();
 
   return (
     <div>
       <Navbar />
-        <PopularContents contents={popularContents} />
-        <RecentContents contents={recentContents} />
-        <LatestNewsClipping contents={latestNewsClipping} />
-      </div>
+      <LearningPageClient initialData={initialData} />
+    </div>
   );
 };
 
