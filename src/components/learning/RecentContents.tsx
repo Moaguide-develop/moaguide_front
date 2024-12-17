@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 
 const RecentContents = ({ contents }: { contents: any[] }) => {
   return (
-    <section className="relative mt-8">
+    <section className="relative mt-12">
       <div className="">
         <h2 className="text-lg font-bold mb-4 text-black z-10 relative">최신 콘텐츠</h2>
         <div className="hidden sm:grid gap-4 relative z-10">

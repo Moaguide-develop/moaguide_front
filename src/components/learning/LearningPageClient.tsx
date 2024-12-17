@@ -9,6 +9,8 @@ import LatestNewsClipping from '@/components/learning/LatestNewsClipping';
 import FilteredContents from '@/components/learning/FilteredContents';
 import HomeIcon from '../../../public/images/learning/learning_home.svg';
 import ArrowIcon from '../../../public/images/learning/bottom_arrow_button.svg';
+import BackgroundImage from '../../../public/images/learning/learning_background.png';
+import SubscriptionBanner from './SubscriptionBanner';
 
 const dropdownOptions = {
   type: [
@@ -32,59 +34,68 @@ const dropdownOptions = {
 };
 
 const LearningPageClient = ({ initialData }: { initialData: any }) => {
-    const [selectedType, setSelectedType] = useState<string>('');
-    const [selectedCategory, setSelectedCategory] = useState<string>('');
-    const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-    const [page, setPage] = useState<number>(1);
-  
-    const fetchContentsWithPage = async () => {
-      const type = selectedType || 'all';
-      const category = selectedCategory || 'all';
-      const endpoint = `http://43.200.90.72/contents/list?type=${type}&category=${category}&page=${page}`;
-      const response = await fetch(endpoint);
-      if (!response.ok) throw new Error('API 호출 실패');
-      return response.json();
-    };
-  
-    const { data, isLoading } = useQuery({
-      queryKey: ['contents', selectedType, selectedCategory, page],
-      queryFn: fetchContentsWithPage,
-      enabled: !!(selectedType || selectedCategory),
-    });
-  
-    const resetFilters = () => {
-      setSelectedType('');
-      setSelectedCategory('');
-      setPage(1);
-      setActiveDropdown(null);
-    };
-  
-    const handleTypeChange = (value: string) => {
-      setSelectedType(value);
-      setSelectedCategory('all');
-      setPage(1); 
-      setActiveDropdown(null);
-    };
-  
-    const handleCategoryChange = (value: string) => {
-        if (!selectedType) {
-          setSelectedType('all');
-        }
-        setSelectedCategory(value);
-        setPage(1);
-        setActiveDropdown(null);
-      };
-  
-    return (
-      <div>
-        <div className="flex justify-end items-center border-b bg-gray-50 shadow-sm relative z-50">
-          <button
+  const [selectedType, setSelectedType] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [page, setPage] = useState<number>(1);
+
+  const fetchContentsWithPage = async () => {
+    const type = selectedType || 'all';
+    const category = selectedCategory || 'all';
+    const endpoint = `http://43.200.90.72/contents/list?type=${type}&category=${category}&page=${page}`;
+    const response = await fetch(endpoint);
+    if (!response.ok) throw new Error('API 호출 실패');
+    return response.json();
+  };
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['contents', selectedType, selectedCategory, page],
+    queryFn: fetchContentsWithPage,
+    enabled: !!(selectedType || selectedCategory),
+  });
+
+  const resetFilters = () => {
+    setSelectedType('');
+    setSelectedCategory('');
+    setPage(1);
+    setActiveDropdown(null);
+  };
+
+  const handleTypeChange = (value: string) => {
+    setSelectedType(value);
+    setSelectedCategory('all');
+    setPage(1);
+    setActiveDropdown(null);
+  };
+
+  const handleCategoryChange = (value: string) => {
+    if (!selectedType) {
+      setSelectedType('all');
+    }
+    setSelectedCategory(value);
+    setPage(1);
+    setActiveDropdown(null);
+  };
+
+  return (
+    <div>
+      {/* 배경 이미지 */}
+      <div className="relative w-full h-[300px] lg:h-[400px]">
+        <Image
+          src={BackgroundImage}
+          alt="Background"
+          layout="fill"
+          objectFit="cover"
+          className="w-full"
+        />
+        {/* 드롭다운 영역 */}
+        <div className="absolute bottom-0 left-0 right-0 flex  justify-end items-center border-b shadow-sm z-50 bg-[#fffffc]/50">
+        <button
             onClick={resetFilters}
             className="flex items-center gap-2 px-6 py-4 text-lg font-semibold text-gray-800"
           >
             <Image src={HomeIcon} alt="Home Icon" width={20} height={20} />
           </button>
-  
           <div className="flex w-1/2">
             <div className="relative flex-1">
               <button
@@ -97,16 +108,16 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
                   ? dropdownOptions.type.find((o) => o.value === selectedType)?.label
                   : '콘텐츠 유형'}
                 <Image
-                    src={ArrowIcon}
-                    alt="Arrow Icon"
-                    width={12}
-                    height={12}
-                    className={`transition-transform duration-300 ${
-                        activeDropdown === 'type' ? 'rotate-180' : ''
-                    }`}
-                    />
+                  src={ArrowIcon}
+                  alt="Arrow Icon"
+                  width={12}
+                  height={12}
+                  className={`transition-transform duration-300 ${
+                    activeDropdown === 'type' ? 'rotate-180' : ''
+                  }`}
+                />
               </button>
-  
+
               {activeDropdown === 'type' && (
                 <div className="absolute left-0 top-full w-full bg-white border shadow-lg z-50">
                   {dropdownOptions.type.map((option) => (
@@ -121,7 +132,7 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
                 </div>
               )}
             </div>
-  
+
             <div className="relative flex-1">
               <button
                 onClick={() =>
@@ -130,19 +141,20 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
                 className="w-[90%] mx-auto flex items-center justify-between py-4 text-lg font-semibold"
               >
                 {selectedCategory
-                  ? dropdownOptions.category.find((o) => o.value === selectedCategory)?.label
+                  ? dropdownOptions.category.find((o) => o.value === selectedCategory)
+                      ?.label
                   : '카테고리'}
                 <Image
-                    src={ArrowIcon}
-                    alt="Arrow Icon"
-                    width={12}
-                    height={12}
-                    className={`transition-transform duration-300 ${
-                        activeDropdown === 'category' ? 'rotate-180' : ''
-                    }`}
-                    />
+                  src={ArrowIcon}
+                  alt="Arrow Icon"
+                  width={12}
+                  height={12}
+                  className={`transition-transform duration-300 ${
+                    activeDropdown === 'category' ? 'rotate-180' : ''
+                  }`}
+                />
               </button>
-  
+
               {activeDropdown === 'category' && (
                 <div className="absolute left-0 top-full w-full bg-white border shadow-lg z-50">
                   {dropdownOptions.category.map((option) => (
@@ -159,28 +171,30 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
             </div>
           </div>
         </div>
-  
-        <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-[90%] lg:w-[100%]">
-          {!selectedType && !selectedCategory ? (
-            <>
-              <PopularContents contents={initialData.popularContents} />
-              <RecentContents contents={initialData.recentContents} />
-              <LatestNewsClipping contents={initialData.latestNewsClipping} />
-            </>
-          ) : isLoading ? (
-            null
-          ) : (
-            <FilteredContents
-              contents={data?.content || []}
-              total={data?.total || 0}
-              page={page}
-              size={data?.size || 5}
-              onPageChange={(newPage) => setPage(newPage)}
-            />
-          )}
-        </div>
       </div>
-    );
-  };
-  
-  export default LearningPageClient;
+
+      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-[90%] lg:w-[100%] mt-8">
+        {!selectedType && !selectedCategory ? (
+          <>
+            <PopularContents contents={initialData.popularContents} />
+            <RecentContents contents={initialData.recentContents} />
+            <SubscriptionBanner/>
+            <LatestNewsClipping contents={initialData.latestNewsClipping} />
+          </>
+        ) : isLoading ? (
+          null
+        ) : (
+          <FilteredContents
+            contents={data?.content || []}
+            total={data?.total || 0}
+            page={page}
+            size={data?.size || 5}
+            onPageChange={(newPage) => setPage(newPage)}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default LearningPageClient;

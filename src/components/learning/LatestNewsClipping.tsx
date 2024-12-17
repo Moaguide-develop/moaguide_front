@@ -4,7 +4,7 @@ import defaultImage from '../../../public/images/learning/learning_img.svg';
 
 const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
   return (
-    <section className="relative mt-8">
+    <section className="relative mt-12 mb-4">
       <h2 className="text-lg font-bold mb-6">뉴스 클리핑</h2>
       <div className="flex gap-6">
         {contents[0] && (
