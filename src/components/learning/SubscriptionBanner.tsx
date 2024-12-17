@@ -2,7 +2,7 @@ import React from 'react';
 
 const SubscriptionBanner = () => {
   return (
-    <div className="flex items-center justify-between bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl px-12 py-16 shadow-md max-w-[1000px] mx-auto mt-12">
+    <div className="w-full flex items-center justify-between bg-gradient-to-r from-gray-50 to-gray-100 rounded-2xl px-12 py-16 shadow-md max-w-[1000px] mx-auto mt-12">
       <div className="text-left">
         <h2 className="text-2xl font-bold text-gray-800 leading-snug">
           모아가이드<br />

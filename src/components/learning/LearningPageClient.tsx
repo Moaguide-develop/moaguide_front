@@ -79,7 +79,6 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
 
   return (
     <div>
-      {/* 배경 이미지 */}
       <div className="relative w-full h-[300px] lg:h-[400px]">
         <Image
           src={BackgroundImage}
@@ -88,7 +87,6 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
           objectFit="cover"
           className="w-full"
         />
-        {/* 드롭다운 영역 */}
         <div className="absolute bottom-0 left-0 right-0 flex  justify-end items-center border-b shadow-sm z-50 bg-[#fffffc]/50">
         <button
             onClick={resetFilters}
@@ -173,12 +171,14 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
         </div>
       </div>
 
-      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-[90%] lg:w-[100%] mt-8">
+      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-full sm:w-[90%] lg:w-[100%] mt-8">
         {!selectedType && !selectedCategory ? (
           <>
             <PopularContents contents={initialData.popularContents} />
             <RecentContents contents={initialData.recentContents} />
+            <div className="hidden sm:flex w-full">
             <SubscriptionBanner/>
+            </div>
             <LatestNewsClipping contents={initialData.latestNewsClipping} />
           </>
         ) : isLoading ? (

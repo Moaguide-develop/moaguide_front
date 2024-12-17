@@ -12,7 +12,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
   return (
     <section className="relative mt-12">
       <div className="">
-        <h2 className="text-lg font-bold mb-4 text-black z-10 relative">최신 콘텐츠</h2>
+        <h2 className="w-[90%] sm:w-[100%] mx-auto text-lg font-bold mb-4 text-black z-10 relative">최신 콘텐츠</h2>
         <div className="hidden sm:grid gap-4 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {contents.map((content, index) => (
