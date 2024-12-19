@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
 import MypageHeader from '@/components/mypage/MypageHeader';
 import MypageMenu from '@/components/mypage/MypageMenu';
-import { logout, refreshAccessToken } from '@/service/auth';
+import { logout } from '@/service/auth';
 import { useAuthStore } from '@/store/userAuth.store';
 import { getCookie, removeCookie } from '@/utils/cookie';
 import { axiosInstance } from '@/service/axiosInstance';

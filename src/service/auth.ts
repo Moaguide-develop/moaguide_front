@@ -180,26 +180,6 @@ export const getUserEmail = async (token: string) => {
   }
 };
 
-export const refreshAccessToken = async () => {
-  try {
-    const response = await refreshAxiosInstance.post('/token/refresh', null);
-
-    const newToken = response.headers['Authorization'] || response.headers['authorization'];
-    
-    if (newToken) {
-      const accessToken = newToken.replace('Bearer ', '');
-      setToken(accessToken);
-      return accessToken;
-    } else {
-      throw new Error('새로운 액세스 토큰을 받지 못했습니다.');
-    }
-  } catch (error) {
-    console.error('리프레시 토큰 요청 오류:', error);
-    removeToken(); 
-    throw error;
-  }
-};
-
 export const deleteUser = async () => {
   try {
     const response = await axiosInstance.delete('/user/Withdrawal');
