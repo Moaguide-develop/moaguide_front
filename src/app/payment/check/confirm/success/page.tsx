@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 
-export default function PaymentFail() {
+export default function PaymentSuccess() {
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
   const message = searchParams.get('message');
