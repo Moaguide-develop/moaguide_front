@@ -5,28 +5,36 @@ import { useModalStore } from '@/store/modal.store';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { fetchcardCheck } from '@/factory/Card/card';
+import TossPaymentsCardWidget from '@/components/payment/TossPaymentsCardWidget';
+import CardRegisterSkeleton from '@/components/skeleton/CardRegisterSkeleton';
+import TossPaymentsCardChange from '@/components/card/TossPaymentsCardChange';
 
 interface ICardData {
   cardName?: string;
   cardNumber?: number;
 }
-const fetchcardCheck = async () => {
-  try {
-    const { data } = await axiosInstance.get<ICardData>('/card/mycard');
-    return data;
-  } catch (error) {
-    console.error('Error fetching payment:', error);
-    throw new Error('결제에 실패했습니다.');
-  }
-};
 
 const CardManagementPage = () => {
-  const { data } = useQuery({ queryKey: ['cardchecking'], queryFn: fetchcardCheck });
+  const { data, isLoading } = useQuery({
+    queryKey: ['cardchecking'],
+    queryFn: fetchcardCheck,
+    retry: false
+  });
 
   const { setOpen, setModalType } = useModalStore();
 
-  const [ispayment, setIspayment] = useState(true);
+  const [ispayment, setIspayment] = useState(false);
+  useEffect(() => {
+    if (data) {
+      if (data.cardName && data.cardNumber) {
+        console.log('bb');
+        setIspayment(true);
+      }
+    }
+  }, [data]);
+
   return (
     <div>
       <div className="max-w-[600px] mx-auto  ">
@@ -41,7 +49,9 @@ const CardManagementPage = () => {
         </Link>
 
         <div className="text-lg font-bold mt-5">결제 관리</div>
-        {ispayment ? (
+        {isLoading ? (
+          <CardRegisterSkeleton />
+        ) : ispayment ? (
           <div>
             <PaymentCard cardName={data?.cardName} cardNumber={data?.cardNumber} />
             <div className="text-gray-500 mt-2 flex justify-center">
@@ -68,7 +78,7 @@ const CardManagementPage = () => {
 export default CardManagementPage;
 
 const PaymentCard = ({ cardName, cardNumber }: ICardData) => {
-  const { requestBillingAuth } = TossPaymentsCardRegister();
+  const { requestBillingAuth } = TossPaymentsCardChange();
   return (
     <div className="max-w-[640px] w-full h-[128px]  shadow rounded-[8px] shadow-gray-300 flex flex-col px-[20px] py-[24px]  mt-[20px]">
       <div className="flex justify-between">
@@ -90,8 +100,13 @@ const PaymentCard = ({ cardName, cardNumber }: ICardData) => {
 };
 
 const NotPayment = () => {
+  const { requestBillingAuth } = TossPaymentsCardRegister();
   return (
-    <div className="w-full max-w-[320px] h-[172px] mx-auto flex flex-col justify-center items-center rounded-lg border-[3px] border-dashed border-gray-300 cursor-pointer bg-gray-50 ">
+    <div
+      className="w-full max-w-[320px] h-[172px] mx-auto flex flex-col justify-center items-center rounded-lg border-[3px] border-dashed border-gray-300 cursor-pointer bg-gray-50 "
+      onClick={() => {
+        requestBillingAuth();
+      }}>
       <div className="relative w-8 h-8 bg-gradient1 rounded-full">
         <Image
           src={'/images/payment/Plus.svg'}
