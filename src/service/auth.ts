@@ -186,6 +186,7 @@ export const getUserEmail = async (token: string) => {
   }
 };
 
+
 export const refreshAccessToken = async () => {
   try {
     const response = await refreshAxiosInstance.post('/token/refresh', null);
