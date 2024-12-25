@@ -7,6 +7,7 @@ import Quitmodal from '@/components/modal/Quitmodal';
 import Couponmodal from '@/components/modal/CouponModal';
 import CancelSignupModal from '@/components/signup/modal/CancelSignupModal';
 import SignupCompleteModal from '@/components/signup/modal/SignupCompleteModal';
+import CancelCardModal from '@/components/signup/modal/CancelCardModal';
 
 const ModalProvider = () => {
   const { open, modalType } = useModalStore();
@@ -27,8 +28,9 @@ const ModalProvider = () => {
     <div>
       {open && modalType === 'secession' && <Quitmodal />}
       {open && modalType === 'coupon' && <Couponmodal />}
-      {open && modalType === 'cancelSignup' && <CancelSignupModal />} 
+      {open && modalType === 'cancelSignup' && <CancelSignupModal />}
       {open && modalType === 'signupComplete' && <SignupCompleteModal />}
+      {open && modalType === 'cancelCard' && <CancelCardModal />}
     </div>,
     $portalRoot
   );

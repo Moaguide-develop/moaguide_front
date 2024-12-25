@@ -42,17 +42,14 @@ const PaymentIndex = () => {
             <div>상품 상세정보 페이지 무제한 확인</div>
           </div>
           <div className="flex gap-4 text-body7 text-gray400">
-            {' '}
             <img src="/images/payment/Check.svg" alt="" />
             <div>관심상품 저장 및 관리</div>
           </div>
           <div className="flex gap-4 text-body7 text-gray400">
-            {' '}
             <img src="/images/payment/Check.svg" alt="" />
             <div>관심상품 변동, 공시, 뉴스 알림</div>
           </div>
           <div className="flex gap-4 text-body7 text-gray400">
-            {' '}
             <img src="/images/payment/Check.svg" alt="" />
             <div>학습하기 콘텐츠 무제한 열람</div>
           </div>

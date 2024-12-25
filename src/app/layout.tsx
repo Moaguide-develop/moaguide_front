@@ -12,6 +12,7 @@ import GnbWrapper from '@/components/common/GnbWrapper';
 import './plugin';
 import NaverAnalytics from '@/lib/NaverAnalytics';
 import AuthWrapper from '@/components/common/AuthWrapper';
+import ToastProvider from '@/providers/ToastProvider';
 
 declare global {
   interface Window {
@@ -102,7 +103,10 @@ export default function RootLayout({
             {children}
             <MobileFooter />
             <ModalProvider />
+
             <div id="root-portal"></div>
+            <ToastProvider />
+            <div id="toast-portal"></div>
           </QueryProvider>
         </IntegrateMSW>
       </body>

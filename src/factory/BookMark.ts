@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/service/axiosInstance';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { throttle } from 'lodash';
 const fetchAddBookMark = async ({
   productId,
@@ -50,4 +50,18 @@ export const useDeleteBookMark = () => {
   });
 
   return deletemutation;
+};
+
+const fetchBookmarks = async () => {
+  const { data } = await axiosInstance.get('/user/bookmark');
+  return data;
+};
+
+export const useBookmarks = () => {
+  const { data: bookmarks, isLoading } = useQuery({
+    queryKey: ['bookmarks'],
+    queryFn: fetchBookmarks
+  });
+
+  return { bookmarks, isLoading };
 };

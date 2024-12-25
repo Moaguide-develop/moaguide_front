@@ -34,7 +34,7 @@ const MypageHeader = ({ bookmarks }: MypageHeaderProps) => {
           </div>
           <div>
             <div className="flex items-center gap-[14px]">
-              <div className="text-normal text-white">{bookmarks}개</div>
+              <div className=" text-white">{bookmarks}개</div>
               <img
                 src="/images/mypage/right_white.svg"
                 alt="Bookmarks"

@@ -6,15 +6,17 @@ import PublicTransport from './PublicTransport';
 import OfficialPriceChart from './chart/OfficialPriceChart';
 import AccommodationVisitorsChart from './chart/AccommodationVisitorsChart';
 import AccommoationRateChart from './chart/AccommodationRateChart';
+
+interface BuildingProductDetailProps {
+  url: string;
+  rentType: boolean | undefined;
+  stayType: boolean | undefined;
+}
 const BuildingProductDetail = ({
   url,
   rentType,
   stayType
-}: {
-  url: string;
-  rentType: boolean | undefined;
-  stayType: boolean | undefined;
-}) => {
+}: BuildingProductDetailProps) => {
   return (
     <div className="max-w-[1000px] mx-auto mt-[32px]">
       {stayType ? (
