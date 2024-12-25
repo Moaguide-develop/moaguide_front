@@ -65,7 +65,7 @@ const PaymentSuccessLoading = () => {
       console.log('결제 요청 완료');
     }
   });
-
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (customerKey && authKey) {
       mutation.mutate({ customerKey, authKey });

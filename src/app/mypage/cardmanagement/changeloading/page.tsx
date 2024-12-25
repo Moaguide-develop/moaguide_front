@@ -47,6 +47,7 @@ const CardRegisterSuccessLoading = () => {
     }
   });
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (customerKey && authKey) {
       mutation.mutate({ customerKey, authKey });

@@ -3,7 +3,6 @@ import { axiosInstance } from '@/service/axiosInstance';
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { Router } from 'express';
 
 interface IPaymentData {
   customerKey: string;
@@ -46,7 +45,7 @@ const CardRegisterSuccessLoading = () => {
       console.log('카드 등록 요청 완료');
     }
   });
-
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (customerKey && authKey) {
       mutation.mutate({ customerKey, authKey });
