@@ -2,9 +2,16 @@
 
 import MypageHeader from '@/components/mypage/MypageHeader';
 import MypageMenu from '@/components/mypage/MypageMenu';
+
 import { useBookmarks } from '@/factory/BookMark';
 import useLogout from '@/hook/useLogout';
 import useCheckLoginStatus from '@/hook/useCheckLoginStatus';
+import { logout } from '@/service/auth';
+import { useAuthStore } from '@/store/userAuth.store';
+import { getCookie, removeCookie } from '@/utils/cookie';
+import { axiosInstance } from '@/service/axiosInstance';
+import { useQuery } from '@tanstack/react-query';
+
 
 const Mypage = () => {
   const { handleLogout } = useLogout();

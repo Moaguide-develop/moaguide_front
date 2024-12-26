@@ -1,6 +1,5 @@
 import { removeToken } from "@/utils/localStorage";
-import { refreshAccessToken } from "./auth";
-import { axiosInstance } from "./axiosInstance";
+import { axiosInstance, refreshAccessToken } from "./axiosInstance";
 import { getCookie, setCookie, removeCookie } from '@/utils/cookie';
 
 export const updateNickname = async (nickname: string): Promise<boolean> => {
