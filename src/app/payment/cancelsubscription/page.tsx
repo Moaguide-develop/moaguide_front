@@ -9,8 +9,8 @@ const CancelSubscriptionPage = () => {
   const [buttonTrigger, setButtonTrigger] = useState(false);
   const { setOpen, setModalType } = useModalStore();
   return (
-    <div>
-      <div onClick={() => router.back()} className="py-[14px] cursor-pointer max-w-max">
+    <div className="px-5 pb-20 sm:px-0 sm:pb-0">
+      <div onClick={() => router.back()} className="pb-[14px] cursor-pointer max-w-max">
         <img src="/images/payment/back.svg" alt="" />
       </div>
       <div className="text-xl py-[20px]  font-bold">
@@ -26,13 +26,22 @@ const CancelSubscriptionPage = () => {
         className={`flex max-w-[640px] h-[54px] px-[16px] py-[14px] rounded-[12px] mt-[15px]
          border-[1px] cursor-pointer ${buttonTrigger ? 'border-gradient' : 'border-gray-200'}`}
         onClick={() => setButtonTrigger(!buttonTrigger)}>
-        <Image
-          src="/images/payment/CheckCircle.svg"
-          alt="Check Image"
-          width={30}
-          height={30}
-          className="border-"
-        />
+        {buttonTrigger ? (
+          <Image
+            src="/images/payment/CheckCircle.svg"
+            alt="Check Image"
+            width={30}
+            height={30}
+          />
+        ) : (
+          <Image
+            src="/images/payment/NonCheckCircle.svg"
+            alt="NonCheck Image"
+            width={30}
+            height={30}
+          />
+        )}
+
         <div className="ml-[5px]">확인하였으며, 동의합니다.</div>
       </div>
 
