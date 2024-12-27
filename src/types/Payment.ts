@@ -5,8 +5,10 @@ export interface PaymentDate {
 }
 
 export interface Payment {
+  lastLogName: string;
   date: PaymentDate;
-  status: boolean;
+  status: string;
+  lastAmount: number;
 }
 
 export interface PaymentLog {
