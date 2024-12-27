@@ -16,7 +16,7 @@ export const useCancelSubscription = () => {
     mutationFn: cancelSubscription,
     onSuccess: () => {
       alert('구독이 취소되었습니다.');
-      window.location.reload();
+      window.location.href = '/';
     },
     onError: (error) => {
       console.error('Error canceling subscription:', error);
