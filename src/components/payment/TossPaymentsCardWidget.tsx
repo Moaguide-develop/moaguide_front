@@ -28,16 +28,14 @@ const TossPaymentsCardWidget = () => {
     fetchPayment();
   }, []);
 
-  async function requestBillingAuth(couponId: number) {
+  async function requestBillingAuth() {
     // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
     // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
 
     try {
       await payment?.requestBillingAuth({
         method: 'CARD', // 자동결제(빌링)는 카드만 지원합니다
-        successUrl:
-          window.location.origin +
-          `/payment/check/confirm/successloading?couponId=${couponId}`,
+        successUrl: window.location.origin + `/payment/check/confirm/successloading`,
         failUrl: window.location.origin + '/payment/check/confirm/fail',
 
         customerName: '김토스'

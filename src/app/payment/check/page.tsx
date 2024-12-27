@@ -89,7 +89,7 @@ const PaymentCheckPage = () => {
       {/* <TossPaymentsCardWidget /> */}
       <div
         onClick={() => {
-          isChecked && requestBillingAuth(couponId);
+          isChecked && requestBillingAuth();
         }}
         className={` my-10 py-[18px] w-full rounded-[12px] flex items-center justify-center text-title1
       ${isChecked ? 'cursor-pointer bg-gradient2 text-white' : 'bg-gray100 text-gray300'}

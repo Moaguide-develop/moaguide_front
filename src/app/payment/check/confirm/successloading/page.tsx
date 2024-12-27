@@ -33,7 +33,7 @@ const PaymentSuccessLoading = () => {
 
   const fetchNextAPI = async () => {
     try {
-      const { data } = await axiosInstance.post(`/billing/start?couponId=${couponId}`);
+      const { data } = await axiosInstance.post(`/billing/start`);
       console.log('다음 API 호출 성공:', data);
       return data;
     } catch (error) {
