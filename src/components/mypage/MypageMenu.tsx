@@ -40,7 +40,7 @@ const MypageMenu = () => {
   //   router.push('/quiz/start');
   // };
   return (
-    <div className="mt-5 flex flex-col">
+    <div className="mt-2 flex flex-col">
       {MenuList.map((item, index) => (
         <MenuLayout key={index} item={item.name} img={item.img} routing={item.routing} />
       ))}
