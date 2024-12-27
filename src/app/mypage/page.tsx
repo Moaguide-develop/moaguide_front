@@ -11,22 +11,24 @@ import { useAuthStore } from '@/store/userAuth.store';
 import { getCookie, removeCookie } from '@/utils/cookie';
 import { axiosInstance } from '@/service/axiosInstance';
 import { useQuery } from '@tanstack/react-query';
-
+import { ItemOfInterst } from '@/components/mypage/ItemOfInterest';
+import { SubscribedInfo } from '@/utils/subscribedDate';
 
 const Mypage = () => {
   const { handleLogout } = useLogout();
   const { loading: loginLoading } = useCheckLoginStatus();
   const { bookmarks, isLoading: bookmarksLoading } = useBookmarks();
-
   if (loginLoading || bookmarksLoading) {
     return null;
   }
 
   return (
     <div className="min-h-[calc(100dvh-134.5px)] flex flex-col sm:min-h-[calc(100vh-60px)] sm:mb-0 w-[90%] mx-auto sm:max-w-[640px]">
-      <header>
-        <MypageHeader bookmarks={bookmarks} />
-      </header>
+      <div>
+        <MypageHeader />
+      </div>
+
+      <ItemOfInterst bookmarks={bookmarks} />
       <nav>
         <MypageMenu />
       </nav>
