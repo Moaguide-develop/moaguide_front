@@ -2,13 +2,16 @@ import React, { useRef } from 'react';
 import { useModalStore } from '@/store/modal.store';
 import Dimmed from '@/components/modal/Dimmed';
 import { useRouter } from 'next/navigation';
-import { useDeletePayment } from '@/factory/Payment';
+import { useDeletePayment } from '@/factory/DeletePayment';
+import { useCancelSubscription } from '@/factory/Payment/cancelsubscription';
 
-const CancelCardModal = () => {
+const CancelSubscriptionModal = () => {
   const { setOpen } = useModalStore();
   const ref = useRef<HTMLDivElement>(null);
   const router = useRouter();
-  const { deletePaymentMutation } = useDeletePayment();
+  // const { deletePaymentMutation } = useDeletePayment();
+
+  const { cancelSubscriptionMutation } = useCancelSubscription();
   const handleCancel = () => {
     setOpen(false);
   };
@@ -26,10 +29,10 @@ const CancelCardModal = () => {
         <div className="px-6 py-[28px] bg-white rounded-[12px]">
           <div className="w-[270px] mx-auto">
             <div className="text-heading2 flex items-center justify-center w-full">
-              결제수단 삭제
+              구독 해지
             </div>
             <div className="flex flex-col items-center mt-2 text-body4 text-gray400">
-              <div>정말 삭제하시겠습니까?</div>
+              <div>정말 구독을 해지하시겠습니까?</div>
             </div>
             <div className="flex items-center justify-center gap-2 mt-[28px]">
               <div
@@ -39,10 +42,10 @@ const CancelCardModal = () => {
               </div>
               <div
                 onClick={() => {
-                  deletePaymentMutation.mutate();
+                  cancelSubscriptionMutation.mutate();
                 }}
                 className="py-[18px] cursor-pointer flex-1 flex items-center justify-center text-title2 text-white bg-black rounded-[12px]">
-                삭제하기
+                해지하기
               </div>
             </div>
           </div>
@@ -52,4 +55,4 @@ const CancelCardModal = () => {
   );
 };
 
-export default CancelCardModal;
+export default CancelSubscriptionModal;

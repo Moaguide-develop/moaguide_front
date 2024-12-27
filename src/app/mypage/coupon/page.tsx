@@ -8,7 +8,9 @@ import { useToastStore } from '@/store/toast.store';
 import { throttle } from 'lodash';
 import { getCoupon } from '@/factory/Coupon/getCoupon';
 import { ICoupon, ICouponsType } from '@/types/coupons';
+import { useRouter } from 'next/navigation';
 const CouponPage = () => {
+  const router = useRouter();
   const [couponCode, setCouponCode] = useState('');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +30,10 @@ const CouponPage = () => {
   return (
     <div>
       <div className="max-w-[600px] mx-auto  ">
-        <Link href={'/mypage'}>
+        <div
+          onClick={() => {
+            router.back();
+          }}>
           <Image
             src="/images/product/LeftVector.svg"
             alt=""
@@ -36,7 +41,7 @@ const CouponPage = () => {
             height={10}
             className="mt-[15px]"
           />
-        </Link>
+        </div>
 
         <div className="text-lg font-bold mt-5">
           보유 쿠폰 <span className="text-gradient">{couponCount}</span>

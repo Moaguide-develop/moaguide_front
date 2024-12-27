@@ -83,7 +83,7 @@ const PaymentCard = ({ cardName, cardNumber }: ICardData) => {
     <div className="max-w-[640px] w-full h-[128px]  shadow rounded-[8px] shadow-gray-300 flex flex-col px-[20px] py-[24px]  mt-[20px]">
       <div className="flex justify-between">
         <div className="font-bold">{cardName}카드</div>
-        <div className=" text-gray-400  font-bold">{cardNumber}xx-xxxx-xxxx-1234</div>
+        <div className=" text-gray-400  font-bold">{cardNumber}xx-xxxx-xxxx-xxxx</div>
       </div>
 
       <div className=" flex justify-end mt-5">

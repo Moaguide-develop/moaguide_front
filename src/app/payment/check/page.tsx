@@ -4,16 +4,21 @@ import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import TossPaymentsCardWidget from '@/components/payment/TossPaymentsCardWidget';
 import { Line } from '@/components/common/Line';
-
+import { getCoupon } from '@/factory/Coupon/getCoupon';
+import Image from 'next/image';
 const PaymentCheckPage = () => {
+  const { data } = getCoupon();
+  const couponLength = data?.coupons?.length as number;
+  const couponName = data?.coupons[0]?.couponName;
+  console.log(data);
   const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
   const { setModalType, setOpen } = useModalStore();
   const [couponId, setCouponId] = useState(1);
-  const handleCoupon = () => {
-    setModalType('coupon');
-    setOpen(true);
-  };
+  // const handleCoupon = () => {
+  //   setModalType('coupon');
+  //   setOpen(true);
+  // };
   const { requestBillingAuth } = TossPaymentsCardWidget();
 
   return (
@@ -35,11 +40,31 @@ const PaymentCheckPage = () => {
       </div>
       <div className="py-5 flex justify-between items-center text-body2 border-b border-gray100">
         <div>쿠폰 사용</div>
-        <div
-          onClick={handleCoupon}
-          className="rounded-[12px] cursor-pointer p-3 flex items-center justify-center bg-black text-white text-body7">
-          쿠폰 선택
-        </div>
+        {couponLength > 0 ? (
+          <div className="rounded-[12px] cursor-pointer p-3 flex items-center justify-center bg-black text-white text-body7">
+            {couponName}
+          </div>
+        ) : (
+          <div>
+            <div className="rounded-[12px] cursor-pointer px-3 py-1 flex items-center justify-center bg-black text-white text-xs  font-light">
+              등록된 쿠폰이 없습니다.
+            </div>
+            <div
+              className="flex justify-end text-sm mt-2"
+              onClick={() => {
+                router.push('/mypage/coupon');
+              }}>
+              쿠폰 등록하기{' '}
+              <Image
+                src={'/images/mypage/right.svg'}
+                alt="leftarrow"
+                width={20}
+                height={20}
+                className="ml-1"
+              />
+            </div>
+          </div>
+        )}
       </div>
       <div className="py-5 flex justify-between text-body2 border-b border-gray100">
         <div>최종 결제 금액</div>
