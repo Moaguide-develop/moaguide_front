@@ -29,7 +29,7 @@ const NotPaymentIndex = () => {
       <div className="text-xl py-[20px]  font-bold">구독 관리</div>
 
       <div className="w-full max-w-[640px] px-[25px] py-[20px] flex items-center justify-between bg-gradient rounded-[12px] mb-[5px] text-white">
-        <div>{SubScribedDate}</div>
+        <div className="font-bold">{SubScribedDate}</div>
         <div>월 {SubScribedPrice?.toLocaleString()}원</div>
       </div>
 

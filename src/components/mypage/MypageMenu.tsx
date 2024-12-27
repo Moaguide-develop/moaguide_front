@@ -29,12 +29,13 @@ const MypageMenu = () => {
       name: '결제 관리',
       img: '/images/mypage/payment.svg',
       routing: 'mypage/cardmanagement'
-    },
-    {
-      name: '카카오톡 1:1 문의',
-      img: '/images/mypage/chat.svg',
-      routing: 'mypage/chat'
     }
+    // ,
+    // {
+    //   name: '카카오톡 1:1 문의',
+    //   img: '/images/mypage/chat.svg',
+    //   routing: 'mypage/chat'
+    // }
   ];
   // const handleStartQuiz = () => {
   //   router.push('/quiz/start');

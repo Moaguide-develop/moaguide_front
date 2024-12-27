@@ -69,40 +69,6 @@ const PaymentIndex = () => {
             <div className="text-body7 text-gray500">₩ 9,900/월</div>
           </div>
         </div>
-        <div
-          onClick={() => setIsActive('second')}
-          className={`w-full rounded-[12px] px-[20px] py-[22px] flex items-center justify-between border-2 cursor-pointer
-        ${isActive === 'second' ? 'border-normal' : 'border-gray100'}
-        `}>
-          <div className="text-heading4">
-            3개월 구독 <span className="text-normal">+ 1개월</span>
-          </div>
-          <div className="flex flex-col gap-2 items-end">
-            <div className="text-body7 text-gray300 line-through">₩ 30,000</div>
-            <div className="text-heading4 ">₩ 18,000</div>
-            <div className="text-body7 text-gray500">₩ 6,000/월</div>
-          </div>
-        </div>
-        <div
-          onClick={() => setIsActive('third')}
-          className={`w-full rounded-[12px] px-[20px] py-[22px] flex items-center justify-between border-2 cursor-pointer
-        ${isActive === 'third' ? 'border-normal' : 'border-gray100'}
-        `}>
-          <div className="flex flex-col gap-2">
-            <div className="bg-error text-caption3 text-white rounded-[4px] max-w-max px-[6px] py-[4px]">
-              Best
-            </div>
-            <div className="text-heading4">
-              6개월 구독 <span className="text-normal">+ 1개월</span>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-2 items-end">
-            <div className="text-body7 text-gray300 line-through">₩ 60,000</div>
-            <div className="text-heading4 ">₩ 18,000</div>
-            <div className="text-body7 text-gray500">₩ 5,000/월</div>
-          </div>
-        </div>
       </div>
       {/* 버튼 */}
       <div
