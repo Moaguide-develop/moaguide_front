@@ -3,13 +3,13 @@ import { getCookie } from '@/utils/cookie';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { Line } from '../common/Line';
-import { usePaymentCheck, usePaymentList } from '@/factory/Payment/paymentcheck';
+import { usePaymentStatus, usePaymentList } from '@/factory/Payment/paymentcheck';
 import { formatDate } from '@/utils/FormatDate';
-
+import { SubscribedInfo } from '@/utils/subscribedDate';
 const NotPaymentIndex = () => {
-  const { data, isLoading } = usePaymentCheck();
+  const { data, isLoading } = usePaymentStatus();
   const { data: paymentListData, isLoading: paymentListLoading } = usePaymentList();
-  console.log(paymentListData);
+  const { SubScribedDate, SubScribedPrice } = SubscribedInfo();
 
   const router = useRouter();
   const startDate = data?.date.startDate;
@@ -23,19 +23,19 @@ const NotPaymentIndex = () => {
   return (
     <div className="px-5 pb-20 sm:px-0 sm:pb-0">
       {/* 뒤로가기 */}
-      <div onClick={() => router.back()} className="py-[14px] cursor-pointer max-w-max">
+      <div onClick={() => router.back()} className="pb-[14px] cursor-pointer max-w-max">
         <img src="/images/payment/back.svg" alt="" />
       </div>
       <div className="text-xl py-[20px]  font-bold">구독 관리</div>
 
       <div className="w-full max-w-[640px] px-[25px] py-[20px] flex items-center justify-between bg-gradient rounded-[12px] mb-[5px] text-white">
-        <div>1개월 구독 이용중</div>
-        <div>월 9,900원</div>
+        <div>{SubScribedDate}</div>
+        <div>월 {SubScribedPrice?.toLocaleString()}원</div>
       </div>
 
       <div
         className=" w-full max-w-[640px] py-[8px] text-gray-400 border-[1px] mt-2 border-gray-300 flex justify-center items-center rounded-[12px] cursor-pointer"
-        onClick={() => router.push('/mypage/payment/cancelsubscription')}>
+        onClick={() => router.push('/payment/cancelsubscription')}>
         구독 해지
       </div>
 

@@ -2,7 +2,7 @@ import { axiosInstance } from '@/service/axiosInstance';
 import { Payment, PaymentList } from '@/types/Payment';
 import { useQuery } from '@tanstack/react-query';
 
-export const fetchPaymentCheck = async () => {
+export const fetchPaymentStatus = async () => {
   try {
     const { data } = await axiosInstance.get<Payment>('/billing/status');
     return data;
@@ -12,10 +12,10 @@ export const fetchPaymentCheck = async () => {
   }
 };
 
-export const usePaymentCheck = () => {
+export const usePaymentStatus = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['paymentcheck'],
-    queryFn: fetchPaymentCheck,
+    queryFn: fetchPaymentStatus,
     retry: 1
   });
 
