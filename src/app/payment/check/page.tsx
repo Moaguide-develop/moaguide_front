@@ -6,6 +6,8 @@ import TossPaymentsCardWidget from '@/components/payment/TossPaymentsCardWidget'
 import { Line } from '@/components/common/Line';
 import { getCoupon } from '@/factory/Coupon/getCoupon';
 import Image from 'next/image';
+import { useCheckCardRegister } from '@/factory/Card/CheckCardRegister';
+
 const PaymentCheckPage = () => {
   const { data } = getCoupon();
   const couponLength = data?.coupons?.length as number;
@@ -14,13 +16,22 @@ const PaymentCheckPage = () => {
   const router = useRouter();
   const [isChecked, setIsChecked] = useState(false);
   const { setModalType, setOpen } = useModalStore();
-  const [couponId, setCouponId] = useState(1);
-  // const handleCoupon = () => {
-  //   setModalType('coupon');
-  //   setOpen(true);
-  // };
+
+  const { data: CheckCard, isLoading } = useCheckCardRegister();
+
   const { requestBillingAuth } = TossPaymentsCardWidget();
 
+  const bililngRequest = () => {
+    if (isChecked) {
+      if (!CheckCard?.cardName) {
+        requestBillingAuth();
+      } else {
+        router.push('/payment/check/confirm/successloading');
+      }
+    } else {
+      null;
+    }
+  };
   return (
     <div className="px-5 pb-20 sm:px-0 sm:pb-0">
       {/* 뒤로가기 */}
@@ -89,7 +100,8 @@ const PaymentCheckPage = () => {
       {/* <TossPaymentsCardWidget /> */}
       <div
         onClick={() => {
-          isChecked && requestBillingAuth();
+          // isChecked && requestBillingAuth();
+          bililngRequest();
         }}
         className={` my-10 py-[18px] w-full rounded-[12px] flex items-center justify-center text-title1
       ${isChecked ? 'cursor-pointer bg-gradient2 text-white' : 'bg-gray100 text-gray300'}
