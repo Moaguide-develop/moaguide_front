@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Router } from 'express';
+import { useCheckCardRegister } from '@/factory/Card/CheckCardRegister';
 
 interface IPaymentData {
   customerKey: string;
@@ -29,7 +30,8 @@ const PaymentSuccessLoading = () => {
   const searchParams = useSearchParams();
   const customerKey = searchParams.get('customerKey');
   const authKey = searchParams.get('authKey');
-  const couponId = searchParams.get('couponId');
+
+  const { data, isLoading } = useCheckCardRegister();
 
   const fetchNextAPI = async () => {
     try {
@@ -67,8 +69,20 @@ const PaymentSuccessLoading = () => {
   });
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    if (customerKey && authKey) {
-      mutation.mutate({ customerKey, authKey });
+    if (!data?.cardName) {
+      if (customerKey && authKey) {
+        mutation.mutate({ customerKey, authKey });
+      }
+    } else {
+      fetchNextAPI()
+        .then((response) => {
+          console.log('연쇄 호출 성공:', response);
+          router.push('/payment/check/confirm/success'); // 성공 시 페이지 이동
+        })
+        .catch((error) => {
+          console.error('연쇄 호출 실패:', error);
+          router.push(`/payment/check/confirm/fail`);
+        });
     }
   }, []);
 
