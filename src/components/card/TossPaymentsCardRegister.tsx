@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 // ------  SDK 초기화 ------
 // @docs https://docs.tosspayments.com/sdk/v2/js#토스페이먼츠-초기화
 // const clientKey = 'test_ck_oEjb0gm23PJxB2xw7YYkrpGwBJn5';  // 모아가이드 테스트 키
-const clientKey = 'test_ck_Ba5PzR0ArnPORd1N1Y4N3vmYnNeD'; //  토스페이먼츠 테스트 키
+const clientKey = process.env.NEXT_PUBLIC_TOSSPAYMENT_KEY as string; //   모아가이드 테스트 키
 const customerKey = uuidv4();
 const secretKey = 'test_sk_P9BRQmyarYPJPN7axzBXVJ07KzLN';
 

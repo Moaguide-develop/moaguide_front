@@ -6,7 +6,10 @@ import { Line } from '../common/Line';
 import { usePaymentStatus, usePaymentList } from '@/factory/Payment/paymentcheck';
 import { formatDate } from '@/utils/FormatDate';
 import { SubscribedInfo } from '@/utils/subscribedDate';
+import { SubscribedStatus } from '@/utils/subscribedStatus';
 const NotPaymentIndex = () => {
+  const { Subscribestatus } = SubscribedStatus();
+  console.log(Subscribestatus);
   const { data, isLoading } = usePaymentStatus();
   const { data: paymentListData, isLoading: paymentListLoading } = usePaymentList();
   const { SubScribedDate, SubScribedPrice } = SubscribedInfo();
@@ -32,12 +35,19 @@ const NotPaymentIndex = () => {
         <div className="font-bold">{SubScribedDate}</div>
         <div>월 {SubScribedPrice?.toLocaleString()}원</div>
       </div>
-
-      <div
-        className=" w-full max-w-[640px] py-[8px] text-gray-400 border-[1px] mt-2 border-gray-300 flex justify-center items-center rounded-[12px] cursor-pointer"
-        onClick={() => router.push('/payment/cancelsubscription')}>
-        구독 해지
-      </div>
+      {Subscribestatus === 'unsubscribing' ? (
+        <div
+          className=" w-full max-w-[640px] py-[8px] text-gray-400 border-[1px] mt-2 border-gray-300 flex justify-center items-center rounded-[12px] cursor-pointer"
+          onClick={() => router.push('/payment/check')}>
+          다시 구독하기
+        </div>
+      ) : Subscribestatus == 'subscribed' ? (
+        <div
+          className=" w-full max-w-[640px] py-[8px] text-gray-400 border-[1px] mt-2 border-gray-300 flex justify-center items-center rounded-[12px] cursor-pointer"
+          onClick={() => router.push('/payment/cancelsubscription')}>
+          구독 해지
+        </div>
+      ) : undefined}
 
       <div>
         <div className=" flex justify-between items-center py-[20px]">

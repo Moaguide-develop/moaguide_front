@@ -6,8 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { fetchcardCheck } from '@/factory/Card/card';
-import TossPaymentsCardWidget from '@/components/payment/TossPaymentsCardWidget';
+import { fetchCheckCard, useCheckCardRegister } from '@/factory/Card/CheckCardRegister';
 import CardRegisterSkeleton from '@/components/skeleton/CardRegisterSkeleton';
 import TossPaymentsCardChange from '@/components/card/TossPaymentsCardChange';
 
@@ -17,11 +16,7 @@ interface ICardData {
 }
 
 const CardManagementPage = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: ['cardchecking'],
-    queryFn: fetchcardCheck,
-    retry: false
-  });
+  const { data, isLoading } = useCheckCardRegister();
 
   const { setOpen, setModalType } = useModalStore();
 
@@ -29,7 +24,6 @@ const CardManagementPage = () => {
   useEffect(() => {
     if (data) {
       if (data.cardName && data.cardNumber) {
-        console.log('bb');
         setIspayment(true);
       }
     }
