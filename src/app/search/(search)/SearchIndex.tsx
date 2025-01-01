@@ -3,7 +3,7 @@ import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 're
 import SearchRank from './SearchRank';
 import useDebounce from '@/hook/useDebounce';
 import { getSearchItem } from '@/factory/SearchItem';
-import CircleSkeleton from '../skeleton/CircleSkeleton';
+import CircleSkeleton from '../../../components/skeleton/CircleSkeleton';
 import SearchedResultItem from './SearchedResultItem';
 import { useSearchStore } from '@/store/search.store';
 import { getMainProduct } from '@/factory/MainProduct';
@@ -36,11 +36,9 @@ const SearchIndex = () => {
 
   return (
     <div className="pt-10 flex flex-col  gap-10">
-     
-        <div className="text-heading3 sm:text-heading1 text-gray700 flex items-center justify-center">
-          찾으시는 상품이 있으신가요?
-        </div>
-
+      <div className="text-heading3 sm:text-heading1 text-gray700 flex items-center justify-center">
+        찾으시는 상품이 있으신가요?
+      </div>
 
       <div className="flex items-center justify-center px-5 sm:px-0">
         <div
@@ -63,7 +61,11 @@ const SearchIndex = () => {
             </div>
           )}
           <div>
-            <img src="/images/search/search_icon.svg" alt="search" className='cursor-pointer'/>
+            <img
+              src="/images/search/search_icon.svg"
+              alt="search"
+              className="cursor-pointer"
+            />
           </div>
         </div>
       </div>
