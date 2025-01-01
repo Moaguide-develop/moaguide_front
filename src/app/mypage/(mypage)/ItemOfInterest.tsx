@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Line } from '../common/Line';
+import { Line } from '../../../components/common/Line';
 interface MypageHeaderProps {
   bookmarks: number;
 }

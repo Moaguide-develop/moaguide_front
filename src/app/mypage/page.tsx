@@ -1,7 +1,7 @@
 'use client';
 
-import MypageHeader from '@/components/mypage/MypageHeader';
-import MypageMenu from '@/components/mypage/MypageMenu';
+import MypageHeader from '@/app/mypage/(mypage)/MypageHeader';
+import MypageMenu from '@/app/mypage/(mypage)/MypageMenu';
 
 import { useBookmarks } from '@/factory/BookMark';
 import useLogout from '@/hook/useLogout';
@@ -11,7 +11,7 @@ import { useAuthStore } from '@/store/userAuth.store';
 import { getCookie, removeCookie } from '@/utils/cookie';
 import { axiosInstance } from '@/service/axiosInstance';
 import { useQuery } from '@tanstack/react-query';
-import { ItemOfInterst } from '@/components/mypage/ItemOfInterest';
+import { ItemOfInterst } from '@/app/mypage/(mypage)/ItemOfInterest';
 import { SubscribedInfo } from '@/utils/subscribedDate';
 
 const Mypage = () => {
