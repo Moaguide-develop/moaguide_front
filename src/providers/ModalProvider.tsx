@@ -5,8 +5,8 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import Quitmodal from '@/components/modal/Quitmodal';
 import Couponmodal from '@/components/modal/CouponModal';
-import CancelSignupModal from '@/components/signup/modal/CancelSignupModal';
-import SignupCompleteModal from '@/components/signup/modal/SignupCompleteModal';
+import CancelSignupModal from '@/app/signup/(signup)/modal/CancelSignupModal';
+import SignupCompleteModal from '@/app/signup/(signup)/modal/SignupCompleteModal';
 import CancelCardModal from '@/components/modal/CancelCardModal';
 import CancelSubscriptionModal from '@/components/modal/CancelSubscriptionModal';
 
