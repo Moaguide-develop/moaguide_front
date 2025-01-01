@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { useRouter } from 'next/navigation';
 import { Swiper as SwiperClass } from 'swiper/types';
-import QuizBanner from '../quize/QuizBanner';
+import QuizBanner from '../quiz/QuizBanner';
 
 const Guide = () => {
   const router = useRouter();
@@ -68,7 +68,7 @@ const Guide = () => {
             </div>
           </div>
         </SwiperSlide> */}
-          {/* <SwiperSlide>
+        {/* <SwiperSlide>
           <div 
             className="relative rounded-[12px] h-[200px] sm:h-[290px] bg-[url('/images/home/moaguide-main-event.png')] bg-cover cursor-pointer"
             onClick={handleEventClick} 

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import { IMusicYoutube } from '@/types/MusicProductType';
+import { IMusicYoutube } from '@/types/Product/MusicProductType';
 import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const MusicYoutube = () => {

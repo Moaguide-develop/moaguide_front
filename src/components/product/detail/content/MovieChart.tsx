@@ -1,4 +1,4 @@
-import { IContentMovieCharts } from '@/types/ContentProductType';
+import { IContentMovieCharts } from '@/types/Product/ContentProductType';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 import { Line } from 'react-chartjs-2';

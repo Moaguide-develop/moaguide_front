@@ -1,7 +1,7 @@
 import { useAddBookMark, useDeleteBookMark } from '@/factory/BookMark';
 import { useAuthStore } from '@/store/userAuth.store';
 import { useEffect } from 'react';
-import { ProductDetail } from '@/types/ProductType';
+import { ProductDetail } from '@/types/Product/ProductType';
 
 export interface BookmarkUpdateProps<T extends ProductDetail> {
   data: T | undefined;

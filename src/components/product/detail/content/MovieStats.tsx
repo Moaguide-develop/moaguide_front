@@ -1,5 +1,5 @@
 import { basicAxiosInstance } from '@/service/axiosInstance';
-import { IContentMovieStats } from '@/types/ContentProductType';
+import { IContentMovieStats } from '@/types/Product/ContentProductType';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
-import { ISubwayData } from '@/types/BuildingProductType';
+import { ISubwayData } from '@/types/Product/BuildingProductType';
 import { basicAxiosInstance } from '@/service/axiosInstance';
 import { TooltipItem } from 'chart.js';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
-import { IStayRateData } from '@/types/BuildingProductType';
+import { IStayRateData } from '@/types/Product/BuildingProductType';
 import { Chart } from 'react-chartjs-2';
 import { ScriptableContext, TooltipItem } from 'chart.js';
 import { basicAxiosInstance } from '@/service/axiosInstance';

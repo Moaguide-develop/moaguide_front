@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
-import { IMusicBulidingStockPriceChart } from '@/types/MusicProductType';
+import { IMusicBulidingStockPriceChart } from '@/types/Product/MusicProductType';
 import { basicAxiosInstance } from '@/service/axiosInstance';
 import { TooltipItem } from 'chart.js';
 

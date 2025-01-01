@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname } from 'next/navigation';
-import { IStayDayData } from '@/types/BuildingProductType';
+import { IStayDayData } from '@/types/Product/BuildingProductType';
 import { TooltipItem } from 'chart.js';
 import { basicAxiosInstance } from '@/service/axiosInstance';
 

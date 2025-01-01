@@ -6,7 +6,7 @@ import { GetContentMoviePeopleData } from '@/factory/ContentMoviePeople';
 import {
   IContentActorStats,
   IContentProductContentActor
-} from '@/types/ContentProductType';
+} from '@/types/Product/ContentProductType';
 import Image from 'next/image';
 import { InvalidateQueryFilters } from '@tanstack/react-query';
 interface MoviePeopleLayoutProps {

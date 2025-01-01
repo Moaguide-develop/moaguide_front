@@ -4,7 +4,7 @@ import UseNewsList from '@/factory/useNewsList';
 import { useCallback } from 'react';
 import NoticeItemSkeleton from '@/components/skeleton/NoticeItemSkeleton';
 import { Virtuoso } from 'react-virtuoso';
-import { INewsItem } from '@/types/BuildingProductType';
+import { INewsItem } from '@/types/Product/BuildingProductType';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { CATEGORY } from '@/static/category';

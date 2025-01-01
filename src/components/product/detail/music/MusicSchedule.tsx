@@ -1,5 +1,5 @@
 import { basicAxiosInstance } from '@/service/axiosInstance';
-import { IMusicSchedule } from '@/types/MusicProductType';
+import { IMusicSchedule } from '@/types/Product/MusicProductType';
 import { useQuery } from '@tanstack/react-query';
 import { usePathname, useRouter } from 'next/navigation';
 

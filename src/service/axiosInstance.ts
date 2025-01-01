@@ -9,24 +9,25 @@ const backendUrl =
 // Axios 인스턴스 정의
 export const axiosInstance = axios.create({
   baseURL: backendUrl,
-  withCredentials: true,
+  withCredentials: true
 });
 
 export const basicAxiosInstance = axios.create({
   baseURL: backendUrl,
-  withCredentials: true,
+  withCredentials: true
 });
 
 export const refreshAxiosInstance = axios.create({
   baseURL: backendUrl,
-  withCredentials: true,
+  withCredentials: true
 });
 
 // 리프레시 토큰 함수
 export const refreshAccessToken = async () => {
   try {
     const response = await refreshAxiosInstance.post('/token/refresh');
-    const newToken = response.headers['authorization'] || response.headers['Authorization'];
+    const newToken =
+      response.headers['authorization'] || response.headers['Authorization'];
     if (!newToken) throw new Error('새로운 액세스 토큰을 받을 수 없습니다.');
     const accessToken = newToken.replace('Bearer ', '');
     setToken(accessToken); // 새 토큰 저장
@@ -47,7 +48,7 @@ axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  (error) => Promise.reject(error),
+  (error) => Promise.reject(error)
 );
 
 axiosInstance.interceptors.response.use(
@@ -69,5 +70,5 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  },
+  }
 );

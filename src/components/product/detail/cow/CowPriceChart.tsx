@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Line } from 'react-chartjs-2';
 import { useRef, useState } from 'react';
-import { ICowProductPrice } from '@/types/CowProductType';
+import { ICowProductPrice } from '@/types/Product/CowProductType';
 import { basicAxiosInstance } from '@/service/axiosInstance';
 
 const CowPriceChart = () => {

@@ -1,5 +1,5 @@
 import { CATEGORY } from '@/static/category';
-import { ProductDetail } from '@/types/ProductType';
+import { ProductDetail } from '@/types/Product/ProductType';
 import Image from 'next/image';
 import Link from 'next/link';
 

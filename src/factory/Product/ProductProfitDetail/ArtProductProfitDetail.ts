@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/service/axiosInstance';
-import { IArtProductProfitDetail } from '@/types/ArtProductType';
+import { IArtProductProfitDetail } from '@/types/Product/ArtProductType';
 import { useQuery, QueryFunctionContext } from '@tanstack/react-query';
 
 const fetchArtProductProfitDetail = async (context: QueryFunctionContext) => {

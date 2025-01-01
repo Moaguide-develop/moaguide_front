@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Chart } from 'react-chartjs-2';
 import { usePathname } from 'next/navigation';
-import { IMusicCopyRightFeeChart } from '@/types/MusicProductType';
+import { IMusicCopyRightFeeChart } from '@/types/Product/MusicProductType';
 import { useQuery } from '@tanstack/react-query';
 import { basicAxiosInstance } from '@/service/axiosInstance';
 import { ScriptableContext, TooltipItem } from 'chart.js';
