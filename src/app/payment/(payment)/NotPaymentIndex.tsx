@@ -2,7 +2,7 @@
 import { getCookie } from '@/utils/cookie';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { Line } from '../common/Line';
+import { Line } from '../../../components/common/Line';
 import { usePaymentStatus, usePaymentList } from '@/factory/Payment/paymentcheck';
 import { formatDate } from '@/utils/FormatDate';
 import { SubscribedInfo } from '@/utils/subscribedDate';
