@@ -3,7 +3,7 @@ import type { MainNews } from '@/types/homeComponentsType';
 import React from 'react';
 import BestNewsItem from './BestNewsItem';
 import { getRecentlyIssues } from '@/factory/RecentlyIssues';
-import BestNewsItemSkeleton from '../skeleton/BestNewsItemSkeleton';
+import BestNewsItemSkeleton from '../../../components/skeleton/BestNewsItemSkeleton';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

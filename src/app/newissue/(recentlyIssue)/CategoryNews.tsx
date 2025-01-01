@@ -3,7 +3,7 @@ import type { IssueListItem } from '@/types/homeComponentsType';
 import React, { useCallback, useState } from 'react';
 import CategoryNewsItem from './CategoryNewsItem';
 import { getIssueLists } from '@/factory/IssueLists';
-import CategoryNewsItemSkeleton from '../skeleton/CategoryNewsItemSkeleton';
+import CategoryNewsItemSkeleton from '../../../components/skeleton/CategoryNewsItemSkeleton';
 import { Virtuoso } from 'react-virtuoso';
 
 const CategoryNews = () => {

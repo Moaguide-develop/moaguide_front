@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { useRouter } from 'next/navigation';
 import { Swiper as SwiperClass } from 'swiper/types';
-import QuizBanner from '../quiz/QuizBanner';
+import QuizBanner from '../../app/quiz/(quiz)/QuizBanner';
 
 const Guide = () => {
   const router = useRouter();

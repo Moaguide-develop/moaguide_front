@@ -5,7 +5,7 @@ import { useQuizDetail } from '@/factory/Quiz/QuizDetail';
 import QuizBanner from './QuizBanner';
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import QuizSkeleton from '../skeleton/QuizSkeleton';
+import QuizSkeleton from '../../../components/skeleton/QuizSkeleton';
 import { axiosInstance } from '@/service/axiosInstance';
 
 const QuizePage = () => {
