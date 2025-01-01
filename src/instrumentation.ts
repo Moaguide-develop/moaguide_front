@@ -15,6 +15,7 @@ export async function register() {
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN, // Sentry DSN 환경 변수
     tracesSampleRate: 1.0, // 성능 모니터링 비율
     environment: process.env.NEXT_PUBLIC_SENTRY_ENV || 'development', // 환경 설정
-    integrations: [] // 필요한 Sentry 통합 옵션 추가
+    integrations: [], // 필요한 Sentry 통합 옵션 추가,
+    debug: true // 디버그 모드 활성화
   });
 }
