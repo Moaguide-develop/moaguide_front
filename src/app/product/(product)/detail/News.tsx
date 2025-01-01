@@ -28,12 +28,12 @@ const News = () => {
   const allPosts = data?.pages.flatMap((page) => page.news) || [];
 
   return (
-    <div className="max-w-[1000px] mx-auto mt-[32px]">
+    <div className="max-w-[1000px] mx-auto mt-[32px] overflow-hidden">
       {isLoading ? (
         Array.from({ length: 5 }).map((_, i) => <NoticeItemSkeleton key={i} />)
       ) : (
         <Virtuoso
-          style={{ height: '200px', margin: '0px' }}
+          style={{ height: '100%', margin: '0px' }}
           useWindowScroll
           totalCount={allPosts.length}
           data={allPosts}

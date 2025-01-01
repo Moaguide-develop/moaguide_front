@@ -1,11 +1,11 @@
 'use client';
 import Container from '@/components/common/Container';
-import Dividend from '@/components/product/Dividend';
-import Filter from '@/components/product/Filter';
-import TopProduct from '@/components/product/TopProduct';
+import Dividend from './Dividend';
+import Filter from './Filter';
+import TopProduct from './TopProduct';
 import React, { useState } from 'react';
-import ProductIsdealSort from '@/components/product/sort/ProductIsdealSort';
-import ProductDealContentList from '@/components/product/contentlist/ProductDealContentList';
+import ProductIsdealSort from './sort/ProductIsdealSort';
+import ProductDealContentList from './contentlist/ProductDealContentList';
 import {
   ISummaryData,
   IReportData,
@@ -19,7 +19,7 @@ import ProductRecruitmentSort from './sort/ProductRecruitmentSort';
 import ProductEndRecruitmentSort from './sort/ProductEndRecruitmentSort';
 import ProductRecruitmentContentList from './contentlist/ProductRecruitmentContentList';
 import ProductEndRecruitmentContentList from './contentlist/ProductEndRecruitmentContentList';
-import { Line } from '../common/Line';
+import { Line } from '@/components/common/Line';
 
 interface IProductBuildingProps extends ISummaryData, IReportData {
   content:

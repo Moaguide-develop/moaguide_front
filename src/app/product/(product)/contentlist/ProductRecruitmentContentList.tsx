@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Container from '../../common/Container';
+import Container from '@/components/common/Container';
 import { IProductRecruitmentData } from '@/types/Diviend';
 import ProductPagenation from '../pagenation/ProductPagenation';
 import Link from 'next/link';
