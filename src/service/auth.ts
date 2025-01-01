@@ -78,6 +78,7 @@ export const login = async (email: string, password: string, rememberMe: boolean
     });
 
     const token = response.headers['authorization'] || response.headers['Authorization'];
+
     if (!token) {
       throw new Error(
         '토큰을 찾을 수 없습니다. 헤더에서 Authorization이 존재하지 않습니다.'
@@ -185,7 +186,6 @@ export const getUserEmail = async (token: string) => {
     throw error;
   }
 };
-
 
 export const refreshAccessToken = async () => {
   try {

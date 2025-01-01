@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Container from '@/components/common/Container';
-import QuizQuestions from '@/components/quiz/QuizQuestions';
-import QuizSubmitButton from '@/components/quiz/QuizSubmitButton';
+import QuizQuestions from '@/app/quiz/(quiz)/QuizQuestions';
+import QuizSubmitButton from '@/app/quiz/(quiz)/QuizSubmitButton';
 import { useQuizQuestions } from '@/factory/Quiz/QuizFetch';
 import { submitQuizAnswers } from '@/factory/Quiz/QuizSubmit';
 import QuizSkeleton from '@/components/skeleton/QuizSkeleton';

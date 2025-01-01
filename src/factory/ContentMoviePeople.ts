@@ -1,4 +1,4 @@
-import { IContentProductContentActor } from '@/types/ContentProductType';
+import { IContentProductContentActor } from '@/types/Product/ContentProductType';
 import { useQuery } from '@tanstack/react-query';
 import { QueryFunctionContext } from '@tanstack/react-query';
 import { basicAxiosInstance } from '@/service/axiosInstance';

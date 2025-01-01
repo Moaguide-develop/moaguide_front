@@ -1,15 +1,15 @@
 'use client';
 import Container from '@/components/common/Container';
-import NavBar from '@/components/product/detail/NavBar';
-import News from '@/components/product/detail/News';
-import Report from '@/components/product/detail/Report';
+import NavBar from '@/app/product/(product)/detail/NavBar';
+import News from '@/app/product/(product)/detail/News';
+import Report from '@/app/product/(product)/detail/Report';
 import { useState } from 'react';
 import { getArtProductDetail } from '@/factory/Product/ProductDetail/ArtProductDetail';
-import ArtProfit from '@/components/product/detail/art/ArtProfit';
-import ArtProductDetail from '@/components/product/detail/art/ArtProductDetail';
+import ArtProfit from '@/app/product/(product)/detail/art/ArtProfit';
+import ArtProductDetail from '@/app/product/(product)/detail/art/ArtProductDetail';
 import '../../../../plugin';
-import { BookmarkUpdate } from '@/components/product/detail/BookmarkUpdate';
-import { ArtTopDetail } from '@/components/product/detail/art/ArtTopDetail';
+import { BookmarkUpdate } from '@/app/product/(product)/detail/BookmarkUpdate';
+import { ArtTopDetail } from '@/app/product/(product)/detail/art/ArtTopDetail';
 import dynamic from 'next/dynamic';
 
 const BlurWrapper = dynamic(() => import('@/components/common/BlurWrapper'), {

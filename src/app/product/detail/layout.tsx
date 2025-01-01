@@ -1,10 +1,10 @@
 'use client';
 import Gnb from '@/components/common/Gnb';
-import ArtDetailGnb from '@/components/product/gnb/ArtDetailGnb';
-import BuildingDetailGnb from '@/components/product/gnb/BuildingDetailGnb';
-import ContentDetailGnb from '@/components/product/gnb/ContentDetailGnb';
-import CowDetailGnb from '@/components/product/gnb/CowDetailGnb';
-import MusicDetailGnb from '@/components/product/gnb/MusicDetailGnb';
+import ArtDetailGnb from '../(product)/gnb/ArtDetailGnb';
+import BuildingDetailGnb from '../(product)/gnb/BuildingDetailGnb';
+import ContentDetailGnb from '../(product)/gnb/ContentDetailGnb';
+import CowDetailGnb from '../(product)/gnb/CowDetailGnb';
+import MusicDetailGnb from '../(product)/gnb/MusicDetailGnb';
 import { usePathname } from 'next/navigation';
 export default function ProductDetailLayout({
   children

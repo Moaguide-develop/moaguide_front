@@ -2,7 +2,7 @@
 import { useModalStore } from '@/store/modal.store';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import TossPaymentsCardWidget from '@/components/payment/TossPaymentsCardWidget';
+import TossPaymentsCardWidget from '@/app/payment/(payment)/TossPaymentsCardWidget';
 import { Line } from '@/components/common/Line';
 import { getCoupon } from '@/factory/Coupon/getCoupon';
 import Image from 'next/image';

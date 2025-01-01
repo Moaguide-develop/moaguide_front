@@ -1,4 +1,4 @@
-import QuizeIndex from '@/components/quize/QuizeIndex';
+import QuizeIndex from '@/app/quiz/(quiz)/QuizeIndex';
 
 const QuizePage = () => {
   return (
