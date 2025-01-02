@@ -65,8 +65,8 @@ const PaymentIndex = () => {
           <div className="text-heading4 text-normal">1개월 구독 + 1개월</div>
           <div className="flex flex-col gap-2 items-end">
             <div className="text-body7 text-gray300 line-through">₩ 10,000</div>
-            <div className="text-heading4 ">₩ 9,900</div>
-            <div className="text-body7 text-gray500">₩ 9,900/월</div>
+            <div className="text-heading4 ">₩ 4,900</div>
+            <div className="text-body7 text-gray500">₩ 4,900/월</div>
           </div>
         </div>
       </div>
