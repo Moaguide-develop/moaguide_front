@@ -52,7 +52,7 @@ const PaymentSuccessLoading = () => {
       fetchNextAPI()
         .then((response) => {
           console.log('연쇄 호출 성공:', response);
-          router.push('/payment/check/confirm/success'); // 성공 시 페이지 이동
+          router.push(`/payment/check/confirm/success?orderId=${response?.orderId}`); // 성공 시 페이지 이동
         })
         .catch((error) => {
           console.error('연쇄 호출 실패:', error);
@@ -77,7 +77,7 @@ const PaymentSuccessLoading = () => {
       fetchNextAPI()
         .then((response) => {
           console.log('연쇄 호출 성공:', response);
-          router.push('/payment/check/confirm/success'); // 성공 시 페이지 이동
+          router.push(`/payment/check/confirm/success?orderId=${response?.orderId}`); // 성공 시 페이지 이동
         })
         .catch((error) => {
           console.error('연쇄 호출 실패:', error);
