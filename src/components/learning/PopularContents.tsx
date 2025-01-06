@@ -8,10 +8,15 @@ import defaultImage from '../../../public/images/learning/learning_img.svg';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import PopularContentsSkeleton from '../skeleton/PopularContentsSkeleton';
+import { useRouter } from 'next/navigation';
 
+/*
+todo: any 타입 변경
+*/
 const PopularContents = ({ contents }: { contents: any[] }) => {
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
-
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 640);
@@ -45,13 +50,14 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
               {contents.map((content, index) => (
                 <SwiperSlide key={index}>
                   <div
-                    className="relative w-full h-[500px] bg-cover bg-center"
+                    className="relative w-full h-[500px] bg-cover bg-center cursor-pointer"
                     style={{
                       backgroundImage: `url('${content.img_link || defaultImage.src}')`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                       backgroundRepeat: 'no-repeat',
                     }}
+                    onClick={() => router.push(`/learning/detail/${content.articleId}`)}
                   >
                     <div className="absolute inset-0 bg-black bg-opacity-50 filter blur-lg"></div>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[270px] h-[300px]">
@@ -90,7 +96,8 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
               {contents.map((content, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-white"
+                  className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-white cursor-pointer"
+                  onClick={() => router.push(`/learning/detail/${content.articleId}`)}
                 >
                   <div className="relative w-full h-[180px]">
                     <Image
