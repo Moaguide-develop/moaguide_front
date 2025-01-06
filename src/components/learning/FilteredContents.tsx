@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import defaultImage from '../../../public/images/learning/learning_img.svg';
 import { FilteredResponse } from '@/types/filterArticle';
@@ -17,6 +18,7 @@ const FilteredContents = ({
   size,
   onPageChange,
 }: FilteredContentsProps) => {
+  const router = useRouter();
   const totalPages = Math.ceil(total / size);
 
   const formatDate = (dateString: string) => {
@@ -33,15 +35,18 @@ const FilteredContents = ({
     }
     return defaultImage;
   };
-
   return (
     <div className="mt-10">
       <div className="space-y-10">
         {contents.length > 0 ? (
           contents.map((item) => (
-            <div key={item.article.articleId} className="flex items-center gap-4">
+            <div
+              key={item.article.articleId}
+              className="flex items-center gap-4 cursor-pointer"
+              onClick={() => router.push(`/learning/detail/${item.article.articleId}`)}
+            >
               <div className="w-64 h-40 flex-shrink-0 overflow-hidden rounded-md">
-                <Image
+               <Image
                   src={getValidImageSrc(item.article.img_link)}
                   alt={item.article.title}
                   width={128}

@@ -18,3 +18,15 @@ export interface Article {
     recentContents: Content[];
     popularContents: Content[];
   }
+
+  export interface ArticleDetail {
+    articleId: number;
+    categoryName: string;
+    title: string;
+    authorName: string;
+    text: string;
+    imgLink: string | null;
+    views: number;
+    likes: number;
+    createdAt: string;
+  }
