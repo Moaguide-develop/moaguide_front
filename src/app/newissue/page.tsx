@@ -1,5 +1,5 @@
 'use client';
-import RecentlyIssueIndex from '@/components/recentlyIssue/Index';
+import RecentlyIssueIndex from '@/app/newissue/(recentlyIssue)/Index';
 import Navbar from '@/components/common/Navbar';
 const NewIssuePage = () => {
   return (

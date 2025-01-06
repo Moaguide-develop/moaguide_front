@@ -1208,26 +1208,22 @@
   resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.4.4.tgz#767cf8e5d528a5d90c9740ca66eb079f5e87d423"
   integrity sha512-5U6SY5z8N42VtrCrKlsTAA35gy2VSyYtHWCsg1H87NU1SXnEfekTVlrga9fzUDrrHcGi2Lb5KenUWb4lRQT5/g==
 
-"@tanstack/match-sorter-utils@^8.7.0":
-  version "8.19.4"
-  resolved "https://registry.yarnpkg.com/@tanstack/match-sorter-utils/-/match-sorter-utils-8.19.4.tgz#dacf772b5d94f4684f10dbeb2518cf72dccab8a5"
-  integrity sha512-Wo1iKt2b9OT7d+YGhvEPD3DXvPv2etTusIMhMUoG7fbhmxcXCtIjJDEygy91Y2JFlwGyjqiBPRozme7UD8hoqg==
-  dependencies:
-    remove-accents "0.5.0"
-
 "@tanstack/query-core@5.59.17":
   version "5.59.17"
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.59.17.tgz#bda3bb678be48e2f6ee692abd1cfc2db3d455e4b"
   integrity sha512-jWdDiif8kaqnRGHNXAa9CnudtxY5v9DUxXhodgqX2Rwzj+1UwStDHEbBd9IA5C7VYAaJ2s+BxFR6PUBs8ERorA==
 
-"@tanstack/react-query-devtools@4":
-  version "4.36.1"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-4.36.1.tgz#7e63601135902a993ca9af73507b125233b1554e"
-  integrity sha512-WYku83CKP3OevnYSG8Y/QO9g0rT75v1om5IvcWUwiUZJ4LanYGLVCZ8TdFG5jfsq4Ej/lu2wwDAULEUnRIMBSw==
+"@tanstack/query-devtools@5.61.4":
+  version "5.61.4"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-devtools/-/query-devtools-5.61.4.tgz#86a3be0ffb97d810525600e3787b5b69808cf9db"
+  integrity sha512-21Tw+u8E3IJJj4A/Bct4H0uBaDTEu7zBrR79FeSyY+mS2gx5/m316oDtJiKkILc819VSTYt+sFzODoJNcpPqZQ==
+
+"@tanstack/react-query-devtools@^5.62.7":
+  version "5.62.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-5.62.7.tgz#8f3f82822f3d5cb326026e96519dff3141d18533"
+  integrity sha512-wxXsdTZJRs//hMtJMU5aNlUaTclRFPqLvDNeWbRj8YpGD3aoo4zyu53W55W2DY16+ycg3fti21uCW4N9oyj91w==
   dependencies:
-    "@tanstack/match-sorter-utils" "^8.7.0"
-    superjson "^1.10.0"
-    use-sync-external-store "^1.2.0"
+    "@tanstack/query-devtools" "5.61.4"
 
 "@tanstack/react-query@^5.59.19":
   version "5.59.19"
@@ -1240,6 +1236,13 @@
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/@tosspayments/brandpay-types/-/brandpay-types-0.2.6.tgz#0a64d6cd4a6be97af374ad6cf0f2d155312d3819"
   integrity sha512-FY8aOm/2rqtXjYux9ZdNTL6GC5+VNIw8eOQ7TP01dS2uGWSzAtR6uuw9HVsgkmJtSyJgmo97tjmbio5oyeyFlg==
+
+"@tosspayments/payment-sdk@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@tosspayments/payment-sdk/-/payment-sdk-1.9.1.tgz#53abe591cd92d9fd245cafc7822dc2ff2fdaaee5"
+  integrity sha512-OzDG2kOGOrb5JRvprR8R/mQzXFNnLW/6X09uLY1KF4+O7ASu6LrMoFCERd+WeAJMtRAARkclGDcJ/GSu+OHzzg==
+  dependencies:
+    "@tosspayments/payment__types" "1.69.0"
 
 "@tosspayments/payment-widget-sdk@^0.11.1":
   version "0.11.1"
@@ -1262,6 +1265,13 @@
     "@tosspayments/payment-widget-types" "^0.0.5"
     "@tosspayments/payment__types" "^1.66.3"
 
+"@tosspayments/payment__types@1.69.0":
+  version "1.69.0"
+  resolved "https://registry.yarnpkg.com/@tosspayments/payment__types/-/payment__types-1.69.0.tgz#5b0fb993cc04a4844587bfc152970b7c17af8e50"
+  integrity sha512-EbU36vLEWfhRpX/g4V0DyRiUmTkNeeVDYjJamD9aJiLmRbLl9PVdXi5QOQTMYma2RGRgA8drHY4yDMsjvKFwCg==
+  dependencies:
+    "@tosspayments/sdk-constants" "^0.2.2"
+
 "@tosspayments/payment__types@^1.66.3":
   version "1.68.0"
   resolved "https://registry.yarnpkg.com/@tosspayments/payment__types/-/payment__types-1.68.0.tgz#924fcd0b1da44d115c6ecfa62b84291c55061490"
@@ -1275,6 +1285,11 @@
   integrity sha512-qTIcD9JnVtN65/yiW5sPAlvK5fpQtDluv4IEyslubncbQLQKE+ePSnGZU1fLNPxcchv6QTnwmgj9Ndm6EN/Ymg==
   dependencies:
     type-fest "^2.11.2"
+
+"@tosspayments/tosspayments-sdk@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@tosspayments/tosspayments-sdk/-/tosspayments-sdk-2.3.2.tgz#860919bc180ee5c467275151b2845345866cfb2c"
+  integrity sha512-8Sq1cMc4HrxF4zaL213D51epQM7P5p7Tq/iLARooX8SMSY/16MVs8NUuIcmO1dbfpcBaX10wLwYSOZcL4ZGRtw==
 
 "@types/body-parser@*":
   version "1.19.5"
@@ -2412,13 +2427,6 @@ cookie@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.6.0.tgz#2798b04b071b0ecbff0dbb62a505a8efa4e19051"
   integrity sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==
-
-copy-anything@^3.0.2:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/copy-anything/-/copy-anything-3.0.5.tgz#2d92dce8c498f790fa7ad16b01a1ae5a45b020a0"
-  integrity sha512-yCEafptTtb4bk7GLEQoM8KVJpxAfdBJYaXyzQEgQQQgYrZiDp8SJmGKlYza6CYjEDNstAdNdKA3UuoULlEbS6w==
-  dependencies:
-    is-what "^4.1.8"
 
 copy-to-clipboard@^3.3.1:
   version "3.3.3"
@@ -4132,11 +4140,6 @@ is-weakset@^2.0.3:
   dependencies:
     call-bind "^1.0.7"
     get-intrinsic "^1.2.4"
-
-is-what@^4.1.8:
-  version "4.1.16"
-  resolved "https://registry.yarnpkg.com/is-what/-/is-what-4.1.16.tgz#1ad860a19da8b4895ad5495da3182ce2acdd7a6f"
-  integrity sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==
 
 isarray@^2.0.5:
   version "2.0.5"
@@ -6281,13 +6284,6 @@ sucrase@^3.32.0:
     pirates "^4.0.1"
     ts-interface-checker "^0.1.9"
 
-superjson@^1.10.0:
-  version "1.13.3"
-  resolved "https://registry.yarnpkg.com/superjson/-/superjson-1.13.3.tgz#3bd64046f6c0a47062850bb3180ef352a471f930"
-  integrity sha512-mJiVjfd2vokfDxsQPOwJ/PtanO87LhpYY88ubI5dUB1Ab58Txbyje3+jpm+/83R/fevaq/107NNhtYBLuoTrFg==
-  dependencies:
-    copy-anything "^3.0.2"
-
 supports-color@^7.1.0:
   version "7.2.0"
   resolved "https://registry.npmjs.org/supports-color/-/supports-color-7.2.0.tgz"
@@ -6312,10 +6308,10 @@ svg-pathdata@^6.0.3:
   resolved "https://registry.yarnpkg.com/svg-pathdata/-/svg-pathdata-6.0.3.tgz#80b0e0283b652ccbafb69ad4f8f73e8d3fbf2cac"
   integrity sha512-qsjeeq5YjBZ5eMdFuUa4ZosMLxgr5RZ+F+Y1OrDhuOCEInRMA3x74XdBtggJcj9kOeInz0WE+LgCPDkZFlBYJw==
 
-swiper@^11.1.8:
-  version "11.1.8"
-  resolved "https://registry.yarnpkg.com/swiper/-/swiper-11.1.8.tgz#16a9ce0441a45cc8d754280361a100e530364583"
-  integrity sha512-sBFp7fA+IfZ/7BMcg8/JSEqDD1qZXBUyliT76yk3zIYVu2fMwFVAghhAJ9vBM5tJUtHW5qcD0pmeEGQs1EK14w==
+swiper@^11.1.15:
+  version "11.1.15"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-11.1.15.tgz#e2258c8d38282e2f115ca463d6e8c5b84cdcf1ca"
+  integrity sha512-IzWeU34WwC7gbhjKsjkImTuCRf+lRbO6cnxMGs88iVNKDwV+xQpBCJxZ4bNH6gSrIbbyVJ1kuGzo3JTtz//CBw==
 
 synckit@^0.9.1:
   version "0.9.1"
@@ -6740,11 +6736,6 @@ use-sync-external-store@1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
-
-use-sync-external-store@^1.2.0:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.2.tgz#c3b6390f3a30eba13200d2302dcdf1e7b57b2ef9"
-  integrity sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==
 
 util-deprecate@^1.0.2:
   version "1.0.2"

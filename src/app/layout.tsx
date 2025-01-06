@@ -12,6 +12,8 @@ import GnbWrapper from '@/components/common/GnbWrapper';
 import './plugin';
 import NaverAnalytics from '@/lib/NaverAnalytics';
 import AuthWrapper from '@/components/common/AuthWrapper';
+import ToastProvider from '@/providers/ToastProvider';
+import RefreshTokenWrapper from '@/components/common/RefreshTokenWrapper';
 
 declare global {
   interface Window {
@@ -99,10 +101,14 @@ export default function RootLayout({
             />
             {/* <AuthWrapper /> */}
             <GnbWrapper />
+            <RefreshTokenWrapper />
             {children}
             <MobileFooter />
             <ModalProvider />
+
             <div id="root-portal"></div>
+            <ToastProvider />
+            <div id="toast-portal"></div>
           </QueryProvider>
         </IntegrateMSW>
       </body>

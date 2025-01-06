@@ -15,7 +15,7 @@
 }
 
 .mySwiper .swiper-pagination {
-  padding-top: 100px;
+  /* padding-top: 100px; */
   bottom: 0px;
   /* 하단에 위치 */
   position: absolute;
@@ -84,7 +84,7 @@
 }
 
 .mySwiper2 .swiper-pagination {
-  padding-top: 100px;
+  padding-top: 16px;
   bottom: 0px;
   position: absolute;
   width: 100%;
@@ -130,3 +130,27 @@
     backdrop-filter: blur(2px);
   }
 }
+
+.mySwiper2 .swiper-pagination {
+  position: static !important; 
+  margin-top: 16px; 
+  display: flex;
+  justify-content: center; 
+}
+
+.mySwiper2 .swiper-pagination-bullet {
+  background-color: #888; 
+  opacity: 1;
+}
+
+.mySwiper2 .swiper-pagination-bullet-active {
+  background-color: #000; 
+}
+.custom-swiper-pagination .swiper-pagination {
+  position: static; 
+  margin-top: 16px; 
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+}
+
