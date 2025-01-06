@@ -1,4 +1,4 @@
-import { IMusicBulidingStockPriceChart } from '@/types/Product/MusicProductType';
+import { IMusicBulidingStockPriceChart } from '@/types/MusicProductType';
 import { TooltipItem } from 'chart.js';
 
 const ChartOption = ({ data }: { data: IMusicBulidingStockPriceChart }) => {
