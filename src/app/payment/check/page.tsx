@@ -91,13 +91,13 @@ const PaymentCheckPage = () => {
       </div>
       <div>
         <div className="flex justify-between items-center ">
-          <div className="flex items-center gap-2  py-5">
+          <div className=" flex items-center gap-2  py-5">
             <div>
               <input
                 type="checkbox"
                 checked={isChecked}
                 onChange={() => setIsChecked((prev) => !prev)}
-                className="cursor-pointer"
+                className="subscribed_check cursor-pointer"
               />
             </div>
             <div
@@ -120,7 +120,7 @@ const PaymentCheckPage = () => {
           // isChecked && requestBillingAuth();
           bililngRequest();
         }}
-        className={` my-10 py-[18px] w-full rounded-[12px] flex items-center justify-center text-title1
+        className={`payment_start my-10 py-[18px] w-full rounded-[12px] flex items-center justify-center text-title1
       ${isChecked ? 'cursor-pointer bg-gradient2 text-white' : 'bg-gray100 text-gray300'}
       `}>
         {couponLength > 0 ? <div> 0원 결제하기</div> : <div>4,900 원 결제하기</div>}
