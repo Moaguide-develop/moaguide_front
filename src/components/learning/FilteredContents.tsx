@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import defaultImage from '../../../public/images/learning/learning_img.svg';
+import { FilteredResponse } from '@/types/filterArticle';
 
 interface FilteredContentsProps {
-  contents: any[];
+  contents: FilteredResponse['content'];
   total: number;
   page: number;
   size: number;
@@ -20,19 +21,29 @@ const FilteredContents = ({
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toISOString().split('T')[0]; 
+    return date.toISOString().split('T')[0];
+  };
+
+  const getValidImageSrc = (imgLink: string | null) => {
+    if (!imgLink || imgLink === '테스트') {
+      return defaultImage; 
+    }
+    if (imgLink.startsWith('http://') || imgLink.startsWith('https://')) {
+      return imgLink;
+    }
+    return defaultImage;
   };
 
   return (
-    <div className='mt-10'>
+    <div className="mt-10">
       <div className="space-y-10">
         {contents.length > 0 ? (
           contents.map((item) => (
-            <div key={item.contentId} className="flex items-center gap-4">
+            <div key={item.article.articleId} className="flex items-center gap-4">
               <div className="w-64 h-40 flex-shrink-0 overflow-hidden rounded-md">
                 <Image
-                  src={item.img_link || defaultImage}
-                  alt={item.title}
+                  src={getValidImageSrc(item.article.img_link)}
+                  alt={item.article.title}
                   width={128}
                   height={80}
                   className="object-cover w-full h-full"
@@ -40,15 +51,15 @@ const FilteredContents = ({
               </div>
               <div className="h-full flex-1">
                 <h3 className="text-lg font-bold text-gray-800 mb-4 line-clamp-1">
-                  {item.title}
+                  {item.article.title}
                 </h3>
                 <p className="text-sm text-gray-600 line-clamp-2">
-                  {item.description}
+                  {item.article.description || '설명 없음'}
                 </p>
                 <div className="justify-end text-xs text-gray-500 mt-4 flex items-center gap-4">
-                  <span>{formatDate(item.date)}</span>
-                  <span>❤ {item.likes}</span>
-                  <span>👁 {item.views}</span>
+                  <span>{formatDate(item.article.date)}</span>
+                  <span>❤ {item.article.likes}</span>
+                  <span>👁 {item.article.views}</span>
                 </div>
               </div>
             </div>
@@ -58,7 +69,6 @@ const FilteredContents = ({
         )}
       </div>
 
-      {/* 페이지네이션 */}
       {totalPages > 1 && (
         <div className="flex justify-center mt-8">
           <ul className="flex items-center space-x-1">
