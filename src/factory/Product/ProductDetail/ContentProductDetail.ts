@@ -1,5 +1,5 @@
 import { axiosInstance } from '@/service/axiosInstance';
-import { IContentProductDetail } from '@/types/Product/ContentProductType';
+import { IContentProductDetail } from '@/types/ContentProductType';
 import { useQuery, QueryFunctionContext } from '@tanstack/react-query';
 import axios from 'axios';
 

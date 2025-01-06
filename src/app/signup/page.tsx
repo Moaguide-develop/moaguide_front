@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useEffect, useState, Suspense } from 'react';
-import Step1 from '@/app/signup/(signup)/Step1';
-import Step2 from '@/app/signup/(signup)/Step2';
-import Step3 from '@/app/signup/(signup)/Step3';
-import Step4 from '@/app/signup/(signup)/Step4';
+import Step1 from '@/components/signup/Step1';
+import Step2 from '@/components/signup/Step2';
+import Step3 from '@/components/signup/Step3';
+import Step4 from '@/components/signup/Step4';
 import { finalSignup } from '@/service/auth';
 import { useRouter } from 'next/navigation';
 import { getCookie, setCookie, removeCookie } from '@/utils/cookie';

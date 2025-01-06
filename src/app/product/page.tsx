@@ -1,8 +1,7 @@
 import Navbar from '@/components/common/Navbar';
-import Product from './(product)/Product';
+import Product from '@/components/product/Product';
 import { IProductCommon, IReport, ISummaryData } from '@/types/Diviend';
 import { cookies } from 'next/headers';
-
 const ProductPage = async ({
   searchParams
 }: {

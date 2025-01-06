@@ -1,4 +1,4 @@
-import Bookmark from '@/app/product/(product)/Bookmark';
+import Bookmark from '@/components/product/Bookmark';
 import { IProductCommon } from '@/types/Diviend';
 import { getToken } from '@/utils/localStorage';
 import { cookies } from 'next/headers';

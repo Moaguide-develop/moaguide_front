@@ -1,7 +1,7 @@
 'use client';
 import NoticeItemSkeleton from '@/components/skeleton/NoticeItemSkeleton';
 import UseNoticeLists from '@/factory/useNoticeLists';
-import { INoticeItem } from '@/types/Product/BuildingProductType';
+import { INoticeItem } from '@/types/BuildingProductType';
 import { useCallback } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 import Image from 'next/image';

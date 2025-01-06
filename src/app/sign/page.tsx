@@ -1,12 +1,12 @@
 'use client';
 
-import SignLayout from '@/app/sign/(sign)/SignLayout';
+import SignLayout from '@/components/sign/SignLayout';
 import React from 'react';
 
 const SignPage = () => {
   return (
     <div>
-      <SignLayout />
+      <SignLayout/>
     </div>
   );
 };

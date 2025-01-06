@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
-import PrivacyControllModal from '../../app/signup/(signup)/modal/PrivacyControllModal';
-import ServiceControllModal from '../../app/signup/(signup)/modal/ServiceControllModal';
+import PrivacyControllModal from '../signup/modal/PrivacyControllModal';
+import ServiceControllModal from '../signup/modal/ServiceControllModal';
 import Image from 'next/image';
 
 const HomeFooter = () => {

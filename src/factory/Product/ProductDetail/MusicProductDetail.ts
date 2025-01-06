@@ -1,6 +1,6 @@
 import { axiosInstance } from '@/service/axiosInstance';
-import { IBuildingProductDetail } from '@/types/Product/BuildingProductType';
-import { IMusicProductDetail } from '@/types/Product/MusicProductType';
+import { IBuildingProductDetail } from '@/types/BuildingProductType';
+import { IMusicProductDetail } from '@/types/MusicProductType';
 import { useQuery, QueryFunctionContext } from '@tanstack/react-query';
 import axios from 'axios';
 
