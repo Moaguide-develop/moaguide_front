@@ -7,9 +7,9 @@ import Step3 from '@/components/signup/Step3';
 import Step4 from '@/components/signup/Step4';
 import { finalSignup } from '@/service/auth';
 import { useRouter } from 'next/navigation';
-import { getCookie, setCookie, removeCookie } from '@/utils/cookie';
+import { getCookie, setCookie } from '@/utils/cookie';
 import { useAuthStore } from '@/store/userAuth.store';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useModalStore } from '@/store/modal.store';
 
@@ -26,12 +26,11 @@ const SignupPage: React.FC = () => {
     marketingConsent?: number;
     loginType: 'local' | 'social' | 'naver' | 'google' | 'kakao';
   }>({
-    loginType: 'local'
+    loginType: 'local',
   });
 
   const router = useRouter();
   const { isLoggedIn } = useAuthStore();
-
   const { setOpen, setModalType } = useModalStore();
   const [popstateActive, setPopstateActive] = useState(false);
 
@@ -46,9 +45,9 @@ const SignupPage: React.FC = () => {
     const verifyToken = searchParams.get('verify');
     const email = searchParams.get('email');
     const loginType = searchParams.get('loginType') as 'naver' | 'google' | 'kakao' | null;
-  
-    console.log('쿼리 파라미터:', { verifyToken, email, loginType }); 
-  
+
+    console.log('쿼리 파라미터:', { verifyToken, email, loginType });
+
     if (verifyToken && email && loginType) {
       console.log('Step 4로 이동합니다.');
       setFormData((prev) => ({
@@ -56,9 +55,12 @@ const SignupPage: React.FC = () => {
         email,
         loginType,
       }));
-  
+
       setCookie('verify_token', verifyToken);
-      setCurrentStep(4);
+
+      setTimeout(() => {
+        setCurrentStep(4);
+      }, 0);
     }
   }, []);
 
@@ -69,12 +71,9 @@ const SignupPage: React.FC = () => {
   const handleUpdate = (data: Partial<typeof formData>) => {
     setFormData((prev) => {
       const updatedFormData = { ...prev, ...data };
-
-      if (JSON.stringify(prev) === JSON.stringify(updatedFormData)) {
-        return prev;
-      }
-
-      return updatedFormData;
+      return JSON.stringify(prev) === JSON.stringify(updatedFormData)
+        ? prev
+        : updatedFormData;
     });
   };
 
@@ -88,7 +87,7 @@ const SignupPage: React.FC = () => {
 
       const authHeaders = {
         cookie: '',
-        Verify: verifyToken
+        Verify: verifyToken,
       };
 
       const response = await finalSignup(formData, authHeaders);
@@ -122,11 +121,10 @@ const SignupPage: React.FC = () => {
 
     window.addEventListener('beforeunload', handleBeforeUnload);
     window.history.pushState(null, '', window.location.href);
-    // window.addEventListener('popstate', pushStateAndShowAlert);
-
+     // window.addEventListener('popstate', pushStateAndShowAlert);
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
-      // window.removeEventListener('popstate', pushStateAndShowAlert);
+       // window.removeEventListener('popstate', pushStateAndShowAlert);
     };
   }, []);
 
@@ -148,7 +146,7 @@ const SignupPage: React.FC = () => {
   return (
     <>
       <Suspense fallback={<div></div>}>
-        <div className={`flex flex-col items-center justify-center`}>
+        <div className="flex flex-col items-center justify-center">
           {currentStep === 1 && (
             <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
           )}
