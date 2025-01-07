@@ -45,13 +45,12 @@ const SignupPage: React.FC = () => {
     const searchParams = new URLSearchParams(window.location.search);
     const verifyToken = searchParams.get('verify');
     const email = searchParams.get('email');
-    const loginType = searchParams.get('loginType') as
-      | 'naver'
-      | 'google'
-      | 'kakao'
-      | null;
+    const loginType = searchParams.get('loginType') as 'naver' | 'google' | 'kakao' | null;
+  
+    console.log('쿼리 파라미터:', { verifyToken, email, loginType }); 
   
     if (verifyToken && email && loginType) {
+      console.log('Step 4로 이동합니다.');
       setFormData((prev) => ({
         ...prev,
         email,
@@ -61,7 +60,7 @@ const SignupPage: React.FC = () => {
       setCookie('verify_token', verifyToken);
       setCurrentStep(4);
     }
-  }, []); 
+  }, []);
 
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
