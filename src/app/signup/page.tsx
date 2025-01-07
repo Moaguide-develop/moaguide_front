@@ -14,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useModalStore } from '@/store/modal.store';
 
 const SignupPage: React.FC = () => {
-  const [isSocialLogin, setIsSocialLogin] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<{
     email?: string;
@@ -46,10 +45,7 @@ const SignupPage: React.FC = () => {
     const email = searchParams.get('email');
     const loginType = searchParams.get('loginType') as 'naver' | 'google' | 'kakao' | null;
 
-    console.log('쿼리 파라미터:', { verifyToken, email, loginType });
-
     if (verifyToken && email && loginType) {
-      console.log('Step 4로 이동합니다.');
       setFormData((prev) => ({
         ...prev,
         email,
