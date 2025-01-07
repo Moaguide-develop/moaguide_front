@@ -50,20 +50,18 @@ const SignupPage: React.FC = () => {
       | 'google'
       | 'kakao'
       | null;
-
-    if (verifyToken && email && loginType && !isSocialLogin) {
-      setIsSocialLogin(true);
+  
+    if (verifyToken && email && loginType) {
       setFormData((prev) => ({
         ...prev,
         email,
-        loginType
+        loginType,
       }));
-
+  
       setCookie('verify_token', verifyToken);
-
       setCurrentStep(4);
     }
-  }, [isSocialLogin]);
+  }, []); 
 
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
