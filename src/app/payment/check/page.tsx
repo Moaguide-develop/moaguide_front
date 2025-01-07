@@ -42,10 +42,7 @@ const PaymentCheckPage = () => {
       <div className="my-3 text-heading3 ">결제하기</div>
       <div className="py-5 flex justify-between text-body2 border-b border-gray100">
         <div>구독 플랜</div>
-        <div>
-          1개월 구독
-          <span className="text-normal">+ 1개월</span>
-        </div>
+        <div>1개월 구독</div>
       </div>
       <div className="py-5 flex justify-between text-body2 border-b border-gray100">
         <div>결제 금액</div>
