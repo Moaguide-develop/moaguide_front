@@ -47,3 +47,4 @@ describe('Full Payment Flow', () => {
     cy.get('p').contains('결제가 진행중입니다...').should('exist');
   });
 });
+export {};

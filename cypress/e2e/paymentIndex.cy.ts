@@ -38,3 +38,5 @@ describe('PaymentIndex Component', () => {
     cy.url().should('not.include', '/payment');
   });
 });
+
+export {};
