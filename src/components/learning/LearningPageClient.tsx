@@ -58,8 +58,6 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
       }))
     : [];
 
-    console.log(initialData);
-
   return (
     <div>
       <div className="relative w-full h-[300px] lg:h-[400px]">
