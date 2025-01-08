@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import defaultImage from '../../../../public/images/learning/learning_img.svg';
+import { getValidImageSrc } from '@/utils/checkImageProperty';
 
 interface HeaderProps {
   categoryName: string;
@@ -9,19 +10,9 @@ interface HeaderProps {
   imgLink: string | null;
 }
 
-const getValidImageSrc = (imgLink: string | null) => {
-  if (!imgLink || imgLink === '테스트') {
-    return defaultImage;
-  }
-  if (imgLink.startsWith('http://') || imgLink.startsWith('https://')) {
-    return imgLink;
-  }
-  return defaultImage;
-};
-
 const ArticleDetailHeader = ({ categoryName, title, createdAt, authorName, imgLink }: HeaderProps) => {
   return (
-    <div className="relative w-full h-[500px]">
+    <div className="relative w-full h-[300px]">
       <Image
         src={getValidImageSrc(imgLink)}
         alt={title}
@@ -29,10 +20,11 @@ const ArticleDetailHeader = ({ categoryName, title, createdAt, authorName, imgLi
         objectFit="cover"
         className="w-full h-full"
       />
+      {/* todo: 모바일 작업 */}
       <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-white">
-        <p className="text-sm">{categoryName}</p>
-        <hr className="w-16 border-t-2 border-white my-2" />
-        <h1 className="text-3xl font-bold">{title}</h1>
+        <p className="text-center text-[#fffffc]/80 text-2xl font-medium font-['Pretendard'] leading-[33.60px] ">{categoryName}</p>
+        <hr className="w-16 border-t-2 border-white my-4" />
+        <h1 className="text-center text-white text-[40px] font-bold font-['Pretendard'] leading-[56px]">{title}</h1>
       </div>
     </div>
   );

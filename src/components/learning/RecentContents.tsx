@@ -75,7 +75,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                 <div
                   key={index}
                   className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-white cursor-pointer"
-                  onClick={() => router.push(`/learning/detail/${contents[0].articleId}`)}
+                  onClick={() => router.push(`/learning/detail/${content.articleId}`)}
                 >
                   <div className="relative w-full h-[180px]">
                     <Image

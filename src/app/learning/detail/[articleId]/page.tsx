@@ -1,3 +1,4 @@
+import Navbar from '@/components/common/Navbar';
 import ArticleDetailClientWrapper from '@/components/learning/article/ArticleDetailClientWrapper';
 
 interface PageProps {
@@ -8,8 +9,9 @@ export default async function ArticleDetailPage({ params }: PageProps) {
   const articleId = params.articleId;
 
   return (
-    <ArticleDetailClientWrapper
-      articleId={Number(articleId)}
-    />
+    <>
+      <Navbar />
+      <ArticleDetailClientWrapper articleId={Number(articleId)} />
+    </>
   );
 }

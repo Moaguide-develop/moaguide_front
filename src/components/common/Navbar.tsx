@@ -7,7 +7,7 @@ const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
   return (
-    <div className="hidden  bg-white shadow-custom-light border-b desk:h-[60px] md:h-full border-gray100 sm:block desk:w-full  lg:w-[100%] sticky top-[58px] z-[99998]">
+    <div className="hidden  bg-white shadow-custom-light border-b md:h-full border-gray100 sm:block desk:w-full  lg:w-[100%] sticky top-[58px] z-[99998]">
       <div className="max-w-[1000px] mx-auto flex items-center">
         <div
           onClick={() => {
@@ -41,7 +41,7 @@ const Navbar = () => {
             router.push('/practicepage');
           }}
           className={` desk:whitespace-nowrap px-4 py-3 flex-1 flex justify-center items-center cursor-pointer text-body5 desk2:text-heading4
-        ${pathname === '/practicepage' ? 'text-black border-b-[2px] border-black' : 'text-gray300'}
+        ${pathname.startsWith('/learning') ? 'text-black border-b-[2px] border-black' : 'text-gray300'}
         `}>
           학습하기
         </div>

@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import defaultImage from '../../../public/images/learning/learning_img.svg';
 import { FilteredResponse } from '@/types/filterArticle';
+import { getValidImageSrc } from '@/utils/checkImageProperty';
 
 interface FilteredContentsProps {
   contents: FilteredResponse['content'];
@@ -26,15 +27,6 @@ const FilteredContents = ({
     return date.toISOString().split('T')[0];
   };
 
-  const getValidImageSrc = (imgLink: string | null) => {
-    if (!imgLink || imgLink === '테스트') {
-      return defaultImage; 
-    }
-    if (imgLink.startsWith('http://') || imgLink.startsWith('https://')) {
-      return imgLink;
-    }
-    return defaultImage;
-  };
   return (
     <div className="mt-10">
       <div className="space-y-10">
