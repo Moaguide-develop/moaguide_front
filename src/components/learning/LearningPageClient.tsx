@@ -13,24 +13,14 @@ import BackgroundImage from '../../../public/images/learning/learning_background
 import SubscriptionBanner from './SubscriptionBanner';
 import { dropdownOptions } from '@/utils/dropdownOptions';
 import { OverviewResponse, Content } from '@/types/learning'; 
-import { FilteredContent, FilteredResponse } from '@/types/filterArticle';
+import { fetchContentsWithPage } from '@/factory/Article/GetArticle';
 
 const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) => {
   const [selectedType, setSelectedType] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1);
-
-  const fetchContentsWithPage = async (): Promise<FilteredResponse> => {
-    const type = selectedType || 'all';
-    const category = selectedCategory || 'all';
-    const endpoint = `http://43.200.90.72/contents/list?type=${type}&category=${category}&page=${page}`;
-    const response = await fetch(endpoint);
-    if (!response.ok) throw new Error('API 호출 실패');
-    return response.json();
-  };
   
-
   const { data, isLoading } = useQuery({
     queryKey: ['contents', selectedType, selectedCategory, page],
     queryFn: fetchContentsWithPage,
