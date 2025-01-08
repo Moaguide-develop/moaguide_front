@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import defaultImage from '../../../../public/images/learning/learning_img.svg';
+import { getValidImageSrc } from '@/utils/checkImageProperty';
 
 interface HeaderProps {
   categoryName: string;
@@ -8,16 +9,6 @@ interface HeaderProps {
   authorName: string;
   imgLink: string | null;
 }
-
-const getValidImageSrc = (imgLink: string | null) => {
-  if (!imgLink || imgLink === '테스트') {
-    return defaultImage;
-  }
-  if (imgLink.startsWith('http://') || imgLink.startsWith('https://')) {
-    return imgLink;
-  }
-  return defaultImage;
-};
 
 const ArticleDetailHeader = ({ categoryName, title, createdAt, authorName, imgLink }: HeaderProps) => {
   return (

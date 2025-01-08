@@ -62,14 +62,15 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         authorName={data.authorName}
         imgLink={data.imgLink}
       />
-      <div className="w-full mx-auto py-12 flex items-center justify-between border-b border-[#ececec]">
-        <div className="text-sm text-[#a0a0a0] ml-24">
+      {/* todo: 화면 크기 작아지면 텍스트 영역 겹치는 부분 */}
+      <div className="w-[90%] mx-auto py-12 flex items-center justify-between border-b border-[#ececec]">
+        <div className="text-sm text-[#a0a0a0]">
           학습하기 &gt; 아티클 &gt; {data.categoryName}
         </div>
         <div className="absolute inset-x-0 text-center">
           <h1 className="text-lg font-semibold text-[#777777]">{data.title}</h1>
         </div>
-        <div className="flex items-center gap-4 mr-24">
+        <div className="flex items-center gap-4 z-[9999]">
           <Image
             src={likedIcon}
             alt="좋아요 아이콘"
@@ -88,11 +89,12 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
           </button>
         </div>
       </div>
-
       <ArticleDetailContent
         text={data.text}
+        title={data.title}
         createdAt={data.createdAt}
         authorName={data.authorName}
+        imgLink={data.imgLink}
       />
     </div>
   );
