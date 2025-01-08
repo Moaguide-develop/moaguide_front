@@ -33,7 +33,7 @@ const TossPaymentsCardWidget = () => {
 
     try {
       await payment?.requestBillingAuth({
-        method: 'CARD', // 자동결제(빌링)는 카드만 지원합니다
+        method: 'CARD',
         successUrl: window.location.origin + `/payment/check/confirm/successloading`,
         failUrl: window.location.origin + '/payment/check/confirm/fail',
 

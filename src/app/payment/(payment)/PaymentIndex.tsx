@@ -1,9 +1,11 @@
 'use client';
 import { getCookie } from '@/utils/cookie';
+import { isfirstpaymentcheck } from '@/utils/isfirstpaymentcheck';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const PaymentIndex = () => {
+  const isfirst = isfirstpaymentcheck();
   const router = useRouter();
   const [isActive, setIsActive] = useState('first');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -62,11 +64,11 @@ const PaymentIndex = () => {
           className={`w-full rounded-[12px] px-[20px] py-[22px] flex items-center justify-between border-2 cursor-pointer
         ${isActive === 'first' ? 'border-normal' : 'border-gray100'}
         `}>
-          <div className="text-heading4 text-normal">1개월 구독 + 1개월</div>
+          <div className="text-heading4 text-normal">1개월 구독</div>
           <div className="flex flex-col gap-2 items-end">
             <div className="text-body7 text-gray300 line-through">₩ 10,000</div>
-            <div className="text-heading4 ">₩ 9,900</div>
-            <div className="text-body7 text-gray500">₩ 9,900/월</div>
+            <div className="text-heading4 ">₩ 4,900</div>
+            <div className="text-body7 text-gray500">₩ 4,900/월</div>
           </div>
         </div>
       </div>
@@ -74,7 +76,7 @@ const PaymentIndex = () => {
       <div
         onClick={handleClick}
         className="cursor-pointer my-10 py-[18px] w-full rounded-[12px] flex items-center justify-center bg-gradient2 text-title1 text-white">
-        첫 달 무료체험하기
+        {isfirst ? '첫 달 무료 체험하기' : '4,900원 결제하기'}
       </div>
     </div>
   );
