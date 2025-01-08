@@ -8,7 +8,7 @@
     "start": "next start -p 80",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "analyze": "cross-env ANALYZE=true next build",
-    "cypress:open": "cypress open"
+    "cypress": "cypress open"
   },
   "dependencies": {
     "@sentry/nextjs": "8",
