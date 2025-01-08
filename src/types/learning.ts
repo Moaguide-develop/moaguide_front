@@ -30,3 +30,18 @@ export interface Article {
     likes: number;
     createdAt: string;
   }
+
+  // 아티클 관련 정보
+  export interface RelatedArticle {
+    likedByMe: boolean;
+    article: RelatedArticleContent;
+  }
+
+  export interface RelatedArticleContent {
+    articleId: number;
+    title: string;
+    imgLink: string | null;
+    createdAt: string;
+    views: number;
+    likes: number;
+  }

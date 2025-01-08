@@ -10,6 +10,7 @@ import { useAuthStore } from '@/store/userAuth.store';
 import Image from 'next/image';
 import sharedIcon from '../../../../public/images/learning/articleShare.svg';
 import likedIcon from '../../../../public/images/learning/articleLiked.svg';
+import RelatedArticles from './RelatedArticles';
 
 interface ArticleDetailClientWrapperProps {
   articleId: number;
@@ -96,6 +97,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         authorName={data.authorName}
         imgLink={data.imgLink}
       />
+      <RelatedArticles articleId={articleId} />
     </div>
   );
 };
