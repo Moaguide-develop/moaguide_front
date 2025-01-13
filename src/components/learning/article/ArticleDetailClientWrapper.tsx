@@ -11,6 +11,7 @@ import Image from 'next/image';
 import sharedIcon from '../../../../public/images/learning/articleShare.svg';
 import likedIcon from '../../../../public/images/learning/articleLiked.svg';
 import RelatedArticles from './RelatedArticles';
+import BackButton from './BackButton';
 
 interface ArticleDetailClientWrapperProps {
   articleId: number;
@@ -93,11 +94,13 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
       <ArticleDetailContent
         text={data.text}
         title={data.title}
+        paywallUp={data.paywallUp}
         createdAt={data.createdAt}
         authorName={data.authorName}
         imgLink={data.imgLink}
       />
       <RelatedArticles articleId={articleId} />
+      <BackButton />
     </div>
   );
 };

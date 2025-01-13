@@ -5,7 +5,7 @@ interface PageProps {
   params: { articleId: string };
 }
 
-export default async function ArticleDetailPage({ params }: PageProps) {
+export default function ArticleDetailPage({ params }: PageProps) {
   const articleId = params.articleId;
 
   return (

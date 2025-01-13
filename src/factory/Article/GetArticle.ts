@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/service/axiosInstance";
+import { axiosInstance, basicAxiosInstance } from "@/service/axiosInstance";
 import { FilteredResponse } from "@/types/filterArticle";
 import { ArticleDetail, RelatedArticle } from "@/types/learning";
 
@@ -33,7 +33,7 @@ export const fetchContentsWithPage = async ({ queryKey }: { queryKey: [string, s
   const [, type, category, page] = queryKey;
 
   try {
-    const response = await axiosInstance.get<FilteredResponse>(
+    const response = await basicAxiosInstance.get<FilteredResponse>(
       `/contents/list`,
       {
         params: {
