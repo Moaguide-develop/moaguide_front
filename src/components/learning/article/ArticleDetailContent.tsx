@@ -31,7 +31,7 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
       <Image
         src={getValidImageSrc(imgLink)}
         alt={title}
-        className="w-full h-full mt-16 my-8"
+        className="w-full max-w-[650px] aspect-square my-16 object-cover mx-auto rounded-lg"
       />
       {isPremium ? (
         <>
@@ -50,7 +50,7 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
               <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/70 to-transparent pointer-events-none"></div>
             </div>
           </article>
-          <div className="mt-8 rounded-lg text-center flex flex-col items-center gap-4">
+          <div className="my-24 rounded-lg text-center flex flex-col items-center gap-4">
             <p
               className="text-center text-black font-semibold font-['Pretendard'] leading-[1.2] tracking-wide"
               style={{
