@@ -93,6 +93,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
       <ArticleDetailContent
         text={data.text}
         title={data.title}
+        paywallUp={data.paywallUp}
         createdAt={data.createdAt}
         authorName={data.authorName}
         imgLink={data.imgLink}

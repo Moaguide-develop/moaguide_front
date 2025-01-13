@@ -25,6 +25,7 @@ export interface Article {
     title: string;
     authorName: string;
     text: string;
+    paywallUp: string;
     imgLink: string | null;
     views: number;
     likes: number;
