@@ -43,6 +43,7 @@ const PaymentSuccessLoading = () => {
       throw new Error('추가 작업에 실패했습니다.');
     }
   };
+
   const mutation = useMutation({
     mutationFn: fetchPayment,
     retry: 0, // 재시도 비활성화
@@ -67,6 +68,7 @@ const PaymentSuccessLoading = () => {
       console.log('결제 요청 완료');
     }
   });
+
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (!data?.cardName) {
