@@ -10,6 +10,12 @@ import { getContentProductDetail } from '@/factory/Product/ProductDetail/Content
 import '../../../../plugin';
 import { BookmarkUpdate } from '@/components/product/detail/BookmarkUpdate';
 import { ContentTopDetail } from '@/components/product/detail/content/ContentTopDetail';
+import dynamic from 'next/dynamic';
+
+const BlurWrapper = dynamic(() => import('@/components/common/BlurWrapper'), {
+  ssr: false
+});
+
 const ContentDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
   const url = props.params.id;
@@ -30,20 +36,25 @@ const ContentDetailpage = (props: { params: { id: string } }) => {
         />
       </Container>
       <NavBar sort={sort} setSort={setSort} />
-
-      {sort === 'news' ? (
-        <News />
-      ) : sort === 'report' ? (
-        <Report />
-      ) : sort === 'profit' ? (
-        <ContentProfit
-          url={url}
-          invest={data?.invest as boolean}
-          genre={data?.genre as string}
-        />
-      ) : sort === 'detail' ? (
-        <ContentProductDetail url={url} genre={data?.genre as string} name={data?.name} />
-      ) : undefined}
+      <BlurWrapper>
+        {sort === 'news' ? (
+          <News />
+        ) : sort === 'report' ? (
+          <Report />
+        ) : sort === 'profit' ? (
+          <ContentProfit
+            url={url}
+            invest={data?.invest as boolean}
+            genre={data?.genre as string}
+          />
+        ) : sort === 'detail' ? (
+          <ContentProductDetail
+            url={url}
+            genre={data?.genre as string}
+            name={data?.name}
+          />
+        ) : undefined}
+      </BlurWrapper>
     </div>
   );
 };

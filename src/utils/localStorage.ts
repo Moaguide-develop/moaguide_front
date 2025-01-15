@@ -1,10 +1,15 @@
-import { getCookie, removeCookie, setCookie } from "./cookie";
+import { getCookie, removeCookie, setCookie } from './cookie';
 
-const TOKEN_EXPIRATION_TIME = 30 * 60 * 1000;
+const TOKEN_EXPIRATION_TIME = 300 * 60 * 1000;
 
 export const setToken = (token: string) => {
-  const expires = new Date(Date.now() + TOKEN_EXPIRATION_TIME); 
-  setCookie('access_token', token, { path: '/', secure: true, sameSite: 'strict', expires });
+  const expires = new Date(Date.now() + TOKEN_EXPIRATION_TIME);
+  setCookie('access_token', token, {
+    path: '/',
+    secure: true,
+    sameSite: 'strict',
+    expires
+  });
 };
 
 export const getToken = (): string | undefined => {
@@ -21,5 +26,10 @@ export const removeToken = () => {
 
 export const setVerifyToken = (token: string) => {
   const expires = new Date(Date.now() + TOKEN_EXPIRATION_TIME);
-  setCookie('verify_token', token, { path: '/', secure: true, sameSite: 'strict', expires });
+  setCookie('verify_token', token, {
+    path: '/',
+    secure: true,
+    sameSite: 'strict',
+    expires
+  });
 };

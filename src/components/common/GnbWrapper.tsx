@@ -7,7 +7,6 @@ import Gnb from '@/components/common/Gnb';
 const GnbWrapper = () => {
   const pathname = usePathname();
   const [isGnbHidden, setIsGnbHidden] = useState(false);
-
   useEffect(() => {
     const checkIfGnbShouldBeHidden = () => {
       const pathsToHideGnb = ['/signup', '/sign', '/find', '/detail', '/login', '/quiz'];

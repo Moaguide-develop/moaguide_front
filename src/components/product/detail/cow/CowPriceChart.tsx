@@ -18,20 +18,13 @@ const CowPriceChart = () => {
     return response.data;
   };
 
-  const {
-    data: HanwooData,
-    isLoading,
-    error
-  } = useQuery({
+  const { data: HanwooData } = useQuery({
     queryKey: ['HanwooChart', filteringData, DateData],
     queryFn: fetchData
   });
 
-  const chartRef = useRef(null);
-
   const HanWooDate = HanwooData?.object?.map((item) => item.day) || [];
   const HanwooCount = HanwooData?.object?.map((item) => item.value) || [];
-
   const sortedHanwooCount = [...HanwooCount].sort((a, b) => b - a);
   const maxHanwooCount = sortedHanwooCount[0] || 0;
   const averageHanwooCount =
@@ -41,70 +34,6 @@ const CowPriceChart = () => {
   const dataSets = {
     labels: HanWooDate,
     data: HanwooCount
-  };
-  const data = {
-    labels: dataSets.labels,
-    datasets: [
-      {
-        label: '한우 가격',
-        // data: String(dataSets.data) + HanwooUnit,
-        data: dataSets.data,
-        borderColor: '#8a4af3',
-        backgroundColor: '#8a4af3',
-        pointBackgroundColor: '#8a4af3',
-        pointBorderColor: '#8a4af3',
-        pointRadius: 0,
-        pointHoverRadius: 7,
-        fill: false,
-        datalabels: {
-          display: false // 선 차트에는 숫자 표시 비활성화
-        }
-      }
-    ]
-  };
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    aspectRatio: 2,
-    plugins: {
-      legend: {
-        display: false
-      },
-      tooltip: {
-        enabled: true,
-        intersect: false
-      }
-    },
-    scales: {
-      x: {
-        display: true,
-        grid: {
-          display: false
-        },
-        ticks: {
-          maxRotation: 45,
-          minRotation: 45
-        },
-        offset: true // x축의 첫 번째 데이터 포인트를 약간 오른쪽으로 이동
-      },
-      y: {
-        display: true,
-        beginAtZero: true,
-        max: newVariable,
-        grid: {
-          display: false
-        }
-      }
-    },
-    elements: {
-      line: {
-        tension: 0
-      },
-      point: {
-        pointStyle: 'circle'
-      }
-    }
   };
 
   return (
@@ -175,7 +104,7 @@ const CowPriceChart = () => {
       </div>
       <div className="flex flex-col items-center justify-center h-full bg-gray-50 mb-[100px]">
         <div className="w-full max-w-4xl h-[400px]">
-          <Line ref={chartRef} data={data} options={options} />
+          <ChartLayout dataSets={dataSets} newVariable={newVariable} />
         </div>
       </div>
     </div>
@@ -183,3 +112,78 @@ const CowPriceChart = () => {
 };
 
 export default CowPriceChart;
+
+interface ChartLayoutProps {
+  dataSets: { labels: string[]; data: number[] };
+  newVariable: number;
+}
+
+const ChartLayout = ({ dataSets, newVariable }: ChartLayoutProps) => {
+  const chartRef = useRef(null);
+
+  const data = {
+    labels: dataSets.labels,
+    datasets: [
+      {
+        label: '한우 가격',
+        data: dataSets.data,
+        borderColor: '#8a4af3',
+        backgroundColor: '#8a4af3',
+        pointBackgroundColor: '#8a4af3',
+        pointBorderColor: '#8a4af3',
+        pointRadius: dataSets.data?.length === 1 ? 2 : 0,
+        pointHoverRadius: 7,
+        fill: false,
+        datalabels: {
+          display: false // 선 차트에는 숫자 표시 비활성화
+        }
+      }
+    ]
+  };
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    aspectRatio: 2,
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        enabled: true,
+        intersect: false
+      }
+    },
+    scales: {
+      x: {
+        display: true,
+        grid: {
+          display: false
+        },
+        ticks: {
+          maxRotation: 45,
+          minRotation: 45
+        },
+        offset: true // x축의 첫 번째 데이터 포인트를 약간 오른쪽으로 이동
+      },
+      y: {
+        display: true,
+        beginAtZero: true,
+        max: newVariable,
+        grid: {
+          display: false
+        }
+      }
+    },
+    elements: {
+      line: {
+        tension: 0
+      },
+      point: {
+        pointStyle: 'circle'
+      }
+    }
+  };
+
+  return <Line ref={chartRef} data={data} options={options} />;
+};

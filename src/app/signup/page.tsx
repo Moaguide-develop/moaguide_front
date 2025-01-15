@@ -7,14 +7,13 @@ import Step3 from '@/components/signup/Step3';
 import Step4 from '@/components/signup/Step4';
 import { finalSignup } from '@/service/auth';
 import { useRouter } from 'next/navigation';
-import { getCookie, setCookie, removeCookie } from '@/utils/cookie';
+import { getCookie, setCookie } from '@/utils/cookie';
 import { useAuthStore } from '@/store/userAuth.store';
-import { toast, ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useModalStore } from '@/store/modal.store';
 
 const SignupPage: React.FC = () => {
-  const [isSocialLogin, setIsSocialLogin] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<{
     email?: string;
@@ -31,9 +30,8 @@ const SignupPage: React.FC = () => {
 
   const router = useRouter();
   const { isLoggedIn } = useAuthStore();
-
   const { setOpen, setModalType } = useModalStore();
-  
+  const [popstateActive, setPopstateActive] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -47,8 +45,7 @@ const SignupPage: React.FC = () => {
     const email = searchParams.get('email');
     const loginType = searchParams.get('loginType') as 'naver' | 'google' | 'kakao' | null;
 
-    if (verifyToken && email && loginType && !isSocialLogin) {
-      setIsSocialLogin(true);
+    if (verifyToken && email && loginType) {
       setFormData((prev) => ({
         ...prev,
         email,
@@ -57,9 +54,11 @@ const SignupPage: React.FC = () => {
 
       setCookie('verify_token', verifyToken);
 
-      setCurrentStep(4);
+      setTimeout(() => {
+        setCurrentStep(4);
+      }, 0);
     }
-  }, [isSocialLogin]);
+  }, []);
 
   const handleNext = () => {
     setCurrentStep((prev) => prev + 1);
@@ -68,35 +67,31 @@ const SignupPage: React.FC = () => {
   const handleUpdate = (data: Partial<typeof formData>) => {
     setFormData((prev) => {
       const updatedFormData = { ...prev, ...data };
-
-      if (JSON.stringify(prev) === JSON.stringify(updatedFormData)) {
-        return prev;
-      }
-
-      return updatedFormData;
+      return JSON.stringify(prev) === JSON.stringify(updatedFormData)
+        ? prev
+        : updatedFormData;
     });
   };
 
   const handleSubmit = async () => {
     try {
       const verifyToken = getCookie('verify_token');
-  
+
       if (!verifyToken) {
         throw new Error('Verify token이 없습니다.');
       }
-  
+
       const authHeaders = {
         cookie: '',
         Verify: verifyToken,
       };
-  
+
       const response = await finalSignup(formData, authHeaders);
- 
+
       if (response === '회원가입 완료') {
         setModalType('signupComplete');
         setOpen(true);
       }
-      
     } catch (error) {
       console.error('서버 요청 오류:', error);
       alert('회원가입에 실패했습니다. 다시 시도해주세요.');
@@ -104,30 +99,50 @@ const SignupPage: React.FC = () => {
   };
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const stepFromUrl = parseInt(searchParams.get('step') || '1', 10);
+    setCurrentStep(stepFromUrl);
+  }, []);
+
+  useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       e.preventDefault();
       e.returnValue = '';
     };
 
-    const pushStateAndShowAlert = () => {
-      window.history.pushState(null, '', window.location.href);
-      alert('페이지를 나가시면 진행 중인 작업이 저장되지 않습니다.');
-    };
+    // const pushStateAndShowAlert = () => {
+    //   alert('페이지를 나가시면 진행 중인 작업이 저장되지 않습니다.');
+    //   window.history.pushState(null, '', window.location.href);
+    // };
 
     window.addEventListener('beforeunload', handleBeforeUnload);
     window.history.pushState(null, '', window.location.href);
-    window.addEventListener('popstate', pushStateAndShowAlert);
-
+     // window.addEventListener('popstate', pushStateAndShowAlert);
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
-      window.removeEventListener('popstate', pushStateAndShowAlert);
+       // window.removeEventListener('popstate', pushStateAndShowAlert);
     };
   }, []);
+
+  useEffect(() => {
+    const handlePopState = (e: PopStateEvent) => {
+      if (!popstateActive) {
+        setModalType('cancelSignup'); // 'cancelSignup' 모달 열기
+        setOpen(true); // 모달 표시
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [popstateActive, setModalType, setOpen]);
 
   return (
     <>
       <Suspense fallback={<div></div>}>
-        <div className={`flex flex-col items-center justify-center`}>
+        <div className="flex flex-col items-center justify-center">
           {currentStep === 1 && (
             <Step1 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
           )}
@@ -135,7 +150,11 @@ const SignupPage: React.FC = () => {
             <Step2 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} />
           )}
           {currentStep === 3 && (
-            <Step3 onNext={handleNext} onUpdate={(data) => handleUpdate(data)} email={formData.email || ''} />
+            <Step3
+              onNext={handleNext}
+              onUpdate={(data) => handleUpdate(data)}
+              email={formData.email || ''}
+            />
           )}
           {currentStep === 4 && (
             <Step4 onNext={handleSubmit} onUpdate={(data) => handleUpdate(data)} />
