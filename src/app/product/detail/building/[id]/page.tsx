@@ -27,6 +27,20 @@ const BuildingDetailpage = (props: { params: { id: string } }) => {
   const [localData, setLocalData] = useState(data);
   const { handleBookmarkClick } = BookmarkUpdate({ data, localData, setLocalData });
 
+  const sortComponents: { [key: string]: JSX.Element } = {
+    public: <Notice />,
+    news: <News />,
+    report: <Report />,
+    profit: <BuildingProfit url={url} />,
+    detail: (
+      <BuildingProductDetail
+        url={url}
+        rentType={data?.rentType}
+        stayType={data?.stayType}
+      />
+    )
+  };
+
   return (
     <div className="overflow-x-hidden desk:mx-3">
       <Container>
@@ -37,23 +51,8 @@ const BuildingDetailpage = (props: { params: { id: string } }) => {
         />
       </Container>
       <NavBar sort={sort} setSort={setSort} />
-      <BlurWrapper>
-        {sort === 'public' ? (
-          <Notice />
-        ) : sort === 'news' ? (
-          <News />
-        ) : sort === 'report' ? (
-          <Report />
-        ) : sort === 'profit' ? (
-          <BuildingProfit url={url} />
-        ) : sort === 'detail' ? (
-          <BuildingProductDetail
-            url={url}
-            rentType={data?.rentType}
-            stayType={data?.stayType}
-          />
-        ) : undefined}
-      </BlurWrapper>
+
+      <BlurWrapper>{sortComponents[sort]}</BlurWrapper>
     </div>
   );
 };

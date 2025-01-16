@@ -25,6 +25,13 @@ const MusicDetailpage = (props: { params: { id: string } }) => {
   const [localData, setLocalData] = useState(data);
   const { handleBookmarkClick } = BookmarkUpdate({ data, localData, setLocalData });
 
+  const sortComponents: { [key: string]: JSX.Element } = {
+    news: <News />,
+    report: <Report />,
+    profit: <MusicProfit url={url} />,
+    detail: <MusicProductDetail />
+  };
+
   return (
     <div className="overflow-x-hidden desk:mx-3">
       <Container>
@@ -35,18 +42,7 @@ const MusicDetailpage = (props: { params: { id: string } }) => {
         />
       </Container>
       <NavBar sort={sort} setSort={setSort} />
-
-      <BlurWrapper>
-        {sort === 'news' ? (
-          <News />
-        ) : sort === 'report' ? (
-          <Report />
-        ) : sort === 'profit' ? (
-          <MusicProfit url={url} />
-        ) : sort === 'detail' ? (
-          <MusicProductDetail />
-        ) : undefined}
-      </BlurWrapper>
+      <BlurWrapper>{sortComponents[sort]}</BlurWrapper>
     </div>
   );
 };
