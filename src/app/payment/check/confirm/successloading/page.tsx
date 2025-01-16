@@ -43,6 +43,7 @@ const PaymentSuccessLoading = () => {
       throw new Error('추가 작업에 실패했습니다.');
     }
   };
+
   const mutation = useMutation({
     mutationFn: fetchPayment,
     retry: 0, // 재시도 비활성화
@@ -52,7 +53,7 @@ const PaymentSuccessLoading = () => {
       fetchNextAPI()
         .then((response) => {
           console.log('연쇄 호출 성공:', response);
-          router.push('/payment/check/confirm/success'); // 성공 시 페이지 이동
+          router.push(`/payment/check/confirm/success?orderId=${response?.orderId}`); // 성공 시 페이지 이동
         })
         .catch((error) => {
           console.error('연쇄 호출 실패:', error);
@@ -67,6 +68,7 @@ const PaymentSuccessLoading = () => {
       console.log('결제 요청 완료');
     }
   });
+
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (!data?.cardName) {
@@ -77,7 +79,7 @@ const PaymentSuccessLoading = () => {
       fetchNextAPI()
         .then((response) => {
           console.log('연쇄 호출 성공:', response);
-          router.push('/payment/check/confirm/success'); // 성공 시 페이지 이동
+          router.push(`/payment/check/confirm/success?orderId=${response?.orderId}`); // 성공 시 페이지 이동
         })
         .catch((error) => {
           console.error('연쇄 호출 실패:', error);

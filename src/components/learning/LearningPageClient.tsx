@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import PopularContents from '@/components/learning/PopularContents';
@@ -12,22 +12,15 @@ import ArrowIcon from '../../../public/images/learning/bottom_arrow_button.svg';
 import BackgroundImage from '../../../public/images/learning/learning_background.png';
 import SubscriptionBanner from './SubscriptionBanner';
 import { dropdownOptions } from '@/utils/dropdownOptions';
+import { OverviewResponse, Content } from '@/types/learning'; 
+import { fetchContentsWithPage } from '@/factory/Article/GetArticle';
 
-const LearningPageClient = ({ initialData }: { initialData: any }) => {
+const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) => {
   const [selectedType, setSelectedType] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [page, setPage] = useState<number>(1);
-
-  const fetchContentsWithPage = async () => {
-    const type = selectedType || 'all';
-    const category = selectedCategory || 'all';
-    const endpoint = `http://43.200.90.72/contents/list?type=${type}&category=${category}&page=${page}`;
-    const response = await fetch(endpoint);
-    if (!response.ok) throw new Error('API 호출 실패');
-    return response.json();
-  };
-
+  
   const { data, isLoading } = useQuery({
     queryKey: ['contents', selectedType, selectedCategory, page],
     queryFn: fetchContentsWithPage,
@@ -57,6 +50,14 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
     setActiveDropdown(null);
   };
 
+  const extractContents = (contents: Content[] | undefined) =>
+  Array.isArray(contents)
+    ? contents.map((item) => ({
+        ...item.article,
+        likedByMe: item.likedByMe,
+      }))
+    : [];
+
   return (
     <div>
       <div className="relative w-full h-[300px] lg:h-[400px]">
@@ -67,8 +68,8 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
           objectFit="cover"
           className="w-full"
         />
-        <div className="absolute bottom-0 left-0 right-0 flex  justify-end items-center border-b shadow-sm z-50 bg-[#fffffc]/50">
-        <button
+        <div className="absolute bottom-0 left-0 right-0 flex justify-end items-center border-b shadow-sm z-50 bg-[#fffffc]/50">
+          <button
             onClick={resetFilters}
             className="flex items-center gap-2 px-6 py-4 text-lg font-semibold text-gray-800"
           >
@@ -154,22 +155,22 @@ const LearningPageClient = ({ initialData }: { initialData: any }) => {
       <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-full sm:w-[90%] lg:w-[100%] mt-8">
         {!selectedType && !selectedCategory ? (
           <>
-            <PopularContents contents={initialData.popularContents} />
-            <RecentContents contents={initialData.recentContents} />
+            <PopularContents contents={extractContents(initialData.popularContents)} />
+            <RecentContents contents={extractContents(initialData.recentContents)} />
             <div className="hidden sm:flex w-full">
-            <SubscriptionBanner/>
+              <SubscriptionBanner />
             </div>
-            <LatestNewsClipping contents={initialData.latestNewsClipping} />
+            <LatestNewsClipping contents={extractContents(initialData.newsContents)} />
           </>
         ) : isLoading ? (
           null
         ) : (
           <FilteredContents
-            contents={data?.content || []}
-            total={data?.total || 0}
-            page={page}
-            size={data?.size || 5}
-            onPageChange={(newPage) => setPage(newPage)}
+          contents={data?.content || []}
+          total={data?.total || 0}
+          page={page}
+          size={data?.size || 5}
+          onPageChange={(newPage) => setPage(newPage)}
           />
         )}
       </div>

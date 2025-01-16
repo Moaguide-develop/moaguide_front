@@ -8,8 +8,10 @@ import defaultImage from '../../../public/images/learning/learning_img.svg';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import RecentContentsSkeleton from '../skeleton/RecentContentsSkeleton';
+import { useRouter } from 'next/navigation';
 
 const RecentContents = ({ contents }: { contents: any[] }) => {
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
             >
               {contents.map((content, index) => (
                 <SwiperSlide key={index} className="relative">
-                  <div className="relative w-full h-[350px] bg-white shadow-lg rounded-lg overflow-hidden">
+                  <div className="relative w-full h-[350px] bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" onClick={() => router.push(`/learning/detail/${content.articleId}`)}>
                     <Image
                       src={content.img_link || defaultImage}
                       alt={content.title}
@@ -72,7 +74,8 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
               {contents.map((content, index) => (
                 <div
                   key={index}
-                  className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-white"
+                  className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-white cursor-pointer"
+                  onClick={() => router.push(`/learning/detail/${content.articleId}`)}
                 >
                   <div className="relative w-full h-[180px]">
                     <Image

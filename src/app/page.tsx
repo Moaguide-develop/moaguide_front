@@ -8,6 +8,12 @@ import { useAuthStore } from '@/store/userAuth.store';
 import { useMemberStore } from '@/store/user.store';
 import { setCookie } from '@/utils/cookie';
 import { setToken } from '@/utils/localStorage';
+import * as Sentry from '@sentry/nextjs';
+
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  tracesSampleRate: 1.0 // 조정 가능
+});
 
 const HomePage = () => {
   const { setIsLoggedIn } = useAuthStore();
@@ -18,14 +24,14 @@ const HomePage = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const userParam = urlParams.get('user');
     const accessToken = urlParams.get('access');
-  
+
     if (userParam && accessToken) {
       try {
         const parsedUser = JSON.parse(decodeURIComponent(userParam));
-        
-        const user = JSON.parse(parsedUser.user); 
+
+        const user = JSON.parse(parsedUser.user);
         setToken(accessToken);
-  
+
         setMember({
           memberEmail: user.email,
           memberNickName: user.nickname,
@@ -33,7 +39,7 @@ const HomePage = () => {
           loginType: user.loginType,
           marketing: user.marketing
         });
-  
+
         setIsLoggedIn(true);
         router.push('/');
       } catch (error) {

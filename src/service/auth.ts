@@ -63,37 +63,40 @@ export const finalSignup = async (formData: any, authHeaders: AuthHeaders) => {
   }
 };
 
+export const signupHistory = async (email: string) => {
+  try {
+    const response = await basicAxiosInstance.post(`/signup/history?email=${email}`);
+    return response.data;
+  } catch (error) {
+    console.error('history 요청 오류:', error);
+    throw error;
+  }
+};
+
 export const login = async (email: string, password: string, rememberMe: boolean) => {
   try {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-
     const url = `/login?rememberMe=${rememberMe}`;
-
     const response = await basicAxiosInstance.post(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     });
-
     const token = response.headers['authorization'] || response.headers['Authorization'];
-
     if (!token) {
       throw new Error(
         '토큰을 찾을 수 없습니다. 헤더에서 Authorization이 존재하지 않습니다.'
       );
     }
-
     const accessToken = token.replace('Bearer ', '');
     setToken(accessToken);
-
     const { setMember } = useMemberStore.getState();
     const userInfo = response.data.user;
     if (!userInfo) {
       throw new Error('사용자 정보를 응답에서 찾을 수 없습니다.');
     }
-
     setMember({
       memberEmail: userInfo.email,
       memberNickName: userInfo.nickname,

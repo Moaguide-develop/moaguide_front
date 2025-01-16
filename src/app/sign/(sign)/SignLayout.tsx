@@ -109,7 +109,7 @@ const SignLayout = () => {
             <div className="w-full text-error text-xs text-center">{errorMessage}</div>
           )}
         </div>
-        <div className="cursor-pointer" style={{ width: '320px', height: '52px' }}>
+        <div className="submit cursor-pointer" style={{ width: '320px', height: '52px' }}>
           <Image
             onClick={throttledHandleLogin}
             src={LoginButton}

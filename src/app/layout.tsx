@@ -14,13 +14,13 @@ import NaverAnalytics from '@/lib/NaverAnalytics';
 import AuthWrapper from '@/components/common/AuthWrapper';
 import ToastProvider from '@/providers/ToastProvider';
 import RefreshTokenWrapper from '@/components/common/RefreshTokenWrapper';
+import * as Sentry from '@sentry/nextjs';
 
 declare global {
   interface Window {
     kakao: any;
   }
 }
-
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
   display: 'swap',
@@ -54,6 +54,11 @@ export const metadata: Metadata = {
     type: 'website'
   }
 };
+
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  tracesSampleRate: 1.0 // 조정 가능
+});
 
 export default function RootLayout({
   children

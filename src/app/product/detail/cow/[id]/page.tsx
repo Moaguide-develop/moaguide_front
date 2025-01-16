@@ -25,6 +25,13 @@ const CowDetailpage = (props: { params: { id: string } }) => {
   const [localData, setLocalData] = useState(data);
   const { handleBookmarkClick } = BookmarkUpdate({ data, localData, setLocalData });
 
+  const sortComponents: { [key: string]: JSX.Element } = {
+    news: <News />,
+    report: <Report />,
+    profit: <CowProfit url={url} />,
+    detail: <CowProductDetail url={url} />
+  };
+
   return (
     <div className="overflow-x-hidden desk:mx-3">
       <Container>
@@ -35,17 +42,7 @@ const CowDetailpage = (props: { params: { id: string } }) => {
         />
       </Container>
       <NavBar sort={sort} setSort={setSort} />
-      <BlurWrapper>
-        {sort === 'news' ? (
-          <News />
-        ) : sort === 'report' ? (
-          <Report />
-        ) : sort === 'profit' ? (
-          <CowProfit url={url} />
-        ) : sort === 'detail' ? (
-          <CowProductDetail url={url} />
-        ) : undefined}
-      </BlurWrapper>
+      <BlurWrapper>{sortComponents[sort]}</BlurWrapper>
     </div>
   );
 };
