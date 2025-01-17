@@ -1,31 +1,45 @@
 import axios from 'axios';
 import { getToken, setToken, removeToken } from '@/utils/localStorage';
-import { refreshAccessToken } from './auth';
 
-let backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+const backendUrl =
+  process.env.NODE_ENV === 'development'
+    ? process.env.NEXT_PUBLIC_DATA
+    : process.env.NEXT_PUBLIC_BACKEND_URL;
 
-process.env.NODE_ENV === 'development'
-  ? (backendUrl = process.env.NEXT_PUBLIC_DATA)
-  : (backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL);
-
-// 토큰을 사용하는 Axios 인스턴스
+// Axios 인스턴스 정의
 export const axiosInstance = axios.create({
   baseURL: backendUrl,
   withCredentials: true
 });
 
-// 토큰을 사용하지 않는 Axios 인스턴스
 export const basicAxiosInstance = axios.create({
   baseURL: backendUrl,
   withCredentials: true
 });
 
-// 리프레시 토큰 요청을 위한 Axios 인스턴스
 export const refreshAxiosInstance = axios.create({
   baseURL: backendUrl,
   withCredentials: true
 });
 
+// 리프레시 토큰 함수
+export const refreshAccessToken = async () => {
+  try {
+    const response = await refreshAxiosInstance.post('/token/refresh');
+    const newToken =
+      response.headers['authorization'] || response.headers['Authorization'];
+    if (!newToken) throw new Error('새로운 액세스 토큰을 받을 수 없습니다.');
+    const accessToken = newToken.replace('Bearer ', '');
+    setToken(accessToken); // 새 토큰 저장
+    return accessToken;
+  } catch (error) {
+    console.error('리프레시 토큰 갱신 실패:', error);
+    removeToken(); // 만료된 토큰 제거
+    throw error;
+  }
+};
+
+// Axios 인터셉터 설정
 axiosInstance.interceptors.request.use(
   (config) => {
     const token = getToken();
@@ -38,31 +52,20 @@ axiosInstance.interceptors.request.use(
 );
 
 axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
+  (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
-    // 토큰이 만료되어 401 에러가 발생했을 경우
     if (error.response && error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true; // 중복 요청 방지 플래그 설정
-
+      originalRequest._retry = true;
       try {
-        // 리프레시 토큰으로 새 액세스 토큰 발급
         const newToken = await refreshAccessToken();
-        if (newToken) {
-          // 새 토큰으로 헤더를 갱신한 후, 실패한 요청 재시도
-          originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
-          return axiosInstance(originalRequest);
-        }
+        originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+        return axiosInstance(originalRequest); // 실패한 요청 재시도
       } catch (refreshError) {
-        console.error('리프레시 토큰 갱신 오류:', refreshError);
-
-        // 리프레시 토큰 갱신 실패 시 로그아웃 처리 또는 에러 핸들링
-        removeToken(); // 만료된 토큰 제거
+        removeToken();
         window.location.href = '/sign'; // 로그인 페이지로 리디렉션
-        return Promise.reject(refreshError); // 무한 루프 방지
+        return Promise.reject(refreshError);
       }
     }
 

@@ -12,13 +12,15 @@ import GnbWrapper from '@/components/common/GnbWrapper';
 import './plugin';
 import NaverAnalytics from '@/lib/NaverAnalytics';
 import AuthWrapper from '@/components/common/AuthWrapper';
+import ToastProvider from '@/providers/ToastProvider';
+import RefreshTokenWrapper from '@/components/common/RefreshTokenWrapper';
+import * as Sentry from '@sentry/nextjs';
 
 declare global {
   interface Window {
     kakao: any;
   }
 }
-
 const pretendard = localFont({
   src: '../static/fonts/PretendardVariable.woff2',
   display: 'swap',
@@ -52,6 +54,11 @@ export const metadata: Metadata = {
     type: 'website'
   }
 };
+
+Sentry.init({
+  dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+  tracesSampleRate: 1.0 // 조정 가능
+});
 
 export default function RootLayout({
   children
@@ -97,12 +104,16 @@ export default function RootLayout({
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
             />
-            <AuthWrapper />
+            {/* <AuthWrapper /> */}
             <GnbWrapper />
+            <RefreshTokenWrapper />
             {children}
             <MobileFooter />
             <ModalProvider />
+
             <div id="root-portal"></div>
+            <ToastProvider />
+            <div id="toast-portal"></div>
           </QueryProvider>
         </IntegrateMSW>
       </body>

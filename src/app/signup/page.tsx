@@ -1,11 +1,11 @@
 'use client';
 
 import React, { useEffect, useState, Suspense } from 'react';
-import Step1 from '@/components/signup/Step1';
-import Step2 from '@/components/signup/Step2';
-import Step3 from '@/components/signup/Step3';
-import Step4 from '@/components/signup/Step4';
-import { finalSignup } from '@/service/auth';
+import Step1 from '@/app/signup/(signup)/Step1';
+import Step2 from '@/app/signup/(signup)/Step2';
+import Step3 from '@/app/signup/(signup)/Step3';
+import Step4 from '@/app/signup/(signup)/Step4';
+import { finalSignup, signupHistory } from '@/service/auth';
 import { useRouter } from 'next/navigation';
 import { getCookie, setCookie, removeCookie } from '@/utils/cookie';
 import { useAuthStore } from '@/store/userAuth.store';
@@ -84,21 +84,18 @@ const SignupPage: React.FC = () => {
   const handleSubmit = async () => {
     try {
       const verifyToken = getCookie('verify_token');
-
       if (!verifyToken) {
         throw new Error('Verify token이 없습니다.');
       }
-
       const authHeaders = {
         cookie: '',
         Verify: verifyToken
       };
-
       const response = await finalSignup(formData, authHeaders);
-
       if (response === '회원가입 완료') {
         setModalType('signupComplete');
         setOpen(true);
+        signupHistory(formData.email || '');
       }
     } catch (error) {
       console.error('서버 요청 오류:', error);

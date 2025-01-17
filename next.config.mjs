@@ -1,3 +1,4 @@
+import { withSentryConfig } from '@sentry/nextjs';
 /** @type {import('next').NextConfig} */
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
@@ -6,10 +7,9 @@ const bundleAnalyzer = withBundleAnalyzer({
   openAnalyzer: false
 });
 const nextConfig = {
-  styledComponents: true,
+  reactStrictMode: false,
   output: 'standalone',
   experimental: { instrumentationHook: true },
-  reactStrictMode: true,
 
   images: {
     domains: [
@@ -27,9 +27,7 @@ const nextConfig = {
       'ssl.pstatic.net'
     ]
   },
-
   swcMinify: true,
-
   compiler: {
     styledComponents: true
   },
@@ -48,4 +46,20 @@ const nextConfig = {
   }
 };
 
-export default bundleAnalyzer(nextConfig);
+const SentryWebpackPluginOptions = {
+  org: 'moaguide',
+  project: 'javascript-nextjs',
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: !process.env.CI,
+  widenClientFileUpload: true,
+  sourcemaps: {
+    deleteSourcemapsAfterUpload: true
+  },
+  reactComponentAnnotation: {
+    enabled: true
+  },
+  hideSourceMaps: false,
+  disableLogger: true,
+  automaticVercelMonitors: true
+};
+export default withSentryConfig(bundleAnalyzer(nextConfig), SentryWebpackPluginOptions);

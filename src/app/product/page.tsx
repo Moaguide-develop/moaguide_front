@@ -1,34 +1,32 @@
 import Navbar from '@/components/common/Navbar';
-import Product from '@/components/product/Product';
+import Product from './(product)/Product';
 import { IProductCommon, IReport, ISummaryData } from '@/types/Diviend';
-import { cookies } from 'next/headers';
+import { getCookie } from '@/utils/serverCookies';
+
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.moaguide.com';
+
 const ProductPage = async ({
   searchParams
 }: {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  const getCookie = (key: string) => {
-    return cookies().get(key)?.value;
-  };
   const token = getCookie('access_token') || '';
 
   const pages = searchParams['page'] || 1;
   const subcategory = searchParams['subcategory'] || 'trade';
   const sort = searchParams['sort'] || 'lastDivide_rate desc';
   const category = searchParams['category'] || 'all';
-  const buildingDiviedResponse = await fetch(`https://api.moaguide.com/summary`, {
+
+  const buildingDiviedResponse = await fetch(`${API_BASE_URL}/summary`, {
     cache: 'no-store'
   });
 
-  const buildingReportResponse = await fetch(
-    'https://api.moaguide.com/summary/report/building',
-    {
-      cache: 'no-store'
-    }
-  );
+  const buildingReportResponse = await fetch(`${API_BASE_URL}/summary/report/building`, {
+    cache: 'no-store'
+  });
   const productDetailResponse = await fetch(
-    `https://api.moaguide.com/summary/list?category=${category}&subcategory=${subcategory}&sort=${sort}&page=${pages}&size=10`,
+    `${API_BASE_URL}/summary/list?category=${category}&subcategory=${subcategory}&sort=${sort}&page=${pages}&size=10`,
     {
       headers: {
         Authorization: `Bearer ${token} `

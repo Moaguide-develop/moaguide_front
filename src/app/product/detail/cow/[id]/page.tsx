@@ -1,18 +1,20 @@
 'use client';
 import Container from '@/components/common/Container';
-import NavBar from '@/components/product/detail/NavBar';
-import News from '@/components/product/detail/News';
-import Report from '@/components/product/detail/Report';
-import Image from 'next/image';
+import NavBar from '@/app/product/(product)/detail/NavBar';
+import News from '@/app/product/(product)/detail/News';
+import Report from '@/app/product/(product)/detail/Report';
 import { useState } from 'react';
 import { getCowProductDetail } from '@/factory/Product/ProductDetail/CowProductDetail';
-import CowProductDetail from '@/components/product/detail/cow/CowProductDetail';
-import CowProfit from '@/components/product/detail/cow/CowProfit';
-import { CATEGORY } from '@/static/category';
-import Link from 'next/link';
+import CowProductDetail from '@/app/product/(product)/detail/cow/CowProductDetail';
+import CowProfit from '@/app/product/(product)/detail/cow/CowProfit';
 import '../../../../plugin';
-import { BookmarkUpdate } from '@/components/product/detail/BookmarkUpdate';
-import { CowTopDetail } from '@/components/product/detail/cow/CowTopDetail';
+import { BookmarkUpdate } from '@/app/product/(product)/detail/BookmarkUpdate';
+import { CowTopDetail } from '@/app/product/(product)/detail/cow/CowTopDetail';
+import dynamic from 'next/dynamic';
+
+const BlurWrapper = dynamic(() => import('@/components/common/BlurWrapper'), {
+  ssr: false
+});
 
 const CowDetailpage = (props: { params: { id: string } }) => {
   const [sort, setSort] = useState('profit');
@@ -22,6 +24,13 @@ const CowDetailpage = (props: { params: { id: string } }) => {
   };
   const [localData, setLocalData] = useState(data);
   const { handleBookmarkClick } = BookmarkUpdate({ data, localData, setLocalData });
+
+  const sortComponents: { [key: string]: JSX.Element } = {
+    news: <News />,
+    report: <Report />,
+    profit: <CowProfit url={url} />,
+    detail: <CowProductDetail url={url} />
+  };
 
   return (
     <div className="overflow-x-hidden desk:mx-3">
@@ -33,16 +42,7 @@ const CowDetailpage = (props: { params: { id: string } }) => {
         />
       </Container>
       <NavBar sort={sort} setSort={setSort} />
-
-      {sort === 'news' ? (
-        <News />
-      ) : sort === 'report' ? (
-        <Report />
-      ) : sort === 'profit' ? (
-        <CowProfit url={url} />
-      ) : sort === 'detail' ? (
-        <CowProductDetail url={url} />
-      ) : undefined}
+      <BlurWrapper>{sortComponents[sort]}</BlurWrapper>
     </div>
   );
 };

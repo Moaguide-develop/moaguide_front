@@ -16,6 +16,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "types": ["react", "react-dom"],
     "incremental": true,
     "plugins": [
       {
@@ -35,7 +36,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/app/payment/check/confirm/successloading"  ],
   "exclude": [
     "node_modules"
   ]
