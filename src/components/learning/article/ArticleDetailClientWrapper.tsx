@@ -64,9 +64,8 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         authorName={data.authorName}
         imgLink={data.imgLink}
       />
-      {/* todo: 화면 크기 작아지면 텍스트 영역 겹치는 부분 */}
-      <div className="w-[90%] mx-auto py-12 flex items-center justify-between border-b border-[#ececec]">
-        <div className="text-sm text-[#a0a0a0]">
+      <div className="max-w-[1000px] w-[90%] mx-auto pt-8 py-2 flex items-center justify-between border-b border-[#ececec]">
+        <div className="text-sm text-[#a0a0a0] mb-20">
           학습하기 &gt; 아티클 &gt; {data.categoryName}
         </div>
         <div className="absolute inset-x-0 text-center">
