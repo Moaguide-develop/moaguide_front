@@ -5,9 +5,11 @@ import Image from 'next/image';
 import defaultImage from '../../../public/images/learning/learning_img.svg';
 import LatestNewsClippingSkeleton from '../skeleton/LatestNewsClippingSkeleton';
 import { useRouter } from 'next/navigation';
+import { useLikeStore } from '@/store/articleLike.store';
 
 const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
+  const { setLikedByMe } = useLikeStore();
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -29,6 +31,17 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
     return <LatestNewsClippingSkeleton />;
   }
 
+  const handleContentFirstClick = (content: any) => {
+    setLikedByMe(contents[0].likedByMe);
+    router.push(`/learning/detail/${contents[0].articleId}`);
+  };
+
+
+  const handleContentClick = (content: any) => {
+    setLikedByMe(content.likedByMe); 
+    router.push(`/learning/detail/${content.articleId}`); 
+  };
+
   return (
     <section className="relative mt-12 mb-4">
       <h2 className="w-[90%] sm:w-[100%] mx-auto text-lg font-bold mb-6">뉴스 클리핑</h2>
@@ -36,7 +49,9 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
         // 모바일 레이아웃
         <div className="sm:hidden">
           {contents[0] && (
-            <div className="w-full overflow-hidden mb-4 cursor-pointer" onClick={() => router.push(`/learning/detail/${contents[0].articleId}`)}>
+            <div className="w-full overflow-hidden mb-4 cursor-pointer"
+              onClick={() => handleContentFirstClick(contents[0])}
+            >
               <Image
                 src={contents[0].img_link || defaultImage}
                 alt={contents[0].title}
@@ -63,7 +78,9 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
           )}
           <div className="flex flex-col gap-4">
             {contents.slice(1, 5).map((content, index) => (
-              <div key={index} className="flex gap-4 w-[90%] sm:w-[100%] mx-auto cursor-pointer" onClick={() => router.push(`/learning/detail/${content.articleId}`)}>
+              <div key={index} className="flex gap-4 w-[90%] sm:w-[100%] mx-auto cursor-pointer" 
+                onClick={() => handleContentClick(content)}
+              >
                 <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
                   <Image
                     src={content.img_link || defaultImage}
@@ -101,7 +118,9 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
         // 데스크톱 레이아웃
         <div className="hidden sm:flex gap-6">
           {contents[0] && (
-            <div className="flex-1 shadow-sm overflow-hidden rounded-lg border cursor-pointer" onClick={() => router.push(`/learning/detail/${contents[0].articleId}`)}>
+            <div className="flex-1 shadow-sm overflow-hidden rounded-lg border cursor-pointer"
+              onClick={() => handleContentFirstClick(contents[0])}
+            >
               <div className="bg-gray-200 rounded-t-lg overflow-hidden">
                 <Image
                   src={contents[0].img_link || defaultImage}
@@ -119,7 +138,9 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
           )}
           <div className="flex flex-col gap-6 w-1/2">
             {contents.slice(1, 5).map((content, index) => (
-              <div key={index} className="flex items-stretch gap-4 cursor-pointer" onClick={() => router.push(`/learning/detail/${content.articleId}`)}>
+              <div key={index} className="flex items-stretch gap-4 cursor-pointer"
+                onClick={() => handleContentClick(content)}
+              >
                 <div className="w-32 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200">
                   <Image
                     src={content.img_link || defaultImage}

@@ -9,9 +9,11 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import RecentContentsSkeleton from '../skeleton/RecentContentsSkeleton';
 import { useRouter } from 'next/navigation';
+import { useLikeStore } from '@/store/articleLike.store';
 
 const RecentContents = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
+  const { setLikedByMe } = useLikeStore();
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -28,6 +30,11 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
   if (isMobile === null) {
     return <RecentContentsSkeleton />;
   }
+
+  const handleContentClick = (content: any) => {
+    setLikedByMe(content.likedByMe); 
+    router.push(`/learning/detail/${content.articleId}`); 
+  };
 
   return (
     <section className="relative mt-12">
@@ -47,7 +54,9 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
             >
               {contents.map((content, index) => (
                 <SwiperSlide key={index} className="relative">
-                  <div className="relative w-full h-[350px] bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" onClick={() => router.push(`/learning/detail/${content.articleId}`)}>
+                  <div className="relative w-full h-[350px] bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"
+                    onClick={() => handleContentClick(content)}
+                    >
                     <Image
                       src={content.img_link || defaultImage}
                       alt={content.title}
@@ -75,7 +84,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                 <div
                   key={index}
                   className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-white cursor-pointer"
-                  onClick={() => router.push(`/learning/detail/${content.articleId}`)}
+                  onClick={() => handleContentClick(content)}
                 >
                   <div className="relative w-full h-[180px]">
                     <Image

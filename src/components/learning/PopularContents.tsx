@@ -9,12 +9,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import PopularContentsSkeleton from '../skeleton/PopularContentsSkeleton';
 import { useRouter } from 'next/navigation';
+import { useLikeStore } from '@/store/articleLike.store';
 
 /*
 todo: any 타입 변경
 */
 const PopularContents = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
+  const { setLikedByMe } = useLikeStore();
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
   
   useEffect(() => {
@@ -31,6 +33,11 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
   if (isMobile === null) {
     return <PopularContentsSkeleton />;
   }
+
+  const handleContentClick = (content: any) => {
+    setLikedByMe(content.likedByMe); 
+    router.push(`/learning/detail/${content.articleId}`); 
+  };
 
   return (
     <section className="relative mt-12">
@@ -57,7 +64,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                       backgroundPosition: 'center',
                       backgroundRepeat: 'no-repeat',
                     }}
-                    onClick={() => router.push(`/learning/detail/${content.articleId}`)}
+                    onClick={() => handleContentClick(content)}
                   >
                     <div className="absolute inset-0 bg-black bg-opacity-50 filter blur-lg"></div>
                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[270px] h-[300px]">
@@ -97,7 +104,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                 <div
                   key={index}
                   className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-white cursor-pointer"
-                  onClick={() => router.push(`/learning/detail/${content.articleId}`)}
+                  onClick={() => handleContentClick(content)}
                 >
                   <div className="relative w-full h-[180px]">
                     <Image
