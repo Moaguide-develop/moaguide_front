@@ -4,14 +4,17 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ArticleDetailHeader from '@/components/learning/article/ArticleDetailHeader';
 import ArticleDetailContent from '@/components/learning/article/ArticleDetailContent';
-import { getArticleDetail } from '@/factory/Article/GetArticle';
-import { ArticleDetail } from '@/types/learning';
+import RelatedArticles from './RelatedArticles';
+import BackButton from './BackButton';
 import { useAuthStore } from '@/store/userAuth.store';
+import { useLikeStore } from '@/store/articleLike.store';
 import Image from 'next/image';
 import sharedIcon from '../../../../public/images/learning/articleShare.svg';
 import likedIcon from '../../../../public/images/learning/articleLiked.svg';
-import RelatedArticles from './RelatedArticles';
-import BackButton from './BackButton';
+import noLikedIcon from '../../../../public/images/learning/articleNoLike.svg';
+import { getArticleDetail } from '@/factory/Article/GetArticle';
+import { ArticleDetail } from '@/types/learning';
+import { likeArticle } from '@/factory/Article/ControlLiked';
 
 interface ArticleDetailClientWrapperProps {
   articleId: number;
@@ -19,8 +22,16 @@ interface ArticleDetailClientWrapperProps {
 
 const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperProps) => {
   const { isLoggedIn } = useAuthStore();
+  const { likedByMe, setLikedByMe } = useLikeStore();
   const router = useRouter();
   const [data, setData] = useState<ArticleDetail | null>(null);
+
+  useEffect(() => {
+    const savedLikedState = localStorage.getItem('likedByMe');
+    if (savedLikedState !== null) {
+      setLikedByMe(JSON.parse(savedLikedState));
+    }
+  }, [setLikedByMe]);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -55,6 +66,15 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     }
   };
 
+  const handleLikeToggle = async () => {
+    try {
+      const response = await likeArticle(articleId);
+      setLikedByMe(response.liked);
+    } catch (error) {
+      console.error('좋아요 API 호출 실패:', error);
+    }
+  };
+
   return (
     <div>
       <ArticleDetailHeader
@@ -73,11 +93,12 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         </div>
         <div className="flex items-center gap-4 z-[9999]">
           <Image
-            src={likedIcon}
+            src={likedByMe ? likedIcon : noLikedIcon} 
             alt="좋아요 아이콘"
             width={24}
             height={24}
             className="cursor-pointer"
+            onClick={handleLikeToggle}
           />
           <button onClick={handleShare} aria-label="공유하기">
             <Image

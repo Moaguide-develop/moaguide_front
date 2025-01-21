@@ -7,5 +7,8 @@ interface LikeState {
 
 export const useLikeStore = create<LikeState>((set) => ({
   likedByMe: false,
-  setLikedByMe: (liked) => set({ likedByMe: liked }),
+  setLikedByMe: (liked) => {
+    localStorage.setItem('likedByMe', JSON.stringify(liked));
+    set({ likedByMe: liked });
+  },
 }));
