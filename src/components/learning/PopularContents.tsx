@@ -9,14 +9,9 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import PopularContentsSkeleton from '../skeleton/PopularContentsSkeleton';
 import { useRouter } from 'next/navigation';
-import { useLikeStore } from '@/store/articleLike.store';
 
-/*
-todo: any 타입 변경
-*/
 const PopularContents = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
-  const { setLikedByMe } = useLikeStore();
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
   
   useEffect(() => {
@@ -35,7 +30,6 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
   }
 
   const handleContentClick = (content: any) => {
-    setLikedByMe(content.likedByMe); 
     router.push(`/learning/detail/${content.articleId}`); 
   };
 

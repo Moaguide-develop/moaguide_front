@@ -6,51 +6,38 @@ import ArticleDetailHeader from '@/components/learning/article/ArticleDetailHead
 import ArticleDetailContent from '@/components/learning/article/ArticleDetailContent';
 import RelatedArticles from './RelatedArticles';
 import BackButton from './BackButton';
-import { useAuthStore } from '@/store/userAuth.store';
-import { useLikeStore } from '@/store/articleLike.store';
 import Image from 'next/image';
 import sharedIcon from '../../../../public/images/learning/articleShare.svg';
 import likedIcon from '../../../../public/images/learning/articleLiked.svg';
 import noLikedIcon from '../../../../public/images/learning/articleNoLike.svg';
 import { getArticleDetail } from '@/factory/Article/GetArticle';
-import { ArticleDetail } from '@/types/learning';
 import { likeArticle } from '@/factory/Article/ControlLiked';
+import { ArticleDetailResponse } from '@/types/learning';
 
 interface ArticleDetailClientWrapperProps {
   articleId: number;
 }
 
 const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperProps) => {
-  const { isLoggedIn } = useAuthStore();
-  const { likedByMe, setLikedByMe } = useLikeStore();
   const router = useRouter();
-  const [data, setData] = useState<ArticleDetail | null>(null);
+  const [data, setData] = useState<ArticleDetailResponse | null>(null);
+  const [likedByMe, setLikedByMe] = useState<boolean>(false);
 
   useEffect(() => {
-    const savedLikedState = localStorage.getItem('likedByMe');
-    if (savedLikedState !== null) {
-      setLikedByMe(JSON.parse(savedLikedState));
-    }
-  }, [setLikedByMe]);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      alert('로그인이 필요한 서비스입니다.');
-      router.push('/sign');
-      return;
-    }
-
     const fetchData = async () => {
       try {
         const result = await getArticleDetail(articleId);
-        setData(result);
+        if (result) {
+          setData(result);
+          setLikedByMe(result.likedByMe);
+        }
       } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
       }
     };
 
     fetchData();
-  }, [isLoggedIn, articleId, router]);
+  }, [articleId]);
 
   if (!data) {
     return null;
@@ -75,25 +62,27 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     }
   };
 
+  const { articleDetail } = data;
+
   return (
     <div>
       <ArticleDetailHeader
-        categoryName={data.categoryName}
-        title={data.title}
-        createdAt={data.createdAt}
-        authorName={data.authorName}
-        imgLink={data.imgLink}
+        categoryName={articleDetail.categoryName}
+        title={articleDetail.title}
+        createdAt={articleDetail.createdAt}
+        authorName={articleDetail.authorName}
+        imgLink={articleDetail.imgLink}
       />
-      <div className="max-w-[1000px] w-[90%] mx-auto pt-8 py-2 flex items-center justify-between border-b border-[#ececec]">
-        <div className="text-sm text-[#a0a0a0] mb-20">
-          학습하기 &gt; 아티클 &gt; {data.categoryName}
+      <div className="max-w-[1000px] w-[90%] mx-auto py-8 flex items-center justify-between border-b border-[#ececec]">
+        <div className="text-sm text-[#a0a0a0]">
+          학습하기 &gt; 아티클 &gt; {articleDetail.categoryName}
         </div>
-        <div className="absolute inset-x-0 text-center">
-          <h1 className="text-lg font-semibold text-[#777777]">{data.title}</h1>
-        </div>
+        {/* <div className="absolute inset-x-0 text-center">
+          <h1 className="text-lg font-semibold text-[#777777]">{articleDetail.title}</h1>
+        </div> */}
         <div className="flex items-center gap-4 z-[9999]">
           <Image
-            src={likedByMe ? likedIcon : noLikedIcon} 
+            src={likedByMe ? likedIcon : noLikedIcon}
             alt="좋아요 아이콘"
             width={24}
             height={24}
@@ -112,12 +101,12 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         </div>
       </div>
       <ArticleDetailContent
-        text={data.text}
-        title={data.title}
-        paywallUp={data.paywallUp}
-        createdAt={data.createdAt}
-        authorName={data.authorName}
-        imgLink={data.imgLink}
+        text={articleDetail.text}
+        title={articleDetail.title}
+        paywallUp={articleDetail.paywallUp}
+        createdAt={articleDetail.createdAt}
+        authorName={articleDetail.authorName}
+        imgLink={articleDetail.imgLink}
       />
       <RelatedArticles articleId={articleId} />
       <BackButton />

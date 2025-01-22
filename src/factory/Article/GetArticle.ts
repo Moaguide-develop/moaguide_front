@@ -1,13 +1,14 @@
 import { axiosInstance, basicAxiosInstance } from "@/service/axiosInstance";
 import { FilteredResponse } from "@/types/filterArticle";
-import { ArticleDetail, RelatedArticle } from "@/types/learning";
+import { ArticleDetail, ArticleDetailResponse, RelatedArticle } from "@/types/learning";
 
-export const getArticleDetail = async (articleId: number): Promise<ArticleDetail | null> => {
-    console.log(articleId);
+export const getArticleDetail = async (
+  articleId: number
+): Promise<ArticleDetailResponse | null> => {
   try {
-    const response = await axiosInstance.get<ArticleDetail>(
-        `articles/detail/${articleId}`
-      );
+    const response = await axiosInstance.get<ArticleDetailResponse>(
+      `articles/detail/${articleId}`
+    );
     return response.data;
   } catch (error) {
     if (!axiosInstance.defaults.headers.common['Authorization']) {
