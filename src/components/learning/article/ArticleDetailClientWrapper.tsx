@@ -25,7 +25,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   const { isLoggedIn } = useAuthStore();
   const [data, setData] = useState<ArticleDetailResponse | null>(null);
   const { setLikedArticle, getLikedState } = useLikeStore();
-  const [likedByMe, setLikedByMe] = useState<boolean>(getLikedState(articleId) ?? false);
+  const [likedByMe, setLikedByMe] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -38,9 +38,11 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
       try {
         const result = await getArticleDetail(articleId);
         if (result) {
-          setData(result); 
+          setData(result);
           setLikedByMe(result.likedByMe);
           setLikedArticle(articleId, result.likedByMe);
+        } else {
+          console.error('Article data is missing.');
         }
       } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
@@ -50,9 +52,11 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     fetchData();
   }, [articleId, setLikedArticle, isLoggedIn, router]);
 
-  if (!data) {
-    return null;
+  if (!data || !data.articleDetail) {
+    return <div>데이터를 가져오지 못했습니다.</div>;
   }
+
+  const { articleDetail } = data;
 
   const handleShare = async () => {
     const shareUrl = `${window.location.origin}/learning/detail/${articleId}`;
@@ -74,20 +78,18 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     }
   };
 
-  const { articleDetail } = data;
-
   return (
     <div>
       <ArticleDetailHeader
-        categoryName={articleDetail.categoryName}
-        title={articleDetail.title}
-        createdAt={articleDetail.createdAt}
-        authorName={articleDetail.authorName}
-        imgLink={articleDetail.imgLink}
+        categoryName={articleDetail?.categoryName || '카테고리 없음'}
+        title={articleDetail?.title || '제목 없음'}
+        createdAt={articleDetail?.createdAt || ''}
+        authorName={articleDetail?.authorName || '작성자 없음'}
+        imgLink={articleDetail?.imgLink || null}
       />
       <div className="max-w-[1000px] w-[90%] mx-auto py-8 flex items-center justify-between border-b border-[#ececec]">
         <div className="text-sm text-[#a0a0a0]">
-          학습하기 &gt; 아티클 &gt; {articleDetail.categoryName}
+          학습하기 &gt; 아티클 &gt; {articleDetail?.categoryName || '카테고리 없음'}
         </div>
         <div className="flex items-center gap-4 z-[9999]">
           <Image
@@ -110,12 +112,12 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         </div>
       </div>
       <ArticleDetailContent
-        text={articleDetail.text}
-        title={articleDetail.title}
-        paywallUp={articleDetail.paywallUp}
-        createdAt={articleDetail.createdAt}
-        authorName={articleDetail.authorName}
-        imgLink={articleDetail.imgLink}
+        text={articleDetail?.text || '내용이 없습니다.'}
+        title={articleDetail?.title || '제목 없음'}
+        paywallUp={articleDetail?.paywallUp || ''}
+        createdAt={articleDetail?.createdAt || ''}
+        authorName={articleDetail?.authorName || '작성자 없음'}
+        imgLink={articleDetail?.imgLink || null}
       />
       <RelatedArticles articleId={articleId} />
       <BackButton />
