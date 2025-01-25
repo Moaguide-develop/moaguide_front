@@ -14,6 +14,7 @@ import { getArticleDetail } from '@/factory/Article/GetArticle';
 import { likeArticle } from '@/factory/Article/ControlLiked';
 import { ArticleDetailResponse } from '@/types/learning';
 import { useLikeStore } from '@/store/articleLike.store';
+import { useAuthStore } from '@/store/userAuth.store';
 
 interface ArticleDetailClientWrapperProps {
   articleId: number;
@@ -21,11 +22,18 @@ interface ArticleDetailClientWrapperProps {
 
 const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperProps) => {
   const router = useRouter();
+  const { isLoggedIn } = useAuthStore();
   const [data, setData] = useState<ArticleDetailResponse | null>(null);
   const { setLikedArticle, getLikedState } = useLikeStore();
   const [likedByMe, setLikedByMe] = useState<boolean>(getLikedState(articleId) ?? false);
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      alert('로그인이 필요한 서비스입니다.');
+      router.push('/sign');
+      return;
+    }
+
     const fetchData = async () => {
       try {
         const result = await getArticleDetail(articleId);
@@ -40,7 +48,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     };
 
     fetchData();
-  }, [articleId, setLikedArticle]);
+  }, [articleId, setLikedArticle, isLoggedIn, router]);
 
   if (!data) {
     return null;

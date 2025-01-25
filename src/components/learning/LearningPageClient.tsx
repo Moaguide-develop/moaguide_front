@@ -16,19 +16,28 @@ import { OverviewResponse, Content } from '@/types/learning';
 import { fetchContentsWithPage } from '@/factory/Article/GetArticle';
 
 const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) => {
-  const [selectedType, setSelectedType] = useState<string>(() => {
-    return sessionStorage.getItem('selectedType') || '';
-  });
-
-  const [selectedCategory, setSelectedCategory] = useState<string>(() => {
-    return sessionStorage.getItem('selectedCategory') || '';
-  });
-
+  // 브라우저에서 sessionStorage 값을 초기화
+  const [selectedType, setSelectedType] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [page, setPage] = useState<number>(1);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [page, setPage] = useState<number>(() => {
-    const savedPage = sessionStorage.getItem('page');
-    return savedPage ? parseInt(savedPage, 10) : 1;
-  });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setSelectedType(sessionStorage.getItem('selectedType') || '');
+      setSelectedCategory(sessionStorage.getItem('selectedCategory') || '');
+      const savedPage = sessionStorage.getItem('page');
+      setPage(savedPage ? parseInt(savedPage, 10) : 1);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('selectedType', selectedType);
+      sessionStorage.setItem('selectedCategory', selectedCategory);
+      sessionStorage.setItem('page', page.toString());
+    }
+  }, [selectedType, selectedCategory, page]);
 
   const { data, isLoading } = useQuery({
     queryKey: ['contents', selectedType, selectedCategory, page],
@@ -36,18 +45,14 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
     enabled: !!(selectedType || selectedCategory),
   });
 
-  useEffect(() => {
-    sessionStorage.setItem('selectedType', selectedType);
-    sessionStorage.setItem('selectedCategory', selectedCategory);
-    sessionStorage.setItem('page', page.toString());
-  }, [selectedType, selectedCategory, page]);
-
   const resetFilters = () => {
     setSelectedType('');
     setSelectedCategory('');
     setPage(1);
     setActiveDropdown(null);
-    sessionStorage.clear();
+    if (typeof window !== 'undefined') {
+      sessionStorage.clear();
+    }
   };
 
   const handleTypeChange = (value: string) => {
@@ -73,7 +78,6 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
           likedByMe: item.likedByMe,
         }))
       : [];
-
   return (
     <div>
       <div className="relative w-full h-[300px] lg:h-[400px]">

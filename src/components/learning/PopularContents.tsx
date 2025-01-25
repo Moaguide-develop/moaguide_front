@@ -39,8 +39,6 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
     router.push(`/learning/detail/${content.articleId}`);
   };
 
-  console.log(contents);
-
   return (
     <section className="relative mt-12">
       <div className="">
