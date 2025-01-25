@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import PopularContents from '@/components/learning/PopularContents';
@@ -16,22 +16,38 @@ import { OverviewResponse, Content } from '@/types/learning';
 import { fetchContentsWithPage } from '@/factory/Article/GetArticle';
 
 const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) => {
-  const [selectedType, setSelectedType] = useState<string>('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedType, setSelectedType] = useState<string>(() => {
+    return sessionStorage.getItem('selectedType') || '';
+  });
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(() => {
+    return sessionStorage.getItem('selectedCategory') || '';
+  });
+
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [page, setPage] = useState<number>(1);
-  
+  const [page, setPage] = useState<number>(() => {
+    const savedPage = sessionStorage.getItem('page');
+    return savedPage ? parseInt(savedPage, 10) : 1;
+  });
+
   const { data, isLoading } = useQuery({
     queryKey: ['contents', selectedType, selectedCategory, page],
     queryFn: fetchContentsWithPage,
     enabled: !!(selectedType || selectedCategory),
   });
 
+  useEffect(() => {
+    sessionStorage.setItem('selectedType', selectedType);
+    sessionStorage.setItem('selectedCategory', selectedCategory);
+    sessionStorage.setItem('page', page.toString());
+  }, [selectedType, selectedCategory, page]);
+
   const resetFilters = () => {
     setSelectedType('');
     setSelectedCategory('');
     setPage(1);
     setActiveDropdown(null);
+    sessionStorage.clear();
   };
 
   const handleTypeChange = (value: string) => {
@@ -51,12 +67,12 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
   };
 
   const extractContents = (contents: Content[] | undefined) =>
-  Array.isArray(contents)
-    ? contents.map((item) => ({
-        ...item.article,
-        likedByMe: item.likedByMe,
-      }))
-    : [];
+    Array.isArray(contents)
+      ? contents.map((item) => ({
+          ...item.article,
+          likedByMe: item.likedByMe,
+        }))
+      : [];
 
   return (
     <div>
@@ -166,11 +182,11 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
           null
         ) : (
           <FilteredContents
-          contents={data?.content || []}
-          total={data?.total || 0}
-          page={page}
-          size={data?.size || 5}
-          onPageChange={(newPage) => setPage(newPage)}
+            contents={data?.content || []}
+            total={data?.total || 0}
+            page={page}
+            size={data?.size || 5}
+            onPageChange={(newPage) => setPage(newPage)}
           />
         )}
       </div>

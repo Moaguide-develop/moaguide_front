@@ -18,12 +18,11 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
   const router = useRouter();
 
   const handleAccesstion = () => {
-    // 결제 페이지 이동 작업
-    router.push('/');
+    router.push('/payment');
   }
 
   return (
-    <div className="max-w-[1000px] w-[90%] lg:w-full mx-auto my-10">
+    <div className="max-w-[1000px] w-[90%] mx-auto my-10">
       <p className="text-sm text-gray-600">
         {new Date(createdAt).toLocaleDateString()} <br />
         BY. {authorName}

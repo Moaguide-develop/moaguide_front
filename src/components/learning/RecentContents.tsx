@@ -9,10 +9,16 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import RecentContentsSkeleton from '../skeleton/RecentContentsSkeleton';
 import { useRouter } from 'next/navigation';
+import likedIcon from '../../../public/images/learning/articleLiked.svg';
+import noLikedIcon from '../../../public/images/learning/articleNoLike.svg';
+import premiumIcon from '../../../public/images/learning/premium_article.svg';
+import { useLikeStore } from '@/store/articleLike.store';
 
 const RecentContents = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
   const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  const { getLikedState } = useLikeStore();
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,6 +34,10 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
   if (isMobile === null) {
     return <RecentContentsSkeleton />;
   }
+
+  const handleContentClick = (content: any) => {
+    router.push(`/learning/detail/${content.articleId}`);
+  };
 
   return (
     <section className="relative mt-12">
@@ -45,69 +55,108 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
               modules={[Pagination]}
               className="w-full mySwiper2 custom-swiper-pagination"
             >
-              {contents.map((content, index) => (
-                <SwiperSlide key={index} className="relative">
-                  <div className="relative w-full h-[350px] bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer" onClick={() => router.push(`/learning/detail/${content.articleId}`)}>
-                    <Image
-                      src={content.img_link || defaultImage}
-                      alt={content.title}
-                      fill
-                      className="object-cover"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
-                      <h3 className="text-white text-lg font-semibold truncate">
-                        {content.title}
-                      </h3>
-                      <p className="text-gray-300 text-sm truncate">
-                        {content.description}
-                      </p>
+              {contents.map((content, index) => {
+                const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+
+                return (
+                  <SwiperSlide key={index} className="relative">
+                    <div
+                      className="relative w-full h-[350px] bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer"
+                      onClick={() => handleContentClick(content)}
+                    >
+                      <Image
+                        src={content.img_link || defaultImage}
+                        alt={content.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent py-4 pl-4 pr-12">
+                        <div className='w-full mx-auto flex flex-col'>
+                        <h3 className="text-white text-lg font-semibold truncate">
+                          {content.title}
+                        </h3>
+                        <p className="text-gray-300 text-sm truncate">
+                          {content.description}
+                        </p>
+                        </div>
+                      </div>
+                      <div className="absolute bottom-6 right-4">
+                        <Image
+                          src={likedByMe ? likedIcon : noLikedIcon}
+                          alt={likedByMe ? 'Liked' : 'Not Liked'}
+                          width={24}
+                          height={24}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </SwiperSlide>
-              ))}
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
             <div className="swiper-pagination mt-4"></div>
           </div>
         ) : (
           <div className="hidden sm:grid gap-4 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {contents.map((content, index) => (
-                <div
-                  key={index}
-                  className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-white cursor-pointer"
-                  onClick={() => router.push(`/learning/detail/${content.articleId}`)}
-                >
-                  <div className="relative w-full h-[180px]">
-                    <Image
-                      src={content.img_link || defaultImage}
-                      alt={content.title}
-                      fill
-                      className="object-cover"
-                    />
+              {contents.map((content, index) => {
+                const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+
+                return (
+                  <div
+                    key={index}
+                    className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-white cursor-pointer"
+                    onClick={() => handleContentClick(content)}
+                  >
+                    <div className="relative w-full h-[180px]">
+                      <Image
+                        src={content.img_link || defaultImage}
+                        alt={content.title}
+                        fill
+                        className="object-cover"
+                      />
+                       {content.premium && (
+                          <div className="absolute bottom-4 left-4">
+                            <Image
+                              src={premiumIcon}
+                              alt="프리미엄 아이콘"
+                              width={24}
+                              height={24}
+                            />
+                          </div>
+                        )}
+                      <div className="absolute bottom-4 right-4">
+                        <Image
+                          src={likedByMe ? likedIcon : noLikedIcon}
+                          alt={likedByMe ? 'Liked' : 'Not Liked'}
+                          width={24}
+                          height={24}
+                        />
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 px-4 py-2">
+                      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
+                        {content.type}
+                      </span>
+                      <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#f4e5ff] text-[#6e35e8]">
+                        {content.categoryName || '카테고리'}
+                      </span>
+                    </div>
+                    <div className="flex flex-col flex-grow px-4">
+                      <h3 className="text-black text-lg font-semibold truncate mt-[16px]">
+                        {content.title}
+                      </h3>
+                      <p className="text-[#726c6c] text-base font-semibold my-[16px] line-clamp-2">
+                        {content.description}
+                      </p>
+                    </div>
+                    <div className="mt-auto border-t px-4 py-2">
+                      <button className="w-full text-center py-2 text-[#545454] text-sm font-medium">
+                        {content.type === '아티클' ? '보러가기' : '재생하기'}
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2 px-4 py-2">
-                    <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                      {content.type}
-                    </span>
-                    <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#f4e5ff] text-[#6e35e8]">
-                      {content.categoryName || '카테고리'}
-                    </span>
-                  </div>
-                  <div className="flex flex-col flex-grow px-4">
-                    <h3 className="text-black text-lg font-semibold truncate mt-[16px]">
-                      {content.title}
-                    </h3>
-                    <p className="text-[#726c6c] text-base font-semibold my-[16px] line-clamp-2">
-                      {content.description}
-                    </p>
-                  </div>
-                  <div className="mt-auto border-t px-4 py-2">
-                    <button className="w-full text-center py-2 text-[#545454] text-sm font-medium">
-                      {content.type === '아티클' ? '보러가기' : '재생하기'}
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         )}

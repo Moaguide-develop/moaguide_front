@@ -1,9 +1,24 @@
+import { cookies } from 'next/headers';
 import Navbar from '@/components/common/Navbar';
 import LearningPageClient from '@/components/learning/LearningPageClient';
 
 const LearningPage = async () => {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('access_token')?.value;
 
-  const response = await fetch('http://43.200.90.72/contents/overview', { cache: 'no-store' });
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  
+  if (accessToken) {
+    headers['Authorization'] = `Bearer ${accessToken}`;
+  }
+
+  const response = await fetch('http://43.200.90.72/contents/overview', {
+    method: 'GET',
+    headers,
+    cache: 'no-store',
+  });
 
   if (!response.ok) {
     console.error('Failed to fetch Overview API');

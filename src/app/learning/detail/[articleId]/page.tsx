@@ -1,3 +1,5 @@
+'use client';
+
 import Navbar from '@/components/common/Navbar';
 import ArticleDetailClientWrapper from '@/components/learning/article/ArticleDetailClientWrapper';
 

@@ -3,12 +3,14 @@ import { RelatedArticle } from "@/types/learning";
 import Image from "next/image";
 import { getRelatedArticles } from "@/factory/Article/GetArticle";
 import { getValidImageSrc } from "@/utils/checkImageProperty";
+import { useRouter } from "next/navigation";
 
 interface RelatedArticlesProps {
   articleId: number;
 }
 
 const RelatedArticles = ({ articleId }: RelatedArticlesProps) => {
+  const router = useRouter();
   const [relatedArticles, setRelatedArticles] = useState<RelatedArticle[] | string>("");
 
   useEffect(() => {
@@ -24,6 +26,10 @@ const RelatedArticles = ({ articleId }: RelatedArticlesProps) => {
 
     fetchData();
   }, [articleId]);
+
+  const handleContentClick = (item: any) => {
+    router.push(`/learning/detail/${item.article.articleId}`);
+  };
 
   // 데이터가 없을 때 처리
   if (typeof relatedArticles === "string") {
@@ -44,7 +50,8 @@ const RelatedArticles = ({ articleId }: RelatedArticlesProps) => {
       </h2>
       <div className="grid grid-cols-3 gap-4">
         {relatedArticles.map((item) => (
-          <div key={item.article.articleId} className="flex flex-col justify-between h-full">
+          <div key={item.article.articleId} className="flex flex-col justify-between h-full cursor-pointer"
+            onClick={() => handleContentClick(item)}>
             <div
               className="w-full relative overflow-hidden rounded-[25px]"
               style={{ aspectRatio: "409 / 255" }}

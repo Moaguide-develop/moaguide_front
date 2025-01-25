@@ -1,8 +1,10 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import defaultImage from '../../../public/images/learning/learning_img.svg';
 import { FilteredResponse } from '@/types/filterArticle';
 import { getValidImageSrc } from '@/utils/checkImageProperty';
+import { useLikeStore } from '@/store/articleLike.store';
 
 interface FilteredContentsProps {
   contents: FilteredResponse['content'];
@@ -27,6 +29,10 @@ const FilteredContents = ({
     return date.toISOString().split('T')[0];
   };
 
+  const handleContentClick = (item: any) => {
+    router.push(`/learning/detail/${item.article.articleId}`); 
+  };
+
   return (
     <div className="mt-10">
       <div className="space-y-10">
@@ -35,7 +41,7 @@ const FilteredContents = ({
             <div
               key={item.article.articleId}
               className="flex items-center gap-4 cursor-pointer"
-              onClick={() => router.push(`/learning/detail/${item.article.articleId}`)}
+              onClick={() => handleContentClick(item)}
             >
               <div className="w-64 h-40 flex-shrink-0 overflow-hidden rounded-md">
                <Image

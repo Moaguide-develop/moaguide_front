@@ -32,6 +32,11 @@ export interface Article {
     createdAt: string;
   }
 
+  export interface ArticleDetailResponse {
+    likedByMe: boolean;
+    articleDetail: ArticleDetail;
+  }
+
   // 아티클 관련 정보
   export interface RelatedArticle {
     likedByMe: boolean;
