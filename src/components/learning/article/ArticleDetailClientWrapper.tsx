@@ -68,8 +68,9 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     return <div>데이터를 가져오지 못했습니다.</div>;
   }
 
-  const { articleDetail } = data;
+  const articleDetail = data?.articleDetail;
   const { categoryName, title, createdAt, authorName, imgLink, text, paywallUp } = articleDetail;
+  console.log(categoryName);
 
   const handleShare = async () => {
     const shareUrl = `${window.location.origin}/learning/detail/${articleId}`;
