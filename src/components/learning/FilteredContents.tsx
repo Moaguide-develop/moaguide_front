@@ -22,7 +22,6 @@ const FilteredContents = ({
   onPageChange,
 }: FilteredContentsProps) => {
   const router = useRouter();
-  const { setLikedByMe } = useLikeStore();
   const totalPages = Math.ceil(total / size);
 
   const formatDate = (dateString: string) => {
@@ -31,7 +30,6 @@ const FilteredContents = ({
   };
 
   const handleContentClick = (item: any) => {
-    setLikedByMe(item.likedByMe); 
     router.push(`/learning/detail/${item.article.articleId}`); 
   };
 
