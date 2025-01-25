@@ -68,7 +68,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                       onClick={() => handleContentClick(content)}
                     >
                       <div className="absolute inset-0 bg-black bg-opacity-50 filter blur-lg"></div>
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[270px] h-[300px]">
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[270px] h-[300px] relative">
                         <Image
                           src={content.img_link || defaultImage}
                           alt={content.title}
@@ -83,6 +83,14 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                             {content.categoryName || '카테고리'}
                           </span>
                         </div>
+                        <div className="absolute bottom-4 right-4">
+                        <Image
+                          src={likedByMe ? likedIcon : noLikedIcon}
+                          alt={likedByMe ? 'Liked' : 'Not Liked'}
+                          width={24}
+                          height={24}
+                        />
+                      </div>
                       </div>
                       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center max-w-[280px] text-white px-4">
                         <h3 className="text-black text-lg font-semibold mb-2 truncate">
@@ -91,14 +99,6 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                         <p className="text-black text-sm font-medium line-clamp-2">
                           {content.description}
                         </p>
-                      </div>
-                      <div className="absolute top-4 right-4">
-                        <Image
-                          src={likedByMe ? likedIcon : noLikedIcon}
-                          alt={likedByMe ? 'Liked' : 'Not Liked'}
-                          width={24}
-                          height={24}
-                        />
                       </div>
                     </div>
                   </SwiperSlide>
@@ -125,7 +125,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                         fill
                         className="object-cover"
                       />
-                       <div className="absolute top-4 right-4">
+                       <div className="absolute bottom-4 right-4">
                       <Image
                         src={likedByMe ? likedIcon : noLikedIcon}
                         alt={likedByMe ? 'Liked' : 'Not Liked'}

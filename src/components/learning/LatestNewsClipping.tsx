@@ -51,6 +51,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               className="w-full overflow-hidden mb-4 cursor-pointer relative"
               onClick={() => handleContentClick(contents[0])}
             >
+              <div className='relative'>
               <Image
                 src={contents[0].img_link || defaultImage}
                 alt={contents[0].title}
@@ -58,7 +59,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 height={300}
                 className="w-full h-48 object-cover rounded-lg"
               />
-              <div className="absolute top-2 right-2">
+              <div className="absolute bottom-4 right-4">
                 <Image
                   src={
                     getLikedState(contents[0].articleId) ?? contents[0].likedByMe
@@ -70,6 +71,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                   height={24}
                   className="cursor-pointer"
                 />
+              </div>
               </div>
               <div className="bg-white w-[90%] sm:w-[100%] mx-auto pt-4">
                 <h3 className="text-lg font-bold">{contents[0].title}</h3>
@@ -103,7 +105,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                     height={80}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-1 right-1">
+                  <div className="absolute bottom-2 right-2">
                     <Image
                       src={
                         getLikedState(content.articleId) ?? content.likedByMe
@@ -155,7 +157,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 height={300}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute top-2 right-2">
+              <div className="absolute bottom-4 right-4">
                 <Image
                   src={
                     getLikedState(contents[0].articleId) ?? contents[0].likedByMe
@@ -188,7 +190,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                     height={80}
                     className="object-cover w-full h-full"
                   />
-                  <div className="absolute top-1 right-1">
+                  <div className="absolute bottom-2 right-2">
                     <Image
                       src={
                         getLikedState(content.articleId) ?? content.likedByMe

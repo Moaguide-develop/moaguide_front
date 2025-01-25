@@ -69,15 +69,17 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         fill
                         className="object-cover"
                       />
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent py-4 pl-4 pr-12">
+                        <div className='w-full mx-auto flex flex-col'>
                         <h3 className="text-white text-lg font-semibold truncate">
                           {content.title}
                         </h3>
                         <p className="text-gray-300 text-sm truncate">
                           {content.description}
                         </p>
+                        </div>
                       </div>
-                      <div className="absolute top-4 right-4">
+                      <div className="absolute bottom-6 right-4">
                         <Image
                           src={likedByMe ? likedIcon : noLikedIcon}
                           alt={likedByMe ? 'Liked' : 'Not Liked'}
@@ -111,7 +113,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         fill
                         className="object-cover"
                       />
-                      <div className="absolute top-4 right-4">
+                      <div className="absolute bottom-4 right-4">
                         <Image
                           src={likedByMe ? likedIcon : noLikedIcon}
                           alt={likedByMe ? 'Liked' : 'Not Liked'}

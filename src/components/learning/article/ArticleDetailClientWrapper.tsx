@@ -30,9 +30,9 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
       try {
         const result = await getArticleDetail(articleId);
         if (result) {
-          setData(result); // 데이터를 상태에 저장
-          setLikedByMe(result.likedByMe); // 좋아요 상태 설정
-          setLikedArticle(articleId, result.likedByMe); // Zustand에 좋아요 상태 저장
+          setData(result); 
+          setLikedByMe(result.likedByMe);
+          setLikedArticle(articleId, result.likedByMe);
         }
       } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
