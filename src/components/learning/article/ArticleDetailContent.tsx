@@ -18,8 +18,7 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
   const router = useRouter();
 
   const handleAccesstion = () => {
-    // 결제 페이지 이동 작업
-    router.push('/');
+    router.push('/payment');
   }
 
   return (

@@ -13,6 +13,7 @@ const useLogout = () => {
     removeCookie('access_token');
     removeCookie('refresh');
     router.push('/sign');
+    sessionStorage.clear();
   };
 
   return { handleLogout };
