@@ -58,7 +58,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     };
 
     fetchData();
-  }, [articleId, router]);
+  }, [articleId, router, setLikedArticle]);
 
   if (isLoading) {
     return null;
