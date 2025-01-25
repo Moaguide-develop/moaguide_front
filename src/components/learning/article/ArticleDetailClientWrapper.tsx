@@ -26,6 +26,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   const [data, setData] = useState<ArticleDetailResponse | null>(null);
   const { setLikedArticle, getLikedState } = useLikeStore();
   const [likedByMe, setLikedByMe] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -46,11 +47,17 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         }
       } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
+      } finally {
+        setIsLoading(false); 
       }
     };
 
     fetchData();
   }, [articleId, setLikedArticle, isLoggedIn, router]);
+
+  if (isLoading) {
+    return null;
+  }
 
   if (!data || !data.articleDetail) {
     return <div>데이터를 가져오지 못했습니다.</div>;
@@ -77,6 +84,9 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
       console.error('좋아요 API 호출 실패:', error);
     }
   };
+
+  console.log('article Data', articleDetail.categoryName);
+  console.log('categoryName Type:', typeof articleDetail?.categoryName);
 
   return (
     <div>
