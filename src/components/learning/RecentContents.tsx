@@ -11,6 +11,7 @@ import RecentContentsSkeleton from '../skeleton/RecentContentsSkeleton';
 import { useRouter } from 'next/navigation';
 import likedIcon from '../../../public/images/learning/articleLiked.svg';
 import noLikedIcon from '../../../public/images/learning/articleNoLike.svg';
+import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 
 const RecentContents = ({ contents }: { contents: any[] }) => {
@@ -113,6 +114,16 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         fill
                         className="object-cover"
                       />
+                       {content.premium && (
+                          <div className="absolute bottom-4 left-4">
+                            <Image
+                              src={premiumIcon}
+                              alt="프리미엄 아이콘"
+                              width={24}
+                              height={24}
+                            />
+                          </div>
+                        )}
                       <div className="absolute bottom-4 right-4">
                         <Image
                           src={likedByMe ? likedIcon : noLikedIcon}

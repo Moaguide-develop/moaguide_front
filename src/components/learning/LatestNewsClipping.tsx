@@ -7,6 +7,7 @@ import LatestNewsClippingSkeleton from '../skeleton/LatestNewsClippingSkeleton';
 import { useRouter } from 'next/navigation';
 import likedIcon from '../../../public/images/learning/articleLiked.svg';
 import noLikedIcon from '../../../public/images/learning/articleNoLike.svg';
+import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 
 const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
@@ -157,7 +158,17 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 height={300}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute bottom-4 right-4">
+               {contents[0].premium && (
+                  <div className="absolute bottom-4 left-4">
+                    <Image
+                      src={premiumIcon}
+                        alt="프리미엄 아이콘"
+                        width={24}
+                        height={24}
+                      />
+                    </div>
+                  )}
+                <div className="absolute bottom-4 right-4">
                 <Image
                   src={
                     getLikedState(contents[0].articleId) ?? contents[0].likedByMe
@@ -190,6 +201,16 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                     height={80}
                     className="object-cover w-full h-full"
                   />
+                   {content.premium && (
+                    <div className="absolute bottom-2 left-2">
+                      <Image
+                        src={premiumIcon}
+                          alt="프리미엄 아이콘"
+                          width={24}
+                          height={24}
+                        />
+                      </div>
+                    )}
                   <div className="absolute bottom-2 right-2">
                     <Image
                       src={

@@ -11,6 +11,7 @@ import PopularContentsSkeleton from '../skeleton/PopularContentsSkeleton';
 import { useRouter } from 'next/navigation';
 import likedIcon from '../../../public/images/learning/articleLiked.svg';
 import noLikedIcon from '../../../public/images/learning/articleNoLike.svg';
+import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 
 const PopularContents = ({ contents }: { contents: any[] }) => {
@@ -37,6 +38,8 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
   const handleContentClick = (content: any) => {
     router.push(`/learning/detail/${content.articleId}`);
   };
+
+  console.log(contents);
 
   return (
     <section className="relative mt-12">
@@ -68,7 +71,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                       onClick={() => handleContentClick(content)}
                     >
                       <div className="absolute inset-0 bg-black bg-opacity-50 filter blur-lg"></div>
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[270px] h-[300px] relative">
+                      <div className="top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[270px] h-[300px] relative">
                         <Image
                           src={content.img_link || defaultImage}
                           alt={content.title}
@@ -83,6 +86,16 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                             {content.categoryName || '카테고리'}
                           </span>
                         </div>
+                        {content.premium && (
+                          <div className="absolute bottom-4 left-4">
+                            <Image
+                              src={premiumIcon}
+                              alt="프리미엄 아이콘"
+                              width={24}
+                              height={24}
+                            />
+                          </div>
+                        )}
                         <div className="absolute bottom-4 right-4">
                         <Image
                           src={likedByMe ? likedIcon : noLikedIcon}
@@ -125,6 +138,16 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                         fill
                         className="object-cover"
                       />
+                      {content.premium && (
+                          <div className="absolute bottom-4 left-4">
+                            <Image
+                              src={premiumIcon}
+                              alt="프리미엄 아이콘"
+                              width={24}
+                              height={24}
+                            />
+                          </div>
+                        )}
                        <div className="absolute bottom-4 right-4">
                       <Image
                         src={likedByMe ? likedIcon : noLikedIcon}
