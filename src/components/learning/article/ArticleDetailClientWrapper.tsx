@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ArticleDetailHeader from '@/components/learning/article/ArticleDetailHeader';
 import ArticleDetailContent from '@/components/learning/article/ArticleDetailContent';
@@ -23,22 +23,26 @@ interface ArticleDetailClientWrapperProps {
 const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperProps) => {
   const router = useRouter();
   const { isLoggedIn } = useAuthStore();
+  const isLoggedInRef = useRef(isLoggedIn);
   const [data, setData] = useState<ArticleDetailResponse | null>(null);
   const { setLikedArticle, getLikedState } = useLikeStore();
   const [likedByMe, setLikedByMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    isLoggedInRef.current = isLoggedIn; 
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (!isLoggedInRef.current) {
       alert('로그인이 필요한 서비스입니다.');
       router.push('/sign');
       return;
     }
-  
+
     const fetchData = async () => {
       try {
         const result = await getArticleDetail(articleId);
-        console.log('API Response:', result);
         if (result) {
           setData(result);
           setLikedByMe(result.likedByMe);
@@ -52,7 +56,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         setIsLoading(false);
       }
     };
-  
+
     fetchData();
   }, [articleId, setLikedArticle, router]);
 
@@ -85,9 +89,6 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
       console.error('좋아요 API 호출 실패:', error);
     }
   };
-
-  console.log('article Data', articleDetail.categoryName);
-  console.log('categoryName Type:', typeof articleDetail?.categoryName);
 
   return (
     <div>
