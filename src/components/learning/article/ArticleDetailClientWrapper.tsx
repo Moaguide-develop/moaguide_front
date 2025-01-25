@@ -25,12 +25,12 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   const { isLoggedIn } = useAuthStore();
   const isLoggedInRef = useRef(isLoggedIn);
   const [data, setData] = useState<ArticleDetailResponse | null>(null);
-  const { setLikedArticle, getLikedState } = useLikeStore();
+  const { setLikedArticle } = useLikeStore();
   const [likedByMe, setLikedByMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    isLoggedInRef.current = isLoggedIn; 
+    isLoggedInRef.current = isLoggedIn;
   }, [isLoggedIn]);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     };
 
     fetchData();
-  }, [articleId, setLikedArticle, router]);
+  }, [articleId, router]);
 
   if (isLoading) {
     return null;
@@ -69,6 +69,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   }
 
   const { articleDetail } = data;
+  const { categoryName, title, createdAt, authorName, imgLink, text, paywallUp } = articleDetail;
 
   const handleShare = async () => {
     const shareUrl = `${window.location.origin}/learning/detail/${articleId}`;
@@ -93,11 +94,11 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   return (
     <div>
       <ArticleDetailHeader
-        categoryName={articleDetail?.categoryName || '카테고리 없음'}
-        title={articleDetail?.title || '제목 없음'}
-        createdAt={articleDetail?.createdAt || ''}
-        authorName={articleDetail?.authorName || '작성자 없음'}
-        imgLink={articleDetail?.imgLink || null}
+        categoryName={categoryName || '카테고리 없음'}
+        title={title || '제목 없음'}
+        createdAt={createdAt || ''}
+        authorName={authorName || '작성자 없음'}
+        imgLink={imgLink || null}
       />
       <div className="max-w-[1000px] w-[90%] mx-auto py-8 flex items-center justify-between border-b border-[#ececec]">
         <div className="text-sm text-[#a0a0a0]">
@@ -124,12 +125,12 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         </div>
       </div>
       <ArticleDetailContent
-        text={articleDetail?.text || '내용이 없습니다.'}
-        title={articleDetail?.title || '제목 없음'}
-        paywallUp={articleDetail?.paywallUp || ''}
-        createdAt={articleDetail?.createdAt || ''}
-        authorName={articleDetail?.authorName || '작성자 없음'}
-        imgLink={articleDetail?.imgLink || null}
+        text={text || '내용이 없습니다.'}
+        title={title || '제목 없음'}
+        paywallUp={paywallUp || ''}
+        createdAt={createdAt || ''}
+        authorName={authorName || '작성자 없음'}
+        imgLink={imgLink || null}
       />
       <RelatedArticles articleId={articleId} />
       <BackButton />
