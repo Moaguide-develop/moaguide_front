@@ -34,10 +34,11 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
       router.push('/sign');
       return;
     }
-
+  
     const fetchData = async () => {
       try {
         const result = await getArticleDetail(articleId);
+        console.log('API Response:', result);
         if (result) {
           setData(result);
           setLikedByMe(result.likedByMe);
@@ -48,12 +49,12 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
       } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
       } finally {
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     };
-
+  
     fetchData();
-  }, [articleId, setLikedArticle, isLoggedIn, router]);
+  }, [articleId, setLikedArticle, router]);
 
   if (isLoading) {
     return null;
