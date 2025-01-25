@@ -13,6 +13,7 @@ import noLikedIcon from '../../../../public/images/learning/articleNoLike.svg';
 import { getArticleDetail } from '@/factory/Article/GetArticle';
 import { likeArticle } from '@/factory/Article/ControlLiked';
 import { ArticleDetailResponse } from '@/types/learning';
+import { useLikeStore } from '@/store/articleLike.store';
 
 interface ArticleDetailClientWrapperProps {
   articleId: number;
@@ -21,15 +22,17 @@ interface ArticleDetailClientWrapperProps {
 const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperProps) => {
   const router = useRouter();
   const [data, setData] = useState<ArticleDetailResponse | null>(null);
-  const [likedByMe, setLikedByMe] = useState<boolean>(false);
+  const { setLikedArticle, getLikedState } = useLikeStore();
+  const [likedByMe, setLikedByMe] = useState<boolean>(getLikedState(articleId) ?? false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await getArticleDetail(articleId);
         if (result) {
-          setData(result);
-          setLikedByMe(result.likedByMe);
+          setData(result); // 데이터를 상태에 저장
+          setLikedByMe(result.likedByMe); // 좋아요 상태 설정
+          setLikedArticle(articleId, result.likedByMe); // Zustand에 좋아요 상태 저장
         }
       } catch (error) {
         console.error('데이터를 가져오는 중 오류 발생:', error);
@@ -37,7 +40,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     };
 
     fetchData();
-  }, [articleId]);
+  }, [articleId, setLikedArticle]);
 
   if (!data) {
     return null;
@@ -57,6 +60,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
     try {
       const response = await likeArticle(articleId);
       setLikedByMe(response.liked);
+      setLikedArticle(articleId, response.liked);
     } catch (error) {
       console.error('좋아요 API 호출 실패:', error);
     }
@@ -77,9 +81,6 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         <div className="text-sm text-[#a0a0a0]">
           학습하기 &gt; 아티클 &gt; {articleDetail.categoryName}
         </div>
-        {/* <div className="absolute inset-x-0 text-center">
-          <h1 className="text-lg font-semibold text-[#777777]">{articleDetail.title}</h1>
-        </div> */}
         <div className="flex items-center gap-4 z-[9999]">
           <Image
             src={likedByMe ? likedIcon : noLikedIcon}

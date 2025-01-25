@@ -1,14 +1,19 @@
 import create from 'zustand';
 
 interface LikeState {
-  likedByMe: boolean;
-  setLikedByMe: (liked: boolean) => void;
+  likedArticles: Record<number, boolean>; 
+  setLikedArticle: (articleId: number, liked: boolean) => void;
+  getLikedState: (articleId: number) => boolean | undefined;
 }
 
-export const useLikeStore = create<LikeState>((set) => ({
-  likedByMe: false,
-  setLikedByMe: (liked) => {
-    localStorage.setItem('likedByMe', JSON.stringify(liked));
-    set({ likedByMe: liked });
-  },
+export const useLikeStore = create<LikeState>((set, get) => ({
+  likedArticles: {},
+  setLikedArticle: (articleId, liked) =>
+    set((state) => ({
+      likedArticles: {
+        ...state.likedArticles,
+        [articleId]: liked,
+      },
+    })),
+  getLikedState: (articleId) => get().likedArticles[articleId],
 }));
