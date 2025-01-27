@@ -1,10 +1,9 @@
 import { getValidImageSrc } from "@/utils/checkImageProperty";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface ContentProps {
-  text?: string; 
+  text?: string;
   title: string;
   paywallUp?: string;
   createdAt: string;
@@ -13,12 +12,34 @@ interface ContentProps {
 }
 
 const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, imgLink }: ContentProps) => {
-  const isPremium = !!paywallUp; 
-  const formattedPaywallUp = paywallUp ? paywallUp.split("\n") : [];
+  const isPremium = !!paywallUp;
   const router = useRouter();
 
   const handleAccesstion = () => {
     router.push('/payment');
+  };
+
+  // `paywallUp` 처리 로직
+  let parsedPaywallContent: string[] = [];
+  try {
+    if (paywallUp) {
+      if (paywallUp.startsWith("[") && paywallUp.endsWith("]")) {
+        // JSON 형식 처리
+        const jsonArray = JSON.parse(paywallUp);
+        parsedPaywallContent = jsonArray.map((item: any) =>
+          item.content
+            ?.map((contentItem: any) => contentItem.text || "")
+            .join("")
+        );
+      } else {
+        // HTML 형식 처리
+        parsedPaywallContent = paywallUp
+          .split("</p>")
+          .map((line: string) => line.replace(/<\/?[^>]+(>|$)/g, "").trim());
+      }
+    }
+  } catch (error) {
+    console.error("paywallUp 데이터 파싱 중 오류 발생:", error);
   }
 
   return (
@@ -35,19 +56,16 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
       {isPremium ? (
         <>
           <article className="mt-8 text-black text-[22px] font-semibold font-['Pretendard'] leading-[30.80px] tracking-wide relative">
-            {formattedPaywallUp.slice(0, 4).map((line, index) => (
+            {/* 4줄까지만 표시 */}
+            {parsedPaywallContent.slice(0, 4).map((line, index) => (
               <p key={index} className="mb-4">
                 {line}
               </p>
             ))}
-            <div className="relative">
-              {formattedPaywallUp.slice(4, 7).map((line, index) => (
-                <p key={index} className="mb-4 text-gray-400">
-                  {line}
-                </p>
-              ))}
+            {/* 그라데이션 추가 */}
+            {parsedPaywallContent.length > 4 && (
               <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/70 to-transparent pointer-events-none"></div>
-            </div>
+            )}
           </article>
           <div className="my-24 rounded-lg text-center flex flex-col items-center gap-4">
             <p
@@ -69,7 +87,7 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
             <div
               className="block w-[90%] max-w-[400px] py-6 px-8 bg-[#611cf2] text-white font-bold rounded-full transition text-center cursor-pointer hover:bg-[#4b10bf]"
               style={{
-                fontSize: 'clamp(18px, 3vw, 24px)', 
+                fontSize: 'clamp(18px, 3vw, 24px)',
               }}
               onClick={handleAccesstion}
             >
