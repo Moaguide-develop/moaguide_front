@@ -1,6 +1,8 @@
-import { getValidImageSrc } from "@/utils/checkImageProperty";
-import Image from "next/image";
+'use client';
+
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { getValidImageSrc } from "@/utils/checkImageProperty";
 
 interface ContentProps {
   text?: string;
@@ -19,28 +21,20 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
     router.push('/payment');
   };
 
-  // `paywallUp` 처리 로직
-  let parsedPaywallContent: string[] = [];
-  try {
-    if (paywallUp) {
-      if (paywallUp.startsWith("[") && paywallUp.endsWith("]")) {
-        // JSON 형식 처리
-        const jsonArray = JSON.parse(paywallUp);
-        parsedPaywallContent = jsonArray.map((item: any) =>
-          item.content
-            ?.map((contentItem: any) => contentItem.text || "")
-            .join("")
-        );
-      } else {
-        // HTML 형식 처리
-        parsedPaywallContent = paywallUp
-          .split("</p>")
-          .map((line: string) => line.replace(/<\/?[^>]+(>|$)/g, "").trim());
-      }
+  const parseHtmlContent = (htmlContent: string): string => {
+    if (!htmlContent) return "";
+
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlContent, "text/html");
+      return doc.body.innerHTML; 
+    } catch (error) {
+      console.error("HTML 파싱 중 오류 발생:", error);
+      return htmlContent; 
     }
-  } catch (error) {
-    console.error("paywallUp 데이터 파싱 중 오류 발생:", error);
-  }
+  };
+
+  const parsedContent = paywallUp ? parseHtmlContent(paywallUp) : null;
 
   return (
     <div className="max-w-[1000px] w-[90%] mx-auto my-10">
@@ -55,18 +49,12 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
       />
       {isPremium ? (
         <>
-          <article className="mt-8 text-black text-[22px] font-semibold font-['Pretendard'] leading-[30.80px] tracking-wide relative">
-            {/* 4줄까지만 표시 */}
-            {parsedPaywallContent.slice(0, 4).map((line, index) => (
-              <p key={index} className="mb-4">
-                {line}
-              </p>
-            ))}
-            {/* 그라데이션 추가 */}
-            {parsedPaywallContent.length > 4 && (
-              <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white via-white/70 to-transparent pointer-events-none"></div>
-            )}
-          </article>
+          <article
+            className="mt-8 text-black text-[22px] font-semibold font-['Pretendard'] leading-[30.80px] tracking-wide"
+            dangerouslySetInnerHTML={{
+              __html: parsedContent || "<p>프리미엄 콘텐츠를 준비 중입니다.</p>",
+            }}
+          />
           <div className="my-24 rounded-lg text-center flex flex-col items-center gap-4">
             <p
               className="text-center text-black font-semibold font-['Pretendard'] leading-[1.2] tracking-wide"
