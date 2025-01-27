@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { FilteredResponse } from '@/types/filterArticle';
 import { getValidImageSrc } from '@/utils/checkImageProperty';
 import { useLikeStore } from '@/store/articleLike.store';
+import { extractText } from '@/utils/extractText';
 
 interface FilteredContentsProps {
   contents: FilteredResponse['content'];
@@ -57,7 +58,7 @@ const FilteredContents = ({
                   {item.article.title}
                 </h3>
                 <p className="text-sm text-gray-600 line-clamp-2">
-                  {item.article.description || '설명 없음'}
+                  {extractText(item.article.description || "")}
                 </p>
                 <div className="justify-end text-xs text-gray-500 mt-4 flex items-center gap-4">
                   <span>{formatDate(item.article.date)}</span>

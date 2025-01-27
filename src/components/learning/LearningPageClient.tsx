@@ -16,7 +16,7 @@ import { OverviewResponse, Content } from '@/types/learning';
 import { fetchContentsWithPage } from '@/factory/Article/GetArticle';
 
 const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) => {
-  // 브라우저에서 sessionStorage 값을 초기화
+
   const [selectedType, setSelectedType] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [page, setPage] = useState<number>(1);
@@ -78,6 +78,8 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
           likedByMe: item.likedByMe,
         }))
       : [];
+  
+      console.log(initialData);
   return (
     <div>
       <div className="relative w-full h-[300px] lg:h-[400px]">

@@ -13,6 +13,7 @@ import likedIcon from '../../../public/images/learning/articleLiked.svg';
 import noLikedIcon from '../../../public/images/learning/articleNoLike.svg';
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
+import { extractText } from '@/utils/extractText';
 
 const RecentContents = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
@@ -76,7 +77,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                           {content.title}
                         </h3>
                         <p className="text-gray-300 text-sm truncate">
-                          {content.description}
+                          {extractText(content.description || "")}
                         </p>
                         </div>
                       </div>
@@ -146,7 +147,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         {content.title}
                       </h3>
                       <p className="text-[#726c6c] text-base font-semibold my-[16px] line-clamp-2">
-                        {content.description}
+                        {extractText(content.description || "")}
                       </p>
                     </div>
                     <div className="mt-auto border-t px-4 py-2">

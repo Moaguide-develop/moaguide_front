@@ -9,6 +9,7 @@ import likedIcon from '../../../public/images/learning/articleLiked.svg';
 import noLikedIcon from '../../../public/images/learning/articleNoLike.svg';
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
+import { extractText } from '@/utils/extractText';
 
 const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
@@ -77,7 +78,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               <div className="bg-white w-[90%] sm:w-[100%] mx-auto pt-4">
                 <h3 className="text-lg font-bold">{contents[0].title}</h3>
                 <p className="text-gray-600 text-sm mt-2 line-clamp-2">
-                  {contents[0].description}
+                  {extractText(contents[0].description || "")}
                 </p>
                 <div className="w-full justify-between">
                   <span
@@ -123,7 +124,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 <div className="flex-1 flex flex-col justify-center">
                   <h3 className="text-sm font-bold line-clamp-1">{content.title}</h3>
                   <p className="text-gray-600 text-xs my-1 line-clamp-2">
-                    {content.description}
+                    {extractText(content.description || "")}
                   </p>
                   <div className="w-full justify-between">
                     <span
@@ -184,7 +185,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
             </div>
             <div className="bg-white p-6 flex flex-col justify-between flex-grow">
               <h3 className="text-xl font-bold">{contents[0].title}</h3>
-              <p className="text-gray-600 text-sm line-clamp-2">{contents[0].description}</p>
+              <p className="text-gray-600 text-sm line-clamp-2">{extractText(contents[0].description || "")}</p>
             </div>
           </div>
           )}
@@ -234,7 +235,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                     </span>
                   <h3 className="text-md font-bold line-clamp-2">{content.title}</h3>
                   <p className="text-sm text-gray-600 line-clamp-2 mt-1">
-                    {content.description}
+                    {extractText(content.description || "")}
                   </p>
                 </div>
               </div>
