@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FilteredResponse } from '@/types/filterArticle';
 import { getValidImageSrc } from '@/utils/checkImageProperty';
-import { useLikeStore } from '@/store/articleLike.store';
+import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { extractText } from '@/utils/extractText';
 
 interface FilteredContentsProps {
@@ -31,7 +31,7 @@ const FilteredContents = ({
   };
 
   const handleContentClick = (item: any) => {
-    router.push(`/learning/detail/${item.article.articleId}`); 
+    router.push(`/learning/detail/${item.article.articleId}`);
   };
 
   return (
@@ -44,21 +44,31 @@ const FilteredContents = ({
               className="flex items-center gap-4 cursor-pointer"
               onClick={() => handleContentClick(item)}
             >
-              <div className="w-64 h-40 flex-shrink-0 overflow-hidden rounded-md">
-               <Image
+              <div className="relative w-64 h-40 flex-shrink-0 overflow-hidden rounded-md">
+                <Image
                   src={getValidImageSrc(item.article.img_link)}
                   alt={item.article.title}
                   width={128}
                   height={80}
                   className="object-cover w-full h-full"
                 />
+                {item.article.isPremium && (
+                  <div className="absolute bottom-4 left-4">
+                    <Image
+                      src={premiumIcon}
+                      alt="프리미엄 아이콘"
+                      width={24}
+                      height={24}
+                    />
+                  </div>
+                )}
               </div>
               <div className="h-40 w-full flex flex-col justify-between">
                 <h3 className="text-lg font-bold text-gray-800 mb-4 line-clamp-1">
                   {item.article.title}
                 </h3>
                 <p className="text-sm text-gray-600 line-clamp-2">
-                {extractText(item.article.description || "")}
+                  {extractText(item.article.description || '')}
                 </p>
                 <div className="text-xs text-gray-500 mt-4 flex items-center justify-end gap-4">
                   <span>{formatDate(item.article.date)}</span>
