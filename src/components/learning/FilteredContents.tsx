@@ -53,14 +53,14 @@ const FilteredContents = ({
                   className="object-cover w-full h-full"
                 />
               </div>
-              <div className="h-full flex-1">
+              <div className="h-40 w-full flex flex-col justify-between">
                 <h3 className="text-lg font-bold text-gray-800 mb-4 line-clamp-1">
                   {item.article.title}
                 </h3>
                 <p className="text-sm text-gray-600 line-clamp-2">
-                  {extractText(item.article.description || "")}
+                {extractText(item.article.description || "")}
                 </p>
-                <div className="justify-end text-xs text-gray-500 mt-4 flex items-center gap-4">
+                <div className="text-xs text-gray-500 mt-4 flex items-center justify-end gap-4">
                   <span>{formatDate(item.article.date)}</span>
                   <span>❤ {item.article.likes}</span>
                   <span>👁 {item.article.views}</span>

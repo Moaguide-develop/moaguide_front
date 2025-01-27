@@ -9,13 +9,13 @@ export const extractText = (input: string): string => {
               ?.map((contentItem: any) => contentItem.text || "")
               .join("")
           )
-          .join("\n");
+          .join(" ");
       } else {
         // HTML 형식 처리
-        return input.replace(/<\/?[^>]+(>|$)/g, "").trim();
+        return input.replace(/<\/?[^>]+(>|$)/g, "").replace(/\n/g, " ").trim();
       }
     } catch {
       // 기본 문자열 반환
-      return input;
+      return input.replace(/\n/g, " ");
     }
   };
