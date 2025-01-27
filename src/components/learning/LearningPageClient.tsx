@@ -17,21 +17,19 @@ import { fetchContentsWithPage } from '@/factory/Article/GetArticle';
 import { resetSessionValues } from '@/utils/resetSessionValues';
 
 const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) => {
+
   const [selectedType, setSelectedType] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [page, setPage] = useState<number>(1);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
-    const shouldReset = true; 
-    if (shouldReset && typeof window !== 'undefined') {
-      resetSessionValues();
+    if (typeof window !== 'undefined') {
+      setSelectedType(sessionStorage.getItem('selectedType') || '');
+      setSelectedCategory(sessionStorage.getItem('selectedCategory') || '');
+      const savedPage = sessionStorage.getItem('page');
+      setPage(savedPage ? parseInt(savedPage, 10) : 1);
     }
-
-    setSelectedType(sessionStorage.getItem('selectedType') || '');
-    setSelectedCategory(sessionStorage.getItem('selectedCategory') || '');
-    const savedPage = sessionStorage.getItem('page');
-    setPage(savedPage ? parseInt(savedPage, 10) : 1);
   }, []);
 
   useEffect(() => {
