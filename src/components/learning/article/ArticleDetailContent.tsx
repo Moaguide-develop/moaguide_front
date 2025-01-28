@@ -34,7 +34,8 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
     }
   };
 
-  const parsedContent = paywallUp ? parseHtmlContent(paywallUp) : null;
+  const parsedPaywallContent = paywallUp ? parseHtmlContent(paywallUp) : null;
+  const parsedTextContent = text ? parseHtmlContent(text) : null;
 
   return (
     <div className="max-w-[1000px] w-[90%] mx-auto my-10">
@@ -52,7 +53,7 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
           <article
             className="mt-8 text-black text-[22px] font-semibold font-['Pretendard'] leading-[30.80px] tracking-wide"
             dangerouslySetInnerHTML={{
-              __html: parsedContent || "<p>프리미엄 콘텐츠를 준비 중입니다.</p>",
+              __html: parsedPaywallContent || "<p>프리미엄 콘텐츠를 준비 중입니다.</p>",
             }}
           />
           <div className="my-24 rounded-lg text-center flex flex-col items-center gap-4">
@@ -84,13 +85,12 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
           </div>
         </>
       ) : (
-        <article className="mt-8 text-black text-[22px] font-semibold font-['Pretendard'] leading-[30.80px] tracking-wide">
-          {text?.split("\n\n").map((paragraph, index) => (
-            <p key={index} className="mb-4">
-              {paragraph}
-            </p>
-          ))}
-        </article>
+        <article
+          className="mt-8 text-black text-[22px] font-semibold font-['Pretendard'] leading-[30.80px] tracking-wide"
+          dangerouslySetInnerHTML={{
+            __html: parsedTextContent || "<p>텍스트 콘텐츠를 불러올 수 없습니다.</p>",
+          }}
+        />
       )}
     </div>
   );
