@@ -18,15 +18,17 @@ export default function PaymentFail() {
           <p className="text-gray-500 mt-4 font-semibold">
             결제 도중 아래와 같은 문제가 생겼습니다. 다시 시도해주세요.
           </p>
+
           <p className="text-body4 text-gray400 max-w-lg mx-auto mt-8">
-            에러 코드: {code || ''}
+            에러 코드: {code || 'undefined'}
           </p>
           <p className="text-body4  text-gray400 max-w-lg mx-auto mt-2">
-            에러 메세지: {message || ''}
+            에러 메세지: {message || '알 수 없는 에러 발생'}
           </p>
           <p className="text-body4  text-gray400 max-w-lg mx-auto mt-2">
-            주문 ID: {orderId || ''}
+            {!code && '1대1문의 부탁드립니다 ㅠㅠ'}{' '}
           </p>
+
           <div className="mt-8">
             <button
               className="w-full bg-normal hover:shadow-lg text-white rounded-xl px-4 py-2.5"
