@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FilteredResponse } from '@/types/filterArticle';
@@ -5,7 +6,7 @@ import { getValidImageSrc } from '@/utils/checkImageProperty';
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { extractText } from '@/utils/extractText';
 import { useLikeStore } from '@/store/articleLike.store';
-import { useEffect } from 'react';
+import { useViewStore } from '@/store/articleView.store';
 
 interface FilteredContentsProps {
   contents: FilteredResponse['content'];
@@ -24,6 +25,7 @@ const FilteredContents = ({
 }: FilteredContentsProps) => {
   const router = useRouter();
   const { likedArticles, setLikedArticle, getLikedState } = useLikeStore();
+  const { articleViews, setArticleView, getArticleView } = useViewStore();
   const totalPages = Math.ceil(total / size);
 
   const formatDate = (dateString: string) => {
@@ -37,12 +39,19 @@ const FilteredContents = ({
 
   useEffect(() => {
     contents.forEach((item) => {
+      // likes 저장
       const existingLike = getLikedState(item.article.articleId);
       if (!existingLike) {
         setLikedArticle(item.article.articleId, item.likedByMe, item.article.likes);
       }
+
+      // views 저장
+      const existingView = getArticleView(item.article.articleId);
+      if (!existingView) {
+        setArticleView(item.article.articleId, item.article.views);
+      }
     });
-  }, [contents, setLikedArticle, getLikedState]);
+  }, [contents, setLikedArticle, getLikedState, setArticleView, getArticleView]);
 
   return (
     <div className="mt-10">
@@ -53,6 +62,7 @@ const FilteredContents = ({
               liked: item.likedByMe,
               likes: item.article.likes,
             };
+            const viewCount = getArticleView(item.article.articleId) || item.article.views;
 
             return (
               <div
@@ -89,7 +99,7 @@ const FilteredContents = ({
                   <div className="text-xs text-gray-500 mt-4 flex items-center justify-end gap-4">
                     <span>{formatDate(item.article.date)}</span>
                     <span>❤ {likeState.likes}</span>
-                    <span>👁 {item.article.views}</span>
+                    <span>👁 {viewCount}</span> {/* views 상태 적용 */}
                   </div>
                 </div>
               </div>

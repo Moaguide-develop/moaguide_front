@@ -15,6 +15,7 @@ import { likeArticle } from '@/factory/Article/ControlLiked';
 import { ArticleDetailResponse } from '@/types/learning';
 import { useLikeStore } from '@/store/articleLike.store';
 import { useAuthStore } from '@/store/userAuth.store';
+import { useViewStore } from '@/store/articleView.store';
 
 interface ArticleDetailClientWrapperProps {
   articleId: number;
@@ -26,6 +27,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   const isLoggedInRef = useRef(isLoggedIn);
   const [data, setData] = useState<ArticleDetailResponse | null>(null);
   const { setLikedArticle } = useLikeStore();
+  const { setArticleView, getArticleView } = useViewStore();
   const [likedByMe, setLikedByMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -47,6 +49,10 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
           setData(result);
           setLikedByMe(result.likedByMe);
           setLikedArticle(articleId, result.likedByMe, result.articleDetail.likes);
+  
+          // views 업데이트
+          const currentViews = getArticleView(articleId) || result.articleDetail.views;
+          setArticleView(articleId, currentViews + 1);
         } else {
           console.error('Article data is missing.');
         }
@@ -56,9 +62,9 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         setIsLoading(false);
       }
     };
-
+  
     fetchData();
-  }, [articleId, router, setLikedArticle]);
+  }, [articleId, router, setLikedArticle, setArticleView, getArticleView]);
 
   if (isLoading) {
     return null;
