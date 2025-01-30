@@ -1,11 +1,12 @@
-'use client';
-
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { FilteredResponse } from '@/types/filterArticle';
 import { getValidImageSrc } from '@/utils/checkImageProperty';
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { extractText } from '@/utils/extractText';
+import { useLikeStore } from '@/store/articleLike.store';
+import { useViewStore } from '@/store/articleView.store';
 
 interface FilteredContentsProps {
   contents: FilteredResponse['content'];
@@ -23,6 +24,8 @@ const FilteredContents = ({
   onPageChange,
 }: FilteredContentsProps) => {
   const router = useRouter();
+  const { likedArticles, setLikedArticle, getLikedState } = useLikeStore();
+  const { articleViews, setArticleView, getArticleView } = useViewStore();
   const totalPages = Math.ceil(total / size);
 
   const formatDate = (dateString: string) => {
@@ -34,50 +37,74 @@ const FilteredContents = ({
     router.push(`/learning/detail/${item.article.articleId}`);
   };
 
+  useEffect(() => {
+    contents.forEach((item) => {
+      // likes 저장
+      const existingLike = getLikedState(item.article.articleId);
+      if (!existingLike) {
+        setLikedArticle(item.article.articleId, item.likedByMe, item.article.likes);
+      }
+
+      // views 저장
+      const existingView = getArticleView(item.article.articleId);
+      if (!existingView) {
+        setArticleView(item.article.articleId, item.article.views);
+      }
+    });
+  }, [contents, setLikedArticle, getLikedState, setArticleView, getArticleView]);
+
   return (
     <div className="mt-10">
       <div className="space-y-10">
         {contents.length > 0 ? (
-          contents.map((item) => (
-            <div
-              key={item.article.articleId}
-              className="flex items-center gap-4 cursor-pointer"
-              onClick={() => handleContentClick(item)}
-            >
-              <div className="relative w-64 h-40 flex-shrink-0 overflow-hidden rounded-md">
-                <Image
-                  src={getValidImageSrc(item.article.img_link)}
-                  alt={item.article.title}
-                  width={128}
-                  height={80}
-                  className="object-cover w-full h-full"
-                />
-                {item.article.isPremium && (
-                  <div className="absolute bottom-4 left-4">
-                    <Image
-                      src={premiumIcon}
-                      alt="프리미엄 아이콘"
-                      width={24}
-                      height={24}
-                    />
+          contents.map((item) => {
+            const likeState = getLikedState(item.article.articleId) || {
+              liked: item.likedByMe,
+              likes: item.article.likes,
+            };
+            const viewCount = getArticleView(item.article.articleId) || item.article.views;
+
+            return (
+              <div
+                key={item.article.articleId}
+                className="flex items-center gap-4 cursor-pointer"
+                onClick={() => handleContentClick(item)}
+              >
+                <div className="relative w-64 h-40 flex-shrink-0 overflow-hidden rounded-md">
+                  <Image
+                    src={getValidImageSrc(item.article.img_link)}
+                    alt={item.article.title}
+                    width={128}
+                    height={80}
+                    className="object-cover w-full h-full"
+                  />
+                  {item.article.isPremium && (
+                    <div className="absolute bottom-4 left-4">
+                      <Image
+                        src={premiumIcon}
+                        alt="프리미엄 아이콘"
+                        width={24}
+                        height={24}
+                      />
+                    </div>
+                  )}
+                </div>
+                <div className="h-40 w-full flex flex-col justify-between">
+                  <h3 className="text-lg font-bold text-gray-800 mb-4 line-clamp-1">
+                    {item.article.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 line-clamp-2">
+                    {extractText(item.article.description || '')}
+                  </p>
+                  <div className="text-xs text-gray-500 mt-4 flex items-center justify-end gap-4">
+                    <span>{formatDate(item.article.date)}</span>
+                    <span>❤ {likeState.likes}</span>
+                    <span>👁 {viewCount}</span> {/* views 상태 적용 */}
                   </div>
-                )}
-              </div>
-              <div className="h-40 w-full flex flex-col justify-between">
-                <h3 className="text-lg font-bold text-gray-800 mb-4 line-clamp-1">
-                  {item.article.title}
-                </h3>
-                <p className="text-sm text-gray-600 line-clamp-2">
-                  {extractText(item.article.description || '')}
-                </p>
-                <div className="text-xs text-gray-500 mt-4 flex items-center justify-end gap-4">
-                  <span>{formatDate(item.article.date)}</span>
-                  <span>❤ {item.article.likes}</span>
-                  <span>👁 {item.article.views}</span>
                 </div>
               </div>
-            </div>
-          ))
+            );
+          })
         ) : (
           <div className="text-center text-gray-500">데이터가 없습니다.</div>
         )}

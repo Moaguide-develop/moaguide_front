@@ -154,3 +154,10 @@
   z-index: 10;
 }
 
+h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}

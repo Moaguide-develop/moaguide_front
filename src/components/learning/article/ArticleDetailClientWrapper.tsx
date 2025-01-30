@@ -15,6 +15,7 @@ import { likeArticle } from '@/factory/Article/ControlLiked';
 import { ArticleDetailResponse } from '@/types/learning';
 import { useLikeStore } from '@/store/articleLike.store';
 import { useAuthStore } from '@/store/userAuth.store';
+import { useViewStore } from '@/store/articleView.store';
 
 interface ArticleDetailClientWrapperProps {
   articleId: number;
@@ -26,6 +27,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   const isLoggedInRef = useRef(isLoggedIn);
   const [data, setData] = useState<ArticleDetailResponse | null>(null);
   const { setLikedArticle } = useLikeStore();
+  const { setArticleView, getArticleView } = useViewStore();
   const [likedByMe, setLikedByMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -46,7 +48,11 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         if (result) {
           setData(result);
           setLikedByMe(result.likedByMe);
-          setLikedArticle(articleId, result.likedByMe);
+          setLikedArticle(articleId, result.likedByMe, result.articleDetail.likes);
+  
+          // views 업데이트
+          const currentViews = getArticleView(articleId) || result.articleDetail.views;
+          setArticleView(articleId, currentViews + 1);
         } else {
           console.error('Article data is missing.');
         }
@@ -56,15 +62,13 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         setIsLoading(false);
       }
     };
-
+  
     fetchData();
-  }, [articleId, router, setLikedArticle]);
+  }, [articleId, router, setLikedArticle, setArticleView, getArticleView]);
 
   if (isLoading) {
     return null;
   }
-
-
 
   if (!data) {
     return <div>데이터를 가져오지 못했습니다.</div>;
@@ -87,8 +91,21 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   const handleLikeToggle = async () => {
     try {
       const response = await likeArticle(articleId);
+      const updatedLikes = response.liked ? data!.articleDetail.likes + 1 : data!.articleDetail.likes - 1;
+      
       setLikedByMe(response.liked);
-      setLikedArticle(articleId, response.liked);
+      setData((prevData) =>
+        prevData
+          ? {
+              ...prevData,
+              articleDetail: {
+                ...prevData.articleDetail,
+                likes: updatedLikes,
+              },
+            }
+          : null
+      );
+      setLikedArticle(articleId, response.liked, updatedLikes);
     } catch (error) {
       console.error('좋아요 API 호출 실패:', error);
     }
