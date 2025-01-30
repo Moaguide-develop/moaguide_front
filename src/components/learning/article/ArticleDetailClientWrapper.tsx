@@ -46,7 +46,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         if (result) {
           setData(result);
           setLikedByMe(result.likedByMe);
-          setLikedArticle(articleId, result.likedByMe);
+          setLikedArticle(articleId, result.likedByMe, result.articleDetail.likes);
         } else {
           console.error('Article data is missing.');
         }
@@ -63,8 +63,6 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   if (isLoading) {
     return null;
   }
-
-
 
   if (!data) {
     return <div>데이터를 가져오지 못했습니다.</div>;
@@ -87,8 +85,21 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
   const handleLikeToggle = async () => {
     try {
       const response = await likeArticle(articleId);
+      const updatedLikes = response.liked ? data!.articleDetail.likes + 1 : data!.articleDetail.likes - 1;
+      
       setLikedByMe(response.liked);
-      setLikedArticle(articleId, response.liked);
+      setData((prevData) =>
+        prevData
+          ? {
+              ...prevData,
+              articleDetail: {
+                ...prevData.articleDetail,
+                likes: updatedLikes,
+              },
+            }
+          : null
+      );
+      setLikedArticle(articleId, response.liked, updatedLikes);
     } catch (error) {
       console.error('좋아요 API 호출 실패:', error);
     }
