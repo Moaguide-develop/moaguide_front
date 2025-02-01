@@ -134,12 +134,12 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         />
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 px-4 py-2">
+                    <div className="flex items-center gap-2 px-3 py-2">
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
                         {content.type}
                       </span>
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#f4e5ff] text-[#6e35e8]">
-                        {content.categoryName || '카테고리'}
+                        {content.categoryName?.replace(/[^a-zA-Z0-9가-힣\s]/g, '') || '카테고리'}
                       </span>
                     </div>
                     <div className="flex flex-col flex-grow px-4">
