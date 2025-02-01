@@ -48,7 +48,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         if (result) {
           setData(result);
           setLikedByMe(result.likedByMe);
-          setLikedArticle(articleId, result.likedByMe, result.articleDetail.likes);
+          // setLikedArticle(articleId, result.likedByMe, result.articleDetail.likes);
   
           // views 업데이트
           const currentViews = getArticleView(articleId) || result.articleDetail.views;
@@ -122,7 +122,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
       />
       <div className="max-w-[1000px] w-[90%] mx-auto py-8 flex items-center justify-between border-b border-[#ececec]">
         <div className="text-sm text-[#a0a0a0]">
-          학습하기 &gt; 아티클 &gt; {articleDetail?.categoryName || '카테고리 없음'}
+          학습하기 &gt; 아티클 &gt; {articleDetail?.categoryName.replace(/[^a-zA-Z0-9가-힣\s]/g, '') || '카테고리 없음'}
         </div>
         <div className="flex items-center gap-4 z-[9999]">
           <Image

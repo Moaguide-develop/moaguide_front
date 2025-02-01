@@ -6,8 +6,8 @@ export const dropdownOptions = {
   ],
   category: [
     { label: '전체', value: 'all' },
-    { label: '이 달의 인기 콘텐츠', value: 'popular' },
-    { label: '최신 콘텐츠', value: 'speed' },
+    // { label: '이 달의 인기 콘텐츠', value: 'popular' },
+    // { label: '최신 콘텐츠', value: 'speed' },
     { label: '오늘의 뉴스', value: 'news' },
     { label: '조각투자 기초 가이드', value: 'guide' },
     { label: '부동산', value: 'building' },

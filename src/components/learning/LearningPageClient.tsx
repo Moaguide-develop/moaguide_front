@@ -80,7 +80,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
 
   return (
     <div>
-      <div className="relative w-full h-[300px] lg:h-[400px]">
+      <div className="hidden sm:flex relative w-full h-[300px] lg:h-[400px]">
         <Image
           src={BackgroundImage}
           alt="Background"
@@ -172,7 +172,84 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
         </div>
       </div>
 
-      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-full sm:w-[90%] lg:w-[100%] mt-8">
+      <div className="relative z-50 bg-white sm:hidden">
+        <button
+          onClick={() => setActiveDropdown(activeDropdown === 'mobile' ? null : 'mobile')}
+          className="w-full px-6 py-4 text-lg font-semibold flex items-center"
+        >
+          {selectedCategory
+            ? dropdownOptions.category.find((o) => o.value === selectedCategory)?.label
+            : '학습하기'}
+          <Image
+            src={ArrowIcon}
+            alt="Arrow Icon"
+            width={16}
+            height={16}
+            className={`transition-transform duration-300 ml-[10px] ${
+              activeDropdown === 'mobile' ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+        {activeDropdown === 'mobile' && (
+          <div className="absolute left-0 w-full bg-white shadow-lg z-50">
+            {selectedCategory !== '' && (
+              <div>
+                <button
+                  onClick={() => {
+                    resetFilters(); 
+                    setActiveDropdown(null); 
+                  }}
+                  className="w-full px-6 py-4 text-start text-[#a2a5aa] text-base hover:bg-gray-100 border-b"
+                >
+                  학습하기
+                </button>
+              </div>
+            )}
+
+            <div>
+              {dropdownOptions.category
+                .filter((option) => option.value !== selectedCategory)
+                .map((option) => (
+                  <button
+                    key={option.value}
+                    onClick={() => {
+                      handleCategoryChange(option.value);
+                      setActiveDropdown(null); 
+                    }}
+                    className="w-full px-6 py-4 text-start text-[#a2a5aa] text-base hover:bg-gray-100 border-b last:border-b-0"
+                  >
+                    {option.label}
+                  </button>
+                ))}
+            </div>
+          </div>
+        )}
+
+        <div
+          className={`flex border-b border-gray-200 z-10 relative ${
+            activeDropdown === 'mobile' ? 'pointer-events-none' : ''
+          }`}
+        >
+          {dropdownOptions.type.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => {
+                handleTypeChange(option.value);
+                setActiveDropdown(null);
+              }}
+              className={`px-4 mx-4 py-2 text-lg font-medium ${
+                selectedCategory && selectedType === option.value
+                  ? 'text-[#1e1e1e] text-base font-bold border-b-2 border-[#6F36E8]'
+                  : 'text-[#a2a5aa] text-base font-bold'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-[90%] lg:w-[100%] mt-8">
         {!selectedType && !selectedCategory ? (
           <>
             <PopularContents contents={extractContents(initialData.popularContents)} />

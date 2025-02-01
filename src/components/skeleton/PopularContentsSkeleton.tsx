@@ -20,7 +20,7 @@ const PopularContentsSkeleton = () => {
                 className="border rounded-lg shadow-sm overflow-hidden flex flex-col bg-gray-100 animate-pulse"
               >
                 <div className="relative w-full h-[180px] bg-gray-300" />
-                <div className="flex items-center gap-2 px-4 py-2">
+                <div className="flex items-center gap-2 px-3 py-2">
                   <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-gray-200 text-gray-400 w-12 h-4" />
                   <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-gray-200 text-gray-400 w-16 h-4" />
                 </div>

@@ -49,6 +49,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
       {isMobile ? (
         <div className="sm:hidden">
           {contents[0] && (
+            
             <div
               className="w-full overflow-hidden mb-4 cursor-pointer relative"
               onClick={() => handleContentClick(contents[0])}
@@ -59,36 +60,38 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 alt={contents[0].title}
                 width={600}
                 height={300}
-                className="w-full h-48 object-cover rounded-lg"
+                className="w-full h-48 object-cover"
               />
               <div className="absolute bottom-4 right-4">
-                <Image
-                  src={
-                    getLikedState(contents[0].articleId) ?? contents[0].likedByMe
-                      ? likedIcon
-                      : noLikedIcon
-                  }
-                  alt="좋아요 아이콘"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer"
-                />
-              </div>
+                  {(() => {
+                    const likedByMe = getLikedState(contents[0].articleId) ?? contents[0].likedByMe;
+                    const likedStatus = likedByMe?.liked ?? contents[0].likedByMe;
+                    return (
+                      <Image
+                        src={likedStatus ? likedIcon : noLikedIcon}
+                        alt={likedStatus ? 'Liked' : 'Not Liked'}
+                        width={24}
+                        height={24}
+                        className="cursor-pointer"
+                      />
+                    );
+                  })()}
+                </div>
               </div>
               <div className="bg-white w-[90%] sm:w-[100%] mx-auto pt-4">
+                <div className="w-full justify-between mb-1">
+                    <span
+                      className="rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a] px-2 py-1"
+                      style={{ display: 'inline-flex', maxWidth: 'fit-content' }}
+                    >
+                      {contents[0].type || '카테고리'}
+                    </span>
+                    <div>{contents[0].date}</div>
+                  </div>
                 <h3 className="text-lg font-bold">{contents[0].title}</h3>
-                <p className="text-gray-600 text-sm mt-2 line-clamp-2">
+                <p className="text-gray-600 text-sm my-2 line-clamp-2">
                   {extractText(contents[0].description || "")}
                 </p>
-                <div className="w-full justify-between">
-                  <span
-                    className="text-xs text-gray-600 px-2 py-1 rounded-full bg-gray-200"
-                    style={{ display: 'inline-flex', maxWidth: 'fit-content' }}
-                  >
-                    {contents[0].type || '카테고리'}
-                  </span>
-                  <div>{contents[0].date}</div>
-                </div>
               </div>
             </div>
           )}
@@ -108,33 +111,35 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute bottom-2 right-2">
-                    <Image
-                      src={
-                        getLikedState(content.articleId) ?? content.likedByMe
-                          ? likedIcon
-                          : noLikedIcon
-                      }
-                      alt="좋아요 아이콘"
-                      width={16}
-                      height={16}
-                      className="cursor-pointer"
-                    />
+                    {(() => {
+                      const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+                      const likedStatus = likedByMe?.liked ?? content.likedByMe;
+                      return (
+                        <Image
+                          src={likedStatus ? likedIcon : noLikedIcon}
+                          alt={likedStatus ? 'Liked' : 'Not Liked'}
+                          width={16}
+                          height={16}
+                          className="cursor-pointer"
+                        />
+                      );
+                    })()}
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col justify-center">
-                  <h3 className="text-sm font-bold line-clamp-1">{content.title}</h3>
-                  <p className="text-gray-600 text-xs my-1 line-clamp-2">
-                    {extractText(content.description || "")}
-                  </p>
-                  <div className="w-full justify-between">
+                <div className="w-full justify-between">
                     <span
-                      className="text-xs text-gray-600 px-2 py-1 rounded-full bg-gray-200"
+                      className="rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a] px-2 py-1"
                       style={{ display: 'inline-flex', maxWidth: 'fit-content' }}
                     >
                       {content.type || '카테고리'}
                     </span>
                     <div>{content.date}</div>
                   </div>
+                  <h3 className="text-sm font-bold line-clamp-1">{content.title}</h3>
+                  <p className="text-gray-600 text-xs mt-1 line-clamp-2">
+                    {extractText(content.description || "")}
+                  </p>
                 </div>
               </div>
             ))}
@@ -170,18 +175,20 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                     </div>
                   )}
                 <div className="absolute bottom-4 right-4">
-                <Image
-                  src={
-                    getLikedState(contents[0].articleId) ?? contents[0].likedByMe
-                      ? likedIcon
-                      : noLikedIcon
-                  }
-                  alt="좋아요 아이콘"
-                  width={24}
-                  height={24}
-                  className="cursor-pointer"
-                />
-              </div>
+                  {(() => {
+                    const likedByMe = getLikedState(contents[0].articleId) ?? contents[0].likedByMe;
+                    const likedStatus = likedByMe?.liked ?? contents[0].likedByMe;
+                    return (
+                      <Image
+                        src={likedStatus ? likedIcon : noLikedIcon}
+                        alt={likedStatus ? 'Liked' : 'Not Liked'}
+                        width={24}
+                        height={24}
+                        className="cursor-pointer"
+                      />
+                    );
+                  })()}
+                </div>
             </div>
             <div className="bg-white p-6 flex flex-col justify-between flex-grow">
               <h3 className="text-xl font-bold">{contents[0].title}</h3>
@@ -189,7 +196,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
             </div>
           </div>
           )}
-          <div className="flex flex-col gap-6 w-1/2">
+          <div className="flex flex-col gap-[1.6rem] w-1/2">
             {contents.slice(1, 5).map((content, index) => (
                <div key={index} className="flex items-stretch gap-4 cursor-pointer"
                   onClick={() => handleContentClick(content)}
@@ -212,29 +219,31 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                         />
                       </div>
                     )}
-                  <div className="absolute bottom-2 right-2">
-                    <Image
-                      src={
-                        getLikedState(content.articleId) ?? content.likedByMe
-                          ? likedIcon
-                          : noLikedIcon
-                      }
-                      alt="좋아요 아이콘"
-                      width={16}
-                      height={16}
-                      className="cursor-pointer"
-                    />
+                <div className="absolute bottom-2 right-2">
+                    {(() => {
+                      const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+                      const likedStatus = likedByMe?.liked ?? content.likedByMe;
+                      return (
+                        <Image
+                          src={likedStatus ? likedIcon : noLikedIcon}
+                          alt={likedStatus ? 'Liked' : 'Not Liked'}
+                          width={16}
+                          height={16}
+                          className="cursor-pointer"
+                        />
+                      );
+                    })()}
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col justify-between">
                   <span
-                      className="text-xs text-gray-600 px-2 py-1 rounded-full bg-gray-200"
+                      className="rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a] px-2 py-1"
                       style={{ display: 'inline-flex', maxWidth: 'fit-content' }}
                     >
                       {content.type || '카테고리'}
                     </span>
-                  <h3 className="text-md font-bold line-clamp-2">{content.title}</h3>
-                  <p className="text-sm text-gray-600 line-clamp-2 mt-1">
+                  <h3 className="text-md font-bold line-clamp-2 my-1">{content.title}</h3>
+                  <p className="text-xs text-gray-600 line-clamp-2">
                     {extractText(content.description || "")}
                   </p>
                 </div>

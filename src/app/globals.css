@@ -33,6 +33,10 @@
   display: inline-block;
 }
 
+.swiper-pagination-bullet-active {
+  background-color: black !important;
+}
+
 .mySwiper .swiper-pagination-bullet-active {
   background-color: black;
 }
