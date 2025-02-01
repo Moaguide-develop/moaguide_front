@@ -11,9 +11,9 @@ export default function ArticleDetailPage({ params }: PageProps) {
   const articleId = params.articleId;
 
   return (
-    <>
+    <div className='min-h-[calc(100dvh-135.5px)] flex flex-col'>
       <Navbar />
       <ArticleDetailClientWrapper articleId={Number(articleId)} />
-    </>
+    </div>
   );
 }

@@ -70,7 +70,7 @@ const FilteredContents = ({
                 className="flex items-center gap-4 cursor-pointer"
                 onClick={() => handleContentClick(item)}
               >
-                <div className="relative w-64 h-40 flex-shrink-0 overflow-hidden rounded-md">
+                <div className="relative w-28 h-28 sm:w-64 sm:h-40 flex-shrink-0 overflow-hidden rounded-md">
                   <Image
                     src={getValidImageSrc(item.article.img_link)}
                     alt={item.article.title}
@@ -89,7 +89,7 @@ const FilteredContents = ({
                     </div>
                   )}
                 </div>
-                <div className="h-40 w-full flex flex-col justify-between">
+                <div className="h-28 sm:h-40 w-full flex flex-col justify-between">
                   <h3 className="text-lg font-bold text-gray-800 mb-4 line-clamp-1">
                     {item.article.title}
                   </h3>
@@ -99,7 +99,7 @@ const FilteredContents = ({
                   <div className="text-xs text-gray-500 mt-4 flex items-center justify-end gap-4">
                     <span>{formatDate(item.article.date)}</span>
                     <span>❤ {likeState.likes}</span>
-                    <span>👁 {viewCount}</span> {/* views 상태 적용 */}
+                    <span>👁 {viewCount}</span> 
                   </div>
                 </div>
               </div>
@@ -111,7 +111,7 @@ const FilteredContents = ({
       </div>
 
       {totalPages > 1 && (
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-8 mb-2">
           <ul className="flex items-center space-x-1">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map(
               (pageNum) => (

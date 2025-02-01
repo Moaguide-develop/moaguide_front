@@ -28,7 +28,7 @@ const LearningPage = async () => {
   const initialData = await response.json();
 
   return (
-    <div>
+    <div className='min-h-[calc(100dvh-135.5px)] flex flex-col'>
       <Navbar />
       <LearningPageClient initialData={initialData} />
     </div>
