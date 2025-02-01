@@ -56,7 +56,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
 
   const handleTypeChange = (value: string) => {
     setSelectedType(value);
-    setSelectedCategory('all');
+    // setSelectedCategory('all');
     setPage(1);
     setActiveDropdown(null);
   };
