@@ -16,7 +16,7 @@ const LatestNewsClippingSkeleton = () => {
             <div className="h-4 bg-gray-200 rounded-md w-full" />
           </div>
         </div>
-        <div className="flex flex-col gap-6 w-1/2">
+        <div className="flex flex-col gap-[2rem] w-1/2">
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
@@ -24,8 +24,9 @@ const LatestNewsClippingSkeleton = () => {
             >
               <div className="w-32 h-20 bg-gray-300 rounded-lg" />
               <div className="flex-1 flex flex-col justify-between">
+                <div className="h-4 bg-gray-200 rounded-md mb-2 w-1/5" />
                 <div className="h-4 bg-gray-200 rounded-md mb-2 w-2/3" />
-                <div className="h-4 bg-gray-200 rounded-md w-1/2" />
+                <div className="h-8 bg-gray-200 rounded-md w-full" />
               </div>
             </div>
           ))}
@@ -33,7 +34,7 @@ const LatestNewsClippingSkeleton = () => {
       </div>
       <div className="sm:hidden">
         <div className="w-full overflow-hidden mb-4 animate-pulse">
-          <div className="bg-gray-300 w-full h-48 rounded-lg" />
+          <div className="bg-gray-300 w-full h-48" />
           <div className="bg-white w-[90%] sm:w-[100%] mx-auto pt-4">
             <div className="h-6 bg-gray-200 rounded-md w-3/4 mb-2" />
             <div className="h-4 bg-gray-200 rounded-md w-full" />
