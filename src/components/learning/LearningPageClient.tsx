@@ -80,7 +80,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
 
   return (
     <div>
-      <div className="relative w-full h-[300px] lg:h-[400px]">
+      <div className="hidden sm:flex relative w-full h-[300px] lg:h-[400px]">
         <Image
           src={BackgroundImage}
           alt="Background"
@@ -169,6 +169,83 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
               )}
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="relative z-50 bg-white sm:hidden">
+        <button
+          onClick={() => setActiveDropdown(activeDropdown === 'mobile' ? null : 'mobile')}
+          className="w-full px-4 py-4 text-lg font-semibold flex justify-between items-center border-b border-gray-200"
+        >
+          {selectedCategory
+            ? dropdownOptions.category.find((o) => o.value === selectedCategory)?.label
+            : '학습하기'}
+          <Image
+            src={ArrowIcon}
+            alt="Arrow Icon"
+            width={12}
+            height={12}
+            className={`transition-transform duration-300 ${
+              activeDropdown === 'mobile' ? 'rotate-180' : ''
+            }`}
+          />
+        </button>
+        {activeDropdown === 'mobile' && (
+          <div className="absolute left-0 w-full bg-white shadow-lg z-50">
+            {selectedCategory !== '' && (
+              <div>
+                <button
+                  onClick={() => {
+                    resetFilters(); 
+                    setActiveDropdown(null); 
+                  }}
+                  className="w-full px-4 py-2 text-start text-gray-700 hover:bg-gray-100 border-b"
+                >
+                  학습하기
+                </button>
+              </div>
+            )}
+
+            <div>
+              {dropdownOptions.category
+                .filter((option) => option.value !== selectedCategory)
+                .map((option) => (
+                  <button
+                    key={option.value}
+                    onClick={() => {
+                      handleCategoryChange(option.value);
+                      setActiveDropdown(null); 
+                    }}
+                    className="w-full px-4 py-2 text-start text-gray-700 hover:bg-gray-100 border-b last:border-b-0"
+                  >
+                    {option.label}
+                  </button>
+                ))}
+            </div>
+          </div>
+        )}
+
+        <div
+          className={`flex justify-around border-b border-gray-200 z-10 relative ${
+            activeDropdown === 'mobile' ? 'pointer-events-none' : ''
+          }`}
+        >
+          {dropdownOptions.type.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => {
+                handleTypeChange(option.value);
+                setActiveDropdown(null);
+              }}
+              className={`px-4 py-2 text-lg font-medium ${
+                selectedType === option.value
+                  ? 'text-purple-600 border-b-2 border-purple-600'
+                  : 'text-gray-500'
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
         </div>
       </div>
 
