@@ -175,7 +175,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
       <div className="relative z-50 bg-white sm:hidden">
         <button
           onClick={() => setActiveDropdown(activeDropdown === 'mobile' ? null : 'mobile')}
-          className="w-full px-4 py-4 text-lg font-semibold flex justify-between items-center border-b border-gray-200"
+          className="w-full px-6 py-4 text-lg font-semibold flex items-center"
         >
           {selectedCategory
             ? dropdownOptions.category.find((o) => o.value === selectedCategory)?.label
@@ -183,9 +183,9 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
           <Image
             src={ArrowIcon}
             alt="Arrow Icon"
-            width={12}
-            height={12}
-            className={`transition-transform duration-300 ${
+            width={16}
+            height={16}
+            className={`transition-transform duration-300 ml-[10px] ${
               activeDropdown === 'mobile' ? 'rotate-180' : ''
             }`}
           />
@@ -199,7 +199,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
                     resetFilters(); 
                     setActiveDropdown(null); 
                   }}
-                  className="w-full px-4 py-2 text-start text-gray-700 hover:bg-gray-100 border-b"
+                  className="w-full px-6 py-4 text-start text-[#a2a5aa] text-base hover:bg-gray-100 border-b"
                 >
                   학습하기
                 </button>
@@ -216,7 +216,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
                       handleCategoryChange(option.value);
                       setActiveDropdown(null); 
                     }}
-                    className="w-full px-4 py-2 text-start text-gray-700 hover:bg-gray-100 border-b last:border-b-0"
+                    className="w-full px-6 py-4 text-start text-[#a2a5aa] text-base hover:bg-gray-100 border-b last:border-b-0"
                   >
                     {option.label}
                   </button>
@@ -226,7 +226,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
         )}
 
         <div
-          className={`flex justify-around border-b border-gray-200 z-10 relative ${
+          className={`flex border-b border-gray-200 z-10 relative ${
             activeDropdown === 'mobile' ? 'pointer-events-none' : ''
           }`}
         >
@@ -237,10 +237,10 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
                 handleTypeChange(option.value);
                 setActiveDropdown(null);
               }}
-              className={`px-4 py-2 text-lg font-medium ${
-                selectedType === option.value
-                  ? 'text-purple-600 border-b-2 border-purple-600'
-                  : 'text-gray-500'
+              className={`px-4 mx-4 py-2 text-lg font-medium ${
+                selectedCategory && selectedType === option.value
+                  ? 'text-[#1e1e1e] text-base font-bold border-b-2 border-[#6F36E8]'
+                  : 'text-[#a2a5aa] text-base font-bold'
               }`}
             >
               {option.label}
