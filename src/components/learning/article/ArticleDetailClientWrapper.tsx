@@ -48,7 +48,7 @@ const ArticleDetailClientWrapper = ({ articleId }: ArticleDetailClientWrapperPro
         if (result) {
           setData(result);
           setLikedByMe(result.likedByMe);
-          setLikedArticle(articleId, result.likedByMe, result.articleDetail.likes);
+          // setLikedArticle(articleId, result.likedByMe, result.articleDetail.likes);
   
           // views 업데이트
           const currentViews = getArticleView(articleId) || result.articleDetail.views;

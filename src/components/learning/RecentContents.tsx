@@ -58,6 +58,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
             >
               {contents.map((content, index) => {
                 const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+                const likedStatus = likedByMe?.liked ?? content.likedByMe;
 
                 return (
                   <SwiperSlide key={index} className="relative">
@@ -83,8 +84,8 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                       </div>
                       <div className="absolute bottom-6 right-4">
                         <Image
-                          src={likedByMe ? likedIcon : noLikedIcon}
-                          alt={likedByMe ? 'Liked' : 'Not Liked'}
+                          src={likedStatus ? likedIcon : noLikedIcon}
+                          alt={likedStatus ? 'Liked' : 'Not Liked'}
                           width={24}
                           height={24}
                         />
@@ -101,6 +102,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {contents.map((content, index) => {
                 const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+                const likedStatus = likedByMe?.liked ?? content.likedByMe;
 
                 return (
                   <div
@@ -127,8 +129,8 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         )}
                       <div className="absolute bottom-4 right-4">
                         <Image
-                          src={likedByMe ? likedIcon : noLikedIcon}
-                          alt={likedByMe ? 'Liked' : 'Not Liked'}
+                          src={likedStatus ? likedIcon : noLikedIcon}
+                          alt={likedStatus ? 'Liked' : 'Not Liked'}
                           width={24}
                           height={24}
                         />

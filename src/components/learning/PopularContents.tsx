@@ -56,7 +56,8 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
             >
               {contents.map((content, index) => {
                 const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
-
+                const likedStatus = likedByMe?.liked ?? content.likedByMe;
+ 
                 return (
                   <SwiperSlide key={index}>
                     <div
@@ -97,8 +98,8 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                         )}
                         <div className="absolute bottom-4 right-4">
                         <Image
-                          src={likedByMe ? likedIcon : noLikedIcon}
-                          alt={likedByMe ? 'Liked' : 'Not Liked'}
+                          src={likedStatus ? likedIcon : noLikedIcon}
+                          alt={likedStatus ? 'Liked' : 'Not Liked'}
                           width={24}
                           height={24}
                         />
@@ -122,7 +123,8 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
           <div className="hidden sm:grid gap-4 relative z-10">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {contents.map((content, index) => {
-                const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+               const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+               const likedStatus = likedByMe?.liked ?? content.likedByMe;
 
                 return (
                   <div
@@ -149,8 +151,8 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                         )}
                        <div className="absolute bottom-4 right-4">
                       <Image
-                        src={likedByMe ? likedIcon : noLikedIcon}
-                        alt={likedByMe ? 'Liked' : 'Not Liked'}
+                        src={likedStatus ? likedIcon : noLikedIcon}
+                        alt={likedStatus ? 'Liked' : 'Not Liked'}
                         width={24}
                         height={24}
                       />
