@@ -62,6 +62,11 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 height={300}
                 className="w-full h-48 object-cover"
               />
+              <div className="absolute top-2 left-4 flex items-center gap-2">
+                <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
+                  {contents[0].type}
+                </span>
+              </div>
               <div className="absolute bottom-4 right-4">
                   {(() => {
                     const likedByMe = getLikedState(contents[0].articleId) ?? contents[0].likedByMe;
@@ -79,7 +84,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 </div>
               </div>
               <div className="bg-white w-[90%] sm:w-[100%] mx-auto pt-4">
-                <div className="w-full justify-between mb-1">
+                {/* <div className="w-full justify-between mb-1">
                     <span
                       className="rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a] px-2 py-1"
                       style={{ display: 'inline-flex', maxWidth: 'fit-content' }}
@@ -87,7 +92,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                       {contents[0].type || '카테고리'}
                     </span>
                     <div>{contents[0].date}</div>
-                  </div>
+                  </div> */}
                 <h3 className="text-lg font-bold">{contents[0].title}</h3>
                 <p className="text-gray-600 text-sm my-2 line-clamp-2">
                   {extractText(contents[0].description || "")}
@@ -110,6 +115,11 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                     height={80}
                     className="w-full h-full object-cover"
                   />
+                  <div className="absolute top-1 left-1 flex items-center gap-2">
+                    <span className="px-2 py-1 rounded-full text-[0.5rem] font-sm bg-[#ececec] text-[#8a8a8a]">
+                      {content.type}
+                    </span>
+                  </div>
                   <div className="absolute bottom-2 right-2">
                     {(() => {
                       const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
@@ -126,8 +136,8 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                     })()}
                   </div>
                 </div>
-                <div className="flex-1 flex flex-col justify-center">
-                <div className="w-full justify-between">
+                <div className="flex-1 flex flex-col justify-between my-1">
+                {/* <div className="w-full justify-between">
                     <span
                       className="rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a] px-2 py-1"
                       style={{ display: 'inline-flex', maxWidth: 'fit-content' }}
@@ -135,7 +145,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                       {content.type || '카테고리'}
                     </span>
                     <div>{content.date}</div>
-                  </div>
+                  </div> */}
                   <h3 className="text-sm font-bold line-clamp-1">{content.title}</h3>
                   <p className="text-gray-600 text-xs mt-1 line-clamp-2">
                     {extractText(content.description || "")}
@@ -164,6 +174,11 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 height={300}
                 className="w-full h-full object-cover"
               />
+               <div className="absolute top-4 left-4 flex items-center gap-2">
+                <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
+                  {contents[0].type}
+                </span>
+              </div>
                {contents[0].premium && (
                   <div className="absolute bottom-4 left-4">
                     <Image
@@ -209,6 +224,11 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                     height={80}
                     className="object-cover w-full h-full"
                   />
+                    <div className="absolute top-2 left-2 flex items-center gap-2">
+                    <span className="px-2 py-1 rounded-full text-[0.7rem] font-sm bg-[#ececec] text-[#8a8a8a]">
+                      {content.type}
+                    </span>
+                  </div>
                    {content.premium && (
                     <div className="absolute bottom-2 left-2">
                       <Image
@@ -236,12 +256,12 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col justify-between">
-                  <span
+                  {/* <span
                       className="rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a] px-2 py-1"
                       style={{ display: 'inline-flex', maxWidth: 'fit-content' }}
                     >
                       {content.type || '카테고리'}
-                    </span>
+                    </span> */}
                   <h3 className="text-md font-bold line-clamp-2 my-1">{content.title}</h3>
                   <p className="text-xs text-gray-600 line-clamp-2">
                     {extractText(content.description || "")}
