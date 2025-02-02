@@ -238,7 +238,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
                 setActiveDropdown(null);
               }}
               className={`px-4 mx-4 py-2 text-lg font-medium ${
-                selectedCategory && selectedType === option.value
+                 selectedType === option.value
                   ? 'text-[#1e1e1e] text-base font-bold border-b-2 border-[#6F36E8]'
                   : 'text-[#a2a5aa] text-base font-bold'
               }`}
@@ -249,12 +249,12 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
         </div>
       </div>
 
-      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-[90%] lg:w-[100%] mt-8">
+      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-full mt-8">
         {!selectedType && !selectedCategory ? (
           <>
             <PopularContents contents={extractContents(initialData.popularContents)} />
             <RecentContents contents={extractContents(initialData.recentContents)} />
-            <div className="hidden sm:flex w-full">
+            <div className="flex w-full">
               <SubscriptionBanner />
             </div>
             <LatestNewsClipping contents={extractContents(initialData.newsContents)} />

@@ -7,7 +7,7 @@ import 'swiper/css/pagination';
 
 const PopularContentsSkeleton = () => {
   return (
-    <section className="relative mt-12">
+    <section className="relative mt-6 sm:mt-12">
       <div className="">
         <h2 className="w-[90%] sm:w-[100%] mx-auto text-lg font-bold mb-4 text-black z-10 relative">
           이 달의 인기 콘텐츠
