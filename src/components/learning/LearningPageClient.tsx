@@ -254,7 +254,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
           <>
             <PopularContents contents={extractContents(initialData.popularContents)} />
             <RecentContents contents={extractContents(initialData.recentContents)} />
-            <div className="hidden sm:flex w-full">
+            <div className="flex w-full">
               <SubscriptionBanner />
             </div>
             <LatestNewsClipping contents={extractContents(initialData.newsContents)} />
