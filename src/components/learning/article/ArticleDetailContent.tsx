@@ -74,7 +74,7 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
               모아가이드를 구독하고 자료를 이어서 받아보세요
             </p>
             <div
-              className="block w-[90%] max-w-[400px] py-6 px-8 bg-[#611cf2] text-white font-bold rounded-full transition text-center cursor-pointer hover:bg-[#4b10bf]"
+              className="block w-full max-w-[400px] py-4 px-8 bg-[#611cf2] text-white font-bold rounded-full transition text-center cursor-pointer hover:bg-[#4b10bf]"
               style={{
                 fontSize: 'clamp(18px, 3vw, 24px)',
               }}

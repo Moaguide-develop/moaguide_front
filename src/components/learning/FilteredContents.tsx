@@ -54,7 +54,7 @@ const FilteredContents = ({
   }, [contents, setLikedArticle, getLikedState, setArticleView, getArticleView]);
 
   return (
-    <div className="mt-10">
+    <div className="w-[90%] lg:w-full mx-auto my-10">
       <div className="space-y-10">
         {contents.length > 0 ? (
           contents.map((item) => {
