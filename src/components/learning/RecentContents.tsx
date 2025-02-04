@@ -11,6 +11,7 @@ import RecentContentsSkeleton from '../skeleton/RecentContentsSkeleton';
 import { useRouter } from 'next/navigation';
 import likedIcon from '../../../public/images/learning/articleLiked.svg';
 import noLikedIcon from '../../../public/images/learning/articleNoLike.svg';
+import articleBackImage from '../../../public/images/learning/article_liked_background.svg';
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 import { extractText } from '@/utils/extractText';
@@ -90,13 +91,22 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         </p>
                         </div>
                       </div>
-                      <div className="absolute bottom-6 right-4">
-                        <Image
-                          src={likedStatus ? likedIcon : noLikedIcon}
-                          alt={likedStatus ? 'Liked' : 'Not Liked'}
-                          width={24}
-                          height={24}
-                        />
+                      <div className="absolute bottom-6 right-3 w-[36px] h-[36px]">
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={articleBackImage}
+                            alt="articleLike"
+                            layout="fill"
+                            className="absolute inset-0"
+                          />
+                          <Image
+                            src={likedStatus ? likedIcon : noLikedIcon}
+                            alt={likedStatus ? 'Liked' : 'Not Liked'}
+                            width={24}
+                            height={24}
+                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                          />
+                        </div>
                       </div>
                     </div>
                   </SwiperSlide>
@@ -135,13 +145,22 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                             />
                           </div>
                         )}
-                      <div className="absolute bottom-4 right-4">
-                        <Image
-                          src={likedStatus ? likedIcon : noLikedIcon}
-                          alt={likedStatus ? 'Liked' : 'Not Liked'}
-                          width={24}
-                          height={24}
-                        />
+                        <div className="absolute bottom-2 right-2 w-[36px] h-[36px]">
+                        <div className="relative w-full h-full">
+                          <Image
+                            src={articleBackImage}
+                            alt="articleLike"
+                            layout="fill"
+                            className="absolute inset-0"
+                          />
+                          <Image
+                            src={likedStatus ? likedIcon : noLikedIcon}
+                            alt={likedStatus ? 'Liked' : 'Not Liked'}
+                            width={24}
+                            height={24}
+                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                          />
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 px-3 py-2">
