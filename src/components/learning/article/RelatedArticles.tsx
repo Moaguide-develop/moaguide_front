@@ -35,7 +35,7 @@ const RelatedArticles = ({ articleId }: RelatedArticlesProps) => {
   if (typeof relatedArticles === "string") {
     return (
       <div className="max-w-[1000px] w-[90%] mx-auto mt-16 my-8 text-center">
-        <h2 className="text-left text-black text-[32px] font-bold font-['Pretendard'] leading-[44.80px] tracking-wide mb-8">
+        <h2 className="text-left text-black text-[2rem] font-bold font-['Pretendard'] leading-[44.80px] tracking-wide mb-8">
           관련 콘텐츠
         </h2>
         <p className="text-[#8a8a8a] text-lg font-semibold">{relatedArticles}</p>
@@ -45,7 +45,7 @@ const RelatedArticles = ({ articleId }: RelatedArticlesProps) => {
 
   return (
     <div className="max-w-[1000px] w-[90%] mx-auto mt-16 my-8">
-      <h2 className="text-black text-[32px] font-bold font-['Pretendard'] leading-[44.80px] tracking-wide mb-8">
+      <h2 className="text-black text-[2rem] font-bold font-['Pretendard'] leading-[44.80px] tracking-wide mb-8">
         관련 콘텐츠
       </h2>
       <div className="grid grid-cols-3 gap-4">

@@ -7,6 +7,7 @@ import LatestNewsClippingSkeleton from '../skeleton/LatestNewsClippingSkeleton';
 import { useRouter } from 'next/navigation';
 import likedIcon from '../../../public/images/learning/articleLiked.svg';
 import noLikedIcon from '../../../public/images/learning/articleNoLike.svg';
+import articleBackImage from '../../../public/images/learning/article_liked_background.svg';
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 import { extractText } from '@/utils/extractText';
@@ -67,21 +68,29 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                   {contents[0].type}
                 </span>
               </div>
-              <div className="absolute bottom-4 right-4">
-                  {(() => {
-                    const likedByMe = getLikedState(contents[0].articleId) ?? contents[0].likedByMe;
-                    const likedStatus = likedByMe?.liked ?? contents[0].likedByMe;
-                    return (
+              <div className="absolute bottom-2 right-2 w-[36px] h-[36px]">
+                {(() => {
+                  const likedByMe = getLikedState(contents[0].articleId) ?? contents[0].likedByMe;
+                  const likedStatus = likedByMe?.liked ?? contents[0].likedByMe;
+                  return (
+                    <div className="relative w-full h-full">
                       <Image
-                        src={likedStatus ? likedIcon : noLikedIcon}
-                        alt={likedStatus ? 'Liked' : 'Not Liked'}
-                        width={24}
-                        height={24}
-                        className="cursor-pointer"
-                      />
-                    );
-                  })()}
-                </div>
+                        src={articleBackImage}
+                        alt="articleLike"
+                        layout="fill"
+                        className="absolute inset-0"
+                        />
+                        <Image
+                          src={likedStatus ? likedIcon : noLikedIcon}
+                          alt={likedStatus ? 'Liked' : 'Not Liked'}
+                          width={24}
+                          height={24}
+                          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                        />
+                      </div>
+                      );
+                    })()}
+                  </div>
               </div>
               <div className="bg-white w-[90%] sm:w-[100%] mx-auto pt-4">
                 {/* <div className="w-full justify-between mb-1">
@@ -120,20 +129,28 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                       {content.type}
                     </span>
                   </div>
-                  <div className="absolute bottom-2 right-2">
-                    {(() => {
-                      const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
-                      const likedStatus = likedByMe?.liked ?? content.likedByMe;
-                      return (
+                  <div className="absolute bottom-1 right-1 w-[24px] h-[24px]">
+                  {(() => {
+                    const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+                    const likedStatus = likedByMe?.liked ?? content.likedByMe;
+                    return (
+                      <div className="relative w-full h-full">
                         <Image
-                          src={likedStatus ? likedIcon : noLikedIcon}
-                          alt={likedStatus ? 'Liked' : 'Not Liked'}
-                          width={16}
-                          height={16}
-                          className="cursor-pointer"
-                        />
-                      );
-                    })()}
+                          src={articleBackImage}
+                          alt="articleLike"
+                          layout="fill"
+                          className="absolute inset-0"
+                          />
+                          <Image
+                            src={likedStatus ? likedIcon : noLikedIcon}
+                            alt={likedStatus ? 'Liked' : 'Not Liked'}
+                            width={16}
+                            height={16}
+                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                          />
+                        </div>
+                        );
+                      })()}
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col justify-between my-1">
@@ -189,21 +206,29 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                       />
                     </div>
                   )}
-                <div className="absolute bottom-4 right-4">
-                  {(() => {
-                    const likedByMe = getLikedState(contents[0].articleId) ?? contents[0].likedByMe;
-                    const likedStatus = likedByMe?.liked ?? contents[0].likedByMe;
-                    return (
+                <div className="absolute bottom-2 right-2 w-[36px] h-[36px]">
+                {(() => {
+                  const likedByMe = getLikedState(contents[0].articleId) ?? contents[0].likedByMe;
+                  const likedStatus = likedByMe?.liked ?? contents[0].likedByMe;
+                  return (
+                    <div className="relative w-full h-full">
                       <Image
-                        src={likedStatus ? likedIcon : noLikedIcon}
-                        alt={likedStatus ? 'Liked' : 'Not Liked'}
-                        width={24}
-                        height={24}
-                        className="cursor-pointer"
-                      />
-                    );
-                  })()}
-                </div>
+                        src={articleBackImage}
+                        alt="articleLike"
+                        layout="fill"
+                        className="absolute inset-0"
+                        />
+                        <Image
+                          src={likedStatus ? likedIcon : noLikedIcon}
+                          alt={likedStatus ? 'Liked' : 'Not Liked'}
+                          width={24}
+                          height={24}
+                          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                        />
+                      </div>
+                      );
+                    })()}
+                  </div>
             </div>
             <div className="bg-white p-6 flex flex-col justify-between flex-grow">
               <h3 className="text-xl font-bold">{contents[0].title}</h3>
@@ -211,7 +236,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
             </div>
           </div>
           )}
-          <div className="flex flex-col gap-[1.6rem] w-1/2">
+          <div className="flex flex-col gap-[2rem] w-1/2">
             {contents.slice(1, 5).map((content, index) => (
                <div key={index} className="flex items-stretch gap-4 cursor-pointer"
                   onClick={() => handleContentClick(content)}
@@ -239,20 +264,28 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                         />
                       </div>
                     )}
-                <div className="absolute bottom-2 right-2">
-                    {(() => {
-                      const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
-                      const likedStatus = likedByMe?.liked ?? content.likedByMe;
-                      return (
+                <div className="absolute bottom-1 right-1 w-[24px] h-[24px]">
+                  {(() => {
+                    const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
+                    const likedStatus = likedByMe?.liked ?? content.likedByMe;
+                    return (
+                      <div className="relative w-full h-full">
                         <Image
-                          src={likedStatus ? likedIcon : noLikedIcon}
-                          alt={likedStatus ? 'Liked' : 'Not Liked'}
-                          width={16}
-                          height={16}
-                          className="cursor-pointer"
-                        />
-                      );
-                    })()}
+                          src={articleBackImage}
+                          alt="articleLike"
+                          layout="fill"
+                          className="absolute inset-0"
+                          />
+                          <Image
+                            src={likedStatus ? likedIcon : noLikedIcon}
+                            alt={likedStatus ? 'Liked' : 'Not Liked'}
+                            width={16}
+                            height={16}
+                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                          />
+                        </div>
+                        );
+                      })()}
                   </div>
                 </div>
                 <div className="flex-1 flex flex-col justify-between">

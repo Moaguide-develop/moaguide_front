@@ -249,7 +249,7 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
         </div>
       </div>
 
-      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-full mt-8">
+      <div className="max-w-[360px] mx-auto desk:max-w-[1000px] w-full sm:w-[90%] mt-8">
         {!selectedType && !selectedCategory ? (
           <>
             <PopularContents contents={extractContents(initialData.popularContents)} />
