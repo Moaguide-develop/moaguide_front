@@ -97,6 +97,9 @@ const config: Config = {
         countdown: 'countdownAnimation 1s ease-in-out',
         'slide-in': 'slide-in 0.5s forwards',
         'slide-out': 'slide-out 0.5s forwards'
+      },
+      backgroundSize: {
+        custom: '1107px 1069px',
       }
     }
   },
