@@ -75,7 +75,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                           zIndex: 1,
                         }}
                       ></div>
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[360px] z-[3]">
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[58%] w-[300px] h-[360px] z-[3]">
                         <Image
                           src={content.imgLink || defaultImage}
                           alt={content.title}
@@ -118,11 +118,11 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                           </div>
                         </div>
                       </div>
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center max-w-[280px] text-white px-4 z-[3]">
-                        <h3 className="text-black text-lg font-semibold mb-2 truncate">
+                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center max-w-[280px] text-white px-4 z-[3]">
+                        <h3 className="text-white text-lg font-semibold">
                           {content.title}
                         </h3>
-                        <p className="text-black text-sm font-medium line-clamp-2">
+                        <p className="text-white text-sm font-medium line-clamp-2">
                           {extractText(content.description || '')}
                         </p>
                       </div>
