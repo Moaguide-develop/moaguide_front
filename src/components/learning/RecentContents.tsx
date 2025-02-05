@@ -68,7 +68,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                       onClick={() => handleContentClick(content)}
                     >
                       <Image
-                        src={content.img_link || defaultImage}
+                        src={content.imgLink || defaultImage}
                         alt={content.title}
                         fill
                         className="object-cover"
@@ -130,7 +130,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                   >
                     <div className="relative w-full h-[180px]">
                       <Image
-                        src={content.img_link || defaultImage}
+                        src={content.imgLink || defaultImage}
                         alt={content.title}
                         fill
                         className="object-cover"

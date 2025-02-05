@@ -41,6 +41,8 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
     router.push(`/learning/detail/${content.articleId}`);
   };
 
+  console.log(contents);
+
   return (
     <section className="relative mt-6 sm:mt-12">
       <div className="">
@@ -64,7 +66,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                     <div
                       className="relative w-full h-[500px] bg-cover bg-center cursor-pointer"
                       style={{
-                        backgroundImage: `url('${content.img_link || defaultImage.src}')`,
+                        backgroundImage: `url('${content.imgLink || defaultImage.src}')`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
@@ -74,7 +76,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                       <div className="absolute inset-0 bg-black bg-opacity-50 filter blur-lg"></div>
                       <div className="top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[270px] h-[300px] relative">
                         <Image
-                          src={content.img_link || defaultImage}
+                          src={content.imgLink || defaultImage}
                           alt={content.title}
                           fill
                           className="object-cover rounded-lg shadow-lg"
@@ -144,7 +146,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                   >
                     <div className="relative w-full h-[180px]">
                       <Image
-                        src={content.img_link || defaultImage}
+                        src={content.imgLink || defaultImage}
                         alt={content.title}
                         fill
                         className="object-cover"

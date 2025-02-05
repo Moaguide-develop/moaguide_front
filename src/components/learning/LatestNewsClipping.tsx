@@ -57,7 +57,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
             >
               <div className='relative'>
               <Image
-                src={contents[0].img_link || defaultImage}
+                src={contents[0].imgLink || defaultImage}
                 alt={contents[0].title}
                 width={600}
                 height={300}
@@ -118,7 +118,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               >
                 <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200 relative">
                   <Image
-                    src={content.img_link || defaultImage}
+                    src={content.imgLink || defaultImage}
                     alt={content.title}
                     width={80}
                     height={80}
@@ -185,7 +185,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               >
             <div className="bg-gray-200 rounded-t-lg overflow-hidden relative">
               <Image
-                src={contents[0].img_link || defaultImage}
+                src={contents[0].imgLink || defaultImage}
                 alt={contents[0].title}
                 width={600}
                 height={300}
@@ -243,7 +243,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 >
                 <div className="w-32 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200 relative">
                   <Image
-                    src={content.img_link || defaultImage}
+                    src={content.imgLink || defaultImage}
                     alt={content.title}
                     width={160}
                     height={80}
