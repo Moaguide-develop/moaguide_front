@@ -43,11 +43,11 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
         {new Date(createdAt).toLocaleDateString()} <br />
         BY. {authorName}
       </p>
-      <Image
+      {/* <Image
         src={getValidImageSrc(imgLink)}
         alt={title}
         className="w-full max-w-[650px] aspect-square my-16 object-cover mx-auto rounded-lg"
-      />
+      /> */}
       {isPremium ? (
         <>
           <article
