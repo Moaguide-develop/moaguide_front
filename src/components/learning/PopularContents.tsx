@@ -15,6 +15,7 @@ import articleBackImage from '../../../public/images/learning/article_liked_back
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 import { extractText } from '@/utils/extractText';
+import { convertContentType } from '@/utils/convertContentType';
 
 const PopularContents = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
@@ -40,8 +41,6 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
   const handleContentClick = (content: any) => {
     router.push(`/learning/detail/${content.articleId}`);
   };
-
-  console.log(contents);
 
   return (
     <section className="relative mt-6 sm:mt-12">
@@ -84,7 +83,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                         />
                         <div className="absolute top-3 left-4 flex items-center gap-2">
                           <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                            {content.type}
+                            {convertContentType(content.type)}
                           </span>
                           <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#f4e5ff] text-[#6e35e8]">
                             {content.categoryName.replace(/[^a-zA-Z0-9가-힣\s]/g, '') || '카테고리'}
@@ -118,8 +117,8 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                           </div>
                         </div>
                       </div>
-                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center max-w-[280px] text-white px-4 z-[3]">
-                        <h3 className="text-white text-lg font-semibold">
+                      <div className="w-[270px] absolute bottom-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center max-w-[280px] text-white z-[3]">
+                        <h3 className="text-white text-lg font-semibold line-clamp-2">
                           {content.title}
                         </h3>
                         <p className="text-white text-sm font-medium line-clamp-2">
@@ -182,7 +181,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                     </div>
                     <div className="flex items-center gap-2 px-3 py-2">
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                        {content.type}
+                        {convertContentType(content.type)}
                       </span>
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#f4e5ff] text-[#6e35e8]">
                         {content.categoryName?.replace(/[^a-zA-Z0-9가-힣\s]/g, '') || '카테고리'}
@@ -198,7 +197,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                     </div>
                     <div className="mt-auto border-t px-4 py-2">
                     <button className="w-full text-center py-2 text-[#545454] text-sm font-medium">
-                      {content.type === '아티클' ? '보러가기' : '재생하기'}
+                      {content.type === 'article' ? '보러가기' : '재생하기'}
                     </button>
                   </div>
                   </div>

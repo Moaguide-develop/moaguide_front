@@ -15,6 +15,7 @@ import articleBackImage from '../../../public/images/learning/article_liked_back
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 import { extractText } from '@/utils/extractText';
+import { convertContentType } from '@/utils/convertContentType';
 
 const RecentContents = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
@@ -75,7 +76,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                       />
                       <div className="absolute top-3 left-4 flex items-center gap-2">
                           <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                            {content.type}
+                            {convertContentType(content.type)}
                           </span>
                           <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#f4e5ff] text-[#6e35e8]">
                             {content.categoryName.replace(/[^a-zA-Z0-9가-힣\s]/g, '') || '카테고리'}
@@ -175,7 +176,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                     </div>
                     <div className="flex items-center gap-2 px-3 py-2">
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                        {content.type}
+                        {convertContentType(content.type)}
                       </span>
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#f4e5ff] text-[#6e35e8]">
                         {content.categoryName?.replace(/[^a-zA-Z0-9가-힣\s]/g, '') || '카테고리'}

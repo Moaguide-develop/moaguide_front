@@ -11,6 +11,7 @@ import articleBackImage from '../../../public/images/learning/article_liked_back
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 import { extractText } from '@/utils/extractText';
+import { convertContentType } from '@/utils/convertContentType';
 
 const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
@@ -65,7 +66,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               />
               <div className="absolute top-2 left-4 flex items-center gap-2">
                 <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                  {contents[0].type}
+                  {convertContentType(contents[0].type)}
                 </span>
               </div>
               <div className="absolute bottom-2 right-4 w-[24px] h-[24px]">
@@ -126,7 +127,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                   />
                   <div className="absolute top-1 left-1 flex items-center gap-2">
                     <span className="px-2 py-1 rounded-full text-[0.5rem] font-sm bg-[#ececec] text-[#8a8a8a]">
-                      {content.type}
+                      {convertContentType(content.type)}
                     </span>
                   </div>
                   <div className="absolute bottom-1 right-1 w-[18px] h-[18px]">
@@ -193,7 +194,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               />
                <div className="absolute top-4 left-4 flex items-center gap-2">
                 <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                  {contents[0].type}
+                  {convertContentType(contents[0].type)}
                 </span>
               </div>
                {contents[0].premium && (
@@ -251,7 +252,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                   />
                     <div className="absolute top-2 left-2 flex items-center gap-2">
                     <span className="px-2 py-1 rounded-full text-[0.7rem] font-sm bg-[#ececec] text-[#8a8a8a]">
-                      {content.type}
+                      {convertContentType(content.type)}
                     </span>
                   </div>
                    {content.premium && (
