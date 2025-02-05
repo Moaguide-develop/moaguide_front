@@ -63,25 +63,26 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
  
                 return (
                   <SwiperSlide key={index}>
-                    <div
-                      className="relative w-full h-[500px] bg-cover bg-center cursor-pointer"
-                      style={{
-                        backgroundImage: `url('${content.imgLink || defaultImage.src}')`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                      }}
-                      onClick={() => handleContentClick(content)}
-                    >
-                      <div className="absolute inset-0 bg-black bg-opacity-50 filter blur-lg"></div>
-                      <div className="top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[270px] h-[300px] relative">
+                    <div className="relative w-full h-[500px] cursor-pointer">
+                      <div
+                        className="absolute inset-0 bg-cover bg-center"
+                        style={{
+                          backgroundImage: `url('${content.imgLink || defaultImage.src}')`,
+                          backgroundSize: 'cover',
+                          backgroundPosition: 'center',
+                          backgroundRepeat: 'no-repeat',
+                          filter: 'blur(10px)',
+                          zIndex: 1,
+                        }}
+                      ></div>
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[360px] z-[3]">
                         <Image
                           src={content.imgLink || defaultImage}
                           alt={content.title}
                           fill
                           className="object-cover rounded-lg shadow-lg"
                         />
-                        <div className="absolute top-2 left-2 flex items-center gap-2">
+                        <div className="absolute top-3 left-4 flex items-center gap-2">
                           <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
                             {content.type}
                           </span>
@@ -99,30 +100,30 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                             />
                           </div>
                         )}
-                      <div className="absolute bottom-4 right-4 w-[36px] h-[36px]">
-                        <div className="relative w-full h-full">
-                          <Image
-                            src={articleBackImage}
-                            alt="articleLike"
-                            layout="fill"
-                            className="absolute inset-0"
-                          />
-                          <Image
-                            src={likedStatus ? likedIcon : noLikedIcon}
-                            alt={likedStatus ? 'Liked' : 'Not Liked'}
-                            width={24}
-                            height={24}
-                            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                          />
+                        <div className="absolute bottom-4 right-4 w-[24px] h-[24px]">
+                          <div className="relative w-full h-full">
+                            <Image
+                              src={articleBackImage}
+                              alt="articleLike"
+                              layout="fill"
+                              className="absolute inset-0"
+                            />
+                            <Image
+                              src={likedStatus ? likedIcon : noLikedIcon}
+                              alt={likedStatus ? 'Liked' : 'Not Liked'}
+                              width={16}
+                              height={16}
+                              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                            />
+                          </div>
                         </div>
                       </div>
-                      </div>
-                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center max-w-[280px] text-white px-4">
+                      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center max-w-[280px] text-white px-4 z-[3]">
                         <h3 className="text-black text-lg font-semibold mb-2 truncate">
                           {content.title}
                         </h3>
                         <p className="text-black text-sm font-medium line-clamp-2">
-                          {extractText(content.description || "")}
+                          {extractText(content.description || '')}
                         </p>
                       </div>
                     </div>
@@ -161,7 +162,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                             />
                           </div>
                         )}
-                        <div className="absolute bottom-2 right-2 w-[36px] h-[36px]">
+                        <div className="absolute bottom-4 right-4 w-[24px] h-[24px]">
                         <div className="relative w-full h-full">
                           <Image
                             src={articleBackImage}
@@ -172,8 +173,8 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
                           <Image
                             src={likedStatus ? likedIcon : noLikedIcon}
                             alt={likedStatus ? 'Liked' : 'Not Liked'}
-                            width={24}
-                            height={24}
+                            width={16}
+                            height={16}
                             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                           />
                         </div>

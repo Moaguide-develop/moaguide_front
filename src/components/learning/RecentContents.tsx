@@ -73,7 +73,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         fill
                         className="object-cover"
                       />
-                      <div className="absolute top-2 left-2 flex items-center gap-2">
+                      <div className="absolute top-3 left-4 flex items-center gap-2">
                           <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
                             {content.type}
                           </span>
@@ -91,7 +91,17 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         </p>
                         </div>
                       </div>
-                      <div className="absolute bottom-6 right-3 w-[36px] h-[36px]">
+                      {content.premium && (
+                          <div className="absolute top-3 right-4">
+                            <Image
+                              src={premiumIcon}
+                              alt="프리미엄 아이콘"
+                              width={24}
+                              height={24}
+                            />
+                          </div>
+                        )}
+                      <div className="absolute bottom-4 right-4 w-[24px] h-[24px]">
                         <div className="relative w-full h-full">
                           <Image
                             src={articleBackImage}
@@ -102,8 +112,8 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                           <Image
                             src={likedStatus ? likedIcon : noLikedIcon}
                             alt={likedStatus ? 'Liked' : 'Not Liked'}
-                            width={24}
-                            height={24}
+                            width={16}
+                            height={16}
                             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                           />
                         </div>
@@ -145,7 +155,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                             />
                           </div>
                         )}
-                        <div className="absolute bottom-2 right-2 w-[36px] h-[36px]">
+                        <div className="absolute bottom-4 right-4 w-[24px] h-[24px]">
                         <div className="relative w-full h-full">
                           <Image
                             src={articleBackImage}
@@ -156,8 +166,8 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                           <Image
                             src={likedStatus ? likedIcon : noLikedIcon}
                             alt={likedStatus ? 'Liked' : 'Not Liked'}
-                            width={24}
-                            height={24}
+                            width={16}
+                            height={16}
                             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                           />
                         </div>
