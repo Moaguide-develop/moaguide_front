@@ -15,6 +15,7 @@ import articleBackImage from '../../../public/images/learning/article_liked_back
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 import { extractText } from '@/utils/extractText';
+import { convertContentType } from '@/utils/convertContentType';
 
 const RecentContents = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
@@ -68,14 +69,14 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                       onClick={() => handleContentClick(content)}
                     >
                       <Image
-                        src={content.img_link || defaultImage}
+                        src={content.imgLink || defaultImage}
                         alt={content.title}
                         fill
                         className="object-cover"
                       />
-                      <div className="absolute top-2 left-2 flex items-center gap-2">
+                      <div className="absolute top-3 left-4 flex items-center gap-2">
                           <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                            {content.type}
+                            {convertContentType(content.type)}
                           </span>
                           <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#f4e5ff] text-[#6e35e8]">
                             {content.categoryName.replace(/[^a-zA-Z0-9가-힣\s]/g, '') || '카테고리'}
@@ -91,7 +92,17 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                         </p>
                         </div>
                       </div>
-                      <div className="absolute bottom-6 right-3 w-[36px] h-[36px]">
+                      {content.premium && (
+                          <div className="absolute top-3 right-4">
+                            <Image
+                              src={premiumIcon}
+                              alt="프리미엄 아이콘"
+                              width={24}
+                              height={24}
+                            />
+                          </div>
+                        )}
+                      <div className="absolute bottom-4 right-4 w-[24px] h-[24px]">
                         <div className="relative w-full h-full">
                           <Image
                             src={articleBackImage}
@@ -102,8 +113,8 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                           <Image
                             src={likedStatus ? likedIcon : noLikedIcon}
                             alt={likedStatus ? 'Liked' : 'Not Liked'}
-                            width={24}
-                            height={24}
+                            width={16}
+                            height={16}
                             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                           />
                         </div>
@@ -130,7 +141,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                   >
                     <div className="relative w-full h-[180px]">
                       <Image
-                        src={content.img_link || defaultImage}
+                        src={content.imgLink || defaultImage}
                         alt={content.title}
                         fill
                         className="object-cover"
@@ -145,7 +156,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                             />
                           </div>
                         )}
-                        <div className="absolute bottom-2 right-2 w-[36px] h-[36px]">
+                        <div className="absolute bottom-4 right-4 w-[24px] h-[24px]">
                         <div className="relative w-full h-full">
                           <Image
                             src={articleBackImage}
@@ -156,8 +167,8 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                           <Image
                             src={likedStatus ? likedIcon : noLikedIcon}
                             alt={likedStatus ? 'Liked' : 'Not Liked'}
-                            width={24}
-                            height={24}
+                            width={16}
+                            height={16}
                             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                           />
                         </div>
@@ -165,7 +176,7 @@ const RecentContents = ({ contents }: { contents: any[] }) => {
                     </div>
                     <div className="flex items-center gap-2 px-3 py-2">
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                        {content.type}
+                        {convertContentType(content.type)}
                       </span>
                       <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#f4e5ff] text-[#6e35e8]">
                         {content.categoryName?.replace(/[^a-zA-Z0-9가-힣\s]/g, '') || '카테고리'}

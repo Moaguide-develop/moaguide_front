@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { FilteredResponse } from '@/types/filterArticle';
 import { getValidImageSrc } from '@/utils/checkImageProperty';
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
+import likeIcon from '../../../public/images/learning/article_filter_like.svg';
+import viewIcon from '../../../public/images/learning/article_filter_view.svg';
 import { extractText } from '@/utils/extractText';
 import { useLikeStore } from '@/store/articleLike.store';
 import { useViewStore } from '@/store/articleView.store';
@@ -79,7 +81,7 @@ const FilteredContents = ({
                     className="object-cover w-full h-full"
                   />
                   {item.article.isPremium && (
-                    <div className="absolute bottom-4 left-4">
+                    <div className="absolute bottom-2 left-2">
                       <Image
                         src={premiumIcon}
                         alt="프리미엄 아이콘"
@@ -98,8 +100,24 @@ const FilteredContents = ({
                   </p>
                   <div className="text-xs text-gray-500 mt-4 flex items-center justify-end gap-4">
                     <span>{formatDate(item.article.date)}</span>
-                    <span>❤ {likeState.likes}</span>
-                    <span>👁 {viewCount}</span> 
+                    <div className='flex flex-row'>
+                    <Image
+                        src={likeIcon}
+                        alt="like"
+                        width={16}
+                        height={16}
+                      />
+                    <span className='ml-1'>{likeState.likes}</span>
+                    </div>
+                    <div className='flex flex-row'>
+                    <Image
+                        src={viewIcon}
+                        alt="view"
+                        width={16}
+                        height={16}
+                      />
+                    <span className='ml-1'>{viewCount}</span> 
+                    </div>
                   </div>
                 </div>
               </div>

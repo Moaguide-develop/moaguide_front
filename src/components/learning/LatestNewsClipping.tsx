@@ -11,6 +11,7 @@ import articleBackImage from '../../../public/images/learning/article_liked_back
 import premiumIcon from '../../../public/images/learning/premium_article.svg';
 import { useLikeStore } from '@/store/articleLike.store';
 import { extractText } from '@/utils/extractText';
+import { convertContentType } from '@/utils/convertContentType';
 
 const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
   const router = useRouter();
@@ -57,7 +58,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
             >
               <div className='relative'>
               <Image
-                src={contents[0].img_link || defaultImage}
+                src={contents[0].imgLink || defaultImage}
                 alt={contents[0].title}
                 width={600}
                 height={300}
@@ -65,10 +66,10 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               />
               <div className="absolute top-2 left-4 flex items-center gap-2">
                 <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                  {contents[0].type}
+                  {convertContentType(contents[0].type)}
                 </span>
               </div>
-              <div className="absolute bottom-2 right-2 w-[36px] h-[36px]">
+              <div className="absolute bottom-2 right-4 w-[24px] h-[24px]">
                 {(() => {
                   const likedByMe = getLikedState(contents[0].articleId) ?? contents[0].likedByMe;
                   const likedStatus = likedByMe?.liked ?? contents[0].likedByMe;
@@ -83,8 +84,8 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                         <Image
                           src={likedStatus ? likedIcon : noLikedIcon}
                           alt={likedStatus ? 'Liked' : 'Not Liked'}
-                          width={24}
-                          height={24}
+                          width={16}
+                          height={16}
                           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                         />
                       </div>
@@ -118,7 +119,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               >
                 <div className="w-20 h-20 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200 relative">
                   <Image
-                    src={content.img_link || defaultImage}
+                    src={content.imgLink || defaultImage}
                     alt={content.title}
                     width={80}
                     height={80}
@@ -126,10 +127,10 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                   />
                   <div className="absolute top-1 left-1 flex items-center gap-2">
                     <span className="px-2 py-1 rounded-full text-[0.5rem] font-sm bg-[#ececec] text-[#8a8a8a]">
-                      {content.type}
+                      {convertContentType(content.type)}
                     </span>
                   </div>
-                  <div className="absolute bottom-1 right-1 w-[24px] h-[24px]">
+                  <div className="absolute bottom-1 right-1 w-[18px] h-[18px]">
                   {(() => {
                     const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
                     const likedStatus = likedByMe?.liked ?? content.likedByMe;
@@ -144,8 +145,8 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                           <Image
                             src={likedStatus ? likedIcon : noLikedIcon}
                             alt={likedStatus ? 'Liked' : 'Not Liked'}
-                            width={16}
-                            height={16}
+                            width={12}
+                            height={12}
                             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                           />
                         </div>
@@ -185,7 +186,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               >
             <div className="bg-gray-200 rounded-t-lg overflow-hidden relative">
               <Image
-                src={contents[0].img_link || defaultImage}
+                src={contents[0].imgLink || defaultImage}
                 alt={contents[0].title}
                 width={600}
                 height={300}
@@ -193,7 +194,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
               />
                <div className="absolute top-4 left-4 flex items-center gap-2">
                 <span className="px-3 py-1.5 rounded-full text-xs font-medium bg-[#ececec] text-[#8a8a8a]">
-                  {contents[0].type}
+                  {convertContentType(contents[0].type)}
                 </span>
               </div>
                {contents[0].premium && (
@@ -206,7 +207,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                       />
                     </div>
                   )}
-                <div className="absolute bottom-2 right-2 w-[36px] h-[36px]">
+                <div className="absolute bottom-4 right-4 w-[24px] h-[24px]">
                 {(() => {
                   const likedByMe = getLikedState(contents[0].articleId) ?? contents[0].likedByMe;
                   const likedStatus = likedByMe?.liked ?? contents[0].likedByMe;
@@ -221,8 +222,8 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                         <Image
                           src={likedStatus ? likedIcon : noLikedIcon}
                           alt={likedStatus ? 'Liked' : 'Not Liked'}
-                          width={24}
-                          height={24}
+                          width={16}
+                          height={16}
                           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                         />
                       </div>
@@ -243,7 +244,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                 >
                 <div className="w-32 flex-shrink-0 rounded-lg overflow-hidden bg-gray-200 relative">
                   <Image
-                    src={content.img_link || defaultImage}
+                    src={content.imgLink || defaultImage}
                     alt={content.title}
                     width={160}
                     height={80}
@@ -251,7 +252,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                   />
                     <div className="absolute top-2 left-2 flex items-center gap-2">
                     <span className="px-2 py-1 rounded-full text-[0.7rem] font-sm bg-[#ececec] text-[#8a8a8a]">
-                      {content.type}
+                      {convertContentType(content.type)}
                     </span>
                   </div>
                    {content.premium && (
@@ -264,7 +265,7 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                         />
                       </div>
                     )}
-                <div className="absolute bottom-1 right-1 w-[24px] h-[24px]">
+                <div className="absolute bottom-2 right-2 w-[18px] h-[18px]">
                   {(() => {
                     const likedByMe = getLikedState(content.articleId) ?? content.likedByMe;
                     const likedStatus = likedByMe?.liked ?? content.likedByMe;
@@ -279,8 +280,8 @@ const LatestNewsClipping = ({ contents }: { contents: any[] }) => {
                           <Image
                             src={likedStatus ? likedIcon : noLikedIcon}
                             alt={likedStatus ? 'Liked' : 'Not Liked'}
-                            width={16}
-                            height={16}
+                            width={12}
+                            height={12}
                             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                           />
                         </div>
