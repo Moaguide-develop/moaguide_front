@@ -62,7 +62,7 @@ const PopularContents = ({ contents }: { contents: any[] }) => {
  
                 return (
                   <SwiperSlide key={index}>
-                    <div className="relative w-full h-[500px] cursor-pointer">
+                    <div className="relative w-full h-[500px] cursor-pointer" onClick={() => handleContentClick(content)}>
                       <div
                         className="absolute inset-0 bg-cover bg-center"
                         style={{
