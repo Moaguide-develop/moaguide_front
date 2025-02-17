@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import PopularContents from '@/components/learning/PopularContents';
 import RecentContents from '@/components/learning/RecentContents';
 import LatestNewsClipping from '@/components/learning/LatestNewsClipping';
@@ -82,13 +82,27 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
         }))
       : [];
     
-  const categoryInfo = categoryConfig[selectedCategory as keyof typeof categoryConfig] || categoryConfig.all;
-
-
+      const categoryInfo = useMemo(() => {
+        return categoryConfig[selectedCategory as keyof typeof categoryConfig] || categoryConfig.all;
+      }, [selectedCategory]);
+    
+      const preloadImage = (src: StaticImageData) => {
+        const img = new window.Image();
+        img.src = src.src;
+      };
+      
+      useEffect(() => {
+        if (selectedCategory) {
+          preloadImage(categoryConfig[selectedCategory as keyof typeof categoryConfig].backgroundImage);
+        }
+      }, [selectedCategory]);
+  
+      
   return (
     <div>
       <div className="hidden sm:flex relative w-full h-[300px] lg:h-[400px]">
       <Image
+        key={categoryInfo.backgroundImage.src} 
         src={categoryInfo.backgroundImage}
         alt="Background"
         layout="fill"
