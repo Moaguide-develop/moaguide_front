@@ -124,7 +124,7 @@ const FilteredContents = ({
             );
           })
         ) : (
-          <div className="text-center text-gray-500">데이터가 없습니다.</div>
+          <div className="text-center text-gray-500">콘텐츠 준비중입니다.</div>
         )}
       </div>
 

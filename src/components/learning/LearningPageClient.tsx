@@ -9,12 +9,12 @@ import LatestNewsClipping from '@/components/learning/LatestNewsClipping';
 import FilteredContents from '@/components/learning/FilteredContents';
 import HomeIcon from '../../../public/images/learning/learning_home.svg';
 import ArrowIcon from '../../../public/images/learning/bottom_arrow_button.svg';
-import BackgroundImage from '../../../public/images/learning/learning_background.png';
 import SubscriptionBanner from './SubscriptionBanner';
 import { dropdownOptions } from '@/utils/dropdownOptions';
 import { OverviewResponse, Content } from '@/types/learning'; 
 import { fetchContentsWithPage } from '@/factory/Article/GetArticle';
 import { resetSessionValues } from '@/utils/resetSessionValues';
+import { categoryConfig } from '@/utils/categoryConfig';
 
 const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) => {
 
@@ -81,17 +81,25 @@ const LearningPageClient = ({ initialData }: { initialData: OverviewResponse }) 
           likedByMe: item.likedByMe,
         }))
       : [];
+    
+  const categoryInfo = categoryConfig[selectedCategory as keyof typeof categoryConfig] || categoryConfig.all;
+
 
   return (
     <div>
       <div className="hidden sm:flex relative w-full h-[300px] lg:h-[400px]">
-        <Image
-          src={BackgroundImage}
-          alt="Background"
-          layout="fill"
-          objectFit="cover"
-          className="w-full"
-        />
+      <Image
+        src={categoryInfo.backgroundImage}
+        alt="Background"
+        layout="fill"
+        objectFit="cover"
+        className="w-full"
+      />
+      <div className="absolute inset-0 bg-black opacity-30"></div>
+     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+      <h2 className="text-white text-3xl font-bold">{categoryInfo.title}</h2>
+      <p className="text-white text-lg mt-2">{categoryInfo.description}</p>
+    </div>
         <div className="absolute bottom-0 left-0 right-0 flex justify-end items-center border-b shadow-sm z-50 bg-[#fffffc]/50">
           <button
             onClick={resetFilters}
