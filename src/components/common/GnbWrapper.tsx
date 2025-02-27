@@ -9,12 +9,13 @@ const GnbWrapper = () => {
   const [isGnbHidden, setIsGnbHidden] = useState(false);
   useEffect(() => {
     const checkIfGnbShouldBeHidden = () => {
-      const pathsToHideGnb = ['/signup', '/sign', '/find', '/login', '/quiz'];
-      
+      const pathsToHideGnb = ['/signup', '/sign', '/find', '/login', '/quiz', 'detail'];
+
       // `/learning/detail` 경로는 Gnb를 숨기지 않음
-      const shouldHideGnb = pathsToHideGnb.some((path) => pathname.includes(path)) &&
-                            !pathname.startsWith('/learning/detail');
-    
+      const shouldHideGnb =
+        pathsToHideGnb.some((path) => pathname.includes(path)) &&
+        !pathname.startsWith('/learning/detail');
+
       setIsGnbHidden(shouldHideGnb);
     };
 
