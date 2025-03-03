@@ -38,7 +38,7 @@ const Navbar = () => {
         </div>
         <div
           onClick={() => {
-            router.push('/practicepage');
+            router.push('/learning');
           }}
           className={` desk:whitespace-nowrap px-4 py-3 flex-1 flex justify-center items-center cursor-pointer text-body5 desk2:text-heading4
         ${pathname.startsWith('/learning') ? 'text-black border-b-[2px] border-black' : 'text-gray300'}
