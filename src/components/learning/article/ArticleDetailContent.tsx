@@ -1,8 +1,6 @@
 'use client';
 
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { getValidImageSrc } from "@/utils/checkImageProperty";
 
 interface ContentProps {
   text?: string;
@@ -23,16 +21,40 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
 
   const parseHtmlContent = (htmlContent: string): string => {
     if (!htmlContent) return "";
-
+  
     try {
       const parser = new DOMParser();
       const doc = parser.parseFromString(htmlContent, "text/html");
-      return doc.body.innerHTML; 
+  
+      doc.querySelectorAll("[class*='max-w-[']").forEach((el) => {
+        const classList = el.getAttribute("class") || "";
+        const match = classList.match(/max-w-\[(\d+)px\]/);
+
+        if (match) {
+          const maxWidth = match[1];
+          (el as HTMLElement).style.maxWidth = `${maxWidth}px`;
+          el.setAttribute("class", classList.replace(match[0], "").trim());
+        }
+      });
+  
+      doc.querySelectorAll("[class*='left-[']").forEach((el) => {
+        const classList = el.getAttribute("class") || "";
+        const match = classList.match(/left-\[(\d+)px\]/);
+
+        if (match) {
+          const leftValue = parseInt(match[1], 10) + 15; 
+          (el as HTMLElement).style.left = `${leftValue}px`;
+          el.setAttribute("class", classList.replace(match[0], "").trim());
+        }
+      });
+  
+      return doc.body.innerHTML;
     } catch (error) {
       console.error("HTML 파싱 중 오류 발생:", error);
-      return htmlContent; 
+      return htmlContent;
     }
   };
+  
 
   const parsedPaywallContent = paywallUp ? parseHtmlContent(paywallUp) : null;
   const parsedTextContent = text ? parseHtmlContent(text) : null;
@@ -43,11 +65,6 @@ const ArticleDetailContent = ({ text, title, paywallUp, createdAt, authorName, i
         {new Date(createdAt).toLocaleDateString()} <br />
         BY. {authorName}
       </p>
-      {/* <Image
-        src={getValidImageSrc(imgLink)}
-        alt={title}
-        className="w-full max-w-[650px] aspect-square my-16 object-cover mx-auto rounded-lg"
-      /> */}
       {isPremium ? (
         <>
           <article
