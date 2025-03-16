@@ -49,12 +49,12 @@ const MobileFooter = () => {
       </div>
       <div
         onClick={() => {
-          router.push('/practicepage');
+          router.push('/learning');
         }}
         className="flex-1 flex flex-col gap-1 items-center">
         <div>
           <img
-            src={`${pathname.includes('/practice') ? '/images/footer/practice_active.svg' : '/images/footer/practice.svg'}`}
+            src={`${pathname.includes('/learning') ? '/images/footer/practice_active.svg' : '/images/footer/practice.svg'}`}
             alt=""
           />
         </div>
