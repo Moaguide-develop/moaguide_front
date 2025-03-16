@@ -96,7 +96,7 @@ const FilteredContents = ({
                   <h3 className="text-lg font-bold text-gray-800 mb-4 line-clamp-1">
                     {item.article.title}
                   </h3>
-                  <p className="text-sm text-gray-600 line-clamp-2">
+                  <p className="text-sm text-gray-600 line-clamp-2 max-w-full overflow-hidden break-words break-all">
                     {extractText(item.article.description || '')}
                   </p>
                   <div className="text-xs text-gray-500 mt-4 flex items-center justify-end gap-4">
