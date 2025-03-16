@@ -9,6 +9,7 @@ import viewIcon from '../../../public/images/learning/article_filter_view.svg';
 import { extractText } from '@/utils/extractText';
 import { useLikeStore } from '@/store/articleLike.store';
 import { useViewStore } from '@/store/articleView.store';
+import ResponsivePagination from './ResponsivePagination';
 
 interface FilteredContentsProps {
   contents: FilteredResponse['content'];
@@ -129,26 +130,11 @@ const FilteredContents = ({
       </div>
 
       {totalPages > 1 && (
-        <div className="flex justify-center mt-8 mb-2">
-          <ul className="flex items-center space-x-1">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-              (pageNum) => (
-                <li key={pageNum}>
-                  <button
-                    onClick={() => onPageChange(pageNum)}
-                    className={`w-8 h-8 flex items-center justify-center border rounded ${
-                      page === pageNum
-                        ? 'bg-purple-600 text-white'
-                        : 'bg-white text-gray-800 border-gray-300 hover:bg-gray-100'
-                    }`}
-                  >
-                    {pageNum}
-                  </button>
-                </li>
-              )
-            )}
-          </ul>
-        </div>
+        <ResponsivePagination
+          totalPages={totalPages}
+          currentPage={page}
+          onPageChange={onPageChange}
+        />
       )}
     </div>
   );
