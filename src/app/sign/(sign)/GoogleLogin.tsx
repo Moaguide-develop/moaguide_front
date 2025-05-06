@@ -5,7 +5,7 @@ import GoogleLoginButton from '/public/images/sign/google-login.svg';
 const GoogleLogin = ({ setLoginType }: { setLoginType: (type: 'google') => void }) => {
   const handleGoogleLogin = () => {
     setLoginType('google');
-    window.location.href = 'https://api.moaguide.com/oauth2/authorization/google';
+    window.location.href = 'https://moaguide.n-e.kr/oauth2/authorization/google';
   };
 
   return (
