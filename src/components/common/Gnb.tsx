@@ -59,9 +59,9 @@ const Gnb = () => {
         </Link>
         {!isLoading && (
           <div className="flex items-center gap-6">
-            <div onClick={() => router.push('/search')} className="cursor-pointer">
+            {/* <div onClick={() => router.push('/search')} className="cursor-pointer">
               <img src="/images/gnb/search.svg" alt="search_icon" className="w-6 h-6" />
-            </div>
+            </div> */}
             <div
               onClick={() => {
                 if (isLoggedIn) {
