@@ -131,7 +131,7 @@ const SignLayout = () => {
       <section className="w-[90%] sm:w-full max-w-[320px] mx-auto items-center mt-6 flex flex-col gap-3 mb-4">
         {/* <KakaoLogin setLoginType={setLoginType} />  */}
         {/* <NaverLogin setLoginType={setLoginType} />  */}
-        <GoogleLogin setLoginType={setLoginType} />
+        {/* <GoogleLogin setLoginType={setLoginType} /> */}
       </section>
     </div>
   );
