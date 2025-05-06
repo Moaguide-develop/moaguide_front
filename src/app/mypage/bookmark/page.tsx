@@ -21,7 +21,7 @@ const BookmarkPage = async ({
 
   try {
     const productBookmarkResponse = await fetch(
-      `https://api.moaguide.com/summary/list?category=${category}&subcategory=bookmark&sort=bookmark&page=${pages}&size=10`,
+      `https://moaguide.n-e.kr/summary/list?category=${category}&subcategory=bookmark&sort=bookmark&page=${pages}&size=10`,
       {
         headers: {
           Authorization: `Bearer ${token}`

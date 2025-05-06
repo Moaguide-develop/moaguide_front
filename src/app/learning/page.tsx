@@ -7,17 +7,17 @@ const LearningPage = async () => {
   const accessToken = cookieStore.get('access_token')?.value;
 
   const headers: HeadersInit = {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/json'
   };
-  
+
   if (accessToken) {
     headers['Authorization'] = `Bearer ${accessToken}`;
   }
 
-  const response = await fetch('http://43.200.90.72/contents/overview', {
+  const response = await fetch('https://moaguide.n-e.kr/contents/overview', {
     method: 'GET',
     headers,
-    cache: 'no-store',
+    cache: 'no-store'
   });
 
   if (!response.ok) {
@@ -28,7 +28,7 @@ const LearningPage = async () => {
   const initialData = await response.json();
 
   return (
-    <div className='min-h-[calc(100dvh-135.5px)] flex flex-col'>
+    <div className="min-h-[calc(100dvh-135.5px)] flex flex-col">
       <Navbar />
       <LearningPageClient initialData={initialData} />
     </div>
