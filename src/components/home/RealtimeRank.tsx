@@ -12,15 +12,15 @@ const RealtimeRank = () => {
   const { setKeyword } = useSearchStore();
   const { data, isLoading } = getRealtimeRank();
 
-  // if (isLoading) {
-  //   return <RealtimeRankSkeleton />;
-  // }
+  if (isLoading) {
+    return <RealtimeRankSkeleton />;
+  }
 
   //돌아가려면 sm:block
   return (
     <div className="max-w-[280px] w-full h-[291px] hidden sm:block">
       <div className="flex flex-col gap-5">
-        <div className="mt-1 text-body5 text-black sm:text-heading4 hidden">
+        <div className="mt-1 text-body5 text-black sm:text-heading4 ">
           실시간 검색 순위
         </div>
         <div className="p-5 shadow-custom-normal rounded-[12px] flex-1">
