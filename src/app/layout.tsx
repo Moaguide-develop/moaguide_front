@@ -101,10 +101,10 @@ export default function RootLayout({
         ) : null}
         <IntegrateMSW>
           <QueryProvider>
-            <Script
+            {/* <Script
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
-            />
+            /> */}
             {/* <AuthWrapper /> */}
             <GnbWrapper />
             <RefreshTokenWrapper />

@@ -1,16 +1,17 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const isVercel =
-    process.env.VERCEL_URL && process.env.VERCEL_URL.includes('vercel.app');
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+  const isMainDomain = siteUrl.includes('moaguide.com');
+
   return {
     rules: [
       {
         userAgent: '*',
-        allow: isVercel ? '' : '/',
-        disallow: isVercel ? '/' : ''
-      }
+        allow: isMainDomain ? '/' : '',
+        disallow: isMainDomain ? '' : '/',
+      },
     ],
-    sitemap: 'https://moaguide.com/sitemap.xml'
+    sitemap: `${siteUrl}/sitemap.xml`,
   };
 }
