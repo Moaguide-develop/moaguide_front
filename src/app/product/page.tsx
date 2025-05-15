@@ -3,7 +3,7 @@ import Product from './(product)/Product';
 import { IProductCommon, IReport, ISummaryData } from '@/types/Diviend';
 import { getCookie } from '@/utils/serverCookies';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.moaguide.com';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://moaguide.n-e.kr';
 
 const ProductPage = async ({
   searchParams

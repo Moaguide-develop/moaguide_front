@@ -17,7 +17,8 @@ export const getRealtimeRank = () => {
 
   const { data, error, ...queryProps } = useQuery<RealtimeRankType[]>({
     queryKey,
-    queryFn: fetchRealtimeRank
+    queryFn: fetchRealtimeRank,
+    retry: false
   });
 
   if (error) {

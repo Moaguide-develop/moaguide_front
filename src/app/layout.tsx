@@ -75,8 +75,9 @@ export default function RootLayout({
       />
       <meta
         name="naver-site-verification"
-        content="04dacb01e59bc7de3fb1e9260ae7e5f98ee465ac"
+        content="2e5a2baeaa16a876f71debbf19ada393b4f4a688"
       />
+
       {/* 본서버 */}
       <meta
         name="google-site-verification"
@@ -100,10 +101,10 @@ export default function RootLayout({
         ) : null}
         <IntegrateMSW>
           <QueryProvider>
-            <Script
+            {/* <Script
               strategy="beforeInteractive"
               src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_MAP_KEY}&autoload=false`}
-            />
+            /> */}
             {/* <AuthWrapper /> */}
             <GnbWrapper />
             <RefreshTokenWrapper />
