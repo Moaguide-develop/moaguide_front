@@ -67,6 +67,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
+      <link rel="canonical" href="https://moaguide.com" />
       <link
         rel="shortcut icon"
         href="https://moaguide.com/favicon1.ico"
