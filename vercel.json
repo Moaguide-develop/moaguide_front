@@ -1,9 +1,0 @@
-{
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "https://moaguide.com/$1",
-      "permanent": true
-    }
-  ]
-}
