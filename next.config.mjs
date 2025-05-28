@@ -1,15 +1,32 @@
 import { withSentryConfig } from '@sentry/nextjs';
-/** @type {import('next').NextConfig} */
 import withBundleAnalyzer from '@next/bundle-analyzer';
 
+/** @type {import('next').NextConfig} */
 const bundleAnalyzer = withBundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
   openAnalyzer: false
 });
+
 const nextConfig = {
   reactStrictMode: false,
   output: 'standalone',
   experimental: { instrumentationHook: true },
+
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'moaguide.vercel.app'
+          }
+        ],
+        destination: 'https://moaguide.com/:path*',
+        permanent: true
+      }
+    ];
+  },
 
   images: {
     domains: [
@@ -28,20 +45,18 @@ const nextConfig = {
       'imgnews.pstatic.net'
     ]
   },
+
   swcMinify: true,
+
   compiler: {
     styledComponents: true
   },
 
   webpack: (config, { isServer }) => {
     if (isServer) {
-      if (Array.isArray(config.resolve.alias))
-        config.resolve.alias.push({ name: 'msw/browser', alias: false });
-      else config.resolve.alias['msw/browser'] = false;
+      config.resolve.alias['msw/browser'] = false;
     } else {
-      if (Array.isArray(config.resolve.alias))
-        config.resolve.alias.push({ name: 'msw/node', alias: false });
-      else config.resolve.alias['msw/node'] = false;
+      config.resolve.alias['msw/node'] = false;
     }
     return config;
   }
@@ -63,4 +78,5 @@ const SentryWebpackPluginOptions = {
   disableLogger: true,
   automaticVercelMonitors: true
 };
+
 export default withSentryConfig(bundleAnalyzer(nextConfig), SentryWebpackPluginOptions);
