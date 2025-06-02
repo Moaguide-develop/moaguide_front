@@ -38,6 +38,9 @@ export const metadata: Metadata = {
   },
 
   keywords: ['모아가이드', 'moaguide', 'STO 큐레이션', '블록체인', '투자 플랫폼'], // 추가된 부분
+  alternates: {
+    canonical: 'https://moaguide.com'
+  },
   openGraph: {
     title: '모아가이드',
     description:
@@ -67,7 +70,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr" className={`${pretendard.variable}`}>
-      <link rel="canonical" href="https://moaguide.com" />
       <link
         rel="shortcut icon"
         href="https://moaguide.com/favicon1.ico"

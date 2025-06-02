@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
-  const isMainDomain = siteUrl.includes('moaguide.com');
+  const isMainDomain = siteUrl === 'https://moaguide.com';
 
   return {
     rules: [
@@ -12,6 +12,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: isMainDomain ? '' : '/',
       },
     ],
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: isMainDomain ? `${siteUrl}/sitemap.xml` : undefined,
   };
 }
